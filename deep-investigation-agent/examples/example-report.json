@@ -1,0 +1,128 @@
+{
+  "status": "complete",
+  "main_answer": "The best-supported conclusion is a mixed-driver model: industrial lobbying shaped timing and design, while security arguments supplied the public justification.",
+  "executive_summary": [
+    "Public evidence supports both industrial and security drivers.",
+    "The mixed explanation fits the full timeline better than single-cause stories.",
+    "Confidence is medium because the private decision path remains partly opaque."
+  ],
+  "established_facts": [
+    "The policy text changed on the recorded effective date.",
+    "Affected sectors publicly commented before implementation.",
+    "Officials publicly cited national-security grounds."
+  ],
+  "key_claims": [
+    {
+      "claim": "Domestic industry lobbying was a major driver.",
+      "status": "mixed",
+      "evidence": [
+        "Documented meetings",
+        "Public submissions",
+        "Timing overlap"
+      ]
+    },
+    {
+      "claim": "The change was purely national-security driven.",
+      "status": "unverified",
+      "evidence": [
+        "Official statements exist",
+        "No public proof of exclusivity"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-01-10",
+      "event": "Public consultation opens"
+    },
+    {
+      "date": "2025-02-15",
+      "event": "Sector groups publish position papers"
+    },
+    {
+      "date": "2025-03-01",
+      "event": "Officials make security-focused statements"
+    },
+    {
+      "date": "2025-03-18",
+      "event": "Policy finalized"
+    }
+  ],
+  "actors": [
+    {
+      "name": "Government trade ministry",
+      "interests": ["policy control", "political cover"],
+      "capabilities": ["rulemaking", "public signaling"],
+      "constraints": ["coalition politics", "international response"]
+    },
+    {
+      "name": "Industrial groups",
+      "interests": ["competitive advantage", "lower compliance friction"],
+      "capabilities": ["lobbying", "public submissions"],
+      "constraints": ["regulatory dependence", "reputational risk"]
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "summary": "National-security concerns primarily drove the policy.",
+      "support": ["Official statements", "security framing"],
+      "contradictions": ["Sector timing overlap", "carve-out pressure"],
+      "assumptions": ["Security agencies led the process"],
+      "confidence": "Low"
+    },
+    {
+      "id": "H2",
+      "summary": "Domestic industry lobbying primarily drove the policy.",
+      "support": ["Public submissions", "timing alignment"],
+      "contradictions": ["Formal security justification", "state security incentives"],
+      "assumptions": ["Lobbying materially shaped drafting"],
+      "confidence": "Medium"
+    },
+    {
+      "id": "H3",
+      "summary": "A mixed explanation fits best: lobbying influenced timing and design while security logic legitimized the move.",
+      "support": ["Best fit to full timeline", "explains both public and sector behavior"],
+      "contradictions": ["Private decision path not fully visible"],
+      "assumptions": ["Both coalitions had influence"],
+      "confidence": "Medium"
+    }
+  ],
+  "non_obvious_links": [
+    "The timing suggests incentive convergence rather than a single decisive driver.",
+    "Sector-specific carve-out debates may indicate tailoring beyond a pure security rationale."
+  ],
+  "risks": [
+    "Retaliatory trade measures",
+    "Compliance cost pass-through",
+    "Escalation of security-based economic policy"
+  ],
+  "forecast": [
+    "Follow-on guidance may reveal which coalition had stronger drafting influence.",
+    "Licensing exception patterns may expose policy tailoring."
+  ],
+  "unknowns": [
+    "Closed-door negotiation details",
+    "Classified assessments",
+    "Undisclosed drafting influence"
+  ],
+  "confidence": {
+    "overall": "Medium",
+    "rationale": "The mixed-driver model fits the public evidence best, but direct visibility into private decision-making is limited."
+  },
+  "sources": {
+    "primary": [
+      "Policy text",
+      "Official statements",
+      "Public submissions"
+    ],
+    "secondary": [
+      "Reputable policy reporting",
+      "Industry analysis"
+    ],
+    "contextual": [
+      "Expert commentary",
+      "Sector background material"
+    ]
+  }
+}

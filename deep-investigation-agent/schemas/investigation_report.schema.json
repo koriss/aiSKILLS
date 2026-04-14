@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InvestigationReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "main_answer",
+    "executive_summary",
+    "established_facts",
+    "key_claims",
+    "timeline",
+    "actors",
+    "hypotheses",
+    "non_obvious_links",
+    "risks",
+    "forecast",
+    "unknowns",
+    "confidence",
+    "sources"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["complete", "partial", "insufficient_evidence"]
+    },
+    "main_answer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "executive_summary": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "established_facts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "key_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "status", "evidence"],
+        "properties": {
+          "claim": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "false", "misleading", "unverified", "mixed", "out-of-context"]
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "event"],
+        "properties": {
+          "date": { "type": "string" },
+          "event": { "type": "string" }
+        }
+      }
+    },
+    "actors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "interests", "capabilities", "constraints"],
+        "properties": {
+          "name": { "type": "string" },
+          "interests": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "capabilities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "constraints": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "summary", "support", "contradictions", "assumptions", "confidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "summary": { "type": "string" },
+          "support": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "contradictions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "assumptions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["High", "Medium", "Low"]
+          }
+        }
+      }
+    },
+    "non_obvious_links": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forecast": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall", "rationale"],
+      "properties": {
+        "overall": {
+          "type": "string",
+          "enum": ["High", "Medium", "Low"]
+        },
+        "rationale": { "type": "string" }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "secondary", "contextual"],
+      "properties": {
+        "primary": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "secondary": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "contextual": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

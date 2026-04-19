@@ -9,6 +9,7 @@
 | ------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
 | **ClawHub Publication Auditor** | `[clawhub-publication-auditor/](clawhub-publication-auditor/)` | Глубокий аудит готовности к публикации в ClawHub: код, упаковка, метаданные, контракты, примеры, доки, портируемость, безопасность, диагностика. | Перед публикацией skill или package в ClawHub, при release readiness, при проверке гигиены артефакта и риска отказа реестра. |
 | **Deep Investigation Agent**    | `[deep-investigation-agent/](deep-investigation-agent/)`       | Исследование сложных тем: веб-поиск, проверка источников, конкурирующие гипотезы, карта доказательств, отчёты для решений.                        | Спорные/быстро меняющиеся темы, геополитика, экономика, безопасность, здоровье, корпоративный анализ, когда важна верификация. |
+| **Research (OpenClaw)**         | `[research/](research/)`                                       | Оркестрация 3–5 subagent-ов, retry/dosbor, HTML + Telegram + JSON-логи; ядро — deep-investigation-agent. Сохранение отчётов и отправка HTML в чат. | Команды «исследуй / проверь» в Telegram, сложные темы, фактчек, когда нужен супервизор и артефакты.                         |
 
 
 ### ClawHub Publication Auditor — детали
@@ -17,6 +18,13 @@
 - **Риск (из skill):** `medium`
 - **Полное описание:** см. frontmatter в `[clawhub-publication-auditor/SKILL.md](clawhub-publication-auditor/SKILL.md)`.
 - **Ресурсы:** чеклисты и шаблоны в `[clawhub-publication-auditor/resources/](clawhub-publication-auditor/resources/)` (`publication-checklist.md`, `findings-template.md`, `manifest-review.md`, `skill-vs-package-decision.md`, `release-blockers.md`).
+
+### Research (OpenClaw) — детали
+
+- **Имя в метаданных:** `research`
+- **Риск (из skill):** `medium`
+- **Описание:** см. frontmatter в `[research/SKILL.md](research/SKILL.md)`.
+- **Состав:** `references/` (orchestration, retry, telegram, logging, report-format), `schemas/`, `templates/`, `scripts/`, `examples/`.
 
 ### Deep Investigation Agent — детали
 

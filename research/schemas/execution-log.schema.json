@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutionLog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "chat_id",
+    "start_time",
+    "end_time",
+    "mode",
+    "chosen_strategy",
+    "why_multiaagent_or_single_agent",
+    "subagent_count",
+    "retry_count",
+    "dosbor_rounds",
+    "files_written",
+    "files_sent",
+    "send_status",
+    "final_confidence",
+    "stop_reason",
+    "errors",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "request_id": { "type": "string" },
+    "chat_id": { "type": "string" },
+    "start_time": { "type": "string", "description": "ISO-8601" },
+    "end_time": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["investigate", "verify"]
+    },
+    "chosen_strategy": { "type": "string" },
+    "why_multiaagent_or_single_agent": { "type": "string" },
+    "subagent_count": { "type": "integer", "minimum": 0 },
+    "retry_count": { "type": "integer", "minimum": 0 },
+    "dosbor_rounds": { "type": "integer", "minimum": 0 },
+    "files_written": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "files_sent": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "send_status": {
+      "type": "string",
+      "enum": ["sent", "failed", "skipped", "not_applicable"]
+    },
+    "send_error": { "type": "string" },
+    "final_confidence": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"]
+    },
+    "confidence_rationale": { "type": "string" },
+    "stop_reason": { "type": "string" },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "overflow_risk_estimate": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "claims_verified_count": { "type": "integer", "minimum": 0 },
+    "claims_unverified_count": { "type": "integer", "minimum": 0 },
+    "quality_gates_failed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "html_cyrillic_ok": { "type": "boolean" },
+    "html_path": { "type": "string" }
+  }
+}

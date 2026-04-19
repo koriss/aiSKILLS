@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QualityReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "strengths",
+    "weaknesses",
+    "fixed_by_dosbor",
+    "remains_weak",
+    "low_quality_sources",
+    "unverifiable_claims"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "request_id": { "type": "string" },
+    "strengths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "weaknesses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fixed_by_dosbor": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "remains_weak": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "low_quality_sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unverifiable_claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "request_id": "req-demo-001",
+  "chat_id": "-1001234567890",
+  "start_time": "2026-04-19T10:00:00Z",
+  "end_time": "2026-04-19T10:42:18Z",
+  "mode": "investigate",
+  "chosen_strategy": "subquestions",
+  "why_multiaagent_or_single_agent": "Жирная задача: широкий диапазон дат и несколько акторов; риск переполнения контекста medium.",
+  "subagent_count": 3,
+  "retry_count": 0,
+  "dosbor_rounds": 1,
+  "files_written": [
+    "/home/node/.openclaw/workspace/reports/demo-import-policy-2026-04-19.html",
+    "/home/node/.openclaw/workspace/reports/final-report.json",
+    "/home/node/.openclaw/workspace/reports/subagent-results.json",
+    "/home/node/.openclaw/workspace/reports/execution-log.json",
+    "/home/node/.openclaw/workspace/reports/quality-review.json"
+  ],
+  "files_sent": [
+    "/home/node/.openclaw/workspace/reports/demo-import-policy-2026-04-19.html"
+  ],
+  "send_status": "sent",
+  "send_error": "",
+  "final_confidence": "Medium",
+  "confidence_rationale": "Согласованность открытых источников хорошая; закрытые переговоры остаются неизвестными.",
+  "stop_reason": "quality_gates_passed",
+  "errors": [],
+  "warnings": [
+    "Один subagent получил flags tertiary_only_when_primary_exists"
+  ],
+  "overflow_risk_estimate": "medium",
+  "claims_verified_count": 0,
+  "claims_unverified_count": 0,
+  "quality_gates_failed": [],
+  "html_cyrillic_ok": true,
+  "html_path": "/home/node/.openclaw/workspace/reports/demo-import-policy-2026-04-19.html"
+}

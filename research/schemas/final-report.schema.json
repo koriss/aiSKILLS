@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResearchFinalReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "slug",
+    "date",
+    "mode",
+    "investigation_report",
+    "orchestration_meta",
+    "verify_claims"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "request_id": { "type": "string" },
+    "slug": { "type": "string" },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "mode": {
+      "type": "string",
+      "enum": ["investigate", "verify"]
+    },
+    "investigation_report": {
+      "type": "object",
+      "description": "Must conform to deep-investigation-agent investigation_report (InvestigationReport). Validated additionally by validate_artifacts.py against sibling schema.",
+      "required": [
+        "status",
+        "main_answer",
+        "executive_summary",
+        "established_facts",
+        "key_claims",
+        "timeline",
+        "actors",
+        "hypotheses",
+        "non_obvious_links",
+        "risks",
+        "forecast",
+        "unknowns",
+        "confidence",
+        "sources"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["complete", "partial", "insufficient_evidence"]
+        },
+        "main_answer": { "type": "string", "minLength": 1 },
+        "executive_summary": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "established_facts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "key_claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["claim", "status", "evidence"],
+            "properties": {
+              "claim": { "type": "string" },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "confirmed",
+                  "false",
+                  "misleading",
+                  "unverified",
+                  "mixed",
+                  "out-of-context"
+                ]
+              },
+              "evidence": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "timeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["date", "event"],
+            "properties": {
+              "date": { "type": "string" },
+              "event": { "type": "string" }
+            }
+          }
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "interests", "capabilities", "constraints"],
+            "properties": {
+              "name": { "type": "string" },
+              "interests": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "capabilities": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "constraints": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "hypotheses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "summary",
+              "support",
+              "contradictions",
+              "assumptions",
+              "confidence"
+            ],
+            "properties": {
+              "id": { "type": "string" },
+              "summary": { "type": "string" },
+              "support": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "contradictions": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "assumptions": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "confidence": {
+                "type": "string",
+                "enum": ["High", "Medium", "Low"]
+              }
+            }
+          }
+        },
+        "non_obvious_links": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "forecast": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "unknowns": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "confidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["overall", "rationale"],
+          "properties": {
+            "overall": {
+              "type": "string",
+              "enum": ["High", "Medium", "Low"]
+            },
+            "rationale": { "type": "string" }
+          }
+        },
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["primary", "secondary", "contextual"],
+          "properties": {
+            "primary": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "secondary": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "contextual": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "orchestration_meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "single_or_multi",
+        "subagent_ids",
+        "html_path",
+        "json_paths"
+      ],
+      "properties": {
+        "single_or_multi": {
+          "type": "string",
+          "enum": ["single", "multi"]
+        },
+        "subagent_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "html_path": { "type": "string" },
+        "json_paths": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "decomposition_rationale": { "type": "string" }
+      }
+    },
+    "verify_claims": {
+      "type": "array",
+      "description": "Режим verify: атомарные утверждения с расширенными статусами; для investigate может быть пустым массивом.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "status", "notes"],
+        "properties": {
+          "claim": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "false",
+              "distorted",
+              "unverified",
+              "out_of_context",
+              "partially_true"
+            ]
+          },
+          "notes": { "type": "string" },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

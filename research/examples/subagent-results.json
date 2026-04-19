@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "request_id": "req-demo-001",
+  "slug": "demo-import-policy",
+  "date": "2026-04-19",
+  "subagents": [
+    {
+      "id": "sub-1-timeline",
+      "goal": "Построить хронологию публичных событий 2023–2025",
+      "assigned_scope": "Только даты и проверяемые публичные события",
+      "decomposition_strategy": "time_periods",
+      "search_count": 7,
+      "source_count": 14,
+      "primary_source_count": 4,
+      "secondary_source_count": 6,
+      "tertiary_source_count": 4,
+      "contradictions_found": 1,
+      "output_file": "/home/node/.openclaw/workspace/reports/sub1-demo-import-policy-2026-04-19.txt",
+      "output_exists": true,
+      "bytes_written": 8420,
+      "summary": "Хронология согласуется с волной отраслевых публичных заявлений до финализации; противоречие в дате одного вторичного пересказа отмечено.",
+      "gaps": [
+        "Нет первичной стенограммы закрытого совещания (ожидаемо недоступно)."
+      ],
+      "rating": "4",
+      "failure_flags": [],
+      "needs_dosbor": false,
+      "followup_tasks": [],
+      "critic_line": "[sub-1-timeline]: ⭐⭐⭐⭐ — Сильная хронология; не хватает одной первички по закрытой части."
+    },
+    {
+      "id": "sub-2-actors",
+      "goal": "Карта акторов и стимулов",
+      "assigned_scope": "Ключевые ведомства и отраслевые группы",
+      "decomposition_strategy": "actors",
+      "search_count": 6,
+      "source_count": 11,
+      "primary_source_count": 2,
+      "secondary_source_count": 5,
+      "tertiary_source_count": 4,
+      "contradictions_found": 0,
+      "output_file": "/home/node/.openclaw/workspace/reports/sub2-demo-import-policy-2026-04-19.txt",
+      "output_exists": true,
+      "bytes_written": 6102,
+      "summary": "Выявлены два крупных блока интересов; доказательства влияния на текст частично косвенные.",
+      "gaps": [
+        "Мало первичных документов лоббирования"
+      ],
+      "rating": "3",
+      "failure_flags": ["tertiary_only_when_primary_exists"],
+      "needs_dosbor": true,
+      "followup_tasks": [
+        "Найти регистр обращений/комментариев, если доступен"
+      ],
+      "critic_line": "[sub-2-actors]: ⭐⭐⭐ — Хорошая карта, но первички мало; запланирован таргетированный досбор."
+    }
+  ]
+}

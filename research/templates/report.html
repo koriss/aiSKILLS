@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[SLUG] — исследование [DATE]</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif; line-height: 1.45; max-width: 52rem; margin: 0 auto; padding: 1.25rem 1.5rem 3rem; color: #111; background: #fafafa; }
+    @media (prefers-color-scheme: dark) { body { color: #e8e8e8; background: #121212; } a { color: #9ecbff; } }
+    h1 { font-size: 1.35rem; margin-bottom: 0.25rem; }
+    .meta { font-size: 0.9rem; opacity: 0.85; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.1rem; margin-top: 1.75rem; border-bottom: 1px solid #ccc; padding-bottom: 0.25rem; }
+    h3 { font-size: 1rem; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 0.5rem 0 1rem; }
+    th, td { border: 1px solid #bbb; padding: 0.35rem 0.5rem; vertical-align: top; }
+    th { background: rgba(0,0,0,0.05); text-align: left; }
+    ul { padding-left: 1.2rem; }
+    .tag { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 0.25rem; font-size: 0.8rem; background: #e0e0e0; }
+    @media (prefers-color-scheme: dark) { .tag { background: #333; } th { background: rgba(255,255,255,0.06); } th, td { border-color: #444; } }
+    blockquote { margin: 0.5rem 0; padding-left: 0.75rem; border-left: 3px solid #888; font-size: 0.95rem; }
+    .warn { color: #a60; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>[TITLE]</h1>
+    <p class="meta">Режим: <span class="tag">[MODE]</span> · Запрос ID: <code>[REQUEST_ID]</code> · Дата: [DATE]</p>
+  </header>
+
+  <section id="executive-summary">
+    <h2>Executive Summary</h2>
+    <p>[EXEC_SUMMARY_PARAGRAPHS]</p>
+  </section>
+
+  <section id="question">
+    <h2>Главный вопрос и подвопросы</h2>
+    <p><strong>Главный вопрос:</strong> [MAIN_QUESTION]</p>
+    <h3>Подвопросы</h3>
+    <ul>[SUBQUESTIONS_LIST]</ul>
+  </section>
+
+  <section id="plan">
+    <h2>План сбора данных</h2>
+    <ol>[DATA_PLAN_STEPS]</ol>
+  </section>
+
+  <section id="facts">
+    <h2>Facts</h2>
+    <ul>[FACTS_LIST]</ul>
+  </section>
+
+  <section id="claims">
+    <h2>Claims / Verification</h2>
+    <table>
+      <thead><tr><th>Утверждение</th><th>Статус</th><th>Комментарий / доказательства</th></tr></thead>
+      <tbody>[CLAIMS_TABLE_ROWS]</tbody>
+    </table>
+  </section>
+
+  <section id="evidence-map">
+    <h2>Evidence Map</h2>
+    <p>[EVIDENCE_MAP_NARRATIVE]</p>
+    <table>
+      <thead><tr><th>Тезис</th><th>Источник</th><th>Класс</th><th>Усиливает / ослабляет</th></tr></thead>
+      <tbody>[EVIDENCE_MAP_ROWS]</tbody>
+    </table>
+  </section>
+
+  <section id="timeline">
+    <h2>Timeline</h2>
+    <table>
+      <thead><tr><th>Дата</th><th>Событие</th></tr></thead>
+      <tbody>[TIMELINE_ROWS]</tbody>
+    </table>
+  </section>
+
+  <section id="actors">
+    <h2>Actors</h2>
+    <table>
+      <thead><tr><th>Актор</th><th>Интересы</th><th>Возможности</th><th>Ограничения</th></tr></thead>
+      <tbody>[ACTORS_ROWS]</tbody>
+    </table>
+  </section>
+
+  <section id="causality">
+    <h2>Причинная цепочка</h2>
+    <p>[CAUSAL_CHAIN]</p>
+  </section>
+
+  <section id="contradictions">
+    <h2>Contradictions</h2>
+    <ul>[CONTRADICTIONS_LIST]</ul>
+  </section>
+
+  <section id="hypotheses">
+    <h2>Hypotheses</h2>
+    <p>Минимум три гипотезы; для лучшей — stress-test.</p>
+    [HYPOTHESES_BLOCKS]
+  </section>
+
+  <section id="confidence">
+    <h2>Confidence</h2>
+    <p><strong>Итоговая уверенность:</strong> [CONFIDENCE_LEVEL]</p>
+    <p>[CONFIDENCE_RATIONALE]</p>
+  </section>
+
+  <section id="unknowns">
+    <h2>Unknowns</h2>
+    <ul>[UNKNOWNS_LIST]</ul>
+  </section>
+
+  <section id="subagent-review">
+    <h2>Subagent Review</h2>
+    <ul>[SUBAGENT_CRITIC_LINES]</ul>
+  </section>
+
+  <section id="sources">
+    <h2>Sources</h2>
+    <h3>Первичные</h3>
+    <ul>[SOURCES_PRIMARY]</ul>
+    <h3>Вторичные (сильные)</h3>
+    <ul>[SOURCES_SECONDARY]</ul>
+    <h3>Контекст / tertiary</h3>
+    <ul>[SOURCES_CONTEXTUAL]</ul>
+  </section>
+
+  <footer>
+    <p class="meta">Сгенерировано skill <code>research</code> · deep-investigation-agent core · [STOP_REASON]</p>
+  </footer>
+</body>
+</html>

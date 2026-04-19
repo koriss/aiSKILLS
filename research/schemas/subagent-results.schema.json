@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "SubagentResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "goal",
+        "assigned_scope",
+        "decomposition_strategy",
+        "search_count",
+        "source_count",
+        "primary_source_count",
+        "secondary_source_count",
+        "tertiary_source_count",
+        "contradictions_found",
+        "output_file",
+        "output_exists",
+        "bytes_written",
+        "summary",
+        "gaps",
+        "rating",
+        "failure_flags",
+        "needs_dosbor",
+        "followup_tasks"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "goal": { "type": "string" },
+        "assigned_scope": { "type": "string" },
+        "decomposition_strategy": {
+          "type": "string",
+          "enum": [
+            "subquestions",
+            "claim_clusters",
+            "evidence_types",
+            "time_periods",
+            "actors",
+            "hypotheses",
+            "mixed"
+          ]
+        },
+        "search_count": { "type": "integer", "minimum": 0 },
+        "source_count": { "type": "integer", "minimum": 0 },
+        "primary_source_count": { "type": "integer", "minimum": 0 },
+        "secondary_source_count": { "type": "integer", "minimum": 0 },
+        "tertiary_source_count": { "type": "integer", "minimum": 0 },
+        "contradictions_found": { "type": "integer", "minimum": 0 },
+        "output_file": { "type": "string" },
+        "output_exists": { "type": "boolean" },
+        "bytes_written": { "type": "integer", "minimum": 0 },
+        "summary": { "type": "string" },
+        "gaps": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rating": {
+          "type": "string",
+          "enum": ["1", "2", "3", "4", "5"]
+        },
+        "failure_flags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "needs_dosbor": { "type": "boolean" },
+        "followup_tasks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "critic_line": { "type": "string" }
+      }
+    }
+  },
+  "title": "SubagentResultsFile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_id", "slug", "date", "subagents"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "request_id": { "type": "string" },
+    "slug": { "type": "string" },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "subagents": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/SubagentResult" }
+    }
+  }
+}

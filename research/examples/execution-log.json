@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "request_id": "req-demo-001",
   "chat_id": "-1001234567890",
   "start_time": "2026-04-19T10:00:00Z",
@@ -34,5 +34,10 @@
   "claims_unverified_count": 0,
   "quality_gates_failed": [],
   "html_cyrillic_ok": true,
-  "html_path": "/home/node/.openclaw/workspace/reports/demo-import-policy-2026-04-19.html"
+  "html_path": "/home/node/.openclaw/workspace/reports/demo-import-policy-2026-04-19.html",
+  "chat_ack_sent": false,
+  "chat_stall_notice_sent": false,
+  "chat_intermediate_count": 0,
+  "chat_final_text_sent": true,
+  "chat_policy_notes": "Промежуточных сообщений нет; финальный текст после отправки HTML."
 }

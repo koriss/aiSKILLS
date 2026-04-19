@@ -2,6 +2,8 @@
 
 Production-grade skill для OpenClaw: расследования и проверка тезисов с **orchestration** поверх **deep-investigation-agent**.
 
+**Чат (v1.1+):** по умолчанию минимум шума — опционально одно короткое ack, при задержке одно фиксированное сообщение, затем **HTML → проверка → отправка файла → один финальный текст** (`templates/final-chat-response.txt`). Подробности: `references/chat-policy.md`.
+
 ## Быстрый старт
 
 1. Скопируй каталог `research/` в workspace агента, например `/home/node/.openclaw/workspace/skills/research/`.
@@ -30,11 +32,11 @@ python3 scripts/assemble_report.py examples/final-report.json reports/out.html
 | Путь | Назначение |
 |------|------------|
 | `SKILL.md` | Основной контракт агента |
-| `references/` | Orchestration, retry, Telegram, логи, формат отчёта |
+| `references/` | Orchestration, retry, Telegram, логи, формат отчёта, **chat-policy** |
 | `schemas/` | JSON Schema для артефактов |
-| `templates/` | HTML и шаблон Telegram |
+| `templates/` | HTML, финальный ответ в чате, плотная Telegram-выжимка |
 | `scripts/` | Проверка skill, валидация, сборка HTML, хелперы критики |
-| `examples/` | Примеры запросов, JSON, сводка, артефакт subagent |
+| `examples/` | Примеры запросов, JSON, сводка, артефакт subagent, **chat-policy-scenarios** |
 
 ## Артефакты прогона
 

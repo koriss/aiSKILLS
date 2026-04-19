@@ -1,9 +1,9 @@
 ---
 name: research
-description: Production-grade OpenClaw skill for deep investigations and claim verification with multi-subagent orchestration, HTML and Telegram outputs, structured logs, retry and dosbor. Russian-first; integrates deep-investigation-agent as analytical core.
+description: Production-grade OpenClaw skill for deep investigations and claim verification with multi-subagent orchestration, HTML and Telegram outputs, structured logs, retry and dosbor. Quiet chat policy: minimal intermediate noise, single final message after HTML. Russian-first; integrates deep-investigation-agent as analytical core.
 license: CC0-1.0
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   type: agent-skill
   format: openclaw-orchestration
   core_skill: deep-investigation-agent
@@ -23,7 +23,7 @@ metadata:
 - финальный синтез не принимает слабые куски без критики и при необходимости dosbor;
 - кириллица и смысл не ломаются; переводы — силами LLM, без внешних переводчиков.
 
-Подробности: `references/orchestration.md`, `references/retry-and-recovery.md`, `references/report-format.md`, `references/telegram-output.md`, `references/logging-and-evaluation.md`.
+Подробности: `references/orchestration.md`, `references/retry-and-recovery.md`, `references/report-format.md`, `references/telegram-output.md`, `references/logging-and-evaluation.md`, **`references/chat-policy.md`** (анти-спам в чате, порядок HTML → финальный текст).
 
 ## When to use
 
@@ -97,26 +97,31 @@ metadata:
 8. **Синтез**  
    Объедини результаты с **deep-investigation-agent**: факты, claims, timeline, гипотезы, противоречия, confidence. Заполни блоки HTML и `investigation_report` в `final-report.json`.
 
-9. **Артефакты на диск**  
-   Сохрани: HTML (по шаблону `templates/report.html`), `final-report.json`, `subagent-results.json`, `execution-log.json`, `quality-review.json`, subagent-файлы.
+9. **HTML → диск → проверка → отправка файла → один финальный текст**  
+   Строгий порядок (не переставлять):
+   1. Сформируй и **сохрани** HTML на диск по шаблону `templates/report.html`.
+   2. **Проверь**, что файл существует и **не пустой** (и при необходимости что кириллица не битая).
+   3. **Отправь HTML** в тот чат, откуда пришёл запрос; зафиксируй `send_status` в `execution-log.json`.
+   4. **Только после этого** отправь **ровно одно** финальное текстовое сообщение в чат по структуре `templates/final-chat-response.txt` (первая строка `ВЕРДИКТ:`, блоки «Что подтверждено», пути к файлам, `Доверие`).
+   5. После этого финального сообщения **не пиши ничего** в чат по этой задаче, пока пользователь не пришлёт новую команду.
 
-10. **Проверка записи**  
-    Убедись, что файлы существуют, размер HTML > 0, нет битой кодировки.
+   Промежуточные сообщения в чат — по **`references/chat-policy.md`**: по умолчанию **0–1** короткое ack; при реальной задержке — максимум **одно** сообщение с фиксированной формулировкой задержки; никаких статусов subagent, планов на 3–6 пунктов и «жду результата» в чат.
 
-11. **Отправка**  
-    Сразу после успешного сохранения отправь **HTML-файл** в тот чат, откуда пришёл запрос (механизм OpenClaw: документ/attach по правилам среды). Зафиксируй `send_status` в execution log.
+10. **Артефакты на диск (JSON и subagent)**  
+    Сохрани: `final-report.json`, `subagent-results.json`, `execution-log.json`, `quality-review.json`, subagent-файлы. События orchestration (запуск subagent, retry, timeout, re-split, dosbor, quality review) — **только в этих логах**, не в чат.
 
-12. **Telegram summary**  
-    Одно сообщение, русский язык, стиль аналитической записки, ≤ **95%** лимита одного сообщения (4096 символов → ориентир **3890** символов), см. `references/telegram-output.md`.
+11. **Плотная Telegram-выжимка (опционально по каналу)**  
+    Если платформа требует отдельного короткого сообщения помимо файла — одно сообщение, ≤ **95%** лимита (**~3890** символов), только плотная аналитика; полнота остаётся в HTML. Шаблон: `templates/telegram-summary.txt`. Не дублировать второй полноценный «финал», если уже отправлен `final-chat-response`.
 
-13. **Финальный quality review**  
+12. **Финальный quality review**  
     Заполни `quality-review.json` и пройди **Quality gates**.
 
 ## Tool policy
 
 - **Поиск и чтение источников:** используй по максимуму разрешённые инструменты веб-поиска/чтения страниц; для режима verify минимум **5–7** релевантных поисковых шагов на всю задачу (не обязательно на каждый subagent, но при слабом куске — досбор). Один поиск «для галочки» — нарушение.
 - **Файлы:** обязательное сохранение артефактов в `reports/`; пути предсказуемые, см. выше.
-- **Канал Telegram:** после сохранения HTML — отправка файла в исходный чат; summary текстом отдельным сообщением при необходимости (если платформа разделяет файл и текст).
+- **Канал Telegram / чат:** не спамить статусами. Служебные события (subagent, retry, dosbor, re-split) — **только в логах** (`execution-log.json`, файлы subagent). В чат — максимум ack + при необходимости одно сообщение задержки + **один** финальный текст после HTML (см. `references/chat-policy.md`).
+- **Канал Telegram:** сначала документ HTML в чат (после проверки файла), затем одно финальное текстовое сообщение; отдельная короткая выжимка — только если это не дублирует второй «финал» (см. Runtime workflow п. 11).
 - **Никакой подмены анализа сырыми выдачами инструментов** в финальном ответе пользователю.
 
 ## Memory policy
@@ -128,9 +133,17 @@ metadata:
 ## Output requirements
 
 - **Язык:** весь пользовательский вывод (HTML, Telegram, пояснения) — **русский**; цитаты на иных языках — с переводом LLM и сохранением смысла.
-- **HTML:** самодостаточный файл, секции из `references/report-format.md`; типографика, без сломанной кириллицы.
+- **HTML:** самодостаточный файл, секции из `references/report-format.md`; типографика, без сломанной кириллицы. Большой объём и детализация — **в HTML**; чат получает плотную выжимку, не копию всего отчёта.
 - **Машиночитаемые JSON:** валидация по `schemas/*.schema.json` скриптом `scripts/validate_artifacts.py`.
 - **Совместимость с deep-investigation-agent:** поле `investigation_report` в `final-report.json` соответствует контракту исследования (см. `../deep-investigation-agent/schemas/investigation_report.schema.json`); расширения — в `orchestration_meta`.
+
+### Chat messaging policy (обязательно)
+
+- **По умолчанию:** максимум **одно** короткое сообщение о принятии задачи **или** **ноль** таких сообщений, если уместно начать без ack. Затем **только один** финальный текст после отправки HTML.
+- **Запрещено** в чат: «запустил проверку», «жду», «результат через несколько минут», планы на 3–6 пунктов, статусы по subagent, пустые сообщения, два дублирующих итога, «проверка завершена» перед вторым таким же итогом, сырые JSON/search results, техкухня orchestration без запроса пользователя (полный список — `references/chat-policy.md`).
+- **Задержка:** если нужно одно промежуточное сообщение — только формулировка из `references/chat-policy.md`; после неё — только финал.
+- **Финальный ответ в чате** — строго **одно** сообщение, структура — `templates/final-chat-response.txt` (включая строку `ВЕРДИКТ:`, блок **Файлы** с путём HTML и фактом отправки).
+- **Порядок обязателен:** HTML сформирован → сохранён → проверен на непустоту → HTML отправлен в чат → финальный текст → **стоп** до новой команды пользователя.
 
 ## Quality gates
 
@@ -141,10 +154,13 @@ metadata:
 3. По каждому subagent есть оценка и рейтинг; мусор не попал в финал как «доказательство».
 4. HTML создан по пути шаблона, файлы записаны, размер проверен.
 5. `send_status` отражает попытку отправки HTML в чат; ошибка отправки залогирована.
-6. Telegram summary одним сообщением, в лимите, без потока ссылок.
-7. `quality-review.json` заполнен честно (слабые места указаны).
-8. Нет необоснованного статуса «подтверждено» при одной цепочке пересказов.
-9. Важные числа и цитаты проверены по контексту (где применимо).
+6. **Чат:** соблюдена политика из **Output requirements → Chat messaging policy**; промежуточный шум не вынесен в чат (orchestration только в логах); финальный текст — **одно** сообщение после HTML; нет второго финала и нет спама.
+7. Плотная выжимка (если используется) — одним сообщением, ≤ **95%** лимита, без дублирования полного отчёта (детали в HTML).
+8. `quality-review.json` заполнен честно (слабые места указаны).
+9. Нет необоснованного статуса «подтверждено» при одной цепочке пересказов.
+10. Важные числа и цитаты проверены по контексту (где применимо).
+
+**Анти-паттерны (ошибка поведения):** перечислены в `references/chat-policy.md` (план работ в чат, «жду», дубль итогов, сырой JSON в чат и т.д.).
 
 Иерархия источников и правила доказательности — в `references/report-format.md` и в workflow deep-investigation-agent.
 

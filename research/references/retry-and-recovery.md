@@ -1,5 +1,7 @@
 # Retry, recovery, re-splitting, dosbor
 
+Все шаги recovery фиксируй в `execution-log.json` и артефактах; **не** отправляй в чат сообщения вида «перезапускаю subagent» или «делаю dosbor», кроме единственного допустимого сообщения о задержке из `references/chat-policy.md`.
+
 ## Лимиты по умолчанию
 
 | Параметр | Значение |

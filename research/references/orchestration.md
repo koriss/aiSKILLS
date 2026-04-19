@@ -1,5 +1,7 @@
 # Orchestration: supervisor-слой над deep-investigation-agent
 
+**Чат:** планирование, разбиение, retry, dosbor и статусы subagent **не анонсировать** пользователю — только `references/chat-policy.md` и логи (`execution-log.json`, артефакты subagent).
+
 ## Роли
 
 | Роль | Функция |

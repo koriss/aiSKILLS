@@ -24,7 +24,11 @@
     "warnings"
   ],
   "properties": {
-    "schema_version": { "type": "string", "const": "1.0.0" },
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0.0", "1.1.0"],
+      "description": "1.1.0 adds optional chat policy audit fields"
+    },
     "request_id": { "type": "string" },
     "chat_id": { "type": "string" },
     "start_time": { "type": "string", "description": "ISO-8601" },
@@ -76,6 +80,28 @@
       "items": { "type": "string" }
     },
     "html_cyrillic_ok": { "type": "boolean" },
-    "html_path": { "type": "string" }
+    "html_path": { "type": "string" },
+    "chat_ack_sent": {
+      "type": "boolean",
+      "description": "Optional: whether an acceptance ack was sent (max 1)"
+    },
+    "chat_stall_notice_sent": {
+      "type": "boolean",
+      "description": "Optional: the single allowed stall message was sent"
+    },
+    "chat_intermediate_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Optional: total intermediate chat messages (ack + stall)"
+    },
+    "chat_final_text_sent": {
+      "type": "boolean",
+      "description": "Optional: single final structured message after HTML"
+    },
+    "chat_policy_notes": {
+      "type": "string",
+      "description": "Optional: short audit note if policy edge case"
+    }
   }
 }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "task_id": { "type": "string" },
+    "current_global_stage": { "type": "string" },
+    "current_item_id": { "type": "string" },
+    "status": { "type": "string" },
+    "allowed_next_global_stages": { "type": "array", "items": { "type": "string" } },
+    "loop_counters": { "type": "object" },
+    "last_progress_at": { "type": "string" },
+    "last_artifact_changed": { "type": "string" },
+    "blocker": { "type": ["string", "null"] },
+    "next_move": { "type": "string" },
+    "updated_at": { "type": "string" }
+  },
+  "required": ["task_id", "current_global_stage", "status", "loop_counters", "updated_at"]
+}

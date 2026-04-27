@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string" },
+    "item_id": { "type": "string" },
+    "claim_text": { "type": "string" },
+    "claim_type": { "type": "string" },
+    "source_ids": { "type": "array", "items": { "type": "string" } },
+    "verification_status": { "type": "string" },
+    "confidence": { "type": "string" },
+    "citation_correctness": { "type": "string" },
+    "citation_faithfulness": { "type": "string" },
+    "correction_action": { "type": "string" }
+  },
+  "required": ["claim_id", "item_id", "claim_text", "verification_status"]
+}

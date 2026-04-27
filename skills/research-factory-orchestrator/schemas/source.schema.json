@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "source_id": { "type": "string" },
+    "title": { "type": "string" },
+    "url": { "type": "string" },
+    "local_ref": { "type": "string" },
+    "date": { "type": "string" },
+    "source_type": { "type": "string" },
+    "reliability_tier": { "type": "integer" },
+    "independence": { "type": "string" },
+    "bias_risk": { "type": "string" },
+    "accessed_at": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "required": ["source_id", "reliability_tier"]
+}

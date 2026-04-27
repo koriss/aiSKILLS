@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "evidence_id": { "type": "string" },
+    "item_id": { "type": "string" },
+    "source_id": { "type": "string" },
+    "summary": { "type": "string" },
+    "direct_url": { "type": "string" },
+    "evidence_anchor": { "type": "string" },
+    "relevance": { "type": "string" },
+    "limitations": { "type": "string" }
+  },
+  "required": ["evidence_id", "item_id", "source_id", "summary"]
+}

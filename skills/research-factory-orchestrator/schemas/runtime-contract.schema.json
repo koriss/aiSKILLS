@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "runtime_version": { "type": "string" },
+    "skill_version": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "task_id": { "type": "string" },
+    "task_title": { "type": "string" },
+    "execution_mode": {
+      "type": "string",
+      "enum": [
+        "AUTO_COMPILE_AND_EXECUTE",
+        "LIGHTWEIGHT_RESEARCH",
+        "FACT_CHECK_ONLY",
+        "REPORT_FACTORY",
+        "EXECUTE_EXISTING_RUNTIME",
+        "RESUME_RUNTIME",
+        "AUDIT_EXISTING_REPORT",
+        "COMPILE_ONLY"
+      ]
+    },
+    "global_stage": { "type": "string" },
+    "risk_level": { "type": "string" },
+    "thresholds": { "type": "object" },
+    "loop_guards": { "type": "object" },
+    "security": { "type": "object" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  },
+  "required": ["runtime_version", "task_id", "execution_mode", "global_stage", "created_at", "updated_at"]
+}

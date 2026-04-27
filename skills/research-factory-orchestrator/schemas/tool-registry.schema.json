@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tool_name": { "type": "string" },
+          "available": { "type": "boolean" },
+          "trust_level": { "type": "string" },
+          "allowed_actions": { "type": "array", "items": { "type": "string" } },
+          "write_access": { "type": "boolean" },
+          "risk": { "type": "string" },
+          "fallback": { "type": "string" },
+          "test_status": { "type": "string" }
+        },
+        "required": ["tool_name", "available"]
+      }
+    }
+  },
+  "required": ["tools"]
+}

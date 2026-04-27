@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "item_id": { "type": "string" },
+    "title": { "type": "string" },
+    "slug": { "type": "string" },
+    "item_type": { "type": "string" },
+    "priority": { "type": "string", "enum": ["A", "B", "C", "D"] },
+    "status": { "type": "string" },
+    "current_stage": { "type": "string" },
+    "output_files": { "type": "object" },
+    "retry_count": { "type": "integer" },
+    "max_retries": { "type": "integer" },
+    "last_error": { "type": ["string", "null"] },
+    "force_rebuild": { "type": "boolean" },
+    "is_final_locked": { "type": "boolean" }
+  },
+  "required": ["item_id", "title", "slug", "status", "retry_count", "max_retries", "force_rebuild", "is_final_locked"]
+}

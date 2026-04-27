@@ -1,0 +1,46 @@
+{
+  "properties": {
+    "timestamp": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "input_summary": {
+      "type": "string"
+    },
+    "output_summary": {
+      "type": "string"
+    },
+    "artifact_changed": {
+      "type": "string"
+    },
+    "tool_used": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "timestamp",
+    "item_id",
+    "stage",
+    "action",
+    "success"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "queue-item.schema.json"
+      }
+    }
+  },
+  "required": [
+    "task_id",
+    "items"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

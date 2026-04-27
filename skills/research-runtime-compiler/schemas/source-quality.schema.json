@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "source_id": {
+      "type": "string"
+    },
+    "score": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "score"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

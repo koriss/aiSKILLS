@@ -1,0 +1,42 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "direct_url": {
+            "type": "string"
+          },
+          "evidence_anchor": {
+            "type": "string"
+          },
+          "accessed_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "claim_id",
+          "source_id",
+          "direct_url",
+          "evidence_anchor"
+        ]
+      }
+    }
+  },
+  "required": [
+    "item_id",
+    "citations"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

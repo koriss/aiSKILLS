@@ -1,0 +1,63 @@
+{
+  "runtime_version": "1.0.0",
+  "skill_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "created_at": "2026-04-27T21:23:42.558096+00:00",
+  "updated_at": "2026-04-27T21:23:42.558096+00:00",
+  "migration_required": false,
+  "task_id": "example-military-bases",
+  "task_type": "queue_based_research",
+  "complexity_level": 3,
+  "autonomy_mode": "full_auto",
+  "queue_required": true,
+  "output_formats": [
+    "html",
+    "json"
+  ],
+  "source_policy": {
+    "tiers": [
+      1,
+      2,
+      3
+    ],
+    "no_source_no_claim": true,
+    "source_limited_mode_enabled": true
+  },
+  "thresholds": {
+    "factual_accuracy": 0.85,
+    "citation_accuracy": 0.9,
+    "citation_faithfulness": 0.85,
+    "source_quality": 0.75,
+    "output_contract_compliance": 1.0,
+    "safety_compliance": 1.0
+  },
+  "loop_guards": {
+    "MAX_QUEUE_ITERATIONS": 10000,
+    "MAX_RESEARCH_LOOPS_PER_ITEM": 5,
+    "MAX_FACT_CHECK_PASSES": 2,
+    "MAX_CITATION_LOCATOR_PASSES": 2,
+    "MAX_ERROR_AUDIT_PASSES": 2,
+    "MAX_FIX_PASSES": 2,
+    "MAX_RETRIES_PER_STAGE": 2,
+    "MAX_TOOL_FAILURES_PER_ITEM": 5,
+    "MAX_NO_PROGRESS_STEPS": 3
+  },
+  "state_machine": {
+    "allowed_sequence": [
+      "pending",
+      "running_discovery",
+      "running_research",
+      "running_evidence_map",
+      "running_claims_registry",
+      "running_draft",
+      "draft_ready",
+      "running_fact_check",
+      "running_citation_locator",
+      "running_error_audit",
+      "fixing_output",
+      "validating",
+      "evaluating",
+      "complete"
+    ]
+  }
+}

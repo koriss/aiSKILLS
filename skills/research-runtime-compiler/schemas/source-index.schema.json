@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "source.schema.json"
+      }
+    }
+  },
+  "required": [
+    "item_id",
+    "sources"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

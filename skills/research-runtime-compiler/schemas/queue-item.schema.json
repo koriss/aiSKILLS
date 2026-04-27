@@ -1,0 +1,101 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "item_type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "output_files": {
+      "type": "object"
+    },
+    "evidence_files": {
+      "type": "object"
+    },
+    "fact_check_files": {
+      "type": "object"
+    },
+    "started_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "draft_ready_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "completed_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retry_count": {
+      "type": "integer"
+    },
+    "max_retries": {
+      "type": "integer"
+    },
+    "last_valid_stage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "blocked_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "force_rebuild": {
+      "type": "boolean"
+    },
+    "is_final_locked": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "item_id",
+    "title",
+    "slug",
+    "priority",
+    "status",
+    "retry_count",
+    "max_retries",
+    "force_rebuild",
+    "is_final_locked"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

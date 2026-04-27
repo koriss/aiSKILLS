@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "evidence_notes": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence-note.schema.json"
+      }
+    }
+  },
+  "required": [
+    "item_id",
+    "evidence_notes"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

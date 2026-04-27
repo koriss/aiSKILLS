@@ -1,0 +1,35 @@
+{
+  "task_id": "example-military-bases",
+  "artifacts": [
+    {
+      "artifact_id": "master-prompt",
+      "path": "MASTER-PROMPT.md",
+      "role": "manifest",
+      "status": "ready",
+      "checksum": "",
+      "created_at": "2026-04-27T21:23:42.558096+00:00",
+      "updated_at": "2026-04-27T21:23:42.558096+00:00",
+      "validated_at": "2026-04-27T21:23:42.558096+00:00"
+    },
+    {
+      "artifact_id": "runtime-contract",
+      "path": "runtime-contract.json",
+      "role": "state",
+      "status": "ready",
+      "checksum": "",
+      "created_at": "2026-04-27T21:23:42.558096+00:00",
+      "updated_at": "2026-04-27T21:23:42.558096+00:00",
+      "validated_at": "2026-04-27T21:23:42.558096+00:00"
+    },
+    {
+      "artifact_id": "queue",
+      "path": "queue.json",
+      "role": "state",
+      "status": "ready",
+      "checksum": "",
+      "created_at": "2026-04-27T21:23:42.558096+00:00",
+      "updated_at": "2026-04-27T21:23:42.558096+00:00",
+      "validated_at": "2026-04-27T21:23:42.558096+00:00"
+    }
+  ]
+}

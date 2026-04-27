@@ -1,0 +1,49 @@
+{
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "user_request": {
+      "type": "string"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "queue_mode": {
+      "type": "string"
+    },
+    "output_formats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_policy": {
+      "type": "object"
+    },
+    "risk_level": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "title",
+    "user_request",
+    "task_type",
+    "created_at"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

@@ -1,0 +1,59 @@
+{
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "task_title": {
+      "type": "string"
+    },
+    "project_dir": {
+      "type": "string"
+    },
+    "completed_items": {
+      "type": "integer"
+    },
+    "skipped_items": {
+      "type": "integer"
+    },
+    "failed_items": {
+      "type": "integer"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality_scores": {
+      "type": "object"
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resume_instructions": {
+      "type": "string"
+    },
+    "rebuild_instructions": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "task_title",
+    "project_dir",
+    "completed_items",
+    "skipped_items",
+    "failed_items"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

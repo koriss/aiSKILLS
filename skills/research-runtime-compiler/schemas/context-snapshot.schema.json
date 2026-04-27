@@ -1,0 +1,63 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "current_stage": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "completed_stages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pending_stages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "key_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "key_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unresolved_issues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "last_successful_artifact": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "item_id",
+    "current_stage",
+    "objective",
+    "next_action"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

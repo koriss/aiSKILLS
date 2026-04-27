@@ -1,0 +1,38 @@
+{
+  "properties": {
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "item_id": {
+            "type": "string"
+          },
+          "stage": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "boolean"
+          },
+          "next_action": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "timestamp",
+          "item_id",
+          "stage",
+          "progress"
+        ]
+      }
+    }
+  },
+  "required": [
+    "events"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

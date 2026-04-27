@@ -1,0 +1,30 @@
+{
+  "task_id": "example-military-bases",
+  "current_stage": "pending",
+  "current_item_id": "example-military-bases-item-1",
+  "status": "pending",
+  "allowed_next_stages": [
+    "running_discovery",
+    "running_research",
+    "running_evidence_map",
+    "running_claims_registry",
+    "running_draft",
+    "draft_ready",
+    "running_fact_check",
+    "running_citation_locator",
+    "running_error_audit",
+    "fixing_output",
+    "validating",
+    "evaluating",
+    "complete"
+  ],
+  "loop_counters": {
+    "queue_iterations": 0,
+    "no_progress_steps": 0
+  },
+  "last_progress_at": "2026-04-27T21:23:42.558096+00:00",
+  "last_artifact_changed": "",
+  "blocker": null,
+  "next_move": "initialize_tool_registry",
+  "updated_at": "2026-04-27T21:23:42.558096+00:00"
+}

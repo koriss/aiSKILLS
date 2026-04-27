@@ -1,0 +1,49 @@
+{
+  "task_id": "example-military-bases",
+  "items": [
+    {
+      "item_id": "example-military-bases-item-1",
+      "item_type": "investigation_target",
+      "title": "Primary item from request",
+      "slug": "primary-item",
+      "priority": "A",
+      "reason": "compiled_from_request",
+      "status": "pending",
+      "output_files": {},
+      "evidence_files": {},
+      "fact_check_files": {},
+      "started_at": null,
+      "draft_ready_at": null,
+      "completed_at": null,
+      "last_error": null,
+      "retry_count": 0,
+      "max_retries": 2,
+      "last_valid_stage": null,
+      "blocked_reason": null,
+      "force_rebuild": false,
+      "is_final_locked": false
+    },
+    {
+      "item_id": "example-military-bases-item-2",
+      "item_type": "investigation_target",
+      "title": "Secondary item placeholder",
+      "slug": "secondary-item",
+      "priority": "B",
+      "reason": "queue_mode_requires_batch",
+      "status": "pending",
+      "output_files": {},
+      "evidence_files": {},
+      "fact_check_files": {},
+      "started_at": null,
+      "draft_ready_at": null,
+      "completed_at": null,
+      "last_error": null,
+      "retry_count": 0,
+      "max_retries": 2,
+      "last_valid_stage": null,
+      "blocked_reason": null,
+      "force_rebuild": false,
+      "is_final_locked": false
+    }
+  ]
+}

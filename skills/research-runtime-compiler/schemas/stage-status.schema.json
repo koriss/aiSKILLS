@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "current_stage": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "completed_stages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "item_id",
+    "current_stage",
+    "status",
+    "updated_at"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

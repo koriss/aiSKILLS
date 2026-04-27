@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "runtime_version": {
+      "type": "string"
+    },
+    "skill_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "complexity_level": {
+      "type": "integer"
+    },
+    "autonomy_mode": {
+      "type": "string"
+    },
+    "state_machine": {
+      "type": "object"
+    },
+    "thresholds": {
+      "type": "object"
+    },
+    "security": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "runtime_version",
+    "skill_version",
+    "schema_version",
+    "task_type",
+    "complexity_level"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

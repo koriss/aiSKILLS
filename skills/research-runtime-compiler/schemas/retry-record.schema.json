@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "attempt": {
+      "type": "integer"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "changed_approach": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "item_id",
+    "stage",
+    "attempt",
+    "timestamp"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

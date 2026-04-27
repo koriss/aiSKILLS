@@ -1,0 +1,17 @@
+{
+  "task_id": "example-military-bases",
+  "task_title": "# Example Request: Military Bases Report Factory\\n\\nBuild a queue-based runtime to map open-source reported military facilities by region with claim-level citations.\\n",
+  "project_dir": "/home/kazak/_projects/aiSKILLS/skills/research-runtime-compiler/examples/generated-military-bases-runtime",
+  "completed_items": 0,
+  "skipped_items": 0,
+  "failed_items": 0,
+  "artifacts": [],
+  "quality_scores": {},
+  "known_gaps": [
+    "runtime not executed yet"
+  ],
+  "resume_instructions": "Use runtime-state.json and queue.json",
+  "rebuild_instructions": "Re-run compile_runtime.py with --force for full rebuild",
+  "created_at": "2026-04-27T21:23:42.558096+00:00",
+  "updated_at": "2026-04-27T21:23:42.558096+00:00"
+}

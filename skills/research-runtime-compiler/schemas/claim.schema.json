@@ -1,0 +1,60 @@
+{
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "claim_text": {
+      "type": "string"
+    },
+    "claim_type": {
+      "type": "string"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "direct_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification_status": {
+      "type": "string"
+    },
+    "evidence_excerpt_or_summary": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string"
+    },
+    "contradiction_notes": {
+      "type": "string"
+    },
+    "correction_action": {
+      "type": "string"
+    },
+    "citation_correctness": {
+      "type": "string"
+    },
+    "citation_faithfulness": {
+      "type": "string"
+    },
+    "extraction_path": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "claim_id",
+    "item_id",
+    "claim_text",
+    "verification_status"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

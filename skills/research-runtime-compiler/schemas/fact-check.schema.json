@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "checked_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "claim.schema.json"
+      }
+    },
+    "summary": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "item_id",
+    "checked_claims"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

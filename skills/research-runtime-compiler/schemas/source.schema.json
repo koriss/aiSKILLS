@@ -1,0 +1,61 @@
+{
+  "properties": {
+    "source_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string"
+    },
+    "reliability_tier": {
+      "type": "integer"
+    },
+    "independence": {
+      "type": "string"
+    },
+    "recency_score": {
+      "type": "number"
+    },
+    "authority_score": {
+      "type": "number"
+    },
+    "specificity_score": {
+      "type": "number"
+    },
+    "directness_score": {
+      "type": "number"
+    },
+    "bias_risk": {
+      "type": "string"
+    },
+    "supports_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "accessed_at": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "reliability_tier"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object"
+}

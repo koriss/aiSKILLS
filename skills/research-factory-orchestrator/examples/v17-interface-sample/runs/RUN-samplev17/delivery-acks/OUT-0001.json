@@ -1,0 +1,10 @@
+{
+  "ack_id": "ACK-OUT-0001",
+  "event_id": "OUT-0001",
+  "run_id": "RUN-samplev17",
+  "provider": "telegram",
+  "status": "sent",
+  "provider_message_id": "stub:OUT-0001",
+  "idempotency_key": "RUN-samplev17:message-001",
+  "created_at": "2026-04-29T00:00:01Z"
+}

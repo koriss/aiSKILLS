@@ -1,0 +1,38 @@
+{
+  "version": "18.1.1-full-overlay-from-v17.3-base-validator-dag",
+  "base": "17.3.0-report-proof-integrity-hardening",
+  "overlays": [
+    "18.0.0-internal-analysis-audit-runtime",
+    "18.1.0-discovery-execution-integrity-hotfix"
+  ],
+  "validators": [
+    "validate_skill_discovery_frontmatter.py",
+    "validate_v18_runtime_artifacts.py",
+    "validate_package_claim_requires_zip.py",
+    "validate_gate_consistency.py",
+    "validate_late_results_protocol.py",
+    "validate_all_python_ast.py",
+    "validate_no_pycache.py",
+    "validate_skill.py"
+  ],
+  "required_gates": [
+    "runtime_gate",
+    "content_gate",
+    "claim_status_gate",
+    "wave_graph_gate",
+    "io_analysis_gate",
+    "self_audit_gate",
+    "package_gate",
+    "provider_ack_gate",
+    "external_delivery_gate",
+    "final_user_claim_gate"
+  ],
+  "release_blockers": [
+    "missing_skill_frontmatter",
+    "skill_file_count_too_low",
+    "package_claim_without_zip",
+    "final_pass_with_failed_gate",
+    "timeout_promoted_to_complete",
+    "late_result_without_accept_reject"
+  ]
+}

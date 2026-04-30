@@ -1,0 +1,8 @@
+{
+  "case_id": "F278-active-context-capacity-not-checked",
+  "failure_code": "F278",
+  "class": "context-acquisition-integrity",
+  "description": "active context capacity not checked",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

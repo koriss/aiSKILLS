@@ -1,0 +1,1 @@
+Research runtime writes generic outbox event; provider adapter sends.

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InterfaceRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "interface",
+    "provider",
+    "conversation_id",
+    "message_id",
+    "user_id",
+    "command",
+    "raw_text",
+    "attachments",
+    "created_at"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "interface": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "conversation_id": {
+      "type": "string"
+    },
+    "message_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "command": {
+      "type": "string"
+    },
+    "raw_text": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

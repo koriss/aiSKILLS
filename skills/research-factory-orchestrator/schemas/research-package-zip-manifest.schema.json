@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResearchPackageZipManifest",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "zip_path": {
+      "type": "string"
+    },
+    "zip_exists": {
+      "type": "boolean"
+    },
+    "required_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "present_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "zip_path",
+    "zip_exists",
+    "required_files",
+    "present_files",
+    "missing_files"
+  ]
+}

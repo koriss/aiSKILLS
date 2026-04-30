@@ -1,0 +1,8 @@
+{
+  "case_id": "F284-operational-loading-request-turned-into-summary",
+  "failure_code": "F284",
+  "class": "context-acquisition-integrity",
+  "description": "operational loading request turned into summary",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

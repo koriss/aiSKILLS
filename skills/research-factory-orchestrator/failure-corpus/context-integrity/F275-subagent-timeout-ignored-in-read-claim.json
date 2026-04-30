@@ -1,0 +1,8 @@
+{
+  "case_id": "F275-subagent-timeout-ignored-in-read-claim",
+  "failure_code": "F275",
+  "class": "context-acquisition-integrity",
+  "description": "subagent timeout ignored in read claim",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

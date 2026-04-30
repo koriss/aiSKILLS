@@ -1,0 +1,8 @@
+{
+  "case_id": "F174-confirmed-claim-without-valid-source-fit",
+  "failure_code": "F174",
+  "description": "Confirmed verdict without valid source fit",
+  "expected_validator": "validate_claim_source_fit.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

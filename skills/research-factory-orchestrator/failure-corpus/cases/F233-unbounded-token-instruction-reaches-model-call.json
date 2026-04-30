@@ -1,0 +1,8 @@
+{
+  "case_id": "F233-unbounded-token-instruction-reaches-model-call",
+  "failure_code": "F233",
+  "description": "Unbounded/long model generation policy leaks into runtime",
+  "expected_validator": "validate_context_budget_policy.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

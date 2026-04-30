@@ -1,0 +1,55 @@
+{
+  "version": "18.3.1-context-integrity-hotfix",
+  "modes": [
+    "operational_load",
+    "exhaustive_audit",
+    "on_demand"
+  ],
+  "operation_types": [
+    "read",
+    "index",
+    "load",
+    "execute",
+    "smoke",
+    "memory_write"
+  ],
+  "thresholds": {
+    "plain_subagent_full_read_file_limit": 100,
+    "plain_subagent_full_read_estimated_token_limit": 50000,
+    "active_context_warning_estimated_token_limit": 120000
+  },
+  "forbidden_claims_without_proof": [
+    "read_all_files",
+    "loaded_all_files_into_context",
+    "know_skill_completely",
+    "subagent_completed_read_without_ack",
+    "smoke_test_loaded_context",
+    "memory_note_is_active_context"
+  ],
+  "required_proofs": {
+    "read_all_files": [
+      "file-inventory.json",
+      "read-ledger.jsonl",
+      "read-coverage.json"
+    ],
+    "loaded_all_files_into_context": [
+      "active-context-manifest.json",
+      "context-budget-analysis.json",
+      "context-claim-gate.json"
+    ],
+    "subagent_completed_read": [
+      "subagent_completion_ack",
+      "read-ledger.jsonl"
+    ],
+    "smoke_test_runtime_path": [
+      "smoke-test transcript"
+    ]
+  },
+  "chat_payload_blocklist": [
+    "Reasoning:",
+    "Thought:",
+    "scratchpad",
+    "internal deliberation",
+    "chain-of-thought"
+  ]
+}

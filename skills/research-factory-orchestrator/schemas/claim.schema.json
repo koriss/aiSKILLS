@@ -1,17 +1,136 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Claim",
   "type": "object",
   "properties": {
-    "claim_id": { "type": "string" },
-    "item_id": { "type": "string" },
-    "claim_text": { "type": "string" },
-    "claim_type": { "type": "string" },
-    "source_ids": { "type": "array", "items": { "type": "string" } },
-    "verification_status": { "type": "string" },
-    "confidence": { "type": "string" },
-    "citation_correctness": { "type": "string" },
-    "citation_faithfulness": { "type": "string" },
-    "correction_action": { "type": "string" }
+    "claim_id": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "taxonomy": {
+      "type": "string",
+      "enum": [
+        "confirmed_fact",
+        "reported_claim",
+        "allegation",
+        "expert_assessment",
+        "inference",
+        "hypothesis",
+        "speculation",
+        "unknown"
+      ]
+    },
+    "claim_type": {
+      "type": "string"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "partially_confirmed",
+        "unsupported",
+        "contradicted",
+        "outdated",
+        "source_missing",
+        "source_does_not_support_claim",
+        "requires_cautious_language"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "disputed",
+        "unknown"
+      ]
+    },
+    "citation_anchor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "correction_action": {
+      "type": "string",
+      "enum": [
+        "keep",
+        "rewrite",
+        "downgrade",
+        "move_to_uncertain",
+        "remove",
+        "block_final"
+      ]
+    },
+    "claim_time_sensitivity": {
+      "type": "string",
+      "enum": [
+        "stable",
+        "slow-changing",
+        "fast-changing",
+        "breaking"
+      ]
+    },
+    "source_age_days": {
+      "type": "integer"
+    },
+    "staleness_risk": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "unknown"
+      ]
+    },
+    "citation_correctness": {
+      "type": "string",
+      "enum": [
+        "supports_claim",
+        "does_not_support_claim",
+        "unclear",
+        "not_checked"
+      ]
+    },
+    "citation_faithfulness": {
+      "type": "string",
+      "enum": [
+        "derived_from_source",
+        "post_hoc_or_unclear",
+        "not_checked"
+      ]
+    },
+    "supporting_int_families": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_family_variety": {
+      "type": "integer"
+    },
+    "independent_origin_count": {
+      "type": "integer"
+    },
+    "all_source_assessment": {
+      "type": "boolean"
+    }
   },
-  "required": ["claim_id", "item_id", "claim_text", "verification_status"]
+  "additionalProperties": true,
+  "required": [
+    "claim_id",
+    "text",
+    "taxonomy",
+    "verification_status",
+    "confidence"
+  ]
 }

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "mode",
+    "files_loaded",
+    "estimated_tokens",
+    "limitations"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string"
+    },
+    "files_loaded": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estimated_tokens": {
+      "type": "integer"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "not_loaded": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

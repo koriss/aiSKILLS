@@ -1,0 +1,1 @@
+run_research_factory.py есть, но из чата вернём workaround напрямую без outbox.

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InlineCitation",
+  "type": "object",
+  "properties": {
+    "citation_id": {
+      "type": "string"
+    },
+    "claim_id": {
+      "type": "string"
+    },
+    "inline_marker": {
+      "type": "string"
+    },
+    "ref_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "full_url": {
+      "type": "string"
+    },
+    "citation_anchor": {
+      "type": "string"
+    },
+    "supports": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "citation_id",
+    "claim_id",
+    "inline_marker",
+    "ref_id",
+    "source_id",
+    "full_url"
+  ]
+}

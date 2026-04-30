@@ -1,0 +1,54 @@
+{
+  "version": "18.3.1-context-integrity-hotfix",
+  "purpose": "Protect RFO runtime from LLM idle timeouts, provider request timeouts, subagent timeouts, local model disconnects, partial outputs, late results and cron contention.",
+  "timeouts": {
+    "platform_idle_timeout_sec_observed": 120,
+    "recommended_first_token_soft_timeout_sec": 30,
+    "recommended_no_progress_soft_timeout_sec": 60,
+    "recommended_provider_hard_timeout_sec": 110,
+    "subagent_expected_window_sec": [
+      30,
+      90
+    ]
+  },
+  "work_unit_limits": {
+    "max_claims_per_wu": 5,
+    "max_sources_per_acquisition_wu": 5,
+    "max_input_chars_per_model_call": 60000,
+    "max_expected_model_runtime_sec": 90,
+    "strict_json_single_blob_forbidden": true,
+    "html_generation_by_model_forbidden": true
+  },
+  "partial_output_protocol": {
+    "format": "jsonl",
+    "required_start_record": true,
+    "required_finalize_record_for_complete": true,
+    "partial_without_finalize_status": "partial",
+    "partial_can_confirm_claim": false
+  },
+  "retry_policy": {
+    "retry_must_change_something": true,
+    "same_prompt_retry_allowed_for": [
+      "transport_disconnect_once"
+    ],
+    "same_prompt_retry_forbidden_for": [
+      "idle_timeout",
+      "context_overflow",
+      "backend_oom",
+      "partial_without_finalize"
+    ],
+    "required_mutations_after_timeout": [
+      "shrink_prompt",
+      "split_work_unit",
+      "alternate_backend",
+      "continuation_packet",
+      "degrade"
+    ]
+  },
+  "final_gate": {
+    "confirmed_requires_complete_wu_or_valid_quorum": true,
+    "timeout_must_cap_affected_claims": true,
+    "late_result_silent_merge_forbidden": true,
+    "snippet_only_confirmation_forbidden": true
+  }
+}

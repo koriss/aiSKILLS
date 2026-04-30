@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryManifestV14",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "run_id",
+    "delivery_status",
+    "attachments",
+    "local_paths_exposed"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "delivery_status": {
+      "enum": [
+        "created",
+        "running",
+        "ready",
+        "delivering",
+        "delivered",
+        "partial",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "local_paths_exposed": {
+      "type": "boolean"
+    }
+  }
+}

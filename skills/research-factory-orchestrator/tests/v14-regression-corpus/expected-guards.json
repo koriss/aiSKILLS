@@ -1,0 +1,12 @@
+{
+  "must_fail_if": [
+    "telegram contains table",
+    "telegram contains local path",
+    "manual_check_passed appears in final proof",
+    "negative identity uses absolute wording",
+    "confirmed_fact has one non-primary source",
+    "derived inference is labelled confirmed_fact",
+    "search-strategy exists but search-ledger missing",
+    "delivered status without required attachments"
+  ]
+}

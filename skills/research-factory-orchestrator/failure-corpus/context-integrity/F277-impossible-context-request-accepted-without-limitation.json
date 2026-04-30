@@ -1,0 +1,8 @@
+{
+  "case_id": "F277-impossible-context-request-accepted-without-limitation",
+  "failure_code": "F277",
+  "class": "context-acquisition-integrity",
+  "description": "impossible context request accepted without limitation",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

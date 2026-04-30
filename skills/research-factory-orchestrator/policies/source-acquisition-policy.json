@@ -1,0 +1,49 @@
+{
+  "version": "18.3.1-context-integrity-hotfix",
+  "states": [
+    "candidate_found",
+    "search_snippet_only",
+    "fetch_fulltext_ok",
+    "fetch_html_ok_but_extraction_failed",
+    "fetch_blocked",
+    "fetch_timeout",
+    "auth_required",
+    "robots_or_policy_blocked",
+    "geo_or_network_blocked",
+    "rate_limited",
+    "paywalled",
+    "archive_available",
+    "archive_unavailable",
+    "api_available",
+    "api_failed",
+    "user_upload_required",
+    "permanent_unavailable",
+    "temporarily_unavailable"
+  ],
+  "rank_caps": {
+    "fetch_fulltext_ok": "E5",
+    "archive_available": "E4",
+    "search_snippet_only": "E1",
+    "auth_required": "E0",
+    "fetch_blocked": "E0",
+    "permanent_unavailable": "E0"
+  },
+  "lawful_fallbacks": [
+    "archive_lookup",
+    "official_api",
+    "rss_atom",
+    "sitemap",
+    "alternative_canonical_source",
+    "public_mirror",
+    "search_as_lead",
+    "user_upload_manual_source_packet",
+    "internal_kb_cache"
+  ],
+  "forbidden_as_default": [
+    "auth_bypass",
+    "paywall_bypass",
+    "suspicious_proxy_evasion",
+    "robots_tos_violation",
+    "masquerading_for_restricted_content"
+  ]
+}

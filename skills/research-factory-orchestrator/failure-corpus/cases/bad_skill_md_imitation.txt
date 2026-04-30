@@ -1,0 +1,1 @@
+Запустил plain subagent. Он прочитает SKILL.md и выполнит pipeline через custom prompt.

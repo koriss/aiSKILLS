@@ -1,0 +1,8 @@
+{
+  "case_id": "F287-context-load-no-file-hashes",
+  "failure_code": "F287",
+  "class": "context-acquisition-integrity",
+  "description": "context load no file hashes",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

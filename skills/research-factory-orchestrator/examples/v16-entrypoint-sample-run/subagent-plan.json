@@ -1,0 +1,68 @@
+{
+  "task_id": "samplev16",
+  "min_subagents": 8,
+  "required_quorum": 10,
+  "assignments": [
+    {
+      "subagent_id": "SA-001",
+      "work_unit_id": "WU-001",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-002",
+      "work_unit_id": "WU-002",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-003",
+      "work_unit_id": "WU-003",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-004",
+      "work_unit_id": "WU-004",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-005",
+      "work_unit_id": "WU-005",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-006",
+      "work_unit_id": "WU-006",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-007",
+      "work_unit_id": "WU-007",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-008",
+      "work_unit_id": "WU-008",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-009",
+      "work_unit_id": "WU-009",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-010",
+      "work_unit_id": "WU-010",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-011",
+      "work_unit_id": "WU-011",
+      "status": "planned"
+    },
+    {
+      "subagent_id": "SA-012",
+      "work_unit_id": "WU-012",
+      "status": "planned"
+    }
+  ],
+  "created_at": "2026-04-29T00:00:00Z"
+}

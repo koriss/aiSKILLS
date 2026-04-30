@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OutboxEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "run_id",
+    "job_id",
+    "command_id",
+    "interface",
+    "provider",
+    "type",
+    "payload_path",
+    "payload_kind",
+    "status",
+    "attempts",
+    "idempotency_key",
+    "required_for_final_delivery",
+    "created_at"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "command_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interface": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "send_message",
+        "send_file",
+        "send_json"
+      ]
+    },
+    "payload_path": {
+      "type": "string"
+    },
+    "payload_kind": {
+      "type": "string"
+    },
+    "file_kind": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "sending",
+        "sent",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "attempts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "required_for_final_delivery": {
+      "type": "boolean"
+    },
+    "delivery_claim_allowed_after_ack": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

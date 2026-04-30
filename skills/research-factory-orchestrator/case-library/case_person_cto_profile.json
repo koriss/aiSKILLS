@@ -1,0 +1,33 @@
+{
+  "case_id": "case_person_cto_profile",
+  "task_type": "person investigation",
+  "audience": "business / hiring / due diligence",
+  "archetype": "person_investigation",
+  "block_plan": [
+    "verdict",
+    "identity_resolution",
+    "roles",
+    "organizations",
+    "public_activity",
+    "same_name_candidates",
+    "sources"
+  ],
+  "required_components": [
+    "executive-summary",
+    "claim-card",
+    "source-reference-item",
+    "timeline",
+    "callout"
+  ],
+  "sample_summary": "Публичные источники подтверждают профессиональную роль, но соцпрофили требуют identity-resolution.",
+  "common_failure_modes": [
+    "wrong social profile",
+    "self-claim as fact",
+    "same-name merge"
+  ],
+  "validator_focus": [
+    "identity_resolution",
+    "inline citations",
+    "summary no new facts"
+  ]
+}

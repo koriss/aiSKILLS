@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HtmlReportDelivery",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "html_report_path": {
+      "type": "string"
+    },
+    "html_report_exists": {
+      "type": "boolean"
+    },
+    "linked_in_chat": {
+      "type": "boolean"
+    },
+    "recorded_in_manifest": {
+      "type": "boolean"
+    },
+    "required_sections_present": {
+      "type": "object"
+    },
+    "blocked_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "html_report_path",
+    "html_report_exists",
+    "linked_in_chat"
+  ]
+}

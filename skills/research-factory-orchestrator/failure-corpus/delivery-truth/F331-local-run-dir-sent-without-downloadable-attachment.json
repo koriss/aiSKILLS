@@ -1,0 +1,5 @@
+{
+  "case_id": "F331-local-run-dir-sent-without-downloadable-attachment",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

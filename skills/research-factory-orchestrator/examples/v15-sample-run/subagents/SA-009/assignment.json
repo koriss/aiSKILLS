@@ -1,0 +1,14 @@
+{
+  "assignment_id": "A-009",
+  "subagent_id": "SA-009",
+  "work_unit_id": "WU-009-strong-tie-pivoting",
+  "objective": "Execute strong_tie_pivoting coverage for the target task.",
+  "context_packet_path": "subagents/SA-009/context-packet.json",
+  "required_outputs": [
+    "sources.json",
+    "claims.json",
+    "evidence.json",
+    "errors.json"
+  ],
+  "status": "planned"
+}

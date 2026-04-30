@@ -1,0 +1,19 @@
+{
+  "version": "18.3.2",
+  "validators": [
+    "validate_runtime.py",
+    "validate_runtime_contract_current.py",
+    "validate_no_attachment_claim_without_ack.py",
+    "validate_delivery_claim_matches_manifest.py",
+    "validate_final_gate_required_for_completion_claim.py",
+    "validate_smoke_run_not_presented_as_research.py",
+    "validate_seed_claims_not_presented_as_domain_analysis.py",
+    "validate_manual_fallback_not_presented_as_rfo.py",
+    "validate_snippet_only_not_full_report.py",
+    "validate_no_local_paths_as_delivery.py",
+    "validate_user_visible_delivery_ack.py",
+    "validate_smoke_failure_modes_are_not_prod_acceptance.py",
+    "validate_core_modularization_contract.py",
+    "validate_no_html_string_gate_as_primary_contract.py"
+  ]
+}

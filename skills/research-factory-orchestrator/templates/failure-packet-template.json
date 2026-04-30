@@ -1,0 +1,10 @@
+{
+  "work_unit_id": "{{WORK_UNIT_ID}}",
+  "failure_type": "unknown",
+  "completed_artifacts": [],
+  "missing_artifacts": [],
+  "validator_failures": [],
+  "partial_artifacts": [],
+  "next_action": "",
+  "created_at": "{{CREATED_AT}}"
+}

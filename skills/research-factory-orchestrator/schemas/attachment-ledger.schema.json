@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Attachment Ledger",
+  "type": "object",
+  "properties": {
+    "attachments": {
+      "type": "array"
+    },
+    "all_required_sent": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

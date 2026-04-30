@@ -1,0 +1,28 @@
+{
+  "claims": [
+    {
+      "claim_id": "C001",
+      "claim_type": "confirmed_fact",
+      "source_ids": [
+        "S001",
+        "S002"
+      ]
+    },
+    {
+      "claim_id": "C002",
+      "claim_type": "confirmed_fact",
+      "source_ids": [
+        "S003"
+      ],
+      "single_source_primary": true
+    },
+    {
+      "claim_id": "C003",
+      "claim_type": "derived_inference",
+      "source_ids": [
+        "S004"
+      ],
+      "derived": true
+    }
+  ]
+}

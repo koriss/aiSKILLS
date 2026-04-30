@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExhaustiveSearchLedger",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "coverage_categories": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "query_families": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "unsearched_categories": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "coverage_categories",
+    "query_families",
+    "unsearched_categories"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": "samplev16",
+  "entrypoint": "scripts/run_research_factory.py",
+  "invocation_mode": "runtime",
+  "state": "compiled",
+  "work_units_total": 12,
+  "workers_planned": 12,
+  "workers_running": 0,
+  "workers_completed": 0,
+  "workers_failed": 0,
+  "searches_recorded": 0,
+  "last_event": "rfo.entrypoint.completed"
+}

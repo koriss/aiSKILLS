@@ -1,0 +1,5 @@
+[3/6] Факты и цифры
+
+✅ full-report.html должен открываться одним файлом.
+
+✅ Telegram messages должны быть plain text.

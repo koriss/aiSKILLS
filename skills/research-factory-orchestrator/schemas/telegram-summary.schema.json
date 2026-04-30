@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TelegramSummary",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "verdict": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "object"
+    },
+    "counts": {
+      "type": "object"
+    },
+    "key_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "key_numbers": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "fact_cards": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "top_sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "claim_ids_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "title",
+    "verdict",
+    "confidence",
+    "key_findings",
+    "attachments",
+    "claim_ids_used"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "case_id": "case_game_release_research",
+  "task_type": "game / entertainment research",
+  "audience": "consumer / media",
+  "archetype": "technology_landscape",
+  "block_plan": [
+    "verdict",
+    "official_announcement",
+    "platforms",
+    "release_window",
+    "developer",
+    "sources",
+    "unknowns"
+  ],
+  "required_components": [
+    "executive-summary",
+    "kpi-card",
+    "timeline",
+    "claim-card"
+  ],
+  "sample_summary": "Официальные страницы подтверждают анонс и платформы; дата выхода и системные требования остаются не подтверждены.",
+  "common_failure_modes": [
+    "fan theory as confirmed fact",
+    "trailer interpretation overclaim"
+  ],
+  "validator_focus": [
+    "official sources",
+    "current-source gate",
+    "claim taxonomy"
+  ]
+}

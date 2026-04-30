@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "topic",
+    "slug",
+    "created_at",
+    "updated_at",
+    "status",
+    "skill_version",
+    "mode",
+    "paths"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "created",
+        "compiled",
+        "collecting",
+        "subagents_running",
+        "subagent_timeout_detected",
+        "recovery_running",
+        "quorum_check",
+        "coverage_check",
+        "partial_ready",
+        "synthesis_ready",
+        "validating",
+        "delivery_ready",
+        "delivered",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "skill_version": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "paths": {
+      "type": "object"
+    }
+  }
+}

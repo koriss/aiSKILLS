@@ -1,0 +1,28 @@
+{
+  "run_id": "bad",
+  "delivery_status": "delivered",
+  "local_paths_exposed": false,
+  "required_acks_present": false,
+  "delivery_claim_allowed": true,
+  "required_outbox_events": [
+    "OUT-0001",
+    "OUT-0002",
+    "OUT-0003"
+  ],
+  "outbox_events": [
+    {
+      "event_id": "OUT-0001",
+      "event_type": "send_message",
+      "ack_status": "sent"
+    }
+  ],
+  "attachments": [
+    {
+      "event_id": "OUT-0002",
+      "type": "standalone_html",
+      "required": true,
+      "sent": true
+    }
+  ],
+  "created_at": "2026-04-29T00:00:00Z"
+}

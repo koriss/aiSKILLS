@@ -1,0 +1,7 @@
+{
+  "case_id": "case_manual_check_final_proof",
+  "failure_type": "F016",
+  "bad_output_pattern": "manual_check_passed used as final validator",
+  "expected_guard": "concrete validators only",
+  "validator_or_eval": "validate_no_manual_check_final_proof.py"
+}

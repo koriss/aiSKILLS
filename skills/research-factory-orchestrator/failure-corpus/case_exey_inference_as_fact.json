@@ -1,0 +1,7 @@
+{
+  "case_id": "case_exey_inference_as_fact",
+  "failure_type": "F010",
+  "bad_output_pattern": "derived birth year promoted to confirmed_fact",
+  "expected_guard": "derived_inference cannot be confirmed_fact",
+  "validator_or_eval": "validate_inference_not_confirmed_fact.py"
+}

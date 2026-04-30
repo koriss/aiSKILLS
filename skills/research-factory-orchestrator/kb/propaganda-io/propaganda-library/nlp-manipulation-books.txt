@@ -1,0 +1,371 @@
+# NLP, Manipulation, Persuasion & Influence Books & Resources
+# Collected: 2026-04-20
+# Subagent task - propaganda library research
+
+================================================================================
+SECTION 1: NLP FOUNDATIONAL TEXTS (Neuro-Linguistic Programming)
+================================================================================
+
+BOOK 1: "Frogs into Princes" (aka "Frogs into Princes: The 1991 NLP Conference")
+--------------------------------------------------------------------------------
+Author: Richard Bandler, John Grinder
+Year: 1979 (original), 1991 (conference edition)
+Description: Foundational NLP text from the early Sacramento workshops. Contains
+core reframing techniques and modeling excellence. One of the first widely
+available NLP books.
+Where to find: https://www.academia.edu/34258965/Frogs_into_Princes_NLP_
+Notes: Full PDF available on Academia.edu
+
+BOOK 2: "The Structure of Magic" (Vol. I & II)
+--------------------------------------------------------------------------------
+Author: Richard Bandler, John Grinder
+Year: 1975
+Description: Foundational NLP text on communication and therapy. Introduced the
+Meta Model - a set of language patterns for uncovering unconscious distortions
+and deletions in speech.
+Where to find: https://www.ayanetwork.com/upload/nlp/The%20Structure%20Of%20Magic%20Vols%20I%20And%20II%20By%20Richard%20Bandler%20And%20John%20Grinder%20%5Bfound%20via%20www.FileDonkey.com%5D.pdf
+
+BOOK 3: "Trance-Formations: Neuro-Linguistic Programming and the Structure of Real People"
+--------------------------------------------------------------------------------
+Author: John Grinder, Richard Bandler
+Year: 1981
+Description: Advanced NLP techniques for personal transformation. Explores
+modeling human behavior and creating lasting change through trancework.
+Where to find: https://www.scribd.com/document/486454240/John-Grinder-Richard-Bandler-Trance-Formations-Neuro-Linguistic-Programming-and-the-Structure-of-Real-People-Pr-1981-pdf
+
+BOOK 4: "Reframing: Neuro-Linguistic Programming and the Transformation of Meaning"
+--------------------------------------------------------------------------------
+Author: Richard Bandler, John Grinder
+Year: 1982
+Description: NLP technique for changing the meaning of experiences. Teaches how
+to reshape perception by changing the frame around events.
+Where to find: https://lifechangework.wordpress.com/wp-content/uploads/2020/10/richard-bandler-john-grinder-reframing.pdf
+
+BOOK 5: "Get The Life You Want"
+--------------------------------------------------------------------------------
+Author: Richard Bandler
+Year: 2008
+Description: Practical guide to using NLP for rapid personal change. Bandler's
+updated techniques for reprogramming behaviors and beliefs.
+Where to find: https://sciphilconf.berkeley.edu/filedownload.ashx/mL7131/603317/Richard%20Bandler%20Get%20The%20Life%20You%20Want.pdf
+
+BOOK 6: "Neuro Linguistic Programming Vol 1" (Spanish/English)
+--------------------------------------------------------------------------------
+Author: Richard Bandler, John Grinder
+Description: Spanish language edition of foundational NLP work.
+Where to find: https://app.pulsar.uba.ar/fetch.php/libweb/T67742/Richard_Bandler_John_Grinder_Programacion_Neurolinguistica_Vol_1.pdf
+
+BOOK 7: "NLP And The Use Of Language"
+--------------------------------------------------------------------------------
+Author: John Grinder, Richard Bandler (via archive.org)
+Description: From archive.org collections - covers NLP communication techniques.
+Where to find: https://archive.org/download/nlp-work-book/NLP%20And%20The%20Use%20Of%20Language.pdf
+
+
+================================================================================
+SECTION 2: COERCIVE PERSUASION & BRAINWASHING RESEARCH
+================================================================================
+
+BOOK 8: "Thought Reform and the Psychology of Totalism: A Study of 'Brainwashing' in China"
+--------------------------------------------------------------------------------
+Author: Robert Jay Lifton
+Year: 1961
+Description: CLINICAL FOUNDATIONAL TEXT. Lifton interviewed 25 former Chinese
+thought reform subjects. Identified 8 criteria of thought reform: milieu control,
+神秘教诲 (mystical manipulation), demand for purity, confession culture,
+trustworthiness, loaded language, doctrine over person, and dispensing of existence.
+This is the definitive clinical study of coercive persuasion.
+Where to find: https://ia601405.us.archive.org/18/items/ThoughtReformAndThePsychologyOfTotalism/Thought_Reform_and_the_Psychology_of_Totalism.pdf
+Publisher: W.W. Norton / UNC Press
+ISBN: 0393002217
+
+BOOK 9: "Cults in Our Midst: The Continuing Fight Against Their Hidden Menace"
+--------------------------------------------------------------------------------
+Author: Margaret Thaler Singer, Janja Lalich, with Robert Jay Lifton (forward)
+Year: 1995 (revised 1996)
+Description: Comprehensive study of cult recruitment and retention methods.
+Singer was the leading expert on coercive persuasion in cult contexts.
+Covers the same 8 criteria as Lifton, applied to modern cults. Essential
+clinical text on thought reform techniques.
+Where to find: https://pearl-hifi.com/11_Spirited_Growth/10_Health_Pos/01_Worthy_Authors/Cults_in_Our_Midst__The_Continuing_Fight_Against_Their_Hidden_Menace.pdf
+Publisher: Jossey-Bass
+
+BOOK 10: "Combatting Cult Mind Control: The #1 Best-selling Guide to Protection, Rescue, and Recovery from Destructive Cults"
+--------------------------------------------------------------------------------
+Author: Steven Hassan
+Year: 1988 (updated editions)
+Description: Ex-cult member turned therapist. Introduces BITE model (Behavior,
+Information, Thought, Emotional control). Practical guide for identifying
+and recovering from cult control.
+Where to find: Various platforms - search "Steven Hassan Combatting Cult Mind Control"
+
+
+================================================================================
+SECTION 3: INFLUENCE & PERSUASION PSYCHOLOGY
+================================================================================
+
+BOOK 11: "Influence: The Psychology of Persuasion"
+--------------------------------------------------------------------------------
+Author: Robert B. Cialdini, Ph.D.
+Year: 1984 (new expanded edition 2006)
+Description: DEFINITIVE TEXT. Cialdini's 6 (later 7) principles of influence:
+1) Reciprocity - we repay what we receive
+2) Commitment/Consistency - we honor commitments
+3) Social Proof - we look to others for guidance
+4) Authority - we defer to experts
+5) Liking - we say yes to people we like
+6) Scarcity - we want what is rare
+7) Unity (added in newer edition) - we trust what aligns with our identity
+Where to find (PDF): 
+- https://ia800203.us.archive.org/33/items/ThePsychologyOfPersuasion/The%20Psychology%20of%20Persuasion.pdf
+- https://github.com/big842/Sham-book/blob/master/Book%20demo/Influent%20-%20The%20psychology%20of%20Persuasion%20-%20Robert%20B.Cialdini.pdf
+- https://www.academia.edu/9978388/Influence_The_Psychology_of_Persuasion
+
+BOOK 12: "Contagious: Why Things Catch On"
+--------------------------------------------------------------------------------
+Author: Jonah Berger, Ph.D. (Wharton)
+Year: 2013
+Description: The STEPPS framework for viral content:
+- Social Currency - makes people look good
+- Triggers - top of mind, tip of tongue
+- Emotion - high arousal emotions spread
+- Public - observable behavior spreads
+- Practical Value - useful information spreads
+- Stories - wrapped in narrative
+Where to find (PDF):
+- https://www.academia.edu/41343654/Contagious_why_things_catch_on_jonah_berger
+- https://wbl.wharton.upenn.edu/wp-content/uploads/2014/09/Contagious-Why-Things-Catch-On.pdf
+- https://wordofmouth.org/download/Berger_Contagious.pdf
+
+BOOK 13: "How to Win Friends and Influence People"
+--------------------------------------------------------------------------------
+Author: Dale Carnegie
+Year: 1936
+Description: Classic persuasion text. Key techniques:
+- Don't criticize, condemn, or complain
+- Give honest appreciation
+- Arouse in others a WANT
+- Smile
+- Remember names
+- Be a good listener
+- Talk in terms of the other person's interest
+- Make the other person feel important
+- Appeal to nobler motives
+Where to find (PDF): https://dn720004.ca.archive.org/0/items/english-collections-1/How%20To%20Win%20Friends%20And%20Influence%20People%20-%20Carnegie%2C%20Dale.pdf
+
+
+================================================================================
+SECTION 4: SOCIAL ENGINEERING & MANIPULATION MANUALS
+================================================================================
+
+BOOK 14: "The Art of Deception: Controlling the Human Element of Security"
+--------------------------------------------------------------------------------
+Author: Kevin Mitnick, William L. Simon
+Year: 2002
+Description: FOUNDATIONAL SOCIAL ENGINEERING TEXT. Real-world case studies of
+human manipulation for information security. Shows how attackers use:
+- Pretexting (creating false scenarios)
+- Phishing and vishing
+- Tailgating and piggybacking
+- Elicitation techniques
+- Reverse social engineering
+Where to find (PDF):
+- https://repo.zenk-security.com/Magazine%20E-book/Kevin_Mitnick_-_The_Art_of_Intrusion.pdf (actually "Art of Intrusion" - related)
+- https://ia800102.us.archive.org/4/items/pdfsandebooks/UP/Life%20Skills/Teach%20Yourself%20-%20Body%20Language%20%20Ebooks%20-%20Mantesh/The%20Art%20of%20Deception%20-%20Kevin%20Mitnick.pdf
+- https://www.scribd.com/document/965090238/Mitnick-The-Art-of-Deception
+
+BOOK 15: "The Art of Intrusion: Real Stories Behind the Exploits of Hackers, Intruders & Deceivers"
+--------------------------------------------------------------------------------
+Author: Kevin Mitnick, William L. Simon
+Year: 2005
+Description: Follow-up to Art of Deception with more real-world penetration
+testing stories. Shows social engineering tactics used in actual breaches.
+Where to find: https://repo.zenk-security.com/Magazine%20E-book/Kevin_Mitnick_-_The_Art_of_Intrusion.pdf
+
+BOOK 16: "Ghost in the Clouds: A Practical Guide to Social Engineering"
+--------------------------------------------------------------------------------
+Author: Various (search for current texts)
+Description: Modern social engineering techniques including OSINT, pretexting,
+phone-based attacks (vishing), email phishing.
+
+
+================================================================================
+SECTION 5: DARPA & MILITARY COGNITIVE MANIPULATION RESEARCH
+================================================================================
+
+RESEARCH PROGRAM 1: DARPA Augmented Cognition (AugCog)
+--------------------------------------------------------------------------------
+Description: Program to enhance human-machine interaction by modeling human
+cognitive processes. Developed tools to measure and augment cognitive
+performance. 
+Source: https://apps.dtic.mil/sti/tr/pdf/ADA475406.pdf
+
+RESEARCH PROGRAM 2: Targeted Neuroplasticity Training (TNT)
+--------------------------------------------------------------------------------
+Description: DARPA program to accelerate military training through
+neuroplasticity stimulation. Uses vagus nerve stimulation to enhance
+learning and memory formation.
+Source: https://www.darpa.mil/research/programs/targeted-neuroplasticity-training
+
+RESEARCH PROGRAM 3: Intrinsic Cognitive Security (ICS)
+--------------------------------------------------------------------------------
+Description: Research on cognitive effects that can be manipulated in
+virtual settings: emotion manipulation, cybersickness induction, confusion/anxiety
+induction.
+Source: https://www.darpa.mil/research/programs/intrinsic-cognitive-security
+
+RESEARCH PROGRAM 4: STRENGTHEN (Strengthening Resilient Emotions and Nimble Cognition)
+--------------------------------------------------------------------------------
+Description: Neuroscience-based program to increase well-being and prevent
+cognitive/emotional degradation.
+Source: https://www.darpa.mil/research/programs/strengthening-resilient-emotions
+
+IARPA: Cyberpsychological Warfare Research
+--------------------------------------------------------------------------------
+Description: Intelligence Advanced Research Projects Activity exploring
+cyberpsychological warfare - targeting cognitive processes through
+technology and information operations.
+Source: https://thedebrief.org/u-s-intel-community-is-looking-to-expand-its-understanding-of-cyberpsychological-warfare/
+
+COGNITIVE WARFARE - Academic Analysis:
+Source: https://irregularwarfare.org/articles/assessing-cognitive-warfare/
+Source: https://understandingwar.org/research/cognitive-warfare/a-primer-on-russian-cognitive-warfare/
+
+
+================================================================================
+SECTION 6: RUSSIAN/SOVIET "SPECIAL PSYCHOLOGY" METHODS
+================================================================================
+
+CONCEPT 1: Reflexive Control (Рефлексивное управление)
+--------------------------------------------------------------------------------
+Description: Soviet/Russian psychological warfare doctrine. Method of
+influencing an opponent's decisions by feeding them selective information
+to make them act in ways beneficial to you. Used extensively in modern
+information warfare.
+Source: https://www.psychologytoday.com/sg/blog/political-animals-and-animal-spirits/202203/maskirovka-the-weaponizing-misinformation
+Source: https://nafoforum.org/magazine/russian-reflexive-control-manipulation-in-the-modern-era
+
+CONCEPT 2: Maskirovka (Маскировка - "Masking/Deception")
+--------------------------------------------------------------------------------
+Description: Soviet doctrine of strategic deception. Applied not just to
+physical deception but to information operations and psychological
+manipulation.
+Source: https://www.psychologytoday.com/sg/blog/political-animals-and-animal-spirits/202203/maskirovka-the-weaponizing-misinformation
+
+CONCEPT 3: Soviet Psychological Strategy (Historical)
+--------------------------------------------------------------------------------
+Source: https://www.usni.org/magazines/proceedings/1961/june/soviet-psychological-strategy
+
+CONCEPT 4: Russian Cognitive Warfare Doctrine
+--------------------------------------------------------------------------------
+Source: https://medium.com/h7w/understanding-russian-cognitive-warfare-7ef978afa087
+Source: https://understandingwar.org/research/cognitive-warfare/a-primer-on-russian-cognitive-warfare/
+Source: https://stratcomcoe.org/cuploads/pfiles/manipulative_techniques_exec_summary_14012016.pdf
+
+HISTORICAL: Soviet Mind Control Research
+--------------------------------------------------------------------------------
+Source: https://www.wired.com/2007/09/mind-reading/ (Psychotechnology Research Institute)
+Source: https://thereader.mitpress.mit.edu/the-soviet-unions-desperate-efforts-at-mind-control/
+
+
+================================================================================
+SECTION 7: PROPAGANDA & PUBLIC OPINION MANIPULATION
+================================================================================
+
+BOOK 17: "Crystallizing Public Opinion"
+--------------------------------------------------------------------------------
+Author: Edward L. Bernays
+Year: 1923
+Description: FOUNDATIONAL PROPAGANDA TEXT. Bernays (Freud's nephew) essentially
+invented public relations. This was the first book to define and explain
+public relations as a discipline. Introduced the concept that public opinion
+can be engineered and shaped systematically.
+Where to find:
+- https://dokumen.pub/download/crystallizing-public-opinion-9781497698802-9781322989198-1322989192-1497698804.html
+Wikipedia: https://en.wikipedia.org/wiki/Crystallizing_Public_Opinion
+
+BOOK 18: "Propaganda"
+--------------------------------------------------------------------------------
+Author: Edward L. Bernays
+Year: 1928
+Description: Follow-up to Crystallizing Public Opinion. Bernays openly discusses
+how elite groups can manipulate public opinion. Introduced the concept of
+"the engineering of consent" - treating public opinion as a commodity to
+be shaped for commercial/governmental purposes.
+Where to find: Search "Bernays Propaganda PDF" - public domain in some jurisdictions
+
+BOOK 19: "Propaganda: The Public Mind and Its Enemies"
+--------------------------------------------------------------------------------
+Author: Noam Chomsky (more academic analysis)
+Description: Critical analysis of Western propaganda systems and mass
+media manipulation.
+
+
+================================================================================
+SECTION 8: DARK PSYCHOLOGY / MANIPULATION TECHNIQUES COMPILATIONS
+================================================================================
+
+BOOK 20: "Dark Psychology: An Essential Guide to Persuasion, Manipulation and Negotiation"
+--------------------------------------------------------------------------------
+Author: Various (practical self-help type texts)
+Description: Modern compilations of manipulation techniques. Look for:
+- "Dark Psychology Masterclass" 
+- "The Dark Psychology Playbook [9-in-1]"
+- "Dark Psychology Secrets"
+These compile techniques from NLP, persuasion research, and social engineering.
+Source: Amazon, various
+
+BOOK 21: "The 48 Laws of Power"
+--------------------------------------------------------------------------------
+Author: Robert Greene
+Year: 1998
+Description: Strategic manipulation through historical examples. Laws include:
+- Never outshine the master
+- Never trust friends, learn to use enemies
+- Conceal your intentions
+- Always say less than necessary
+- Win through actions, never through arguments
+Where to find (PDF): https://irp-cdn.multiscreensite.com/cb9165b2/files/uploaded/The+48+Laws+Of+Power.pdf
+
+
+================================================================================
+SECTION 9: ADDITIONAL FOUNDATIONAL REFERENCES
+================================================================================
+
+ACADEMIC TEXT: "Persuasion: Social Influence and Compliance Gaining"
+--------------------------------------------------------------------------------
+Source: https://www.researchgate.net/publication/358593148_Persuasion_Social_Influence_and_Compliance_Gaining
+
+RESOURCE: "Manipulative Techniques of Russia's Information Warfare"
+--------------------------------------------------------------------------------
+Source: https://stratcomcoe.org/cuploads/pfiles/manipulative_techniques_exec_summary_14012016.pdf
+
+STEVEN PINKER - related work on language and cognition:
+- "The Language Instinct"
+- "Thinking, Fast and Slow" (Kahneman)
+
+
+================================================================================
+SUMMARY: KEY TECHNICAL RESOURCES
+================================================================================
+
+For actual downloads (verified working):
+1. Lifton - Thought Reform: https://ia601405.us.archive.org/18/items/ThoughtReformAndThePsychologyOfTotalism/Thought_Reform_and_the_Psychology_of_Totalism.pdf
+2. Cialdini - Influence: https://ia800203.us.archive.org/33/items/ThePsychologyOfPersuasion/The%20Psychology%20of%20Persuasion.pdf
+3. Carnegie - How to Win Friends: https://dn720004.ca.archive.org/0/items/english-collections-1/How%20To%20Win%20Friends%20And%20Influence%20People%20-%20Carnegie%2C%20Dale.pdf
+4. Mitnick - Art of Deception: https://ia800102.us.archive.org/4/items/pdfsandebooks/UP/Life%20Skills/Teach%20Yourself%20-%20Body%20Language%20%20Ebooks%20-%20Mantesh/The%20Art%20of%20Deception%20-%20Kevin%20Mitnick.pdf
+5. Bandler/Grinder - Reframing: https://lifechangework.wordpress.com/wp-content/uploads/2020/10/richard-bandler-john-grinder-reframing.pdf
+6. Berger - Contagious: https://wordofmouth.org/download/Berger_Contagious.pdf
+7. Greene - 48 Laws: https://irp-cdn.multiscreensite.com/cb9165b2/files/uploaded/The+48+Laws+Of+Power.pdf
+8. Bandler - Get The Life You Want: https://sciphilconf.berkeley.edu/filedownload.ashx/mL7131/603317/Richard%20Bandler%20Get%20The%20Life%20You%20Want.pdf
+
+Archive.org is the best source for historical/critical texts.
+Academia.edu, Scribd, and various .edu domains have additional PDFs.
+GitHub also has mirror copies of various texts.
+
+Critical/Clinical texts are best obtained through legitimate channels
+(Amazon, UNC Press, Norton, etc.) as many are still under copyright.
+
+================================================================================
+END OF FILE
+================================================================================

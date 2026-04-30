@@ -1,0 +1,16 @@
+{
+  "status": "pass_with_limitations",
+  "allowed_claims": [
+    "operational core loaded",
+    "workspace indexed",
+    "files can be inspected on demand"
+  ],
+  "forbidden_claims": [
+    "all files loaded into active context unless active-context-manifest proves it"
+  ],
+  "read_coverage": {
+    "total_files": "<int>",
+    "files_opened": "<int>",
+    "files_indexed": "<int>"
+  }
+}

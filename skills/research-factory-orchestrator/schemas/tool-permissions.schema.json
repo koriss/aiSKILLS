@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ToolPermissions",
+  "type": "object",
+  "properties": {
+    "permissions": {
+      "type": "object"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "permissions"
+  ]
+}

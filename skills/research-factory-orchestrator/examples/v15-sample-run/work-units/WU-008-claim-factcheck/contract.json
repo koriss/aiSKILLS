@@ -1,0 +1,31 @@
+{
+  "work_unit_id": "WU-008-claim-factcheck",
+  "axis": "claim_factcheck",
+  "objective": "Execute claim_factcheck coverage for the target task.",
+  "status": "planned",
+  "collection_unit": true,
+  "minimum_queries": 3,
+  "minimum_sources": 2,
+  "search_modes": [
+    "broad",
+    "exact",
+    "negative",
+    "primary",
+    "freshness",
+    "source_specific"
+  ],
+  "source_families": [
+    "primary_or_origin",
+    "official_or_institutional",
+    "independent_media",
+    "registry_or_database",
+    "contrary_or_debunking",
+    "archive_or_cached"
+  ],
+  "required_outputs": [
+    "sources.json",
+    "claims.json",
+    "evidence.json",
+    "errors.json"
+  ]
+}

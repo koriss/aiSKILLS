@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChatSummary",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "output_profile": {
+      "type": "string"
+    },
+    "executive_summary": {
+      "type": "string"
+    },
+    "key_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "verified_claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "uncertain_claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "fact_check_summary": {
+      "type": "string"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "html_report_path": {
+      "type": "string"
+    },
+    "artifact_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generated_from_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "executive_summary",
+    "key_findings",
+    "verified_claims",
+    "source_refs",
+    "html_report_path",
+    "generated_from_artifacts"
+  ]
+}

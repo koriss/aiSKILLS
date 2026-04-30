@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{REPORT_TITLE}}</title>
+  <style>
+{{INLINE_CSS}}
+  </style>
+</head>
+<body>
+  <header class="report-shell report-hero">
+    <p class="chip">{{REPORT_TYPE}}</p>
+    <h1>{{REPORT_TITLE}}</h1>
+    <p class="section-summary">{{REPORT_SUBTITLE}}</p>
+    <div class="report-meta">
+      <span class="chip">Generated: {{GENERATED_AT}}</span>
+      <span class="chip verified">Sources: {{SOURCE_COUNT}}</span>
+      <span class="chip">Claims: {{CLAIM_COUNT}}</span>
+      <span class="chip {{CONFIDENCE_CLASS}}">Confidence: {{CONFIDENCE_LABEL}}</span>
+    </div>
+  </header>
+
+  <main class="report-shell layout">
+    <article>
+      <section class="section" id="executive-summary">
+        <h2>Executive Summary</h2>
+        <p class="section-summary">{{EXECUTIVE_SUMMARY_VERDICT}}</p>
+        <div class="kpi-strip">{{KPI_CARDS}}</div>
+        <h3>Key findings</h3>
+        <div class="grid">{{KEY_FINDING_CARDS}}</div>
+        <div class="callout warning"><strong>Caveats:</strong> {{CAVEATS}}</div>
+      </section>
+
+      <section class="section" id="scope-method">
+        <h2>Scope & Method</h2>
+        <p class="section-summary">{{SCOPE_SUMMARY}}</p>
+        {{METHOD_BLOCKS}}
+      </section>
+
+      <section class="section" id="key-facts">
+        <h2>Evidence & Facts</h2>
+        <p class="section-summary">Verified, partial, disputed and weak claims are separated. Each important fact should carry a citation marker.</p>
+        <div class="grid">{{CLAIM_CARDS}}</div>
+      </section>
+
+      <section class="section" id="structured-data">
+        <h2>Structured Data</h2>
+        <p class="section-summary">{{STRUCTURED_DATA_SUMMARY}}</p>
+        {{STRUCTURED_TABLES}}
+      </section>
+
+      <section class="section" id="timeline">
+        <h2>Timeline</h2>
+        <ol class="timeline">{{TIMELINE_ITEMS}}</ol>
+      </section>
+
+      <section class="section" id="contradictions-gaps">
+        <h2>Contradictions, Weak Signals & Gaps</h2>
+        {{CONTRADICTION_CARDS}}
+        {{GAP_CARDS}}
+      </section>
+
+      <section class="section" id="analysis">
+        <h2>Analysis & Implications</h2>
+        <p class="section-summary">{{ANALYSIS_SUMMARY}}</p>
+        {{ANALYSIS_BLOCKS}}
+      </section>
+
+      <section class="section" id="references">
+        <h2>Sources</h2>
+        <p class="section-summary">Full source URLs are visible and clickable. Inline markers point to these references.</p>
+        <ol class="source-list">{{WIKI_REFERENCES}}</ol>
+      </section>
+
+      <section class="section" id="appendix">
+        <h2>Appendix</h2>
+        {{APPENDICES}}
+      </section>
+    </article>
+
+    <aside class="toc" aria-label="Report navigation">
+      <strong>Contents</strong>
+      <a href="#executive-summary">Executive Summary</a>
+      <a href="#scope-method">Scope & Method</a>
+      <a href="#key-facts">Evidence & Facts</a>
+      <a href="#structured-data">Structured Data</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#contradictions-gaps">Contradictions & Gaps</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#references">Sources</a>
+      <a href="#appendix">Appendix</a>
+    </aside>
+  </main>
+
+  <footer class="report-shell">
+    <p>Standalone report. Required CSS and optional JS are embedded in this file. Source URLs remain external links.</p>
+  </footer>
+
+  <script type="application/json" id="report-data-json">
+{{REPORT_DATA_JSON}}
+  </script>
+  <script>
+{{INLINE_JS}}
+  </script>
+</body>
+</html>

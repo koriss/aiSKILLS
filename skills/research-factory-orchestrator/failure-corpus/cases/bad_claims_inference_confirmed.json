@@ -1,0 +1,14 @@
+{
+  "claims": [
+    {
+      "claim_id": "C002",
+      "claim_type": "confirmed_fact",
+      "source_ids": [
+        "S001",
+        "S002"
+      ],
+      "derived": true,
+      "text": "Возраст примерно выведен из косвенных данных"
+    }
+  ]
+}

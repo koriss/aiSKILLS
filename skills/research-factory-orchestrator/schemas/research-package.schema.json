@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResearchPackage",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "source_quality": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "source_snapshots": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "search_ledger": {
+      "type": "object"
+    },
+    "evidence_cards": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "evidence_debt": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "adversarial_review": {
+      "type": "object"
+    },
+    "error_audit": {
+      "type": "object"
+    },
+    "final_answer_gate": {
+      "type": "object"
+    },
+    "completion_proof": {
+      "type": "object"
+    },
+    "coverage_matrix": {
+      "type": "object"
+    },
+    "exhaustive_search_ledger": {
+      "type": "object"
+    },
+    "inline_citations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "wiki_references": {
+      "type": "object"
+    },
+    "claim_citation_map": {
+      "type": "object"
+    },
+    "person_data_classification": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "item_id",
+    "sources",
+    "claims",
+    "completion_proof"
+  ]
+}

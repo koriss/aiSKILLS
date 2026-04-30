@@ -1,0 +1,8 @@
+{
+  "case_id": "F227-repeated-model-timeout-without-prompt-shrink",
+  "failure_code": "F227",
+  "description": "Timeout retry without mutation",
+  "expected_validator": "validate_retry_action_required.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

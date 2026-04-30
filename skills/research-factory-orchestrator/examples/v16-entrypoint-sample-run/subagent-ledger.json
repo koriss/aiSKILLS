@@ -1,0 +1,9 @@
+{
+  "task_id": "samplev16",
+  "required_quorum": 10,
+  "subagents": [],
+  "subagents_total": 0,
+  "subagents_completed": 0,
+  "subagents_failed": 0,
+  "quorum_met": false
+}

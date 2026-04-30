@@ -1,0 +1,16 @@
+{
+  "run_id": "ea58e6fc",
+  "attachments": [
+    {
+      "type": "standalone_html",
+      "required": true,
+      "sent": true
+    },
+    {
+      "type": "research_package",
+      "required": true,
+      "sent": true
+    }
+  ],
+  "all_required_sent": true
+}

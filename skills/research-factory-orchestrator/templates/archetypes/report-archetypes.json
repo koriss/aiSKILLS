@@ -1,0 +1,455 @@
+{
+  "created_at": "2026-04-28T00:14:20Z",
+  "version": "v12-prep",
+  "archetypes": [
+    {
+      "id": "entity_profile",
+      "name": "Entity Profile",
+      "best_for": [
+        "person",
+        "company",
+        "organization",
+        "public figure"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "identity_resolution",
+        "key_facts",
+        "timeline",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "relations",
+        "public_activity",
+        "registries",
+        "contradictions",
+        "gaps"
+      ],
+      "avoid_blocks": [
+        "overwide_comparison_matrix"
+      ],
+      "mobile_notes": [
+        "identity and verdict first"
+      ],
+      "failure_modes": [
+        "same-name confusion",
+        "social profile overclaiming",
+        "self-claims as facts"
+      ]
+    },
+    {
+      "id": "company_due_diligence",
+      "name": "Company Due Diligence",
+      "best_for": [
+        "company",
+        "startup",
+        "vendor",
+        "counterparty"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "legal_entities",
+        "ownership",
+        "products",
+        "financials",
+        "risks",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "contracts",
+        "sanctions",
+        "litigation",
+        "web_presence",
+        "media_mentions"
+      ],
+      "avoid_blocks": [
+        "unverified valuation claims in summary"
+      ],
+      "mobile_notes": [
+        "KPI cards"
+      ],
+      "failure_modes": [
+        "old legal entity mistaken for current",
+        "aggregator-only sourcing"
+      ]
+    },
+    {
+      "id": "person_investigation",
+      "name": "Person Investigation",
+      "best_for": [
+        "person",
+        "executive",
+        "expert",
+        "researcher"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "identity_resolution",
+        "roles",
+        "organizations",
+        "public_traces",
+        "same_name_candidates",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "business_links",
+        "publications",
+        "conference_appearances",
+        "social_profiles",
+        "gaps"
+      ],
+      "avoid_blocks": [
+        "unverified private details as established facts"
+      ],
+      "mobile_notes": [
+        "fact cards not tables"
+      ],
+      "failure_modes": [
+        "name-only match",
+        "wrong social profile",
+        "candidate promoted to confirmed"
+      ]
+    },
+    {
+      "id": "fact_check",
+      "name": "Claim Verification / Fact Check",
+      "best_for": [
+        "claim",
+        "rumor",
+        "controversy",
+        "specific statement"
+      ],
+      "required_blocks": [
+        "verdict",
+        "claim_matrix",
+        "evidence_for",
+        "evidence_against",
+        "confidence",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "timeline",
+        "original_source_trace",
+        "source_laundering",
+        "open_questions"
+      ],
+      "avoid_blocks": [
+        "long background before verdict"
+      ],
+      "mobile_notes": [
+        "verdict card first"
+      ],
+      "failure_modes": [
+        "repetition treated as corroboration",
+        "intent inferred without evidence"
+      ]
+    },
+    {
+      "id": "timeline_reconstruction",
+      "name": "Timeline / Event Reconstruction",
+      "best_for": [
+        "incident",
+        "event",
+        "crisis",
+        "sequence"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "chronology",
+        "actors",
+        "evidence_by_event",
+        "contradictions",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "uncertainty_by_time",
+        "source_freshness",
+        "maps_or_media"
+      ],
+      "avoid_blocks": [
+        "non-chronological fact dump"
+      ],
+      "mobile_notes": [
+        "vertical timeline"
+      ],
+      "failure_modes": [
+        "timestamp drift",
+        "timezone confusion"
+      ]
+    },
+    {
+      "id": "comparative_analysis",
+      "name": "Comparative Analysis",
+      "best_for": [
+        "compare",
+        "vendors",
+        "countries",
+        "tools",
+        "policies"
+      ],
+      "required_blocks": [
+        "summary",
+        "criteria",
+        "comparison_matrix",
+        "recommendation",
+        "tradeoffs",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "scoring_model",
+        "sensitivity_analysis",
+        "shortlist"
+      ],
+      "avoid_blocks": [
+        "huge matrix in telegram"
+      ],
+      "mobile_notes": [
+        "wide table in HTML, summary cards in Telegram"
+      ],
+      "failure_modes": [
+        "criteria changed mid-report",
+        "scores without rationale"
+      ]
+    },
+    {
+      "id": "market_overview",
+      "name": "Market Overview",
+      "best_for": [
+        "market",
+        "industry",
+        "sector",
+        "competitive landscape"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "market_map",
+        "key_players",
+        "numbers",
+        "trends",
+        "risks",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "segments",
+        "funding",
+        "regulation",
+        "forecast"
+      ],
+      "avoid_blocks": [
+        "uncited market size"
+      ],
+      "mobile_notes": [
+        "KPI strip and trend cards"
+      ],
+      "failure_modes": [
+        "old market size figures",
+        "mixing regions"
+      ]
+    },
+    {
+      "id": "technology_landscape",
+      "name": "Technology Landscape",
+      "best_for": [
+        "technology",
+        "software",
+        "AI",
+        "cyber",
+        "platform",
+        "game"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "technical_overview",
+        "capabilities",
+        "limitations",
+        "evidence",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "architecture",
+        "benchmarks",
+        "standards",
+        "security",
+        "roadmap"
+      ],
+      "avoid_blocks": [
+        "marketing claims as technical facts"
+      ],
+      "mobile_notes": [
+        "capability cards"
+      ],
+      "failure_modes": [
+        "vendor claims unverified",
+        "outdated docs"
+      ]
+    },
+    {
+      "id": "narrative_media_analysis",
+      "name": "Narrative / Media / IO Analysis",
+      "best_for": [
+        "propaganda",
+        "info war",
+        "media narrative",
+        "campaign",
+        "FIMI",
+        "psyops analysis"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "narrative_map",
+        "source_chain",
+        "amplification",
+        "method_matches",
+        "uncertainty",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "language_comparison",
+        "actor_map",
+        "IO_KB_matches",
+        "counter_analysis_questions"
+      ],
+      "avoid_blocks": [
+        "operational influence recommendations"
+      ],
+      "mobile_notes": [
+        "narrative cards"
+      ],
+      "failure_modes": [
+        "intent overclaiming",
+        "method label treated as proof"
+      ]
+    },
+    {
+      "id": "science_literature_review",
+      "name": "Science / Literature Review",
+      "best_for": [
+        "biology",
+        "medicine",
+        "science",
+        "academic review"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "research_question",
+        "evidence_hierarchy",
+        "findings",
+        "limitations",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "study_table",
+        "effect_sizes",
+        "method_quality",
+        "guidelines"
+      ],
+      "avoid_blocks": [
+        "headline claims without methods"
+      ],
+      "mobile_notes": [
+        "summary cards + appendix table"
+      ],
+      "failure_modes": [
+        "preprint overclaiming",
+        "relative risk without absolute risk"
+      ]
+    },
+    {
+      "id": "dataset_centric_report",
+      "name": "Dataset-Centric Report",
+      "best_for": [
+        "dataset",
+        "spreadsheet",
+        "statistics",
+        "numbers-heavy"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "data_dictionary",
+        "quality_checks",
+        "findings",
+        "tables",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "charts",
+        "outliers",
+        "missingness",
+        "methodology"
+      ],
+      "avoid_blocks": [
+        "large raw tables in summary"
+      ],
+      "mobile_notes": [
+        "chart/table appendix links"
+      ],
+      "failure_modes": [
+        "aggregation errors",
+        "units missing"
+      ]
+    },
+    {
+      "id": "risk_memo",
+      "name": "Risk Memo",
+      "best_for": [
+        "risk",
+        "decision",
+        "strategy",
+        "security",
+        "investment"
+      ],
+      "required_blocks": [
+        "bottom_line",
+        "risk_register",
+        "evidence",
+        "likelihood_impact",
+        "mitigations",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "scenarios",
+        "signposts",
+        "decision_options"
+      ],
+      "avoid_blocks": [
+        "unsupported probability precision"
+      ],
+      "mobile_notes": [
+        "risk cards"
+      ],
+      "failure_modes": [
+        "confidence not calibrated",
+        "mitigations not tied to evidence"
+      ]
+    },
+    {
+      "id": "compose_from_components",
+      "name": "Compose From Components",
+      "best_for": [
+        "unusual task",
+        "mixed task",
+        "no archetype fit"
+      ],
+      "required_blocks": [
+        "executive_summary",
+        "scope",
+        "key_findings",
+        "evidence",
+        "sources"
+      ],
+      "preferred_blocks": [
+        "selected_by_model_with_reason"
+      ],
+      "avoid_blocks": [
+        "forcing wrong archetype"
+      ],
+      "mobile_notes": [
+        "keep first screen predictable"
+      ],
+      "failure_modes": [
+        "layout drift",
+        "missing required sections"
+      ]
+    }
+  ]
+}

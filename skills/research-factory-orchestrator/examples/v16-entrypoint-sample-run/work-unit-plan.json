@@ -1,0 +1,92 @@
+{
+  "task_id": "samplev16",
+  "min_work_units": 8,
+  "work_units": [
+    {
+      "work_unit_id": "WU-001",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-002",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-003",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-004",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-005",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-006",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-007",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-008",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-009",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-010",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-011",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    },
+    {
+      "work_unit_id": "WU-012",
+      "axis": "sample",
+      "objective": "sample",
+      "status": "planned",
+      "required_outputs": []
+    }
+  ],
+  "compiled_at": "2026-04-29T00:00:00Z",
+  "status": "planned"
+}

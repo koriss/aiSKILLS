@@ -1,0 +1,133 @@
+{
+  "report_meta": {
+    "title": "Sample Research Report",
+    "subtitle": "Standalone mobile-first HTML report sample.",
+    "report_type": "demo",
+    "generated_at": "2026-04-28T00:14:20Z",
+    "lang": "ru"
+  },
+  "archetype": "entity_profile",
+  "summary": {
+    "preview": "Demo preview.",
+    "verdict": "Это демонстрационный отчёт, показывающий структуру standalone HTML, wiki-style citations и mobile-first блоки.",
+    "key_findings": [
+      {
+        "text": "Факты, анализ и неопределённость разделены."
+      },
+      {
+        "text": "Источники отображаются с полными URL внизу отчёта."
+      },
+      {
+        "text": "Telegram summary должен быть plain text, не HTML."
+      }
+    ],
+    "key_numbers": [
+      {
+        "label": "Sources",
+        "value": 2,
+        "note": "demo"
+      },
+      {
+        "label": "Claims",
+        "value": 2,
+        "note": "demo"
+      },
+      {
+        "label": "Confidence",
+        "value": "High",
+        "note": "template only"
+      }
+    ],
+    "confidence": {
+      "level": "high",
+      "class": "verified"
+    },
+    "caveats": [
+      {
+        "text": "Это sample-файл, не реальный исследовательский отчёт."
+      }
+    ],
+    "claim_ids_used": [
+      "C001",
+      "C002"
+    ]
+  },
+  "scope_summary": "Проверка структуры и рендера.",
+  "structured_data_summary": "Данные представлены в карточках и таблицах.",
+  "analysis_summary": "Шаблон отделяет presentation layer от semantic JSON.",
+  "sections": [
+    {
+      "section_id": "executive-summary",
+      "title": "Executive Summary",
+      "section_type": "summary",
+      "components": []
+    },
+    {
+      "section_id": "scope-method",
+      "title": "Scope & Method",
+      "section_type": "method",
+      "components": []
+    },
+    {
+      "section_id": "key-facts",
+      "title": "Evidence & Facts",
+      "section_type": "facts",
+      "components": []
+    },
+    {
+      "section_id": "structured-data",
+      "title": "Structured Data",
+      "section_type": "data",
+      "components": []
+    },
+    {
+      "section_id": "contradictions-gaps",
+      "title": "Contradictions & Gaps",
+      "section_type": "gaps",
+      "components": []
+    },
+    {
+      "section_id": "references",
+      "title": "Sources",
+      "section_type": "sources",
+      "components": []
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C001",
+      "text": "Final HTML must be standalone.",
+      "verification_status": "confirmed",
+      "confidence": "high",
+      "citation_numbers": [
+        1
+      ]
+    },
+    {
+      "claim_id": "C002",
+      "text": "Telegram messages should use plain text.",
+      "verification_status": "confirmed",
+      "confidence": "high",
+      "citation_numbers": [
+        2
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "S001",
+      "ref_id": "ref-1",
+      "title": "Standalone policy",
+      "full_url": "https://example.com/standalone-policy"
+    },
+    {
+      "source_id": "S002",
+      "ref_id": "ref-2",
+      "title": "Telegram policy",
+      "full_url": "https://example.com/telegram-policy"
+    }
+  ],
+  "figures": [],
+  "tables": [],
+  "appendices": []
+}

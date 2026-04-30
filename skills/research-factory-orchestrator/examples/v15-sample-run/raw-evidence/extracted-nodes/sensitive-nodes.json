@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    {
+      "node_id": "CN-001",
+      "node_type": "email",
+      "source_ids": [
+        "S001"
+      ],
+      "sensitivity": "public_professional",
+      "display_policy": "service_annex_redacted"
+    }
+  ]
+}

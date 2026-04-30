@@ -1,0 +1,1 @@
+Полный standalone HTML-отчёт. Открывается одним файлом, без внешних CSS/JS/assets. Источники и citation anchors внутри.

@@ -1,0 +1,11 @@
+{
+  "case_id": "real-2026-04-30-claimed-zip-missing",
+  "description": "Telegram claimed 98KB ZIP but ZIP was absent/not delivered",
+  "expected_failure_classes": [
+    "F221",
+    "F222",
+    "F150",
+    "F152"
+  ],
+  "source": "user-provided real Telegram failure"
+}

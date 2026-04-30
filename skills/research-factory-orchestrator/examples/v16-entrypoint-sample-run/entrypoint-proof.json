@@ -1,0 +1,16 @@
+{
+  "entrypoint": "scripts/run_research_factory.py",
+  "entrypoint_version": "16.0.0-execution-integrity-lifecycle-hardening",
+  "invocation_mode": "runtime",
+  "not_plain_subagent": true,
+  "not_skill_md_imitation": true,
+  "run_id": "samplev16",
+  "created_artifacts": [
+    "run.json",
+    "work-unit-plan.json",
+    "subagent-plan.json",
+    "ledgers/search-ledger.json",
+    "delivery-manifest.json"
+  ],
+  "startup_state": "compiled"
+}

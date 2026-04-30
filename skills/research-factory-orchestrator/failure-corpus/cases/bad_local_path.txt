@@ -1,0 +1,1 @@
+Артефакты: /home/node/.openclaw/workspace/research-runs/test

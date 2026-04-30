@@ -1,0 +1,11 @@
+{
+  "version": "17.1.0-chat-outbox-semantics-stage05",
+  "queue_layout": {
+    "pending": "queue/pending",
+    "running": "queue/running",
+    "done": "queue/done",
+    "failed": "queue/failed"
+  },
+  "job_schema": "schemas/runtime-job.schema.json",
+  "claim_strategy": "atomic_rename"
+}

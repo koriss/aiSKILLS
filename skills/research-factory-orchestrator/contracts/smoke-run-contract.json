@@ -1,0 +1,10 @@
+{
+  "version": "18.3.2",
+  "smoke_is_harness_only": true,
+  "seed_only_max_claim_level": "runtime_structure_only",
+  "forbidden_user_claims": [
+    "full research completed",
+    "factchecked report completed",
+    "domain analysis completed"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "version": "18.3.1-context-integrity-hotfix",
+  "validators": [
+    "validate_execution_reliability_gate.py",
+    "validate_model_call_ledger.py",
+    "validate_partial_output_not_complete.py",
+    "validate_finalize_marker_required.py",
+    "validate_retry_action_required.py",
+    "validate_retry_idempotency.py",
+    "validate_late_results_not_merged.py",
+    "validate_timeout_reflected_in_claim_caps.py",
+    "validate_no_ambient_context_runtime_override.py",
+    "validate_context_budget_policy.py",
+    "validate_source_quality_schema.py",
+    "validate_claim_source_fit.py",
+    "validate_snippet_only_not_confirmed.py",
+    "validate_source_gap_reflected_in_final_verdict.py"
+  ],
+  "context_integrity_validators": [
+    "validate_context_claim_gate.py",
+    "validate_read_claim_requires_ledger.py",
+    "validate_no_smoke_as_context_proof.py",
+    "validate_no_plain_subagent_for_full_workspace_read.py",
+    "validate_no_reasoning_leak_in_chat_payload.py"
+  ]
+}

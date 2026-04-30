@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProgressLedger",
+  "type": "object",
+  "properties": {
+    "completed_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources_found": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verified_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rejected_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "replans": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_best_action": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "completed_steps"
+  ]
+}

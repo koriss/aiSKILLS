@@ -1,0 +1,7 @@
+{
+  "case_id": "case_source_count_mismatch",
+  "failure_type": "F011",
+  "bad_output_pattern": "summary claims 45 sources but bibliography/sources registry differs",
+  "expected_guard": "source count consistency validator",
+  "validator_or_eval": "validate_source_count_consistency.py"
+}

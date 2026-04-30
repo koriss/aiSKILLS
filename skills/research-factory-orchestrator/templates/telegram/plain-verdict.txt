@@ -1,0 +1,11 @@
+[{{SEQ}}/{{TOTAL}}] 🦊 Исследование: {{TITLE}}
+
+Вердикт:
+{{VERDICT}}
+
+Уверенность: {{CONFIDENCE}}
+Источников: {{SOURCE_COUNT}}
+Подтверждённых фактов: {{VERIFIED_CLAIMS_COUNT}}
+Спорных / слабых мест: {{WEAK_OR_DISPUTED_COUNT}}
+
+Полный HTML-отчёт прикреплён отдельным файлом.

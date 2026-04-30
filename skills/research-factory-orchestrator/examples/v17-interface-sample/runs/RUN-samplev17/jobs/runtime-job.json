@@ -1,0 +1,14 @@
+{
+  "job_id": "JOB-samplev17",
+  "run_id": "RUN-samplev17",
+  "command_id": "CMD-samplev17",
+  "runtime_entrypoint": "scripts/run_research_factory.py",
+  "task": "Sample v17 interface test",
+  "status": "queued",
+  "created_from_interface": "telegram",
+  "provider": "telegram",
+  "delivery_profile": "mobile_chat",
+  "run_dir": "/mnt/data/_build_rfo_v17_final/skills/research-factory-orchestrator/examples/v17-interface-sample/runs/RUN-samplev17",
+  "outbox_dir": "/mnt/data/_build_rfo_v17_final/skills/research-factory-orchestrator/examples/v17-interface-sample/runs/RUN-samplev17/outbox",
+  "created_at": "2026-04-29T00:00:00Z"
+}

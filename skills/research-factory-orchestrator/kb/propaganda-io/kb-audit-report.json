@@ -1,0 +1,2835 @@
+{
+  "created_at": "2026-04-27T23:57:25Z",
+  "archive_sha256": "fd5f6298974cd7d497ac7e735aba2dca56c5184a4c3501c17fc8beefdf7389b5",
+  "datasets": {
+    "methods": {
+      "count": 505,
+      "parse_errors": [],
+      "unique_ids": 505,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          505
+        ],
+        [
+          "kb_source",
+          505
+        ],
+        [
+          "name",
+          505
+        ],
+        [
+          "aliases",
+          505
+        ],
+        [
+          "category",
+          505
+        ],
+        [
+          "subcategory",
+          505
+        ],
+        [
+          "description",
+          505
+        ],
+        [
+          "mechanism",
+          505
+        ],
+        [
+          "source_refs",
+          505
+        ],
+        [
+          "language",
+          505
+        ],
+        [
+          "languages",
+          505
+        ],
+        [
+          "confidence",
+          505
+        ],
+        [
+          "related_methods",
+          505
+        ],
+        [
+          "used_by_actors",
+          505
+        ],
+        [
+          "doctrine_ids",
+          505
+        ],
+        [
+          "examples",
+          174
+        ],
+        [
+          "counter",
+          174
+        ]
+      ],
+      "with_language_field": 505
+    },
+    "actors": {
+      "count": 26,
+      "parse_errors": [],
+      "unique_ids": 26,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          26
+        ],
+        [
+          "kb_source",
+          26
+        ],
+        [
+          "type",
+          26
+        ],
+        [
+          "name",
+          26
+        ],
+        [
+          "aliases",
+          26
+        ],
+        [
+          "country",
+          26
+        ],
+        [
+          "description",
+          26
+        ],
+        [
+          "io_methods",
+          26
+        ],
+        [
+          "doctrines",
+          26
+        ],
+        [
+          "sources",
+          26
+        ],
+        [
+          "confidence",
+          26
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "doctrines": {
+      "count": 11,
+      "parse_errors": [],
+      "unique_ids": 11,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          11
+        ],
+        [
+          "kb_source",
+          11
+        ],
+        [
+          "name",
+          11
+        ],
+        [
+          "category",
+          11
+        ],
+        [
+          "description",
+          11
+        ],
+        [
+          "source_refs",
+          11
+        ],
+        [
+          "language",
+          11
+        ],
+        [
+          "languages",
+          11
+        ],
+        [
+          "country",
+          11
+        ],
+        [
+          "methods",
+          11
+        ],
+        [
+          "actors",
+          11
+        ],
+        [
+          "confidence",
+          11
+        ]
+      ],
+      "with_language_field": 11
+    },
+    "documents": {
+      "count": 1946,
+      "parse_errors": [],
+      "unique_ids": 1946,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          1946
+        ],
+        [
+          "kb_source",
+          1946
+        ],
+        [
+          "type",
+          1946
+        ],
+        [
+          "title",
+          1946
+        ],
+        [
+          "file_path",
+          1946
+        ],
+        [
+          "meta_path",
+          1946
+        ],
+        [
+          "pages",
+          1946
+        ],
+        [
+          "chars",
+          1946
+        ],
+        [
+          "keywords",
+          1946
+        ],
+        [
+          "preview",
+          1946
+        ],
+        [
+          "io_relevant",
+          1946
+        ],
+        [
+          "matched_methods",
+          1946
+        ],
+        [
+          "confidence",
+          1946
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "sources": {
+      "count": 2087,
+      "parse_errors": [],
+      "unique_ids": 2087,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          2087
+        ],
+        [
+          "kb_source",
+          2087
+        ],
+        [
+          "type",
+          2087
+        ],
+        [
+          "title",
+          2087
+        ],
+        [
+          "author",
+          2087
+        ],
+        [
+          "year",
+          2087
+        ],
+        [
+          "language",
+          2087
+        ],
+        [
+          "country",
+          2087
+        ],
+        [
+          "url",
+          2087
+        ],
+        [
+          "format",
+          2087
+        ],
+        [
+          "topic_tags",
+          2087
+        ],
+        [
+          "why_relevant",
+          2087
+        ],
+        [
+          "confidence",
+          2087
+        ],
+        [
+          "relevance_score",
+          130
+        ]
+      ],
+      "with_language_field": 2087
+    },
+    "relations": {
+      "count": 4049,
+      "parse_errors": [],
+      "unique_ids": 0,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "from_id",
+          4049
+        ],
+        [
+          "from_type",
+          4049
+        ],
+        [
+          "relation",
+          4049
+        ],
+        [
+          "to_id",
+          4049
+        ],
+        [
+          "to_type",
+          4049
+        ],
+        [
+          "metadata",
+          4049
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "languages": {
+      "count": 17,
+      "parse_errors": [],
+      "unique_ids": 17,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          17
+        ],
+        [
+          "iso639_1",
+          17
+        ],
+        [
+          "name",
+          17
+        ],
+        [
+          "sources_count",
+          17
+        ],
+        [
+          "methods_count",
+          17
+        ],
+        [
+          "confidence",
+          17
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "regions": {
+      "count": 25,
+      "parse_errors": [],
+      "unique_ids": 25,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          25
+        ],
+        [
+          "iso3166_1",
+          25
+        ],
+        [
+          "name",
+          25
+        ],
+        [
+          "actors_count",
+          25
+        ],
+        [
+          "sources_count",
+          25
+        ],
+        [
+          "confidence",
+          25
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "propaganda_methods_v2": {
+      "count": 262,
+      "parse_errors": [],
+      "top_keys": [
+        [
+          "method_id",
+          262
+        ],
+        [
+          "name_ru",
+          262
+        ],
+        [
+          "name_en",
+          262
+        ],
+        [
+          "source",
+          262
+        ],
+        [
+          "page_ref",
+          262
+        ],
+        [
+          "definition",
+          184
+        ],
+        [
+          "examples",
+          184
+        ],
+        [
+          "mechanism",
+          184
+        ],
+        [
+          "context",
+          184
+        ],
+        [
+          "counter",
+          184
+        ],
+        [
+          "detection_tags",
+          57
+        ],
+        [
+          "categories",
+          57
+        ]
+      ]
+    },
+    "ontology_graph": {
+      "count": 440,
+      "parse_errors": [],
+      "top_keys": [
+        [
+          "op",
+          440
+        ],
+        [
+          "entity",
+          266
+        ],
+        [
+          "from",
+          174
+        ],
+        [
+          "rel",
+          174
+        ],
+        [
+          "to",
+          174
+        ]
+      ]
+    }
+  },
+  "content_diagnostics": {
+    "methods_missing": {
+      "name": 0,
+      "description": 0,
+      "mechanism": 0,
+      "category": 0,
+      "subcategory": 505,
+      "source_refs": 0,
+      "language": 0,
+      "languages": 339,
+      "confidence": 0
+    },
+    "propaganda_methods_missing": {
+      "name_ru": 0,
+      "name_en": 0,
+      "definition": 78,
+      "examples": 78,
+      "mechanism": 78,
+      "context": 80,
+      "counter": 78,
+      "detection_tags": 205,
+      "categories": 205
+    },
+    "methods_title_duplicate_groups": 170,
+    "propaganda_title_duplicate_groups": 1,
+    "methods_content_duplicate_groups": 0,
+    "propaganda_content_duplicate_groups": 0,
+    "methods_title_duplicate_examples": [
+      {
+        "norm": "cognitive warfare",
+        "ids": [
+          "IO_M001",
+          "PROP_ISW-001"
+        ],
+        "titles": [
+          "Cognitive Warfare",
+          "Cognitive Warfare"
+        ]
+      },
+      {
+        "norm": "psychological operations psyop",
+        "ids": [
+          "IO_M003",
+          "PROP_EMD-003"
+        ],
+        "titles": [
+          "Psychological Operations (PSYOP)",
+          "Psychological Operations (PSYOP)"
+        ]
+      },
+      {
+        "norm": "disinformation",
+        "ids": [
+          "IO_M016",
+          "PROP_AM-002"
+        ],
+        "titles": [
+          "Disinformation",
+          "Disinformation"
+        ]
+      },
+      {
+        "norm": "active measures",
+        "ids": [
+          "IO_M019",
+          "PROP_AM-001"
+        ],
+        "titles": [
+          "Active Measures",
+          "Active Measures"
+        ]
+      },
+      {
+        "norm": "information operations io",
+        "ids": [
+          "IO_M050",
+          "PROP_FM3-001"
+        ],
+        "titles": [
+          "Information Operations (IO)",
+          "Information Operations (IO)"
+        ]
+      },
+      {
+        "norm": "inoculation theory",
+        "ids": [
+          "IO_M108",
+          "PROP_JOW-004"
+        ],
+        "titles": [
+          "Inoculation Theory",
+          "Inoculation Theory"
+        ]
+      },
+      {
+        "norm": "social proof",
+        "ids": [
+          "IO_M111",
+          "PROP_Ciald-003"
+        ],
+        "titles": [
+          "Social Proof",
+          "Social Proof"
+        ]
+      },
+      {
+        "norm": "commitment and consistency",
+        "ids": [
+          "IO_M115",
+          "PROP_Ciald-002"
+        ],
+        "titles": [
+          "Commitment and Consistency",
+          "Commitment and Consistency"
+        ]
+      },
+      {
+        "norm": "cognitive dissonance",
+        "ids": [
+          "IO_M118",
+          "PROP_JOW-006"
+        ],
+        "titles": [
+          "Cognitive Dissonance",
+          "Cognitive Dissonance"
+        ]
+      },
+      {
+        "norm": "internet facilitated influence",
+        "ids": [
+          "IO_P-AM-003",
+          "PROP_AM-003"
+        ],
+        "titles": [
+          "Internet-Facilitated Influence",
+          "Internet-Facilitated Influence"
+        ]
+      },
+      {
+        "norm": "enemy image construction",
+        "ids": [
+          "IO_P-AM-004",
+          "PROP_AM-004"
+        ],
+        "titles": [
+          "Enemy Image Construction",
+          "Enemy Image Construction"
+        ]
+      },
+      {
+        "norm": "proxy war via surrogate means",
+        "ids": [
+          "IO_P-AM-005",
+          "PROP_AM-005"
+        ],
+        "titles": [
+          "Proxy War via Surrogate Means",
+          "Proxy War via Surrogate Means"
+        ]
+      },
+      {
+        "norm": "engineering of consent",
+        "ids": [
+          "IO_P-BER-001",
+          "PROP_BER-001"
+        ],
+        "titles": [
+          "Engineering of Consent",
+          "Engineering of Consent"
+        ]
+      },
+      {
+        "norm": "managed symbols",
+        "ids": [
+          "IO_P-BER-002",
+          "PROP_BER-002"
+        ],
+        "titles": [
+          "Managed Symbols",
+          "Managed Symbols"
+        ]
+      },
+      {
+        "norm": "interest aggregation",
+        "ids": [
+          "IO_P-BER-003",
+          "PROP_BER-003"
+        ],
+        "titles": [
+          "Interest Aggregation",
+          "Interest Aggregation"
+        ]
+      },
+      {
+        "norm": "pseudo event creation",
+        "ids": [
+          "IO_P-BER-004",
+          "PROP_BER-004"
+        ],
+        "titles": [
+          "Pseudo-event Creation",
+          "Pseudo-event Creation"
+        ]
+      },
+      {
+        "norm": "invisible government",
+        "ids": [
+          "IO_P-BER-005",
+          "PROP_BER-005"
+        ],
+        "titles": [
+          "Invisible Government",
+          "Invisible Government"
+        ]
+      },
+      {
+        "norm": "opinion leaders principle",
+        "ids": [
+          "IO_P-BER-006",
+          "PROP_BER-006"
+        ],
+        "titles": [
+          "Opinion Leaders Principle",
+          "Opinion Leaders Principle"
+        ]
+      },
+      {
+        "norm": "psychology of public relations",
+        "ids": [
+          "IO_P-BER-007",
+          "PROP_BER-007"
+        ],
+        "titles": [
+          "Psychology of Public Relations",
+          "Psychology of Public Relations"
+        ]
+      },
+      {
+        "norm": "economics of propaganda",
+        "ids": [
+          "IO_P-BER-008",
+          "PROP_BER-008"
+        ],
+        "titles": [
+          "Economics of Propaganda",
+          "Economics of Propaganda"
+        ]
+      },
+      {
+        "norm": "engineering consent bernays",
+        "ids": [
+          "IO_P-BER-009",
+          "PROP_BER-009"
+        ],
+        "titles": [
+          "Engineering Consent (Bernays)",
+          "Engineering Consent (Bernays)"
+        ]
+      },
+      {
+        "norm": "ideological work s xi ng g ngzu",
+        "ids": [
+          "IO_P-CHI-001",
+          "PROP_CHI-001"
+        ],
+        "titles": [
+          "Ideological Work (Sīxiǎng Gōngzuò)",
+          "Ideological Work (Sīxiǎng Gōngzuò)"
+        ]
+      },
+      {
+        "norm": "atrocity story fabrication",
+        "ids": [
+          "IO_P-CHI-002",
+          "PROP_CHI-002"
+        ],
+        "titles": [
+          "Atrocity Story Fabrication",
+          "Atrocity Story Fabrication"
+        ]
+      },
+      {
+        "norm": "framing recontextualization",
+        "ids": [
+          "IO_P-CHI-003",
+          "PROP_CHI-003"
+        ],
+        "titles": [
+          "Framing / Recontextualization",
+          "Framing / Recontextualization"
+        ]
+      },
+      {
+        "norm": "media flooding saturation",
+        "ids": [
+          "IO_P-CHI-004",
+          "PROP_CHI-004"
+        ],
+        "titles": [
+          "Media Flooding / Saturation",
+          "Media Flooding / Saturation"
+        ]
+      },
+      {
+        "norm": "value manipulation",
+        "ids": [
+          "IO_P-CHI-005",
+          "PROP_CHI-005"
+        ],
+        "titles": [
+          "Value Manipulation",
+          "Value Manipulation"
+        ]
+      },
+      {
+        "norm": "media ownership filter",
+        "ids": [
+          "IO_P-CHOM-001",
+          "PROP_CHOM-001"
+        ],
+        "titles": [
+          "Media Ownership Filter",
+          "Media Ownership Filter"
+        ]
+      },
+      {
+        "norm": "advertising filter",
+        "ids": [
+          "IO_P-CHOM-002",
+          "PROP_CHOM-002"
+        ],
+        "titles": [
+          "Advertising Filter",
+          "Advertising Filter"
+        ]
+      },
+      {
+        "norm": "sourcing filter",
+        "ids": [
+          "IO_P-CHOM-003",
+          "PROP_CHOM-003"
+        ],
+        "titles": [
+          "Sourcing Filter",
+          "Sourcing Filter"
+        ]
+      },
+      {
+        "norm": "flak filter",
+        "ids": [
+          "IO_P-CHOM-004",
+          "PROP_CHOM-004"
+        ],
+        "titles": [
+          "Flak Filter",
+          "Flak Filter"
+        ]
+      }
+    ],
+    "propaganda_title_duplicate_examples": [
+      {
+        "norm": "pre propaganda предпропаганда",
+        "ids": [
+          "ELL-003",
+          "OAP-001"
+        ],
+        "titles": [
+          [
+            "Pre-Propaganda",
+            "Предпропаганда"
+          ],
+          [
+            "Pre-Propaganda",
+            "Предпропаганда"
+          ]
+        ]
+      }
+    ],
+    "methods_content_duplicate_examples": [],
+    "propaganda_content_duplicate_examples": [],
+    "cross_exact_title_matches_count": 184,
+    "cross_exact_title_matches_examples": [
+      {
+        "prop_id": "AM-001",
+        "prop_name_en": "Active Measures",
+        "prop_name_ru": "Активные мероприятия (Active Measures)",
+        "matches": [
+          "IO_M019",
+          "IO_M019",
+          "PROP_AM-001"
+        ],
+        "match_key": "active measures"
+      },
+      {
+        "prop_id": "AM-002",
+        "prop_name_en": "Disinformation",
+        "prop_name_ru": "Дезинформация",
+        "matches": [
+          "IO_M016",
+          "IO_M016",
+          "IO_M089",
+          "PROP_AM-002"
+        ],
+        "match_key": "disinformation"
+      },
+      {
+        "prop_id": "AM-003",
+        "prop_name_en": "Internet-Facilitated Influence",
+        "prop_name_ru": "Использование интернета",
+        "matches": [
+          "IO_P-AM-003",
+          "PROP_AM-003"
+        ],
+        "match_key": "internet facilitated influence"
+      },
+      {
+        "prop_id": "AM-004",
+        "prop_name_en": "Enemy Image Construction",
+        "prop_name_ru": "Создание образа врага",
+        "matches": [
+          "IO_P-AM-004",
+          "PROP_AM-004"
+        ],
+        "match_key": "enemy image construction"
+      },
+      {
+        "prop_id": "AM-005",
+        "prop_name_en": "Proxy War via Surrogate Means",
+        "prop_name_ru": "Прокси-война",
+        "matches": [
+          "IO_P-AM-005",
+          "PROP_AM-005"
+        ],
+        "match_key": "proxy war via surrogate means"
+      },
+      {
+        "prop_id": "BER-001",
+        "prop_name_en": "Engineering of Consent",
+        "prop_name_ru": "Инженеринг согласия",
+        "matches": [
+          "IO_P-BER-001",
+          "PROP_BER-001"
+        ],
+        "match_key": "engineering of consent"
+      },
+      {
+        "prop_id": "BER-002",
+        "prop_name_en": "Managed Symbols",
+        "prop_name_ru": "Управляемые символы",
+        "matches": [
+          "IO_P-BER-002",
+          "PROP_BER-002"
+        ],
+        "match_key": "managed symbols"
+      },
+      {
+        "prop_id": "BER-003",
+        "prop_name_en": "Interest Aggregation",
+        "prop_name_ru": "Агрегация интересов",
+        "matches": [
+          "IO_P-BER-003",
+          "PROP_BER-003"
+        ],
+        "match_key": "interest aggregation"
+      },
+      {
+        "prop_id": "BER-004",
+        "prop_name_en": "Pseudo-event Creation",
+        "prop_name_ru": "Создание псевдо-событий",
+        "matches": [
+          "IO_P-BER-004",
+          "PROP_BER-004"
+        ],
+        "match_key": "pseudo event creation"
+      },
+      {
+        "prop_id": "BER-005",
+        "prop_name_en": "Invisible Government",
+        "prop_name_ru": "Невидимое правительство",
+        "matches": [
+          "IO_P-BER-005",
+          "PROP_BER-005"
+        ],
+        "match_key": "invisible government"
+      },
+      {
+        "prop_id": "BER-006",
+        "prop_name_en": "Opinion Leaders Principle",
+        "prop_name_ru": "Принцип лидеров мнений",
+        "matches": [
+          "IO_P-BER-006",
+          "PROP_BER-006"
+        ],
+        "match_key": "opinion leaders principle"
+      },
+      {
+        "prop_id": "BER-007",
+        "prop_name_en": "Psychology of Public Relations",
+        "prop_name_ru": "Психология PR",
+        "matches": [
+          "IO_P-BER-007",
+          "PROP_BER-007"
+        ],
+        "match_key": "psychology of public relations"
+      },
+      {
+        "prop_id": "BER-008",
+        "prop_name_en": "Economics of Propaganda",
+        "prop_name_ru": "Экономика пропаганды",
+        "matches": [
+          "IO_P-BER-008",
+          "PROP_BER-008"
+        ],
+        "match_key": "economics of propaganda"
+      },
+      {
+        "prop_id": "BER-009",
+        "prop_name_en": "Engineering Consent (Bernays)",
+        "prop_name_ru": "Концепция «управления согласием»",
+        "matches": [
+          "IO_P-BER-009",
+          "PROP_BER-009"
+        ],
+        "match_key": "engineering consent bernays"
+      },
+      {
+        "prop_id": "CHI-001",
+        "prop_name_en": "Ideological Work (Sīxiǎng Gōngzuò)",
+        "prop_name_ru": "Идеологическая работа",
+        "matches": [
+          "IO_P-CHI-001",
+          "PROP_CHI-001"
+        ],
+        "match_key": "ideological work s xi ng g ngzu"
+      },
+      {
+        "prop_id": "CHI-002",
+        "prop_name_en": "Atrocity Story Fabrication",
+        "prop_name_ru": "Истории зверств (Atrocity Stories)",
+        "matches": [
+          "IO_P-CHI-002",
+          "PROP_CHI-002"
+        ],
+        "match_key": "atrocity story fabrication"
+      },
+      {
+        "prop_id": "CHI-003",
+        "prop_name_en": "Framing / Recontextualization",
+        "prop_name_ru": "Рамки (Framing)",
+        "matches": [
+          "IO_P-CHI-003",
+          "PROP_CHI-003"
+        ],
+        "match_key": "framing recontextualization"
+      },
+      {
+        "prop_id": "CHI-004",
+        "prop_name_en": "Media Flooding / Saturation",
+        "prop_name_ru": "Медиа-насыщение (Flooding)",
+        "matches": [
+          "IO_P-CHI-004",
+          "PROP_CHI-004"
+        ],
+        "match_key": "media flooding saturation"
+      },
+      {
+        "prop_id": "CHI-005",
+        "prop_name_en": "Value Manipulation",
+        "prop_name_ru": "Изменение ценностей",
+        "matches": [
+          "IO_P-CHI-005",
+          "PROP_CHI-005"
+        ],
+        "match_key": "value manipulation"
+      },
+      {
+        "prop_id": "CHOM-001",
+        "prop_name_en": "Media Ownership Filter",
+        "prop_name_ru": "Фильтр собственности СМИ",
+        "matches": [
+          "IO_P-CHOM-001",
+          "PROP_CHOM-001"
+        ],
+        "match_key": "media ownership filter"
+      },
+      {
+        "prop_id": "CHOM-002",
+        "prop_name_en": "Advertising Filter",
+        "prop_name_ru": "Фильтр рекламы",
+        "matches": [
+          "IO_P-CHOM-002",
+          "PROP_CHOM-002"
+        ],
+        "match_key": "advertising filter"
+      },
+      {
+        "prop_id": "CHOM-003",
+        "prop_name_en": "Sourcing Filter",
+        "prop_name_ru": "Фильтр источников",
+        "matches": [
+          "IO_P-CHOM-003",
+          "PROP_CHOM-003"
+        ],
+        "match_key": "sourcing filter"
+      },
+      {
+        "prop_id": "CHOM-004",
+        "prop_name_en": "Flak Filter",
+        "prop_name_ru": "Фильтр критики (флэк)",
+        "matches": [
+          "IO_P-CHOM-004",
+          "PROP_CHOM-004"
+        ],
+        "match_key": "flak filter"
+      },
+      {
+        "prop_id": "CHOM-005",
+        "prop_name_en": "Anti-Communism Ideology Filter",
+        "prop_name_ru": "Антикоммунизм как фильтр",
+        "matches": [
+          "IO_P-CHOM-005",
+          "PROP_CHOM-005"
+        ],
+        "match_key": "anti communism ideology filter"
+      },
+      {
+        "prop_id": "CIPSO-001",
+        "prop_name_en": "Демонстративное размещение материалов о потерях",
+        "prop_name_ru": "Демонстративное размещение материалов о потерях",
+        "matches": [
+          "IO_P-CIPSO-001",
+          "PROP_CIPSO-001"
+        ],
+        "match_key": "демонстративное размещение материалов о потерях"
+      },
+      {
+        "prop_id": "CIPSO-002",
+        "prop_name_en": "Телефонный терроризм",
+        "prop_name_ru": "Телефонный терроризм",
+        "matches": [
+          "IO_P-CIPSO-002",
+          "PROP_CIPSO-002"
+        ],
+        "match_key": "телефонный терроризм"
+      },
+      {
+        "prop_id": "CIPSO-003",
+        "prop_name_en": "Публичное распространение персональных данных",
+        "prop_name_ru": "Публичное распространение персональных данных",
+        "matches": [
+          "IO_P-CIPSO-003",
+          "PROP_CIPSO-003"
+        ],
+        "match_key": "публичное распространение персональных данных"
+      },
+      {
+        "prop_id": "CIPSO-004",
+        "prop_name_en": "Программы сдачи в плен",
+        "prop_name_ru": "Программы сдачи в плен",
+        "matches": [
+          "IO_P-CIPSO-004",
+          "PROP_CIPSO-004"
+        ],
+        "match_key": "программы сдачи в плен"
+      },
+      {
+        "prop_id": "CIPSO-005",
+        "prop_name_en": "Взлом радиочастот",
+        "prop_name_ru": "Взлом радиочастот",
+        "matches": [
+          "IO_P-CIPSO-005",
+          "PROP_CIPSO-005"
+        ],
+        "match_key": "взлом радиочастот"
+      },
+      {
+        "prop_id": "CIPSO-006",
+        "prop_name_en": "Псевдопатриотические экстремистские организации",
+        "prop_name_ru": "Псевдопатриотические экстремистские организации",
+        "matches": [
+          "IO_P-CIPSO-006",
+          "PROP_CIPSO-006"
+        ],
+        "match_key": "псевдопатриотические экстремистские организации"
+      },
+      {
+        "prop_id": "CIPSO-007",
+        "prop_name_en": "Фейки о «подполье» на подконтрольных РФ территориях",
+        "prop_name_ru": "Фейки о «подполье» на подконтрольных РФ территориях",
+        "matches": [
+          "IO_P-CIPSO-007",
+          "PROP_CIPSO-007"
+        ],
+        "match_key": "фейки о подполье на подконтрольных рф территориях"
+      },
+      {
+        "prop_id": "CIPSO-008",
+        "prop_name_en": "Операции спецслужб по вовлечению молодёжи (ARG)",
+        "prop_name_ru": "Операции спецслужб по вовлечению молодёжи (ARG)",
+        "matches": [
+          "IO_P-CIPSO-008",
+          "PROP_CIPSO-008"
+        ],
+        "match_key": "операции спецслужб по вовлечению молодёжи arg"
+      },
+      {
+        "prop_id": "CIPSO-009",
+        "prop_name_en": "Угрозы семье военнослужащего",
+        "prop_name_ru": "Угрозы семье военнослужащего",
+        "matches": [
+          "IO_P-CIPSO-009",
+          "PROP_CIPSO-009"
+        ],
+        "match_key": "угрозы семье военнослужащего"
+      },
+      {
+        "prop_id": "CIPSO-010",
+        "prop_name_en": "Фейковые обращения пленных офицеров",
+        "prop_name_ru": "Фейковые обращения пленных офицеров",
+        "matches": [
+          "IO_P-CIPSO-010",
+          "PROP_CIPSO-010"
+        ],
+        "match_key": "фейковые обращения пленных офицеров"
+      },
+      {
+        "prop_id": "CIPSO-011",
+        "prop_name_en": "Фейковые ресурсы от имени «местных жителей»",
+        "prop_name_ru": "Фейковые ресурсы от имени «местных жителей»",
+        "matches": [
+          "IO_P-CIPSO-011",
+          "PROP_CIPSO-011"
+        ],
+        "match_key": "фейковые ресурсы от имени местных жителей"
+      },
+      {
+        "prop_id": "CIPSO-012",
+        "prop_name_en": "Фейковые аккаунты журналистов и общественных деятелей",
+        "prop_name_ru": "Фейковые аккаунты журналистов и общественных деятелей",
+        "matches": [
+          "IO_P-CIPSO-012",
+          "PROP_CIPSO-012"
+        ],
+        "match_key": "фейковые аккаунты журналистов и общественных деятелей"
+      },
+      {
+        "prop_id": "CIPSO-013",
+        "prop_name_en": "Фейковые видеосюжеты от имени российских СМИ",
+        "prop_name_ru": "Фейковые видеосюжеты от имени российских СМИ",
+        "matches": [
+          "IO_P-CIPSO-013",
+          "PROP_CIPSO-013"
+        ],
+        "match_key": "фейковые видеосюжеты от имени российских сми"
+      },
+      {
+        "prop_id": "CIPSO-014",
+        "prop_name_en": "Сайты и боты для сбора данных о военнослужащих",
+        "prop_name_ru": "Сайты и боты для сбора данных о военнослужащих",
+        "matches": [
+          "IO_P-CIPSO-014",
+          "PROP_CIPSO-014"
+        ],
+        "match_key": "сайты и боты для сбора данных о военнослужащих"
+      },
+      {
+        "prop_id": "CIPSO-015",
+        "prop_name_en": "Фейки о военных преступлениях",
+        "prop_name_ru": "Фейки о военных преступлениях",
+        "matches": [
+          "IO_P-CIPSO-015",
+          "PROP_CIPSO-015"
+        ],
+        "match_key": "фейки о военных преступлениях"
+      },
+      {
+        "prop_id": "CIPSO-016",
+        "prop_name_en": "Информационно-психологические спецоперации с реальным применением оружия",
+        "prop_name_ru": "Информационно-психологические спецоперации с реальным применением оружия",
+        "matches": [
+          "IO_P-CIPSO-016",
+          "PROP_CIPSO-016"
+        ],
+        "match_key": "информационно психологические спецоперации с реальным применением оружия"
+      },
+      {
+        "prop_id": "CIPSO-017",
+        "prop_name_en": "Подложные сообщения «очевидцев» об обстрелах",
+        "prop_name_ru": "Подложные сообщения «очевидцев» об обстрелах",
+        "matches": [
+          "IO_P-CIPSO-017",
+          "PROP_CIPSO-017"
+        ],
+        "match_key": "подложные сообщения очевидцев об обстрелах"
+      },
+      {
+        "prop_id": "CIPSO-018",
+        "prop_name_en": "Ядерная угроза",
+        "prop_name_ru": "Ядерная угроза",
+        "matches": [
+          "IO_P-CIPSO-018",
+          "PROP_CIPSO-018"
+        ],
+        "match_key": "ядерная угроза"
+      },
+      {
+        "prop_id": "CIPSO-019",
+        "prop_name_en": "Угроза подрыва ЗАЭС",
+        "prop_name_ru": "Угроза подрыва ЗАЭС",
+        "matches": [
+          "IO_P-CIPSO-019",
+          "PROP_CIPSO-019"
+        ],
+        "match_key": "угроза подрыва заэс"
+      },
+      {
+        "prop_id": "CIPSO-020",
+        "prop_name_en": "Фейки об убийствах и покушениях, организованных российскими спецслужбами",
+        "prop_name_ru": "Фейки об убийствах и покушениях, организованных российскими спецслужбами",
+        "matches": [
+          "IO_P-CIPSO-020",
+          "PROP_CIPSO-020"
+        ],
+        "match_key": "фейки об убийствах и покушениях организованных российскими спецслужбами"
+      },
+      {
+        "prop_id": "CIPSO-021",
+        "prop_name_en": "Фейки о потерях и пленных — переиспользование кадров",
+        "prop_name_ru": "Фейки о потерях и пленных — переиспользование кадров",
+        "matches": [
+          "IO_P-CIPSO-021",
+          "PROP_CIPSO-021"
+        ],
+        "match_key": "фейки о потерях и пленных переиспользование кадров"
+      },
+      {
+        "prop_id": "CIPSO-022",
+        "prop_name_en": "Публикация кадров с убийством пленных",
+        "prop_name_ru": "Публикация кадров с убийством пленных",
+        "matches": [
+          "IO_P-CIPSO-022",
+          "PROP_CIPSO-022"
+        ],
+        "match_key": "публикация кадров с убийством пленных"
+      },
+      {
+        "prop_id": "CIPSO-023",
+        "prop_name_en": "Фейковые рейтинги и искажённая статистика",
+        "prop_name_ru": "Фейковые рейтинги и искажённая статистика",
+        "matches": [
+          "IO_P-CIPSO-023",
+          "PROP_CIPSO-023"
+        ],
+        "match_key": "фейковые рейтинги и искажённая статистика"
+      },
+      {
+        "prop_id": "CIPSO-024",
+        "prop_name_en": "Телефонное мошенничество",
+        "prop_name_ru": "Телефонное мошенничество",
+        "matches": [
+          "IO_P-CIPSO-024",
+          "PROP_CIPSO-024"
+        ],
+        "match_key": "телефонное мошенничество"
+      },
+      {
+        "prop_id": "CIPSO-025",
+        "prop_name_en": "Фейки о победах ВСУ",
+        "prop_name_ru": "Фейки о победах ВСУ",
+        "matches": [
+          "IO_P-CIPSO-025",
+          "PROP_CIPSO-025"
+        ],
+        "match_key": "фейки о победах всу"
+      },
+      {
+        "prop_id": "CIPSO-026",
+        "prop_name_en": "Фейковые обращения от лица российских военнослужащих",
+        "prop_name_ru": "Фейковые обращения от лица российских военнослужащих",
+        "matches": [
+          "IO_P-CIPSO-026",
+          "PROP_CIPSO-026"
+        ],
+        "match_key": "фейковые обращения от лица российских военнослужащих"
+      },
+      {
+        "prop_id": "CIPSO-027",
+        "prop_name_en": "Перехват связи и spoofing",
+        "prop_name_ru": "Перехват связи и spoofing",
+        "matches": [
+          "IO_P-CIPSO-027",
+          "PROP_CIPSO-027"
+        ],
+        "match_key": "перехват связи и spoofing"
+      },
+      {
+        "prop_id": "CIPSO-028",
+        "prop_name_en": "Отрицание успехов России",
+        "prop_name_ru": "Отрицание успехов России",
+        "matches": [
+          "IO_P-CIPSO-028",
+          "PROP_CIPSO-028"
+        ],
+        "match_key": "отрицание успехов россии"
+      },
+      {
+        "prop_id": "CIPSO-029",
+        "prop_name_en": "Отрицание принудительной мобилизации на Украине",
+        "prop_name_ru": "Отрицание принудительной мобилизации на Украине",
+        "matches": [
+          "IO_P-CIPSO-029",
+          "PROP_CIPSO-029"
+        ],
+        "match_key": "отрицание принудительной мобилизации на украине"
+      },
+      {
+        "prop_id": "CIPSO-030",
+        "prop_name_en": "Информационная подготовка наступления",
+        "prop_name_ru": "Информационная подготовка наступления",
+        "matches": [
+          "IO_P-CIPSO-030",
+          "PROP_CIPSO-030"
+        ],
+        "match_key": "информационная подготовка наступления"
+      },
+      {
+        "prop_id": "CIPSO-031",
+        "prop_name_en": "Манипуляция данными о потерях и госпиталях",
+        "prop_name_ru": "Манипуляция данными о потерях и госпиталях",
+        "matches": [
+          "IO_P-CIPSO-031",
+          "PROP_CIPSO-031"
+        ],
+        "match_key": "манипуляция данными о потерях и госпиталях"
+      },
+      {
+        "prop_id": "CIPSO-032",
+        "prop_name_en": "Фейковые заявления от имени руководства РФ",
+        "prop_name_ru": "Фейковые заявления от имени руководства РФ",
+        "matches": [
+          "IO_P-CIPSO-032",
+          "PROP_CIPSO-032"
+        ],
+        "match_key": "фейковые заявления от имени руководства рф"
+      },
+      {
+        "prop_id": "CIPSO-033",
+        "prop_name_en": "Фейки об эвакуации",
+        "prop_name_ru": "Фейки об эвакуации",
+        "matches": [
+          "IO_P-CIPSO-033",
+          "PROP_CIPSO-033"
+        ],
+        "match_key": "фейки об эвакуации"
+      },
+      {
+        "prop_id": "CIPSO-034",
+        "prop_name_en": "Фейки о выходе подразделений из прифронтовых пунктов",
+        "prop_name_ru": "Фейки о выходе подразделений из прифронтовых пунктов",
+        "matches": [
+          "IO_P-CIPSO-034",
+          "PROP_CIPSO-034"
+        ],
+        "match_key": "фейки о выходе подразделений из прифронтовых пунктов"
+      },
+      {
+        "prop_id": "CIPSO-035",
+        "prop_name_en": "Фейки о захвате населённых пунктов",
+        "prop_name_ru": "Фейки о захвате населённых пунктов",
+        "matches": [
+          "IO_P-CIPSO-035",
+          "PROP_CIPSO-035"
+        ],
+        "match_key": "фейки о захвате населённых пунктов"
+      },
+      {
+        "prop_id": "CIPSO-036",
+        "prop_name_en": "Фейки о прорыве обороны",
+        "prop_name_ru": "Фейки о прорыве обороны",
+        "matches": [
+          "IO_P-CIPSO-036",
+          "PROP_CIPSO-036"
+        ],
+        "match_key": "фейки о прорыве обороны"
+      },
+      {
+        "prop_id": "CIPSO-037",
+        "prop_name_en": "Фейки о панике среди населения",
+        "prop_name_ru": "Фейки о панике среди населения",
+        "matches": [
+          "IO_P-CIPSO-037",
+          "PROP_CIPSO-037"
+        ],
+        "match_key": "фейки о панике среди населения"
+      },
+      {
+        "prop_id": "CIPSO-038",
+        "prop_name_en": "Фейки о референдумах о выходе регионов из состава РФ",
+        "prop_name_ru": "Фейки о референдумах о выходе регионов из состава РФ",
+        "matches": [
+          "IO_P-CIPSO-038",
+          "PROP_CIPSO-038"
+        ],
+        "match_key": "фейки о референдумах о выходе регионов из состава рф"
+      },
+      {
+        "prop_id": "CIPSO-039",
+        "prop_name_en": "Фейки о поражении значимых военных объектов",
+        "prop_name_ru": "Фейки о поражении значимых военных объектов",
+        "matches": [
+          "IO_P-CIPSO-039",
+          "PROP_CIPSO-039"
+        ],
+        "match_key": "фейки о поражении значимых военных объектов"
+      },
+      {
+        "prop_id": "CIPSO-040",
+        "prop_name_en": "Фейки о гуманитарном кризисе",
+        "prop_name_ru": "Фейки о гуманитарном кризисе",
+        "matches": [
+          "IO_P-CIPSO-040",
+          "PROP_CIPSO-040"
+        ],
+        "match_key": "фейки о гуманитарном кризисе"
+      },
+      {
+        "prop_id": "CIPSO-041",
+        "prop_name_en": "Фейки о «скрытой мобилизации»",
+        "prop_name_ru": "Фейки о «скрытой мобилизации»",
+        "matches": [
+          "IO_P-CIPSO-041",
+          "PROP_CIPSO-041"
+        ],
+        "match_key": "фейки о скрытой мобилизации"
+      },
+      {
+        "prop_id": "CIPSO-042",
+        "prop_name_en": "Призывы к протестам",
+        "prop_name_ru": "Призывы к протестам",
+        "matches": [
+          "IO_P-CIPSO-042",
+          "PROP_CIPSO-042"
+        ],
+        "match_key": "призывы к протестам"
+      },
+      {
+        "prop_id": "CIPSO-043",
+        "prop_name_en": "Звуковая имитация движения колонн",
+        "prop_name_ru": "Звуковая имитация движения колонн",
+        "matches": [
+          "IO_P-CIPSO-043",
+          "PROP_CIPSO-043"
+        ],
+        "match_key": "звуковая имитация движения колонн"
+      },
+      {
+        "prop_id": "CIPSO-044",
+        "prop_name_en": "Провокация родственников к митингам через spoofing",
+        "prop_name_ru": "Провокация родственников к митингам через spoofing",
+        "matches": [
+          "IO_P-CIPSO-044",
+          "PROP_CIPSO-044"
+        ],
+        "match_key": "провокация родственников к митингам через spoofing"
+      },
+      {
+        "prop_id": "CIPSO-045",
+        "prop_name_en": "Фейки о неуставных отношениях",
+        "prop_name_ru": "Фейки о неуставных отношениях",
+        "matches": [
+          "IO_P-CIPSO-045",
+          "PROP_CIPSO-045"
+        ],
+        "match_key": "фейки о неуставных отношениях"
+      },
+      {
+        "prop_id": "CIPSO-046",
+        "prop_name_en": "Фейки о радиоактивном/химическом заражении",
+        "prop_name_ru": "Фейки о радиоактивном/химическом заражении",
+        "matches": [
+          "IO_P-CIPSO-046",
+          "PROP_CIPSO-046"
+        ],
+        "match_key": "фейки о радиоактивном химическом заражении"
+      },
+      {
+        "prop_id": "CIPSO-047",
+        "prop_name_en": "Фейки о заградительных отрядах",
+        "prop_name_ru": "Фейки о заградительных отрядах",
+        "matches": [
+          "IO_P-CIPSO-047",
+          "PROP_CIPSO-047"
+        ],
+        "match_key": "фейки о заградительных отрядах"
+      },
+      {
+        "prop_id": "CIPSO-048",
+        "prop_name_en": "Фейковые заявления руководства (в т.ч. регионального)",
+        "prop_name_ru": "Фейковые заявления руководства (в т.ч. регионального)",
+        "matches": [
+          "IO_P-CIPSO-048",
+          "PROP_CIPSO-048"
+        ],
+        "match_key": "фейковые заявления руководства в т ч регионального"
+      },
+      {
+        "prop_id": "CIPSO-049",
+        "prop_name_en": "Постановочные видеообращения пленных",
+        "prop_name_ru": "Постановочные видеообращения пленных",
+        "matches": [
+          "IO_P-CIPSO-049",
+          "PROP_CIPSO-049"
+        ],
+        "match_key": "постановочные видеообращения пленных"
+      },
+      {
+        "prop_id": "CIPSO-050",
+        "prop_name_en": "Подложные официальные документы",
+        "prop_name_ru": "Подложные официальные документы",
+        "matches": [
+          "IO_P-CIPSO-050",
+          "PROP_CIPSO-050"
+        ],
+        "match_key": "подложные официальные документы"
+      },
+      {
+        "prop_id": "CIPSO-051",
+        "prop_name_en": "Имитация международной поддержки",
+        "prop_name_ru": "Имитация международной поддержки",
+        "matches": [
+          "IO_P-CIPSO-051",
+          "PROP_CIPSO-051"
+        ],
+        "match_key": "имитация международной поддержки"
+      },
+      {
+        "prop_id": "CIPSO-052",
+        "prop_name_en": "Информационный терроризм",
+        "prop_name_ru": "Информационный терроризм",
+        "matches": [
+          "IO_P-CIPSO-052",
+          "PROP_CIPSO-052"
+        ],
+        "match_key": "информационный терроризм"
+      },
+      {
+        "prop_id": "CIPSO-053",
+        "prop_name_en": "Фейки на религиозной/этнической почве",
+        "prop_name_ru": "Фейки на религиозной/этнической почве",
+        "matches": [
+          "IO_P-CIPSO-053",
+          "PROP_CIPSO-053"
+        ],
+        "match_key": "фейки на религиозной этнической почве"
+      },
+      {
+        "prop_id": "CIPSO-054",
+        "prop_name_en": "Spoofing-вербовка через мессенджеры",
+        "prop_name_ru": "Spoofing-вербовка через мессенджеры",
+        "matches": [
+          "IO_P-CIPSO-054",
+          "PROP_CIPSO-054"
+        ],
+        "match_key": "spoofing вербовка через мессенджеры"
+      },
+      {
+        "prop_id": "CIPSO-055",
+        "prop_name_en": "Фейковые банковские карты с письмами от МО РФ",
+        "prop_name_ru": "Фейковые банковские карты с письмами от МО РФ",
+        "matches": [
+          "IO_P-CIPSO-055",
+          "PROP_CIPSO-055"
+        ],
+        "match_key": "фейковые банковские карты с письмами от мо рф"
+      },
+      {
+        "prop_id": "CIPSO-056",
+        "prop_name_en": "Фейковые анкеты на сайтах знакомств",
+        "prop_name_ru": "Фейковые анкеты на сайтах знакомств",
+        "matches": [
+          "IO_P-CIPSO-056",
+          "PROP_CIPSO-056"
+        ],
+        "match_key": "фейковые анкеты на сайтах знакомств"
+      }
+    ],
+    "relations_types": [
+      [
+        "has_language",
+        2087
+      ],
+      [
+        "contains_method",
+        1747
+      ],
+      [
+        "documented_in",
+        174
+      ],
+      [
+        "based_in",
+        26
+      ],
+      [
+        "written_in",
+        15
+      ]
+    ],
+    "relations_broken_count": 4049,
+    "relations_broken_examples": [
+      {
+        "idx": 1,
+        "from_id": "SOURCE_BIB_bib-001",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 2,
+        "from_id": "SOURCE_BIB_bib-002",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 3,
+        "from_id": "SOURCE_BIB_bib-003",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 4,
+        "from_id": "SOURCE_BIB_bib-004",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 5,
+        "from_id": "SOURCE_BIB_bib-005",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 6,
+        "from_id": "SOURCE_BIB_bib-006",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 7,
+        "from_id": "SOURCE_BIB_bib-007",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 8,
+        "from_id": "SOURCE_BIB_bib-008",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 9,
+        "from_id": "SOURCE_BIB_bib-009",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 10,
+        "from_id": "SOURCE_BIB_bib-010",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 11,
+        "from_id": "SOURCE_BIB_bib-011",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 12,
+        "from_id": "SOURCE_BIB_bib-012",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 13,
+        "from_id": "SOURCE_BIB_bib-013",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 14,
+        "from_id": "SOURCE_BIB_bib-014",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 15,
+        "from_id": "SOURCE_BIB_bib-015",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 16,
+        "from_id": "SOURCE_BIB_bib-016",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 17,
+        "from_id": "SOURCE_BIB_bib-017",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 18,
+        "from_id": "SOURCE_BIB_bib-018",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 19,
+        "from_id": "SOURCE_BIB_bib-019",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 20,
+        "from_id": "SOURCE_BIB_bib-020",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 21,
+        "from_id": "SOURCE_BIB_bib-021",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 22,
+        "from_id": "SOURCE_BIB_bib-022",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 23,
+        "from_id": "SOURCE_BIB_bib-023",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 24,
+        "from_id": "SOURCE_BIB_bib-024",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 25,
+        "from_id": "SOURCE_BIB_bib-025",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 26,
+        "from_id": "SOURCE_BIB_bib-026",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 27,
+        "from_id": "SOURCE_BIB_bib-027",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 28,
+        "from_id": "SOURCE_BIB_bib-028",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 29,
+        "from_id": "SOURCE_BIB_bib-029",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 30,
+        "from_id": "SOURCE_BIB_bib-030",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 31,
+        "from_id": "SOURCE_BIB_bib-031",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 32,
+        "from_id": "SOURCE_BIB_bib-032",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 33,
+        "from_id": "SOURCE_BIB_bib-033",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 34,
+        "from_id": "SOURCE_BIB_bib-034",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 35,
+        "from_id": "SOURCE_BIB_bib-035",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 36,
+        "from_id": "SOURCE_BIB_bib-036",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 37,
+        "from_id": "SOURCE_BIB_bib-037",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 38,
+        "from_id": "SOURCE_BIB_bib-038",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 39,
+        "from_id": "SOURCE_BIB_bib-039",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 40,
+        "from_id": "SOURCE_BIB_bib-040",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 41,
+        "from_id": "SOURCE_BIB_bib-041",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 42,
+        "from_id": "SOURCE_BIB_bib-042",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 43,
+        "from_id": "SOURCE_BIB_bib-043",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 44,
+        "from_id": "SOURCE_BIB_bib-044",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 45,
+        "from_id": "SOURCE_BIB_bib-045",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 46,
+        "from_id": "SOURCE_BIB_bib-046",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 47,
+        "from_id": "SOURCE_BIB_bib-047",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 48,
+        "from_id": "SOURCE_BIB_bib-048",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 49,
+        "from_id": "SOURCE_BIB_bib-049",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      },
+      {
+        "idx": 50,
+        "from_id": "SOURCE_BIB_bib-050",
+        "relation": "has_language",
+        "to_id": "zh",
+        "from_exists": true,
+        "to_exists": false
+      }
+    ],
+    "sources_missing_url": 1517,
+    "sources_duplicate_url_groups": 43,
+    "sources_duplicate_url_examples": [
+      {
+        "url": "https://www.mnd.gov.tw/file/21091",
+        "ids": [
+          "SOURCE_BIB_bib-050",
+          "SOURCE_BIB_bib-1908"
+        ],
+        "titles": [
+          {
+            "en": "1.2 共軍心理戰的思想、理論與發展"
+          },
+          {
+            "en": "Психологическая война (китайский перевод)"
+          }
+        ]
+      },
+      {
+        "url": "https://apps.dtic.mil/sti/trecms/pdf/ad1157096.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-092",
+          "SOURCE_BIB_bib-173"
+        ],
+        "titles": [
+          {
+            "en": "2.1 Russia's Reflexive Control Theory: Manipulating an Opponent"
+          },
+          {
+            "en": "8.3 Russia's Reflexive Control Theory: Manipulating an Opponent's Will and Perception"
+          }
+        ]
+      },
+      {
+        "url": "https://press.armywarcollege.edu/cgi/viewcontent.cgi?article=3262&context=parameters",
+        "ids": [
+          "SOURCE_BIB_bib-094",
+          "SOURCE_BIB_bib-181"
+        ],
+        "titles": [
+          {
+            "en": "2.3 Reflexive Control: Influencing Strategic Behavior"
+          },
+          {
+            "en": "8.11 Reflexive Control: Influencing Strategic Behavior"
+          }
+        ]
+      },
+      {
+        "url": "https://www.osw.waw.pl/sites/default/files/pw_64_ang_active-measures_net_0.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-107",
+          "SOURCE_BIB_bib-178",
+          "SOURCE_BIB_bib-1867"
+        ],
+        "titles": [
+          {
+            "en": "3.6 64 Active Measures"
+          },
+          {
+            "en": "8.8 64 Active Measures"
+          },
+          {
+            "en": "Active Measures - OSW 64 Measures"
+          }
+        ]
+      },
+      {
+        "url": "https://www.intelligence.senate.gov/wp-content/uploads/2024/08/sites-default-files-hearings-s-hrg-115-40-pt-1.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-109",
+          "SOURCE_BIB_bib-179"
+        ],
+        "titles": [
+          {
+            "en": "3.8 A Primer in Russian Active Measures and Influence Campaigns"
+          },
+          {
+            "en": "8.9 A Primer in Russian Active Measures and Influence Campaigns"
+          }
+        ]
+      },
+      {
+        "url": "https://www.rand.org/content/dam/rand/pubs/research_reports/rr4300/rr4373z2/rand_rr4373z2.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-113",
+          "SOURCE_BIB_bib-130"
+        ],
+        "titles": [
+          {
+            "en": "4.2 Russian Disinformation Efforts on Social Media"
+          },
+          {
+            "en": "5.9 Russian Disinformation Efforts on Social Media — RAND"
+          }
+        ]
+      },
+      {
+        "url": "https://css.ethz.ch/content/dam/ethz/special-interest/gess/cis/center-for-securities-studies/resources/docs/ndc%20fm_9.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-128",
+          "SOURCE_BIB_bib-1825"
+        ],
+        "titles": [
+          {
+            "en": "5.7 Handbook of Russian Information Warfare"
+          },
+          {
+            "en": "Handbook of Russian Information Warfare"
+          }
+        ]
+      },
+      {
+        "url": "https://pstmprint.ru/wp-content/uploads/2016/12/infw-2-2013-1.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-158",
+          "SOURCE_BIB_bib-159",
+          "SOURCE_BIB_bib-182"
+        ],
+        "titles": [
+          {
+            "en": "5.2 Концепция сетецентрической войны"
+          },
+          {
+            "en": "5.3 Информационное противоборство (актуальные аспекты)"
+          },
+          {
+            "en": "9.1 Журнал «Информационные войны» (INFW)"
+          }
+        ]
+      },
+      {
+        "url": "https://metis.unibw.de/assets/pdf/metis-studie42-2024_12-rus_ostflanke.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-186",
+          "SOURCE_BIB_bib-1925"
+        ],
+        "titles": [
+          {
+            "en": "1. Metis Studie Nr. 42 — Szenarien russischer hybrider Kriegsführung"
+          },
+          {
+            "en": "Metis Studie Nr. 42 - Szenarien russischer hybrider Kriegsfuehrung"
+          }
+        ]
+      },
+      {
+        "url": "https://www.aies.at/download/2023/aies-study-2023-3.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-187",
+          "SOURCE_BIB_bib-1926"
+        ],
+        "titles": [
+          {
+            "en": "2. Die russische hybride Kriegsführung"
+          },
+          {
+            "en": "Die russische hybride Kriegsfuehrung"
+          }
+        ]
+      },
+      {
+        "url": "https://www.prif.org/fileadmin/daten/publikationen/prif_spotlights/2025/spotlight_6_2025_barrierefrei.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-188",
+          "SOURCE_BIB_bib-1927"
+        ],
+        "titles": [
+          {
+            "en": "3. Aktive Cyberabwehr als Antwort auf Russlands hybride Kriegsführung"
+          },
+          {
+            "en": "Aktive Cyberabwehr als Antwort auf Russlands hybride Kriegsfuehrung"
+          }
+        ]
+      },
+      {
+        "url": "https://www.jstor.org/stable/10.2307/resrep14407.4",
+        "ids": [
+          "SOURCE_BIB_bib-190",
+          "SOURCE_BIB_bib-1922"
+        ],
+        "titles": [
+          {
+            "en": "5. Strategien der Informationskriegsführung (JSTOR)"
+          },
+          {
+            "en": "Strategien der Informationskriegsfuehrung"
+          }
+        ]
+      },
+      {
+        "url": "https://www.zaoerv.de/76_2016/76_2016_2_a_513_526.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-192",
+          "SOURCE_BIB_bib-1930"
+        ],
+        "titles": [
+          {
+            "en": "7. Hybride Kriegsführung: Eine neue Herausforderung?"
+          },
+          {
+            "en": "Hybride Kriegsfuehrung: Eine neue Herausforderung?"
+          }
+        ]
+      },
+      {
+        "url": "https://www.lpb-bw.de/fileadmin/lpb_hauptportal/veranstaltungsprogramme_lancloud/pdf/seminar_249.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-193",
+          "SOURCE_BIB_bib-1929"
+        ],
+        "titles": [
+          {
+            "en": "8. Krieg mit anderen Mitteln — Hybridkriegsführung in Deutschland"
+          },
+          {
+            "en": "Krieg mit anderen Mitteln - Hybridkriegsfuehrung in Deutschland"
+          }
+        ]
+      },
+      {
+        "url": "https://www.bmlv.gv.at/pdf_pool/publikationen/buch_bilban_grininger_mythos_gerasimov_doktrin_web.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-194",
+          "SOURCE_BIB_bib-1928"
+        ],
+        "titles": [
+          {
+            "en": "9. Mythos „Gerasimov-Doktrin\""
+          },
+          {
+            "en": "Mythos Gerasimov-Doktrin"
+          }
+        ]
+      },
+      {
+        "url": "https://www.transcript-verlag.de/shopmedia/openaccess/pdf/oa9783839477014.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-198",
+          "SOURCE_BIB_bib-1923"
+        ],
+        "titles": [
+          {
+            "en": "13. Zur politisch-strategischen Kommunikation mit Memen"
+          },
+          {
+            "en": "Zur politisch-strategischen Kommunikation mit Memen"
+          }
+        ]
+      },
+      {
+        "url": "https://opus4.kobv.de/opus4-fizbw/files/839/mahlow_ba_medien_und_krieg.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-199",
+          "SOURCE_BIB_bib-1924"
+        ],
+        "titles": [
+          {
+            "en": "14. Bachelorthesis — Medien und Krieg / EU vs. Desinformation"
+          },
+          {
+            "en": "Bachelorthesis - Medien und Krieg / EU vs. Desinformation"
+          }
+        ]
+      },
+      {
+        "url": "https://westendverlag.de/media/22/eb/e3/1706101412/9783864894220.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-200",
+          "SOURCE_BIB_bib-1916"
+        ],
+        "titles": [
+          {
+            "en": "15. KOGNITIVE KRIEGSFÜHRUNG — Neueste Manipulationstechniken als Waffengattung der NATO"
+          },
+          {
+            "en": "KOGNITIVE KRIEGSFUEHRUNG - Neueste Manipulationstechniken als Waffengattung der NATO"
+          }
+        ]
+      },
+      {
+        "url": "https://esut.de/2024/07/fachbeitraege/50946/kognitive-kriegsfuehrung/",
+        "ids": [
+          "SOURCE_BIB_bib-201",
+          "SOURCE_BIB_bib-1917"
+        ],
+        "titles": [
+          {
+            "en": "16. Kognitive Kriegsführung — ESUT"
+          },
+          {
+            "en": "Kognitive Kriegsfuehrung - ESUT"
+          }
+        ]
+      },
+      {
+        "url": "https://ata-dag.de/media/2023/10/opinions-n%c2%b0-43-dr.-philip-jan-schaefer-die-cognitive-domain-of-military-operations.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-202",
+          "SOURCE_BIB_bib-1918"
+        ],
+        "titles": [
+          {
+            "en": "17. Dr. Philip Jan Schäfer — Die \"Cognitive Domain of Military Operations\""
+          },
+          {
+            "en": "Die Cognitive Domain of Military Operations"
+          }
+        ]
+      },
+      {
+        "url": "https://www.bmlv.gv.at/pdf_pool/publikationen/book_icarus_wings_dengg_web.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-203",
+          "SOURCE_BIB_bib-1919"
+        ],
+        "titles": [
+          {
+            "en": "18. ICARUS' WINGS — Human Enhancement & Kognitive Kriegsführung"
+          },
+          {
+            "en": "ICARUS' WINGS - Human Enhancement & Kognitive Kriegsfuehrung"
+          }
+        ]
+      },
+      {
+        "url": "https://www.kritischegesellschaftsforschung.de/journal/article/65/36/pdf",
+        "ids": [
+          "SOURCE_BIB_bib-204",
+          "SOURCE_BIB_bib-1920"
+        ],
+        "titles": [
+          {
+            "en": "19. Cognitive warfare, propaganda and nudging"
+          },
+          {
+            "en": "Cognitive warfare, propaganda and nudging"
+          }
+        ]
+      },
+      {
+        "url": "https://publications.sto.nato.int/publications/sto%20meeting%20proceedings/sto-mp-hfm-361/$$mp-hfm-361-cover.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-214",
+          "SOURCE_BIB_bib-1852"
+        ],
+        "titles": [
+          {
+            "en": "9. Mitigating and Responding to Cognitive Warfare (NATO)"
+          },
+          {
+            "en": "STO-HFM-361 - Cognitive Warfare Proceedings"
+          }
+        ]
+      },
+      {
+        "url": "https://publications.tno.nl/publication/34641000/0hb67k/korteling-2023-education.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-215",
+          "SOURCE_BIB_bib-1935"
+        ],
+        "titles": [
+          {
+            "en": "10. Mitigating and Responding to Cognitive Warfare — TNO"
+          },
+          {
+            "en": "Mitigating and Responding to Cognitive Warfare - TNO"
+          }
+        ]
+      },
+      {
+        "url": "https://innovationhub-act.org/wp-content/uploads/2023/12/cognitive-warfare-symposium-ensc-march-2022-publication.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-216",
+          "SOURCE_BIB_bib-1936"
+        ],
+        "titles": [
+          {
+            "en": "11. Cognitive Warfare — NATO Innovation Hub"
+          },
+          {
+            "en": "Cognitive Warfare - NATO Innovation Hub"
+          }
+        ]
+      },
+      {
+        "url": "https://apps.dtic.mil/sti/trecms/pdf/ad1200226.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-217",
+          "SOURCE_BIB_bib-1937"
+        ],
+        "titles": [
+          {
+            "en": "12. Mitigating and Responding to Cognitive Warfare — DTIC"
+          },
+          {
+            "en": "Mitigating and Responding to Cognitive Warfare - DTIC"
+          }
+        ]
+      },
+      {
+        "url": "https://hal.science/hal-04328461/document",
+        "ids": [
+          "SOURCE_BIB_bib-218",
+          "SOURCE_BIB_bib-1938"
+        ],
+        "titles": [
+          {
+            "en": "13. Towards a Definition of Cognitive Warfare — HAL"
+          },
+          {
+            "en": "Towards a Definition of Cognitive Warfare - HAL"
+          }
+        ]
+      },
+      {
+        "url": "https://www.academia.edu/164625056/the_nexus_genz212_and_cognitive_warfare",
+        "ids": [
+          "SOURCE_BIB_bib-219",
+          "SOURCE_BIB_bib-1939"
+        ],
+        "titles": [
+          {
+            "en": "14. THE NEXUS: GENZ212 AND COGNITIVE WARFARE"
+          },
+          {
+            "en": "THE NEXUS: GENZ212 AND COGNITIVE WARFARE"
+          }
+        ]
+      },
+      {
+        "url": "https://www.youthpolicycenter.org/wp-content/uploads/2024/09/cognitive-and-hybrid-warfare.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-220",
+          "SOURCE_BIB_bib-1940"
+        ],
+        "titles": [
+          {
+            "en": "15. Cognitive and Hybrid Warfare | Youth Policy Center"
+          },
+          {
+            "en": "Cognitive and Hybrid Warfare | Youth Policy Center"
+          }
+        ]
+      },
+      {
+        "url": "https://www.defence-institute.be/wp-content/uploads/2021/07/rmb-21-art-03.pdf",
+        "ids": [
+          "SOURCE_BIB_bib-223",
+          "SOURCE_BIB_bib-1932"
+        ],
+        "titles": [
+          {
+            "en": "18. La direction générale de la communication stratégique"
+          },
+          {
+            "en": "La direction generale de la communication strategique"
+          }
+        ]
+      }
+    ],
+    "sources_year_missing": 1531,
+    "sources_language_counts": [
+      [
+        "en",
+        1044
+      ],
+      [
+        "ru",
+        328
+      ],
+      [
+        "zh",
+        196
+      ],
+      [
+        "de",
+        177
+      ],
+      [
+        "he",
+        141
+      ],
+      [
+        "es",
+        70
+      ],
+      [
+        "ar",
+        22
+      ],
+      [
+        "fa",
+        22
+      ],
+      [
+        "fr",
+        21
+      ],
+      [
+        "pt",
+        20
+      ],
+      [
+        "tr",
+        18
+      ],
+      [
+        "hi",
+        16
+      ],
+      [
+        "ja",
+        5
+      ],
+      [
+        "ko",
+        5
+      ],
+      [
+        "it",
+        1
+      ],
+      [
+        "nl",
+        1
+      ]
+    ],
+    "methods_language_counts": [
+      [
+        "en",
+        331
+      ],
+      [
+        "multi",
+        174
+      ]
+    ],
+    "methods_category_counts": [
+      [
+        "dtic",
+        165
+      ],
+      [
+        "informational",
+        57
+      ],
+      [
+        "cognitive",
+        52
+      ],
+      [
+        "military",
+        31
+      ],
+      [
+        "language",
+        27
+      ],
+      [
+        "psychological",
+        22
+      ],
+      [
+        "technological",
+        16
+      ],
+      [
+        "strategic",
+        15
+      ],
+      [
+        "information",
+        12
+      ],
+      [
+        "chinese",
+        10
+      ],
+      [
+        "us",
+        10
+      ],
+      [
+        "rhetorical",
+        9
+      ],
+      [
+        "russian",
+        9
+      ],
+      [
+        "pr_marketing",
+        9
+      ],
+      [
+        "platform",
+        8
+      ],
+      [
+        "sect",
+        8
+      ],
+      [
+        "european",
+        7
+      ],
+      [
+        "social",
+        6
+      ],
+      [
+        "media",
+        6
+      ],
+      [
+        "cultural",
+        5
+      ],
+      [
+        "political",
+        5
+      ],
+      [
+        "institutional",
+        5
+      ],
+      [
+        "economic",
+        4
+      ],
+      [
+        "diplomatic",
+        4
+      ],
+      [
+        "iranian",
+        3
+      ]
+    ],
+    "propaganda_categories_counts": [
+      [
+        "missing",
+        205
+      ],
+      [
+        "fake",
+        41
+      ],
+      [
+        "demo",
+        27
+      ],
+      [
+        "prov",
+        17
+      ],
+      [
+        "data",
+        10
+      ],
+      [
+        "target",
+        6
+      ],
+      [
+        "tech",
+        5
+      ]
+    ],
+    "documents_chars_stats": {
+      "min": 0,
+      "median": 55531.0,
+      "max": 1725126,
+      "zero": 3
+    },
+    "documents_pages_stats": {
+      "min": 0,
+      "median": 32.0,
+      "max": 1466,
+      "zero": 1
+    },
+    "documents_io_relevant_counts": [
+      [
+        "True",
+        1302
+      ],
+      [
+        "False",
+        644
+      ]
+    ],
+    "methods_confidence_stats": {
+      "min": 0.8,
+      "median": 0.85,
+      "max": 0.85
+    }
+  },
+  "warnings": [
+    "Exact title overlaps exist between io-kb methods and PROPAGANDA_METHODS_v2; method-crosswalk is required.",
+    "Some PROPAGANDA_METHODS_v2 records lack definition/mechanism/context/counter; lower match confidence for sparse records.",
+    "Some relations reference IDs absent from loaded primary sets; relation integrity flags are preserved.",
+    "Some source records have missing URLs; they cannot be used as clickable citation sources without enrichment.",
+    "Some source URLs are duplicated; source-origin dedup should collapse duplicate origins.",
+    "KB is analytic reference for classification, not direct evidence about a target entity.",
+    "Do not generate operational influence instructions from method records; use only for detection/classification/counter-analysis."
+  ],
+  "recommendations": [
+    "Create canonical IDs across all KB sources.",
+    "Keep raw records, but add normalized canonical-methods, canonical-sources, canonical-relations.",
+    "Add crosswalk from PROPAGANDA_METHODS_v2 method_id to IO_Mxxx when titles/aliases overlap.",
+    "Add field quality_score per method based on definition/mechanism/counter/source_refs presence.",
+    "Treat DTIC/document records as discovery metadata unless full text is available and cited.",
+    "Generate io-method-index.json for safe lexical matching.",
+    "Add kb_match records with safe_use=analytic_classification_only.",
+    "Never allow KB method records to support target facts directly."
+  ],
+  "normalized": {
+    "canonical_records": 4837,
+    "canonical_methods": 767,
+    "canonical_sources": 2087,
+    "canonical_relations": 4049,
+    "method_crosswalk_records": 389,
+    "search_index_records": 804
+  }
+}

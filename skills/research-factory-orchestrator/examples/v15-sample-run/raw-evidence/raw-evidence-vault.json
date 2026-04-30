@@ -1,0 +1,17 @@
+{
+  "run_id": "ea58e6fc",
+  "sources": [],
+  "extracted_nodes": [
+    {
+      "node_id": "CN-001",
+      "collected": true,
+      "stored_in_package": true,
+      "shown_in_telegram": false,
+      "sensitivity": "public_professional"
+    }
+  ],
+  "raw_claims": [],
+  "rejected": [],
+  "provenance": [],
+  "created_at": "2026-04-29T00:00:00Z"
+}

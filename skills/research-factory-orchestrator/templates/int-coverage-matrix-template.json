@@ -1,0 +1,53 @@
+{
+  "item_id": "{{ITEM_ID}}",
+  "int_families": [
+    {
+      "int_family": "OSINT",
+      "status": "pending"
+    },
+    {
+      "int_family": "WEBINT",
+      "status": "pending"
+    },
+    {
+      "int_family": "SOCMINT",
+      "status": "pending"
+    },
+    {
+      "int_family": "FININT-public",
+      "status": "pending"
+    },
+    {
+      "int_family": "GEOINT-public",
+      "status": "pending"
+    },
+    {
+      "int_family": "IMINT-public",
+      "status": "pending"
+    },
+    {
+      "int_family": "TECHINT-public",
+      "status": "pending"
+    },
+    {
+      "int_family": "CYBINT/CTI-public",
+      "status": "pending"
+    },
+    {
+      "int_family": "MEDINT-public",
+      "status": "pending"
+    },
+    {
+      "int_family": "SIGINT",
+      "status": "public_derivative_only"
+    },
+    {
+      "int_family": "HUMINT",
+      "status": "user_provided_only"
+    }
+  ],
+  "single_int_lockin": false,
+  "all_source_claimed": false,
+  "all_source_supported": false,
+  "created_at": "{{CREATED_AT}}"
+}

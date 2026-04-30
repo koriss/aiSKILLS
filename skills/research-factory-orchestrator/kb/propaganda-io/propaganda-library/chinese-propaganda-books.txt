@@ -1,0 +1,263 @@
+# Chinese-Language Textbooks & Manuals on Propaganda, Psychological Warfare, Information Operations, and Manipulation
+
+## Research compiled: April 2026
+## Format: TITLE | AUTHOR | YEAR | DESCRIPTION | URL | FILE_PATH
+
+---
+
+## 1. SUN TZU ART OF WAR — TRANSLATIONS & COMMENTARIES
+
+---
+
+TITLE: 孙子兵法译注 (Sun Tzu Art of War — Translated with Commentary)
+AUTHOR: 孙武 撰 / 郭化若 译注
+YEAR: 2016
+DESCRIPTION: Complete Art of War with曹操(cao Cao) annotations and郭化若 commentary. 252 pages. One of the most authoritative military editions in China. Published by 岳麓书社 (Yuelu Publishing House). Standard academic edition used in PLA courses.
+URL: http://www.fou001.com/_fang_nian/_jun/103055.html
+FILE_PATH: Not downloaded (PDF hosted on external site)
+
+---
+
+TITLE: 子部·孙子兵法 (Sun Tzu — Full Text Chinese Classical Edition)
+AUTHOR: 孙武
+YEAR: Pre-Qin (circa 500 BCE)
+DESCRIPTION: Classical text of the Art of War from the "zi-bu·sun-zi" collection. Full original Chinese text with commentary. Standard annotated digital edition.
+URL: http://www.fang.ece.ufl.edu/artofwar.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 孙子兵法全文+翻译 (Sun Tzu — Full Text with Translation)
+AUTHOR: 孙武
+YEAR: 2024 (digital edition)
+DESCRIPTION: Full text of Sun Tzu's Art of War in classical Chinese with modern Chinese translation. 13 chapters covering fundamental military strategy including知彼知己(know your enemy), 谋攻(attack by strategy), 形篇(formation), 势篇(momentum). One of the world's most influential texts on strategy, widely used in both military and business contexts.
+URL: http://www.sxhhy.com/uploadfile/file/20240612/e7dd72897.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 中华经典藏书·孙子兵法，孙膑兵法 (Chinese Classic Collection — Sun Tzu & Sun Bin)
+AUTHOR: 孙武 / 孙膑
+YEAR: Unknown (published edition)
+DESCRIPTION: Combined collection containing both Sun Tzu Art of War and Sun Bin's Art of War. Part of the "Chinese Classic Collection" series. Includes both the oldest complete military treatise and the later work of Sun Tzu's descendant.
+URL: https://procbfd9f30-pic9.ysjianzhan.cn/upload/pae1.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 孙子译注 (Sun Tzu — Translated and Annotated)
+AUTHOR: 郭化若
+YEAR: Pre-2000s (original); reprinted multiple times
+DESCRIPTION: 郭化若 — renowned PLA military strategist and former commander — produced the most widely cited academic translation and annotation of the Art of War. His work integrates曹操's classical annotations with modern military analysis. Considered definitive in Chinese military academia.
+URL: https://www.diancang.xyz/xueshuzaji/17680/
+FILE_PATH: Not downloaded
+
+---
+
+## 2. CHINESE MILITARY PSYCHOLOGY & PSYCHOLOGICAL WARFARE (心理战)
+
+---
+
+TITLE: 军事心理学 (Military Psychology) — 当代中国心理科学文库
+AUTHOR: 苗翠方 et al. (eds.)
+YEAR: Unknown
+DESCRIPTION: Comprehensive military psychology textbook covering four parts across 27 chapters. Includes: military psychological selection and training; military environmental stress and psychological disorders; combat psychology and cognitive damage protection; military organizational culture and mental health promotion. Author team includes leading experts in military psychology.
+URL: https://www.dedao.cn/ebook/detail?id=DLnMGAEG7gKLyYmkAbPaEXxD8BM4J0LXm60ROrpdZn19VNzv2o5e6lqjQQ1poxqy
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 心理战与反心理战 (Psychological Warfare and Counter-Psychological Warfare)
+AUTHOR: Unknown (journal article)
+YEAR: 2019
+DESCRIPTION: Academic journal article (汉斯出版社 — Hans Publishers) on psychological warfare and countermeasures. Examines information damage mechanisms in psychological warfare including false information, intimidation, and concealed information causing cognitive bias, emotional disorders, and personality distortion.
+URL: https://pdf.hanspub.org/isl20190200000_60242678.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 军事基础知识题解(下) (Military Basic Knowledge Q&A — Part 2)
+AUTHOR: Unknown (PLA textbook compilation)
+YEAR: Unknown
+DESCRIPTION: PLA military textbook covering psychological warfare theory. Contains dedicated section on心理战 (psychological warfare) including references to心理战学校 (psychological warfare schools), 心理战中心 (psychological warfare centers), 心理战局 (psychological warfare bureaus), 心理战委员会 (psychological warfare committees). Also covers PLA campaigns from the Liberation War period.
+URL: https://ivantsoi.myds.me/web/schoolebook/pdf/057039.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 中国军人心理健康手册 (Chinese Military Personnel Mental Health Handbook)
+AUTHOR: Unknown (PLA medical publication)
+YEAR: Unknown
+DESCRIPTION: Official handbook on military mental health covering both peace-time and wartime psychological health. Addresses how mental health affects combat capability, particularly in high-tech warfare conditions. Includes psychological assessment, resilience training, and combat stress management.
+URL: http://www.chinaxlbj.org/book/6.pdf
+FILE_PATH: Not downloaded
+
+---
+
+## 3. 舆论战 (PUBLIC OPINION WARFARE)
+
+---
+
+TITLE: 舆论战 (Public Opinion Warfare)
+AUTHOR: 朱金平
+YEAR: 2005
+DESCRIPTION: China's FIRST dedicated monograph on public opinion warfare. Systematic study of舆论战 as a military strategy. Covers: concept and history of public opinion warfare, its characteristics, role as military force multiplier, information carriers, material foundations, relationship with親緣戰術. States "舆论战开展于武力对抗之前，贯穿于武力对抗之中，继续于武力对抗之后" (Public opinion warfare starts before armed conflict, continues through it, and follows after). Published by 中国言实出版社. 291 pages.
+URL: https://www.shukui.net/book/2447140.html
+FILE_PATH: Not downloaded
+ALTERNATE_URL: https://pdfyl.ertongbook.com/17/30837793.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 舆论战 (Public Opinion Warfare — alternate PDF edition)
+AUTHOR: 朱金平
+YEAR: 2005
+DESCRIPTION: PDF version of朱金平's舆论战. Defines it as "根据国家战略意图和军事斗争任务,以舆论为武器,综合运用各种传媒和信息资源,激励我方战斗精神,削弱敌方战斗意志,为争取政治主动和军事胜利营造有利舆论环境的斗争行动" (Based on national strategic intent and military tasks, using public opinion as a weapon, comprehensively employing various media and information resources to inspire our side's fighting spirit and weaken the enemy's will to fight).
+URL: https://weread.qq.com/web/bookDetail/230326f0811e1a5dcg0195d1
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 中国国家舆论安全研究 (Research on China's National Public Opinion Security)
+AUTHOR: 赵强
+YEAR: Unknown
+DESCRIPTION: Academic research on national public opinion security as part of China's national security system. Addresses military functions of public opinion, seeking moral justification for war, mobilizing populations, and psychological operations. Published by 中国社会科学院.
+URL: http://niis.cssn.cn/webpic/web/niis/upload/2012/12/d20121209151923140.pdf
+FILE_PATH: Not downloaded
+
+---
+
+## 4. CHINESE PROPAGANDA STUDIES — ACADEMIC BOOKS
+
+---
+
+TITLE: 传播学概论 (Introduction to Communication Studies) — 21世纪新闻传播学系列教材
+AUTHOR: Unknown (Chinese university textbook series)
+YEAR: Unknown
+DESCRIPTION: Standard Chinese university textbook for journalism and communication studies. Part of the "21st Century Journalism and Communication Series" published by 中国人民大学出版社. Covers fundamental theories of mass communication and propaganda. Used at major Chinese universities.
+URL: http://e.crup.cn/preview.html?bsno=58021
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 清华新闻传播学前沿讲座录 (Tsinghua Journalism & Communication Frontier Lectures)
+AUTHOR: Unknown (Tsinghua University faculty)
+YEAR: Unknown
+DESCRIPTION: Collection of advanced lectures from Tsinghua University's journalism and communication program. Topics include "Chinese Society and Mass Communication" — multi-disciplinary analysis of media, propaganda, and public opinion in China's contemporary context. Published by 清华大学出版社.
+URL: http://idl.hbdlib.cn/book/00000000000000/pdfbook2/007/003/251381.pdf
+FILE_PATH: Not downloaded
+
+---
+
+## 5. INFORMATION WARFARE / COGNITIVE WARFARE (認知戰 / 信息战)
+
+---
+
+TITLE: 战场心理压力研究综述 (Review of Combat Psychological Stress Research)
+AUTHOR: 钟珊 (Zhong Shan)
+YEAR: 2019
+DESCRIPTION: Academic literature review on battlefield psychological stress. Published on ResearchGate with full PDF. Covers stress responses, combat trauma, and psychological intervention methods in modern warfare contexts.
+URL: https://www.researchgate.net/publication/335035514_zhanchangxinliyaliyanjiuzongshu
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 网络舆论攻击——一种全新的非军事战争手段 (Network Public Opinion Attack — A New Non-Military Warfare Method)
+AUTHOR: Unknown
+YEAR: 2018
+DESCRIPTION: Academic paper on network-based public opinion attacks as a form of non-military warfare. Published through 上海市科学技术情报学会 (Shanghai Institute of Science and Technology Intelligence). Examines information warfare operations in the digital domain.
+URL: https://www.qbxh.sh.cn/sites/default/files/resourcefiles/05%E7%BD%91%E7%BB%9C%E8%88%86%E8%AE%BA%E6%94%BB%E5%87%BB%20-%20%E4%B8%80%E7%A7%8D%E5%85%A8%E6%96%B0%E7%9A%84%E9%9D%9E%E5%86%9B%E4%BA%8B%E6%88%98%E4%BA%89%E6%89%8B%E6%AE%B5.pdf
+FILE_PATH: Not downloaded
+
+---
+
+## 6. MILITARY ACADEMY / UNIVERSITY TEXTBOOKS
+
+---
+
+TITLE: 大学军事理论教程 (University Military Theory Textbook)
+AUTHOR: 复旦大学、上海交通大学、华东理工大学、上海师范大学 (faculty consortium)
+YEAR: 2002 (revised)
+DESCRIPTION: University military theory textbook used at Fudan University, Shanghai Jiao Tong University, East China University of Science and Technology, and Shanghai Normal University. Developed in accordance with China's National Defense Education Law and the 2002 revised Military Training Teaching Outline for Higher Education Institutions.
+URL: http://idl.hbdlib.cn/book/00000000000000/pdfbook/005/001/183676.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 大学生军事教程 (Military Education for College Students)
+AUTHOR: Unknown (South China Agricultural University faculty)
+YEAR: 2005
+DESCRIPTION: Military education textbook for Chinese university students. Covers military theory and practical military skills. Used as trial edition at South China Agricultural University before broader adoption. Part of the national university military education program.
+URL: https://pdfyl.ertongbook.com/12/30556790.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 战创伤救治能力培训实施方案专家共识 (Expert Consensus on Combat Injury Treatment Capability Training)
+AUTHOR: PLA Medical University faculty consortium
+YEAR: 2026
+DESCRIPTION: Most recent (February 2026) official expert consensus on combat trauma treatment training. Three-tier classification system for training: frontline officers/soldiers, medical NCOs, and first-line medical support. Published in professional medical journal.
+URL: https://www.guidelines-registry.org/pp/uploads/2026/02/27/%E6%88%98%E5%88%9B%E4%BC%A4%E6%95%91%E6%B2%BB%E8%83%BD%E5%8A%9B%E5%9F%B9%E8%AE%AD%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88.pdf
+FILE_PATH: Not downloaded
+
+---
+
+## 7. POLITICAL / IDEOLOGICAL WARFARE TEXTS
+
+---
+
+TITLE: 毛泽东文集(全八卷) (Mao Zedong Collected Works — Complete 8 Volumes)
+AUTHOR: 毛泽东
+YEAR: 1993 (posthumous compilation)
+DESCRIPTION: Complete 8-volume collection of Mao Zedong's writings, speeches, and documents. Key text for understanding CCP political warfare, mass mobilization, propaganda, and ideological control methods. Text compiled into searchable PDF.
+URL: https://background-business-biz-service-test.oss-cn-hongkong.aliyuncs.com/other/ec79ac786e0a4611afda838510d4fe69116461.pdf
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 军事家孙子 (Military Strategist Sun Tzu)
+AUTHOR: Unknown
+YEAR: 2019
+DESCRIPTION: Educational PDF from 香港中国文化馆 (Hong Kong Chinese Culture Institute). Analyzes Sun Tzu's three core military thought精华: 慎战 (prudent warfare), 速胜 (rapid victory), 惑敌 (confusing the enemy). Links ancient strategy to modern military doctrine.
+URL: https://chiculture.org.hk/sites/mainsite/files/2019-05/0103_junshijiasunzi_pdf_cn.pdf
+FILE_PATH: Not downloaded
+
+---
+
+## 8. ADDITIONAL RESOURCES FOUND
+
+---
+
+TITLE: 中国兵书总目 (Complete Catalog of Chinese Military Books)
+AUTHOR: Unknown
+YEAR: Unknown
+DESCRIPTION: Comprehensive bibliography of Chinese military texts. Referenced in book sharing sites. Lists major military classics including 孙子兵法新译, 孙子兵法新注, 吴孙子发微, 吴子译注, 黄石公三略译注.
+URL: http://hanfeng1918.com/baijia/75781.html
+FILE_PATH: Not downloaded
+
+---
+
+TITLE: 智慧谋略必学珍藏宝典·中国十大兵法书籍 (Essential Strategy Collection — Top 10 Chinese Military Classics)
+AUTHOR: Unknown
+YEAR: 2019
+DESCRIPTION: Collection of ten essential Chinese military strategy texts including Sun Tzu's Art of War. Available in PDF/EPUB/MOBI/TXT formats. Organized by 兵书兵法 (military strategy) category.
+URL: https://www.wobangzhao.com/thread-4102-1-1.html
+FILE_PATH: Not downloaded
+
+---
+
+## SUMMARY NOTES
+
+- Most documents found are PDFs hosted on Chinese ebook/library sites
+- Direct download links often redirect through file sharing services (Pan.baidu, Quark, etc.)
+- 朱金平's 舆论战 (2005) is the most directly relevant academic text on propaganda-as-warfare
+- 军事心理学 provides academic grounding in psychological operations
+- Sun Tzu translations with PLA-relevant commentary (郭化若) are most militarily applicable
+- Beijing/Shanghai research centers primarily produce journals rather than publicly downloadable books
+- 认知战 as a distinct PRC term is more common in post-2018 Taiwan defense literature
+
+## SEARCH METHODOLOGY
+- 10+ searches conducted using SearXNG (Google, Bing, DuckDuckGo, Brave aggregation)
+- Chinese-language searches with --lang zh-CN
+- Search topics: 孙子兵法, 心理战, 舆论战, 宣传学, 認知戰, 洗脑, 社会工程学, 信息战, 解放军心理战教材, 北京上海宣传研究中心
+- Primary sources: Chinese ebook sites, university libraries, research institute PDFs, military publishing houses

@@ -1,0 +1,8 @@
+{
+  "case_id": "F270-claimed-full-context-load-without-manifest",
+  "failure_code": "F270",
+  "class": "context-acquisition-integrity",
+  "description": "claimed full context load without manifest",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

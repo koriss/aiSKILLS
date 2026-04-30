@@ -1,0 +1,560 @@
+{
+  "version": "18.3.2-delivery-truth-smoke-runtime-contract-hotfix",
+  "description": "Merged regression index: preserved v17/v18/v18.1 plus v18.3 source quality, source acquisition and execution reliability hardening cases.",
+  "legacy_v17_cases_total": 20,
+  "legacy_v17_cases": [
+    {
+      "case_id": "case_telegram_table_rendering",
+      "failure_type": "telegram_table",
+      "validator": "validate_telegram_no_tables_strict.py",
+      "bad_sample": "bad_telegram_table.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F058"
+      ]
+    },
+    {
+      "case_id": "case_telegram_local_path_leak",
+      "failure_type": "local_path",
+      "validator": "validate_no_local_paths_in_telegram.py",
+      "bad_sample": "bad_local_path.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F043",
+        "F051"
+      ]
+    },
+    {
+      "case_id": "case_manual_check_final_proof",
+      "failure_type": "manual_check_passed",
+      "validator": "validate_no_manual_check_final_proof.py",
+      "bad_sample": "bad_manual_check.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F042"
+      ]
+    },
+    {
+      "case_id": "case_negative_identity_overconfidence",
+      "failure_type": "negative_identity_overconfidence",
+      "validator": "validate_negative_identity_wording.py",
+      "bad_sample": "bad_negative_identity.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F084"
+      ]
+    },
+    {
+      "case_id": "case_confirmed_fact_single_weak_source",
+      "failure_type": "confirmed_fact_single_weak_source",
+      "validator": "validate_confirmed_fact_source_support.py",
+      "bad_sample": "bad_claims_single_source.json",
+      "good_sample": "good_claims.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F123"
+      ]
+    },
+    {
+      "case_id": "case_derived_inference_as_confirmed_fact",
+      "failure_type": "derived_inference_as_confirmed_fact",
+      "validator": "validate_inference_not_confirmed_fact.py",
+      "bad_sample": "bad_claims_inference_confirmed.json",
+      "good_sample": "good_claims.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F120"
+      ]
+    },
+    {
+      "case_id": "case_delivery_overclaim",
+      "failure_type": "delivery_overclaim",
+      "validator": "validate_delivery_manifest.py",
+      "bad_sample": "bad_delivery_overclaim.json",
+      "good_sample": "good_delivery.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F050",
+        "F150",
+        "F152"
+      ]
+    },
+    {
+      "case_id": "case_runtime_entrypoint_confusion",
+      "failure_type": "runtime_entrypoint_confusion",
+      "validator": "validate_no_skill_md_imitation.py",
+      "bad_sample": "bad_skill_md_imitation.txt",
+      "good_sample": "good_runtime_startup.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F021",
+        "F022",
+        "F024",
+        "F035"
+      ]
+    },
+    {
+      "case_id": "case_status_claim_mismatch",
+      "failure_type": "status_claim_mismatch",
+      "validator": "validate_status_claim_consistency.py",
+      "bad_sample": "bad_status_claim.txt",
+      "bad_status": "bad_status_claim_runtime-status.json",
+      "good_sample": "good_runtime_startup.txt",
+      "good_status": "good_status_claim_runtime-status.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F025"
+      ]
+    },
+    {
+      "case_id": "case_no_entrypoint_proof",
+      "failure_type": "entrypoint_proof_missing",
+      "validator": "validate_runtime_entrypoint.py",
+      "bad_sample": "bad_run_no_entrypoint_proof",
+      "good_sample": "good_run_entrypoint_proof",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F027",
+        "F028"
+      ]
+    },
+    {
+      "case_id": "case_interface_no_return_path",
+      "failure_type": "interface_no_return_path",
+      "validator": "validate_interface_return_path_claim.py",
+      "bad_sample": "bad_interface_no_return_path.txt",
+      "good_sample": "good_interface_queued.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F044",
+        "F045"
+      ]
+    },
+    {
+      "case_id": "case_direct_interface_response_bypasses_renderer",
+      "failure_type": "direct_interface_response_bypasses_renderer",
+      "validator": "validate_no_direct_interface_response.py",
+      "bad_sample": "bad_direct_interface_response.txt",
+      "good_sample": "good_rendered_interface_response.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F043",
+        "F051"
+      ]
+    },
+    {
+      "case_id": "case_worker_bundle_sent_as_research_package",
+      "failure_type": "worker_bundle_sent_as_research_package",
+      "validator": "validate_worker_bundle_not_research_package.py",
+      "bad_sample": "bad_worker_bundle.zip",
+      "good_sample": "good_research_package.zip",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F041",
+        "F052",
+        "F053"
+      ]
+    },
+    {
+      "case_id": "case_provider_specific_logic_leaked_into_runtime",
+      "failure_type": "provider_specific_logic_leaked_into_runtime",
+      "validator": "validate_no_provider_hardcode_text.py",
+      "bad_sample": "bad_provider_hardcode.txt",
+      "good_sample": "good_provider_layer.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F055",
+        "F056"
+      ]
+    },
+    {
+      "case_id": "case_real_telegram_fake_rfo_runtime_route",
+      "failure_type": "rfo_command_routed_to_plain_subagent",
+      "validator": "validate_rfo_command_did_not_spawn_plain_subagent.py",
+      "bad_sample": "real_2026_04_30_fake_rfo_telegram_log.txt",
+      "good_sample": "good_rfo_runtime_log.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F023",
+        "F035",
+        "F193",
+        "F199"
+      ]
+    },
+    {
+      "case_id": "case_real_reply_context_wrong_rfo_route",
+      "failure_type": "reply_context_rfo_routed_to_deep_investigation",
+      "validator": "validate_rfo_command_did_not_spawn_plain_subagent.py",
+      "bad_sample": "real_2026_04_30_reply_context_wrong_rfo_route.txt",
+      "good_sample": "good_rfo_runtime_log.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F023",
+        "F024",
+        "F193",
+        "F199",
+        "F201"
+      ]
+    },
+    {
+      "case_id": "case_html_proof_without_runtime_artifacts",
+      "failure_type": "html_self_declared_runtime_proof",
+      "validator": "validate_html_proof_matches_runtime_artifacts.py",
+      "bad_sample": "bad_fake_rfo_full_report.html",
+      "good_sample": "good_run_report_proof",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F190",
+        "F191",
+        "F197",
+        "F198",
+        "F196"
+      ]
+    },
+    {
+      "case_id": "case_malformed_html_delivered",
+      "failure_type": "malformed_html_but_delivered",
+      "validator": "validate_html_well_formed.py",
+      "bad_sample": "bad_fake_rfo_full_report.html",
+      "good_sample": "good_simple_report.html",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F194"
+      ]
+    },
+    {
+      "case_id": "case_claim_id_gap_without_skip_reason",
+      "failure_type": "claim_id_gap_without_skip_reason",
+      "validator": "validate_claim_id_continuity_or_skip_reason.py",
+      "bad_sample": "bad_fake_rfo_full_report.html",
+      "good_sample": "good_report_claims.html",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F200"
+      ]
+    },
+    {
+      "case_id": "case_chat_delivery_claim_before_ack_real_log",
+      "failure_type": "delivery_claim_before_ack",
+      "validator": "validate_chat_claims_against_delivery_manifest.py",
+      "bad_sample": "real_2026_04_30_fake_rfo_telegram_log.txt",
+      "good_sample": "good_chat_no_delivery_claim.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F150",
+        "F152",
+        "F192",
+        "F195"
+      ]
+    }
+  ],
+  "required_failure_classes": [
+    "F170",
+    "F171",
+    "F172",
+    "F173",
+    "F174",
+    "F175",
+    "F176",
+    "F177",
+    "F179",
+    "F180",
+    "F181",
+    "F190",
+    "F191",
+    "F193",
+    "F195",
+    "F200",
+    "F201",
+    "F202",
+    "F203",
+    "F204",
+    "F205",
+    "F207",
+    "F210",
+    "F211",
+    "F213",
+    "F214",
+    "F215",
+    "F216",
+    "F217",
+    "F218",
+    "F219",
+    "F221",
+    "F222",
+    "F227",
+    "F228",
+    "F230",
+    "F233",
+    "F260",
+    "F261",
+    "F270",
+    "F271",
+    "F272",
+    "F273",
+    "F274",
+    "F275",
+    "F276",
+    "F277",
+    "F278",
+    "F279",
+    "F280",
+    "F281",
+    "F282",
+    "F283",
+    "F284",
+    "F285",
+    "F286",
+    "F287",
+    "F288",
+    "F289"
+  ],
+  "v18_v18_1_case_files": [
+    "cases/real-2026-04-30-claimed-zip-missing.json",
+    "cases/real-2026-04-30-late-sa011-after-report.json",
+    "cases/real-2026-04-30-manual-report-proof-conflict.json",
+    "cases/real-2026-04-30-missing-frontmatter-discovery.json",
+    "cases/real-2026-04-30-rfo-telegram-fake-runtime.json"
+  ],
+  "preserved_indexes": [
+    "index-v17.3-preserved.json",
+    "index-v18-overlay.json",
+    "index-v18.1-overlay.json"
+  ],
+  "generated_at": "2026-04-30T10:45:50Z",
+  "v18_3_reliability_cases_total": 18,
+  "v18_3_reliability_cases": [
+    {
+      "case_id": "F170-political-actor-as-statistics",
+      "failure_type": "political-actor-as-statistics",
+      "validator": "validate_political_actor_not_statistics.py",
+      "covers": [
+        "F170"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F171-self-claim-as-external-confirmation",
+      "failure_type": "self-claim-as-external-confirmation",
+      "validator": "validate_self_claim_not_external_confirmation.py",
+      "covers": [
+        "F171"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F172-source-laundering-counted-as-independence",
+      "failure_type": "source-laundering-counted-as-independence",
+      "validator": "validate_source_laundering.py",
+      "covers": [
+        "F172"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F174-confirmed-claim-without-valid-source-fit",
+      "failure_type": "confirmed-claim-without-valid-source-fit",
+      "validator": "validate_claim_source_fit.py",
+      "covers": [
+        "F174"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F200-snippet-used-as-confirmed-source",
+      "failure_type": "snippet-used-as-confirmed-source",
+      "validator": "validate_snippet_only_not_confirmed.py",
+      "covers": [
+        "F200"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F201-blocked-fetch-silently-ignored",
+      "failure_type": "blocked-fetch-silently-ignored",
+      "validator": "validate_source_gap_reflected_in_final_verdict.py",
+      "covers": [
+        "F201"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F207-source-gap-not-reflected-in-final-verdict",
+      "failure_type": "source-gap-not-reflected-in-final-verdict",
+      "validator": "validate_source_gap_reflected_in_final_verdict.py",
+      "covers": [
+        "F207"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F210-subagent-timeout-without-partial-commit",
+      "failure_type": "subagent-timeout-without-partial-commit",
+      "validator": "validate_model_call_ledger.py",
+      "covers": [
+        "F210"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F214-partial-output-used-as-final",
+      "failure_type": "partial-output-used-as-final",
+      "validator": "validate_partial_output_not_complete.py",
+      "covers": [
+        "F214"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F215-missing-finalize-marker",
+      "failure_type": "missing-finalize-marker",
+      "validator": "validate_finalize_marker_required.py",
+      "covers": [
+        "F215"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F218-late-result-silently-merged",
+      "failure_type": "late-result-silently-merged",
+      "validator": "validate_late_results_not_merged.py",
+      "covers": [
+        "F218"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F219-timeout-not-reflected-in-final-gate",
+      "failure_type": "timeout-not-reflected-in-final-gate",
+      "validator": "validate_timeout_reflected_in_claim_caps.py",
+      "covers": [
+        "F219"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F227-repeated-model-timeout-without-prompt-shrink",
+      "failure_type": "repeated-model-timeout-without-prompt-shrink",
+      "validator": "validate_retry_action_required.py",
+      "covers": [
+        "F227"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F228-local-model-circuit-open-but-used",
+      "failure_type": "local-model-circuit-open-but-used",
+      "validator": "validate_local_model_circuit_breaker.py",
+      "covers": [
+        "F228"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F230-ambient-agent-direct-subagent-overrides-rfo",
+      "failure_type": "ambient-agent-direct-subagent-overrides-rfo",
+      "validator": "validate_no_ambient_context_runtime_override.py",
+      "covers": [
+        "F230"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F233-unbounded-token-instruction-reaches-model-call",
+      "failure_type": "unbounded-token-instruction-reaches-model-call",
+      "validator": "validate_context_budget_policy.py",
+      "covers": [
+        "F233"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F260-cron-timeout-without-ledger",
+      "failure_type": "cron-timeout-without-ledger",
+      "validator": "validate_cron_isolation.py",
+      "covers": [
+        "F260"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    },
+    {
+      "case_id": "F261-cron-contends-with-interactive-rfo",
+      "failure_type": "cron-contends-with-interactive-rfo",
+      "validator": "validate_cron_isolation.py",
+      "covers": [
+        "F261"
+      ],
+      "expected_bad": "fail_or_gate_block"
+    }
+  ],
+  "v18_3_1_context_integrity_cases_total": 20,
+  "v18_3_1_context_integrity_cases": [
+    "failure-corpus/context-integrity/F270-claimed-full-context-load-without-manifest.json",
+    "failure-corpus/context-integrity/F271-claimed-all-files-read-without-ledger.json",
+    "failure-corpus/context-integrity/F272-summary-or-inventory-presented-as-full-read.json",
+    "failure-corpus/context-integrity/F273-smoke-test-as-context-load-proof.json",
+    "failure-corpus/context-integrity/F274-subagent-started-as-completed.json",
+    "failure-corpus/context-integrity/F275-subagent-timeout-ignored-in-read-claim.json",
+    "failure-corpus/context-integrity/F276-memory-write-as-active-context.json",
+    "failure-corpus/context-integrity/F277-impossible-context-request-accepted-without-limitation.json",
+    "failure-corpus/context-integrity/F278-active-context-capacity-not-checked.json",
+    "failure-corpus/context-integrity/F279-stale-version-claimed-after-newer-release.json",
+    "failure-corpus/context-integrity/F280-path-name-confusion-in-skill-discovery.json",
+    "failure-corpus/context-integrity/F281-readiness-claim-after-incomplete-read.json",
+    "failure-corpus/context-integrity/F282-repeated-self-certification-after-user-correction.json",
+    "failure-corpus/context-integrity/F283-reasoning-leak-in-chat-payload.json",
+    "failure-corpus/context-integrity/F284-operational-loading-request-turned-into-summary.json",
+    "failure-corpus/context-integrity/F285-full-understanding-claim-without-validator.json",
+    "failure-corpus/context-integrity/F286-all-files-claim-uses-sampled-files-only.json",
+    "failure-corpus/context-integrity/F287-context-load-no-file-hashes.json",
+    "failure-corpus/context-integrity/F288-context-load-no-token-budget.json",
+    "failure-corpus/context-integrity/F289-context-claim-not-reflected-in-final-gate.json"
+  ],
+  "v18_3_2_delivery_truth_cases": [
+    "F300",
+    "F301",
+    "F302",
+    "F303",
+    "F304",
+    "F310",
+    "F311",
+    "F312",
+    "F313",
+    "F314",
+    "F320",
+    "F321",
+    "F322",
+    "F323",
+    "F324",
+    "F330",
+    "F331",
+    "F340",
+    "F350",
+    "F351",
+    "F352"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RetryLedger",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "retries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "open_retries": {
+      "type": "integer"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "retries",
+    "open_retries"
+  ]
+}

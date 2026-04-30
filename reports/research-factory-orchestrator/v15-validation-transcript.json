@@ -1,0 +1,24 @@
+[
+  {
+    "check": "python_ast_parse_all_scripts",
+    "passed": true,
+    "files": 108
+  },
+  {
+    "check": "no_pycache",
+    "passed": true
+  },
+  {
+    "check": "contracts_present",
+    "passed": true
+  },
+  {
+    "check": "failure_corpus_present",
+    "passed": true,
+    "cases": 7
+  },
+  {
+    "check": "package_hygiene_basic",
+    "passed": true
+  }
+]

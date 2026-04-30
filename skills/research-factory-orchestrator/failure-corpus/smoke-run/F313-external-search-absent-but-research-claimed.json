@@ -1,0 +1,5 @@
+{
+  "case_id": "F313-external-search-absent-but-research-claimed",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

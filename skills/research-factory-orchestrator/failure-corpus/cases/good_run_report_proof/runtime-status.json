@@ -1,0 +1,8 @@
+{
+  "run_id": "RUN-GOOD-PROOF",
+  "job_id": "JOB-GOOD-PROOF",
+  "command_id": "CMD-GOOD-PROOF",
+  "state": "delivered",
+  "work_units_total": 8,
+  "workers_planned": 8
+}

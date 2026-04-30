@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Model Call Ledger Record",
+  "type": "object",
+  "required": [
+    "model_call_id",
+    "work_unit_id",
+    "status",
+    "idempotency_key"
+  ],
+  "properties": {
+    "model_call_id": {
+      "type": "string"
+    },
+    "work_unit_id": {
+      "type": "string"
+    },
+    "model_profile": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "partial",
+        "timeout",
+        "disconnect",
+        "overflow",
+        "backend_error"
+      ]
+    },
+    "finalize_seen": {
+      "type": "boolean"
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "retry_recommendation": {
+      "type": "string"
+    }
+  }
+}

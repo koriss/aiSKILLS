@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryAck",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ack_id",
+    "event_id",
+    "run_id",
+    "provider",
+    "status",
+    "idempotency_key",
+    "created_at",
+    "stub_delivery",
+    "real_external_delivery"
+  ],
+  "properties": {
+    "ack_id": {
+      "type": "string"
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "command_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provider": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "sent",
+        "failed",
+        "duplicate"
+      ]
+    },
+    "provider_message_id": {
+      "type": "string"
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "payload_kind": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "file_kind": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provider_payload_path": {
+      "type": "string"
+    },
+    "stub_delivery": {
+      "type": "boolean"
+    },
+    "real_external_delivery": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

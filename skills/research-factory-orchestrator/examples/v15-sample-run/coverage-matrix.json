@@ -1,0 +1,127 @@
+{
+  "task_id": "ea58e6fc",
+  "axes": [
+    {
+      "axis_id": "AX-001",
+      "axis": "entity_resolution",
+      "required": true,
+      "reason": "Universal coverage axis entity_resolution",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-001-entity-resolution"
+      ]
+    },
+    {
+      "axis_id": "AX-002",
+      "axis": "primary_origin_sources",
+      "required": true,
+      "reason": "Universal coverage axis primary_origin_sources",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-002-primary-origin-sources"
+      ]
+    },
+    {
+      "axis_id": "AX-003",
+      "axis": "broad_sweep",
+      "required": true,
+      "reason": "Universal coverage axis broad_sweep",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-003-broad-sweep"
+      ]
+    },
+    {
+      "axis_id": "AX-004",
+      "axis": "contrary_adversarial_search",
+      "required": true,
+      "reason": "Universal coverage axis contrary_adversarial_search",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-004-contrary-adversarial-search"
+      ]
+    },
+    {
+      "axis_id": "AX-005",
+      "axis": "source_quality_provenance",
+      "required": true,
+      "reason": "Universal coverage axis source_quality_provenance",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-005-source-quality-provenance"
+      ]
+    },
+    {
+      "axis_id": "AX-006",
+      "axis": "timeline_freshness",
+      "required": true,
+      "reason": "Universal coverage axis timeline_freshness",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-006-timeline-freshness"
+      ]
+    },
+    {
+      "axis_id": "AX-007",
+      "axis": "structured_data",
+      "required": true,
+      "reason": "Universal coverage axis structured_data",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-007-structured-data"
+      ]
+    },
+    {
+      "axis_id": "AX-008",
+      "axis": "claim_factcheck",
+      "required": true,
+      "reason": "Universal coverage axis claim_factcheck",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-008-claim-factcheck"
+      ]
+    },
+    {
+      "axis_id": "AX-009",
+      "axis": "strong_tie_pivoting",
+      "required": true,
+      "reason": "Universal coverage axis strong_tie_pivoting",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-009-strong-tie-pivoting"
+      ]
+    },
+    {
+      "axis_id": "AX-010",
+      "axis": "contact_media_graph",
+      "required": true,
+      "reason": "Universal coverage axis contact_media_graph",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-010-contact-media-graph"
+      ]
+    },
+    {
+      "axis_id": "AX-011",
+      "axis": "raw_evidence_vault",
+      "required": true,
+      "reason": "Universal coverage axis raw_evidence_vault",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-011-raw-evidence-vault"
+      ]
+    },
+    {
+      "axis_id": "AX-012",
+      "axis": "synthesis_merge",
+      "required": true,
+      "reason": "Universal coverage axis synthesis_merge",
+      "status": "planned",
+      "work_unit_ids": [
+        "WU-012-synthesis-merge"
+      ]
+    }
+  ],
+  "minimum_axes_required": 8,
+  "complete": false
+}

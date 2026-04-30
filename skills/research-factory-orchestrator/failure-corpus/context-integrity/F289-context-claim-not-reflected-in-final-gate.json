@@ -1,0 +1,8 @@
+{
+  "case_id": "F289-context-claim-not-reflected-in-final-gate",
+  "failure_code": "F289",
+  "class": "context-acquisition-integrity",
+  "description": "context claim not reflected in final gate",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

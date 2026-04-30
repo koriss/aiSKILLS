@@ -1,0 +1,1 @@
+Запущен full pipeline, strict research factory, subagents и fanout работают.

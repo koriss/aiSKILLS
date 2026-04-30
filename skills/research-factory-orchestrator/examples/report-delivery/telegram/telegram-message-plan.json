@@ -1,0 +1,54 @@
+{
+  "plain_text_only": true,
+  "no_large_tables": true,
+  "messages": [
+    {
+      "message_id": "telegram-message-001",
+      "sequence": 1,
+      "total": 6,
+      "block_type": "verdict",
+      "path": "telegram-message-001.txt",
+      "char_count": 130
+    },
+    {
+      "message_id": "telegram-message-002",
+      "sequence": 2,
+      "total": 6,
+      "block_type": "key_findings",
+      "path": "telegram-message-002.txt",
+      "char_count": 178
+    },
+    {
+      "message_id": "telegram-message-003",
+      "sequence": 3,
+      "total": 6,
+      "block_type": "facts",
+      "path": "telegram-message-003.txt",
+      "char_count": 118
+    },
+    {
+      "message_id": "telegram-message-004",
+      "sequence": 4,
+      "total": 6,
+      "block_type": "gaps",
+      "path": "telegram-message-004.txt",
+      "char_count": 60
+    },
+    {
+      "message_id": "telegram-message-005",
+      "sequence": 5,
+      "total": 6,
+      "block_type": "sources",
+      "path": "telegram-message-005.txt",
+      "char_count": 83
+    },
+    {
+      "message_id": "telegram-message-006",
+      "sequence": 6,
+      "total": 6,
+      "block_type": "files",
+      "path": "telegram-message-006.txt",
+      "char_count": 104
+    }
+  ]
+}

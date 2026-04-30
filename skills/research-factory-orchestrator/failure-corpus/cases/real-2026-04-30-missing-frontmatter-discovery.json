@@ -1,0 +1,8 @@
+{
+  "case_id": "real-2026-04-30-missing-frontmatter-discovery",
+  "description": "v18 zip had no SKILL YAML frontmatter and was invisible to OpenClaw skills list",
+  "expected_failure_classes": [
+    "F230"
+  ],
+  "source": "user-provided real Telegram failure"
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Execution Reliability Gate",
+  "type": "object",
+  "required": [
+    "status",
+    "model_timeouts",
+    "partial_outputs_without_finalize",
+    "claims_capped_due_to_execution"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "pass_with_degraded_outputs",
+        "fail"
+      ]
+    },
+    "model_timeouts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "request_timeouts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "worker_lease_expired": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partial_outputs_used": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partial_outputs_without_finalize": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claims_capped_due_to_execution": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

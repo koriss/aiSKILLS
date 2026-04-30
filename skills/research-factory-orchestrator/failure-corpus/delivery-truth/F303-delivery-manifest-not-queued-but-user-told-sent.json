@@ -1,0 +1,5 @@
+{
+  "case_id": "F303-delivery-manifest-not-queued-but-user-told-sent",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

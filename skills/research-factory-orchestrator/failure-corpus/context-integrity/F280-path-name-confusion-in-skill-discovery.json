@@ -1,0 +1,8 @@
+{
+  "case_id": "F280-path-name-confusion-in-skill-discovery",
+  "failure_code": "F280",
+  "class": "context-acquisition-integrity",
+  "description": "path name confusion in skill discovery",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

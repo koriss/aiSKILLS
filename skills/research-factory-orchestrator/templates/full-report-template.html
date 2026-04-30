@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{{TITLE}}</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; line-height: 1.5; max-width: 1180px; margin: 0 auto; padding: 32px; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
+    th { background: #f2f2f2; }
+    .claim-confirmed { border-left: 4px solid #2e7d32; padding-left: 8px; }
+    .claim-uncertain { border-left: 4px solid #f9a825; padding-left: 8px; }
+    .claim-disputed { border-left: 4px solid #c62828; padding-left: 8px; }
+    code { background: #f6f6f6; padding: 2px 4px; }
+  </style>
+</head>
+<body>
+  <header id="metadata">
+    <h1>{{TITLE}}</h1>
+    <p><strong>Generated:</strong> {{GENERATED_AT}}</p>
+    <p><strong>Output profile:</strong> {{OUTPUT_PROFILE}}</p>
+  </header>
+
+  <section id="executive-summary">
+    <h2>Executive Summary</h2>
+    {{EXECUTIVE_SUMMARY}}
+  </section>
+
+  <section id="research-question-scope">
+    <h2>Research Question and Scope</h2>
+    {{RESEARCH_QUESTION_SCOPE}}
+  </section>
+
+  <section id="methodology">
+    <h2>Methodology</h2>
+    {{METHODOLOGY}}
+  </section>
+
+  <section id="search-strategy">
+    <h2>Search Strategy</h2>
+    {{SEARCH_STRATEGY}}
+  </section>
+
+  <section id="source-quality">
+    <h2>Source Quality and Source-Laundering Assessment</h2>
+    {{SOURCE_QUALITY}}
+  </section>
+
+  <section id="evidence-map">
+    <h2>Evidence Map</h2>
+    {{EVIDENCE_MAP}}
+  </section>
+
+  <section id="verified-claims">
+    <h2>Verified Claims</h2>
+    {{VERIFIED_CLAIMS}}
+  </section>
+
+  <section id="uncertain-claims">
+    <h2>Uncertain / Disputed Claims</h2>
+    {{UNCERTAIN_CLAIMS}}
+  </section>
+
+  <section id="fact-check">
+    <h2>Fact-Check Results</h2>
+    {{FACT_CHECK}}
+  </section>
+
+  <section id="citation-locator">
+    <h2>Citation Locator / Source Anchors</h2>
+    {{CITATION_LOCATOR}}
+  </section>
+
+  <section id="adversarial-review">
+    <h2>Adversarial Review</h2>
+    {{ADVERSARIAL_REVIEW}}
+  </section>
+
+  <section id="error-audit">
+    <h2>Error Audit</h2>
+    {{ERROR_AUDIT}}
+  </section>
+
+  <section id="known-gaps">
+    <h2>Known Gaps and Limitations</h2>
+    {{KNOWN_GAPS}}
+  </section>
+
+  <section id="coverage-matrix">
+    <h2>Coverage Matrix</h2>
+    {{COVERAGE_MATRIX}}
+  </section>
+
+  <section id="sources">
+    <h2>Sources</h2>
+    <table><thead><tr><th>source_id</th><th>title</th><th>source_type</th><th>publisher</th><th>full_url</th><th>accessed_at</th><th>supports_claim_ids</th></tr></thead><tbody>{{SOURCE_ROWS_WITH_FULL_URLS}}</tbody></table>
+  </section>
+
+  <section id="identity-resolution">
+    <h2>Identity Resolution</h2>
+    {{IDENTITY_RESOLUTION}}
+  </section>
+
+  <section id="validation-proof">
+    <h2>Validation Proof</h2>
+    {{VALIDATION_PROOF}}
+    <script type="application/json" id="completion-proof-json">{{COMPLETION_PROOF_JSON}}</script>
+    <script type="application/json" id="research-package-manifest-json">{{RESEARCH_PACKAGE_MANIFEST_JSON}}</script>
+  </section>
+
+  <section id="appendices">
+    <h2>Appendices</h2>
+    {{APPENDICES}}
+  </section>
+<section id="wiki-references"><h2>References</h2><ol id="references-list">{{WIKI_REFERENCES}}</ol></section>
+</body>
+</html>

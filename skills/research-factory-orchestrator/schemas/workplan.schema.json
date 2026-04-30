@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workplan",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "work_units": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "running",
+        "complete",
+        "blocked",
+        "failed"
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "work_units",
+    "status"
+  ]
+}

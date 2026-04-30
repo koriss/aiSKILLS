@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StandaloneHTMLReport",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "standalone": {
+      "type": "boolean"
+    },
+    "has_inline_style": {
+      "type": "boolean"
+    },
+    "has_viewport": {
+      "type": "boolean"
+    },
+    "external_asset_count": {
+      "type": "integer"
+    },
+    "has_wiki_citations": {
+      "type": "boolean"
+    },
+    "mobile_validated": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "path",
+    "standalone",
+    "has_inline_style",
+    "has_viewport",
+    "external_asset_count"
+  ]
+}

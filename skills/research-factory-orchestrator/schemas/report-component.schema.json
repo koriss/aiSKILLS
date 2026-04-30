@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportComponent",
+  "type": "object",
+  "properties": {
+    "component_id": {
+      "type": "string"
+    },
+    "component_type": {
+      "type": "string"
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "type": "object"
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "display_priority": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "component_id",
+    "component_type",
+    "data"
+  ]
+}

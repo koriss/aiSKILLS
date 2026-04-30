@@ -1,0 +1,13 @@
+{
+  "version": "15.0.0-runtime-contract-enforcement",
+  "required_attachments": [
+    "standalone_html",
+    "research_package"
+  ],
+  "telegram": {
+    "plain_text_only": true,
+    "no_tables": true,
+    "no_local_paths": true,
+    "no_raw_sensitive_contacts": true
+  }
+}

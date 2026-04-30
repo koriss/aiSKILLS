@@ -1,0 +1,8 @@
+{
+  "case_id": "F288-context-load-no-token-budget",
+  "failure_code": "F288",
+  "class": "context-acquisition-integrity",
+  "description": "context load no token budget",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

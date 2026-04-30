@@ -1,0 +1,29 @@
+{
+  "case_id": "case_fact_check",
+  "task_type": "single claim verification",
+  "audience": "decision maker",
+  "archetype": "fact_check",
+  "block_plan": [
+    "verdict",
+    "claim",
+    "evidence_for",
+    "evidence_against",
+    "contradictions",
+    "sources"
+  ],
+  "required_components": [
+    "claim-card",
+    "callout",
+    "source-reference-item"
+  ],
+  "sample_summary": "Claim partially supported; strongest source confirms X but does not confirm Y.",
+  "common_failure_modes": [
+    "partial support converted to full confirmation",
+    "source laundering"
+  ],
+  "validator_focus": [
+    "claim granularity",
+    "source independence",
+    "contradictions"
+  ]
+}

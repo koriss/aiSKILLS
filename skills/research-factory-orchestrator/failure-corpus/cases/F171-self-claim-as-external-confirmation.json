@@ -1,0 +1,8 @@
+{
+  "case_id": "F171-self-claim-as-external-confirmation",
+  "failure_code": "F171",
+  "description": "Self/interested claim promoted to external confirmation",
+  "expected_validator": "validate_self_claim_not_external_confirmation.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

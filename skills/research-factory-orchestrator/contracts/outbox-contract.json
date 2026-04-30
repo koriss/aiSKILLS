@@ -1,0 +1,40 @@
+{
+  "version": "17.1.0-runtime-lifecycle-hardening",
+  "outbox_dir": "outbox",
+  "event_schema": "schemas/outbox-event.schema.json",
+  "delivery_ack_schema": "schemas/delivery-ack.schema.json",
+  "delivery_semantics": "at_least_once_with_idempotency_key",
+  "only_delivery_worker_can_mark_delivered": true,
+  "required_event_types": [
+    "send_message",
+    "send_file"
+  ],
+  "required_events": [
+    {
+      "event_id": "OUT-0001",
+      "type": "send_message",
+      "payload_kind": "chat_message",
+      "required_for_final_delivery": true
+    },
+    {
+      "event_id": "OUT-0002",
+      "type": "send_file",
+      "file_kind": "html_report",
+      "required_for_final_delivery": true
+    },
+    {
+      "event_id": "OUT-0003",
+      "type": "send_file",
+      "file_kind": "research_package",
+      "required_for_final_delivery": true
+    }
+  ],
+  "delivery_claim_rule": "Chat text and final gate MUST NOT claim delivered/attached/sent until delivery acknowledgements exist.",
+  "local_path_rule": "User-facing chat text MUST NOT expose absolute local filesystem paths. Outbox payload_path may be relative to run_dir only.",
+  "message_split_policy_required": true,
+  "delivery_manifest_update_rule": "outbox_delivery_worker.py MUST recompute delivery-manifest.json, attachment-ledger.json, final-answer-gate.json, and runtime-status.json after ACKs.",
+  "terminal_statuses": [
+    "delivered",
+    "stub_delivered"
+  ]
+}

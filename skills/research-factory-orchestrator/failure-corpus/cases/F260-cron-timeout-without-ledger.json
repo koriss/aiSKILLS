@@ -1,0 +1,8 @@
+{
+  "case_id": "F260-cron-timeout-without-ledger",
+  "failure_code": "F260",
+  "description": "Cron timeout not recorded",
+  "expected_validator": "validate_cron_isolation.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

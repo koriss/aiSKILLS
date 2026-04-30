@@ -1,18 +1,78 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuntimeState",
   "type": "object",
   "properties": {
-    "task_id": { "type": "string" },
-    "current_global_stage": { "type": "string" },
-    "current_item_id": { "type": "string" },
-    "status": { "type": "string" },
-    "allowed_next_global_stages": { "type": "array", "items": { "type": "string" } },
-    "loop_counters": { "type": "object" },
-    "last_progress_at": { "type": "string" },
-    "last_artifact_changed": { "type": "string" },
-    "blocker": { "type": ["string", "null"] },
-    "next_move": { "type": "string" },
-    "updated_at": { "type": "string" }
+    "task_id": {
+      "type": "string"
+    },
+    "global_state": {
+      "type": "string",
+      "enum": [
+        "received_request",
+        "analyzing_request",
+        "compiling_runtime",
+        "runtime_compiled",
+        "executing_runtime",
+        "tool_discovery",
+        "permission_check",
+        "queue_discovery",
+        "search_strategy_generation",
+        "source_acquisition",
+        "source_normalization",
+        "source_quality_scoring",
+        "source_laundering_detection",
+        "evidence_cards",
+        "evidence_mapping",
+        "claims_extracting",
+        "draft_ready",
+        "fact_check_running",
+        "citation_locator_running",
+        "adversarial_review_running",
+        "error_audit_running",
+        "fixing_output",
+        "validating",
+        "final_answer_gate",
+        "full_html_report_ready",
+        "final_ready",
+        "delivered",
+        "blocked",
+        "paused"
+      ]
+    },
+    "current_item_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "complete",
+        "blocked",
+        "paused",
+        "failed"
+      ]
+    },
+    "allowed_next_states": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "loop_counters": {
+      "type": "object"
+    },
+    "updated_at": {
+      "type": "string"
+    }
   },
-  "required": ["task_id", "current_global_stage", "status", "loop_counters", "updated_at"]
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "global_state",
+    "status"
+  ]
 }

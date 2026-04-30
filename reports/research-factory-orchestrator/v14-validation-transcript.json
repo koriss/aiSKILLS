@@ -1,0 +1,44 @@
+[
+  {
+    "cmd": "validate_telegram_no_tables_strict.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/telegram-good.txt",
+    "returncode": 0,
+    "stdout": "OK: no Telegram tables",
+    "stderr": ""
+  },
+  {
+    "cmd": "validate_no_local_paths_in_telegram.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/telegram-good.txt",
+    "returncode": 0,
+    "stdout": "OK: no local paths in Telegram",
+    "stderr": ""
+  },
+  {
+    "cmd": "validate_confirmed_fact_source_support.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/claims-good.json",
+    "returncode": 0,
+    "stdout": "OK: confirmed facts have sufficient support",
+    "stderr": ""
+  },
+  {
+    "cmd": "validate_inference_not_confirmed_fact.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/claims-good.json",
+    "returncode": 0,
+    "stdout": "OK: derived inferences are not confirmed_fact",
+    "stderr": ""
+  },
+  {
+    "cmd": "validate_negative_identity_wording.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/telegram-good.txt",
+    "returncode": 0,
+    "stdout": "OK: negative identity wording is bounded",
+    "stderr": ""
+  },
+  {
+    "cmd": "validate_delivery_manifest.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/delivery-good.json",
+    "returncode": 0,
+    "stdout": "OK: delivery manifest validates",
+    "stderr": ""
+  },
+  {
+    "cmd": "validate_no_manual_check_final_proof.py /mnt/data/_build_rfo_v14-failure-corpus-superagent-hardening/skills/research-factory-orchestrator/examples/v14-validator-samples/telegram-good.txt",
+    "returncode": 0,
+    "stdout": "OK: no manual_check_passed final proof",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorkUnitContract",
+  "type": "object",
+  "properties": {
+    "work_unit_id": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "entity_scope": {
+      "type": "string"
+    },
+    "coverage_categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "int_families": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_families": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_completion": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validators": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "max_attempts": {
+      "type": "integer"
+    },
+    "retry_policy": {
+      "type": "string"
+    },
+    "merge_target": {
+      "type": "string"
+    },
+    "done_definition": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "work_unit_id",
+    "objective",
+    "coverage_categories",
+    "required_outputs",
+    "validators",
+    "merge_target",
+    "done_definition"
+  ]
+}

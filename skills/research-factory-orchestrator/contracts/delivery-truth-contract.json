@@ -1,0 +1,21 @@
+{
+  "version": "18.3.2",
+  "invariants": [
+    "prepared_not_sent",
+    "rendered_not_delivered",
+    "local_path_not_attachment",
+    "attachment_claim_requires_provider_ack"
+  ],
+  "required_for_attachment_claim": [
+    "delivery-manifest.json",
+    "attachment-ledger.json",
+    "provider ack/file id"
+  ],
+  "forbidden_without_ack": [
+    "HTML-отчёт во вложении",
+    "file attached",
+    "sent above",
+    "resent",
+    "delivered"
+  ]
+}

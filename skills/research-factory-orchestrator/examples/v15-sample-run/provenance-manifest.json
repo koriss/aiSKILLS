@@ -1,0 +1,43 @@
+{
+  "run_id": "ea58e6fc",
+  "entities": [
+    {
+      "entity_id": "report/full-report.html",
+      "type": "report"
+    },
+    {
+      "entity_id": "package/research-package.zip",
+      "type": "package"
+    }
+  ],
+  "activities": [
+    {
+      "activity_id": "runtime.init",
+      "type": "init_runtime",
+      "time": "2026-04-29T01:16:52Z"
+    },
+    {
+      "activity_id": "render.report",
+      "type": "render",
+      "time": "2026-04-29T01:16:52Z"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "orchestrator",
+      "type": "runtime"
+    },
+    {
+      "agent_id": "validator-dag",
+      "type": "validator"
+    }
+  ],
+  "relations": [
+    {
+      "type": "wasGeneratedBy",
+      "entity": "report/full-report.html",
+      "activity": "render.report"
+    }
+  ],
+  "created_at": "2026-04-29T01:16:52Z"
+}

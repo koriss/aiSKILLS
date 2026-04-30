@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchLedger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "searches",
+    "total_searches",
+    "created_at"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "searches": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "total_searches": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

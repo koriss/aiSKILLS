@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvidenceDebt",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "debts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "open_high_severity_count": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "debts",
+    "open_high_severity_count"
+  ]
+}

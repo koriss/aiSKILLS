@@ -1,0 +1,4 @@
+[5/6] Главные источники
+
+[1] Standalone HTML policy
+[2] Telegram plain text policy

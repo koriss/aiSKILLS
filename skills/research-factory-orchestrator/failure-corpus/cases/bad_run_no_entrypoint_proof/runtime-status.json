@@ -1,0 +1,4 @@
+{
+  "run_id": "BAD-RUN",
+  "entrypoint": "scripts/run_research_factory.py"
+}

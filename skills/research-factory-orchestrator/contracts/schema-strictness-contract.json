@@ -1,0 +1,14 @@
+{
+  "version": "15.0.0-runtime-contract-enforcement",
+  "critical_schemas_additional_properties_false": [
+    "run.schema.json",
+    "work-unit-plan.schema.json",
+    "subagent-ledger.schema.json",
+    "search-ledger.schema.json",
+    "claims-registry.schema.json",
+    "delivery-manifest.schema.json",
+    "artifact-manifest.schema.json",
+    "provenance-manifest.schema.json",
+    "final-answer-gate.schema.json"
+  ]
+}

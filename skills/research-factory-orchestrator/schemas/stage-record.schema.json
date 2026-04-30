@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StageRecord",
+  "type": "object",
+  "properties": {
+    "stage_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "running",
+        "complete",
+        "blocked",
+        "failed"
+      ]
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "completed_at": {
+      "type": "string"
+    },
+    "actions_attempted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "artifacts_created": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_found": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence_impact": {
+      "type": "string"
+    },
+    "next_safe_action": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "stage_name",
+    "status",
+    "actions_attempted"
+  ]
+}

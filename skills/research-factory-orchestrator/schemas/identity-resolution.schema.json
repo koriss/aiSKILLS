@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IdentityResolution",
+  "type": "object",
+  "properties": {
+    "target_person": {
+      "type": "string"
+    },
+    "target_context": {
+      "type": "object"
+    },
+    "confirmed_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "probable_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "candidate_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "rejected_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "critical_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "decision_summary": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "target_person",
+    "confirmed_profiles",
+    "probable_profiles",
+    "candidate_profiles",
+    "rejected_profiles"
+  ]
+}

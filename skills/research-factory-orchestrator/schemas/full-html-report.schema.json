@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FullHtmlReport",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "standalone": {
+      "type": "boolean"
+    },
+    "sections": {
+      "type": "object"
+    },
+    "source_count": {
+      "type": "integer"
+    },
+    "verified_claim_count": {
+      "type": "integer"
+    },
+    "citation_anchor_count": {
+      "type": "integer"
+    },
+    "generated_from_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "title",
+    "path",
+    "standalone",
+    "sections"
+  ]
+}

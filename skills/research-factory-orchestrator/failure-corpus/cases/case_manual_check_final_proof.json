@@ -1,0 +1,9 @@
+{
+  "case_id": "case_manual_check_final_proof",
+  "failure_type": "manual_check_passed",
+  "bad_output_pattern": "manual_check_passed as final proof",
+  "expected_guard": "concrete validators only",
+  "validator": "validate_no_manual_check_final_proof.py",
+  "bad_sample": "bad_manual_check.txt",
+  "good_sample": "good_telegram.txt"
+}

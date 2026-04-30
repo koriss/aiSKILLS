@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EmbeddedIOKBManifest",
+  "type": "object",
+  "properties": {
+    "created_at": {
+      "type": "string"
+    },
+    "kb_name": {
+      "type": "string"
+    },
+    "embedded": {
+      "type": "boolean"
+    },
+    "self_contained": {
+      "type": "boolean"
+    },
+    "raw_archive": {
+      "type": "string"
+    },
+    "raw_archive_sha256": {
+      "type": "string"
+    },
+    "required_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stats": {
+      "type": "object"
+    },
+    "content_diagnostics_summary": {
+      "type": "object"
+    },
+    "normalized": {
+      "type": "object"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "kb_name",
+    "embedded",
+    "self_contained",
+    "required_files",
+    "normalized"
+  ]
+}

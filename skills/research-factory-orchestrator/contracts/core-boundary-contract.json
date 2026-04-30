@@ -1,0 +1,13 @@
+{
+  "version": "18.3.2",
+  "compatibility_monolith": "scripts/rfo_v18_core.py",
+  "target_components": [
+    "runtime.adapter",
+    "runtime.worker",
+    "runtime.outbox",
+    "runtime.validation",
+    "runtime.packaging",
+    "runtime.smoke"
+  ],
+  "rule": "new code should target bounded runtime modules; rfo_v18_core remains compatibility entrypoint until refactor completes"
+}

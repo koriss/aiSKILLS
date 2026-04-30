@@ -1,0 +1,8 @@
+{
+  "case_id": "F218-late-result-silently-merged",
+  "failure_code": "F218",
+  "description": "Late model result merged after final/retry",
+  "expected_validator": "validate_late_results_not_merged.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

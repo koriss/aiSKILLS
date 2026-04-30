@@ -1,0 +1,1 @@
+Interface adapter queued runtime-job.json and outbox policy. Delivery through provider ack.

@@ -1,0 +1,5 @@
+{
+  "case_id": "F301-file-delivery-claim-without-attachment-ledger",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GlobalMergePlan",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "merge_inputs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "merge_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflict_resolution_policy": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "running",
+        "complete",
+        "blocked",
+        "failed"
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "merge_inputs",
+    "merge_outputs",
+    "status"
+  ]
+}

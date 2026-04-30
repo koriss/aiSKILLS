@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HtmlSectionCheck",
+  "type": "object",
+  "properties": {
+    "html_report_path": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "object",
+      "properties": {
+        "executive_summary": {
+          "type": "boolean"
+        },
+        "research_question_scope": {
+          "type": "boolean"
+        },
+        "methodology": {
+          "type": "boolean"
+        },
+        "search_strategy": {
+          "type": "boolean"
+        },
+        "source_quality": {
+          "type": "boolean"
+        },
+        "evidence_map": {
+          "type": "boolean"
+        },
+        "verified_claims": {
+          "type": "boolean"
+        },
+        "uncertain_claims": {
+          "type": "boolean"
+        },
+        "fact_check": {
+          "type": "boolean"
+        },
+        "citation_locator": {
+          "type": "boolean"
+        },
+        "adversarial_review": {
+          "type": "boolean"
+        },
+        "error_audit": {
+          "type": "boolean"
+        },
+        "known_gaps": {
+          "type": "boolean"
+        },
+        "sources": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "passed": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "html_report_path",
+    "sections",
+    "passed"
+  ]
+}

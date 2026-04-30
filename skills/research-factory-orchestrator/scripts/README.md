@@ -1,15 +1,13 @@
 # Scripts
 
-- `init_runtime.py` — create internal runtime under `--project-dir` (contracts, state, queue, items, logs).
-- `validate_schemas.py` — check every `../schemas/*.schema.json` for basic JSON Schema structure.
-- `validate_runtime.py` — check required runtime files and JSON/HTML sanity.
+- `validate_skill.py` validates strict OpenClaw frontmatter and no-lightweight guardrails.
+- `validate_schemas.py <schemas_dir>` validates schema JSON. Example: `python3 -S scripts/validate_schemas.py schemas`.
+- `init_runtime.py --project-dir <run_dir> --task "..."` creates the current v18 runtime skeleton.
+- `validate_runtime.py <run_dir> [--profile current|legacy]` validates mandatory runtime artifacts. Default is `current`, matching `init_runtime.py`.
+- `package_skill.py` creates `.skill` and workspace zip packages.
+- `validate_package.py` checks package safety.
 
-## Examples
+## v18.3.2 note
 
-```bash
-python3 init_runtime.py --project-dir /tmp/rf-task --title "Sample task"
-python3 validate_schemas.py
-python3 validate_runtime.py --project-dir /tmp/rf-task
-```
-
-Dependency: Python 3 standard library only.
+`validate_runtime.py` no longer requires the legacy `items/_template/*` skeleton unless explicitly called with `--profile legacy`.
+Smoke/failure harness output must not be used as production acceptance evidence; use delivery/run-mode/final gates.

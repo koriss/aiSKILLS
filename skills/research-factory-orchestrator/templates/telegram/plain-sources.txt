@@ -1,0 +1,5 @@
+[{{SEQ}}/{{TOTAL}}] Главные источники
+
+{{TOP_SOURCES}}
+
+Полный список источников, URL, citation anchors и fact-check — в HTML-отчёте.

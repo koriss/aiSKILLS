@@ -1,0 +1,19 @@
+{
+  "version": "18.3.1-context-integrity-hotfix",
+  "required_artifacts": [
+    "acquisition/source-candidates.json",
+    "acquisition/source-acquisition-plan.json",
+    "acquisition/source-acquisition-results.json",
+    "acquisition/source-gap-ledger.json",
+    "acquisition/domain-capability-cache.json",
+    "acquisition/acquisition-retry-ledger.json",
+    "acquisition/acquisition-dead-letter.json"
+  ],
+  "invariants": [
+    "snippet_only_cannot_confirm_claim",
+    "blocked_source_recorded_as_gap",
+    "auth_required_not_used_as_verified",
+    "fetch_timeout_does_not_kill_entire_run",
+    "archive_copy_has_timestamp"
+  ]
+}

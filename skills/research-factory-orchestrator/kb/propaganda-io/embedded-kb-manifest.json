@@ -1,0 +1,758 @@
+{
+  "created_at": "2026-04-27T23:57:25Z",
+  "kb_name": "propaganda-io",
+  "embedded": true,
+  "self_contained": true,
+  "raw_archive": "kb/propaganda-io/_raw/propaganda-io-archive.zip",
+  "raw_archive_sha256": "fd5f6298974cd7d497ac7e735aba2dca56c5184a4c3501c17fc8beefdf7389b5",
+  "required_files": [
+    "kb/propaganda-io/embedded-kb-manifest.json",
+    "kb/propaganda-io/kb-audit-report.json",
+    "kb/propaganda-io/io-kb-unified/methods.jsonl",
+    "kb/propaganda-io/io-kb-unified/actors.jsonl",
+    "kb/propaganda-io/io-kb-unified/sources.jsonl",
+    "kb/propaganda-io/io-kb-unified/relations.jsonl",
+    "kb/propaganda-io/ontology/graph.jsonl",
+    "kb/propaganda-io/propaganda-methods/PROPAGANDA_METHODS_v2.json",
+    "kb/propaganda-io/normalized/canonical-methods.jsonl",
+    "kb/propaganda-io/normalized/canonical-records.jsonl",
+    "kb/propaganda-io/normalized/method-crosswalk.json",
+    "kb/propaganda-io/io-method-index.json"
+  ],
+  "stats": {
+    "methods": {
+      "count": 505,
+      "parse_errors": [],
+      "unique_ids": 505,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          505
+        ],
+        [
+          "kb_source",
+          505
+        ],
+        [
+          "name",
+          505
+        ],
+        [
+          "aliases",
+          505
+        ],
+        [
+          "category",
+          505
+        ],
+        [
+          "subcategory",
+          505
+        ],
+        [
+          "description",
+          505
+        ],
+        [
+          "mechanism",
+          505
+        ],
+        [
+          "source_refs",
+          505
+        ],
+        [
+          "language",
+          505
+        ],
+        [
+          "languages",
+          505
+        ],
+        [
+          "confidence",
+          505
+        ],
+        [
+          "related_methods",
+          505
+        ],
+        [
+          "used_by_actors",
+          505
+        ],
+        [
+          "doctrine_ids",
+          505
+        ],
+        [
+          "examples",
+          174
+        ],
+        [
+          "counter",
+          174
+        ]
+      ],
+      "with_language_field": 505
+    },
+    "actors": {
+      "count": 26,
+      "parse_errors": [],
+      "unique_ids": 26,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          26
+        ],
+        [
+          "kb_source",
+          26
+        ],
+        [
+          "type",
+          26
+        ],
+        [
+          "name",
+          26
+        ],
+        [
+          "aliases",
+          26
+        ],
+        [
+          "country",
+          26
+        ],
+        [
+          "description",
+          26
+        ],
+        [
+          "io_methods",
+          26
+        ],
+        [
+          "doctrines",
+          26
+        ],
+        [
+          "sources",
+          26
+        ],
+        [
+          "confidence",
+          26
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "doctrines": {
+      "count": 11,
+      "parse_errors": [],
+      "unique_ids": 11,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          11
+        ],
+        [
+          "kb_source",
+          11
+        ],
+        [
+          "name",
+          11
+        ],
+        [
+          "category",
+          11
+        ],
+        [
+          "description",
+          11
+        ],
+        [
+          "source_refs",
+          11
+        ],
+        [
+          "language",
+          11
+        ],
+        [
+          "languages",
+          11
+        ],
+        [
+          "country",
+          11
+        ],
+        [
+          "methods",
+          11
+        ],
+        [
+          "actors",
+          11
+        ],
+        [
+          "confidence",
+          11
+        ]
+      ],
+      "with_language_field": 11
+    },
+    "documents": {
+      "count": 1946,
+      "parse_errors": [],
+      "unique_ids": 1946,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          1946
+        ],
+        [
+          "kb_source",
+          1946
+        ],
+        [
+          "type",
+          1946
+        ],
+        [
+          "title",
+          1946
+        ],
+        [
+          "file_path",
+          1946
+        ],
+        [
+          "meta_path",
+          1946
+        ],
+        [
+          "pages",
+          1946
+        ],
+        [
+          "chars",
+          1946
+        ],
+        [
+          "keywords",
+          1946
+        ],
+        [
+          "preview",
+          1946
+        ],
+        [
+          "io_relevant",
+          1946
+        ],
+        [
+          "matched_methods",
+          1946
+        ],
+        [
+          "confidence",
+          1946
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "sources": {
+      "count": 2087,
+      "parse_errors": [],
+      "unique_ids": 2087,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          2087
+        ],
+        [
+          "kb_source",
+          2087
+        ],
+        [
+          "type",
+          2087
+        ],
+        [
+          "title",
+          2087
+        ],
+        [
+          "author",
+          2087
+        ],
+        [
+          "year",
+          2087
+        ],
+        [
+          "language",
+          2087
+        ],
+        [
+          "country",
+          2087
+        ],
+        [
+          "url",
+          2087
+        ],
+        [
+          "format",
+          2087
+        ],
+        [
+          "topic_tags",
+          2087
+        ],
+        [
+          "why_relevant",
+          2087
+        ],
+        [
+          "confidence",
+          2087
+        ],
+        [
+          "relevance_score",
+          130
+        ]
+      ],
+      "with_language_field": 2087
+    },
+    "relations": {
+      "count": 4049,
+      "parse_errors": [],
+      "unique_ids": 0,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "from_id",
+          4049
+        ],
+        [
+          "from_type",
+          4049
+        ],
+        [
+          "relation",
+          4049
+        ],
+        [
+          "to_id",
+          4049
+        ],
+        [
+          "to_type",
+          4049
+        ],
+        [
+          "metadata",
+          4049
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "languages": {
+      "count": 17,
+      "parse_errors": [],
+      "unique_ids": 17,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          17
+        ],
+        [
+          "iso639_1",
+          17
+        ],
+        [
+          "name",
+          17
+        ],
+        [
+          "sources_count",
+          17
+        ],
+        [
+          "methods_count",
+          17
+        ],
+        [
+          "confidence",
+          17
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "regions": {
+      "count": 25,
+      "parse_errors": [],
+      "unique_ids": 25,
+      "duplicate_ids": 0,
+      "top_keys": [
+        [
+          "id",
+          25
+        ],
+        [
+          "iso3166_1",
+          25
+        ],
+        [
+          "name",
+          25
+        ],
+        [
+          "actors_count",
+          25
+        ],
+        [
+          "sources_count",
+          25
+        ],
+        [
+          "confidence",
+          25
+        ]
+      ],
+      "with_language_field": 0
+    },
+    "propaganda_methods_v2": {
+      "count": 262,
+      "parse_errors": [],
+      "top_keys": [
+        [
+          "method_id",
+          262
+        ],
+        [
+          "name_ru",
+          262
+        ],
+        [
+          "name_en",
+          262
+        ],
+        [
+          "source",
+          262
+        ],
+        [
+          "page_ref",
+          262
+        ],
+        [
+          "definition",
+          184
+        ],
+        [
+          "examples",
+          184
+        ],
+        [
+          "mechanism",
+          184
+        ],
+        [
+          "context",
+          184
+        ],
+        [
+          "counter",
+          184
+        ],
+        [
+          "detection_tags",
+          57
+        ],
+        [
+          "categories",
+          57
+        ]
+      ]
+    },
+    "ontology_graph": {
+      "count": 440,
+      "parse_errors": [],
+      "top_keys": [
+        [
+          "op",
+          440
+        ],
+        [
+          "entity",
+          266
+        ],
+        [
+          "from",
+          174
+        ],
+        [
+          "rel",
+          174
+        ],
+        [
+          "to",
+          174
+        ]
+      ]
+    }
+  },
+  "content_diagnostics_summary": {
+    "methods_title_duplicate_groups": 170,
+    "propaganda_title_duplicate_groups": 1,
+    "cross_exact_title_matches_count": 184,
+    "relations_broken_count": 4049,
+    "sources_missing_url": 1517,
+    "sources_duplicate_url_groups": 43
+  },
+  "normalized": {
+    "canonical_records": 4837,
+    "canonical_methods": 767,
+    "canonical_sources": 2087,
+    "canonical_relations": 4049,
+    "method_crosswalk_records": 389,
+    "search_index_records": 804
+  },
+  "warnings": [
+    "Exact title overlaps exist between io-kb methods and PROPAGANDA_METHODS_v2; method-crosswalk is required.",
+    "Some PROPAGANDA_METHODS_v2 records lack definition/mechanism/context/counter; lower match confidence for sparse records.",
+    "Some relations reference IDs absent from loaded primary sets; relation integrity flags are preserved.",
+    "Some source records have missing URLs; they cannot be used as clickable citation sources without enrichment.",
+    "Some source URLs are duplicated; source-origin dedup should collapse duplicate origins.",
+    "KB is analytic reference for classification, not direct evidence about a target entity.",
+    "Do not generate operational influence instructions from method records; use only for detection/classification/counter-analysis."
+  ],
+  "files": [
+    {
+      "path": "kb/propaganda-io/_raw/propaganda-io-archive.zip",
+      "size": 733075,
+      "sha256": "fd5f6298974cd7d497ac7e735aba2dca56c5184a4c3501c17fc8beefdf7389b5"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/BUILD_PLAN.md",
+      "size": 4044,
+      "sha256": "7ed90512f4de322e34b99d9f052c0e738a3ca7d1d3768877e643a178e4882c5c"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/actors.jsonl",
+      "size": 7517,
+      "sha256": "a5d8ad581b522b68e6033cfc325e0295862cb9c40aa2ae48f7991d723db306ed"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/doctrines.jsonl",
+      "size": 3970,
+      "sha256": "9ad7a6d31b5ebef17dc1834b5443c36b40ae69538474eae6e0fed035820b2b4c"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/documents.jsonl",
+      "size": 1243635,
+      "sha256": "1e687d77e65a5615eb199db5c373d262666d0f479d034cb959c383958b9d22a6"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/languages.jsonl",
+      "size": 1859,
+      "sha256": "90c61eae5e1c0fc7a845e3635f4c2c0cbcb9e69370c27bdd5b575ec4c5963482"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/methods.jsonl",
+      "size": 484387,
+      "sha256": "659d7e3d7da5e47996d95496bcdf96311d76e5d92a2087117ee13ae42b2e0ca9"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/regions.jsonl",
+      "size": 2764,
+      "sha256": "fb56b07702ae5a2408d78c9a4ace6a4aaf86a0089c833f6ceb61b348022dff48"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/relations.jsonl",
+      "size": 574259,
+      "sha256": "6674af8f240933d33a73d7a10e5faaa08e0d92b7692342386d3c619b5c0d23ff"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/reports/BUILD_REPORT.md",
+      "size": 2365,
+      "sha256": "0d3a5ce8fdbfab3a196c0646b0ab6eaec7ddc11a18f1a3ddc5e35a3692173d16"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/reports/COVERAGE.md",
+      "size": 2873,
+      "sha256": "5dc644f535d44386a9a5577fde88e75e1b8b08af61fd0c2e0387204cb0d8d963"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/reports/POST_BUILD_AUDIT_v1.md",
+      "size": 13887,
+      "sha256": "4f9a03bc2e5c00f9161ea57f5c3f9a2310160d501cb91bcad33182ea77e713bc"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/sources.jsonl",
+      "size": 805460,
+      "sha256": "be965195e40ac9e85dde0ffc4c4b34a71ab9ead6d0f9e594800ba25458eed6fe"
+    },
+    {
+      "path": "kb/propaganda-io/io-kb-unified/state/BUILD_STATE.json",
+      "size": 894,
+      "sha256": "db6f7b8f7eb6c73304968808bf622960ab1fac598b26a523ac380cf4c3beb722"
+    },
+    {
+      "path": "kb/propaganda-io/io-method-index.json",
+      "size": 737550,
+      "sha256": "ebc926e85818da22e415cb9223f26ea092e85ba549bfe5ef6089700b839be76c"
+    },
+    {
+      "path": "kb/propaganda-io/kb-audit-report.json",
+      "size": 75098,
+      "sha256": "0c87e8532bae9a45c6a42b360f2f295c09c4a7e533681268cc54f268697b9352"
+    },
+    {
+      "path": "kb/propaganda-io/kb-audit-report.md",
+      "size": 1770,
+      "sha256": "2fbd8ca496234eb4e725f349fc6e54addd1d7d72ea36fe7f4413bb6aa9442031"
+    },
+    {
+      "path": "kb/propaganda-io/normalized/canonical-methods.jsonl",
+      "size": 1555474,
+      "sha256": "7422a1c1a904710e81d27b19c0dbb06d1540c3fe210bef03ee8e6bc9493f59bc"
+    },
+    {
+      "path": "kb/propaganda-io/normalized/canonical-records.jsonl",
+      "size": 6320979,
+      "sha256": "97718be43690522175fd7af80e57577c7e008c522991247a87e83467b3b7da93"
+    },
+    {
+      "path": "kb/propaganda-io/normalized/canonical-relations.jsonl",
+      "size": 1921877,
+      "sha256": "77edda57e17718b51616837b9c84071c97cef070c5e316e4442af0a941aa3451"
+    },
+    {
+      "path": "kb/propaganda-io/normalized/canonical-sources.jsonl",
+      "size": 2456234,
+      "sha256": "cbf98a34c7aa626ec60ed4b95a77ed5257a85b07e51a82f6b4d0d45f3de6da9c"
+    },
+    {
+      "path": "kb/propaganda-io/normalized/method-crosswalk.json",
+      "size": 89942,
+      "sha256": "a93674d18ac4a598bca6e535438867ebfc50159948115fa3c5974a6ec4bfa7da"
+    },
+    {
+      "path": "kb/propaganda-io/ontology/graph.jsonl",
+      "size": 273991,
+      "sha256": "f7e62e8c6de1515f5a806eddd0ff5839c793a725064424169d632d6dda144378"
+    },
+    {
+      "path": "kb/propaganda-io/ontology/schema.yaml",
+      "size": 735,
+      "sha256": "23ba13abc5685589d320aa453b59a41908971334df6524b238df05fc083a048f"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/DOWNLOAD-LIST.md",
+      "size": 7078,
+      "sha256": "d25e2cded1800ac73c0a066b7a5b0f3bd2882a283aa7c61bc0e49d1f1e0673fa"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/DOWNLOAD-LIST.txt",
+      "size": 6894,
+      "sha256": "028146a7a98fb754163ef98a4339896a2c9b959c743c9dd62c2fc8ea06389b9b"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/anatomy/PROPOSAL_ANATOMY_p2_12_CASES.md",
+      "size": 102484,
+      "sha256": "d2aa5879ffd5adf6e15b681894c141fadf7e2e72772659f027d4f4a8c61987b6"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/anatomy/PROPOSAL_ANATOMY_v1_main.md",
+      "size": 102132,
+      "sha256": "5dc74a544590981fe68524c5e0d734d1c32fad710bb1ba1650af39b6136ea7c5"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/brainwashing-research.txt",
+      "size": 10630,
+      "sha256": "1f688991121dd2cbf03e4cfe2f328355eb007144fdfdfe38692784a516176b3c"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/chinese-propaganda-books.txt",
+      "size": 14640,
+      "sha256": "bb9e87f16436747217e0670ca28172241431d6738786fb2d2424334493d33611"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/downloads/download-log.txt",
+      "size": 48,
+      "sha256": "3b661d762fda1cd23a43983c6c2361740ea5b94b1c30b42b424663838b27d67f"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/hebrew-propaganda-books.txt",
+      "size": 13251,
+      "sha256": "8319a64a5199f90242b25d9a1a1fce2b14d36a50b31bc6e12b57b1be29796c10"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/nazi-propaganda-books.txt",
+      "size": 12816,
+      "sha256": "62682c9082a81d2e4d7c637b1931fbc6a916fa06659a52774fba25cdb6929720"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/nlp-manipulation-books.txt",
+      "size": 20557,
+      "sha256": "483fd242d64c0b2539f3bc63c63e71993398ee36a155f725941bf6866c14893b"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/propaganda-manuals.txt",
+      "size": 19857,
+      "sha256": "af071989c8bb1192b071dc2cf6059f8396748e2256a84520c7f32615f5f6ff95"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/psyop-military-manuals.txt",
+      "size": 20722,
+      "sha256": "873d025e627c12032dd9c26ac60761bd69d002c16848b65eacf20e566e249ecc"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/russian-propaganda-books.txt",
+      "size": 20775,
+      "sha256": "a5144071bd68ed3615d0d49fc8571bb23e3727ac523a1ee5e5039d5debbe51f8"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/sessions/moscow-closures-investigation-state.md",
+      "size": 1399,
+      "sha256": "0d56be9b49ff1224c9143882525725eb0d9a01e56bc41bc448509dcd1109949e"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/soviet-propaganda-books.txt",
+      "size": 16096,
+      "sha256": "3e16d755db74e7c393594188448ea064ae1dbc73357cdca585cc256a476a8bf1"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-library/spanish-propaganda-books.txt",
+      "size": 11216,
+      "sha256": "a62b75736c5896630307448de8527f662ef61462224910b4a0d1c4cfdfbc0291"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-methods/PROPAGANDA_METHODS_v1.json",
+      "size": 142503,
+      "sha256": "63b85a94ecdb627ff1e44a10eeb41acc09141169b0e1eec7d08a76cb9dc2c0a6"
+    },
+    {
+      "path": "kb/propaganda-io/propaganda-methods/PROPAGANDA_METHODS_v2.json",
+      "size": 247126,
+      "sha256": "7163c2a26007b714bbbc934d745b521213b5df0f0bc1fd20e43efe535b88dd21"
+    },
+    {
+      "path": "kb/propaganda-io/upstream-scripts/query_methods.py",
+      "size": 2920,
+      "sha256": "d6761e558d3ab29b6dbe74eaae88dc74d2052a967476a3f0d6403f2b7e0806d4"
+    }
+  ]
+}

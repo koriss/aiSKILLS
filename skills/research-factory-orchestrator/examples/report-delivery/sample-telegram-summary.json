@@ -1,0 +1,61 @@
+{
+  "title": "Sample Research Report",
+  "verdict": "Это демонстрационный Telegram summary. Он plain text, без HTML и Markdown-разметки.",
+  "confidence": {
+    "level": "high",
+    "reason": "template demo"
+  },
+  "counts": {
+    "sources": 2,
+    "verified_claims": 2,
+    "weak_claims": 0,
+    "contradictions": 0
+  },
+  "key_findings": [
+    {
+      "text": "Полный отчёт отправляется отдельным standalone HTML-файлом."
+    },
+    {
+      "text": "Большие таблицы не отправляются в Telegram."
+    },
+    {
+      "text": "Summary не должно содержать новых фактов."
+    }
+  ],
+  "fact_cards": [
+    {
+      "text": "✅ full-report.html должен открываться одним файлом."
+    },
+    {
+      "text": "✅ Telegram messages должны быть plain text."
+    }
+  ],
+  "warnings": [],
+  "gaps": [
+    {
+      "text": "Это demo, не реальный отчёт."
+    }
+  ],
+  "top_sources": [
+    {
+      "label": "Standalone HTML policy"
+    },
+    {
+      "label": "Telegram plain text policy"
+    }
+  ],
+  "attachments": [
+    {
+      "type": "html_report",
+      "path": "full-report.html"
+    },
+    {
+      "type": "research_package",
+      "path": "research-package.zip"
+    }
+  ],
+  "claim_ids_used": [
+    "C001",
+    "C002"
+  ]
+}

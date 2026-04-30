@@ -1,0 +1,12 @@
+{
+  "run_id": "ea58e6fc",
+  "artifacts": [
+    {
+      "path": "report/full-report.html"
+    },
+    {
+      "path": "package/research-package.zip"
+    }
+  ],
+  "updated_at": "2026-04-29T00:00:00Z"
+}

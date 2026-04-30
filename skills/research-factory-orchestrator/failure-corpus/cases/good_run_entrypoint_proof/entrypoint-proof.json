@@ -1,0 +1,11 @@
+{
+  "run_id": "GOOD-RUN",
+  "entrypoint": "scripts/run_research_factory.py",
+  "invocation_mode": "runtime",
+  "not_plain_subagent": true,
+  "not_skill_md_imitation": true,
+  "created_artifacts": [
+    "run.json",
+    "runtime-status.json"
+  ]
+}

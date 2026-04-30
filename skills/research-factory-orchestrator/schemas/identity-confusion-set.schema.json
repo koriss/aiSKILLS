@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IdentityConfusionSet",
+  "type": "object",
+  "properties": {
+    "target_person": {
+      "type": "string"
+    },
+    "similar_people": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "target_person",
+    "similar_people"
+  ]
+}

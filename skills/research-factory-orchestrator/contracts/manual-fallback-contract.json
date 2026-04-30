@@ -1,0 +1,11 @@
+{
+  "version": "18.3.2",
+  "manual_fallback_allowed": true,
+  "must_be_labelled": "manual preliminary draft, not validated RFO output",
+  "rfo_claim_allowed_only_if": [
+    "claim registry updated",
+    "evidence/source ledgers updated",
+    "source quality updated",
+    "final gates rerun"
+  ]
+}

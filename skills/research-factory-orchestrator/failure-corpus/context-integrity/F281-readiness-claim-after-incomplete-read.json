@@ -1,0 +1,8 @@
+{
+  "case_id": "F281-readiness-claim-after-incomplete-read",
+  "failure_code": "F281",
+  "class": "context-acquisition-integrity",
+  "description": "readiness claim after incomplete read",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

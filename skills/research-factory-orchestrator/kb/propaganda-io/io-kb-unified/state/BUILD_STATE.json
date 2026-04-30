@@ -1,0 +1,36 @@
+{
+  "build_id": "io-kb-unified-2026-04-22",
+  "started_at": "2026-04-22T22:02:00Z",
+  "phase": "complete",
+  "files_processed": 1948,
+  "methods_found": 505,
+  "actors_found": 26,
+  "doctrines_found": 11,
+  "sources_found": 2087,
+  "documents_found": 1946,
+  "relations_found": 4049,
+  "errors": [],
+  "stages": {
+    "discovery": "complete",
+    "extraction": "complete",
+    "normalization": "complete",
+    "dedup": "complete",
+    "structuring": "complete",
+    "linking": "complete",
+    "validation": "complete",
+    "output": "complete"
+  },
+  "sources": {
+    "io_kb_methods": 331,
+    "propaganda_kb_methods": 174,
+    "io_kb_actors": 26,
+    "io_kb_doctrines": 11,
+    "bibliography_entries": 1957,
+    "non_english_sources": 130,
+    "dtic_files": 6107,
+    "dtic_with_meta": 1946
+  },
+  "languages_found": 17,
+  "regions_found": 25,
+  "completed_at": "2026-04-22T22:15:59.319773Z"
+}

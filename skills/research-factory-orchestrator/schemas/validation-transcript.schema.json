@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ValidationTranscript",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "validators": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "all_passed": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "item_id",
+    "validators",
+    "all_passed"
+  ]
+}

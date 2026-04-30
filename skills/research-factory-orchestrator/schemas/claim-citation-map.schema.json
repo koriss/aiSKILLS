@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClaimCitationMap",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "all_verified_claims_cited": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "mappings",
+    "all_verified_claims_cited"
+  ]
+}

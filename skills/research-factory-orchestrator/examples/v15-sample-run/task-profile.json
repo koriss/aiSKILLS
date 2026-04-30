@@ -1,0 +1,21 @@
+{
+  "task_id": "ea58e6fc",
+  "topic": "Sample v15 runtime test",
+  "detected_entities": [],
+  "claim_types": [],
+  "uncertainty_axes": [
+    "entity_ambiguity",
+    "source_independence",
+    "current_vs_historical",
+    "self_claim_vs_external"
+  ],
+  "source_family_needs": [
+    "primary_or_origin",
+    "official_or_institutional",
+    "independent_media",
+    "registry_or_database",
+    "contrary_or_debunking",
+    "archive_or_cached"
+  ],
+  "created_at": "2026-04-29T01:16:36Z"
+}

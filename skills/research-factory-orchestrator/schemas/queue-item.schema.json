@@ -1,20 +1,60 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QueueItem",
   "type": "object",
   "properties": {
-    "item_id": { "type": "string" },
-    "title": { "type": "string" },
-    "slug": { "type": "string" },
-    "item_type": { "type": "string" },
-    "priority": { "type": "string", "enum": ["A", "B", "C", "D"] },
-    "status": { "type": "string" },
-    "current_stage": { "type": "string" },
-    "output_files": { "type": "object" },
-    "retry_count": { "type": "integer" },
-    "max_retries": { "type": "integer" },
-    "last_error": { "type": ["string", "null"] },
-    "force_rebuild": { "type": "boolean" },
-    "is_final_locked": { "type": "boolean" }
+    "item_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "tool_discovery",
+        "permission_check",
+        "queue_discovery",
+        "search_strategy_generation",
+        "source_acquisition",
+        "source_normalization",
+        "source_quality_scoring",
+        "source_laundering_detection",
+        "evidence_cards",
+        "evidence_mapping",
+        "claims_extracting",
+        "draft_ready",
+        "fact_check_running",
+        "citation_locator_running",
+        "adversarial_review_running",
+        "error_audit_running",
+        "fixing_output",
+        "validating",
+        "complete",
+        "failed_retryable",
+        "failed_blocked",
+        "paused",
+        "skipped_existing_valid"
+      ]
+    },
+    "retry_count": {
+      "type": "integer"
+    },
+    "last_error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
   },
-  "required": ["item_id", "title", "slug", "status", "retry_count", "max_retries", "force_rebuild", "is_final_locked"]
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "title",
+    "status"
+  ]
 }

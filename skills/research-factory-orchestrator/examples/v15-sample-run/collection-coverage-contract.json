@@ -1,0 +1,23 @@
+{
+  "task_id": "ea58e6fc",
+  "minimum_work_units": 8,
+  "minimum_collection_work_units": 6,
+  "minimum_search_modes": [
+    "broad",
+    "exact",
+    "negative",
+    "primary",
+    "freshness",
+    "source_specific"
+  ],
+  "minimum_source_families": 5,
+  "minimum_independent_sources": 20,
+  "required_source_families": [
+    "primary_or_origin",
+    "official_or_institutional",
+    "independent_media",
+    "registry_or_database",
+    "contrary_or_debunking",
+    "archive_or_cached"
+  ]
+}

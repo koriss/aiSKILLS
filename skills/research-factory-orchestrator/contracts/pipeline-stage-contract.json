@@ -1,0 +1,25 @@
+{
+  "version": "15.0.0-runtime-contract-enforcement",
+  "states": [
+    "created",
+    "compiled",
+    "collecting",
+    "subagents_running",
+    "subagent_timeout_detected",
+    "recovery_running",
+    "quorum_check",
+    "coverage_check",
+    "partial_ready",
+    "synthesis_ready",
+    "validating",
+    "delivery_ready",
+    "delivered",
+    "failed",
+    "cancelled"
+  ],
+  "terminal_states": [
+    "delivered",
+    "failed",
+    "cancelled"
+  ]
+}

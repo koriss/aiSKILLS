@@ -1,0 +1,32 @@
+[
+  {
+    "check": "python_ast_parse_all_scripts",
+    "passed": true,
+    "files": 131
+  },
+  {
+    "check": "no_pycache",
+    "passed": true
+  },
+  {
+    "check": "interface_adapter_contract_present",
+    "passed": true
+  },
+  {
+    "check": "provider_contract_present",
+    "passed": true
+  },
+  {
+    "check": "outbox_contract_present",
+    "passed": true
+  },
+  {
+    "check": "v17_sample_artifacts_present",
+    "passed": true
+  },
+  {
+    "check": "failure_corpus_extended",
+    "passed": true,
+    "cases": 14
+  }
+]

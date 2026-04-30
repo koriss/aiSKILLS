@@ -1,16 +1,53 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TraceEvent",
   "type": "object",
   "properties": {
-    "timestamp": { "type": "string" },
-    "stage": { "type": "string" },
-    "action": { "type": "string" },
-    "item_id": { "type": "string" },
-    "tool_used": { "type": "string" },
-    "artifact_changed": { "type": "string" },
-    "progress": { "type": "boolean" },
-    "success": { "type": "boolean" },
-    "error": { "type": ["string", "null"] }
+    "timestamp": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "item_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tool_used": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "artifact_changed": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "progress": {
+      "type": "boolean"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
   },
-  "required": ["timestamp", "stage", "action", "success", "progress"]
+  "additionalProperties": true,
+  "required": [
+    "timestamp",
+    "state",
+    "action",
+    "success"
+  ]
 }

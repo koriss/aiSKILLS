@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoverageMatrix",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "entity_type": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "entity_type",
+    "categories",
+    "complete"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IOKBIndex",
+  "type": "object",
+  "properties": {
+    "created_at": {
+      "type": "string"
+    },
+    "record_count": {
+      "type": "integer"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "safe_use": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "record_count",
+    "records",
+    "safe_use"
+  ]
+}

@@ -1,0 +1,360 @@
+{
+  "task_id": "ea58e6fc",
+  "min_work_units": 8,
+  "work_units": [
+    {
+      "work_unit_id": "WU-001-entity-resolution",
+      "axis": "entity_resolution",
+      "objective": "Execute entity_resolution coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-002-primary-origin-sources",
+      "axis": "primary_origin_sources",
+      "objective": "Execute primary_origin_sources coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-003-broad-sweep",
+      "axis": "broad_sweep",
+      "objective": "Execute broad_sweep coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-004-contrary-adversarial-search",
+      "axis": "contrary_adversarial_search",
+      "objective": "Execute contrary_adversarial_search coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-005-source-quality-provenance",
+      "axis": "source_quality_provenance",
+      "objective": "Execute source_quality_provenance coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-006-timeline-freshness",
+      "axis": "timeline_freshness",
+      "objective": "Execute timeline_freshness coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-007-structured-data",
+      "axis": "structured_data",
+      "objective": "Execute structured_data coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-008-claim-factcheck",
+      "axis": "claim_factcheck",
+      "objective": "Execute claim_factcheck coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-009-strong-tie-pivoting",
+      "axis": "strong_tie_pivoting",
+      "objective": "Execute strong_tie_pivoting coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-010-contact-media-graph",
+      "axis": "contact_media_graph",
+      "objective": "Execute contact_media_graph coverage for the target task.",
+      "status": "completed",
+      "collection_unit": true,
+      "minimum_queries": 3,
+      "minimum_sources": 2,
+      "search_modes": [
+        "broad",
+        "exact",
+        "negative",
+        "primary",
+        "freshness",
+        "source_specific"
+      ],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-011-raw-evidence-vault",
+      "axis": "raw_evidence_vault",
+      "objective": "Execute raw_evidence_vault coverage for the target task.",
+      "status": "completed",
+      "collection_unit": false,
+      "minimum_queries": 0,
+      "minimum_sources": 0,
+      "search_modes": [],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "result.json"
+      ]
+    },
+    {
+      "work_unit_id": "WU-012-synthesis-merge",
+      "axis": "synthesis_merge",
+      "objective": "Execute synthesis_merge coverage for the target task.",
+      "status": "completed",
+      "collection_unit": false,
+      "minimum_queries": 0,
+      "minimum_sources": 0,
+      "search_modes": [],
+      "source_families": [
+        "primary_or_origin",
+        "official_or_institutional",
+        "independent_media",
+        "registry_or_database",
+        "contrary_or_debunking",
+        "archive_or_cached"
+      ],
+      "required_outputs": [
+        "result.json"
+      ]
+    }
+  ],
+  "compiled_at": "2026-04-29T01:16:36Z",
+  "status": "planned"
+}

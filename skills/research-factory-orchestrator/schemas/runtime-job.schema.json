@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuntimeJob",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "job_id",
+    "run_id",
+    "command_id",
+    "runtime_entrypoint",
+    "task",
+    "status",
+    "created_from_interface",
+    "provider",
+    "delivery_profile",
+    "run_dir",
+    "outbox_dir",
+    "created_at"
+  ],
+  "properties": {
+    "job_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "command_id": {
+      "type": "string"
+    },
+    "runtime_entrypoint": {
+      "type": "string"
+    },
+    "task": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "queued",
+        "running",
+        "done",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "created_from_interface": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "delivery_profile": {
+      "type": "string"
+    },
+    "run_dir": {
+      "type": "string"
+    },
+    "outbox_dir": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

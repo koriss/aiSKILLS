@@ -1,0 +1,31 @@
+{
+  "case_id": "case_media_narrative_io",
+  "task_type": "narrative / IO analysis",
+  "audience": "analyst",
+  "archetype": "narrative_media_analysis",
+  "block_plan": [
+    "verdict",
+    "narrative_map",
+    "source_chain",
+    "amplification",
+    "method_matches",
+    "uncertainty"
+  ],
+  "required_components": [
+    "claim-card",
+    "source-reference-item",
+    "callout",
+    "wide-table"
+  ],
+  "sample_summary": "Нарративы классифицированы через embedded KB; classification не является доказательством намерения.",
+  "common_failure_modes": [
+    "intent overclaim",
+    "KB method label as proof",
+    "operational recommendation"
+  ],
+  "validator_focus": [
+    "no operational output",
+    "KB provenance",
+    "information integrity classification"
+  ]
+}

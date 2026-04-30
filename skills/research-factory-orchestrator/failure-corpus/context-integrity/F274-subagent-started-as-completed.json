@@ -1,0 +1,8 @@
+{
+  "case_id": "F274-subagent-started-as-completed",
+  "failure_code": "F274",
+  "class": "context-acquisition-integrity",
+  "description": "subagent started as completed",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

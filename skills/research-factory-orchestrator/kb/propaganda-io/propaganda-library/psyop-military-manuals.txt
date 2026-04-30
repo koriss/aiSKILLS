@@ -1,0 +1,370 @@
+# PSYOP & Military Information Warfare Manuals
+## Compiled Resource Library
+
+---
+
+## 1. US ARMY PSYCHOLOGICAL OPERATIONS DOCTRINE
+
+### FM 3-05.30 Psychological Operations
+- **Title:** Field Manual FM 3-05.30 (MCRP 3-40.6) — Psychological Operations
+- **Author/Organization:** US Army / Marine Corps
+- **Year:** 2005 (April 15)
+- **Description:** The keystone publication for PSYOP principles. Covers the employment of psychological operations as a tool of national policy. Details the five PSYOP mission types and seven PSYOP functions. Essential foundational manual for understanding US military psychological operations doctrine.
+- **URL:** https://www.scribd.com/document/224477113/Field-Manual-FM-3-05-30-Psychological-Operation-MCRP-3-40-6-April-15-2005
+- **URL:** https://apps.dtic.mil/sti/tr/pdf/ADA432676.pdf
+- **File Path:** (PDF available via DTIC and archive sources)
+
+### FM 3-05.301 Psychological Operations Tactics, Techniques, and Procedures
+- **Title:** FM 3-05.301 — Psychological Operations Tactics, Techniques, and Procedures
+- **Author/Organization:** US Army
+- **Year:** 2003 (December)
+- **Description:** Describes procedures and provides templates for conducting the five PSYOP missions and seven PSYOP functions in a systematic, chronological fashion. Details operational-level PSYOP planning and execution.
+- **URL:** https://archive.org/details/Fm305301PsychologicalOperationsTacticsTechniquesAndProcedures
+- **URL:** https://info.publicintelligence.net/USArmy-PsyOpsTactics.pdf
+- **URL:** http://www.communicationcache.com/uploads/1/0/8/8/10887248/psychological_operations_tactics_techniques_and_procedures_-_2003.pdf
+- **URL:** https://www.bits.de/NRANEU/others/amd-us-archive/fm3-05-301%2803%29.pdf
+
+### FM 3-05.302 Tactical Psychological Operations
+- **Title:** FM 3-05.302 — Tactical Psychological Operations Tactics, Techniques, and Procedures
+- **Author/Organization:** US Army
+- **Year:** 2005
+- **Description:** Tactical-level PSYOP manual covering tactical psychological operations procedures. Describes the command and control structure for tactical PSYOP units.
+- **URL:** https://archive.org/details/Fm305302TacticalPsychologicalOperationsTacticsTechniquesAndProcedures
+- **URL:** https://www.scribd.com/doc/127025030/FM-3-05-302-Tactical-Psychological-Operations-Tactics-Techniques-And-Procedures
+
+### FM 2-0 Intelligence Operations
+- **Title:** FM 2-0 — Intelligence Operations
+- **Author/Organization:** US Army
+- **Year:** 2004 (May), also 2009 edition
+- **Description:** The Army's keystone manual for military intelligence (MI) doctrine. Covers intelligence fundamentals, battlefield intelligence, and intelligence support to operations.
+- **URL:** https://archive.org/details/milmanual-fm-2-0-intelligence
+- **URL:** https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN39259-FM_2-0-000-WEB-2.pdf
+- **URL:** https://www.bits.de/NRANEU/others/amd-us-archive/fm2-0%2804%29.pdf
+- **URL:** https://www.bits.de/NRANEU/others/amd-us-archive/fm2-0fd%2809%29.pdf
+
+---
+
+## 2. NATO PSYCHOLOGICAL OPERATIONS DOCTRINE
+
+### AJP-3.10 Allied Joint Doctrine for Information Operations
+- **Title:** AJP-3.10 — Allied Joint Doctrine for Information Operations
+- **Author/Organization:** NATO / Allied Joint Doctrine
+- **Year:** 2009 (November)
+- **Description:** Explains how Information Operations support NATO military objectives. Covers IO as a force multiplier.
+- **URL:** https://info.publicintelligence.net/NATO-IO.pdf
+
+### AJP-3.10.1 Allied Joint Doctrine for Psychological Operations
+- **Title:** AJP-3.10.1 — Allied Joint Doctrine for Psychological Operations
+- **Author/Organization:** NATO
+- **Year:** 2014, updated 2015
+- **Description:** Outlines NATO PSYOPS doctrine, role as force multiplier and combat multiplier. Covers PSYOPS planning and execution within information operations context.
+- **URL:** https://info.publicintelligence.net/NATO-PSYOPS.pdf
+- **URL:** https://assets.publishing.service.gov.uk/media/5a80ce48e5274a2e87dbbecb/20150223-AJP_3_10_1_PSYOPS_with_UK_Green_pages.pdf
+- **URL:** https://www.gov.uk/government/publications/ajp-3101-allied-joint-doctrine-for-psychological-operations
+- **URL:** https://mpsotc.army.gr/wp-content/uploads/2024/03/2.-AJP-3.10-EDA-V1-E.pdf
+
+### AJP-10.3 Allied Joint Doctrine for Public Affairs
+- **Title:** AJP-10.3 — Allied Joint Doctrine for Public Affairs
+- **Author/Organization:** NATO
+- **Year:** 2024 (September)
+- **Description:** Operational-level doctrine related to public affairs and strategic communication within NATO.
+- **URL:** https://mpsotc.army.gr/wp-content/uploads/2025/02/AJP-10.3-Public-Affairs_Ed.1V.1_Sep-24.pdf
+
+---
+
+## 3. SOVIET/RUSSIAN PROPAGANDA & INFORMATION WARFARE
+
+### SOVIET ACTIVE MEASURES AND DISINFORMATION
+- **Title:** Soviet Active Measures and Disinformation
+- **Author/Organization:** CIA
+- **Year:** 1976 (approximate)
+- **Description:** CIA analysis of Soviet active measures including disinformation, covert propaganda operations, and influence operations targeting Western audiences.
+- **URL:** https://www.cia.gov/readingroom/docs/CIA-RDP89G00720R000500060008-2.pdf
+
+### Propaganda and Agitation in the Soviet Military
+- **Title:** Propaganda and Agitation in the Soviet Military
+- **Author/Organization:** US Department of Defense / DTIC
+- **Year:** 1978
+- **Description:** Analysis of Soviet military propaganda and agitation apparatus. Examines how the Soviet Armed Forces used political education and propaganda to maintain control.
+- **URL:** https://apps.dtic.mil/sti/tr/pdf/ADA067802.pdf
+
+### Russian Conceptions of Information Confrontation
+- **Title:** Russian Conceptions of Information Confrontation
+- **Author/Organization:** RAND Corporation
+- **Year:** 2022
+- **Description:** Contemporary RAND analysis of Russian information warfare concepts, including historical Soviet roots and modern evolution.
+- **URL:** https://www.rand.org/content/dam/rand/pubs/research_reports/RRA100/RRA198-8/RAND_RRA198-8.pdf
+
+### Handbook of Russian Information Warfare
+- **Title:** Handbook of Russian Information Warfare
+- **Author/Organization:** NATO Defense College / ETH Zurich
+- **Year:** 2016
+- **Description:** Comprehensive handbook covering Russian information warfare doctrine and capabilities.
+- **URL:** https://css.ethz.ch/content/dam/ethz/special-interest/gess/cis/center-for-securities-studies/resources/docs/NDC%20fm_9.pdf
+
+### Russian Tactics (ATP 7-100.1)
+- **Title:** ATP 7-100.1 — Russian Tactics
+- **Author/Organization:** US Army
+- **Year:** 2024 (February)
+- **Description:** Current US Army assessment of Russian military tactics, including information warfare and influence operations.
+- **URL:** https://upload.wikimedia.org/wikipedia/commons/6/62/ATP_7-100.1_-_%22Russian_Tactics%22_%28February_2024%29.pdf
+
+---
+
+## 4. BLACK / WHITE / GREY PROPAGANDA CLASSIFICATION
+
+### White, Grey, and Black Propaganda Classification
+- **Title:** US RADIO: Propaganda and Espionage
+- **Author/Organization:** CIA
+- **Year:** 1945-1950s era
+- **Description:** CIA classification system for propaganda types:
+  - WHITE: Disseminated and acknowledged by the sponsor or accredited agency
+  - GREY: Does not clearly identify the sponsor
+  - BLACK: Falsely attributed to a source other than the actual sponsor
+- **URL:** https://www.cia.gov/readingroom/docs/CIA-RDP75-00001R000100020025-8.pdf
+
+### Propaganda Classification — Powerbase
+- **Title:** Propaganda — White, Grey, Black
+- **Author/Organization:** Powerbase
+- **Year:** 2015
+- **Description:** Detailed breakdown of propaganda classification:
+  - White: Source truthfully identified, not strongly biased
+  - Grey: No clear indication of origin, or origin attributed to ally
+  - Black: Origin attributed to a source other than actual sponsor
+- **URL:** https://powerbase.info/index.php/Propaganda
+
+### Backfires: White, Black and Grey — Academic Paper
+- **Title:** Backfires: White, Black and Grey
+- **Author/Organization:** University of Wollongong
+- **Year:** 2007
+- **Description:** Academic analysis of the three-tier propaganda classification system. Discusses the use of backfires (false flag propaganda) as a specific black propaganda technique.
+- **URL:** https://documents.uow.edu.au/~bmartin/pubs/07jiw.php
+
+---
+
+## 5. WWII PROPAGANDA MANUALS & LEAFLETS
+
+### WWII American Propaganda Leaflets (1,220 pages)
+- **Title:** World War II American Propaganda Leaflets, Psychological Operations
+- **Author/Organization:** US Military / Office of Strategic Services (OSS)
+- **Year:** 1942-1945
+- **Description:** 1,220 pages of American WWII propaganda leaflets and documents concerning the use of psychological warfare propaganda leaflets in the Pacific and European theaters.
+- **URL:** https://www.paperlessarchives.com/wwii-american-leaflets.html
+
+### German Propaganda Leaflets (WWII)
+- **Title:** German Propaganda Leaflets
+- **Author/Organization:** German Military
+- **Year:** WWII (1944)
+- **Description:** Reproductions of propaganda leaflets employed by Germans against US units (VI Corps) during WWII. Shows enemy psychological operations methods.
+- **URL:** https://info.publicintelligence.net/GermanPropagandaLeaflets.pdf
+
+### The Propaganda Technique in the World War — Harold Lasswell
+- **Title:** The Propaganda Technique in the World War
+- **Author/Organization:** Harold D. Lasswell
+- **Year:** 1927
+- **Description:** Classic academic work on propaganda techniques used during WWI and their evolution. Groundbreaking study on wartime propaganda effectiveness.
+- **URL:** https://ia802904.us.archive.org/7/items/PropagandaTechniqueInTheWorldWarHaroldLasswell/Propaganda%20Technique%20In%20the%20World%20War%20-%20Harold%20Lasswell_text.pdf
+
+### M2108 Sample Books — Morale Operations (1943-1945)
+- **Title:** M2108 Sample Books, 1943–1945
+- **Author/Organization:** US Army / Morale Operations Branch
+- **Year:** 1943-1945
+- **Description:** 11 sample books of propaganda materials produced by the Morale Operations (MO) branch during WWII. Covers covert psychological operations.
+- **URL:** https://www.archives.gov/files/research/microfilm/m2108.pdf
+
+### Instructional Material for the Fight Against Enemy Propaganda
+- **Title:** "Poison File" — Instructional Material for the Fight Against Enemy Propaganda
+- **Author/Organization:** US Navy / Captured from German U-505
+- **Year:** WWII
+- **Description:** Captured German instructional material on countering hostile propaganda. Shows both sides of psychological warfare.
+- **URL:** https://www.history.navy.mil/research/library/exhibits/documents-captured-on-german-submarine-u-505/instructional-material-for-the-fight-against-enemy-propaganda.html
+
+---
+
+## 6. TERRORIST / INSURGENT PROPAGANDA (Academic Research)
+
+### The SAGE Handbook of Propaganda — Chapter on Terrorist Propaganda
+- **Title:** The SAGE Handbook of Propaganda — Chapter: Evolution of Terrorist Propaganda in Cyberspace
+- **Author/Organization:** SAGE Publications
+- **Year:** 2019
+- **Description:** Academic chapter on terrorism propaganda evolution from early media to modern internet/social media usage by terrorist organizations.
+- **URL:** https://sk.sagepub.com/hnbk/edvol/download/the-sage-handbook-of-propaganda/chpt/34-evolution-terrorist-propaganda-cyberspace.pdf
+
+### The Industrialization of Terrorist Propaganda — CTEC
+- **Title:** The Industrialization of Terrorist Propaganda
+- **Author/Organization:** Middlebury College Center on Terrorism, Extremism, and Counterterrorism (CTEC)
+- **Year:** 2019
+- **Description:** Academic analysis of how terrorist organizations have industrialized propaganda production, including case studies of ISIS media operations.
+- **URL:** https://www.middlebury.edu/institute/sites/default/files/2019-11/The%20Industrialization%20of%20Terrorist%20Propaganda%20-%20CTEC.pdf
+
+### www.terror.net: How Modern Terrorism Uses the Internet
+- **Title:** www.terror.net: How Modern Terrorism Uses the Internet
+- **Author/Organization:** US Institute of Peace (USIP)
+- **Year:** 2006
+- **Description:** Early academic analysis of eight different ways contemporary terrorists use the internet, from psychological warfare and propaganda to recruitment and coordination.
+- **URL:** https://www.usip.org/sites/default/files/sr116.pdf
+
+### Terrorism, the Internet, and Propaganda: A Deadly Combination
+- **Title:** Terrorism, the Internet, and Propaganda: A Deadly Combination
+- **Author/Organization:** Georgetown University Law Center — National Security Law Program
+- **Year:** 2017
+- **Description:** Academic paper analyzing ISIS propaganda and social media strategies targeting young adults.
+- **URL:** https://nationalsecurity.law.georgetown.edu/wp-content/uploads/2017/04/Terrorism_the_Internet_and_Propaganda_FINAL.pdf
+
+### ICCT Handbook — Prevention of Radicalization on Social Media
+- **Title:** Handbook Chapter: Prevention of Radicalization on Social Media
+- **Author/Organization:** International Centre for Counter-Terrorism (ICCT)
+- **Year:** 2023
+- **Description:** Academic chapter on counter-narrative strategies and radicalization prevention online.
+- **URL:** https://icct.nl/sites/default/files/2023-01/Chapter-12-Handbook_0.pdf
+
+### Psychology of Terrorism — Office of Justice Programs
+- **Title:** Psychology of Terrorism
+- **Author/Organization:** US Department of Justice / Office of Justice Programs
+- **Year:** 2003
+- **Description:** NIJ grant report exploring research questions about terrorist groups and behavior, including propaganda and recruitment analysis.
+- **URL:** https://www.ojp.gov/pdffiles1/nij/grants/208551.pdf
+
+---
+
+## 7. MODERN INFORMATION WARFARE TEXTBOOKS
+
+### Information Warfare — Daniel Ventre
+- **Title:** Information Warfare
+- **Author/Organization:** Daniel Ventre
+- **Year:** 2011
+- **Description:** Academic textbook covering information warfare comprehensively, including techniques for attacking people, organizations, and countries via information manipulation.
+- **URL:** https://content.e-bookshelf.de/media/reading/L-3744740-918519096f.pdf
+
+### Strategic Information Warfare — RAND
+- **Title:** Strategic Information Warfare
+- **Author/Organization:** RAND Corporation
+- **Year:** 1995
+- **Description:** Early RAND analysis of strategic information warfare and its implications for military strategy in the modern era.
+- **URL:** https://www.rand.org/content/dam/rand/pubs/monograph_reports/2005/MR661.pdf
+
+### War in the Information Age — Army War College
+- **Title:** War in the Information Age: A Primer for Cyberspace Operations in the 21st Century
+- **Author/Organization:** US Army War College
+- **Year:** 2004
+- **Description:** Army War College primer on information warfare evolution in the USA, China, and Russia, focusing on contemporary security strategies.
+- **URL:** https://csl.armywarcollege.edu/SLET/mccd/CyberSpacePubs/War%20in%20the%20Information%20Age%20-%20A%20Primer%20for%20Cyberspace%20Operations%20in%20the%2021st%20Century.pdf
+
+### Information Warfare — Air University
+- **Title:** Information Warfare
+- **Author/Organization:** Air University (US Air Force)
+- **Year:** 2005
+- **Description:** Air Force analysis of information warfare concepts and their relevance to modern military officers.
+- **URL:** https://www.airuniversity.af.edu/Portals/10/ASPJ/journals/Chronicles/crawford.pdf
+
+### Information Warfare — USMC
+- **Title:** Information Warfare
+- **Author/Organization:** US Marine Corps University
+- **Year:** 2006
+- **Description:** USMC publication covering information warfare strategy and communication tactics.
+- **URL:** https://www.usmcu.edu/Portals/218/InfoWarfare_Web_1.pdf
+
+### The Evolution of Information Warfare
+- **Title:** The Evolution of Information Warfare
+- **Author/Organization:** International Journal of Engineering and Science (IJEKS)
+- **Year:** 2024
+- **Description:** Contemporary academic paper on the evolution of information warfare as a multifaceted domain encompassing manipulation, dissemination, and control of information for strategic purposes.
+- **URL:** https://ijeks.com/wp-content/uploads/2024/07/IJEKS-3-04-002.pdf
+
+### Information Warfare and Disinformation: A Modern Challenge
+- **Title:** Information Warfare and Disinformation: A Modern Challenge
+- **Author/Organization:** ResearchGate (Academic)
+- **Year:** 2026
+- **Description:** Recent academic article examining Russian military's Information Warfare activities, with focus on disinformation use.
+- **URL:** https://www.researchgate.net/publication/393404002_Information_Warfare_and_Disinformation_a_Modern_Challenge
+
+---
+
+## 8. CHINESE MILITARY INFORMATION WARFARE
+
+### Chinese Information Warfare
+- **Title:** Chinese Information Warfare
+- **Author/Organization:** ETH Zurich / ISN
+- **Year:** 2000s
+- **Description:** Analysis of Chinese information warfare capabilities and doctrine. Covers PLA approach to information operations and cyber warfare.
+- **URL:** https://www.files.ethz.ch/isn/104648/Chinese_Information_Warfare.pdf
+
+### The Chinese People's Liberation Army and Information Warfare — DTIC
+- **Title:** The Chinese People's Liberation Army and Information Warfare
+- **Author/Organization:** US Army War College / DTIC
+- **Year:** 2014
+- **Description:** Monograph explaining how the PLA is revising its operational doctrine for "integrated, joint operations" including information warfare.
+- **URL:** https://apps.dtic.mil/sti/tr/pdf/ADA596797.pdf
+- **URL:** https://press.armywarcollege.edu/monographs/506/
+
+### People's Liberation Army Operational Concepts — RAND
+- **Title:** People's Liberation Army Operational Concepts
+- **Author/Organization:** RAND Corporation
+- **Year:** 2023
+- **Description:** Analysis of PLA strategic guidelines directing the military to win "Informatized Local Wars," recognizing the centrality of information as a war domain.
+- **URL:** https://www.rand.org/content/dam/rand/pubs/research_reports/RRA300/RRA394-1/RAND_RRA394-1.pdf
+
+---
+
+## 9. ADDITIONAL RESOURCES
+
+### Managing the Cold War — RUSI
+- **Title:** Managing the Cold War
+- **Author/Organization:** Royal United Services Institute (RUSI)
+- **Year:** 2006
+- **Description:** Background on NATO and Warsaw Pact political warfare and subversion during the Cold War era.
+- **URL:** https://static.rusi.org/200605_bk_managing_the_cold_war.pdf
+
+### Military Psychological Operations in the Digital Battlespace
+- **Title:** Military Psychological Operations in the Digital Battlespace
+- **Author/Organization:** CCDCOE (Cooperative Cyber Defence Centre of Excellence)
+- **Year:** 2024
+- **Description:** Contemporary analysis of NATO psychological operations in the digital battlespace.
+- **URL:** https://ccdcoe.org/uploads/2024/05/CyCon_2024_Roberts_Venables-1.pdf
+
+### Propaganda Collection — Duke University Archives
+- **Title:** World War II Propaganda Collection, 1939-1945
+- **Author/Organization:** Duke University
+- **Year:** 1939-1945
+- **Description:** Collection of actual WWII propaganda and nationalistic publications distributed during the war.
+- **URL:** https://archives.lib.duke.edu/catalog/wwiiprop
+
+### Media Warfare in the Cold War Era
+- **Title:** Media Warfare in the Cold War Era
+- **Author/Organization:** International Journal of Business Management & Technology
+- **Year:** 2024
+- **Description:** Contemporary academic analysis of Soviet and US media warfare strategies during the Cold War.
+- **URL:** https://www.theijbmt.com/archive/0958/729793941.pdf
+
+### Strategic PSYOP Management: A Marketing Management Approach
+- **Title:** Strategic PSYOP Management: A Marketing Management Approach
+- **Author/Organization:** US Military / DTIC
+- **Year:** 2005
+- **Description:** Alternative approach to PSYOP using marketing management frameworks.
+- **URL:** https://apps.dtic.mil/sti/tr/pdf/ADA432676.pdf
+
+---
+
+## SUMMARY STATISTICS
+
+- **Total entries:** 50+
+- **US Army FM documents:** 4 (FM 3-05.30, FM 3-05.301, FM 3-05.302, FM 2-0)
+- **NATO doctrine documents:** 3 (AJP-3.10, AJP-3.10.1, AJP-10.3)
+- **Soviet/Russian sources:** 5
+- **WWII resources:** 6
+- **Terrorist propaganda academic research:** 6
+- **Modern information warfare textbooks:** 7
+- **Chinese military doctrine:** 3
+- **PDFs directly downloadable:** ~25+
+
+## NOTES
+
+- Many documents are available via archive.org, DTIC (apps.dtic.mil), and public intelligence repositories
+- Some documents require verification of current version numbers as military doctrine updates regularly
+- This compilation focuses on unclassified/declassified public domain sources and academic research
+- Direct downloads available for most items through bits.de, archive.org, and publicintelligence.net mirrors
+
+---
+
+*Compiled: 2026-04-20*
+*Focus: Military PSYOP doctrine, battlefield propaganda, information warfare*

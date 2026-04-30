@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportArchetype",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "best_for": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preferred_blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "avoid_blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mobile_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "failure_modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "name",
+    "best_for",
+    "required_blocks"
+  ]
+}

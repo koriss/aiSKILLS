@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-04-28T00:14:20Z",
+  "cases": [
+    {
+      "case_id": "case_person_cto_profile",
+      "task_type": "person investigation",
+      "archetype": "person_investigation"
+    },
+    {
+      "case_id": "case_company_due_diligence",
+      "task_type": "company due diligence",
+      "archetype": "company_due_diligence"
+    },
+    {
+      "case_id": "case_media_narrative_io",
+      "task_type": "narrative / IO analysis",
+      "archetype": "narrative_media_analysis"
+    },
+    {
+      "case_id": "case_game_release_research",
+      "task_type": "game / entertainment research",
+      "archetype": "technology_landscape"
+    },
+    {
+      "case_id": "case_fact_check",
+      "task_type": "single claim verification",
+      "archetype": "fact_check"
+    }
+  ]
+}

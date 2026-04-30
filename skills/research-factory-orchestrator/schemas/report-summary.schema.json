@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportSummary",
+  "type": "object",
+  "properties": {
+    "preview": {
+      "type": "string"
+    },
+    "verdict": {
+      "type": "string"
+    },
+    "key_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "key_numbers": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "confidence": {
+      "type": "object"
+    },
+    "caveats": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "why_it_matters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "next_steps": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "claim_ids_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "verdict",
+    "key_findings",
+    "confidence",
+    "claim_ids_used"
+  ]
+}

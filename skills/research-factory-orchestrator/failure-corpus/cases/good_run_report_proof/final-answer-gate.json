@@ -1,0 +1,14 @@
+{
+  "run_id": "RUN-GOOD-PROOF",
+  "job_id": "JOB-GOOD-PROOF",
+  "command_id": "CMD-GOOD-PROOF",
+  "passed": true,
+  "gates": {
+    "external_delivery_gate": {
+      "status": "pass"
+    },
+    "final_user_claim_gate": {
+      "status": "pass"
+    }
+  }
+}

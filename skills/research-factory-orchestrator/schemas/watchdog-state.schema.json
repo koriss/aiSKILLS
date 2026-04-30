@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WatchdogState",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "running": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stale": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "failed_retryable": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unmerged": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocked_final_delivery": {
+      "type": "boolean"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "blocked_final_delivery"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "case_id": "case_arbesv_negative_identity_overconfidence",
+  "failure_type": "F009",
+  "bad_output_pattern": "not found anywhere / does not exist",
+  "expected_guard": "bounded wording: not confirmed in checked open sources",
+  "validator_or_eval": "validate_negative_identity_wording.py"
+}

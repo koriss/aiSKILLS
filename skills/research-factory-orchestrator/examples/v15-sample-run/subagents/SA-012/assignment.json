@@ -1,0 +1,11 @@
+{
+  "assignment_id": "A-012",
+  "subagent_id": "SA-012",
+  "work_unit_id": "WU-012-synthesis-merge",
+  "objective": "Execute synthesis_merge coverage for the target task.",
+  "context_packet_path": "subagents/SA-012/context-packet.json",
+  "required_outputs": [
+    "result.json"
+  ],
+  "status": "planned"
+}

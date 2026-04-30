@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SubagentLedger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "required_quorum",
+    "subagents",
+    "subagents_total",
+    "subagents_completed",
+    "subagents_failed",
+    "quorum_met"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "required_quorum": {
+      "type": "integer"
+    },
+    "subagents": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "subagents_total": {
+      "type": "integer"
+    },
+    "subagents_completed": {
+      "type": "integer"
+    },
+    "subagents_failed": {
+      "type": "integer"
+    },
+    "quorum_met": {
+      "type": "boolean"
+    }
+  }
+}

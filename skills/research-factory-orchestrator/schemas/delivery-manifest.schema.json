@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "delivery_status",
+    "attachments",
+    "local_paths_exposed",
+    "created_at"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "delivery_status": {
+      "enum": [
+        "created",
+        "running",
+        "ready",
+        "delivering",
+        "delivered",
+        "partial",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "telegram_messages": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "local_paths_exposed": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

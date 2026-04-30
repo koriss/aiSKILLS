@@ -1,0 +1,40 @@
+types:
+  Method:
+    required: [method_id, name_ru, source]
+    properties:
+      - method_id
+      - name_ru
+      - name_en
+      - source
+      - page_ref
+      - definition
+      - mechanism
+      - context
+      - counter
+
+  MethodCategory:
+    required: [name]
+    properties:
+      - name
+      - source_count
+
+relations:
+  belongs_to_category:
+    from_types: [Method]
+    to_types: [MethodCategory]
+    cardinality: many_to_one
+
+  related_to:
+    from_types: [Method]
+    to_types: [Method]
+    cardinality: many_to_many
+
+  part_of_strategy:
+    from_types: [Method]
+    to_types: [Strategy]
+    cardinality: many_to_many
+
+  counteracted_by:
+    from_types: [Method]
+    to_types: [CounterMethod]
+    cardinality: many_to_one

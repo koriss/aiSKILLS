@@ -1,0 +1,7 @@
+{
+  "run_id": "RUN-samplev17",
+  "job_id": "JOB-samplev17",
+  "provider": "telegram",
+  "delivery_semantics": "at_least_once_with_idempotency_key",
+  "only_delivery_worker_can_mark_delivered": true
+}

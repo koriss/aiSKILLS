@@ -1,0 +1,77 @@
+{
+  "version": "17.1.0-runtime-lifecycle-hardening",
+  "providers": {
+    "cli": {
+      "adapter": "providers/cli/cli_delivery_adapter.py",
+      "supports": [
+        "send_message",
+        "send_file"
+      ],
+      "delivery_ack_required": true,
+      "ack_must_include": [
+        "ack_id",
+        "event_id",
+        "run_id",
+        "provider",
+        "status",
+        "idempotency_key",
+        "created_at",
+        "stub_delivery",
+        "real_external_delivery",
+        "provider_payload_path"
+      ],
+      "default_mode": "local_copy",
+      "stub_delivery_must_be_explicit": false
+    },
+    "telegram": {
+      "adapter": "providers/telegram/telegram_delivery_adapter.py",
+      "supports": [
+        "send_message",
+        "send_file"
+      ],
+      "delivery_ack_required": true,
+      "constraints": {
+        "mobile_safe": true,
+        "no_tables": true,
+        "default_max_message_chars": 3500
+      },
+      "ack_must_include": [
+        "ack_id",
+        "event_id",
+        "run_id",
+        "provider",
+        "status",
+        "idempotency_key",
+        "created_at",
+        "stub_delivery",
+        "real_external_delivery",
+        "provider_payload_path"
+      ],
+      "default_mode": "stub",
+      "stub_delivery_must_be_explicit": true
+    },
+    "webhook": {
+      "adapter": "providers/webhook/webhook_delivery_adapter.py",
+      "supports": [
+        "send_message",
+        "send_file",
+        "send_json"
+      ],
+      "delivery_ack_required": true,
+      "ack_must_include": [
+        "ack_id",
+        "event_id",
+        "run_id",
+        "provider",
+        "status",
+        "idempotency_key",
+        "created_at",
+        "stub_delivery",
+        "real_external_delivery",
+        "provider_payload_path"
+      ],
+      "default_mode": "stub",
+      "stub_delivery_must_be_explicit": true
+    }
+  }
+}

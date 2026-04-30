@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvidenceCard",
+  "type": "object",
+  "properties": {
+    "evidence_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "official_statement",
+        "filing",
+        "dataset",
+        "article",
+        "interview",
+        "court_record",
+        "registry_record",
+        "scientific_paper",
+        "standard",
+        "other"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "direct_quote_short": {
+      "type": "string"
+    },
+    "anchor": {
+      "type": "string"
+    },
+    "supports": {
+      "type": "string",
+      "enum": [
+        "direct",
+        "indirect",
+        "contextual",
+        "contradicts"
+      ]
+    },
+    "limitations": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "disputed",
+        "unknown"
+      ]
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "evidence_id",
+    "source_id",
+    "summary",
+    "supports",
+    "confidence"
+  ]
+}

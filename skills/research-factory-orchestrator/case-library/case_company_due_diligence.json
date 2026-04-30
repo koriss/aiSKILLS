@@ -1,0 +1,31 @@
+{
+  "case_id": "case_company_due_diligence",
+  "task_type": "company due diligence",
+  "audience": "manager / investment / partnership",
+  "archetype": "company_due_diligence",
+  "block_plan": [
+    "verdict",
+    "legal_entities",
+    "ownership",
+    "products",
+    "financials",
+    "risks",
+    "sources"
+  ],
+  "required_components": [
+    "kpi-card",
+    "wide-table",
+    "claim-card",
+    "callout"
+  ],
+  "sample_summary": "Компания подтверждена реестрами и сайтом; ключевой риск — старые юрлица и неполные финансовые данные.",
+  "common_failure_modes": [
+    "old legal entity current overclaim",
+    "aggregator-only sourcing"
+  ],
+  "validator_focus": [
+    "source provenance",
+    "freshness",
+    "legal entity timeline"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "case_id": "F330-local-path-presented-as-file-delivery",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

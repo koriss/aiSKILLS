@@ -1,0 +1,19 @@
+{
+  "version": "18.3.2",
+  "init_runtime_outputs": [
+    "run.json",
+    "run-state.json",
+    "task-profile.json",
+    "coverage-matrix.json",
+    "work-unit-plan.json",
+    "subagent-plan.json",
+    "subagent-ledger.json",
+    "collection-coverage-contract.json",
+    "collection-coverage-result.json",
+    "delivery-manifest.json",
+    "attachment-ledger.json",
+    "final-answer-gate.json"
+  ],
+  "validator": "scripts/validate_runtime.py --profile current",
+  "legacy_validator_profile": "scripts/validate_runtime.py --profile legacy"
+}

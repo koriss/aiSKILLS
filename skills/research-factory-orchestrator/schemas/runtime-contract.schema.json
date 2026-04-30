@@ -1,32 +1,62 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuntimeContract",
   "type": "object",
   "properties": {
-    "runtime_version": { "type": "string" },
-    "skill_version": { "type": "string" },
-    "schema_version": { "type": "string" },
-    "task_id": { "type": "string" },
-    "task_title": { "type": "string" },
-    "execution_mode": {
+    "task_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "user_request": {
+      "type": "string"
+    },
+    "mode": {
       "type": "string",
       "enum": [
         "AUTO_COMPILE_AND_EXECUTE",
-        "LIGHTWEIGHT_RESEARCH",
-        "FACT_CHECK_ONLY",
         "REPORT_FACTORY",
-        "EXECUTE_EXISTING_RUNTIME",
-        "RESUME_RUNTIME",
+        "FACT_CHECK_ONLY",
         "AUDIT_EXISTING_REPORT",
+        "RESUME_RUNTIME",
         "COMPILE_ONLY"
       ]
     },
-    "global_stage": { "type": "string" },
-    "risk_level": { "type": "string" },
-    "thresholds": { "type": "object" },
-    "loop_guards": { "type": "object" },
-    "security": { "type": "object" },
-    "created_at": { "type": "string" },
-    "updated_at": { "type": "string" }
+    "output_profile": {
+      "type": "string",
+      "enum": [
+        "executive_brief",
+        "deep_report",
+        "fact_check_report",
+        "due_diligence_memo",
+        "market_map",
+        "risk_register",
+        "timeline",
+        "entity_map",
+        "source_audit",
+        "dataset_package",
+        "report_factory_package",
+        "academic_reference",
+        "game_research_brief",
+        "political_analysis",
+        "scientific_literature_review"
+      ]
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "project_dir": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
   },
-  "required": ["runtime_version", "task_id", "execution_mode", "global_stage", "created_at", "updated_at"]
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "title",
+    "mode"
+  ]
 }

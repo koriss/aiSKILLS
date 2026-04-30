@@ -1,9 +1,27 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FactCheck",
   "type": "object",
   "properties": {
-    "item_id": { "type": "string" },
-    "checked_claims": { "type": "array", "items": { "$ref": "claim.schema.json" } }
+    "item_id": {
+      "type": "string"
+    },
+    "claims_checked": {
+      "type": "integer"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "completed_at": {
+      "type": "string"
+    }
   },
-  "required": ["item_id", "checked_claims"]
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "claims_checked"
+  ]
 }

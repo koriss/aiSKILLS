@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Source Gap",
+  "type": "object",
+  "required": [
+    "gap_id",
+    "claim_id",
+    "failure_class",
+    "impact"
+  ],
+  "properties": {
+    "gap_id": {
+      "type": "string"
+    },
+    "claim_id": {
+      "type": "string"
+    },
+    "source_candidate": {
+      "type": "string"
+    },
+    "failure_class": {
+      "type": "string"
+    },
+    "fallbacks_tried": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "best_available_state": {
+      "type": "string"
+    },
+    "impact": {
+      "type": "string"
+    },
+    "recommended_next_action": {
+      "type": "string"
+    }
+  }
+}

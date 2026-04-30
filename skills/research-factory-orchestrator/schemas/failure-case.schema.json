@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FailureCase",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "failure_type",
+    "bad_output_pattern",
+    "expected_guard",
+    "validator"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "failure_type": {
+      "type": "string"
+    },
+    "bad_output_pattern": {
+      "type": "string"
+    },
+    "expected_guard": {
+      "type": "string"
+    },
+    "validator": {
+      "type": "string"
+    },
+    "bad_sample": {
+      "type": "string"
+    },
+    "good_sample": {
+      "type": "string"
+    }
+  }
+}

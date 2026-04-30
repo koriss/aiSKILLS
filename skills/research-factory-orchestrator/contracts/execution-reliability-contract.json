@@ -1,0 +1,26 @@
+{
+  "version": "18.3.1-context-integrity-hotfix",
+  "required_artifacts": [
+    "execution/runtime-deadlines.json",
+    "execution/worker-leases.json",
+    "execution/worker-heartbeats.jsonl",
+    "execution/model-call-ledger.jsonl",
+    "execution/model-timeout-ledger.jsonl",
+    "execution/partial-output-ledger.jsonl",
+    "execution/retry-budget.json",
+    "execution/late-results-ledger.jsonl",
+    "execution/dead-letter-queue.jsonl",
+    "model/model-profiles.json",
+    "model/inference-backend-health.jsonl",
+    "model/model-routing-policy.json",
+    "model/context-budget-policy.json"
+  ],
+  "invariants": [
+    "no_partial_output_as_final",
+    "finalize_marker_required",
+    "timeout_reflected_in_final_gate",
+    "retry_must_be_idempotent",
+    "late_result_not_silently_merged",
+    "ambient_agent_context_cannot_override_rfo_entrypoint"
+  ]
+}

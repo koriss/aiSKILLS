@@ -1,0 +1,170 @@
+{
+  "task_id": "ea58e6fc",
+  "min_subagents": 8,
+  "required_quorum": 10,
+  "assignments": [
+    {
+      "assignment_id": "A-001",
+      "subagent_id": "SA-001",
+      "work_unit_id": "WU-001-entity-resolution",
+      "objective": "Execute entity_resolution coverage for the target task.",
+      "context_packet_path": "subagents/SA-001/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-002",
+      "subagent_id": "SA-002",
+      "work_unit_id": "WU-002-primary-origin-sources",
+      "objective": "Execute primary_origin_sources coverage for the target task.",
+      "context_packet_path": "subagents/SA-002/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-003",
+      "subagent_id": "SA-003",
+      "work_unit_id": "WU-003-broad-sweep",
+      "objective": "Execute broad_sweep coverage for the target task.",
+      "context_packet_path": "subagents/SA-003/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-004",
+      "subagent_id": "SA-004",
+      "work_unit_id": "WU-004-contrary-adversarial-search",
+      "objective": "Execute contrary_adversarial_search coverage for the target task.",
+      "context_packet_path": "subagents/SA-004/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-005",
+      "subagent_id": "SA-005",
+      "work_unit_id": "WU-005-source-quality-provenance",
+      "objective": "Execute source_quality_provenance coverage for the target task.",
+      "context_packet_path": "subagents/SA-005/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-006",
+      "subagent_id": "SA-006",
+      "work_unit_id": "WU-006-timeline-freshness",
+      "objective": "Execute timeline_freshness coverage for the target task.",
+      "context_packet_path": "subagents/SA-006/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-007",
+      "subagent_id": "SA-007",
+      "work_unit_id": "WU-007-structured-data",
+      "objective": "Execute structured_data coverage for the target task.",
+      "context_packet_path": "subagents/SA-007/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-008",
+      "subagent_id": "SA-008",
+      "work_unit_id": "WU-008-claim-factcheck",
+      "objective": "Execute claim_factcheck coverage for the target task.",
+      "context_packet_path": "subagents/SA-008/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-009",
+      "subagent_id": "SA-009",
+      "work_unit_id": "WU-009-strong-tie-pivoting",
+      "objective": "Execute strong_tie_pivoting coverage for the target task.",
+      "context_packet_path": "subagents/SA-009/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-010",
+      "subagent_id": "SA-010",
+      "work_unit_id": "WU-010-contact-media-graph",
+      "objective": "Execute contact_media_graph coverage for the target task.",
+      "context_packet_path": "subagents/SA-010/context-packet.json",
+      "required_outputs": [
+        "sources.json",
+        "claims.json",
+        "evidence.json",
+        "errors.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-011",
+      "subagent_id": "SA-011",
+      "work_unit_id": "WU-011-raw-evidence-vault",
+      "objective": "Execute raw_evidence_vault coverage for the target task.",
+      "context_packet_path": "subagents/SA-011/context-packet.json",
+      "required_outputs": [
+        "result.json"
+      ],
+      "status": "planned"
+    },
+    {
+      "assignment_id": "A-012",
+      "subagent_id": "SA-012",
+      "work_unit_id": "WU-012-synthesis-merge",
+      "objective": "Execute synthesis_merge coverage for the target task.",
+      "context_packet_path": "subagents/SA-012/context-packet.json",
+      "required_outputs": [
+        "result.json"
+      ],
+      "status": "planned"
+    }
+  ],
+  "created_at": "2026-04-29T01:16:36Z"
+}

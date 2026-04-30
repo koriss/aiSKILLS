@@ -1,0 +1,22 @@
+{
+  "version": "16.0.0-execution-integrity-lifecycle-hardening",
+  "required_entrypoint": "scripts/run_research_factory.py",
+  "required_invocation_mode": "runtime",
+  "forbidden_invocation_patterns": [
+    "plain_subagent",
+    "read_skill_md_and_execute",
+    "single_worker_full_pipeline",
+    "manual_prompt_scaffold"
+  ],
+  "required_startup_artifacts": [
+    "entrypoint-proof.json",
+    "runtime-status.json",
+    "run.json",
+    "work-unit-plan.json",
+    "subagent-plan.json",
+    "subagent-ledger.json",
+    "ledgers/search-ledger.json",
+    "delivery-manifest.json"
+  ],
+  "required_startup_status": "compiled"
+}

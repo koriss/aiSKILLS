@@ -1,0 +1,5 @@
+{
+  "case_id": "F312-meta-claims-presented-as-domain-claims",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

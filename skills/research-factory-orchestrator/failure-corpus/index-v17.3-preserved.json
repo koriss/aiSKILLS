@@ -1,0 +1,311 @@
+{
+  "version": "17.3.0-report-proof-integrity-hardening",
+  "description": "Regression cases for runtime entrypoint, interface return path, outbox delivery, provider isolation, chat rendering, claims, and package proof failures.",
+  "cases": [
+    {
+      "case_id": "case_telegram_table_rendering",
+      "failure_type": "telegram_table",
+      "validator": "validate_telegram_no_tables_strict.py",
+      "bad_sample": "bad_telegram_table.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F058"
+      ]
+    },
+    {
+      "case_id": "case_telegram_local_path_leak",
+      "failure_type": "local_path",
+      "validator": "validate_no_local_paths_in_telegram.py",
+      "bad_sample": "bad_local_path.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F043",
+        "F051"
+      ]
+    },
+    {
+      "case_id": "case_manual_check_final_proof",
+      "failure_type": "manual_check_passed",
+      "validator": "validate_no_manual_check_final_proof.py",
+      "bad_sample": "bad_manual_check.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F042"
+      ]
+    },
+    {
+      "case_id": "case_negative_identity_overconfidence",
+      "failure_type": "negative_identity_overconfidence",
+      "validator": "validate_negative_identity_wording.py",
+      "bad_sample": "bad_negative_identity.txt",
+      "good_sample": "good_telegram.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F084"
+      ]
+    },
+    {
+      "case_id": "case_confirmed_fact_single_weak_source",
+      "failure_type": "confirmed_fact_single_weak_source",
+      "validator": "validate_confirmed_fact_source_support.py",
+      "bad_sample": "bad_claims_single_source.json",
+      "good_sample": "good_claims.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F123"
+      ]
+    },
+    {
+      "case_id": "case_derived_inference_as_confirmed_fact",
+      "failure_type": "derived_inference_as_confirmed_fact",
+      "validator": "validate_inference_not_confirmed_fact.py",
+      "bad_sample": "bad_claims_inference_confirmed.json",
+      "good_sample": "good_claims.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F120"
+      ]
+    },
+    {
+      "case_id": "case_delivery_overclaim",
+      "failure_type": "delivery_overclaim",
+      "validator": "validate_delivery_manifest.py",
+      "bad_sample": "bad_delivery_overclaim.json",
+      "good_sample": "good_delivery.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F050",
+        "F150",
+        "F152"
+      ]
+    },
+    {
+      "case_id": "case_runtime_entrypoint_confusion",
+      "failure_type": "runtime_entrypoint_confusion",
+      "validator": "validate_no_skill_md_imitation.py",
+      "bad_sample": "bad_skill_md_imitation.txt",
+      "good_sample": "good_runtime_startup.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F021",
+        "F022",
+        "F024",
+        "F035"
+      ]
+    },
+    {
+      "case_id": "case_status_claim_mismatch",
+      "failure_type": "status_claim_mismatch",
+      "validator": "validate_status_claim_consistency.py",
+      "bad_sample": "bad_status_claim.txt",
+      "bad_status": "bad_status_claim_runtime-status.json",
+      "good_sample": "good_runtime_startup.txt",
+      "good_status": "good_status_claim_runtime-status.json",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F025"
+      ]
+    },
+    {
+      "case_id": "case_no_entrypoint_proof",
+      "failure_type": "entrypoint_proof_missing",
+      "validator": "validate_runtime_entrypoint.py",
+      "bad_sample": "bad_run_no_entrypoint_proof",
+      "good_sample": "good_run_entrypoint_proof",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F027",
+        "F028"
+      ]
+    },
+    {
+      "case_id": "case_interface_no_return_path",
+      "failure_type": "interface_no_return_path",
+      "validator": "validate_interface_return_path_claim.py",
+      "bad_sample": "bad_interface_no_return_path.txt",
+      "good_sample": "good_interface_queued.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F044",
+        "F045"
+      ]
+    },
+    {
+      "case_id": "case_direct_interface_response_bypasses_renderer",
+      "failure_type": "direct_interface_response_bypasses_renderer",
+      "validator": "validate_no_direct_interface_response.py",
+      "bad_sample": "bad_direct_interface_response.txt",
+      "good_sample": "good_rendered_interface_response.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F043",
+        "F051"
+      ]
+    },
+    {
+      "case_id": "case_worker_bundle_sent_as_research_package",
+      "failure_type": "worker_bundle_sent_as_research_package",
+      "validator": "validate_worker_bundle_not_research_package.py",
+      "bad_sample": "bad_worker_bundle.zip",
+      "good_sample": "good_research_package.zip",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F041",
+        "F052",
+        "F053"
+      ]
+    },
+    {
+      "case_id": "case_provider_specific_logic_leaked_into_runtime",
+      "failure_type": "provider_specific_logic_leaked_into_runtime",
+      "validator": "validate_no_provider_hardcode_text.py",
+      "bad_sample": "bad_provider_hardcode.txt",
+      "good_sample": "good_provider_layer.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F055",
+        "F056"
+      ]
+    },
+    {
+      "case_id": "case_real_telegram_fake_rfo_runtime_route",
+      "failure_type": "rfo_command_routed_to_plain_subagent",
+      "validator": "validate_rfo_command_did_not_spawn_plain_subagent.py",
+      "bad_sample": "real_2026_04_30_fake_rfo_telegram_log.txt",
+      "good_sample": "good_rfo_runtime_log.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F023",
+        "F035",
+        "F193",
+        "F199"
+      ]
+    },
+    {
+      "case_id": "case_real_reply_context_wrong_rfo_route",
+      "failure_type": "reply_context_rfo_routed_to_deep_investigation",
+      "validator": "validate_rfo_command_did_not_spawn_plain_subagent.py",
+      "bad_sample": "real_2026_04_30_reply_context_wrong_rfo_route.txt",
+      "good_sample": "good_rfo_runtime_log.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F023",
+        "F024",
+        "F193",
+        "F199",
+        "F201"
+      ]
+    },
+    {
+      "case_id": "case_html_proof_without_runtime_artifacts",
+      "failure_type": "html_self_declared_runtime_proof",
+      "validator": "validate_html_proof_matches_runtime_artifacts.py",
+      "bad_sample": "bad_fake_rfo_full_report.html",
+      "good_sample": "good_run_report_proof",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F190",
+        "F191",
+        "F197",
+        "F198",
+        "F196"
+      ]
+    },
+    {
+      "case_id": "case_malformed_html_delivered",
+      "failure_type": "malformed_html_but_delivered",
+      "validator": "validate_html_well_formed.py",
+      "bad_sample": "bad_fake_rfo_full_report.html",
+      "good_sample": "good_simple_report.html",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F194"
+      ]
+    },
+    {
+      "case_id": "case_claim_id_gap_without_skip_reason",
+      "failure_type": "claim_id_gap_without_skip_reason",
+      "validator": "validate_claim_id_continuity_or_skip_reason.py",
+      "bad_sample": "bad_fake_rfo_full_report.html",
+      "good_sample": "good_report_claims.html",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F200"
+      ]
+    },
+    {
+      "case_id": "case_chat_delivery_claim_before_ack_real_log",
+      "failure_type": "delivery_claim_before_ack",
+      "validator": "validate_chat_claims_against_delivery_manifest.py",
+      "bad_sample": "real_2026_04_30_fake_rfo_telegram_log.txt",
+      "good_sample": "good_chat_no_delivery_claim.txt",
+      "expected_bad": "fail",
+      "expected_good": "pass",
+      "covers": [
+        "F150",
+        "F152",
+        "F192",
+        "F195"
+      ]
+    }
+  ],
+  "required_failure_classes": [
+    "F021",
+    "F022",
+    "F024",
+    "F025",
+    "F027",
+    "F028",
+    "F035",
+    "F041",
+    "F043",
+    "F044",
+    "F045",
+    "F050",
+    "F051",
+    "F052",
+    "F053",
+    "F055",
+    "F056",
+    "F058",
+    "F084",
+    "F120",
+    "F123",
+    "F150",
+    "F152",
+    "F190",
+    "F191",
+    "F192",
+    "F193",
+    "F194",
+    "F195",
+    "F196",
+    "F197",
+    "F198",
+    "F199",
+    "F200",
+    "F201"
+  ]
+}

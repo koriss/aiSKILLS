@@ -1,0 +1,8 @@
+{
+  "case_id": "F279-stale-version-claimed-after-newer-release",
+  "failure_code": "F279",
+  "class": "context-acquisition-integrity",
+  "description": "stale version claimed after newer release",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

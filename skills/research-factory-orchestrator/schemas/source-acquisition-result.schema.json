@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Source Acquisition Result",
+  "type": "object",
+  "required": [
+    "source_id",
+    "url",
+    "final_state",
+    "evidence_rank_cap",
+    "attempts"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "final_state": {
+      "type": "string"
+    },
+    "evidence_rank_cap": {
+      "type": "string",
+      "enum": [
+        "E5",
+        "E4",
+        "E3",
+        "E2",
+        "E1",
+        "E0"
+      ]
+    },
+    "coverage_gap": {
+      "type": "boolean"
+    },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

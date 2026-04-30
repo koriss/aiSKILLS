@@ -1,0 +1,14 @@
+{
+  "assignment_id": "A-008",
+  "subagent_id": "SA-008",
+  "work_unit_id": "WU-008-claim-factcheck",
+  "objective": "Execute claim_factcheck coverage for the target task.",
+  "context_packet_path": "subagents/SA-008/context-packet.json",
+  "required_outputs": [
+    "sources.json",
+    "claims.json",
+    "evidence.json",
+    "errors.json"
+  ],
+  "status": "planned"
+}

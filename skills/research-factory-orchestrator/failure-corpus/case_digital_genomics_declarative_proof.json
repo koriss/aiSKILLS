@@ -1,0 +1,7 @@
+{
+  "case_id": "case_digital_genomics_declarative_proof",
+  "failure_type": "F006",
+  "bad_output_pattern": "completion-proof claims pipeline done without ledgers/provenance",
+  "expected_guard": "pipeline answer only from ledgers/manifests",
+  "validator_or_eval": "render_pipeline_answer_from_ledgers.py"
+}

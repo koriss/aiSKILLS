@@ -1,0 +1,8 @@
+{
+  "case_id": "F230-ambient-agent-direct-subagent-overrides-rfo",
+  "failure_code": "F230",
+  "description": "Host-agent ambient instruction overrides RFO runtime",
+  "expected_validator": "validate_no_ambient_context_runtime_override.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

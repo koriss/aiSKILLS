@@ -1,0 +1,119 @@
+{
+  "version": "18.2-draft",
+  "rank_classes": {
+    "E5": "authoritative_in_scope",
+    "E4": "strong_primary_or_methodic",
+    "E3": "useful_but_limited",
+    "E2": "weak_or_interested",
+    "E1": "lead_only",
+    "E0": "invalid_for_claim"
+  },
+  "claim_regimes": [
+    "record_claim",
+    "statement_claim",
+    "empirical_world_state_claim",
+    "causal_claim",
+    "legal_claim",
+    "scientific_claim",
+    "narrative_propaganda_claim",
+    "sentiment_perception_claim"
+  ],
+  "official_modes": [
+    "custodian_of_record",
+    "statistical_publisher",
+    "regulatory_decision_maker",
+    "court_or_legal_authority",
+    "actor_press_office",
+    "state_media",
+    "political_executive",
+    "security_service_statement",
+    "wartime_information_actor"
+  ],
+  "origin_types": [
+    "academic_peer_reviewed",
+    "academic_preprint",
+    "academic_book",
+    "official_statistics",
+    "official_regulatory",
+    "official_legal",
+    "official_court",
+    "official_registry",
+    "official_corporate",
+    "official_press_release",
+    "international_organization",
+    "central_bank",
+    "ngo_report",
+    "think_tank_report",
+    "media_news",
+    "investigative_media",
+    "state_media",
+    "party_media",
+    "political_actor",
+    "company_self_claim",
+    "personal_blog",
+    "expert_blog",
+    "social_post",
+    "forum_post",
+    "opinion_column",
+    "wiki_encyclopedia",
+    "aggregator",
+    "database_secondary",
+    "leaked_material",
+    "unknown"
+  ],
+  "base_origin_weights": {
+    "academic_peer_reviewed": 0.9,
+    "official_statistics": 0.92,
+    "official_legal": 0.94,
+    "official_court": 0.94,
+    "official_registry": 0.93,
+    "central_bank": 0.92,
+    "international_organization": 0.88,
+    "investigative_media": 0.78,
+    "ngo_report": 0.7,
+    "think_tank_report": 0.66,
+    "media_news": 0.62,
+    "official_corporate": 0.72,
+    "official_press_release": 0.6,
+    "company_self_claim": 0.55,
+    "academic_preprint": 0.68,
+    "expert_blog": 0.45,
+    "state_media": 0.38,
+    "political_actor": 0.35,
+    "opinion_column": 0.28,
+    "party_media": 0.25,
+    "personal_blog": 0.3,
+    "social_post": 0.22,
+    "forum_post": 0.15,
+    "aggregator": 0.18,
+    "wiki_encyclopedia": 0.35,
+    "leaked_material": 0.4,
+    "unknown": 0.1
+  },
+  "fit_overrides": [
+    {
+      "claim_type": "public_statement",
+      "source_origin_type": "political_actor",
+      "rank": "E5",
+      "note": "Strong only for proving the actor said it, not that the statement is factually true."
+    },
+    {
+      "claim_type": "official_statistical_value",
+      "source_origin_type": "political_actor",
+      "rank": "E0",
+      "note": "Political actor is not a primary statistics source."
+    },
+    {
+      "claim_type": "narrative_propaganda_claim",
+      "source_origin_type": "state_media",
+      "rank": "E5",
+      "note": "Strong for analysis of state-media narrative, not automatically strong for world-state truth."
+    },
+    {
+      "claim_type": "empirical_world_state_claim",
+      "source_origin_type": "expert_blog",
+      "rank": "E3",
+      "condition": "Only if primary data and method are transparent; otherwise E1/E2."
+    }
+  ]
+}

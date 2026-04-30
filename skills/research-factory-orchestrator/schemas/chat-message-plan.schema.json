@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChatMessagePlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "job_id",
+    "command_id",
+    "interface",
+    "provider",
+    "plain_text_only",
+    "mobile_safe",
+    "no_tables",
+    "no_local_paths",
+    "no_premature_delivery_claims",
+    "split_policy",
+    "messages",
+    "attachments",
+    "delivery_claim_policy",
+    "created_at"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "command_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interface": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "plain_text_only": {
+      "type": "boolean"
+    },
+    "mobile_safe": {
+      "type": "boolean"
+    },
+    "no_tables": {
+      "type": "boolean"
+    },
+    "no_local_paths": {
+      "type": "boolean"
+    },
+    "no_premature_delivery_claims": {
+      "type": "boolean"
+    },
+    "split_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_message_chars",
+        "logical_blocks",
+        "overflow_strategy"
+      ],
+      "properties": {
+        "max_message_chars": {
+          "type": "integer",
+          "minimum": 500,
+          "maximum": 8000
+        },
+        "logical_blocks": {
+          "type": "boolean"
+        },
+        "overflow_strategy": {
+          "type": "string"
+        }
+      }
+    },
+    "messages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "delivery_claim_policy": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

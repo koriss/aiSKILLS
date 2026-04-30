@@ -1,0 +1,158 @@
+# Soviet Propaganda & Ideological Warfare Library
+# Compiled search results for Soviet-era textbooks, manuals, and academic books
+# Format: TITLE | AUTHOR | YEAR | DESCRIPTION | URL | FILE_PATH
+
+============================================================
+1. SOVIET PROPAGANDA THEORY - LENIN
+============================================================
+
+What Is To Be Done? Burning Questions of Our Movement | V.I. Lenin | 1902 | Foundational text on Marxist propaganda, agitation, and the role of the Communist Party. Defines the distinction between propaganda and agitation. | https://www.marxists.org/archive/lenin/works/download/what-itd.pdf |
+
+Lenin: Selected Works (Vol. 11) | V.I. Lenin | 1935 (pub.) | Contains Lenin's key writings on propaganda, ideology, and party organization. | https://archive.org/download/selected-works-vol.-11/Selected%20Works%20-%20Vol.%2011.pdf |
+
+Lenin Rediscovered: What Is To Be Done In Context | Lars T. Lih | 2008 | Academic analysis of Lenin's What Is To Be Done?, placing it in historical context. | https://files.libcom.org/files/Lars%20T.%20Lih%20-%20Lenin%20Rediscovered%20-%20What%20Is%20to%20Be%20Done%20In%20Context%20(2008).pdf |
+
+Lenin on Literature and Art | V.I. Lenin | various | Lenin's writings on the role of art and culture in revolutionary propaganda. | https://ia600305.us.archive.org/35/items/LeninOnLiteratureAndArt/Lenin%20on%20Literature%20and%20Art_text.pdf |
+
+============================================================
+2. MARXIST-LENINIST IDEOLOGY TEXTBOOKS
+============================================================
+
+Fundamentals of Marxist-Leninist Philosophy | Alexander Petrovich Sheptulin | 1986 | Standard Soviet university textbook on dialectical and historical materialism. | https://archive.org/details/mlphilosophy |
+
+The Basics of Marxist-Leninist Theory | Genrikh Nikolaevich Volkov | 1974 (approx.) | Basic textbook explaining Marxist-Leninist theory for party education. | https://archive.org/details/BasicsMarxistLeninistTheory |
+
+Fundamentals of Marxism-Leninism (Manual) | Moscow Institute of Social Sciences | 1961 | Soviet manual for teaching Marxism-Leninism, covering philosophy, political economy, scientific socialism. | http://bannedthought.net/MLM-Theory/RevisionistTexts/FundamentalsOfML-Manual-Moscow-1961-OCR.pdf |
+
+Curriculum of the Basic Principles of Marxism-Leninism | Various | 1970s-80s | Soviet curriculum documents for teaching communist ideology. | https://archive.org/download/intro-basic-princ-marx-lenin-part-1-final/IntroBasicPrincMarxLenin_Part_1_Final.pdf |
+
+Soviet Marxism-Leninism: The Decline of an Ideology | Evan | 1983 | Critical academic analysis of Soviet ideological textbooks. | https://archive.org/details/sovietmarxismlen0000evan |
+
+============================================================
+3. RED ARMY / POLITICAL WORK FIELD MANUALS
+============================================================
+
+The Officer's Handbook; A Soviet View | S.N. Kozlov (ed.) | 1971 | Declassified U.S. analysis of Soviet military doctrine, including political work. | https://apps.dtic.mil/sti/tr/pdf/ADA046591.pdf |
+
+Propaganda and Agitation in the Soviet Military | R.L. Gambolati | 1978 (ADA067802) | U.S. military analysis of Soviet military propaganda and agitation. | https://apps.dtic.mil/sti/pdfs/ADA067802.pdf |
+
+Political Work Among Troops and Enemy Population 1941-1945 | M.I. Burtsev (ed.) | 1970s | Soviet historical study of political work (политическая работа) during WWII. | https://www.researchgate.net/publication/330686862_Some_Aspects_of_Organisation_of_the_Military-Political_Leadership_of_Ideological_Work_in_the_Armed_Forces_of_Nazi_Germany_During_the_Second_World_War |
+
+Public Opinion in Soviet Russia | Various | 1950s | Soviet textbook on public opinion theory and propaganda functions. | https://ia800902.us.archive.org/3/items/in.ernet.dli.2015.129452/2015.129452.Public-Opinion-In-Soviet-Russia.pdf |
+
+Партийно-политическая работа в Советских Вооружённых Силах (Party-Political Work in Soviet Armed Forces) | GlavPU (Main Political Directorate) | 1940s-70s | Red Army political work manuals covering agitation and propaganda among troops. | https://rosguard.gov.ru/uploads/2023/08/zakaz37623blok.pdf |
+
+Russian Abbreviations (Library of Congress) | Various | 1952 | Reference work including definitions of Soviet political terminology: Политическая работа, Политработник, Политрук. | https://bannedthought.net/USSR/Reference/Rosenberg-RussianAbbreviations-LibraryOfCongress-1952-OCR-sm.pdf |
+
+============================================================
+4. KGB ACTIVE MEASURES / disinformation
+============================================================
+
+Soviet Active Measures and Disinformation | CIA | 1980s | Declassified CIA analysis of KGB "активные мероприятия" (active measures) operations. | https://www.cia.gov/readingroom/docs/CIA-RDP89G00720R000500060008-2.pdf |
+
+KGB Expert Bares Soviet Active Measures | CIA | 1980s | Declassified CIA document on KGB active measures tactics. | https://www.cia.gov/readingroom/docs/CIA-RDP90-00806R000201200001-5.pdf |
+
+Soviet 'Active Measures' Forgery and Disinformation | CIA | 1984 | CIA analysis of Soviet disinformation and forgery operations. | https://www.cia.gov/readingroom/docs/CIA-RDP84B00049R001303150031-0.pdf |
+
+"Active Measures" of USSR Against USA | NISS Ukraine | 2017 | Historical analysis of Soviet active measures targeting the USA during Cold War. | https://niss.gov.ua/sites/default/files/2017-05/active___druk_bleed-5.pdf |
+
+Active Measures - Spy Museum | Various | 2010s | Overview of KGB disinformation techniques and active measures. | https://spy-museum.s3.amazonaws.com/files/back_active-measures.pdf |
+
+Active Measures Series: Intro to the KGB Playbook | Olga Lautman | 2025 | Modern analysis of KGB active measures playbook and its legacy. | https://olgalautman.substack.com/p/active-measures-series-an-intro-to |
+
+============================================================
+5. WWII SOVIET COMBAT PROPAGANDA (БОЕВАЯ ПРОПАГАНДА)
+============================================================
+
+Political Propaganda of the Red Army | Various | 1941-1945 | Academic study of Red Army propaganda units during WWII, political work among troops and enemy population. | https://biblioteca-digitala.ro/reviste/codrul-cosminului/23_codrul-cosminului_vol-23-nr-1-decembrie_2017.pdf |
+
+Политическая работа в авиационных частях в битве за Ленинград (Political Work in Aviation Units During Battle of Leningrad) | Various | 1941-1944 | Study of political work and propaganda in Soviet aviation during the siege of Leningrad. | https://cyberleninka.ru/article/n/politicheskaya-rabota-v-aviatsionnyh-chastyah-v-bitve-za-leningrad/pdf |
+
+============================================================
+6. PSYCHOLOGICAL WARFARE / INFORMATION WARFARE
+============================================================
+
+Information-Psychological War in Afghanistan | D. Davydov | 1980s | Soviet analysis of information-psychological warfare in Afghanistan. Referenced in RAND research. | https://www.rand.org/content/dam/rand/pubs/research_reports/RR4300/RR4373z2/RAND_RR4373z2.pdf |
+
+Digital Soviet Union | Kukkola | 2018 | Academic thesis on Soviet information warfare doctrine, referencing "Психологическая война империализма" (1975) journal article. | https://www.doria.fi/bitstream/10024/177157/3/Kukkola_Digital%20Soviet%20Union_finalnet.pdf |
+
+Information and Psychological War Against the Population of Ukraine | Various | 2014+ | Modern analysis connecting Soviet psychological warfare doctrine to contemporary operations. | https://scispace.com/pdf/information-and-psychological-war-against-the-population-2t2jxcjxsf.pdf |
+
+Manufacturing Impunity | Global Rights Compliance | 2025 | Analysis of Russian "information warfare" (информационная война) and "information struggle" (информационная борьба). | https://globalrightscompliance.org/wp-content/uploads/2025/05/Manufacturing-Impunity.pdf |
+
+============================================================
+7. SOVIET MASKIROVKA (ДЕЗИНФОРМАЦИЯ/МАСКИРОВКА)
+============================================================
+
+A Systematic Analysis of Russian Military Deception | Cranfield University | 2010s | Academic analysis of original Russian military texts using the term 'маскировка' (maskirovka). | https://dspace.lib.cranfield.ac.uk/bitstreams/b8b762e8-5383-4d0b-bd84-d81d3def1b2b/download |
+
+Bloodless but Deadly: Information Warfare in Russian Military Science | ResearchGate | 2024 | Research on Russian strategic deception, maskirovka, and information warfare. | https://www.researchgate.net/publication/384413448_Bloodless_but_deadly_Information_warfare_in_Russian_military_science_research |
+
+Understanding Russian Hybrid Warfare | VTechWorks | 2025 | Comparative study of Russian маскировка (maskirovka) as military deception doctrine. | https://vtechworks.lib.vt.edu/bitstreams/ac77d823-d976-42dd-95e2-559b08020368/download |
+
+FM 20-3 Camouflage Concealment and Decoys (US Army) | U.S. Army | 1999 | Includes reference to Soviet doctrinal "Тактическая маскировка и отвлекающие действия" (1999). | https://www.scribd.com/document/253011126/FM-20-3-Camouflage-Concealment-and-Decoys-Field-Manual |
+
+Cyber War in Perspective: Russian Aggression against Ukraine | CCDCoe | 2018 | Analysis of Russian maskirovka (маскировка) denial and deception doctrine. | https://ccdcoe.org/uploads/2018/10/CyberWarinPerspective_full_book.pdf |
+
+============================================================
+8. INFORMATION STRUGGLE (ИНФОРМАЦИОННАЯ БОРЬБА)
+============================================================
+
+The Crisis in Ukraine and Information Operations of the Russian Federation | Sazonov et al. | 2016 | Academic collection on информационная борьба (information struggle) doctrine. | https://www.academia.edu/39070399/Sazonov_Vladimir_Saumets_Andres_M%C3%B6lder_Holger_2016_eds_The_Crisis_in_Ukraine_and_Information_Operations_of_the_Russian_Federation_Tartu |
+
+Information Confrontation of Nazi Germany and USSR | Various | 2010s | Historiography study on information confrontation, referencing Soviet political work among enemy population. | https://www.academia.edu/130100688/Information_Confrontation_of_Nazi_Germany_and_the_Ussr_in_Historiography |
+
+Peculiarities of Russian Information Operations | Uku Arold | 2021 | Analysis of Russian "information war(fare)" (информационная война) and "information struggle" (информационная борьба). | https://vana.kvak.ee/files/2021/10/Uku-Arold_PECULIARITIES-OF-RUSSIAN-INFORMATION.pdf |
+
+Information Operations of the Russian Federation | Estonian Journal of Military Studies | 2022 | Academic journal issue on Russian information operations and propaganda. | https://www.researchgate.net/publication/364165705_THE_CRISIS_IN_UKRAINE_AND_INFORMATION_OPERATIONS_OF_THE_RUSSIAN_FEDERATION_Estonian_Journal_of_Military_Studies_2 |
+
+============================================================
+9. STalin-era propaganda / HISTORY OF CPK
+============================================================
+
+History of Communist Party of the Soviet Union (Bolsheviks) | J. Stalin | 1938 | Short course textbook on history of CPSU(b), used as ideological primer. (Short Course versions available on archive.org) | https://archive.org/details/HistoryOfTheCommunistPartyOfTheSovietUnionBolsheviks |
+
+Russian Revolution and Indian Patriots | Various | 1920s-30s | Documents and propaganda materials of Communist International. | https://ia601401.us.archive.org/22/items/in.ernet.dli.2015.100061/2015.100061.The-Russian-Revolution-And-The-Indian-Patriots-Ed-1st_text.pdf |
+
+Documents of the History of Communist Party of India | Various | 1920s-40s | Comintern-era documents showing global communist propaganda networks. | https://ia800702.us.archive.org/27/items/in.ernet.dli.2015.117368/2015.117368.Documents-Of-The-History-Of-The-Communist-Party-Of-India--Part---I-_text.pdf |
+
+============================================================
+10. ADDITIONAL SOURCES - academic & ARCHIVE
+============================================================
+
+Totalitarian Communication: Hierarchies, Codes, and Typology | Postoutenko (ed.) | 2010s | Academic analysis of Soviet totalitarian communication and propaganda systems. | https://library.oapen.org/bitstream/handle/20.500.12657/25375/1004721.pdf?sequence=1&isAllowed=y |
+
+U.S. Democracy as Target of Russian Secret Services | Warsaw Institute | 2021 | Analysis of Russian information-psychological warfare, referencing Soviet doctrinal sources. | https://warsawinstitute.org/wp-content/uploads/2021/07/RS_06-2021_EN.pdf |
+
+The Faces of Estonian Sovietisation | Tartu University | 2018 | Academic study of Sovietisation and violence in Estonia, references "активные мероприятия". | https://www.academia.edu/108839671/The_Faces_of_Estonian_Sovietisation_A_Look_Back_Notes_on_the_publication_Sovietisation_and_violence_the_case_of_Estonia_2018_Tartu_University_of_Tartu_Press_ed_Meelis_Saueauk_Toomas_Hiio_Proceedings_of_the_Estonian_Institute_of_Historical_Memory_Eesti_M%C3%A4lu_Instituudi_toimetised_1 |
+
+Soviet Defectors: Revelations of Renegade Intelligence Officers | Various | 1924-1954 | Includes reference to "Политическая Работа в Советской Армии" by Vadim Denisov in Hoover Archive. | https://dokumen.pub/soviet-defectors-revelations-of-renegade-intelligence-officers-1924-1954-9781474467254.html |
+
+Кузнецов Д.В. Четверо с Интрепида: СССР, США, пропаганда | Д.В. Кузнецов | 2019 | Academic work on USSR-USA propaganda and counter-propaganda during Vietnam War era. | https://www.academia.edu/41531240/%D0%9A%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BE%D0%B2_%D0%94_%D0%92_%D0%A7%D0%B5%D1%82%D0%B2%D0%B5%D1%80%D0%BE_%D1%81_%D0%98%D0%BD%D1%82%D1%80%D0%B5%D0%BF%D0%B8%D0%B4%D0%B0_%D0%A1%D0%A1%D0%A1_%D0%A1%D0%A8%D0%90_%D0%BF%D1%80%D0%BE%D0%BF%D0%B0%D0%B3%D0%B0%D0%BD%D0%B4%D0%B0_%D0%B8_%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BF%D1%80%D0%BE%D0%BF%D0%B0%D0%B3%D0%B0%D0%BD%D0%B4%D0%B0_%D0%B2%D0%BE_%D0%B2%D1%80%D0%B5%D0%BC%D1%8F_%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B_%D0%B2%D0%BE_%D0%92%D1%8C%D0%B5%D1%82%D0%BD%D0%B0%D0%BC%D0%B5_1964_1973_%D0%B3%D0%B3 |
+
+============================================================
+KEY ARCHIVES & REPOSITORIES
+============================================================
+
+- Marxists Internet Archive: https://www.marxists.org - Complete works of Lenin, Stalin, Marx, Engels
+- Archive.org: https://archive.org - Soviet textbooks, ideology materials
+- BannedThought.net: http://bannedthought.net - Soviet political texts, MLM theory
+- CIA Readingroom: https://www.cia.gov/readingroom - Declassified KGB/active measures docs
+- DTIC (U.S. Army): https://apps.dtic.mil - U.S. translations of Soviet military manuals
+- Academia.edu: Various Soviet studies and historical research papers
+
+============================================================
+NOTES
+============================================================
+
+Many Soviet-era textbooks are available through:
+1. Western archival research (CIA, DTIC declassifications)
+2. Archive.org digitization of library collections
+3. Academic repositories in Eastern Europe
+4. BannedThought.net for Soviet/MLM texts
+5. Marxists Internet Archive for primary Leninist sources
+
+Direct Soviet-era PDFs (original printing) are harder to find as they were 
+typically classified or limited to party/military distribution. Most available
+materials are either: (a) Western analytical studies, (b) declassified Western
+intel documents, or (c) later reprints hosted on archive sites.

@@ -1,0 +1,75 @@
+{
+  "run_id": "good",
+  "delivery_status": "delivered",
+  "local_paths_exposed": false,
+  "required_acks_present": true,
+  "delivery_claim_allowed": true,
+  "external_delivery_claim_allowed": true,
+  "provider_ack_claim_allowed": true,
+  "stub_delivery": false,
+  "real_external_delivery": true,
+  "required_outbox_events": [
+    "OUT-0001",
+    "OUT-0002",
+    "OUT-0003"
+  ],
+  "gates": {
+    "provider_ack_gate": {
+      "status": "pass",
+      "passed": true,
+      "reason": "all required provider ACKs are present and valid"
+    },
+    "external_delivery_gate": {
+      "status": "pass",
+      "passed": true,
+      "reason": "real external delivery acknowledged"
+    },
+    "final_user_claim_gate": {
+      "status": "pass",
+      "passed": true,
+      "reason": "safe to claim files were externally delivered"
+    }
+  },
+  "outbox_events": [
+    {
+      "event_id": "OUT-0001",
+      "event_type": "send_message",
+      "ack_status": "sent",
+      "real_external_delivery": true,
+      "stub_delivery": false
+    },
+    {
+      "event_id": "OUT-0002",
+      "event_type": "send_file",
+      "file_kind": "html_report",
+      "ack_status": "sent",
+      "real_external_delivery": true,
+      "stub_delivery": false
+    },
+    {
+      "event_id": "OUT-0003",
+      "event_type": "send_file",
+      "file_kind": "research_package",
+      "ack_status": "sent",
+      "real_external_delivery": true,
+      "stub_delivery": false
+    }
+  ],
+  "attachments": [
+    {
+      "event_id": "OUT-0002",
+      "type": "standalone_html",
+      "required": true,
+      "sent": true,
+      "externally_sent": true
+    },
+    {
+      "event_id": "OUT-0003",
+      "type": "research_package",
+      "required": true,
+      "sent": true,
+      "externally_sent": true
+    }
+  ],
+  "created_at": "2026-04-29T00:00:00Z"
+}

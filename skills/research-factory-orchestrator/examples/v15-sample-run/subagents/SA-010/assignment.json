@@ -1,0 +1,14 @@
+{
+  "assignment_id": "A-010",
+  "subagent_id": "SA-010",
+  "work_unit_id": "WU-010-contact-media-graph",
+  "objective": "Execute contact_media_graph coverage for the target task.",
+  "context_packet_path": "subagents/SA-010/context-packet.json",
+  "required_outputs": [
+    "sources.json",
+    "claims.json",
+    "evidence.json",
+    "errors.json"
+  ],
+  "status": "planned"
+}

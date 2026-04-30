@@ -1,0 +1,5 @@
+{
+  "version": "18.0.0",
+  "required_failure_classes": ["F170", "F171", "F172", "F173", "F174", "F175", "F176", "F177", "F179", "F180", "F181", "F190", "F191", "F193", "F195"],
+  "note": "v18 regression corpus includes policy-only feature, fake runtime, missing blocks, placeholder HTML, missing wave graph, missing self-audit and delivery overclaim classes."
+}

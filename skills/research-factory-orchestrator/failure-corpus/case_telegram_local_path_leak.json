@@ -1,0 +1,7 @@
+{
+  "case_id": "case_telegram_local_path_leak",
+  "failure_type": "F007",
+  "bad_output_pattern": "Telegram message includes /home/node path",
+  "expected_guard": "no local paths in user-facing Telegram",
+  "validator_or_eval": "validate_no_local_paths_in_telegram.py"
+}

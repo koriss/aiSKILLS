@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorkUnitPlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "min_work_units",
+    "work_units",
+    "compiled_at",
+    "status"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "min_work_units": {
+      "type": "integer"
+    },
+    "work_units": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "compiled_at": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

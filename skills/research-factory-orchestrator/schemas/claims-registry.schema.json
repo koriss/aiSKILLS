@@ -1,9 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClaimsRegistry",
   "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claims"
+  ],
   "properties": {
-    "item_id": { "type": "string" },
-    "claims": { "type": "array", "items": { "$ref": "claim.schema.json" } }
-  },
-  "required": ["item_id", "claims"]
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
 }

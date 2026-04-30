@@ -1,0 +1,9 @@
+{
+  "case_id": "case_derived_inference_as_confirmed_fact",
+  "failure_type": "derived_inference_as_confirmed_fact",
+  "bad_output_pattern": "derived estimate labelled confirmed_fact",
+  "expected_guard": "derived_inference / estimate label",
+  "validator": "validate_inference_not_confirmed_fact.py",
+  "bad_sample": "bad_claims_inference_confirmed.json",
+  "good_sample": "good_claims.json"
+}

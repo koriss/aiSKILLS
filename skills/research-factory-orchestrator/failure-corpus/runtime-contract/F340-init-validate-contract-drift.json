@@ -1,0 +1,5 @@
+{
+  "case_id": "F340-init-validate-contract-drift",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

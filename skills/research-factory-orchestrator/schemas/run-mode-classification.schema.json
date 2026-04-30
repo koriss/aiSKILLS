@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Run Mode Classification",
+  "type": "object",
+  "properties": {
+    "run_mode": {
+      "type": "string"
+    },
+    "external_search_executed": {
+      "type": "boolean"
+    },
+    "production_research_allowed": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,4 @@
+/research_factory_orchestrator test
+| claim | verdict |
+|---|---|
+| A | B |

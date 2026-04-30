@@ -1,0 +1,5 @@
+{
+  "version": "15.0.0-runtime-contract-enforcement",
+  "bad_samples_must_fail": true,
+  "good_samples_must_pass": true
+}

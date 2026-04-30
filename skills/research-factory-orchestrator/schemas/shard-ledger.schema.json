@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShardLedger",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "shards": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "open_retryable_count": {
+      "type": "integer"
+    },
+    "unmerged_count": {
+      "type": "integer"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "shards",
+    "open_retryable_count",
+    "unmerged_count",
+    "complete"
+  ]
+}

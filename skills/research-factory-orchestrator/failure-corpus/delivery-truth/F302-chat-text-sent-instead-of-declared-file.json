@@ -1,0 +1,5 @@
+{
+  "case_id": "F302-chat-text-sent-instead-of-declared-file",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

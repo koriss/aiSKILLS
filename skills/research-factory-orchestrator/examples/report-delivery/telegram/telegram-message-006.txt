@@ -1,0 +1,4 @@
+[6/6] Файлы
+
+📎 full-report.html — полный standalone HTML-отчёт.
+📎 research-package.zip — proof package.

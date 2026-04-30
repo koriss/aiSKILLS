@@ -1,0 +1,24 @@
+{
+  "task_id": "ea58e6fc",
+  "work_units_completed": 12,
+  "collection_work_units_completed": 10,
+  "search_modes_present": [
+    "broad",
+    "exact",
+    "negative",
+    "primary",
+    "freshness",
+    "source_specific"
+  ],
+  "source_families_present": [
+    "primary_or_origin",
+    "official_or_institutional",
+    "independent_media",
+    "registry_or_database",
+    "contrary_or_debunking",
+    "archive_or_cached"
+  ],
+  "independent_sources_count": 24,
+  "passed": true,
+  "errors": []
+}

@@ -1,0 +1,13 @@
+{
+  "version": "18.3.2",
+  "machine_readable_artifacts_are_primary": true,
+  "html_string_heuristics_allowed_for": [
+    "render hygiene warnings"
+  ],
+  "html_string_heuristics_forbidden_for": [
+    "final gate pass",
+    "delivery truth",
+    "run mode truth",
+    "source support truth"
+  ]
+}

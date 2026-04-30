@@ -1,0 +1,8 @@
+{
+  "case_id": "case_cattle_timeout_partial_delivery",
+  "failure_type": "F001/F003",
+  "bad_output_pattern": "subagents timed out but report is presented as complete",
+  "expected_guard": "timeout failure packets, retry/replacement, quorum gate, partial status if unresolved",
+  "validator_or_eval": "validate_failure_packet_on_timeout.py + subagent_quorum eval",
+  "notes": "A completed label is invalid when required workers timed out."
+}

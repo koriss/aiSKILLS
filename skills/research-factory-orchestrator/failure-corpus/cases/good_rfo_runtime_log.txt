@@ -1,0 +1,6 @@
+
+/research_factory_orchestrator проверка видео о безотзывных сертификатах
+interface_runtime_adapter.py created normalized-command.json and runtime-job.json
+runtime_job_worker.py --execute-runtime invoked scripts/run_research_factory.py
+outbox_delivery_worker.py processed outbox events
+delivery-manifest.json updated from delivery-acks

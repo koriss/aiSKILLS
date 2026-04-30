@@ -1,18 +1,84 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source",
   "type": "object",
   "properties": {
-    "source_id": { "type": "string" },
-    "title": { "type": "string" },
-    "url": { "type": "string" },
-    "local_ref": { "type": "string" },
-    "date": { "type": "string" },
-    "source_type": { "type": "string" },
-    "reliability_tier": { "type": "integer" },
-    "independence": { "type": "string" },
-    "bias_risk": { "type": "string" },
-    "accessed_at": { "type": "string" },
-    "notes": { "type": "string" }
+    "source_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "official",
+        "registry",
+        "filing",
+        "court",
+        "dataset",
+        "scientific",
+        "editorial",
+        "specialist",
+        "tertiary",
+        "social",
+        "unknown"
+      ]
+    },
+    "reliability_tier": {
+      "type": "integer"
+    },
+    "accessed_at": {
+      "type": "string"
+    },
+    "full_url": {
+      "type": "string"
+    },
+    "supports_claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_family": {
+      "type": "string"
+    },
+    "int_family": {
+      "type": "string"
+    },
+    "collection_form": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "string"
+    },
+    "direct_collection": {
+      "type": "boolean"
+    },
+    "public_derivative": {
+      "type": "boolean"
+    },
+    "independence_score": {
+      "type": "number"
+    },
+    "origin_source_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
   },
-  "required": ["source_id", "reliability_tier"]
+  "additionalProperties": true,
+  "required": [
+    "source_id",
+    "title",
+    "full_url"
+  ]
 }

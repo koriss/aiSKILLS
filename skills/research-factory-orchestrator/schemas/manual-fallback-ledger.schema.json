@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Manual Fallback Ledger",
+  "type": "object",
+  "properties": {
+    "manual_search_used": {
+      "type": "boolean"
+    },
+    "manual_synthesis_used": {
+      "type": "boolean"
+    },
+    "integrated_into_rfo_artifacts": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,36 @@
+{
+  "version": "17.1.0-runtime-lifecycle-hardening",
+  "required_paths": [
+    "run.json",
+    "entrypoint-proof.json",
+    "runtime-status.json",
+    "interface/normalized-command.json",
+    "interface/interface-request.json",
+    "observability-events.jsonl",
+    "work-unit-plan.json",
+    "subagent-plan.json",
+    "subagent-ledger.json",
+    "ledgers/search-ledger.json",
+    "ledgers/tool-call-ledger.json",
+    "claims/claims-registry.json",
+    "evidence/evidence-cards.json",
+    "raw-evidence/raw-evidence-vault.json",
+    "provenance-manifest.json",
+    "artifact-manifest.json",
+    "validation-transcript.json",
+    "delivery-manifest.json",
+    "attachment-ledger.json",
+    "final-answer-gate.json",
+    "report/full-report.html",
+    "chat/chat-message-plan.json",
+    "jobs/runtime-job.json",
+    "outbox/outbox-policy.json",
+    "outbox/OUT-0001.json",
+    "outbox/OUT-0002.json",
+    "outbox/OUT-0003.json"
+  ],
+  "forbidden_package_types_as_final": [
+    "worker_bundle",
+    "subagent_outputs_only"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "case_id": "F272-summary-or-inventory-presented-as-full-read",
+  "failure_code": "F272",
+  "class": "context-acquisition-integrity",
+  "description": "summary or inventory presented as full read",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

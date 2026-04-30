@@ -1,0 +1,8 @@
+{
+  "case_id": "F271-claimed-all-files-read-without-ledger",
+  "failure_code": "F271",
+  "class": "context-acquisition-integrity",
+  "description": "claimed all files read without ledger",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

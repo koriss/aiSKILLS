@@ -1,0 +1,10 @@
+{
+  "item_id": "{{ITEM_ID}}",
+  "zip_path": "research-package.zip",
+  "zip_exists": false,
+  "required_files": [],
+  "present_files": [],
+  "missing_files": [],
+  "sha256": null,
+  "created_at": "{{CREATED_AT}}"
+}

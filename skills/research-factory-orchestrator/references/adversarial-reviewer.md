@@ -1,0 +1,1 @@
+Adversarial review is mandatory before final delivery. Return pass, conditional_pass, or blocked. Check unsupported claims, overclaiming, weak sources, source laundering, stale evidence, missing counterevidence, and summary confidence.

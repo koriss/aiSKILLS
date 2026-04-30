@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Claim Source Fit",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "source_id",
+    "claim_type",
+    "claim_regime",
+    "rank_class",
+    "evidence_weight"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "claim_type": {
+      "type": "string"
+    },
+    "claim_regime": {
+      "type": "string"
+    },
+    "rank_class": {
+      "type": "string",
+      "enum": [
+        "E5",
+        "E4",
+        "E3",
+        "E2",
+        "E1",
+        "E0"
+      ]
+    },
+    "evidence_weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "fit_reason": {
+      "type": "string"
+    },
+    "invalid_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "vector": {
+      "type": "object"
+    }
+  }
+}

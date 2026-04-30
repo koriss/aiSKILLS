@@ -1,0 +1,7 @@
+{
+  "case_id": "case_telegram_table_rendering",
+  "failure_type": "F008",
+  "bad_output_pattern": "Markdown/ASCII table sent to Telegram",
+  "expected_guard": "vertical verdict cards only",
+  "validator_or_eval": "validate_telegram_no_tables_strict.py"
+}

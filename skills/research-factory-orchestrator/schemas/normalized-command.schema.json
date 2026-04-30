@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NormalizedCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "command_id",
+    "interface",
+    "provider",
+    "conversation_id",
+    "message_id",
+    "user_id",
+    "command",
+    "task",
+    "attachments",
+    "created_at",
+    "delivery_constraints"
+  ],
+  "properties": {
+    "command_id": {
+      "type": "string"
+    },
+    "interface": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "conversation_id": {
+      "type": "string"
+    },
+    "message_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "command": {
+      "type": "string"
+    },
+    "task": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "delivery_constraints": {
+      "type": "object"
+    }
+  }
+}

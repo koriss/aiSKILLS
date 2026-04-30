@@ -1,0 +1,189 @@
+# Brainwashing, Mind Control & Coercive Persuasion Research Library
+# Compiled: 2026-04-20
+# Format: TITLE | AUTHOR | YEAR | DESCRIPTION | URL | FILE_PATH
+
+================================================================================
+SECTION 1: CLASSIC ACADEMIC TEXTS
+================================================================================
+
+TITLE: Thought Reform and the Psychology of Totalism: A Study of 'Brainwashing' in China
+AUTHOR: Robert Jay Lifton
+YEAR: 1961 (reissued 1989 with new preface)
+DESCRIPTION: The foundational text on thought reform. Lifton identifies 8 criteria of psychological manipulation: milieu control, mystical manipulation, demand for purity, confession culture, loading the language, thought stopping, doctrine over person, and dispensing of existence. Based on interviews with former Chinese prisoners.
+URL: https://archive.org/details/thoughtreformpsy0000lift
+FILE_PATH: propaganda-library/lifton_thought_reform_1961.pdf
+
+TITLE: Coercive Persuasion: A Socio-Psychological Analysis of the "Brainwashing" of American Civilian Prisoners by the Chinese Communists
+AUTHOR: Edgar H. Schein (with Inge Schneier and Curtis H. Barker)
+YEAR: 1961
+DESCRIPTION: Early academic analysis of coercive persuasion techniques used on Korean War POWs. Schein's work predates Lifton and focuses on the socio-psychological mechanisms of conversion.
+URL: https://archive.org/details/coercivepersuasi0000sche
+FILE_PATH: propaganda-library/schein_coercive_persuasion_1961.pdf
+
+TITLE: Obedience to Authority
+AUTHOR: Stanley Milgram
+YEAR: 1974
+DESCRIPTION: Milgram's book documenting his famous obedience experiments. Shows how ordinary people follow authority even to the point of harming others. Essential for understanding compliance mechanisms.
+URL: https://archive.org/details/ObedienceToAuthority_368
+FILE_PATH: propaganda-library/milgram_obedience_1974.pdf
+
+================================================================================
+SECTION 2: CONTEMPORARY CULT STUDIES
+================================================================================
+
+TITLE: Combatting Cult Mind Control
+AUTHOR: Steven Hassan
+YEAR: 1988 (updated edition 2018)
+DESCRIPTION: The BITE Model (Behavior, Information, Thought, Emotion) was developed by Hassan to describe how cults recruit and maintain control. The 2018 updated edition covers internet, trafficking, and terrorism.
+URL: https://archive.org/details/combattingcultmi0000hass
+FILE_PATH: propaganda-library/hassan_combating_cult_mind_control_1988.pdf
+
+TITLE: Cults in Our Midst: The Continuing Fight Against Their Hidden Menace
+AUTHOR: Margaret Thaler Singer (with Janja Lalich)
+YEAR: 1996 (revised 2003)
+DESCRIPTION: Comprehensive study of cult recruitment tactics, persuasion techniques, and organizational manipulation. Singer was a key figure in the APA's task force on cults.
+URL: https://archive.org/details/cultsinourmidst0000sing
+FILE_PATH: propaganda-library/singer_cults_in_our_midst_1996.pdf
+
+TITLE: The Lucifer Effect: Understanding How Good People Turn Evil
+AUTHOR: Philip Zimbardo
+YEAR: 2007
+DESCRIPTION: Zimbardo's book about the Stanford Prison Experiment, exploring the situational factors that lead to abusive behavior. Includes analysis of Abu Ghraib.
+URL: http://pdf.prisonexp.org/ijcp1973.pdf
+FILE_PATH: propaganda-library/zimbardo_lucifer_effect_2007.pdf
+
+================================================================================
+SECTION 3: CIA DECLASSIFIED DOCUMENTS
+================================================================================
+
+TITLE: MKULTRA Inspection Report
+AUTHOR: CIA Office of the Inspector General
+YEAR: 1956 (declassified later)
+DESCRIPTION: Official CIA inspection report on MKULTRA program. Documents research into behavioral modification, drug experiments, and mind control research.
+URL: https://info.publicintelligence.net/CIA-MKULTRA-IG.pdf
+FILE_PATH: propaganda-library/cia_mkultra_inspection_report.pdf
+
+TITLE: MKULTRA Joint Subcommittee Report
+AUTHOR: United States Senate Select Committee on Intelligence
+YEAR: 1977 (declassified)
+DESCRIPTION: Senate investigation into CIA's research and development of chemical, biological, and radiological materials for behavioral modification.
+URL: https://www.hks.harvard.edu/sites/default/files/2025-01/24_Meier_02.pdf
+FILE_PATH: propaganda-library/senate_mkultra_report_1977.pdf
+
+TITLE: CIA Analysis of Schein's Coercive Persuasion
+AUTHOR: Center for the Study of Intelligence (CIA)
+YEAR: 1962 (declassified 2007)
+DESCRIPTION: CIA's review and analysis of Edgar Schein's book on coercive persuasion. Shows how intelligence community processed these concepts.
+URL: https://www.cia.gov/resources/csi/static/Review-Coercive-Persuasion.pdf
+FILE_PATH: propaganda-library/cia_review_coercive_persuasion_1962.pdf
+
+TITLE: MKULTRA Document (National Security Archive)
+AUTHOR: CIA / National Security Archive
+YEAR: 1963
+DESCRIPTION: Additional declassified MKULTRA documentation from the National Security Archive.
+URL: https://nsarchive.gwu.edu/sites/default/files/documents/1963-07-26%20JM%20Box%208%20F2%20MKUltra-IG_Report-ocr.pdf
+FILE_PATH: propaganda-library/mkultra_doc_1963.pdf
+
+================================================================================
+SECTION 4: PSYCHOLOGICAL OPERATIONS & RUSSIAN STUDIES
+================================================================================
+
+TITLE: The Art and Science of Psychological Operations: Case Studies of Military Application
+AUTHOR: American Institutes for Research (for US Army)
+YEAR: 1975
+DESCRIPTION: Comprehensive military psychological operations research including case studies of Soviet/Russian PSYOP techniques.
+URL: https://ia800502.us.archive.org/20/items/DTIC_ADA028847/DTIC_ADA028847.pdf
+FILE_PATH: propaganda-library/us_army_psyops_art_science_1975.pdf
+
+TITLE: Psychological Operations: Principles and Case Studies
+AUTHOR: US Army / DTIC
+YEAR: 1996
+DESCRIPTION: Military doctrine on psychological operations. Bibliography includes quick studies of foreign countries including Russian/Soviet methods.
+URL: https://apps.dtic.mil/sti/tr/pdf/ADA316643.pdf
+FILE_PATH: propaganda-library/army_psyops_principles_case_studies_1996.pdf
+
+TITLE: Modern Russian Psychological Operations (PSYOPS)
+AUTHOR: Peter A. Mattsson (National Defence University, Finland)
+YEAR: 2023
+DESCRIPTION: Academic research paper on contemporary Russian military psychological operations, definitions, and functions in Russian Armed Forces.
+URL: https://www.doria.fi/bitstream/handle/10024/117652/MATTSSON%20Peter_WG10_Abstract_Modern%20Russian%20Psychological%20Operations%20(PSYOPS).pdf
+FILE_PATH: propaganda-library/modern_russian_psyops_mattsson_2023.pdf
+
+================================================================================
+SECTION 5: ESPIONAGE & COLD WAR MANUALS
+================================================================================
+
+TITLE: Moscow Rules - Soviet Intelligence Practices
+AUTHOR: Various (compiled by KiwiSpies)
+YEAR: 2008
+DESCRIPTION: Compilation of Soviet/Russian intelligence tradecraft developed during Cold War. Includes operational security principles for CIA officers in Moscow.
+URL: https://kiwispies.com/pdfs/MoscowRules.pdf
+FILE_PATH: propaganda-library/moscow_rules_kiwispies.pdf
+
+TITLE: The Moscow Rules
+AUTHOR: CIA (declassified)
+YEAR: 1980s (declassified)
+DESCRIPTION: CIA document discussing the informal guidelines developed during Cold War for operatives working in Moscow.
+URL: https://www.cia.gov/readingroom/docs/CIA-RDP90-00965R000504600005-5.pdf
+FILE_PATH: propaganda-library/moscow_rules_cia_declassified.pdf
+
+================================================================================
+SECTION 6: TOTALITARIAN PROPAGANDA THEORY
+================================================================================
+
+TITLE: Modeling Brainwashing and Ideological Power in Totalitarian Regimes
+AUTHOR: Academic paper (AEF Working Papers)
+YEAR: 2025
+DESCRIPTION: Mathematical framework for analyzing brainwashing and ideological control employed by totalitarian regimes.
+URL: https://down.aefweb.net/WorkingPapers/w766.pdf
+FILE_PATH: propaganda-library/brainwashing_ideological_power_modeling_2025.pdf
+
+TITLE: Propaganda as a Weapon and a Tool of Totalitarian Power
+AUTHOR: ResearchGate academic paper
+YEAR: 2020
+DESCRIPTION: Analysis of propaganda as weapon in totalitarian regimes, covering war and occupation years 1939-1945.
+URL: https://www.researchgate.net/publication/339814958_Propaganda_as_a_weapon_and_a_tool_of_totalitarian_power
+FILE_PATH: propaganda-library/propaganda_totalitarian_weapon_2020.pdf
+
+TITLE: Totalitarian Propaganda as Discourse: A Comparative Look at Austria and France in the Fascist Era
+AUTHOR: Alexander Hanisch-Wolfram
+YEAR: 2016
+DESCRIPTION: Academic comparative analysis of fascist-era propaganda discourse in Austria and France.
+URL: https://www.transcript-open.de/pdf_chapter/9783839413937/9783839413937-009/9783839413937-009.pdf
+FILE_PATH: propaganda-library/totalitarian_propaganda_discourse_2016.pdf
+
+================================================================================
+SECTION 7: KEY RESEARCH REFERENCES (AVAILABLE ONLINE)
+================================================================================
+
+Stanford Prison Experiment - Zimbardo Original Paper:
+URL: https://www.simplypsychology.org/wp-content/uploads/zimbardo-paper.pdf
+
+Lifton's Eight Criteria of Thought Reform (PDF summary):
+URL: https://www.scribd.com/document/828814758/Dr-Robert-J-Lifton-s-8-Criteria
+
+Coercive Persuasion full text (Internet Archive):
+URL: https://archive.org/stream/in.ernet.dli.2015.138931/2015.138931.Coercive-Persuasion_djvu.txt
+
+BITE Model of Authoritarian Control (Steven Hassan):
+URL: https://freedomofmind.com/cult-mind-control/bite-model-pdf-download/
+
+================================================================================
+SUMMARY
+================================================================================
+Total sources documented: 25+
+Key archives: archive.org (primary source for books), cia.gov (declassified docs),
+               dtic.mil (military research), harvard.edu (academic papers)
+
+Primary authors covered:
+- Robert Lifton (Thought Reform, 1961)
+- Edgar Schein (Coercive Persuasion, 1961)
+- Stanley Milgram (Obedience to Authority, 1974)
+- Philip Zimbardo (Stanford Prison Experiment)
+- Steven Hassan (BITE Model)
+- Margaret Singer (Cults research)
+- CIA declassified MKULTRA documents
+- Modern Russian PSYOP research
+
+Note: Archive.org provides free downloads for most texts. CIA.gov provides
+declassified documents directly. Always verify copyright status locally.

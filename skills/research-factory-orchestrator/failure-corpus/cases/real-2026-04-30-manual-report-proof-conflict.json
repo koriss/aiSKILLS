@@ -1,0 +1,11 @@
+{
+  "case_id": "real-2026-04-30-manual-report-proof-conflict",
+  "description": "Manual/Deep Investigation report mixed RFO claims and validation passed with failed gates",
+  "expected_failure_classes": [
+    "F205",
+    "F216",
+    "F217",
+    "F218"
+  ],
+  "source": "user-provided real Telegram failure"
+}

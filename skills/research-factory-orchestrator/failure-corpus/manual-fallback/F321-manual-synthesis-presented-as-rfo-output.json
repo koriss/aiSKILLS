@@ -1,0 +1,5 @@
+{
+  "case_id": "F321-manual-synthesis-presented-as-rfo-output",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

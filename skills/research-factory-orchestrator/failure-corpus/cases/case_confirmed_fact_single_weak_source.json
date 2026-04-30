@@ -1,0 +1,9 @@
+{
+  "case_id": "case_confirmed_fact_single_weak_source",
+  "failure_type": "confirmed_fact_single_weak_source",
+  "bad_output_pattern": "confirmed_fact with one non-primary source",
+  "expected_guard": "2 sources or single_source_primary=true",
+  "validator": "validate_confirmed_fact_source_support.py",
+  "bad_sample": "bad_claims_single_source.json",
+  "good_sample": "good_claims.json"
+}

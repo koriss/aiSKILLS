@@ -1,0 +1,8 @@
+{
+  "case_id": "F282-repeated-self-certification-after-user-correction",
+  "failure_code": "F282",
+  "class": "context-acquisition-integrity",
+  "description": "repeated self certification after user correction",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

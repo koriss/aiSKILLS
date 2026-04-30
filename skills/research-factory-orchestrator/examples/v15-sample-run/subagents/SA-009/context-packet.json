@@ -1,0 +1,20 @@
+{
+  "run_id": "ea58e6fc",
+  "task": "Sample v15 runtime test",
+  "work_unit_id": "WU-009-strong-tie-pivoting",
+  "axis": "strong_tie_pivoting",
+  "allowed_scope": [
+    "target-relevant collection and analysis"
+  ],
+  "forbidden_scope": [
+    "unsupported conclusions",
+    "unbounded recursion",
+    "raw sensitive data in Telegram"
+  ],
+  "required_outputs": [
+    "sources.json",
+    "claims.json",
+    "evidence.json",
+    "errors.json"
+  ]
+}

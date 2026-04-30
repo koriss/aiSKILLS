@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Claim Evidence Weight",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "verdict",
+    "evidence_weight_total",
+    "verdict_scope"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "evidence_weight_total": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "independent_support_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "visibility_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "confirmed_within_scope",
+        "confirmed_as_statement",
+        "likely",
+        "partial",
+        "contested",
+        "unverified",
+        "misleading",
+        "rejected",
+        "insufficient_evidence"
+      ]
+    },
+    "verdict_scope": {
+      "type": "string"
+    },
+    "blocked_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

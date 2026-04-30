@@ -1,0 +1,5 @@
+{
+  "case_id": "F314-final-report-contains-only-seed-claims",
+  "release": "18.3.2",
+  "expected": "validator blocks or labels this condition; no production completion claim allowed"
+}

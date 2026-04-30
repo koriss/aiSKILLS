@@ -1,9 +1,27 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Queue",
   "type": "object",
   "properties": {
-    "task_id": { "type": "string" },
-    "items": { "type": "array", "items": { "$ref": "queue-item.schema.json" } }
+    "task_id": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
   },
-  "required": ["task_id", "items"]
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "items"
+  ]
 }

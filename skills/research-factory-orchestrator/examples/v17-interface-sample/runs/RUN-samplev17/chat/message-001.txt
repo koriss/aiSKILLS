@@ -1,0 +1,2 @@
+Исследование принято в runtime job.
+run_id: RUN-samplev17

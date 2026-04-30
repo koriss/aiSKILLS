@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SemanticReport",
+  "type": "object",
+  "properties": {
+    "report_meta": {
+      "type": "object"
+    },
+    "summary": {
+      "type": "object"
+    },
+    "archetype": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "figures": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "appendices": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "validation": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "report_meta",
+    "summary",
+    "sections",
+    "claims",
+    "sources"
+  ]
+}

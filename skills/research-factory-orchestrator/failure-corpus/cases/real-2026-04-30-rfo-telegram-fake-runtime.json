@@ -1,0 +1,5 @@
+{
+  "case_id": "real-2026-04-30-rfo-telegram-fake-runtime",
+  "expected_failures": ["F023", "F024", "F035", "F041", "F043", "F050", "F150", "F152", "F190", "F191", "F193", "F195"],
+  "summary": "Real Telegram log where /research_factory_orchestrator was routed to plain subagent and report claimed runtime/package/delivery without proof."
+}

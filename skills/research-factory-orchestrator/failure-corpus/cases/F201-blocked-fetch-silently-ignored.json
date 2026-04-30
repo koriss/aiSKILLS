@@ -1,0 +1,8 @@
+{
+  "case_id": "F201-blocked-fetch-silently-ignored",
+  "failure_code": "F201",
+  "description": "Blocked fetch not recorded as gap",
+  "expected_validator": "validate_source_gap_reflected_in_final_verdict.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

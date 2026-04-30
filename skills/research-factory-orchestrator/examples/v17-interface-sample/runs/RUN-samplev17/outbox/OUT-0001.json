@@ -1,0 +1,15 @@
+{
+  "event_id": "OUT-0001",
+  "run_id": "RUN-samplev17",
+  "job_id": "JOB-samplev17",
+  "interface": "telegram",
+  "provider": "telegram",
+  "type": "send_message",
+  "payload_path": "chat/message-001.txt",
+  "attachments": [],
+  "status": "sent",
+  "attempts": 1,
+  "idempotency_key": "RUN-samplev17:message-001",
+  "created_at": "2026-04-29T00:00:00Z",
+  "sent_at": "2026-04-29T00:00:01Z"
+}

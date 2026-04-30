@@ -1,0 +1,26 @@
+{
+  "run_id": "ea58e6fc",
+  "passed": true,
+  "checks": {
+    "work_unit_compilation_validated": true,
+    "no_single_work_unit_run": true,
+    "no_single_subagent_run": true,
+    "subagent_quorum_met": true,
+    "collection_coverage_met": true,
+    "search_ledger_present": true,
+    "subagent_ledger_present": true,
+    "artifact_manifest_validated": true,
+    "provenance_manifest_validated": true,
+    "standalone_html_validated": true,
+    "telegram_no_tables": true,
+    "telegram_no_local_paths": true,
+    "no_sensitive_data_in_telegram": true,
+    "research_package_zip_created": true,
+    "research_package_zip_sent": true,
+    "html_report_sent": true,
+    "delivery_manifest_validated": true,
+    "failure_corpus_evals_passed": true,
+    "no_manual_check_as_final_proof": true
+  },
+  "created_at": "2026-04-29T00:00:00Z"
+}

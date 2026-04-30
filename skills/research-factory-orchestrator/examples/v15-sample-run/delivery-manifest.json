@@ -1,0 +1,19 @@
+{
+  "run_id": "ea58e6fc",
+  "delivery_status": "delivered",
+  "local_paths_exposed": false,
+  "attachments": [
+    {
+      "type": "standalone_html",
+      "required": true,
+      "sent": true
+    },
+    {
+      "type": "research_package",
+      "required": true,
+      "sent": true
+    }
+  ],
+  "telegram_messages": [],
+  "created_at": "2026-04-29T00:00:00Z"
+}

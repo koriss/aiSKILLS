@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "file",
+    "sha256",
+    "bytes",
+    "operation",
+    "status",
+    "timestamp"
+  ],
+  "properties": {
+    "file": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string"
+    },
+    "bytes": {
+      "type": "integer"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "read",
+        "index",
+        "load",
+        "execute",
+        "smoke",
+        "memory_write"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "skipped",
+        "timeout",
+        "failed"
+      ]
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "loaded_to_active_context": {
+      "type": "boolean"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

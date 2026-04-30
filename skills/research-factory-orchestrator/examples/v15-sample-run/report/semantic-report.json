@@ -1,0 +1,21 @@
+{
+  "report_meta": {
+    "run_id": "ea58e6fc",
+    "topic": "Sample v15 runtime test",
+    "slug": "sample-v15-runtime-test",
+    "created_at": "2026-04-29T01:16:36Z",
+    "updated_at": "2026-04-29T01:16:36Z",
+    "status": "created",
+    "skill_version": "15.0.0-runtime-contract-enforcement",
+    "mode": "AUTO_COMPILE_AND_EXECUTE",
+    "paths": {
+      "html_report": "report/full-report.html",
+      "research_package": "package/research-package.zip",
+      "telegram_plan": "telegram/telegram-message-plan.json"
+    }
+  },
+  "summary": {},
+  "sections": [],
+  "claims": [],
+  "sources": []
+}

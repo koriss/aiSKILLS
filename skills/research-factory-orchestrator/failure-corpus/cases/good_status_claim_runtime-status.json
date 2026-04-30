@@ -1,0 +1,7 @@
+{
+  "run_id": "GOOD-STATUS",
+  "entrypoint": "scripts/run_research_factory.py",
+  "state": "compiled",
+  "work_units_total": 12,
+  "workers_planned": 12
+}

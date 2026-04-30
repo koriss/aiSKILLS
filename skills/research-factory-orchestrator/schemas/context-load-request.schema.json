@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "mode",
+    "requested_scope",
+    "claim_policy"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "operational_load",
+        "exhaustive_audit",
+        "on_demand"
+      ]
+    },
+    "requested_scope": {
+      "type": "string"
+    },
+    "claim_policy": {
+      "type": "string"
+    },
+    "max_active_context_tokens": {
+      "type": "integer"
+    },
+    "batching_required": {
+      "type": "boolean"
+    }
+  }
+}

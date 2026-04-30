@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IdentityCandidate",
+  "type": "object",
+  "properties": {
+    "candidate_id": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "claimed_role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "claimed_company": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "claimed_location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "identity_status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "probable",
+        "candidate",
+        "rejected",
+        "unrelated"
+      ]
+    },
+    "match_score": {
+      "type": "integer"
+    },
+    "hard_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "soft_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "negative_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "critical_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision": {
+      "type": "string"
+    },
+    "used_in_report": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "candidate_id",
+    "platform",
+    "url",
+    "display_name",
+    "identity_status",
+    "hard_signals",
+    "critical_conflicts",
+    "used_in_report"
+  ]
+}

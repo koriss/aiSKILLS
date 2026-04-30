@@ -1,0 +1,9 @@
+{
+  "case_id": "case_telegram_table_rendering",
+  "failure_type": "telegram_table",
+  "bad_output_pattern": "Markdown or ASCII table in Telegram",
+  "expected_guard": "vertical verdict cards only",
+  "validator": "validate_telegram_no_tables_strict.py",
+  "bad_sample": "bad_telegram_table.txt",
+  "good_sample": "good_telegram.txt"
+}

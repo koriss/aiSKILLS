@@ -1,0 +1,11 @@
+{
+  "case_id": "real-2026-04-30-late-sa011-after-report",
+  "description": "SA-011 raw-evidence arrived after report was sent; no amendment/merge",
+  "expected_failure_classes": [
+    "F210",
+    "F211",
+    "F213",
+    "F214"
+  ],
+  "source": "user-provided real Telegram failure"
+}

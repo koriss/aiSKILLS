@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchStrategy",
+  "type": "object",
+  "properties": {
+    "query_families": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "broad_topical_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exact_entity_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "primary_source_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_specific_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contrary_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recent_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "terminology_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_gap_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "broad_topical_queries",
+    "exact_entity_queries",
+    "primary_source_queries",
+    "contrary_queries"
+  ]
+}

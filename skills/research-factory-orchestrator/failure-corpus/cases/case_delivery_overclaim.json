@@ -1,0 +1,9 @@
+{
+  "case_id": "case_delivery_overclaim",
+  "failure_type": "delivery_overclaim",
+  "bad_output_pattern": "delivered without required attachments",
+  "expected_guard": "delivery manifest required attachments sent",
+  "validator": "validate_delivery_manifest.py",
+  "bad_sample": "bad_delivery_overclaim.json",
+  "good_sample": "good_delivery.json"
+}

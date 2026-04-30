@@ -1,0 +1,11 @@
+{
+  "claims": [
+    {
+      "claim_id": "C001",
+      "claim_type": "confirmed_fact",
+      "source_ids": [
+        "S001"
+      ]
+    }
+  ]
+}

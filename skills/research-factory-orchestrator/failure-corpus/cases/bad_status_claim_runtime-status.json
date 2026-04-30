@@ -1,0 +1,7 @@
+{
+  "run_id": "BAD-STATUS",
+  "entrypoint": "plain-subagent",
+  "state": "created",
+  "work_units_total": 1,
+  "workers_planned": 1
+}

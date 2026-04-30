@@ -1,0 +1,4 @@
+[{{SEQ}}/{{TOTAL}}] Файлы
+
+📎 full-report.html — полный standalone HTML-отчёт.
+📎 research-package.zip — claims, sources, evidence cards, validation proof.

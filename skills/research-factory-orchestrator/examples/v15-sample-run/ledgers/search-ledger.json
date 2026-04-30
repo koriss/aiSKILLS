@@ -1,0 +1,55 @@
+{
+  "task_id": "ea58e6fc",
+  "searches": [
+    {
+      "search_id": "SEARCH-001",
+      "work_unit_id": "WU-001",
+      "query": "sample broad",
+      "search_mode": "broad",
+      "status": "completed",
+      "result_count": 5
+    },
+    {
+      "search_id": "SEARCH-002",
+      "work_unit_id": "WU-002",
+      "query": "sample exact",
+      "search_mode": "exact",
+      "status": "completed",
+      "result_count": 5
+    },
+    {
+      "search_id": "SEARCH-003",
+      "work_unit_id": "WU-003",
+      "query": "sample negative",
+      "search_mode": "negative",
+      "status": "completed",
+      "result_count": 5
+    },
+    {
+      "search_id": "SEARCH-004",
+      "work_unit_id": "WU-004",
+      "query": "sample primary",
+      "search_mode": "primary",
+      "status": "completed",
+      "result_count": 5
+    },
+    {
+      "search_id": "SEARCH-005",
+      "work_unit_id": "WU-005",
+      "query": "sample freshness",
+      "search_mode": "freshness",
+      "status": "completed",
+      "result_count": 5
+    },
+    {
+      "search_id": "SEARCH-006",
+      "work_unit_id": "WU-006",
+      "query": "sample source_specific",
+      "search_mode": "source_specific",
+      "status": "completed",
+      "result_count": 5
+    }
+  ],
+  "total_searches": 6,
+  "created_at": "2026-04-29T00:00:00Z"
+}

@@ -1,0 +1,20 @@
+{
+  "work_unit_id": "WU-001",
+  "objective": "",
+  "entity_scope": "",
+  "coverage_categories": [],
+  "int_families": [],
+  "source_families": [],
+  "required_inputs": [],
+  "required_outputs": [],
+  "forbidden_completion": [
+    "free text only",
+    "scope reduction",
+    "missing artifacts"
+  ],
+  "validators": [],
+  "max_attempts": 3,
+  "retry_policy": "retry_with_same_contract_fresh_context",
+  "merge_target": "",
+  "done_definition": []
+}

@@ -1,0 +1,8 @@
+{
+  "case_id": "F228-local-model-circuit-open-but-used",
+  "failure_code": "F228",
+  "description": "Unhealthy local model backend used despite open circuit",
+  "expected_validator": "validate_local_model_circuit_breaker.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

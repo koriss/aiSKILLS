@@ -1,0 +1,8 @@
+{
+  "case_id": "F172-source-laundering-counted-as-independence",
+  "failure_code": "F172",
+  "description": "Reprints counted as independent evidence",
+  "expected_validator": "validate_source_laundering.py",
+  "expected": "fail_or_gate_block",
+  "version_added": "18.3.0-source-quality-execution-reliability-hardening"
+}

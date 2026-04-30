@@ -1,0 +1,14 @@
+{
+  "assignment_id": "A-006",
+  "subagent_id": "SA-006",
+  "work_unit_id": "WU-006-timeline-freshness",
+  "objective": "Execute timeline_freshness coverage for the target task.",
+  "context_packet_path": "subagents/SA-006/context-packet.json",
+  "required_outputs": [
+    "sources.json",
+    "claims.json",
+    "evidence.json",
+    "errors.json"
+  ],
+  "status": "planned"
+}

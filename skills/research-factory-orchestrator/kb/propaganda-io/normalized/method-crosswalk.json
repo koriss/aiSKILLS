@@ -1,0 +1,2729 @@
+{
+  "created_at": "2026-04-27T23:57:25Z",
+  "crosswalk": [
+    {
+      "propaganda_method_id": "AM-001",
+      "io_method_id": "IO_M019",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "active measures",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-001",
+      "io_method_id": "IO_M019",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "active measures",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-001",
+      "io_method_id": "PROP_AM-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "active measures",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-002",
+      "io_method_id": "IO_M016",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "disinformation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-002",
+      "io_method_id": "IO_M016",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "disinformation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-002",
+      "io_method_id": "IO_M089",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "disinformation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-002",
+      "io_method_id": "PROP_AM-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "disinformation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-003",
+      "io_method_id": "IO_P-AM-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "internet facilitated influence",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-003",
+      "io_method_id": "PROP_AM-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "internet facilitated influence",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-004",
+      "io_method_id": "IO_P-AM-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "enemy image construction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-004",
+      "io_method_id": "PROP_AM-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "enemy image construction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-005",
+      "io_method_id": "IO_P-AM-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "proxy war via surrogate means",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "AM-005",
+      "io_method_id": "PROP_AM-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "proxy war via surrogate means",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-001",
+      "io_method_id": "IO_P-BER-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "engineering of consent",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-001",
+      "io_method_id": "PROP_BER-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "engineering of consent",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-002",
+      "io_method_id": "IO_P-BER-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "managed symbols",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-002",
+      "io_method_id": "PROP_BER-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "managed symbols",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-003",
+      "io_method_id": "IO_P-BER-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "interest aggregation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-003",
+      "io_method_id": "PROP_BER-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "interest aggregation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-004",
+      "io_method_id": "IO_P-BER-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pseudo event creation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-004",
+      "io_method_id": "PROP_BER-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pseudo event creation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-005",
+      "io_method_id": "IO_P-BER-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "invisible government",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-005",
+      "io_method_id": "PROP_BER-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "invisible government",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-006",
+      "io_method_id": "IO_P-BER-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "opinion leaders principle",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-006",
+      "io_method_id": "PROP_BER-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "opinion leaders principle",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-007",
+      "io_method_id": "IO_P-BER-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "psychology of public relations",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-007",
+      "io_method_id": "PROP_BER-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "psychology of public relations",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-008",
+      "io_method_id": "IO_P-BER-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "economics of propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-008",
+      "io_method_id": "PROP_BER-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "economics of propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-009",
+      "io_method_id": "IO_P-BER-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "engineering consent bernays",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "BER-009",
+      "io_method_id": "PROP_BER-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "engineering consent bernays",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-001",
+      "io_method_id": "IO_P-CHI-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "ideological work s xi ng g ngzu",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-001",
+      "io_method_id": "PROP_CHI-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "ideological work s xi ng g ngzu",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-002",
+      "io_method_id": "IO_P-CHI-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "atrocity story fabrication",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-002",
+      "io_method_id": "PROP_CHI-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "atrocity story fabrication",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-003",
+      "io_method_id": "IO_P-CHI-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "framing recontextualization",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-003",
+      "io_method_id": "PROP_CHI-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "framing recontextualization",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-004",
+      "io_method_id": "IO_P-CHI-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "media flooding saturation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-004",
+      "io_method_id": "PROP_CHI-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "media flooding saturation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-005",
+      "io_method_id": "IO_P-CHI-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "value manipulation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHI-005",
+      "io_method_id": "PROP_CHI-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "value manipulation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-001",
+      "io_method_id": "IO_P-CHOM-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "media ownership filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-001",
+      "io_method_id": "PROP_CHOM-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "media ownership filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-002",
+      "io_method_id": "IO_P-CHOM-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "advertising filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-002",
+      "io_method_id": "PROP_CHOM-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "advertising filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-003",
+      "io_method_id": "IO_P-CHOM-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "sourcing filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-003",
+      "io_method_id": "PROP_CHOM-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "sourcing filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-004",
+      "io_method_id": "IO_P-CHOM-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "flak filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-004",
+      "io_method_id": "PROP_CHOM-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "flak filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-005",
+      "io_method_id": "IO_P-CHOM-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "anti communism ideology filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CHOM-005",
+      "io_method_id": "PROP_CHOM-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "anti communism ideology filter",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-001",
+      "io_method_id": "IO_P-CIPSO-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "демонстративное размещение материалов о потерях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-001",
+      "io_method_id": "PROP_CIPSO-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "демонстративное размещение материалов о потерях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-002",
+      "io_method_id": "IO_P-CIPSO-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "телефонный терроризм",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-002",
+      "io_method_id": "PROP_CIPSO-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "телефонный терроризм",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-003",
+      "io_method_id": "IO_P-CIPSO-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "публичное распространение персональных данных",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-003",
+      "io_method_id": "PROP_CIPSO-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "публичное распространение персональных данных",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-004",
+      "io_method_id": "IO_P-CIPSO-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "программы сдачи в плен",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-004",
+      "io_method_id": "PROP_CIPSO-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "программы сдачи в плен",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-005",
+      "io_method_id": "IO_P-CIPSO-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "взлом радиочастот",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-005",
+      "io_method_id": "PROP_CIPSO-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "взлом радиочастот",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-006",
+      "io_method_id": "IO_P-CIPSO-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "псевдопатриотические экстремистские организации",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-006",
+      "io_method_id": "PROP_CIPSO-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "псевдопатриотические экстремистские организации",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-007",
+      "io_method_id": "IO_P-CIPSO-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о подполье на подконтрольных рф территориях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-007",
+      "io_method_id": "PROP_CIPSO-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о подполье на подконтрольных рф территориях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-008",
+      "io_method_id": "IO_P-CIPSO-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "операции спецслужб по вовлечению молодёжи arg",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-008",
+      "io_method_id": "PROP_CIPSO-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "операции спецслужб по вовлечению молодёжи arg",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-009",
+      "io_method_id": "IO_P-CIPSO-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "угрозы семье военнослужащего",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-009",
+      "io_method_id": "PROP_CIPSO-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "угрозы семье военнослужащего",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-010",
+      "io_method_id": "IO_P-CIPSO-010",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые обращения пленных офицеров",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-010",
+      "io_method_id": "PROP_CIPSO-010",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые обращения пленных офицеров",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-011",
+      "io_method_id": "IO_P-CIPSO-011",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые ресурсы от имени местных жителей",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-011",
+      "io_method_id": "PROP_CIPSO-011",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые ресурсы от имени местных жителей",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-012",
+      "io_method_id": "IO_P-CIPSO-012",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые аккаунты журналистов и общественных деятелей",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-012",
+      "io_method_id": "PROP_CIPSO-012",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые аккаунты журналистов и общественных деятелей",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-013",
+      "io_method_id": "IO_P-CIPSO-013",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые видеосюжеты от имени российских сми",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-013",
+      "io_method_id": "PROP_CIPSO-013",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые видеосюжеты от имени российских сми",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-014",
+      "io_method_id": "IO_P-CIPSO-014",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "сайты и боты для сбора данных о военнослужащих",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-014",
+      "io_method_id": "PROP_CIPSO-014",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "сайты и боты для сбора данных о военнослужащих",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-015",
+      "io_method_id": "IO_P-CIPSO-015",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о военных преступлениях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-015",
+      "io_method_id": "PROP_CIPSO-015",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о военных преступлениях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-016",
+      "io_method_id": "IO_P-CIPSO-016",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "информационно психологические спецоперации с реальным применением оружия",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-016",
+      "io_method_id": "PROP_CIPSO-016",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "информационно психологические спецоперации с реальным применением оружия",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-017",
+      "io_method_id": "IO_P-CIPSO-017",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "подложные сообщения очевидцев об обстрелах",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-017",
+      "io_method_id": "PROP_CIPSO-017",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "подложные сообщения очевидцев об обстрелах",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-018",
+      "io_method_id": "IO_P-CIPSO-018",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "ядерная угроза",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-018",
+      "io_method_id": "PROP_CIPSO-018",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "ядерная угроза",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-019",
+      "io_method_id": "IO_P-CIPSO-019",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "угроза подрыва заэс",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-019",
+      "io_method_id": "PROP_CIPSO-019",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "угроза подрыва заэс",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-020",
+      "io_method_id": "IO_P-CIPSO-020",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки об убийствах и покушениях организованных российскими спецслужбами",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-020",
+      "io_method_id": "PROP_CIPSO-020",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки об убийствах и покушениях организованных российскими спецслужбами",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-021",
+      "io_method_id": "IO_P-CIPSO-021",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о потерях и пленных переиспользование кадров",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-021",
+      "io_method_id": "PROP_CIPSO-021",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о потерях и пленных переиспользование кадров",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-022",
+      "io_method_id": "IO_P-CIPSO-022",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "публикация кадров с убийством пленных",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-022",
+      "io_method_id": "PROP_CIPSO-022",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "публикация кадров с убийством пленных",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-023",
+      "io_method_id": "IO_P-CIPSO-023",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые рейтинги и искажённая статистика",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-023",
+      "io_method_id": "PROP_CIPSO-023",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые рейтинги и искажённая статистика",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-024",
+      "io_method_id": "IO_P-CIPSO-024",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "телефонное мошенничество",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-024",
+      "io_method_id": "PROP_CIPSO-024",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "телефонное мошенничество",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-025",
+      "io_method_id": "IO_P-CIPSO-025",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о победах всу",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-025",
+      "io_method_id": "PROP_CIPSO-025",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о победах всу",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-026",
+      "io_method_id": "IO_P-CIPSO-026",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые обращения от лица российских военнослужащих",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-026",
+      "io_method_id": "PROP_CIPSO-026",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые обращения от лица российских военнослужащих",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-027",
+      "io_method_id": "IO_P-CIPSO-027",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "перехват связи и spoofing",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-027",
+      "io_method_id": "PROP_CIPSO-027",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "перехват связи и spoofing",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-028",
+      "io_method_id": "IO_P-CIPSO-028",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "отрицание успехов россии",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-028",
+      "io_method_id": "PROP_CIPSO-028",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "отрицание успехов россии",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-029",
+      "io_method_id": "IO_P-CIPSO-029",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "отрицание принудительной мобилизации на украине",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-029",
+      "io_method_id": "PROP_CIPSO-029",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "отрицание принудительной мобилизации на украине",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-030",
+      "io_method_id": "IO_P-CIPSO-030",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "информационная подготовка наступления",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-030",
+      "io_method_id": "PROP_CIPSO-030",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "информационная подготовка наступления",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-031",
+      "io_method_id": "IO_P-CIPSO-031",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "манипуляция данными о потерях и госпиталях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-031",
+      "io_method_id": "PROP_CIPSO-031",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "манипуляция данными о потерях и госпиталях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-032",
+      "io_method_id": "IO_P-CIPSO-032",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые заявления от имени руководства рф",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-032",
+      "io_method_id": "PROP_CIPSO-032",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые заявления от имени руководства рф",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-033",
+      "io_method_id": "IO_P-CIPSO-033",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки об эвакуации",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-033",
+      "io_method_id": "PROP_CIPSO-033",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки об эвакуации",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-034",
+      "io_method_id": "IO_P-CIPSO-034",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о выходе подразделений из прифронтовых пунктов",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-034",
+      "io_method_id": "PROP_CIPSO-034",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о выходе подразделений из прифронтовых пунктов",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-035",
+      "io_method_id": "IO_P-CIPSO-035",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о захвате населённых пунктов",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-035",
+      "io_method_id": "PROP_CIPSO-035",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о захвате населённых пунктов",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-036",
+      "io_method_id": "IO_P-CIPSO-036",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о прорыве обороны",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-036",
+      "io_method_id": "PROP_CIPSO-036",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о прорыве обороны",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-037",
+      "io_method_id": "IO_P-CIPSO-037",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о панике среди населения",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-037",
+      "io_method_id": "PROP_CIPSO-037",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о панике среди населения",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-038",
+      "io_method_id": "IO_P-CIPSO-038",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о референдумах о выходе регионов из состава рф",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-038",
+      "io_method_id": "PROP_CIPSO-038",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о референдумах о выходе регионов из состава рф",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-039",
+      "io_method_id": "IO_P-CIPSO-039",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о поражении значимых военных объектов",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-039",
+      "io_method_id": "PROP_CIPSO-039",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о поражении значимых военных объектов",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-040",
+      "io_method_id": "IO_P-CIPSO-040",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о гуманитарном кризисе",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-040",
+      "io_method_id": "PROP_CIPSO-040",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о гуманитарном кризисе",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-041",
+      "io_method_id": "IO_P-CIPSO-041",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о скрытой мобилизации",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-041",
+      "io_method_id": "PROP_CIPSO-041",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о скрытой мобилизации",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-042",
+      "io_method_id": "IO_P-CIPSO-042",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "призывы к протестам",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-042",
+      "io_method_id": "PROP_CIPSO-042",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "призывы к протестам",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-043",
+      "io_method_id": "IO_P-CIPSO-043",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "звуковая имитация движения колонн",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-043",
+      "io_method_id": "PROP_CIPSO-043",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "звуковая имитация движения колонн",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-044",
+      "io_method_id": "IO_P-CIPSO-044",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "провокация родственников к митингам через spoofing",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-044",
+      "io_method_id": "PROP_CIPSO-044",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "провокация родственников к митингам через spoofing",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-045",
+      "io_method_id": "IO_P-CIPSO-045",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о неуставных отношениях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-045",
+      "io_method_id": "PROP_CIPSO-045",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о неуставных отношениях",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-046",
+      "io_method_id": "IO_P-CIPSO-046",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о радиоактивном химическом заражении",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-046",
+      "io_method_id": "PROP_CIPSO-046",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о радиоактивном химическом заражении",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-047",
+      "io_method_id": "IO_P-CIPSO-047",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о заградительных отрядах",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-047",
+      "io_method_id": "PROP_CIPSO-047",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки о заградительных отрядах",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-048",
+      "io_method_id": "IO_P-CIPSO-048",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые заявления руководства в т ч регионального",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-048",
+      "io_method_id": "PROP_CIPSO-048",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые заявления руководства в т ч регионального",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-049",
+      "io_method_id": "IO_P-CIPSO-049",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "постановочные видеообращения пленных",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-049",
+      "io_method_id": "PROP_CIPSO-049",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "постановочные видеообращения пленных",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-050",
+      "io_method_id": "IO_P-CIPSO-050",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "подложные официальные документы",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-050",
+      "io_method_id": "PROP_CIPSO-050",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "подложные официальные документы",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-051",
+      "io_method_id": "IO_P-CIPSO-051",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "имитация международной поддержки",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-051",
+      "io_method_id": "PROP_CIPSO-051",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "имитация международной поддержки",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-052",
+      "io_method_id": "IO_P-CIPSO-052",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "информационный терроризм",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-052",
+      "io_method_id": "PROP_CIPSO-052",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "информационный терроризм",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-053",
+      "io_method_id": "IO_P-CIPSO-053",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки на религиозной этнической почве",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-053",
+      "io_method_id": "PROP_CIPSO-053",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейки на религиозной этнической почве",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-054",
+      "io_method_id": "IO_P-CIPSO-054",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spoofing вербовка через мессенджеры",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-054",
+      "io_method_id": "PROP_CIPSO-054",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spoofing вербовка через мессенджеры",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-055",
+      "io_method_id": "IO_P-CIPSO-055",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые банковские карты с письмами от мо рф",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-055",
+      "io_method_id": "PROP_CIPSO-055",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые банковские карты с письмами от мо рф",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-056",
+      "io_method_id": "IO_P-CIPSO-056",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые анкеты на сайтах знакомств",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-056",
+      "io_method_id": "PROP_CIPSO-056",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "фейковые анкеты на сайтах знакомств",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-057",
+      "io_method_id": "IO_P-CIPSO-057",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "звуковая имитация военной техники lrad",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "CIPSO-057",
+      "io_method_id": "PROP_CIPSO-057",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "звуковая имитация военной техники lrad",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-001",
+      "io_method_id": "IO_P-Ciald-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "reciprocation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-001",
+      "io_method_id": "PROP_Ciald-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "reciprocation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-002",
+      "io_method_id": "IO_M115",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "commitment and consistency",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-002",
+      "io_method_id": "PROP_Ciald-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "commitment and consistency",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-003",
+      "io_method_id": "IO_M111",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "social proof",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-003",
+      "io_method_id": "IO_M111",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "social proof",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-003",
+      "io_method_id": "PROP_Ciald-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "social proof",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-004",
+      "io_method_id": "IO_M116",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "liking",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-004",
+      "io_method_id": "IO_P-Ciald-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "liking",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-004",
+      "io_method_id": "PROP_Ciald-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "liking",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-005",
+      "io_method_id": "IO_M112",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "authority",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-005",
+      "io_method_id": "IO_P-Ciald-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "authority",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-005",
+      "io_method_id": "PROP_Ciald-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "authority",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-006",
+      "io_method_id": "IO_M113",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "scarcity",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-006",
+      "io_method_id": "IO_M113",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "scarcity",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-006",
+      "io_method_id": "IO_P-Ciald-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "scarcity",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "Ciald-006",
+      "io_method_id": "PROP_Ciald-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "scarcity",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-001",
+      "io_method_id": "IO_P-ELL-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "agitation propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-001",
+      "io_method_id": "PROP_ELL-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "agitation propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-002",
+      "io_method_id": "IO_P-ELL-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "integration propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-002",
+      "io_method_id": "PROP_ELL-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "integration propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-003",
+      "io_method_id": "IO_P-ELL-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-003",
+      "io_method_id": "IO_P-OAP-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-003",
+      "io_method_id": "PROP_ELL-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-003",
+      "io_method_id": "PROP_OAP-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-004",
+      "io_method_id": "IO_P-ELL-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "intellectual vulnerability to propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-004",
+      "io_method_id": "PROP_ELL-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "intellectual vulnerability to propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-005",
+      "io_method_id": "IO_P-ELL-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "technological society prophecy",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ELL-005",
+      "io_method_id": "PROP_ELL-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "technological society prophecy",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "EMD-001",
+      "io_method_id": "IO_P-EMD-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive domain in military operations",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "EMD-001",
+      "io_method_id": "PROP_EMD-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive domain in military operations",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "EMD-002",
+      "io_method_id": "IO_P-EMD-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "strategic communications stratcom",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "EMD-002",
+      "io_method_id": "PROP_EMD-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "strategic communications stratcom",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "EMD-003",
+      "io_method_id": "IO_M003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "psychological operations psyop",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "EMD-003",
+      "io_method_id": "PROP_EMD-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "psychological operations psyop",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-001",
+      "io_method_id": "IO_M050",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information operations io",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-001",
+      "io_method_id": "PROP_FM3-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information operations io",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-002",
+      "io_method_id": "IO_P-FM3-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "three dimensions of information environment",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-002",
+      "io_method_id": "PROP_FM3-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "three dimensions of information environment",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-003",
+      "io_method_id": "IO_P-FM3-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information related capabilities irc",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-003",
+      "io_method_id": "PROP_FM3-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information related capabilities irc",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-004",
+      "io_method_id": "IO_P-FM3-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information asymmetry",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-004",
+      "io_method_id": "PROP_FM3-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information asymmetry",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-005",
+      "io_method_id": "IO_P-FM3-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "speed and diffusion of information",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "FM3-005",
+      "io_method_id": "PROP_FM3-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "speed and diffusion of information",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-001",
+      "io_method_id": "IO_P-HAS-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "love bombing",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-001",
+      "io_method_id": "PROP_HAS-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "love bombing",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-002",
+      "io_method_id": "IO_P-HAS-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "middleman tactic",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-002",
+      "io_method_id": "PROP_HAS-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "middleman tactic",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-003",
+      "io_method_id": "IO_P-HAS-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "systematic isolation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-003",
+      "io_method_id": "PROP_HAS-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "systematic isolation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-004",
+      "io_method_id": "IO_P-HAS-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "trance induction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-004",
+      "io_method_id": "PROP_HAS-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "trance induction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-005",
+      "io_method_id": "IO_P-HAS-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "confession technique compromising",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-005",
+      "io_method_id": "PROP_HAS-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "confession technique compromising",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-006",
+      "io_method_id": "IO_P-HAS-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "financial exploitation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-006",
+      "io_method_id": "PROP_HAS-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "financial exploitation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-007",
+      "io_method_id": "IO_P-HAS-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "artificial consensus",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-007",
+      "io_method_id": "PROP_HAS-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "artificial consensus",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-008",
+      "io_method_id": "IO_P-HAS-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "foot in the door compliance escalation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "HAS-008",
+      "io_method_id": "PROP_HAS-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "foot in the door compliance escalation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-001",
+      "io_method_id": "IO_M001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive warfare",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-001",
+      "io_method_id": "IO_M001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive warfare",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-001",
+      "io_method_id": "PROP_ISW-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive warfare",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-002",
+      "io_method_id": "IO_M026",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "reflexive control",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-002",
+      "io_method_id": "IO_P-ISW-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "reflexive control",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-002",
+      "io_method_id": "PROP_ISW-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "reflexive control",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-003",
+      "io_method_id": "IO_P-ISW-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "perception shaping via physical action",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "ISW-003",
+      "io_method_id": "PROP_ISW-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "perception shaping via physical action",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-001",
+      "io_method_id": "IO_P-JOW-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-001",
+      "io_method_id": "IO_P-LINEB-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-001",
+      "io_method_id": "PROP_JOW-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-001",
+      "io_method_id": "PROP_LINEB-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-002",
+      "io_method_id": "IO_P-JOW-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-002",
+      "io_method_id": "IO_P-LINEB-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-002",
+      "io_method_id": "PROP_JOW-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-002",
+      "io_method_id": "PROP_LINEB-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-003",
+      "io_method_id": "IO_P-JOW-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-003",
+      "io_method_id": "IO_P-LINEB-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-003",
+      "io_method_id": "PROP_JOW-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-003",
+      "io_method_id": "PROP_LINEB-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-004",
+      "io_method_id": "IO_M108",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "inoculation theory",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-004",
+      "io_method_id": "PROP_JOW-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "inoculation theory",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-005",
+      "io_method_id": "IO_P-JOW-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "elaboration likelihood model",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-005",
+      "io_method_id": "PROP_JOW-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "elaboration likelihood model",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-006",
+      "io_method_id": "IO_M118",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive dissonance",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "JOW-006",
+      "io_method_id": "PROP_JOW-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cognitive dissonance",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-001",
+      "io_method_id": "IO_P-KM-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "word amoebas",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-001",
+      "io_method_id": "PROP_KM-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "word amoebas",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-002",
+      "io_method_id": "IO_P-KM-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "direct lie",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-002",
+      "io_method_id": "PROP_KM-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "direct lie",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-003",
+      "io_method_id": "IO_P-KM-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "omission strategic silence",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-003",
+      "io_method_id": "PROP_KM-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "omission strategic silence",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-004",
+      "io_method_id": "IO_P-KM-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "omission of goal cost and timeline",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-004",
+      "io_method_id": "PROP_KM-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "omission of goal cost and timeline",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-005",
+      "io_method_id": "IO_P-KM-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "false wisdom pseudo profound statements",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-005",
+      "io_method_id": "PROP_KM-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "false wisdom pseudo profound statements",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-006",
+      "io_method_id": "IO_P-KM-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "concept dilution and substitution",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-006",
+      "io_method_id": "PROP_KM-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "concept dilution and substitution",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-007",
+      "io_method_id": "IO_P-KM-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "name and object substitution",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-007",
+      "io_method_id": "PROP_KM-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "name and object substitution",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-008",
+      "io_method_id": "IO_P-KM-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "manipulation of numbers and statistics",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-008",
+      "io_method_id": "PROP_KM-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "manipulation of numbers and statistics",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-009",
+      "io_method_id": "IO_P-KM-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "creating incoherence",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-009",
+      "io_method_id": "PROP_KM-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "creating incoherence",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-010",
+      "io_method_id": "IO_P-KM-010",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "memory suppression",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-010",
+      "io_method_id": "PROP_KM-010",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "memory suppression",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-011",
+      "io_method_id": "IO_P-KM-011",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "symbol destruction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-011",
+      "io_method_id": "PROP_KM-011",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "symbol destruction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-012",
+      "io_method_id": "IO_P-KM-012",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "moral core destruction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-012",
+      "io_method_id": "PROP_KM-012",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "moral core destruction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-013",
+      "io_method_id": "IO_P-KM-013",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "fear manipulation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-013",
+      "io_method_id": "PROP_KM-013",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "fear manipulation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-014",
+      "io_method_id": "IO_P-KM-014",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black myths",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-014",
+      "io_method_id": "PROP_KM-014",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black myths",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-015",
+      "io_method_id": "IO_P-KM-015",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "managed disaster",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-015",
+      "io_method_id": "PROP_KM-015",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "managed disaster",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-016",
+      "io_method_id": "IO_P-KM-016",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "image hunger vulnerability",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-016",
+      "io_method_id": "PROP_KM-016",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "image hunger vulnerability",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-017",
+      "io_method_id": "IO_P-KM-017",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "intellectual autism",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-017",
+      "io_method_id": "PROP_KM-017",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "intellectual autism",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-018",
+      "io_method_id": "IO_P-KM-018",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "terrorism as propaganda tool",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-018",
+      "io_method_id": "PROP_KM-018",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "terrorism as propaganda tool",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-019",
+      "io_method_id": "IO_P-KM-019",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "semantic terror",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-019",
+      "io_method_id": "PROP_KM-019",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "semantic terror",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-020",
+      "io_method_id": "IO_P-KM-020",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "loss of proportion",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-020",
+      "io_method_id": "PROP_KM-020",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "loss of proportion",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-021",
+      "io_method_id": "IO_P-KM-021",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "stereotypes and metaphors",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-021",
+      "io_method_id": "PROP_KM-021",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "stereotypes and metaphors",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-022",
+      "io_method_id": "IO_P-KM-022",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "technological risk myths",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KM-022",
+      "io_method_id": "PROP_KM-022",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "technological risk myths",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-001",
+      "io_method_id": "IO_P-KRY-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "disinformation deception",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-001",
+      "io_method_id": "PROP_KRY-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "disinformation deception",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-002",
+      "io_method_id": "IO_P-KRY-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "manipulation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-002",
+      "io_method_id": "PROP_KRY-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "manipulation",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-003",
+      "io_method_id": "IO_P-KRY-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "rumor and myth dissemination",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-003",
+      "io_method_id": "PROP_KRY-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "rumor and myth dissemination",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-004",
+      "io_method_id": "IO_P-KRY-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "suggestion indoctrination",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-004",
+      "io_method_id": "PROP_KRY-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "suggestion indoctrination",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-005",
+      "io_method_id": "IO_P-KRY-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "persuasion logical",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-005",
+      "io_method_id": "PROP_KRY-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "persuasion logical",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-006",
+      "io_method_id": "IO_P-KRY-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "repetition principle",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-006",
+      "io_method_id": "PROP_KRY-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "repetition principle",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-007",
+      "io_method_id": "IO_P-KRY-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "primacy effect",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-007",
+      "io_method_id": "PROP_KRY-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "primacy effect",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-008",
+      "io_method_id": "IO_P-KRY-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "credibility principle",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-008",
+      "io_method_id": "PROP_KRY-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "credibility principle",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-009",
+      "io_method_id": "IO_P-KRY-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "mass oral broadcasting",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-009",
+      "io_method_id": "PROP_KRY-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "mass oral broadcasting",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-010",
+      "io_method_id": "IO_P-KRY-010",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "leaflets as tactical weapon",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "KRY-010",
+      "io_method_id": "PROP_KRY-010",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "leaflets as tactical weapon",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-001",
+      "io_method_id": "IO_P-LEN-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spontaneity vs consciousness theory",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-001",
+      "io_method_id": "PROP_LEN-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spontaneity vs consciousness theory",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-002",
+      "io_method_id": "IO_P-LEN-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "party as vanguard",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-002",
+      "io_method_id": "PROP_LEN-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "party as vanguard",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-003",
+      "io_method_id": "IO_P-LEN-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "agitation and propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-003",
+      "io_method_id": "PROP_LEN-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "agitation and propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-004",
+      "io_method_id": "IO_P-LEN-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "imperialism as highest stage",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LEN-004",
+      "io_method_id": "PROP_LEN-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "imperialism as highest stage",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-001",
+      "io_method_id": "IO_P-JOW-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-001",
+      "io_method_id": "IO_P-LINEB-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-001",
+      "io_method_id": "PROP_JOW-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-001",
+      "io_method_id": "PROP_LINEB-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "black propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-002",
+      "io_method_id": "IO_P-JOW-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-002",
+      "io_method_id": "IO_P-LINEB-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-002",
+      "io_method_id": "PROP_JOW-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-002",
+      "io_method_id": "PROP_LINEB-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "white propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-003",
+      "io_method_id": "IO_P-JOW-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-003",
+      "io_method_id": "IO_P-LINEB-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-003",
+      "io_method_id": "PROP_JOW-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-003",
+      "io_method_id": "PROP_LINEB-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "grey propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-004",
+      "io_method_id": "IO_P-LINEB-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "rumor dissemination",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-004",
+      "io_method_id": "PROP_LINEB-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "rumor dissemination",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-005",
+      "io_method_id": "IO_P-LINEB-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "leaflet warfare",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-005",
+      "io_method_id": "PROP_LINEB-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "leaflet warfare",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-006",
+      "io_method_id": "IO_P-LINEB-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information as weapon",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-006",
+      "io_method_id": "PROP_LINEB-006",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information as weapon",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-007",
+      "io_method_id": "IO_P-LINEB-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "demoralization",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-007",
+      "io_method_id": "PROP_LINEB-007",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "demoralization",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-008",
+      "io_method_id": "IO_P-LINEB-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "exploiting enemy motives",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-008",
+      "io_method_id": "PROP_LINEB-008",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "exploiting enemy motives",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-009",
+      "io_method_id": "IO_P-LINEB-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "subversive propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LINEB-009",
+      "io_method_id": "PROP_LINEB-009",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "subversive propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LSE-001",
+      "io_method_id": "IO_P-LSE-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "soviet subversion",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "LSE-001",
+      "io_method_id": "PROP_LSE-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "soviet subversion",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OAP-001",
+      "io_method_id": "IO_P-ELL-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OAP-001",
+      "io_method_id": "IO_P-OAP-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OAP-001",
+      "io_method_id": "PROP_ELL-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OAP-001",
+      "io_method_id": "PROP_OAP-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "pre propaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OSW2-001",
+      "io_method_id": "IO_P-OSW2-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information warfare russian concept",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OSW2-001",
+      "io_method_id": "PROP_OSW2-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "information warfare russian concept",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OSW2-002",
+      "io_method_id": "IO_P-OSW2-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spetspropaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OSW2-002",
+      "io_method_id": "PROP_OSW2-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spetspropaganda",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "POL-001",
+      "io_method_id": "IO_P-POL-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "political advertising",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "POL-001",
+      "io_method_id": "PROP_POL-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "political advertising",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "POL-002",
+      "io_method_id": "IO_P-POL-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spin doctoring",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "POL-002",
+      "io_method_id": "PROP_POL-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "spin doctoring",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "POL-003",
+      "io_method_id": "IO_P-POL-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "public sphere construction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "POL-003",
+      "io_method_id": "PROP_POL-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "public sphere construction",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-001",
+      "io_method_id": "IO_P-SUN-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "ch i maneuver indirection",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-001",
+      "io_method_id": "PROP_SUN-001",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "ch i maneuver indirection",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-002",
+      "io_method_id": "IO_P-SUN-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cheng direct method",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-002",
+      "io_method_id": "PROP_SUN-002",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "cheng direct method",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-003",
+      "io_method_id": "IO_P-SUN-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "attack by stratagem",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-003",
+      "io_method_id": "PROP_SUN-003",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "attack by stratagem",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-004",
+      "io_method_id": "IO_P-SUN-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "use of spies",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-004",
+      "io_method_id": "PROP_SUN-004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "use of spies",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-005",
+      "io_method_id": "IO_P-SUN-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "deception and misdirection",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "SUN-005",
+      "io_method_id": "PROP_SUN-005",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "deception and misdirection",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-058",
+      "io_method_id": "IO_M144",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "coordinated inauthentic behavior",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-065",
+      "io_method_id": "IO_M149",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "typosquatting",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-106",
+      "io_method_id": "IO_M033",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "manufactured doubt",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-115",
+      "io_method_id": "IO_M030",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "whataboutism",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-115",
+      "io_method_id": "IO_M030",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "whataboutism",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-117",
+      "io_method_id": "IO_M029",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "gaslighting",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-117",
+      "io_method_id": "IO_M029",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "gaslighting",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "OST-122",
+      "io_method_id": "IO_M120",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "availability heuristic",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-129",
+      "io_method_id": "IO_M084",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "stratcom",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-129",
+      "io_method_id": "IO_M086",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "stratcom",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-130",
+      "io_method_id": "IO_M163",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "prebunking",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-130",
+      "io_method_id": "IO_M163",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "prebunking",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-132",
+      "io_method_id": "IO_M004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "perception management",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-132",
+      "io_method_id": "IO_M004",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "perception management",
+      "confidence": 0.92
+    },
+    {
+      "propaganda_method_id": "PSY-134",
+      "io_method_id": "IO_M039",
+      "match_type": "exact_normalized_title_or_alias",
+      "match_key": "synthetic media",
+      "confidence": 0.92
+    }
+  ],
+  "count": 389
+}

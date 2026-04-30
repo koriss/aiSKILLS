@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IOMethodMatch",
+  "type": "object",
+  "properties": {
+    "match_id": {
+      "type": "string"
+    },
+    "kb_record_id": {
+      "type": "string"
+    },
+    "kb_source": {
+      "type": "string"
+    },
+    "matched_claim_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "matched_text": {
+      "type": "string"
+    },
+    "match_reason": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "number"
+    },
+    "safe_use": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "match_id",
+    "kb_record_id",
+    "kb_source",
+    "matched_text",
+    "match_reason",
+    "confidence",
+    "safe_use"
+  ]
+}

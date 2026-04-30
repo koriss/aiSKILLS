@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO Worker Lease",
+  "type": "object",
+  "required": [
+    "worker_id",
+    "job_id",
+    "lease_until",
+    "last_heartbeat",
+    "status"
+  ],
+  "properties": {
+    "worker_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "work_unit_id": {
+      "type": "string"
+    },
+    "lease_until": {
+      "type": "string"
+    },
+    "last_heartbeat": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

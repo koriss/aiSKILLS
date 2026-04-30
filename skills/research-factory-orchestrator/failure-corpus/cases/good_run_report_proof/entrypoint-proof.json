@@ -1,0 +1,7 @@
+{
+  "run_id": "RUN-GOOD-PROOF",
+  "job_id": "JOB-GOOD-PROOF",
+  "command_id": "CMD-GOOD-PROOF",
+  "entrypoint": "scripts/run_research_factory.py",
+  "invocation_mode": "runtime"
+}

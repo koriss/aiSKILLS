@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SourceSnapshot",
+  "type": "object",
+  "properties": {
+    "source_id": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "accessed_at": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "content_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "short_evidence_excerpt": {
+      "type": "string"
+    },
+    "snapshot_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license_or_access_note": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "source_id",
+    "accessed_at",
+    "title"
+  ]
+}

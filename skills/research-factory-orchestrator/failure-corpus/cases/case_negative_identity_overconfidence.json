@@ -1,0 +1,9 @@
+{
+  "case_id": "case_negative_identity_overconfidence",
+  "failure_type": "negative_identity_overconfidence",
+  "bad_output_pattern": "not found anywhere / does not exist",
+  "expected_guard": "not confirmed in checked sources",
+  "validator": "validate_negative_identity_wording.py",
+  "bad_sample": "bad_negative_identity.txt",
+  "good_sample": "good_telegram.txt"
+}

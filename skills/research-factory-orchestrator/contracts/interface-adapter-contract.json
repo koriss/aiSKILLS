@@ -1,0 +1,25 @@
+{
+  "version": "17.1.0-chat-outbox-semantics-stage05",
+  "supported_interfaces": [
+    "generic_chat",
+    "telegram",
+    "cli",
+    "web"
+  ],
+  "supported_providers": [
+    "telegram",
+    "cli",
+    "webhook"
+  ],
+  "required_adapter_outputs": [
+    "interface/interface-request.json",
+    "interface/normalized-command.json",
+    "jobs/runtime-job.json",
+    "outbox/outbox-policy.json"
+  ],
+  "forbidden": [
+    "direct_model_response_for_runtime_command",
+    "provider_specific_runtime_logic",
+    "provider_specific_research_pipeline"
+  ]
+}

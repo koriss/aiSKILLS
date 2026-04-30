@@ -1,0 +1,43 @@
+{
+  "contract": "context-acquisition-integrity",
+  "version": "18.3.1-context-integrity-hotfix",
+  "required_artifacts": [
+    "context/file-inventory.json",
+    "context/context-budget-analysis.json",
+    "context/read-ledger.jsonl",
+    "context/read-coverage.json",
+    "context/active-context-manifest.json",
+    "context/context-claim-gate.json"
+  ],
+  "rules": [
+    "read claims require read-ledger coverage",
+    "active-context claims require active-context-manifest and budget analysis",
+    "smoke-test may not be used as context-load proof",
+    "subagent start is not completion proof",
+    "memory write is not active context",
+    "plain subagent read-all is forbidden above threshold without batching/checkpoints",
+    "chat payloads must not leak internal reasoning markers"
+  ],
+  "failure_codes": [
+    "F270",
+    "F271",
+    "F272",
+    "F273",
+    "F274",
+    "F275",
+    "F276",
+    "F277",
+    "F278",
+    "F279",
+    "F280",
+    "F281",
+    "F282",
+    "F283",
+    "F284",
+    "F285",
+    "F286",
+    "F287",
+    "F288",
+    "F289"
+  ]
+}

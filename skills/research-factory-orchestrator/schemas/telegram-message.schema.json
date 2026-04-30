@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TelegramMessage",
+  "type": "object",
+  "properties": {
+    "message_id": {
+      "type": "string"
+    },
+    "sequence": {
+      "type": "integer"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "block_type": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "char_count": {
+      "type": "integer"
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "message_id",
+    "sequence",
+    "block_type",
+    "text",
+    "char_count"
+  ]
+}

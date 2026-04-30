@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO User Visible Delivery",
+  "type": "object",
+  "properties": {
+    "message_text": {
+      "type": "string"
+    },
+    "delivery_claims": {
+      "type": "array"
+    },
+    "proof_refs": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

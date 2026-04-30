@@ -1,0 +1,8 @@
+{
+  "case_id": "F283-reasoning-leak-in-chat-payload",
+  "failure_code": "F283",
+  "class": "context-acquisition-integrity",
+  "description": "reasoning leak in chat payload",
+  "expected": "validator blocks false context/read/readiness claim unless manifest/ledger proof exists",
+  "introduced_in": "18.3.1-context-integrity-hotfix"
+}

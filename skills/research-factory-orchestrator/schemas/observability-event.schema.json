@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ObservabilityEvent",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "event_name",
+    "run_id",
+    "timestamp",
+    "status"
+  ],
+  "properties": {
+    "event_name": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "work_unit_id": {
+      "type": "string"
+    },
+    "subagent_id": {
+      "type": "string"
+    }
+  }
+}

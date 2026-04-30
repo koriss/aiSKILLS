@@ -1,24 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvaluationScore",
   "type": "object",
   "properties": {
-    "item_id": { "type": "string" },
-    "scores": {
-      "type": "object",
-      "properties": {
-        "factual_accuracy": { "type": "number" },
-        "citation_accuracy": { "type": "number" },
-        "citation_faithfulness": { "type": "number" },
-        "completeness": { "type": "number" },
-        "source_quality": { "type": "number" },
-        "contradiction_handling": { "type": "number" },
-        "output_contract_compliance": { "type": "number" },
-        "tool_efficiency": { "type": "number" },
-        "safety_compliance": { "type": "number" },
-        "resume_readiness": { "type": "number" }
-      }
+    "item_id": {
+      "type": "string"
     },
-    "pass": { "type": "boolean" }
+    "scores": {
+      "type": "object"
+    },
+    "passed": {
+      "type": "boolean"
+    }
   },
-  "required": ["item_id", "scores", "pass"]
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "scores",
+    "passed"
+  ]
 }

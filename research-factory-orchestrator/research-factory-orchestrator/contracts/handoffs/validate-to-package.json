@@ -1,0 +1,9 @@
+{
+  "from_phase": "validate",
+  "to_phase": "package",
+  "required_fields": ["run_dir", "validation_transcript"],
+  "success_response": "package_built",
+  "failure_response": "package_skipped",
+  "timeout_ms": 600000,
+  "on_failure_action": "retry_with_smaller_scope"
+}

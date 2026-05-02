@@ -1,0 +1,9 @@
+{
+  "run_id": "failure-corpus-f207-lc16",
+  "version": "18.7.0",
+  "features": {
+    "provider_telegram_real_send": "stub",
+    "real_external_search_workers": "missing"
+  },
+  "rule": "fixture production must not ship stub FTM rows"
+}

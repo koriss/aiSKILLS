@@ -1,8 +1,6 @@
-"""RFO bounded component wrapper: adapter.py.
+"""RFO bounded component: interface adapter entrypoint (core-boundary-contract)."""
+from __future__ import annotations
 
-Compatibility wrapper around scripts.rfo_v18_core until full decomposition.
-"""
+from runtime.adapter_impl import cmd_adapter
 
-# Import dynamically only when used to avoid entrypoint side effects.
-def component_boundary():
-    return "adapter"
+__all__ = ["cmd_adapter"]

@@ -1,0 +1,35 @@
+{
+  "schema_version": "v19.0",
+  "sources": [
+    {
+      "source_id": "S1",
+      "title": "A",
+      "canonical_origin_id": "same",
+      "url": "https://example.invalid/1",
+      "publisher": "x",
+      "accessed_at": "2026-05-02T12:00:00Z",
+      "source_role": "news_media",
+      "access_level": "public",
+      "interest_alignment": "unknown",
+      "verification_mode": "secondary",
+      "independence": "independent",
+      "citation_eligible": true,
+      "corroboration_type": "corroborating"
+    },
+    {
+      "source_id": "S2",
+      "title": "B",
+      "canonical_origin_id": "same",
+      "url": "https://example.invalid/2",
+      "publisher": "x",
+      "accessed_at": "2026-05-02T12:00:00Z",
+      "source_role": "news_media",
+      "access_level": "public",
+      "interest_alignment": "unknown",
+      "verification_mode": "secondary",
+      "independence": "independent",
+      "citation_eligible": true,
+      "corroboration_type": "corroborating"
+    }
+  ]
+}

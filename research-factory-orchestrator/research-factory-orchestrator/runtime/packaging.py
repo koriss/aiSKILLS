@@ -1,8 +1,6 @@
-"""RFO bounded component wrapper: packaging.py.
+"""RFO bounded component: research-package zip builder (core-boundary-contract)."""
+from __future__ import annotations
 
-Compatibility wrapper around scripts.rfo_v18_core until full decomposition.
-"""
+from runtime.worker_impl import build_package
 
-# Import dynamically only when used to avoid entrypoint side effects.
-def component_boundary():
-    return "packaging"
+__all__ = ["build_package"]

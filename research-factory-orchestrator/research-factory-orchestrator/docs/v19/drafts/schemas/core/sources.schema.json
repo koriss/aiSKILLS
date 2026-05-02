@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/schemas/v19/sources-bundle.schema.json",
+  "title": "SourcesBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sources"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "v19.0"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sourceRecord"
+      }
+    }
+  },
+  "$defs": {
+    "sourceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "title",
+        "canonical_origin_id",
+        "source_role",
+        "access_level",
+        "interest_alignment",
+        "verification_mode",
+        "independence",
+        "citation_eligible",
+        "corroboration_type"
+      ],
+      "properties": {
+        "source_id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "canonical_origin_id": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "document_path": { "type": "string" },
+        "archival_locator": { "type": "string" },
+        "publisher": { "type": "string" },
+        "accessed_at": { "type": "string" },
+        "source_role": {
+          "type": "string",
+          "enum": [
+            "official",
+            "court",
+            "registry",
+            "dataset_publisher",
+            "peer_reviewed",
+            "journalist",
+            "ngo",
+            "activist",
+            "corporate",
+            "osint",
+            "witness",
+            "anonymous",
+            "unknown"
+          ]
+        },
+        "access_level": {
+          "type": "string",
+          "enum": ["primary_access", "secondary", "derivative", "unknown"]
+        },
+        "interest_alignment": {
+          "type": "string",
+          "enum": ["direct", "indirect", "none", "unknown"]
+        },
+        "verification_mode": {
+          "type": "string",
+          "enum": [
+            "raw_document",
+            "dataset",
+            "visual",
+            "testimony",
+            "aggregation",
+            "opinion"
+          ]
+        },
+        "independence": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"]
+        },
+        "authority_scope": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "corroboration_type": {
+          "type": "string",
+          "enum": ["independent", "circular", "unknown"]
+        },
+        "citation_eligible": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "citation_eligible": { "const": true } },
+            "required": ["citation_eligible"]
+          },
+          "then": {
+            "anyOf": [
+              { "required": ["url"] },
+              { "required": ["document_path"] },
+              { "required": ["archival_locator"] }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

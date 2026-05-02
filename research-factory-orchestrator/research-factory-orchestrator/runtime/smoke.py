@@ -1,8 +1,6 @@
-"""RFO bounded component wrapper: smoke.py.
+"""RFO bounded component: end-to-end smoke harness (core-boundary-contract)."""
+from __future__ import annotations
 
-Compatibility wrapper around scripts.rfo_v18_core until full decomposition.
-"""
+from runtime.smoke_impl import cmd_smoke
 
-# Import dynamically only when used to avoid entrypoint side effects.
-def component_boundary():
-    return "smoke"
+__all__ = ["cmd_smoke"]

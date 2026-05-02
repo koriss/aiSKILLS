@@ -1,0 +1,5 @@
+{
+  "run_id": "failure-corpus-f206-lc09",
+  "features": {"provider_telegram_real_send": "implemented", "real_external_search_workers": "implemented"},
+  "rule": "fixture"
+}

@@ -1,8 +1,6 @@
-"""RFO bounded component wrapper: worker.py.
+"""RFO bounded component: runtime worker (run + queue) entrypoint (core-boundary-contract)."""
+from __future__ import annotations
 
-Compatibility wrapper around scripts.rfo_v18_core until full decomposition.
-"""
+from runtime.worker_impl import build_package, cmd_run, cmd_worker
 
-# Import dynamically only when used to avoid entrypoint side effects.
-def component_boundary():
-    return "worker"
+__all__ = ["cmd_run", "cmd_worker", "build_package"]

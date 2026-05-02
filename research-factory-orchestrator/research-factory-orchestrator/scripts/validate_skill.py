@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import ast, json, re, sys
+import ast, json, re, shutil, sys
 sys.dont_write_bytecode = True
-VERSION = "18.3.2-delivery-truth-smoke-runtime-contract-hotfix"
+VERSION = "19.0.1"
 root = Path(__file__).resolve().parents[1]
 errors = []
 required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs"]
@@ -28,7 +28,14 @@ required_scripts = [
     "validate_runtime_contract_current.py", "validate_no_attachment_claim_without_ack.py", "validate_delivery_claim_matches_manifest.py",
     "validate_final_gate_required_for_completion_claim.py", "validate_smoke_run_not_presented_as_research.py",
     "validate_manual_fallback_not_presented_as_rfo.py", "validate_no_local_paths_as_delivery.py",
-    "validate_core_modularization_contract.py", "validate_no_html_string_gate_as_primary_contract.py"
+    "validate_core_modularization_contract.py", "validate_no_html_string_gate_as_primary_contract.py",
+    "validate_idempotent_outbox.py", "validate_cross_model_judge.py",
+    "validate_release.py", "validate_release_report.py",
+    "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
+    "validate_logical_consistency.py",
+    "run_core_validators.py",
+    "check_validation_pass.py",
+    "migrate_validator_invocation.py",
 ]
 required_providers = ["providers/telegram/telegram_delivery_adapter.py", "providers/cli/cli_delivery_adapter.py", "providers/webhook/webhook_delivery_adapter.py"]
 required_contracts = ["artifact-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "runtime-contract-v18.3.2.json", "core-boundary-contract.json"]
@@ -38,6 +45,19 @@ for d in required_dirs:
     if not (root/d).is_dir(): errors.append(f"missing_dir:{d}")
 for s in required_scripts:
     if not (root/"scripts"/s).is_file(): errors.append(f"missing_script:{s}")
+if not (root/"tests"/"run_failure_corpus.py").is_file():
+    errors.append("missing_tests_run_failure_corpus_shim")
+caps_path = root/"contracts"/"provider-capabilities.json"
+if caps_path.is_file():
+    try:
+        caps = json.loads(caps_path.read_text(encoding="utf-8"))
+        cli = caps.get("providers",{}).get("cli",{})
+        if cli.get("stub_delivery") is not True:
+            errors.append("provider_caps_cli_stub_delivery_must_be_true")
+        if cli.get("external") is not False:
+            errors.append("provider_caps_cli_external_must_be_false")
+    except Exception as e:
+        errors.append(f"provider_capabilities_read_error:{e}")
 for p in required_providers:
     if not (root/p).is_file(): errors.append(f"missing_provider:{p}")
 for c in required_contracts:
@@ -64,7 +84,7 @@ if not text.startswith("---"): errors.append("SKILL.md_missing_yaml_frontmatter"
 else:
     fm = text.split("---",2)[1]
     if not re.search(r"(?m)^name:\s*research_factory_orchestrator\s*$", fm): errors.append("frontmatter_missing_name")
-    if VERSION not in fm: errors.append("frontmatter_missing_v18_3_2_version")
+    if VERSION not in fm: errors.append("frontmatter_missing_skill_version")
 for needle in ["HOW TO OPERATE THIS SKILL", "v18.3.1 context integrity invariants", "smoke-test pass is not proof", "v18.3 hard reliability invariants", "ambient-agent context must not override", "Partial model output is not a completed work unit", "Preserved v17.3 Contract Body", "## v17 interface adapter and outbox runtime", "## v12 report delivery system"]:
     if needle not in text: errors.append(f"SKILL.md_missing_section:{needle}")
 file_count = sum(1 for p in root.rglob("*") if p.is_file())
@@ -74,6 +94,10 @@ for d in ["references", "schemas", "kb", "templates", "examples", "tests"]:
 for py in root.rglob("*.py"):
     try: ast.parse(py.read_text(encoding="utf-8"))
     except Exception as e: errors.append(f"python_ast_error:{py.relative_to(root)}:{e}")
+# compileall and some tooling always write scripts/__pycache__; skill policy is no committed bytecode here.
+for _cache in (root / "scripts" / "__pycache__", root / "runtime" / "__pycache__"):
+    if _cache.is_dir():
+        shutil.rmtree(_cache, ignore_errors=True)
 pycache = [str(p.relative_to(root)) for p in root.rglob("*") if p.name == "__pycache__" or p.suffix == ".pyc"]
 if pycache: errors.append("pycache_present:"+json.dumps(pycache, ensure_ascii=False))
 index = root/"failure-corpus/index.json"
@@ -85,6 +109,11 @@ else:
     if not data.get("v18_3_reliability_cases"): errors.append("failure_corpus_missing_v18_3_reliability_cases")
     if not data.get("v18_3_1_context_integrity_cases"): errors.append("failure_corpus_missing_v18_3_1_context_integrity_cases")
     if not data.get("v18_3_2_delivery_truth_cases"): errors.append("failure_corpus_missing_v18_3_2_delivery_truth_cases")
+    if not data.get("v18_5_edge_handoff_failure_classes"): errors.append("failure_corpus_missing_v18_5_edge_handoff_failure_classes")
+    if not data.get("v18_5_1_truth_gate_regression_cases"): errors.append("failure_corpus_missing_v18_5_1_truth_gate_regression_cases")
+    if not data.get("v18_7_logical_consistency_cases"): errors.append("failure_corpus_missing_v18_7_logical_consistency_cases")
+    if not data.get("v18_5_relytool_taxonomy") or len(data.get("v18_5_relytool_taxonomy") or []) < 12:
+        errors.append("failure_corpus_missing_v18_5_relytool_taxonomy")
 out = {"status":"pass" if not errors else "fail", "validator":"validate_skill", "version":VERSION, "skill_file_count":file_count, "errors":errors}
 print(json.dumps(out, ensure_ascii=False, indent=2))
 sys.exit(1 if errors else 0)

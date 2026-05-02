@@ -1,0 +1,7 @@
+{
+  "from_phase": "init",
+  "to_phase": "run",
+  "required_fields": ["run_id", "job_id", "task"],
+  "intent": "bootstrap run directory and identifiers before content generation",
+  "on_failure_action": "block"
+}

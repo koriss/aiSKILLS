@@ -1,23 +1,24 @@
 ---
 name: research_factory_orchestrator
-description: Full-overlay Research Factory Orchestrator for OpenClaw: v18.3.2 adds delivery-truth, smoke-run/manual-fallback guards, current runtime-contract validation, and operator instructions over v18.3.1.
+description: Research Factory Orchestrator for OpenClaw: v19.0.1 core line (schemas/core, V1–V6 validators, run_core_validators + profiles). Condensed operator sheet in SKILL-core.md.
 license: internal
 metadata:
-  version: "18.3.2-delivery-truth-smoke-runtime-contract-hotfix"
+  version: "19.0.1"
   package: openclaw-research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  full_overlay_base: "18.1.1-full-overlay-from-v17.3-base"
   overlays:
-    - "18.2-source-quality-weighting-system"
-    - "18.3-execution-reliability-hardening"
-    - "18.3.1-context-acquisition-integrity"
-    - "18.3.2-delivery-truth-smoke-runtime-contract-hotfix"
-  release: "18.3.2"
+    - "19.0.0-pragmatic-rigor-phase1"
+    - "19.0.1"
+  release: "19.0.1"
 ---
+
+**Primary operator path:** use **`SKILL-core.md`** for v19 operation. This `SKILL.md` is retained as full reference text.
+
+**v19.0.1:** See `SKILL-core.md` and `docs/release-notes/v19.0.1.md` (patch) + `docs/release-notes/v19.0.0-phase1.md` (phase-1 baseline). v19 core path: `RFO_V19_PROFILE=mvr` (or full-rigor, propaganda-io, book-verification) + `scripts/run_core_validators.py`.
 
 ## HOW TO OPERATE THIS SKILL — mandatory operator protocol
 

@@ -1,0 +1,7 @@
+{
+  "run_id": "failure-corpus-f205-empty-dm",
+  "mode": "research",
+  "requested_mode": "research",
+  "provider": "cli",
+  "version": "18.7.0-logical-consistency"
+}

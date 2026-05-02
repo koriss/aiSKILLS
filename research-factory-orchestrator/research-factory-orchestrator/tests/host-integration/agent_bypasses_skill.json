@@ -1,0 +1,6 @@
+{
+  "scenario_id": "host_agent_bypass_skill",
+  "description": "Host agent answers from memory without invoking adapter; expect skill-side validators + host guard to block publish.",
+  "expected_signals": ["manual_fallback_presented_as_rfo", "publish_allowed_false"],
+  "version": "18.3.2"
+}

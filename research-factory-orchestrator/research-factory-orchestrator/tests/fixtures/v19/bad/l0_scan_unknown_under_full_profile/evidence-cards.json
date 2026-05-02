@@ -1,0 +1,23 @@
+{
+  "schema_version": "v19.0",
+  "evidence_cards": [
+    {
+      "evidence_id": "E1",
+      "source_ids": [
+        "S1"
+      ],
+      "evidence_type": "article",
+      "extracted_fact_or_excerpt": {
+        "kind": "excerpt",
+        "text": "t"
+      },
+      "supports": [
+        {
+          "claim_id": "C1",
+          "stance": "supports"
+        }
+      ],
+      "confidence": "medium"
+    }
+  ]
+}

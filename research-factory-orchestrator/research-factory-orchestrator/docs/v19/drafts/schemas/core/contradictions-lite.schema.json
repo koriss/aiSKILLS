@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/schemas/v19/contradictions-lite.schema.json",
+  "title": "ContradictionsLite",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scan", "entries"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "v19.0" },
+    "scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contradiction_level",
+        "contradiction_scan_performed",
+        "scan_scope",
+        "high_severity_detected"
+      ],
+      "properties": {
+        "contradiction_level": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "contradiction_scan_performed": { "type": "boolean" },
+        "scan_scope": { "type": "string", "minLength": 1 },
+        "high_severity_detected": {
+          "oneOf": [{ "type": "boolean" }, { "type": "string", "const": "unknown" }]
+        }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "rubric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_role",
+        "interest_alignment",
+        "access_level",
+        "verification_mode",
+        "independence",
+        "corroboration"
+      ],
+      "properties": {
+        "source_role": {
+          "type": "string",
+          "enum": [
+            "conflict_party",
+            "official",
+            "ngo",
+            "academic",
+            "journalist",
+            "osint",
+            "witness",
+            "unknown"
+          ]
+        },
+        "interest_alignment": {
+          "type": "string",
+          "enum": ["direct", "indirect", "none", "unknown"]
+        },
+        "access_level": {
+          "type": "string",
+          "enum": ["primary_access", "secondary", "derivative", "unknown"]
+        },
+        "verification_mode": {
+          "type": "string",
+          "enum": [
+            "raw_data",
+            "visual",
+            "document",
+            "testimony",
+            "aggregation",
+            "opinion"
+          ]
+        },
+        "independence": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"]
+        },
+        "corroboration": {
+          "type": "string",
+          "enum": ["independent", "circular", "unknown"]
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "claim_id",
+        "conflict_type",
+        "source_a_id",
+        "source_b_id",
+        "severity",
+        "resolution_status",
+        "effect_on_claim_status",
+        "rubric_a",
+        "rubric_b"
+      ],
+      "properties": {
+        "entry_id": { "type": "string", "minLength": 1 },
+        "claim_id": { "type": "string", "minLength": 1 },
+        "conflict_type": { "type": "string", "minLength": 1 },
+        "source_a_id": { "type": "string", "minLength": 1 },
+        "source_b_id": { "type": "string", "minLength": 1 },
+        "severity": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "resolution_status": {
+          "type": "string",
+          "enum": [
+            "unresolved",
+            "partially_resolved",
+            "resolved",
+            "waived_with_justification"
+          ]
+        },
+        "effect_on_claim_status": { "type": "string", "minLength": 1 },
+        "rubric_a": { "$ref": "#/$defs/rubric" },
+        "rubric_b": { "$ref": "#/$defs/rubric" },
+        "resolution_notes": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "from_phase": "outbox",
+  "to_phase": "validate",
+  "required_fields": ["run_dir", "delivery_manifest", "final_answer_gate"],
+  "success_response": "validation_transcript_pass",
+  "failure_response": "validation_transcript_fail",
+  "timeout_ms": 300000,
+  "on_failure_action": "block_publish"
+}

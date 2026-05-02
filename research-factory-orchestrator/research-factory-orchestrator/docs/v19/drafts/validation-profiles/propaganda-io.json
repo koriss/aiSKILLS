@@ -1,0 +1,130 @@
+{
+  "profile": "propaganda-io",
+  "schema_version": "v19.0-draft",
+  "description": "Specialized profile: neutral pattern detection + mapping. Not a political classifier. KB is reference-only. Values in claim_topics_enum are descriptive routing labels for policy/caps only, not verdict taxonomies (see docs/v19/propaganda-io-neutrality.md).",
+  "parent_profile": "full-rigor",
+  "active_validators": [
+    "validate_artifact_schema",
+    "validate_traceability",
+    "validate_source_quality",
+    "validate_claim_status",
+    "validate_final_answer",
+    "validate_delivery_truth"
+  ],
+  "options": {
+    "contradiction_level_default": "L1",
+    "contradiction_level_max": "L2",
+    "confidence_calibration": true,
+    "overclaiming_check": true,
+    "strict_source_threshold": true,
+    "require_full_contradiction_matrix": true,
+    "laundering_graph": true,
+    "timeline_integrity_deep": true,
+    "narrative_sponsorship_graph": true,
+    "amplification_map": true,
+    "cross_platform_trace": true,
+    "kb_usage_mode": "reference_only"
+  },
+  "propaganda_io_rules": {
+    "mode": "pattern_detection_and_mapping",
+    "kb_usage": {
+      "mandatory_when": ["profile_is_propaganda_io", "narrative_claim_present"],
+      "kb_match_is_evidence": false,
+      "kb_cannot_upgrade_claim_status": true
+    },
+    "claim_topic_vs_pattern": {
+      "claim_topics_enum": [
+        "civilian_harm_attribution",
+        "protected_object_military_use",
+        "large_scale_harm_claim",
+        "intent_assessment",
+        "responsibility_assignment",
+        "legitimacy_claim",
+        "capability_claim"
+      ],
+      "narrative_patterns_enum": [
+        "responsibility_reversal_claim",
+        "actor_role_reframing",
+        "mirror_accusation",
+        "evidence_origin_obfuscation",
+        "selective_context_removal",
+        "temporal_inversion",
+        "definitional_manipulation",
+        "emotional_flooding",
+        "false_dichotomy",
+        "moving_the_goalposts",
+        "appeal_to_inevitability",
+        "coordinated_amplification",
+        "cross_platform_repetition",
+        "low_context_visual_claim"
+      ],
+      "forbidden_verdict_loaded_system_labels": true
+    },
+    "pattern_detection_requirements": {
+      "pattern_requires_source_ids": true,
+      "pattern_requires_evidence_span": true,
+      "pattern_requires_explanation": true,
+      "pattern_requires_alternative_explanation": true,
+      "pattern_requires_canonical_method_id_when_kb_aligned": true
+    },
+    "source_assessment": {
+      "use_numeric_weights": false,
+      "dimensions": [
+        "source_role",
+        "access_level",
+        "interest_alignment",
+        "verification_mode",
+        "independence",
+        "authority_scope",
+        "corroboration_type"
+      ]
+    },
+    "visual_social_evidence": {
+      "raw_video_photo_default_status": "lead_only",
+      "social_media_post_default_status": "lead_only",
+      "upgrade_requires": [
+        "geolocation_or_equivalent_context",
+        "timestamp_or_temporal_anchor",
+        "chain_of_custody_or_origin_attribution",
+        "manipulation_check_or_unknown_explicit",
+        "independent_corroboration"
+      ]
+    }
+  },
+  "claim_type_policies": {
+    "narrative_claim": {
+      "max_status": "reported_claim",
+      "requires": ["origin_source_tracking", "amplification_map"]
+    },
+    "geopolitical_intent_assessment": { "max_status": "inferred_assessment", "min_support_tier": "high" },
+    "forecast": { "max_status": "forecast_scenario", "min_support_tier": "high" },
+    "atrocity_related": {
+      "default_max_status": "disputed_or_reported",
+      "can_upgrade_to_confirmed_fact_if": [
+        "forensic_or_primary_records",
+        "multiple_independent_corroboration",
+        "timeline_consistency"
+      ],
+      "requires_caveats": true
+    }
+  },
+  "blocking_rules": {
+    "missing_evidence_card": "block",
+    "pattern_without_evidence_span": "block",
+    "kb_match_used_as_evidence": "block",
+    "broken_kb_relation_supports_attribution": "block",
+    "external_delivery_claim_without_real_proof": "block",
+    "local_path_leak_user_visible": "block"
+  },
+  "output_requirements": {
+    "mandatory_sections": [
+      "narrative_map",
+      "amplification_summary",
+      "source_laundering_analysis",
+      "detected_patterns",
+      "contradiction_matrix_summary",
+      "traceability_summary",
+      "limitations_and_gaps"
+    ]
+  }
+}

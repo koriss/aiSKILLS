@@ -1,0 +1,6 @@
+{
+  "run_id": "failure-corpus-f201-lc04",
+  "status": "fail",
+  "validators_total": 1,
+  "errors": [{"code": "synthetic"}]
+}

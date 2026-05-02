@@ -1,0 +1,7 @@
+{
+  "status": "fail",
+  "errors": [
+    {"synthetic": "validation_failed_fixture"}
+  ],
+  "run_dir": "cases/F195_run_dir"
+}

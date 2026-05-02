@@ -123,7 +123,7 @@ def main():
     request_id=args.request_id or f"REQ-{run_id[4:] if run_id.startswith('RUN-') else seed}"
     slug=slugify(args.task)
 
-    for d in ["interface","jobs","ledgers","checkpoints","failure-packets","sources/source-fetches","claims","evidence","graph","raw-evidence/sources","raw-evidence/extracted-nodes","raw-evidence/raw-claims","raw-evidence/rejected","raw-evidence/provenance","work-units","subagents","report","chat","package","logs","outbox","delivery-acks","provider-payloads"]:
+    for d in ["interface","jobs","ledgers","checkpoints","failure-packets","sources/source-fetches","claims","evidence","graph","raw-evidence/sources","raw-evidence/extracted-nodes","raw-evidence/raw-claims","raw-evidence/rejected","raw-evidence/provenance","work-units","work-queue/pending","work-queue/running","work-queue/done","subagents","report","chat","package","logs","outbox","delivery-acks","provider-payloads"]:
         (root/d).mkdir(parents=True, exist_ok=True)
 
     ensure_interface_context(root, args.task, run_id, job_id, command_id, request_id, args.provider, args.interface, args.locale)
@@ -158,9 +158,20 @@ def main():
     jwrite(root/"provenance-manifest.json", {"run_id":run_id,"entities":[],"activities":[],"agents":[],"relations":[],"created_at":now()})
     jwrite(root/"artifact-manifest.json", {"run_id":run_id,"artifacts":[],"updated_at":now()})
     jwrite(root/"validation-transcript.json", {"run_id":run_id,"validators":[],"all_passed":False,"created_at":now()})
+    twrite(root/"trace.jsonl", json.dumps({"ts":now(),"run_id":run_id,"job_id":job_id,"phase":"init_runtime","decision":"initialized","validator_id":None,"model":None,"prompt_hash":None,"output_hash":None,"duration_ms":None,"evidence_refs":[]}, ensure_ascii=False)+"\n")
     jwrite(root/"delivery-manifest.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"delivery_status":"created","attachments":[],"chat_messages":[],"local_paths_exposed":False,"created_at":now()})
     jwrite(root/"attachment-ledger.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"attachments":[],"all_required_sent":False})
-    jwrite(root/"final-answer-gate.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"passed":False,"checks":{},"created_at":now()})
+    init_gates={
+        "provider_ack_gate":{"status":"fail","passed":False},
+        "external_delivery_gate":{"status":"fail","passed":False,"stub_only":False},
+        "final_user_claim_gate":{"status":"fail","passed":False,"stub_only":False},
+        "content_gate":{"status":"fail","passed":False},
+        "wave_graph_gate":{"status":"fail","passed":False},
+        "io_analysis_gate":{"status":"fail","passed":False},
+        "self_audit_gate":{"status":"fail","passed":False},
+        "package_gate":{"status":"fail","passed":False},
+    }
+    jwrite(root/"final-answer-gate.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"passed":False,"status":"fail","gates":init_gates,"created_at":now()})
     jwrite(root/"report/semantic-report.json", {"report_meta":run,"summary":{},"sections":[],"claims":[],"sources":[]})
     twrite(root/"report/full-report.html", "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'></head><body><h1>Runtime initialization report shell</h1><script type='application/json' id='artifact-manifest-json'>{}</script><script type='application/json' id='provenance-manifest-json'>{}</script><script type='application/json' id='validation-transcript-json'>{}</script><script type='application/json' id='delivery-manifest-json'>{}</script><script type='application/json' id='runtime-status-json'>{}</script><script type='application/json' id='entrypoint-proof-json'>{}</script></body></html>")
     chat_plan={"run_id":run_id,"job_id":job_id,"command_id":command_id,"provider":args.provider,"plain_text_only":True,"mobile_safe":True,"no_tables":True,"no_local_paths":True,"split_policy":{"max_message_chars":3500,"logical_blocks":True},"messages":[],"attachments":[],"created_at":now()}

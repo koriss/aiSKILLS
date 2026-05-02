@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO capability token (ACP-CT-1.0 / CapToken / OCap-inspired)",
+  "type": "object",
+  "required": ["cap_id", "holder", "scope", "exp", "nonce", "signature"],
+  "properties": {
+    "cap_id": { "type": "string" },
+    "holder": { "type": "string", "description": "phase|adapter" },
+    "scope": { "type": "array", "items": { "type": "string" } },
+    "exp": { "type": "string", "description": "RFC3339 mandatory expiry" },
+    "nonce": { "type": "string", "minLength": 16 },
+    "parent_hash": { "type": "string" },
+    "signature": { "type": "string" },
+    "max_depth": { "type": "integer", "minimum": 0, "default": 3 }
+  },
+  "additionalProperties": false
+}

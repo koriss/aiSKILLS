@@ -1,0 +1,12 @@
+{
+  "version": "18.3.2",
+  "preflight": "Recorded from agent session — see docs/release-notes/v18.3.2-semantic-diff.md",
+  "smoke": "scripts/rfo_v18_core.py smoke (telegram stub) — final_gate_status stub_only expected",
+  "delivery_tests": "scripts/test_delivery_gate_negative_cases.py — OK after outbox_delivery_worker fix",
+  "failure_corpus": "scripts/rfo_v18_core.py failure — exit 0 after required_failure_classes aligned to corpus covers",
+  "hypothesis_check": {
+    "fake_sent_removed": true,
+    "cmd_failure_executes_validators": true,
+    "init_gates_key": "gates not checks"
+  }
+}

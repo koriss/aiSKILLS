@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContradictionMatrixStubLegacy",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "item_id",
+    "entries"
+  ]
+}

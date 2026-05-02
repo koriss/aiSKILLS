@@ -1,0 +1,34 @@
+{
+  "profile": "book-verification",
+  "schema_version": "v19.0-draft",
+  "description": "Book / long-form verification. Stricter citation and excerpt gates; single canonical protocol path in implementation.",
+  "parent_profile": "full-rigor",
+  "active_validators": [
+    "validate_artifact_schema",
+    "validate_traceability",
+    "validate_source_quality",
+    "validate_claim_status",
+    "validate_final_answer",
+    "validate_delivery_truth"
+  ],
+  "options": {
+    "contradiction_level_default": "L1",
+    "strict_source_threshold": true,
+    "require_retrievable_locator_for_citation": true,
+    "snippet_only_never_confirmed": true,
+    "kb_usage_mode": "off"
+  },
+  "claim_type_policies": {
+    "narrative_claim": { "max_status": "reported_claim", "min_support_tier": "high" },
+    "scientific_empirical": { "max_status": "confirmed_fact", "min_support_tier": "high" },
+    "legal": { "max_status": "confirmed_fact", "min_support_tier": "high" }
+  },
+  "blocking_rules": {
+    "missing_evidence_card": "block",
+    "citation_without_retrievable_locator": "block",
+    "confirmed_fact_violates_status_cap": "block",
+    "local_path_leak_user_visible": "block",
+    "external_delivery_claim_without_real_proof": "block"
+  },
+  "canonical_protocol_note": "Only one active book protocol document in implementation package; legacy copies under legacy/ only."
+}

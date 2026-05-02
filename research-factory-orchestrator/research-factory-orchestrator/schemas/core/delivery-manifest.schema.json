@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/schemas/v19/delivery-manifest.schema.json",
+  "title": "DeliveryManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "delivery_status",
+    "attachments",
+    "local_paths_exposed",
+    "artifact_ready_claim_allowed",
+    "external_delivery_claim_allowed",
+    "stub_delivery_disclosure_required",
+    "provider_capability_snapshot",
+    "real_external_delivery",
+    "stub_delivery",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "v19.0" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "job_id": { "type": "string" },
+    "delivery_status": {
+      "type": "string",
+      "enum": [
+        "not_queued",
+        "created",
+        "running",
+        "ready",
+        "delivering",
+        "delivered",
+        "stub_delivered",
+        "partial_delivery",
+        "partial",
+        "failed",
+        "cancelled",
+        "content_ready_delivery_not_proven",
+        "validation_failed"
+      ]
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "attachment_hashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+    },
+    "telegram_messages": {
+      "type": "array",
+      "items": { "type": "object", "additionalProperties": true }
+    },
+    "local_paths_exposed": { "type": "boolean" },
+    "artifact_ready_claim_allowed": { "type": "boolean" },
+    "external_delivery_claim_allowed": { "type": "boolean" },
+    "stub_delivery_disclosure_required": { "type": "boolean" },
+    "provider_adapter_completed": { "type": "boolean" },
+    "provider_capability_snapshot": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "real_external_delivery": { "type": "boolean" },
+    "stub_delivery": { "type": "boolean" },
+    "delivery_claim_allowed": {
+      "type": "boolean",
+      "description": "Deprecated composite; prefer split booleans. If present must equal external OR artifact policy."
+    },
+    "publish_allowed": { "type": "boolean" },
+    "publish_reason": { "type": "string" },
+    "provider_ack_id": { "type": "string" },
+    "required_outbox_events": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "required_acks_missing": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "gates": { "type": "object", "additionalProperties": true },
+    "user_visible_artifact_paths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string" }
+  }
+}

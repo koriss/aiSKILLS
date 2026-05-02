@@ -1,0 +1,7 @@
+{
+  "run_id": "failure-corpus-f206-lc09",
+  "mode": "research",
+  "requested_mode": "production",
+  "provider": "cli",
+  "version": "18.7.0-logical-consistency"
+}

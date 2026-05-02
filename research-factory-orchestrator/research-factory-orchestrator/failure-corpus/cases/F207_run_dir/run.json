@@ -1,0 +1,7 @@
+{
+  "run_id": "failure-corpus-f207-lc16",
+  "mode": "production",
+  "requested_mode": "production",
+  "provider": "telegram",
+  "version": "18.7.0-logical-consistency"
+}

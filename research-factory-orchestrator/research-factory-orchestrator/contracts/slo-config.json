@@ -1,0 +1,10 @@
+{
+  "version": "18.5.0",
+  "windows": {"short_minutes": 5, "long_hours": 1},
+  "targets": {
+    "validators_pass_rate": {"slo": 0.995, "error_budget_monthly": 0.005},
+    "delivery_success_rate": {"slo": 0.99, "error_budget_monthly": 0.01},
+    "replay_determinism_rate": {"slo": 1.0, "error_budget_monthly": 0.0}
+  },
+  "notes": "Burn-rate alerts: compare 5m vs 1h windows on trace+events volume; wire to external observability per operator runbook."
+}

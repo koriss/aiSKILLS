@@ -1,0 +1,21 @@
+{
+  "profile": "mvr",
+  "schema_version": "v19.0",
+  "options": {
+    "contradiction_level_default": "L0",
+    "contradiction_level_escalate_to": "L1",
+    "contradiction_escalate_when": [
+      "medium_or_high_source_conflict",
+      "numerical_mismatch_gt_10pct"
+    ],
+    "confidence_calibration": true,
+    "overclaiming_check": true,
+    "strict_source_threshold": false,
+    "require_full_contradiction_matrix": false,
+    "laundering_graph": false,
+    "timeline_integrity_deep": false,
+    "narrative_sponsorship_graph": false,
+    "kb_usage_mode": "off",
+    "delivery_mode": "stub_allowed_explicit"
+  }
+}

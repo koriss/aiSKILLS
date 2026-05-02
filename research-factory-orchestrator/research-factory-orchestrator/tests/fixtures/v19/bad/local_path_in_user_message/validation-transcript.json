@@ -1,0 +1,66 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "fx",
+  "profile_used": "mvr",
+  "validators": [
+    {
+      "validator_id": "validate_artifact_schema",
+      "passed": true,
+      "blocking": false,
+      "issues": [],
+      "warnings": [],
+      "summary": "V1 artifact gate"
+    },
+    {
+      "validator_id": "validate_traceability",
+      "passed": true,
+      "blocking": false,
+      "issues": [],
+      "warnings": [],
+      "summary": "V2 traceability"
+    },
+    {
+      "validator_id": "validate_source_quality",
+      "passed": true,
+      "blocking": false,
+      "issues": [],
+      "warnings": [],
+      "summary": "V3 source quality"
+    },
+    {
+      "validator_id": "validate_claim_status",
+      "passed": true,
+      "blocking": false,
+      "issues": [],
+      "warnings": [],
+      "summary": "V4 claim status"
+    },
+    {
+      "validator_id": "validate_final_answer",
+      "passed": true,
+      "blocking": false,
+      "issues": [],
+      "warnings": [],
+      "summary": "V5 final answer / overconfidence"
+    },
+    {
+      "validator_id": "validate_delivery_truth",
+      "passed": false,
+      "blocking": true,
+      "issues": [
+        {
+          "code": "local_path_leak",
+          "severity": "error",
+          "path": "/home/x/y.txt",
+          "detail": "absolute path in user-visible list",
+          "artifact": "delivery-manifest.json"
+        }
+      ],
+      "warnings": [],
+      "summary": "V6 delivery truth"
+    }
+  ],
+  "overall_pass": false,
+  "all_passed": false,
+  "created_at": "2026-05-02T14:00:36.256363Z"
+}

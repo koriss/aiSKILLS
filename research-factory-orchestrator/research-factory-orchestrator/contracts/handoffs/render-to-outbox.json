@@ -1,0 +1,7 @@
+{
+  "from_phase": "render",
+  "to_phase": "outbox",
+  "required_fields": ["run_id", "chat_plan"],
+  "intent": "chat plan and payloads must exist before outbox events are materialized",
+  "on_failure_action": "block"
+}

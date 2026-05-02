@@ -1,0 +1,8 @@
+{
+  "run_id": "failure-corpus-f201-lc04",
+  "mode": "research",
+  "requested_mode": "research",
+  "normalized_from": null,
+  "provider": "cli",
+  "version": "18.7.0-logical-consistency"
+}

@@ -1,0 +1,63 @@
+{
+  "profile": "full-rigor",
+  "schema_version": "v19.0",
+  "description": "Deep due diligence. Same six core validators; stricter thresholds, L1/L2 contradiction, proof integrity.",
+  "parent_profile": "mvr",
+  "active_validators": [
+    "validate_artifact_schema",
+    "validate_traceability",
+    "validate_source_quality",
+    "validate_claim_status",
+    "validate_final_answer",
+    "validate_delivery_truth"
+  ],
+  "options": {
+    "contradiction_level_default": "L1",
+    "contradiction_level_max": "L2",
+    "confidence_calibration": true,
+    "overclaiming_check": true,
+    "strict_source_threshold": true,
+    "require_full_contradiction_matrix": true,
+    "laundering_graph": true,
+    "timeline_integrity_deep": true,
+    "narrative_sponsorship_graph": true,
+    "kb_usage_mode": "reference_only_when_propaganda_profile",
+    "delivery_mode": "real_external_only_unless_explicit_stub"
+  },
+  "claim_type_policies": {
+    "forecast": { "max_status": "forecast_scenario", "min_support_tier": "high" },
+    "geopolitical_intent_assessment": { "max_status": "inferred_assessment", "min_support_tier": "high" },
+    "narrative_claim": { "max_status": "reported_claim", "min_support_tier": "high" },
+    "atrocity_related": {
+      "default_max_status": "disputed_or_reported",
+      "can_upgrade_to_confirmed_fact_if": [
+        "forensic_or_primary_records",
+        "multiple_independent_corroboration",
+        "timeline_consistency",
+        "visual_documentary_with_chain_of_custody"
+      ],
+      "requires_caveats": true
+    }
+  },
+  "blocking_rules": {
+    "missing_evidence_card": "block",
+    "evidence_without_resolvable_source": "block",
+    "confirmed_fact_violates_status_cap": "block",
+    "unresolved_critical_contradiction": "block",
+    "local_path_leak_user_visible": "block",
+    "external_delivery_claim_without_real_proof": "block",
+    "high_overconfidence_blocking_bucket_non_empty": "block",
+    "l0_contradiction_unknown_under_full": "block",
+    "kb_match_used_as_evidence": "block"
+  },
+  "contradiction_l0_requirements": {
+    "contradiction_scan_performed_required": true,
+    "high_severity_unknown_blocks_pass": true
+  },
+  "auto_escalation": {
+    "enabled": true,
+    "user_override_allowed": true,
+    "require_structured_signals": true,
+    "forbidden_keyword_only_escalation": true
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/schemas/v19/claims-registry.schema.json",
+  "title": "ClaimsRegistry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "claims"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "v19.0" },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/claim" }
+    }
+  },
+  "$defs": {
+    "supportEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "evidence_card_id", "role_for_claim"],
+      "properties": {
+        "source_id": { "type": "string", "minLength": 1 },
+        "evidence_card_id": { "type": "string", "minLength": 1 },
+        "role_for_claim": {
+          "type": "string",
+          "enum": [
+            "primary_support",
+            "corroboration",
+            "context",
+            "lead",
+            "opposition"
+          ]
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "claim_text",
+        "claim_type",
+        "status",
+        "confidence",
+        "evidence_card_ids",
+        "support_set"
+      ],
+      "properties": {
+        "claim_id": { "type": "string", "minLength": 1 },
+        "claim_text": { "type": "string", "minLength": 1 },
+        "claim_type": { "type": "string", "minLength": 1 },
+        "status": {
+          "type": "string",
+          "enum": [
+            "confirmed_fact",
+            "verified_estimate",
+            "reported_claim",
+            "inferred_assessment",
+            "forecast_scenario",
+            "disputed",
+            "insufficient_evidence",
+            "contradicted",
+            "lead_only"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"]
+        },
+        "evidence_card_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "support_set": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/supportEntry" }
+        }
+      }
+    }
+  }
+}

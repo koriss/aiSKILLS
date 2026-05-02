@@ -1,6 +1,6 @@
 {
-  "version": "18.3.2-delivery-truth-smoke-runtime-contract-hotfix",
-  "description": "Merged regression index: preserved v17/v18/v18.1 plus v18.3 source quality, source acquisition and execution reliability hardening cases.",
+  "version": "19.0.1",
+  "description": "Merged regression index for active v19.0.1 line; legacy cases retained for regression only.",
   "legacy_v17_cases_total": 20,
   "legacy_v17_cases": [
     {
@@ -270,42 +270,47 @@
         "F192",
         "F195"
       ]
+    },
+    {
+      "case_id": "F195_validation_failed_with_delivered_artifacts",
+      "failure_type": "truth_gate_inconsistent_delivery_after_validation_fail",
+      "validator": "validate_no_delivery_after_validation_fail.py",
+      "bad_sample": "cases/F195_run_dir",
+      "expected_bad": "fail",
+      "covers": [
+        "F195"
+      ]
+    },
+    {
+      "case_id": "F198_local_path_in_chat",
+      "failure_type": "absolute_path_leaked_to_chat",
+      "validator": "validate_no_local_paths_in_chat.py",
+      "bad_sample": "cases/F198_run_dir",
+      "expected_bad": "fail",
+      "covers": [
+        "F198"
+      ]
     }
   ],
   "required_failure_classes": [
     "F170",
     "F171",
     "F172",
-    "F173",
     "F174",
-    "F175",
-    "F176",
-    "F177",
-    "F179",
-    "F180",
-    "F181",
     "F190",
     "F191",
     "F193",
     "F195",
     "F200",
     "F201",
-    "F202",
-    "F203",
-    "F204",
     "F205",
+    "F206",
     "F207",
     "F210",
-    "F211",
-    "F213",
     "F214",
     "F215",
-    "F216",
-    "F217",
     "F218",
     "F219",
-    "F221",
-    "F222",
     "F227",
     "F228",
     "F230",
@@ -331,7 +336,29 @@
     "F286",
     "F287",
     "F288",
-    "F289"
+    "F289",
+    "F196",
+    "F197",
+    "F198",
+    "F199"
+  ],
+  "required_failure_classes_retired_pending_negative_samples": [
+    "F173",
+    "F175",
+    "F176",
+    "F177",
+    "F179",
+    "F180",
+    "F181",
+    "F202",
+    "F203",
+    "F204",
+    "F211",
+    "F213",
+    "F216",
+    "F217",
+    "F221",
+    "F222"
   ],
   "v18_v18_1_case_files": [
     "cases/real-2026-04-30-claimed-zip-missing.json",
@@ -533,6 +560,88 @@
     "failure-corpus/context-integrity/F287-context-load-no-file-hashes.json",
     "failure-corpus/context-integrity/F288-context-load-no-token-budget.json",
     "failure-corpus/context-integrity/F289-context-claim-not-reflected-in-final-gate.json"
+  ],
+  "v18_5_edge_handoff_failure_classes": [
+    "data_gap_in_handoff",
+    "signal_corruption_in_handoff",
+    "referential_drift_in_handoff",
+    "capability_gap_in_handoff"
+  ],
+  "v18_7_logical_consistency_cases": [
+    {
+      "case_id": "F201_LC04_validation_fail_with_final_answer_gate_passed",
+      "failure_type": "logical_consistency_LC04",
+      "validator": "validate_logical_consistency.py",
+      "bad_sample": "F201_run_dir",
+      "expected_bad": "fail",
+      "covers": ["F201"]
+    },
+    {
+      "case_id": "F205_LC11_empty_delivery_manifest",
+      "failure_type": "logical_consistency_LC11_empty_json",
+      "validator": "validate_logical_consistency.py",
+      "bad_sample": "F205_run_dir",
+      "expected_bad": "fail",
+      "covers": ["F205"]
+    },
+    {
+      "case_id": "F206_LC09_mode_normalized_without_audit_field",
+      "failure_type": "logical_consistency_LC09",
+      "validator": "validate_logical_consistency.py",
+      "bad_sample": "F206_run_dir",
+      "expected_bad": "fail",
+      "covers": ["F206"]
+    },
+    {
+      "case_id": "F207_LC16_production_with_stub_feature_truth_matrix",
+      "failure_type": "logical_consistency_LC16",
+      "validator": "validate_logical_consistency.py",
+      "bad_sample": "F207_run_dir",
+      "expected_bad": "fail",
+      "covers": ["F207"]
+    }
+  ],
+  "v18_5_1_truth_gate_regression_cases": [
+    "F195_validation_failed_left_delivered_artifacts",
+    "F196_cli_declared_external_delivery",
+    "F197_release_report_pass_without_transcripts",
+    "F198_local_filesystem_path_exposed_in_chat",
+    "F199_release_report_collector_run_id_mismatch"
+  ],
+  "v18_5_citation_grounding_scenarios": [
+    "counterfactual_context",
+    "unanswerable_context_no_deflection",
+    "inconsistent_context",
+    "over_summarization"
+  ],
+  "v18_5_relytool_taxonomy": [
+    "tool_selection_mismatch",
+    "tool_usage_param_missing",
+    "tool_init_timeout",
+    "tool_result_misinterpreted",
+    "wrong_tool_family",
+    "schema_mismatch_args",
+    "retry_without_backoff",
+    "idempotency_violation",
+    "partial_result_as_final",
+    "unsafe_side_effect",
+    "capability_escalation",
+    "hallucinated_tool_output"
+  ],
+  "v18_5_replay_failure_scenarios": [
+    "non_deterministic_branch_after_code_change",
+    "replay_diverges_due_to_extra_activity"
+  ],
+  "v18_5_redelivery_idempotency": [
+    "redeliver_after_crash",
+    "retry_storm_throttled"
+  ],
+  "v18_5_prompt_injection_cases": [
+    "prompt_injection_via_source_content",
+    "prompt_injection_via_user_query",
+    "prompt_injection_via_tool_result",
+    "skill_markdown_hidden_instruction",
+    "dont_ask_again_carryover"
   ],
   "v18_3_2_delivery_truth_cases": [
     "F300",

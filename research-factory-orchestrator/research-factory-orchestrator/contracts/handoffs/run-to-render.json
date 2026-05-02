@@ -1,0 +1,7 @@
+{
+  "from_phase": "run",
+  "to_phase": "render",
+  "required_fields": ["run_id", "artifacts_ready"],
+  "intent": "graph/claims/report artifacts must exist before HTML/chat render",
+  "on_failure_action": "block"
+}

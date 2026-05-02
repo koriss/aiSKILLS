@@ -1,8 +1,6 @@
-"""RFO bounded component wrapper: outbox.py.
+"""RFO bounded component: outbox / delivery truth (provider-capabilities-driven)."""
+from __future__ import annotations
 
-Compatibility wrapper around scripts.rfo_v18_core until full decomposition.
-"""
+from runtime.outbox_impl import cmd_outbox
 
-# Import dynamically only when used to avoid entrypoint side effects.
-def component_boundary():
-    return "outbox"
+__all__ = ["cmd_outbox"]

@@ -23,10 +23,11 @@ def make_run(root, provider="telegram", ack_mode="stub", missing=None, failed=No
     (r/"chat").mkdir(exist_ok=True); (r/"chat"/"message-001.txt").write_text("ok", encoding="utf-8")
     write(r/"outbox"/"outbox-policy.json", {"required_events": REQUIRED})
     for eid in REQUIRED:
+        if missing == eid:
+            continue
         typ = "send_message" if eid == "OUT-0001" else "send_file"
         payload = "chat/message-001.txt" if eid == "OUT-0001" else ("report/full-report.html" if eid == "OUT-0002" else "package/research-package.zip")
         write(r/"outbox"/f"{eid}.json", {"event_id":eid,"run_id":"RUN-NEG","job_id":"JOB-NEG","command_id":"CMD-NEG","provider":provider,"type":typ,"payload_path":payload,"payload_kind":"chat_message" if typ=="send_message" else "attachment","file_kind":None if typ=="send_message" else ("html_report" if eid=="OUT-0002" else "research_package"),"status":"sent","idempotency_key":"NEG:"+eid})
-        if missing == eid: continue
         stub = ack_mode == "stub"
         real = ack_mode == "real"
         status = "failed" if failed == eid else "sent"
@@ -46,11 +47,11 @@ def main():
     try:
         stub=make_run(base, provider="telegram", ack_mode="stub")
         odw.recompute_delivery_state(stub)
-        md=read(stub/"delivery-manifest.json"); fg=read(stub/"final-answer-gate.json")
+        md=read(stub/"delivery-manifest.json"); fg=read(stub/"final-answer-gate.json"); g=fg.get("gates") or {}
         if md.get("delivery_status") != "stub_delivered": errors.append("stub case did not become stub_delivered")
         if md.get("delivery_claim_allowed") is not False: errors.append("stub case allowed delivery claim")
         if fg.get("passed") is not False: errors.append("stub case set final passed true")
-        if fg.get("external_delivery_gate") != "stub_only": errors.append("stub case external gate not stub_only")
+        if (g.get("external_delivery_gate") or {}).get("status") != "stub_only": errors.append("stub case external gate not stub_only")
         real=make_run(base, provider="cli", ack_mode="real")
         odw.recompute_delivery_state(real)
         md=read(real/"delivery-manifest.json"); fg=read(real/"final-answer-gate.json")

@@ -1,8 +1,6 @@
-"""RFO bounded component wrapper: validation.py.
+"""RFO bounded component: package validation entrypoint (core-boundary-contract)."""
+from __future__ import annotations
 
-Compatibility wrapper around scripts.rfo_v18_core until full decomposition.
-"""
+from runtime.validate_impl import validate
 
-# Import dynamically only when used to avoid entrypoint side effects.
-def component_boundary():
-    return "validation"
+__all__ = ["validate"]

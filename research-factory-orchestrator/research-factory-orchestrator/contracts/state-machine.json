@@ -1,0 +1,22 @@
+{
+  "version": "18.5.0",
+  "states": [
+    "queued",
+    "content_rendered",
+    "delivery_queued",
+    "stub_delivered",
+    "delivered",
+    "failed",
+    "partial_delivery"
+  ],
+  "initial": "queued",
+  "terminal": ["stub_delivered", "delivered", "failed", "partial_delivery"],
+  "transitions": [
+    {"from": "queued", "to": "content_rendered", "event": "runtime_completed"},
+    {"from": "content_rendered", "to": "delivery_queued", "event": "outbox_prepared"},
+    {"from": "delivery_queued", "to": "stub_delivered", "event": "stub_ack_complete"},
+    {"from": "delivery_queued", "to": "delivered", "event": "external_ack_complete"},
+    {"from": "delivery_queued", "to": "failed", "event": "ack_failed"},
+    {"from": "delivery_queued", "to": "partial_delivery", "event": "partial_acks"}
+  ]
+}

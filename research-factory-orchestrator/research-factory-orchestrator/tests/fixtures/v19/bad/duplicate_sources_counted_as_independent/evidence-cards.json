@@ -1,0 +1,39 @@
+{
+  "schema_version": "v19.0",
+  "evidence_cards": [
+    {
+      "evidence_id": "E1",
+      "source_ids": [
+        "S1"
+      ],
+      "extracted_fact_or_excerpt": {
+        "kind": "excerpt",
+        "text": "a"
+      },
+      "supports": [
+        {
+          "claim_id": "C1",
+          "stance": "supports"
+        }
+      ],
+      "confidence": "medium"
+    },
+    {
+      "evidence_id": "E2",
+      "source_ids": [
+        "S2"
+      ],
+      "extracted_fact_or_excerpt": {
+        "kind": "excerpt",
+        "text": "b"
+      },
+      "supports": [
+        {
+          "claim_id": "C1",
+          "stance": "supports"
+        }
+      ],
+      "confidence": "medium"
+    }
+  ]
+}

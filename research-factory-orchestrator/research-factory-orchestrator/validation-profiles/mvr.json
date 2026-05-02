@@ -1,0 +1,56 @@
+{
+  "profile": "mvr",
+  "schema_version": "v19.0",
+  "description": "Minimal Viable Rigor — default. Fast, fail-closed on sacred path and delivery safety.",
+  "active_validators": [
+    "validate_artifact_schema",
+    "validate_traceability",
+    "validate_source_quality",
+    "validate_claim_status",
+    "validate_final_answer",
+    "validate_delivery_truth"
+  ],
+  "options": {
+    "contradiction_level_default": "L0",
+    "contradiction_level_escalate_to": "L1",
+    "contradiction_escalate_when": ["medium_or_high_source_conflict", "numerical_mismatch_gt_10pct"],
+    "confidence_calibration": true,
+    "overclaiming_check": true,
+    "strict_source_threshold": false,
+    "require_full_contradiction_matrix": false,
+    "laundering_graph": false,
+    "timeline_integrity_deep": false,
+    "narrative_sponsorship_graph": false,
+    "kb_usage_mode": "off",
+    "delivery_mode": "stub_allowed_explicit"
+  },
+  "claim_type_policies": {
+    "forecast": { "max_status": "forecast_scenario", "min_support_tier": "medium" },
+    "geopolitical_intent_assessment": { "max_status": "inferred_assessment", "min_support_tier": "medium" },
+    "narrative_claim": { "max_status": "reported_claim", "min_support_tier": "medium" },
+    "atrocity_related": {
+      "default_max_status": "disputed_or_reported",
+      "can_upgrade_to_confirmed_fact_if": [
+        "forensic_or_primary_records",
+        "multiple_independent_corroboration",
+        "timeline_consistency"
+      ],
+      "requires_caveats": true
+    }
+  },
+  "blocking_rules": {
+    "missing_evidence_card": "block",
+    "evidence_without_resolvable_source": "block",
+    "confirmed_fact_violates_status_cap": "block",
+    "local_path_leak_user_visible": "block",
+    "external_delivery_claim_without_real_proof": "block",
+    "kb_match_used_as_evidence": "block",
+    "l0_contradiction_scan_not_performed_for_profile": "warn"
+  },
+  "auto_escalation": {
+    "enabled": true,
+    "user_override_allowed": true,
+    "require_structured_signals": true,
+    "forbidden_keyword_only_escalation": true
+  }
+}

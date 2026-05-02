@@ -138,6 +138,7 @@ def _check_expected(
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json-report", action="store_true", help="Emit one JSON summary line to stdout")
+    ap.add_argument("--verbose", action="store_true", help="Print fixture name as each fixture is checked (I3)")
     args = ap.parse_args()
     py = sys.executable
     summary: dict[str, object] = {"fixtures": [], "ok": True}
@@ -150,6 +151,8 @@ def main() -> int:
             if not fixture_dir.is_dir():
                 continue
             name = f"{label}/{fixture_dir.name}"
+            if args.verbose:
+                print(f"[fixture] {name}", file=sys.stderr)
             fb = _forbidden_paths(fixture_dir)
             if fb:
                 all_errs.append(f"{name}: FIXTURE-HYGIENE-VIOLATION forbidden files: {fb}")

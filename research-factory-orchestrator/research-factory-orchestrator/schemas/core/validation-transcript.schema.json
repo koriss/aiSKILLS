@@ -2,8 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://rfo.local/schemas/v19/validation-transcript.schema.json",
   "title": "ValidationTranscript",
+  "description": "REC-1: root allows extension fields; validatorResult items allow extra keys (reserved: validator_id, status, passed, blocking, issues, warnings, summary, duration_ms).",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "schema_version",
     "run_id",
@@ -34,7 +35,7 @@
   "$defs": {
     "validatorResult": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
         "validator_id",
         "status",

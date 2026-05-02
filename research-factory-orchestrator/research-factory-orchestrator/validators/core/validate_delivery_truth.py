@@ -70,12 +70,25 @@ def main() -> int:
                     continue
                 if re.search(r"(^|/)(home|Users|tmp|var|root|opt|usr)/", pth, re.I) or pth.startswith("~/") or re.match(r"^[A-Za-z]:\\", pth):
                     issues.append({"code": "local_path_leak", "severity": "error", "path": pth, "detail": "local/absolute path in user-visible list", "artifact": "delivery-manifest.json"})
+            stub = dm.get("stub_delivery") is True
+            real_ext = dm.get("real_external_delivery") is True
+            ext_claim = dm.get("external_delivery_claim_allowed") is True
+            if stub and (real_ext or ext_claim):
+                issues.append(
+                    {
+                        "code": "DELIV-STUB-EXT",
+                        "severity": "error",
+                        "path": "delivery_manifest_flags",
+                        "detail": "stub_delivery incompatible with real_external_delivery / external_delivery_claim_allowed",
+                        "artifact": "delivery-manifest.json",
+                    }
+                )
             atts = dm.get("attachments") or []
             if isinstance(atts, list):
                 if dm.get("artifact_ready_claim_allowed") is True and len(atts) == 0:
                     issues.append(
                         {
-                            "code": "DELIV-ATT-MISSING",
+                            "code": "DELIV-ATT-EMPTY-WITH-CLAIM",
                             "severity": "error",
                             "path": "attachments",
                             "detail": "artifact_ready_claim_allowed true but attachments empty",
@@ -96,10 +109,20 @@ def main() -> int:
                                 "artifact": "delivery-manifest.json",
                             }
                         )
-                    if dm.get("stub_delivery") is True and apth.lower().endswith((".tmp", ".log", ".bak")):
+                    if apth and not (rd / apth).is_file():
                         issues.append(
                             {
-                                "code": "DELIV-STUB-EXT",
+                                "code": "DELIV-ATT-MISSING",
+                                "severity": "error",
+                                "path": apth,
+                                "detail": "attachment path does not exist under run_dir",
+                                "artifact": "delivery-manifest.json",
+                            }
+                        )
+                    if stub and apth.lower().endswith((".tmp", ".log", ".bak")):
+                        issues.append(
+                            {
+                                "code": "DELIV-STUB-FORBIDDEN-ATTACHMENT",
                                 "severity": "error",
                                 "path": apth,
                                 "detail": "stub_delivery attachment uses forbidden extension",

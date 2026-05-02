@@ -1,6 +1,6 @@
 # Research Factory Orchestrator — v19 core operator sheet
 
-**Version:** `19.0.2` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Patch notes:** `docs/release-notes/v19.0.2.md` · **Legacy full overlay:** `SKILL.md` (v18.x retained)
+**Version:** `19.0.3` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Lenses:** `docs/adr/ADR-009-architectural-lenses.md` · **Root patterns:** `docs/adr/ADR-010-root-patterns.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Patch notes:** `docs/release-notes/v19.0.3.md` · **Legacy full overlay:** `SKILL.md` (v18.x retained)
 
 **Deprecation:** subagent / durable work-unit / shard-ledger flows remain **legacy-only** (see `SKILL.md`, `references/work-unit-contract.md`). The v19 **core path** is profiles + V1–V6 + `run_core_validators.py`; do not mix undocumented subagent overrides with `RFO_V19_PROFILE` runs.
 
@@ -57,4 +57,4 @@ Run: `python -S scripts/run_core_validators.py --run-dir <run_dir> --profile mvr
 
 ## Compatibility
 
-Full historical SKILL text lives in **`SKILL.md`** only (overlay duplicate removed in v19.0.2). Runtime version: `runtime/version.json`.
+Full historical SKILL text lives in **`SKILL.md`** only (overlay duplicate removed in v19.0.2). Runtime version: `runtime/version.json` (see `v19.0.3` release notes for closure gates).

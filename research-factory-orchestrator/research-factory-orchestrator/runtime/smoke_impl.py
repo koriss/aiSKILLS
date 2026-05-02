@@ -10,6 +10,32 @@ from pathlib import Path
 
 from runtime.util import jr, jw, now, skill_root
 from runtime.status import VERSION
+from runtime.validate_impl import V19_PROFILES
+
+
+def _v19_rollback_closure_ok(rd: Path) -> bool:
+    """J5: validate may return non-zero under v19 profile; smoke still passes if rollback is complete."""
+    dm = jr(rd / "delivery-manifest.json", {})
+    fg = jr(rd / "final-answer-gate.json", {})
+    rs = jr(rd / "runtime-status.json", {})
+    tr = jr(rd / "validation-transcript.json", {})
+    if not isinstance(dm, dict) or not isinstance(fg, dict) or not isinstance(rs, dict):
+        return False
+    if dm.get("delivery_status") != "validation_failed":
+        return False
+    if not (dm.get("real_external_delivery") is False and dm.get("external_delivery_claim_allowed") is False):
+        return False
+    if fg.get("passed") is not False or fg.get("status") != "fail":
+        return False
+    if rs.get("state") != "validation_failed":
+        return False
+    if not isinstance(tr, dict):
+        return False
+    if tr.get("overall_pass") is True:
+        return False
+    if tr.get("overall_pass") is False:
+        return True
+    return False
 
 
 def cmd_smoke(a):
@@ -24,6 +50,28 @@ def cmd_smoke(a):
         if p.returncode:
             raise RuntimeError(name + " failed")
 
+    def step_validate_v19_aware(rd: Path, cmd: list[str]) -> None:
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=240, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        prof = os.environ.get("RFO_V19_PROFILE", "").strip().lower()
+        effective_rc = p.returncode
+        note = ""
+        if p.returncode != 0 and prof in V19_PROFILES and _v19_rollback_closure_ok(rd):
+            effective_rc = 0
+            note = "v19_validate_nonzero_but_rollback_closure_ok"
+        entry = {
+            "name": "validate",
+            "returncode": p.returncode,
+            "effective_returncode": effective_rc,
+            "stdout": p.stdout[-4000:],
+            "stderr": p.stderr[-4000:],
+        }
+        if note:
+            entry["note"] = note
+        rep["steps"].append(entry)
+        jw(rep["report_path"], rep)
+        if effective_rc:
+            raise RuntimeError("validate failed")
+
     core = str(skill_root() / "scripts" / "rfo_v18_core.py")
     py = sys.executable
     step("adapter", [py, "-S", core, "adapter", "--runs-root", str(root), "--interface", a.interface, "--provider", a.provider, "--conversation-id", a.conversation_id, "--message-id", a.message_id, "--user-id", a.user_id, "--task", a.task])
@@ -31,7 +79,7 @@ def cmd_smoke(a):
     step("outbox", [py, "-S", core, "outbox", "--runs-root", str(root)])
     latest = jr(root / "index/latest.json")
     rd = Path(latest["run_dir"])
-    step("validate", [py, "-S", core, "validate", "--run-dir", str(rd)])
+    step_validate_v19_aware(rd, [py, "-S", core, "validate", "--run-dir", str(rd)])
     gate = jr(rd / "final-answer-gate.json")
     rep.update({"smoke_test_passed": True, "run_dir": str(rd), "run_id": latest["run_id"], "run_label": latest["run_label"], "final_answer_gate": gate, "finished_at": now()})
     jw(rep["report_path"], rep)

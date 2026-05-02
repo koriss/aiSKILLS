@@ -7,18 +7,33 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-STATUSES = [
-    "confirmed",
-    "probable",
-    "partial",
-    "disputed",
-    "contradicted",
-    "false",
-    "unsupported",
-    "unknown",
-    "stale",
-    "inferred",
-]
+def _load_claim_statuses() -> tuple[list[str], dict]:
+    p = Path(__file__).resolve().parent.parent / "contracts" / "claim-statuses.json"
+    try:
+        o = json.loads(p.read_text(encoding="utf-8"))
+        st = o.get("statuses")
+        if isinstance(st, list) and all(isinstance(x, str) for x in st):
+            la = o.get("legacy_aliases")
+            return st, la if isinstance(la, dict) else {}
+    except Exception:
+        pass
+    return (
+        [
+            "confirmed",
+            "probable",
+            "disputed",
+            "contradicted",
+            "false",
+            "unsupported",
+            "unknown",
+            "stale",
+            "inferred",
+        ],
+        {},
+    )
+
+
+STATUSES, CLAIM_STATUS_LEGACY_ALIASES = _load_claim_statuses()
 REQ_EVENTS = ["OUT-0001", "OUT-0002", "OUT-0003", "OUT-0004", "OUT-0005", "OUT-0006"]
 CHAT = [
     ("OUT-0001", "analytical_memo", "chat/message-001-analytical-memo.txt"),
@@ -144,11 +159,36 @@ def jw(p: Path | str, o: object) -> None:
     p.write_text(json.dumps(o, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def jr(p: Path | str, d: object | None = None):
+def read_json_or_none(p: Path | str) -> dict | list | None:
+    """Load JSON from ``p``. Return ``None`` if the file is missing or invalid JSON.
+
+    Use in proof-layer code where a missing file must not be conflated with ``{}``.
+    """
     p = Path(p)
-    if p.exists():
+    if not p.is_file():
+        return None
+    try:
+        o = json.loads(p.read_text(encoding="utf-8"))
+        return o if isinstance(o, (dict, list)) else None
+    except Exception:
+        return None
+
+
+def jr(p: Path | str, d: object | None = None):
+    """Load JSON from ``p``. If missing and ``d`` is ``None``, returns ``{}`` (footgun — prefer ``read_json_or_none``)."""
+    p = Path(p)
+    if p.is_file():
         return json.loads(p.read_text(encoding="utf-8"))
-    return {} if d is None else d
+    if d is None:
+        import warnings
+
+        warnings.warn(
+            "jr(): missing file with default None returns {}; use read_json_or_none() for proof-layer code",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return {}
+    return d
 
 
 def tw(p: Path | str, t: str) -> None:

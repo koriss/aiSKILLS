@@ -23,7 +23,8 @@
     "format": "jsonl",
     "required_start_record": true,
     "required_finalize_record_for_complete": true,
-    "partial_without_finalize_status": "partial",
+    "partial_without_finalize_status": "probable",
+    "partial_status_deprecated_note": "see contracts/claim-statuses.json legacy_aliases.partial",
     "partial_can_confirm_claim": false
   },
   "retry_policy": {

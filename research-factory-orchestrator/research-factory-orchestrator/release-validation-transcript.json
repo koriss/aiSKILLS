@@ -1,59 +1,110 @@
 {
-  "skill_version": "19.0.2",
+  "version": "19.0.3",
+  "skill_version": "19.0.3",
   "steps": [
     {
       "name": "validate_skill",
       "rc": 0,
-      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"validator\": \"validate_skill\",\n  \"version\": \"19.0.2\",\n  \"skill_file_count\": 1256,\n  \"errors\": []\n}\n",
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"validator\": \"validate_skill\",\n  \"version\": \"19.0.3\",\n  \"skill_file_count\": 1269,\n  \"errors\": []\n}\n",
       "stderr_tail": ""
     },
     {
       "name": "check_schema_drift",
       "rc": 0,
-      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"schema_fingerprints\": {\n    \"scripts/validate_logical_consistency.py\": \"167790e522ae345f76fa1e3e113dff56404b5b8e7eeb7cec0a0575e4cf52fbe8\",\n    \"scripts/validate_release.py\": \"6e6cd91e345cdf198254fb0bb696e1a1d83460581ba96642aad45c3a3555d846\",\n    \"scripts/run_core_validators.py\": \"96a91ad2d892c65a723d8c4470c93fd5f37c2f912eee09b26c17ba982e5149f1\",\n    \"validators/core/validate_traceability.py\": \"82c09fd41aee5ee07efd6720e7517ae99cad2e511a1577e92b9be4ccd38fec5f\",\n    \"validators/core/validate_delivery_truth.py\": \"ddb196fb6ee090e43bae9f38e41e6dd2232067f755f3256306a886e9fc61487b\",\n    \"scripts/check_validation_pass.py\": \"2c5c5650d0052c0f6fa11feb366ab2799754c3b9aa5a4885c52afc4cf9f50340\",\n    \"scripts/migrate_validator_invocation.py\": \"23e253007582c25e6cebeb9a7d4ef15e168bb0e843bfed19b4c8b80e87dde342\",\n    \"schemas/delivery-manifest.schema.json\": \"318897979a38f2445f18cf4f4b63b741bff8e84bd024153553e544d29df51c19\",\n    \"schemas/claim.schema.json\": \"c2a54e3edd3a79020a53d96cd7285512ddfb9a7dd053471e1416ce63576ef1cc\",\n    \"contracts/handoff-envelope.schema.json\": \"85353b8238418b4630fe0b84b5805833c977219818ccaa4ae7e91ea9340034c7\",\n    \"contracts/capability-token.schema.json\": \"264f68eb06b3d4670a6f3c373a59bcb52345d65b481813ef2f69afcb32721209\",\n    \"contracts/severity-matrix.json\": \"d8140e89d5f4824fba2aeff49bcb42f01e0b5ac6f3c5790e2ed4188fa2136056\",\n    \"contracts/slo-config.json\": \"f4b2d99e7af03c0f1201f4bc6bf69114d3a4b6abf8c21e258958f63391ac600d\",\n    \"contracts/state-machine.json\": \"6a58930d6f57877d48b96b07a7dd514f0f959ccf7d7285c91bfcf3ce78026b36\",\n    \"schemas/core/claims-registry.schema.json\": \"521f05efdd9b3befa0f8d3da4c38c853d7b3a91cc5dc44571cc9b76dc6c2a14d\",\n    \"schemas/core/contradictions-lite.schema.json\": \"7cd2fd5695bd8e33c77651cf20124dc61148dfa1301bcea3373ac6fb6242af66\",\n    \"schemas/core/delivery-manifest.schema.json\": \"cdc63432864b4479fdcf5e0d640e981510e6e34e0f38134109b9858a4ae7d4d4\",\n    \"schemas/core/evidence-cards.schema.json\": \"28200a4dcf475020b4449ebf77e813f8a8f9434aa39b61ee963a412a376eb0de\",\n    \"schemas/core/final-answer-gate.schema.json\": \"bec5cd93074b54cbca435cd50b656b8879274b0aa79258f4b5708a17ee116729\",\n    \"schemas/core/sources.schema.json\": \"06b443a1aa4184fc63d815f17cae1ad3b41fae2e02a614bae7b99c01f36385c1\",\n    \"schemas/core/validation-transcript.schema.json\": \"85aaf6e28b8f38841e7948beb8ea41540c0f15026c0119da41591267bef6ef8f\",\n    \"schemas/contradiction-matrix.schema.json\": \"70df7421bec44d1102fd9b3673f10a2492eb9f25cea43dc3d3db6218755ae851\"\n  }\n}\n",
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"schema_fingerprints\": {\n    \"scripts/validate_logical_consistency.py\": \"167790e522ae345f76fa1e3e113dff56404b5b8e7eeb7cec0a0575e4cf52fbe8\",\n    \"scripts/validate_release.py\": \"23b8114016d2263424d945242d10becc26bb76e21100b268256f65327dd4a4de\",\n    \"scripts/run_core_validators.py\": \"96a91ad2d892c65a723d8c4470c93fd5f37c2f912eee09b26c17ba982e5149f1\",\n    \"validators/core/validate_traceability.py\": \"82c09fd41aee5ee07efd6720e7517ae99cad2e511a1577e92b9be4ccd38fec5f\",\n    \"validators/core/validate_delivery_truth.py\": \"6ea18f9e8af5d274b0163e35a2c7b4d72e32e3586245cb251fd7232719e1e7b6\",\n    \"scripts/check_validation_pass.py\": \"2c5c5650d0052c0f6fa11feb366ab2799754c3b9aa5a4885c52afc4cf9f50340\",\n    \"scripts/migrate_validator_invocation.py\": \"23e253007582c25e6cebeb9a7d4ef15e168bb0e843bfed19b4c8b80e87dde342\",\n    \"schemas/delivery-manifest.schema.json\": \"318897979a38f2445f18cf4f4b63b741bff8e84bd024153553e544d29df51c19\",\n    \"schemas/claim.schema.json\": \"c2a54e3edd3a79020a53d96cd7285512ddfb9a7dd053471e1416ce63576ef1cc\",\n    \"contracts/handoff-envelope.schema.json\": \"85353b8238418b4630fe0b84b5805833c977219818ccaa4ae7e91ea9340034c7\",\n    \"contracts/capability-token.schema.json\": \"264f68eb06b3d4670a6f3c373a59bcb52345d65b481813ef2f69afcb32721209\",\n    \"contracts/severity-matrix.json\": \"d8140e89d5f4824fba2aeff49bcb42f01e0b5ac6f3c5790e2ed4188fa2136056\",\n    \"contracts/slo-config.json\": \"f4b2d99e7af03c0f1201f4bc6bf69114d3a4b6abf8c21e258958f63391ac600d\",\n    \"contracts/state-machine.json\": \"7b382b15913dc8dc7bac0644535b66af894dd6a93346187ce54c5b03c7ab2e2d\",\n    \"schemas/core/claims-registry.schema.json\": \"521f05efdd9b3befa0f8d3da4c38c853d7b3a91cc5dc44571cc9b76dc6c2a14d\",\n    \"schemas/core/contradictions-lite.schema.json\": \"7cd2fd5695bd8e33c77651cf20124dc61148dfa1301bcea3373ac6fb6242af66\",\n    \"schemas/core/delivery-manifest.schema.json\": \"cdc63432864b4479fdcf5e0d640e981510e6e34e0f38134109b9858a4ae7d4d4\",\n    \"schemas/core/evidence-cards.schema.json\": \"28200a4dcf475020b4449ebf77e813f8a8f9434aa39b61ee963a412a376eb0de\",\n    \"schemas/core/final-answer-gate.schema.json\": \"4106e10aed2c597db4a1d58382f40f5ebde8cae03b1ce942268b9f43a6d706fa\",\n    \"schemas/core/sources.schema.json\": \"06b443a1aa4184fc63d815f17cae1ad3b41fae2e02a614bae7b99c01f36385c1\",\n    \"schemas/core/validation-transcript.schema.json\": \"78506123902aae116877db9b6a1e5d731187040b19021f73a8272125d635a48f\",\n    \"schemas/contradiction-matrix.schema.json\": \"70df7421bec44d1102fd9b3673f10a2492eb9f25cea43dc3d3db6218755ae851\"\n  }\n}\n",
       "stderr_tail": ""
     },
     {
-      "name": "smoke_telegram",
+      "name": "_audit_composition_schemas",
       "rc": 0,
-      "smoke_report_sha256": "ae5765f77daefd17d2859d06dbcae3710a9fc2a6de5c52fe8009e3fa743c1ddb",
-      "smoke_run_dir": "/tmp/rfo-release-smoke-tozi5uxq/runs/test_internal_audit_target_20260502T172714",
-      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-tozi5uxq\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-tozi5uxq/runs/test_internal_audit_target_20260502T172714\",\n  \"final_gate_status\": \"stub_only\"\n}\n"
+      "stdout_tail": "{\"status\": \"pass\", \"issues_count\": 0, \"report\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/composition-audit-report.json\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "_smoke_subagent_isolation",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"forbidden_loaded\": []\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "_smoke_pristine_run",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"pass\", \"detail\": \"pristine v19 validate failed closed as expected\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "_smoke_rollback_creates_stubs",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"pass\", \"issue_code\": \"\", \"detail\": \"rollback closure + idempotency + V1 + A6\"}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "smoke_telegram_v18",
+      "rc": 0,
+      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-v18-mhnkqooa\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-v18-mhnkqooa/runs/test_internal_audit_target_20260502T214752\",\n  \"final_gate_status\": \"stub_only\"\n}\n",
+      "stderr_tail": "",
+      "smoke_report_sha256": "95e107cbdd9306e2c13cf25147ee9f775005cda77b431c133c0aa0e8ab1b323f",
+      "smoke_run_dir": "/tmp/rfo-release-smoke-v18-mhnkqooa/runs/test_internal_audit_target_20260502T214752"
+    },
+    {
+      "name": "smoke_telegram_v19",
+      "rc": 0,
+      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-v19-ivphzyz8\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-v19-ivphzyz8/runs/test_internal_audit_target_20260502T214753\",\n  \"final_gate_status\": \"fail\"\n}\n",
+      "stderr_tail": "",
+      "smoke_report_sha256": "8dc6d40ea8e37ed86c2f715b9b421476e6e4b0d14680db51cf343b0613bb8b9c",
+      "smoke_run_dir": "/tmp/rfo-release-smoke-v19-ivphzyz8/runs/test_internal_audit_target_20260502T214753",
+      "rc_effective": 0
     },
     {
       "name": "failure_corpus",
       "rc": 0,
-      "stdout_tail": "r/failure-corpus/cases/bad_claims_inference_confirmed.json\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_delivery_overclaim\",\n      \"validator\": \"validate_delivery_manifest.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_delivery_overclaim.json\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_runtime_entrypoint_confusion\",\n      \"validator\": \"validate_no_skill_md_imitation.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_skill_md_imitation.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_status_claim_mismatch\",\n      \"validator\": \"validate_status_claim_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_status_claim.txt\",\n      \"returncode\": 2,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_no_entrypoint_proof\",\n      \"validator\": \"validate_runtime_entrypoint.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_run_no_entrypoint_proof\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_interface_no_return_path\",\n      \"validator\": \"validate_interface_return_path_claim.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_interface_no_return_path.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_direct_interface_response_bypasses_renderer\",\n      \"validator\": \"validate_no_direct_interface_response.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_direct_interface_response.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_worker_bundle_sent_as_research_package\",\n      \"validator\": \"validate_worker_bundle_not_research_package.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_worker_bundle.zip\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_provider_specific_logic_leaked_into_runtime\",\n      \"validator\": \"validate_no_provider_hardcode_text.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_provider_hardcode.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_real_telegram_fake_rfo_runtime_route\",\n      \"validator\": \"validate_rfo_command_did_not_spawn_plain_subagent.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_real_reply_context_wrong_rfo_route\",\n      \"validator\": \"validate_rfo_command_did_not_spawn_plain_subagent.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/real_2026_04_30_reply_context_wrong_rfo_route.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_html_proof_without_runtime_artifacts\",\n      \"validator\": \"validate_html_proof_matches_runtime_artifacts.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_malformed_html_delivered\",\n      \"validator\": \"validate_html_well_formed.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_claim_id_gap_without_skip_reason\",\n      \"validator\": \"validate_claim_id_continuity_or_skip_reason.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_chat_delivery_claim_before_ack_real_log\",\n      \"validator\": \"validate_chat_claims_against_delivery_manifest.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F195_validation_failed_with_delivered_artifacts\",\n      \"validator\": \"validate_no_delivery_after_validation_fail.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F195_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F198_local_path_in_chat\",\n      \"validator\": \"validate_no_local_paths_in_chat.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F198_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F201_LC04_validation_fail_with_final_answer_gate_passed\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F201_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F205_LC11_empty_delivery_manifest\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F205_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F206_LC09_mode_normalized_without_audit_field\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F206_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F207_LC16_production_with_stub_feature_truth_matrix\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F207_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    }\n  ],\n  \"bad_sample_mismatches\": [],\n  \"generated_at\": \"2026-05-02T17:27:16Z\"\n}\n",
+      "stdout_tail": "ch-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_malformed_html_delivered\",\n      \"validator\": \"validate_html_well_formed.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_claim_id_gap_without_skip_reason\",\n      \"validator\": \"validate_claim_id_continuity_or_skip_reason.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_chat_delivery_claim_before_ack_real_log\",\n      \"validator\": \"validate_chat_claims_against_delivery_manifest.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F195_validation_failed_with_delivered_artifacts\",\n      \"validator\": \"validate_no_delivery_after_validation_fail.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F195_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F198_local_path_in_chat\",\n      \"validator\": \"validate_no_local_paths_in_chat.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F198_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F201_LC04_validation_fail_with_final_answer_gate_passed\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F201_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F205_LC11_empty_delivery_manifest\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F205_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F206_LC09_mode_normalized_without_audit_field\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F206_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F207_LC16_production_with_stub_feature_truth_matrix\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F207_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    }\n  ],\n  \"bad_sample_mismatches\": [],\n  \"generated_at\": \"2026-05-02T21:47:54Z\"\n}\n",
       "stderr_tail": ""
     },
     {
       "name": "validate_v19_fixture_suite",
       "rc": 0,
       "stdout_tail": "",
-      "stderr_tail": ""
+      "stderr_tail": "[fixture] good/mvr_minimal_valid\n[fixture] bad/claim_without_evidence\n[fixture] bad/cli_claimed_external_delivery\n[fixture] bad/cli_with_external_delivery_claim_allowed\n[fixture] bad/confirmed_from_social_only\n[fixture] bad/contradiction_required_but_missing\n[fixture] bad/duplicate_sources_counted_as_independent\n[fixture] bad/evidence_source_id_unknown\n[fixture] bad/evidence_supports_invalid_shape\n[fixture] bad/evidence_without_source\n[fixture] bad/final_answer_new_fact\n[fixture] bad/forecast_as_confirmed_fact\n[fixture] bad/geopolitical_intent_as_confirmed_fact\n[fixture] bad/kb_as_corroboration_reported_claim\n[fixture] bad/kb_match_used_as_evidence\n[fixture] bad/l0_scan_unknown_under_full_profile\n[fixture] bad/local_path_in_user_message\n[fixture] bad/narrative_confirmed_exceeds_cap\n[fixture] bad/raw_visual_without_context_confirmed\n[fixture] bad/support_set_decl_mismatch\n[fixture] bad/support_set_role_invalid\n[fixture] bad/support_set_source_mismatch\n[fixture] bad/v6_deliv_att_absolute_path\n[fixture] bad/v6_deliv_att_missing\n[fixture] bad/v6_deliv_stub_ext\n[fixture] bad/v6_deliv_stub_tmp_ext\n"
     },
     {
       "name": "validate_v19_release_bad_suite",
       "rc": 0,
       "stdout_tail": "",
-      "stderr_tail": ""
+      "stderr_tail": "[release_bad] release_pass_without_transcript\n"
     },
     {
       "name": "validate_no_delivery_after_validation_fail",
       "rc": 0,
-      "run_dir": "/tmp/rfo-release-smoke-tozi5uxq/runs/test_internal_audit_target_20260502T172714"
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "run_dir": "/tmp/rfo-release-smoke-v18-mhnkqooa/runs/test_internal_audit_target_20260502T214752"
     },
     {
       "name": "validate_logical_consistency",
       "rc": 0,
-      "run_dir": "/tmp/rfo-release-smoke-tozi5uxq/runs/test_internal_audit_target_20260502T172714"
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"violations\": [],\n  \"run_dir\": \"/tmp/rfo-release-smoke-v18-mhnkqooa/runs/test_internal_audit_target_20260502T214752\"\n}\n",
+      "stderr_tail": "",
+      "run_dir": "/tmp/rfo-release-smoke-v18-mhnkqooa/runs/test_internal_audit_target_20260502T214752"
+    },
+    {
+      "name": "_diff_telegram_against_golden",
+      "rc": 0,
+      "stdout_tail": "{\"status\": \"skip\", \"reason\": \"contracts/telegram-golden absent (D1 skeleton)\"}\n",
+      "stderr_tail": "",
+      "run_dir": "/tmp/rfo-release-smoke-v18-mhnkqooa/runs/test_internal_audit_target_20260502T214752"
     },
     {
       "name": "validate_release_report",
       "rc": 0,
-      "stdout_tail": "{\"status\": \"pass\", \"note\": \"no release report provided; transcript integrity only\"}\n"
+      "stdout_tail": "{\"status\": \"pass\", \"note\": \"no release report provided; transcript integrity only\"}\n",
+      "stderr_tail": ""
     }
   ],
-  "transcript_sha256": "fbd0f380c265e1d851ee645810a659874553e349284b445ded8c1e9cfb38b7f4",
-  "generated_at": "2026-05-02T17:27:19.384236Z"
+  "transcript_sha256": "46d2f962ac18c836a0f0377395f80b6891f0ac99e779dab1e97bb8f8172ec4e0",
+  "generated_at": "2026-05-02T21:47:57.881861Z",
+  "overall_verdict": "READY",
+  "human_summary": "REQUIRED_GATES 14/14 passed; steps 15/15 rc=0",
+  "blocking_failures": [],
+  "next_actions": []
 }

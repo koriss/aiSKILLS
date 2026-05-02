@@ -117,31 +117,43 @@ def validate_instance(
         return validate_instance(instance, tgt, root=root, path=path, issue_code=issue_code, strict_additional=strict_additional)
 
     if "oneOf" in schema and isinstance(schema["oneOf"], list):
+        match_count = 0
         for i, br in enumerate(schema["oneOf"]):
             if not isinstance(br, dict):
                 continue
             e = validate_instance(instance, br, root=root, path=f"{path}/oneOf[{i}]", issue_code=issue_code, strict_additional=strict_additional)
             if not e:
-                return []
-        errors.append((issue_code, f"oneOf: no branch matched at {path}"))
-        return errors
+                match_count += 1
+        if match_count == 0:
+            errors.append(("V1-SCHEMA-ONEOF-NO-MATCH", f"oneOf: no branch matched at {path}"))
+            return errors
+        if match_count > 1:
+            errors.append(("V1-SCHEMA-ONEOF-MULTI-MATCH", f"oneOf: {match_count} branches matched at {path}"))
+            return errors
+        # exactly one branch matched — continue to sibling keywords on this schema object
 
     if "anyOf" in schema and isinstance(schema["anyOf"], list):
+        any_ok = False
         for i, br in enumerate(schema["anyOf"]):
             if isinstance(br, dict):
                 e = validate_instance(instance, br, root=root, path=f"{path}/anyOf[{i}]", issue_code=issue_code, strict_additional=strict_additional)
                 if not e:
-                    return []
-        errors.append((issue_code, f"anyOf fail at {path}"))
-        return errors
+                    any_ok = True
+                    break
+        if not any_ok:
+            errors.append(("V1-SCHEMA-ANYOF-NO-MATCH", f"anyOf: no branch matched at {path}"))
+            return errors
 
     if "allOf" in schema and isinstance(schema["allOf"], list):
+        pre_allof = len(errors)
         for i, br in enumerate(schema["allOf"]):
             if isinstance(br, dict):
                 errors.extend(
                     validate_instance(instance, br, root=root, path=f"{path}/allOf[{i}]", issue_code=issue_code, strict_additional=strict_additional)
                 )
-        return errors
+        if len(errors) > pre_allof:
+            return errors
+        # allOf branches passed — continue to sibling keywords (type/properties/additionalProperties)
 
     if "if" in schema and isinstance(schema["if"], dict):
         if_errs = validate_instance(instance, schema["if"], root=root, path=f"{path}/if", issue_code=issue_code, strict_additional=strict_additional)

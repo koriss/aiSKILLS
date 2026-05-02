@@ -64,4 +64,4 @@ Used by `scripts/validate_v19_release_bad_suite.py`:
 
 ## Version
 
-Contract applies from RFO **19.0.2** onward.
+Contract applies from RFO **19.0.3** onward (v19.0.2 baseline retained in historical fixtures where noted).

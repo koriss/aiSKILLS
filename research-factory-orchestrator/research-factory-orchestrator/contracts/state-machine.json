@@ -1,5 +1,5 @@
 {
-  "version": "19.0.2",
+  "version": "19.0.3",
   "states": [
     "queued",
     "content_rendered",
@@ -13,6 +13,7 @@
   "initial": "queued",
   "terminal": ["stub_delivered", "delivered", "failed", "partial_delivery", "validation_failed"],
   "transitions": [
+    {"from": "queued", "to": "validation_failed", "event": "validation_failed"},
     {"from": "queued", "to": "content_rendered", "event": "runtime_completed"},
     {"from": "content_rendered", "to": "delivery_queued", "event": "outbox_prepared"},
     {"from": "delivery_queued", "to": "stub_delivered", "event": "stub_ack_complete"},

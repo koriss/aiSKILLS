@@ -3,8 +3,9 @@
   "expected_rc": 1,
   "expected_validator": "validate_delivery_truth",
   "expected_issue_codes": [
-    "DELIV-ATT-EMPTY-WITH-CLAIM"
+    "DELIV-ATT-MISSING",
+    "DELIV-STUB-FORBIDDEN-ATTACHMENT"
   ],
   "allow_prior_fail": false,
-  "rationale": "artifact_ready with empty attachments"
+  "rationale": "stub_delivery with forbidden tmp extension and missing file"
 }

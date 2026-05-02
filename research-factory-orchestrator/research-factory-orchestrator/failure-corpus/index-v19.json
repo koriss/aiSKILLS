@@ -1,7 +1,7 @@
 {
   "schema_version": "v19.0",
-  "skill_version": "19.0.2",
-  "description": "v19.0.2 failure-code overlay index for core validators and fixture suites.",
+  "skill_version": "19.0.3",
+  "description": "v19.0.3 failure-code overlay index for core validators and fixture suites.",
   "v19_fixture_roots": {
     "good": "tests/fixtures/v19/good/mvr_minimal_valid",
     "bad": "tests/fixtures/v19/bad",

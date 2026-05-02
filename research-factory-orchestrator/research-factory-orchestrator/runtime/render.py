@@ -199,7 +199,6 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
         "run_id": run_id,
         "confirmed": [c for c in cs if c["status"] == "confirmed"],
         "probable": [c for c in cs if c["status"] == "probable"],
-        "partial": [],
         "disputed": [],
         "doubtful": [],
         "false": [],

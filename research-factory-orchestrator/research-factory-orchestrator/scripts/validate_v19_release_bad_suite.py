@@ -43,6 +43,7 @@ def main() -> int:
         if not fx.is_dir():
             continue
         name = fx.name
+        print(f"[release_bad] {name}", file=sys.stderr)
         fh = _fixture_hygiene(fx)
         if fh:
             errs.append(f"{name}: FIXTURE-HYGIENE-VIOLATION {fh}")

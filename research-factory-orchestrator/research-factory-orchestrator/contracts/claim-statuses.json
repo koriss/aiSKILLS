@@ -1,0 +1,32 @@
+{
+  "schema_version": "v19.0.3",
+  "statuses": [
+    "confirmed",
+    "probable",
+    "disputed",
+    "contradicted",
+    "false",
+    "unsupported",
+    "unknown",
+    "stale",
+    "inferred"
+  ],
+  "legacy_aliases": {
+    "partial": {
+      "removed_in": "v19.0.2",
+      "use": "probable",
+      "note": "Do not emit in new artifacts; retained for corpus regression references only."
+    }
+  },
+  "display_order": [
+    "confirmed",
+    "probable",
+    "disputed",
+    "contradicted",
+    "unsupported",
+    "unknown",
+    "stale",
+    "inferred",
+    "false"
+  ]
+}

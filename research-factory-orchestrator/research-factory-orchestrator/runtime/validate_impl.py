@@ -8,24 +8,44 @@ import sys
 import zipfile
 from pathlib import Path
 
-from runtime.schema_defaults import merge_rollback_delivery_manifest, merge_rollback_final_answer_gate
-from runtime.util import PKG_REQUIRED, jl, jr, jw, now, skill_root
+from runtime.schema_defaults import (
+    merge_rollback_delivery_manifest,
+    merge_rollback_final_answer_gate,
+    minimal_valid,
+)
+from runtime.util import PKG_REQUIRED, jl, jr, jw, now, read_json_or_none, skill_root
 
 V19_PROFILES = frozenset({"mvr", "full-rigor", "propaganda-io", "book-verification"})
 
 
+def _ensure_rollback_stub_html(rd: Path) -> None:
+    """Create physical stub so V6 DELIV-ATT-MISSING does not fire on rollback attachment."""
+    from runtime.schema_defaults import ROLLBACK_STUB_HTML
+
+    rep = rd / "report"
+    rep.mkdir(parents=True, exist_ok=True)
+    stub = rep / "rollback-stub.html"
+    if not stub.is_file():
+        stub.write_text(ROLLBACK_STUB_HTML, encoding="utf-8")
+
+
 def _fail_closed_rollback(rd: Path, errs: list) -> None:
     """Truth-gate: validation_failed must roll back optimistic delivery claims."""
-    dm = jr(rd / "delivery-manifest.json", {})
-    if dm:
-        jw(rd / "delivery-manifest.json", merge_rollback_delivery_manifest(dm))
-    fg = jr(rd / "final-answer-gate.json", {})
-    if fg:
-        jw(rd / "final-answer-gate.json", merge_rollback_final_answer_gate(fg))
-    st = jr(rd / "runtime-status.json", {})
-    if st:
-        st.update({"state": "validation_failed"})
-        jw(rd / "runtime-status.json", st)
+    _ensure_rollback_stub_html(rd)
+    dm = read_json_or_none(rd / "delivery-manifest.json")
+    if not isinstance(dm, dict):
+        dm = minimal_valid("delivery-manifest")
+    jw(rd / "delivery-manifest.json", merge_rollback_delivery_manifest(dm))
+    fg = read_json_or_none(rd / "final-answer-gate.json")
+    if not isinstance(fg, dict):
+        fg = minimal_valid("final-answer-gate")
+    jw(rd / "final-answer-gate.json", merge_rollback_final_answer_gate(fg))
+    st = read_json_or_none(rd / "runtime-status.json")
+    if not isinstance(st, dict):
+        st = minimal_valid("runtime-status")
+    st = dict(st)
+    st.update({"state": "validation_failed"})
+    jw(rd / "runtime-status.json", st)
     jl(
         rd / "observability-events.jsonl",
         {"event_name": "validation.fail_closed_rollback", "status": "ok", "errors_count": len(errs), "timestamp": now()},

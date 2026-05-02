@@ -8,6 +8,7 @@ import zipfile
 from pathlib import Path
 
 from runtime.render import render_all
+from runtime.schema_defaults import minimal_valid
 from runtime.status import VERSION
 from runtime.util import CHAT, PKG_REQUIRED, REQ_EVENTS, jw, jr, jl, now, sha, sid, skill_root, tw
 
@@ -86,12 +87,45 @@ def cmd_run(a):
             "not_skill_md_imitation": True,
         },
     )
-    jw(rd / "runtime-status.json", {"run_id": run_id, "job_id": job_id, "command_id": cmd_id, "state": "content_rendered", "version": VERSION})
-    jw(rd / "delivery-manifest.json", {"run_id": run_id, "job_id": job_id, "command_id": cmd_id, "delivery_status": "not_queued", "gates": {}})
+    jw(
+        rd / "runtime-status.json",
+        minimal_valid(
+            "runtime-status",
+            overrides={
+                "run_id": run_id,
+                "job_id": job_id,
+                "command_id": cmd_id,
+                "state": "content_rendered",
+                "version": VERSION,
+            },
+        ),
+    )
+    jw(
+        rd / "delivery-manifest.json",
+        minimal_valid(
+            "delivery-manifest",
+            overrides={
+                "run_id": run_id,
+                "job_id": job_id,
+                "command_id": cmd_id,
+                "delivery_status": "not_queued",
+                "stub_delivery": False,
+                "stub_delivery_disclosure_required": False,
+                "gates": {},
+            },
+        ),
+    )
     jw(rd / "attachment-ledger.json", {"run_id": run_id, "job_id": job_id, "command_id": cmd_id, "attachments": []})
     jw(
         rd / "final-answer-gate.json",
-        {"run_id": run_id, "job_id": job_id, "command_id": cmd_id, "passed": False, "status": "content_ready_delivery_not_proven", "gates": {}},
+        minimal_valid(
+            "final-answer-gate",
+            overrides={
+                "run_id": run_id,
+                "passed": False,
+                "status": "content_ready_delivery_not_proven",
+            },
+        ),
     )
     jl(rd / "observability-events.jsonl", {"event_name": "v18.runtime.started", "run_id": run_id, "job_id": job_id, "timestamp": now()})
     feature_matrix = {

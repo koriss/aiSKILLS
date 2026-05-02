@@ -1,0 +1,16 @@
+{
+  "schema_version": "v19.0.2",
+  "description": "Numeric rank for claim status cap checks (higher = stronger / more committed).",
+  "ranks": {
+    "confirmed_fact": 60,
+    "verified_estimate": 55,
+    "forecast_scenario": 50,
+    "inferred_assessment": 45,
+    "reported_claim": 40,
+    "lead_only": 38,
+    "disputed": 35,
+    "insufficient_evidence": 25,
+    "contradicted": 10
+  },
+  "cap_check_exclude_statuses": ["contradicted"]
+}

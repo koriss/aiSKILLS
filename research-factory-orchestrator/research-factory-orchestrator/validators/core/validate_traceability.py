@@ -91,6 +91,29 @@ def main() -> int:
             if not ec:
                 issues.append({"code": "support_evidence_missing", "severity": "error", "path": cid, "detail": eid, "artifact": "claims-registry.json"})
                 continue
+            sup_sid = str(sup.get("source_id") or "")
+            ec_sids = {str(x) for x in (ec.get("source_ids") or []) if x}
+            if sup_sid and sup_sid not in ec_sids:
+                issues.append(
+                    {
+                        "code": "TRACE-SUP-SOURCE-001",
+                        "severity": "error",
+                        "path": cid,
+                        "detail": f"support_set source_id {sup_sid!r} not in evidence card {eid} source_ids",
+                        "artifact": "claims-registry.json",
+                    }
+                )
+            decl_eids = {str(x) for x in (cl.get("evidence_card_ids") or []) if x}
+            if eid and eid not in decl_eids:
+                issues.append(
+                    {
+                        "code": "TRACE-SUP-DECL-001",
+                        "severity": "error",
+                        "path": cid,
+                        "detail": f"support_set evidence_card_id {eid!r} not in claim evidence_card_ids",
+                        "artifact": "claims-registry.json",
+                    }
+                )
             ex = ec.get("extracted_fact_or_excerpt") or {}
             if not (isinstance(ex, dict) and str(ex.get("text") or "").strip()):
                 issues.append({"code": "empty_excerpt", "severity": "error", "path": eid, "detail": "extracted_fact_or_excerpt.text empty", "artifact": "evidence-cards.json"})

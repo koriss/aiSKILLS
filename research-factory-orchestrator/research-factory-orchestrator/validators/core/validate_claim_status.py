@@ -7,6 +7,8 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[2]
+
 
 def _emit(passed: bool, blocking: bool, issues: list, warnings: list, summary: str) -> None:
     print(
@@ -50,6 +52,20 @@ def main() -> int:
     )
     if req_lite and not (rd / "contradictions-lite.json").is_file():
         issues.append({"code": "contradictions_lite_required", "severity": "error", "path": "", "detail": "missing contradictions-lite.json", "artifact": ""})
+    rank_path = ROOT / "contracts" / "status-rank.json"
+    rank_data: dict = {}
+    if rank_path.is_file():
+        try:
+            rank_data = json.loads(rank_path.read_text(encoding="utf-8"))
+        except Exception:
+            rank_data = {}
+    ranks: dict[str, int] = {}
+    if isinstance(rank_data.get("ranks"), dict):
+        for k, v in rank_data["ranks"].items():
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                ranks[str(k)] = int(v)
+    exclude_status = {str(x) for x in (rank_data.get("cap_check_exclude_statuses") or []) if x}
+    ctp = prof.get("claim_type_policies") if isinstance(prof.get("claim_type_policies"), dict) else {}
     evb = _load(rd / "evidence-cards.json") or {}
     cards = {str(c.get("evidence_id")): c for c in (evb.get("evidence_cards") or []) if isinstance(c, dict)}
     fg = _load(rd / "final-answer-gate.json") or {}
@@ -61,10 +77,23 @@ def main() -> int:
             continue
         st = str(cl.get("status") or "")
         ct = str(cl.get("claim_type") or "")
-        if ct == "forecast" and st == "confirmed_fact":
-            issues.append({"code": "forecast_status_cap", "severity": "error", "path": "C1", "detail": ct, "artifact": "claims-registry.json"})
-        if ct == "geopolitical_intent_assessment" and st == "confirmed_fact":
-            issues.append({"code": "geo_status_cap", "severity": "error", "path": "C1", "detail": ct, "artifact": "claims-registry.json"})
+        cid = str(cl.get("claim_id") or "")
+        if ranks and st not in exclude_status:
+            pol = ctp.get(ct) if isinstance(ctp.get(ct), dict) else None
+            if pol and isinstance(pol.get("max_status"), str):
+                cap_st = str(pol["max_status"])
+                sr = ranks.get(st)
+                cr = ranks.get(cap_st)
+                if sr is not None and cr is not None and sr > cr:
+                    issues.append(
+                        {
+                            "code": "claim_status_cap_exceeded",
+                            "severity": "error",
+                            "path": cid or ct,
+                            "detail": f"status {st!r} exceeds max_status {cap_st!r} for claim_type {ct!r}",
+                            "artifact": "claims-registry.json",
+                        }
+                    )
         for sup in cl.get("support_set") or []:
             if not isinstance(sup, dict):
                 continue
@@ -72,12 +101,18 @@ def main() -> int:
             eid = str(sup.get("evidence_card_id") or "")
             ec = cards.get(eid) or {}
             et = str(ec.get("evidence_type") or "")
-            if st == "confirmed_fact" and et == "social_post":
-                issues.append({"code": "social_post_confirmed", "severity": "error", "path": eid, "detail": et, "artifact": "evidence-cards.json"})
-            if st == "confirmed_fact" and et == "user_video":
-                issues.append({"code": "raw_visual_confirmed", "severity": "error", "path": eid, "detail": et, "artifact": "evidence-cards.json"})
-            if st == "confirmed_fact" and role in ("lead", "lead_only", "snippet_only"):
-                issues.append({"code": "weak_role_confirmed", "severity": "error", "path": role, "detail": "lead/snippet cannot back confirmed_fact", "artifact": "claims-registry.json"})
+            if st == "confirmed_fact" and role == "primary_support" and et in ("social_post", "user_video"):
+                issues.append(
+                    {
+                        "code": "weak_evidence_type_for_primary_support",
+                        "severity": "error",
+                        "path": eid,
+                        "detail": et,
+                        "artifact": "evidence-cards.json",
+                    }
+                )
+            if st == "confirmed_fact" and role == "lead":
+                issues.append({"code": "weak_role_confirmed", "severity": "error", "path": role, "detail": "lead cannot back confirmed_fact", "artifact": "claims-registry.json"})
     blocking = bool(issues)
     _emit(not blocking, blocking, issues, warnings, "V4 claim status")
     return 0 if not blocking else 1

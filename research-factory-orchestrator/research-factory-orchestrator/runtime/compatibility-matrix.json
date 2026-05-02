@@ -1,5 +1,5 @@
 {
-  "skill_version": "19.0.1",
+  "skill_version": "19.0.2",
   "layouts": [
     {
       "runtime_artifact_layout": "v18-work-queue+outbox-acks",
@@ -7,5 +7,5 @@
       "status": "supported"
     }
   ],
-  "upgrade_notes": "v19.0.1 patch: KISS validation-profile-used (options as-is; require_full_contradiction_matrix); V2 role_for_claim vs claims-registry enum; V6 DELIV-EXT-CLI; remove duplicate SKILL overlay; docs/v19/drafts FROZEN README; semver-only version strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
+  "upgrade_notes": "v19.0.2 patch: KISS validation-profile-used (options as-is; require_full_contradiction_matrix); V2 role_for_claim vs claims-registry enum; V6 DELIV-EXT-CLI; remove duplicate SKILL overlay; docs/v19/drafts FROZEN README; semver-only version strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
 }

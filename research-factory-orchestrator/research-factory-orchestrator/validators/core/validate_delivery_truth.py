@@ -66,8 +66,46 @@ def main() -> int:
                     }
                 )
             for pth in dm.get("user_visible_artifact_paths") or []:
-                if isinstance(pth, str) and re.search(r"(^|/)(home|Users|tmp|var|root)/", pth, re.I):
-                    issues.append({"code": "local_path_leak", "severity": "error", "path": pth, "detail": "absolute path in user-visible list", "artifact": "delivery-manifest.json"})
+                if not isinstance(pth, str):
+                    continue
+                if re.search(r"(^|/)(home|Users|tmp|var|root|opt|usr)/", pth, re.I) or pth.startswith("~/") or re.match(r"^[A-Za-z]:\\", pth):
+                    issues.append({"code": "local_path_leak", "severity": "error", "path": pth, "detail": "local/absolute path in user-visible list", "artifact": "delivery-manifest.json"})
+            atts = dm.get("attachments") or []
+            if isinstance(atts, list):
+                if dm.get("artifact_ready_claim_allowed") is True and len(atts) == 0:
+                    issues.append(
+                        {
+                            "code": "DELIV-ATT-MISSING",
+                            "severity": "error",
+                            "path": "attachments",
+                            "detail": "artifact_ready_claim_allowed true but attachments empty",
+                            "artifact": "delivery-manifest.json",
+                        }
+                    )
+                for att in atts:
+                    if not isinstance(att, dict):
+                        continue
+                    apth = str(att.get("path") or "")
+                    if apth.startswith("/") or (len(apth) > 2 and apth[1] == ":" and apth[0].isalpha()):
+                        issues.append(
+                            {
+                                "code": "DELIV-ATT-ABSOLUTE-PATH",
+                                "severity": "error",
+                                "path": apth,
+                                "detail": "attachment path must be relative",
+                                "artifact": "delivery-manifest.json",
+                            }
+                        )
+                    if dm.get("stub_delivery") is True and apth.lower().endswith((".tmp", ".log", ".bak")):
+                        issues.append(
+                            {
+                                "code": "DELIV-STUB-EXT",
+                                "severity": "error",
+                                "path": apth,
+                                "detail": "stub_delivery attachment uses forbidden extension",
+                                "artifact": "delivery-manifest.json",
+                            }
+                        )
     vt = rd / "validation-transcript.json"
     if vt.is_file():
         try:
@@ -75,7 +113,13 @@ def main() -> int:
         except Exception:
             tr = {}
         if isinstance(tr, dict) and str(tr.get("status") or "").lower() == "fail":
-            if isinstance(dm, dict) and str(dm.get("delivery_status") or "") not in ("failed", "validation_failed", "cancelled"):
+            if isinstance(dm, dict) and str(dm.get("delivery_status") or "") not in (
+                "failed",
+                "validation_failed",
+                "cancelled",
+                "stub_delivered",
+                "content_ready_delivery_not_proven",
+            ):
                 issues.append({"code": "rollback_not_explicit", "severity": "error", "path": "delivery_status", "detail": str(dm.get("delivery_status")), "artifact": "delivery-manifest.json"})
     blocking = bool(issues)
     _emit(not blocking, blocking, issues, warnings, "V6 delivery truth")

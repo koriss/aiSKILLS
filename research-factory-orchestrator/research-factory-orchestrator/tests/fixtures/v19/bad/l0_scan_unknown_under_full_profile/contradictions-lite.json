@@ -1,4 +1,10 @@
 {
   "schema_version": "v19.0",
-  "pairs": []
+  "scan": {
+    "contradiction_level": 0,
+    "contradiction_scan_performed": true,
+    "scan_scope": "L0",
+    "high_severity_detected": false
+  },
+  "entries": []
 }

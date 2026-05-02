@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator for OpenClaw: v19.0.1 core line (schemas/core, V1–V6 validators, run_core_validators + profiles). Condensed operator sheet in SKILL-core.md.
+description: Research Factory Orchestrator for OpenClaw: v19.0.2 core line (schemas/core, V1–V6 validators, run_core_validators + profiles). Condensed operator sheet in SKILL-core.md.
 license: internal
 metadata:
-  version: "19.0.1"
+  version: "19.0.2"
   package: openclaw-research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -12,13 +12,13 @@ metadata:
   discovery_required: true
   overlays:
     - "19.0.0-pragmatic-rigor-phase1"
-    - "19.0.1"
-  release: "19.0.1"
+    - "19.0.2"
+  release: "19.0.2"
 ---
 
 **Primary operator path:** use **`SKILL-core.md`** for v19 operation. This `SKILL.md` is retained as full reference text.
 
-**v19.0.1:** See `SKILL-core.md` and `docs/release-notes/v19.0.1.md` (patch) + `docs/release-notes/v19.0.0-phase1.md` (phase-1 baseline). v19 core path: `RFO_V19_PROFILE=mvr` (or full-rigor, propaganda-io, book-verification) + `scripts/run_core_validators.py`.
+**v19.0.2:** See `SKILL-core.md` and `docs/release-notes/v19.0.2.md` (patch) + `docs/release-notes/v19.0.0-phase1.md` (phase-1 baseline). v19 core path: `RFO_V19_PROFILE=mvr` (or full-rigor, propaganda-io, book-verification) + `scripts/run_core_validators.py`.
 
 ## HOW TO OPERATE THIS SKILL — mandatory operator protocol
 

@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_source_quality",
+  "expected_issue_codes": [
+    "duplicate_sources_same_origin"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "same canon"
+}

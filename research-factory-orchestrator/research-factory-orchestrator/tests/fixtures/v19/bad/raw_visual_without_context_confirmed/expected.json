@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_claim_status",
+  "expected_issue_codes": [
+    "weak_evidence_type_for_primary_support"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "user_video primary confirmed"
+}

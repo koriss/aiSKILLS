@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_delivery_truth",
+  "expected_issue_codes": [
+    "DELIV-STUB-EXT"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "stub tmp ext"
+}

@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_claim_status",
+  "expected_issue_codes": [
+    "claim_status_cap_exceeded"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "geo cap"
+}

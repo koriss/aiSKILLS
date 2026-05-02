@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_artifact_schema",
+  "expected_issue_codes": [
+    "V1-SCHEMA-EVIDENCE-CARDS"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "supports must be string enum"
+}

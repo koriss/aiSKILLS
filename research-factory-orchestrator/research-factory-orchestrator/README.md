@@ -12,8 +12,8 @@ Only if the user explicitly asks for: `compile only`, `scaffold only`, `generate
 ## Quick start (agent)
 1. Choose execution mode (default: `AUTO_COMPILE_AND_EXECUTE`).
 2. Pick `PROJECT_DIR` (workspace subdirectory, e.g. `.research-factory/<task_id>/`).
-3. Run `python scripts/init_runtime.py --project-dir <PROJECT_DIR> --task-id <id>` to materialize the tree, then follow `templates/execution-runbook.md` in chat until `delivered`.
-4. Use `python scripts/validate_schemas.py` and `python scripts/validate_runtime.py --project-dir <PROJECT_DIR>` before claiming checkpoint.
+3. Run `python -S scripts/init_runtime.py --project-dir <PROJECT_DIR> --task-id <id>` to materialize the tree, then follow `templates/execution-runbook.md` in chat until `delivered`.
+4. Use `python -S scripts/validate_schemas.py` and `python -S scripts/validate_runtime.py --project-dir <PROJECT_DIR>` before claiming checkpoint.
 
 ## User-facing output
 Ship: executive summary, main findings, evidence-backed analysis, claim verification table, citations with anchors, limitations, and paths to any written files. Internal JSON/HTML under `PROJECT_DIR` are support evidence, not the main answer by themselves.

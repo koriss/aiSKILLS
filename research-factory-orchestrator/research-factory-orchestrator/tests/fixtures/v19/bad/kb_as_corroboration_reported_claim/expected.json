@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_source_quality",
+  "expected_issue_codes": [
+    "kb_match_used_as_evidence"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "KB corroboration"
+}

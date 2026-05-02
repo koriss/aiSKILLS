@@ -1,24 +1,35 @@
 {
   "schema_version": "v19.0",
-  "skill_version": "19.0.1",
-  "description": "Consolidated pointer index for v19 Pragmatic Rigor (phase 1 + v19.0.1 patch). Legacy overlay JSON files remain authoritative for their slices; this file lists them and v19 fixture roots.",
-  "canonical_case_index": "failure-corpus/index.json",
-  "legacy_overlay_indexes": [
-    "failure-corpus/index-v17.3-preserved.json",
-    "failure-corpus/index-v18-overlay.json",
-    "failure-corpus/index-v18.1-overlay.json"
-  ],
+  "skill_version": "19.0.2",
+  "description": "v19.0.2 failure-code overlay index for core validators and fixture suites.",
   "v19_fixture_roots": {
     "good": "tests/fixtures/v19/good/mvr_minimal_valid",
-    "bad": "tests/fixtures/v19/bad"
+    "bad": "tests/fixtures/v19/bad",
+    "release_bad": "tests/fixtures/v19/release_bad"
   },
-  "v19_core_validators": [
-    "validate_artifact_schema",
-    "validate_traceability",
-    "validate_source_quality",
-    "validate_claim_status",
-    "validate_final_answer",
-    "validate_delivery_truth"
-  ],
-  "runner": "scripts/run_core_validators.py"
+  "codes": [
+    {"code":"V1-SCHEMA-SOURCES","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/evidence_source_id_unknown"},
+    {"code":"V1-SCHEMA-EVIDENCE-CARDS","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/evidence_supports_invalid_shape"},
+    {"code":"V1-SCHEMA-CLAIMS-REGISTRY","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/support_set_role_invalid"},
+    {"code":"V1-SCHEMA-DELIVERY-MANIFEST","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/v6_deliv_att_missing"},
+    {"code":"V1-SCHEMA-FINAL-ANSWER-GATE","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/final_answer_new_fact"},
+    {"code":"V1-SCHEMA-CONTRADICTIONS-LITE","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/l0_scan_unknown_under_full_profile"},
+    {"code":"V1-SCHEMA-UNSUPPORTED-KEYWORD","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"n/a"},
+
+    {"code":"TRACE-SUP-SOURCE-001","category":"traceability","severity":"error","owner_validator":"validate_traceability","reproduces_in_fixture":"bad/support_set_source_mismatch"},
+    {"code":"TRACE-SUP-DECL-001","category":"traceability","severity":"error","owner_validator":"validate_traceability","reproduces_in_fixture":"bad/support_set_decl_mismatch"},
+
+    {"code":"kb_match_used_as_evidence","category":"source-quality","severity":"error","owner_validator":"validate_source_quality","reproduces_in_fixture":"bad/kb_as_corroboration_reported_claim"},
+    {"code":"kb_as_factual_source","category":"source-quality","severity":"deprecated_removed","owner_validator":"validate_source_quality","renamed_to":"kb_match_used_as_evidence"},
+
+    {"code":"weak_evidence_type_for_primary_support","category":"status-cap","severity":"error","owner_validator":"validate_claim_status","reproduces_in_fixture":"bad/confirmed_from_social_only"},
+    {"code":"claim_status_cap_exceeded","category":"status-cap","severity":"error","owner_validator":"validate_claim_status","reproduces_in_fixture":"bad/narrative_confirmed_exceeds_cap"},
+
+    {"code":"DELIV-ATT-MISSING","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_att_missing"},
+    {"code":"DELIV-ATT-ABSOLUTE-PATH","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_att_absolute_path"},
+    {"code":"DELIV-STUB-EXT","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_stub_ext"},
+
+    {"code":"FIXTURE-HYGIENE-VIOLATION","category":"fixture-suite","severity":"error","owner_validator":"validate_v19_fixture_suite","reproduces_in_fixture":"suite-level"},
+    {"code":"FIXTURE-MISSING-EXPECTED","category":"fixture-suite","severity":"error","owner_validator":"validate_v19_fixture_suite","reproduces_in_fixture":"suite-level"}
+  ]
 }

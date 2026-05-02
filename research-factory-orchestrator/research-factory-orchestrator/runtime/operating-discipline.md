@@ -1,6 +1,6 @@
-# RFO operating discipline (v19.0.1)
+# RFO operating discipline (v19.0.2)
 
-0. **v19.0.1 cleanup pass** — semver-only versions; `validation-profile-used.json` carries profile `options` verbatim; V2 enforces `role_for_claim` vs `schemas/core/claims-registry.schema.json`; V6 blocks `cli` + `external_delivery_claim_allowed`; see `docs/release-notes/v19.0.1.md`.
+0. **v19.0.2 cleanup pass** — semver-only versions; `validation-profile-used.json` carries profile `options` verbatim; V2 enforces `role_for_claim` vs `schemas/core/claims-registry.schema.json`; V6 blocks `cli` + `external_delivery_claim_allowed`; see `docs/release-notes/v19.0.2.md`.
 
 1. **One bug class → one fix → one negative test → one proof** in the failure-corpus or `scripts/test_*.py`.
 2. **No new surface area** until current invariants have a failing fixture that turns green after the fix.

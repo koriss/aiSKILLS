@@ -1,0 +1,31 @@
+{
+  "schema_version": "v19.0",
+  "evidence_cards": [
+    {
+      "evidence_id": "E1",
+      "source_ids": [
+        "S2"
+      ],
+      "evidence_type": "article",
+      "extracted_fact_or_excerpt": {
+        "kind": "excerpt",
+        "text": "primary fact"
+      },
+      "supports": "direct",
+      "confidence": "medium"
+    },
+    {
+      "evidence_id": "E2",
+      "source_ids": [
+        "KB:001"
+      ],
+      "evidence_type": "article",
+      "extracted_fact_or_excerpt": {
+        "kind": "excerpt",
+        "text": "kb corroboration"
+      },
+      "supports": "indirect",
+      "confidence": "medium"
+    }
+  ]
+}

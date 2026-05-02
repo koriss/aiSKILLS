@@ -1,0 +1,10 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 1,
+  "expected_validator": "validate_final_answer",
+  "expected_issue_codes": [
+    "new_fact_without_claim_id"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "blocking bucket"
+}

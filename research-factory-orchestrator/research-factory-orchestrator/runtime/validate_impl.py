@@ -8,6 +8,7 @@ import sys
 import zipfile
 from pathlib import Path
 
+from runtime.schema_defaults import merge_rollback_delivery_manifest, merge_rollback_final_answer_gate
 from runtime.util import PKG_REQUIRED, jl, jr, jw, now, skill_root
 
 V19_PROFILES = frozenset({"mvr", "full-rigor", "propaganda-io", "book-verification"})
@@ -17,21 +18,10 @@ def _fail_closed_rollback(rd: Path, errs: list) -> None:
     """Truth-gate: validation_failed must roll back optimistic delivery claims."""
     dm = jr(rd / "delivery-manifest.json", {})
     if dm:
-        dm.update(
-            {
-                "delivery_status": "failed",
-                "real_external_delivery": False,
-                "delivery_claim_allowed": False,
-                "publish_allowed": False,
-                "publish_reason": "validation_failed",
-                "updated_at": now(),
-            }
-        )
-        jw(rd / "delivery-manifest.json", dm)
+        jw(rd / "delivery-manifest.json", merge_rollback_delivery_manifest(dm))
     fg = jr(rd / "final-answer-gate.json", {})
     if fg:
-        fg.update({"passed": False, "status": "fail", "updated_at": now()})
-        jw(rd / "final-answer-gate.json", fg)
+        jw(rd / "final-answer-gate.json", merge_rollback_final_answer_gate(fg))
     st = jr(rd / "runtime-status.json", {})
     if st:
         st.update({"state": "validation_failed"})

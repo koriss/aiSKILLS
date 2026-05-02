@@ -8,13 +8,13 @@
       "url": "https://example.invalid/1",
       "publisher": "x",
       "accessed_at": "2026-05-02T12:00:00Z",
-      "source_role": "news_media",
-      "access_level": "public",
+      "source_role": "official",
+      "access_level": "primary_access",
       "interest_alignment": "unknown",
-      "verification_mode": "secondary",
-      "independence": "independent",
+      "verification_mode": "raw_document",
+      "independence": "high",
       "citation_eligible": true,
-      "corroboration_type": "corroborating"
+      "corroboration_type": "independent"
     },
     {
       "source_id": "S2",
@@ -23,13 +23,13 @@
       "url": "https://example.invalid/2",
       "publisher": "x",
       "accessed_at": "2026-05-02T12:00:00Z",
-      "source_role": "news_media",
-      "access_level": "public",
+      "source_role": "official",
+      "access_level": "primary_access",
       "interest_alignment": "unknown",
-      "verification_mode": "secondary",
-      "independence": "independent",
+      "verification_mode": "raw_document",
+      "independence": "high",
       "citation_eligible": true,
-      "corroboration_type": "corroborating"
+      "corroboration_type": "independent"
     }
   ]
 }

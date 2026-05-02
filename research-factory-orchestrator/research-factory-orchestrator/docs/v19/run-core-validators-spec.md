@@ -7,7 +7,7 @@ Single entrypoint executing **exactly six** validators in order, aggregating res
 ## CLI
 
 ```
-python scripts/run_core_validators.py --run-dir <path> [--profile mvr|full-rigor|propaganda-io|book-verification]
+python -S scripts/run_core_validators.py --run-dir <path> [--profile mvr|full-rigor|propaganda-io|book-verification]
 ```
 
 - Default profile: `mvr`

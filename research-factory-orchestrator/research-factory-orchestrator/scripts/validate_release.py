@@ -71,47 +71,39 @@ def main() -> int:
     p4 = subprocess.run([py, "-S", core, "failure"], cwd=str(ROOT), capture_output=True, text=True, timeout=600, env=env)
     steps.append({"name": "failure_corpus", "rc": p4.returncode, "stdout_tail": (p4.stdout or "")[-8000:], "stderr_tail": (p4.stderr or "")[-2000:]})
 
-    v19_good = ROOT / "tests" / "fixtures" / "v19" / "good" / "mvr_minimal_valid"
-    v19_rc = 0
-    v19_tmp = Path(tempfile.mkdtemp(prefix="rfo-v19-good-"))
-    try:
-        if v19_good.is_dir():
-            for item in v19_good.iterdir():
-                dest = v19_tmp / item.name
-                if item.is_file():
-                    shutil.copy2(item, dest)
-                elif item.is_dir():
-                    shutil.copytree(item, dest)
-            pv = subprocess.run(
-                [py, "-S", str(ROOT / "scripts" / "run_core_validators.py"), "--run-dir", str(v19_tmp), "--profile", "mvr"],
-                cwd=str(ROOT),
-                capture_output=True,
-                text=True,
-                timeout=300,
-                env=env,
-            )
-            pc = subprocess.run(
-                [py, "-S", str(ROOT / "scripts" / "check_validation_pass.py"), "--run-dir", str(v19_tmp)],
-                cwd=str(ROOT),
-                capture_output=True,
-                text=True,
-                timeout=60,
-                env=env,
-            )
-            v19_rc = 0 if pv.returncode == 0 and pc.returncode == 0 else 1
-            steps.append(
-                {
-                    "name": "v19_core_validators_good_fixture",
-                    "rc": v19_rc,
-                    "stdout_tail": ((pv.stdout or "") + "\n" + (pc.stdout or ""))[-4000:],
-                    "stderr_tail": ((pv.stderr or "") + "\n" + (pc.stderr or ""))[-2000:],
-                }
-            )
-        else:
-            v19_rc = 1
-            steps.append({"name": "v19_core_validators_good_fixture", "rc": 1, "error": "missing tests/fixtures/v19/good/mvr_minimal_valid"})
-    finally:
-        shutil.rmtree(v19_tmp, ignore_errors=True)
+    pv19 = subprocess.run(
+        [py, "-S", str(ROOT / "scripts" / "validate_v19_fixture_suite.py")],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        timeout=600,
+        env=env,
+    )
+    steps.append(
+        {
+            "name": "validate_v19_fixture_suite",
+            "rc": pv19.returncode,
+            "stdout_tail": (pv19.stdout or "")[-4000:],
+            "stderr_tail": (pv19.stderr or "")[-2000:],
+        }
+    )
+
+    prb = subprocess.run(
+        [py, "-S", str(ROOT / "scripts" / "validate_v19_release_bad_suite.py")],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        timeout=120,
+        env=env,
+    )
+    steps.append(
+        {
+            "name": "validate_v19_release_bad_suite",
+            "rc": prb.returncode,
+            "stdout_tail": (prb.stdout or "")[-4000:],
+            "stderr_tail": (prb.stderr or "")[-2000:],
+        }
+    )
 
     nd_rc = 0
     if run_dir and Path(run_dir).is_dir():
@@ -185,7 +177,8 @@ def main() -> int:
         "check_schema_drift",
         "smoke_telegram",
         "failure_corpus",
-        "v19_core_validators_good_fixture",
+        "validate_v19_fixture_suite",
+        "validate_v19_release_bad_suite",
         "validate_no_delivery_after_validation_fail",
         "validate_logical_consistency",
         "validate_release_report",

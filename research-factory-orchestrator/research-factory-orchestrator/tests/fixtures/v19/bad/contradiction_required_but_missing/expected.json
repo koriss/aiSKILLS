@@ -1,0 +1,10 @@
+{
+  "expected_profile": "full-rigor",
+  "expected_rc": 1,
+  "expected_validator": "validate_artifact_schema",
+  "expected_issue_codes": [
+    "missing_contradictions_lite"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "full-rigor requires contradictions-lite.json"
+}

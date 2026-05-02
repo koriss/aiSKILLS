@@ -1,0 +1,10 @@
+{
+  "expected_profile": "full-rigor",
+  "expected_rc": 1,
+  "expected_validator": "validate_claim_status",
+  "expected_issue_codes": [
+    "l0_unknown_blocked"
+  ],
+  "allow_prior_fail": false,
+  "rationale": "full-rigor L0 unknown"
+}

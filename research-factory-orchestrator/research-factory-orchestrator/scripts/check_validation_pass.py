@@ -21,11 +21,20 @@ def main() -> int:
     except Exception as e:
         print(str(e), file=sys.stderr)
         return 1
-    if isinstance(o, dict) and "overall_pass" in o:
-        ok = bool(o.get("overall_pass"))
-    else:
-        ok = str(o.get("status", "")).lower() == "pass"
-    print(json.dumps({"passed": ok}, ensure_ascii=False))
+    if not isinstance(o, dict):
+        print("invalid transcript root", file=sys.stderr)
+        return 1
+    top = str(o.get("status") or "").lower()
+    overall = bool(o.get("overall_pass"))
+    vals = o.get("validators") if isinstance(o.get("validators"), list) else []
+    v_ok = all(
+        isinstance(v, dict)
+        and str(v.get("status") or "").lower() == "pass"
+        and v.get("passed") is True
+        for v in vals
+    )
+    ok = overall and top == "pass" and v_ok
+    print(json.dumps({"passed": ok, "top_status": top, "overall_pass": overall}, ensure_ascii=False))
     return 0 if ok else 1
 
 

@@ -1,8 +1,8 @@
 # Research Factory Orchestrator — v19 core operator sheet
 
-**Version:** `19.0.1` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Patch notes:** `docs/release-notes/v19.0.1.md` · **Legacy full overlay:** `SKILL.md` (v18.x retained)
+**Version:** `19.0.2` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Patch notes:** `docs/release-notes/v19.0.2.md` · **Legacy full overlay:** `SKILL.md` (v18.x retained)
 
-**Deprecation:** subagent / durable work-unit / shard-ledger flows remain **legacy-only** (see `SKILL.md`, `contracts/work-unit-contract.json`). The v19 **core path** is profiles + V1–V6 + `run_core_validators.py`; do not mix undocumented subagent overrides with `RFO_V19_PROFILE` runs.
+**Deprecation:** subagent / durable work-unit / shard-ledger flows remain **legacy-only** (see `SKILL.md`, `references/work-unit-contract.md`). The v19 **core path** is profiles + V1–V6 + `run_core_validators.py`; do not mix undocumented subagent overrides with `RFO_V19_PROFILE` runs.
 
 ## Role
 
@@ -45,7 +45,7 @@ Every factual claim must trace through **primary_support** / **corroboration** r
 - **`propaganda-io`** — IO laundering checks; `kb_match_is_evidence: false` enforced in profile JSON.  
 - **`book-verification`** — book-grade corroboration thresholds.
 
-Run: `python scripts/run_core_validators.py --run-dir <run_dir> --profile mvr`. CI pass check: `python scripts/check_validation_pass.py --run-dir <run_dir>`.
+Run: `python -S scripts/run_core_validators.py --run-dir <run_dir> --profile mvr`. CI pass check: `python -S scripts/check_validation_pass.py --run-dir <run_dir>`.
 
 ## v18.7 logical consistency (parallel)
 
@@ -53,8 +53,8 @@ Run: `python scripts/run_core_validators.py --run-dir <run_dir> --profile mvr`. 
 
 ## Migration
 
-`python scripts/migrate_validator_invocation.py` prints (or `-o file`) legacy registry id → v19 runner mapping. **`failure-corpus/index-v19.json`** lists overlays + v19 fixture roots.
+`python -S scripts/migrate_validator_invocation.py` prints (or `-o file`) legacy registry id → v19 runner mapping. **`failure-corpus/index-v19.json`** lists overlays + v19 fixture roots.
 
 ## Compatibility
 
-Full historical SKILL text lives in **`SKILL.md`** only (overlay duplicate removed in v19.0.1). Runtime version: `runtime/version.json`.
+Full historical SKILL text lives in **`SKILL.md`** only (overlay duplicate removed in v19.0.2). Runtime version: `runtime/version.json`.

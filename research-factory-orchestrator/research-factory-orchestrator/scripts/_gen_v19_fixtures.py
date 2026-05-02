@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""One-shot generator for tests/fixtures/v19 (good + bad). Stdlib only."""
+"""One-shot generator for tests/fixtures/v19 (good + bad + release_bad). Stdlib only."""
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FIX = ROOT / "tests" / "fixtures" / "v19"
-RUN_VERSION = "19.0.1"
+RUN_VERSION = "19.0.2"
 
 
 def profile_used(profile_name: str) -> dict:
@@ -34,19 +35,19 @@ def src_bundle(s1: str, s2: str, o1: str, o2: str) -> dict:
             "url": f"https://example.invalid/{sid}",
             "publisher": "fixture",
             "accessed_at": "2026-05-02T12:00:00Z",
-            "source_role": "news_media",
-            "access_level": "public",
+            "source_role": "journalist",
+            "access_level": "secondary",
             "interest_alignment": "unknown",
-            "verification_mode": "secondary",
-            "independence": "independent",
+            "verification_mode": "aggregation",
+            "independence": "high",
             "citation_eligible": True,
-            "corroboration_type": "corroborating",
+            "corroboration_type": "independent",
         }
 
     return {"schema_version": "v19.0", "sources": [one(s1, o1), one(s2, o2)]}
 
 
-def ev_card(eid: str, sids: list[str], text: str, etype: str) -> dict:
+def ev_card(eid: str, sids: list[str], text: str, etype: str, supports: str = "direct") -> dict:
     return {
         "schema_version": "v19.0",
         "evidence_cards": [
@@ -55,7 +56,7 @@ def ev_card(eid: str, sids: list[str], text: str, etype: str) -> dict:
                 "source_ids": sids,
                 "evidence_type": etype,
                 "extracted_fact_or_excerpt": {"kind": "excerpt", "text": text or "x"},
-                "supports": [{"claim_id": "C1", "stance": "supports"}],
+                "supports": supports,
                 "confidence": "medium",
             }
         ],
@@ -93,6 +94,19 @@ def gate(blocking: list | None = None, hs: str | bool = False) -> dict:
     }
 
 
+def contradictions_lite(hs: str | bool = False) -> dict:
+    return {
+        "schema_version": "v19.0",
+        "scan": {
+            "contradiction_level": 0,
+            "contradiction_scan_performed": True,
+            "scan_scope": "L0",
+            "high_severity_detected": hs,
+        },
+        "entries": [],
+    }
+
+
 def dm(cli: bool, **extra: object) -> dict:
     o = {
         "schema_version": "v19.0",
@@ -110,6 +124,25 @@ def dm(cli: bool, **extra: object) -> dict:
     }
     o.update(extra)
     return o
+
+
+def exp(
+    profile: str,
+    rc: int,
+    validator: str,
+    codes: list[str],
+    *,
+    prior: bool = False,
+    rationale: str = "",
+) -> dict:
+    return {
+        "expected_profile": profile,
+        "expected_rc": rc,
+        "expected_validator": validator,
+        "expected_issue_codes": codes,
+        "allow_prior_fail": prior,
+        "rationale": rationale,
+    }
 
 
 def write_dir(rd: Path, files: dict[str, object]) -> None:
@@ -133,14 +166,13 @@ def main() -> None:
     sup = [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}]
     good_files = {
         "run.json": {"run_id": "fx", "provider": "cli", "mode": "research", "version": RUN_VERSION},
-        "validation-profile-used.json": profile_used("mvr"),
         "sources.json": src_bundle("S1", "S2", "oa", "ob"),
         "evidence-cards.json": ev_card("E1", ["S1"], "ok", "article"),
         "claims-registry.json": claim_row("narrative_claim", "reported_claim", ["E1"], sup),
         "final-answer-gate.json": gate(),
         "delivery-manifest.json": dm(True),
-        "validation-transcript.json": {"schema_version": "v19.0", "status": "pending", "validators": []},
         "report/full-report.html": common_html(),
+        "expected.json": exp("mvr", 0, "", [], rationale="golden path"),
     }
     write_dir(FIX / "good" / "mvr_minimal_valid", good_files)
 
@@ -149,11 +181,9 @@ def main() -> None:
 
     base = {
         "run.json": {"run_id": "fx", "provider": "cli", "mode": "research", "version": RUN_VERSION},
-        "validation-profile-used.json": profile_used("mvr"),
         "sources.json": src_bundle("S1", "S2", "oa", "ob"),
         "final-answer-gate.json": gate(),
         "delivery-manifest.json": dm(True),
-        "validation-transcript.json": {"schema_version": "v19.0", "status": "pending", "validators": []},
         "report/full-report.html": common_html(),
     }
 
@@ -168,6 +198,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="evidence_cards minItems under strict schema"),
         },
     )
 
@@ -182,6 +213,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="source_ids minItems under strict schema"),
         },
     )
 
@@ -196,6 +228,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_traceability", ["unknown_source"], rationale="unknown S_MISSING"),
         },
     )
 
@@ -209,6 +242,13 @@ def main() -> None:
                 "confirmed_fact",
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "expected.json": exp(
+                "mvr",
+                1,
+                "validate_claim_status",
+                ["weak_evidence_type_for_primary_support"],
+                rationale="social_post as primary for confirmed_fact",
             ),
         },
     )
@@ -224,6 +264,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="forecast cap"),
         },
     )
 
@@ -238,6 +279,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="geo cap"),
         },
     )
 
@@ -251,6 +293,13 @@ def main() -> None:
                 "confirmed_fact",
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "expected.json": exp(
+                "mvr",
+                1,
+                "validate_claim_status",
+                ["weak_evidence_type_for_primary_support"],
+                rationale="user_video primary confirmed",
             ),
         },
     )
@@ -267,6 +316,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "KB:001", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_source_quality", ["kb_match_used_as_evidence"], rationale="KB primary"),
         },
     )
 
@@ -280,13 +330,13 @@ def main() -> None:
                 "url": "https://example.invalid/1",
                 "publisher": "x",
                 "accessed_at": "2026-05-02T12:00:00Z",
-                "source_role": "news_media",
-                "access_level": "public",
+                "source_role": "official",
+                "access_level": "primary_access",
                 "interest_alignment": "unknown",
-                "verification_mode": "secondary",
-                "independence": "independent",
+                "verification_mode": "raw_document",
+                "independence": "high",
                 "citation_eligible": True,
-                "corroboration_type": "corroborating",
+                "corroboration_type": "independent",
             },
             {
                 "source_id": "S2",
@@ -295,13 +345,13 @@ def main() -> None:
                 "url": "https://example.invalid/2",
                 "publisher": "x",
                 "accessed_at": "2026-05-02T12:00:00Z",
-                "source_role": "news_media",
-                "access_level": "public",
+                "source_role": "official",
+                "access_level": "primary_access",
                 "interest_alignment": "unknown",
-                "verification_mode": "secondary",
-                "independence": "independent",
+                "verification_mode": "raw_document",
+                "independence": "high",
                 "citation_eligible": True,
-                "corroboration_type": "corroborating",
+                "corroboration_type": "independent",
             },
         ],
     }
@@ -311,15 +361,17 @@ def main() -> None:
             {
                 "evidence_id": "E1",
                 "source_ids": ["S1"],
+                "evidence_type": "article",
                 "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "a"},
-                "supports": [{"claim_id": "C1", "stance": "supports"}],
+                "supports": "direct",
                 "confidence": "medium",
             },
             {
                 "evidence_id": "E2",
                 "source_ids": ["S2"],
+                "evidence_type": "article",
                 "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "b"},
-                "supports": [{"claim_id": "C1", "stance": "supports"}],
+                "supports": "direct",
                 "confidence": "medium",
             },
         ],
@@ -343,7 +395,13 @@ def main() -> None:
     }
     b(
         "duplicate_sources_counted_as_independent",
-        {**base, "sources.json": dup_sources, "evidence-cards.json": dup_ev, "claims-registry.json": dup_claim},
+        {
+            **base,
+            "sources.json": dup_sources,
+            "evidence-cards.json": dup_ev,
+            "claims-registry.json": dup_claim,
+            "expected.json": exp("mvr", 1, "validate_source_quality", ["duplicate_sources_same_origin"], rationale="same canon"),
+        },
     )
 
     b(
@@ -358,6 +416,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "final-answer-gate.json": gate(["new_fact_without_claim_id"]),
+            "expected.json": exp("mvr", 1, "validate_final_answer", ["new_fact_without_claim_id"], rationale="blocking bucket"),
         },
     )
 
@@ -372,7 +431,8 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "delivery-manifest.json": dm(True, user_visible_artifact_paths=["/home/x/y.txt"]),
+            "delivery-manifest.json": dm(True, user_visible_artifact_paths=["/opt/rfo/leak.txt"]),
+            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["local_path_leak"], rationale="/opt in user-visible"),
         },
     )
 
@@ -388,6 +448,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(False),
+            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["cli_external"], rationale="cli real_external_delivery"),
         },
     )
 
@@ -401,7 +462,13 @@ def main() -> None:
                 "reported_claim",
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
-                meta={"force_contradictions_lite": True},
+            ),
+            "expected.json": exp(
+                "full-rigor",
+                1,
+                "validate_artifact_schema",
+                ["missing_contradictions_lite"],
+                rationale="full-rigor requires contradictions-lite.json",
             ),
         },
     )
@@ -410,8 +477,7 @@ def main() -> None:
         "l0_scan_unknown_under_full_profile",
         {
             **base,
-            "validation-profile-used.json": profile_used("full-rigor"),
-            "contradictions-lite.json": {"schema_version": "v19.0", "pairs": []},
+            "contradictions-lite.json": contradictions_lite(),
             "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
             "claims-registry.json": claim_row(
                 "narrative_claim",
@@ -420,22 +486,9 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "final-answer-gate.json": gate(hs="unknown"),
+            "expected.json": exp("full-rigor", 1, "validate_claim_status", ["l0_unknown_blocked"], rationale="full-rigor L0 unknown"),
         },
     )
-
-    rel_files = {k: v for k, v in base.items() if k != "validation-transcript.json"}
-    rel_files.update(
-        {
-            "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
-            "claims-registry.json": claim_row(
-                "narrative_claim",
-                "reported_claim",
-                ["E1"],
-                [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
-            ),
-        }
-    )
-    b("release_pass_without_transcript", rel_files)
 
     b(
         "support_set_role_invalid",
@@ -448,6 +501,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "totally_made_up"}],
             ),
+            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-CLAIMS-REGISTRY"], rationale="role_for_claim not in schema enum"),
         },
     )
 
@@ -463,7 +517,226 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(True, external_delivery_claim_allowed=True, real_external_delivery=False),
+            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-EXT-CLI"], rationale="cli external claim"),
         },
+    )
+
+    b(
+        "evidence_supports_invalid_shape",
+        {
+            **base,
+            "evidence-cards.json": {
+                "schema_version": "v19.0",
+                "evidence_cards": [
+                    {
+                        "evidence_id": "E1",
+                        "source_ids": ["S1"],
+                        "evidence_type": "article",
+                        "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "x"},
+                        "supports": [{"claim_id": "C1", "stance": "supports"}],
+                        "confidence": "medium",
+                    }
+                ],
+            },
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1"],
+                [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="supports must be string enum"),
+        },
+    )
+
+    b(
+        "support_set_source_mismatch",
+        {
+            **base,
+            "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1"],
+                [{"source_id": "S2", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "expected.json": exp("mvr", 1, "validate_traceability", ["TRACE-SUP-SOURCE-001"], rationale="S2 not on card"),
+        },
+    )
+
+    b(
+        "support_set_decl_mismatch",
+        {
+            **base,
+            "evidence-cards.json": {
+                "schema_version": "v19.0",
+                "evidence_cards": [
+                    {
+                        "evidence_id": "E1",
+                        "source_ids": ["S1"],
+                        "evidence_type": "article",
+                        "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "a"},
+                        "supports": "direct",
+                        "confidence": "medium",
+                    },
+                    {
+                        "evidence_id": "E2",
+                        "source_ids": ["S2"],
+                        "evidence_type": "article",
+                        "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "b"},
+                        "supports": "direct",
+                        "confidence": "medium",
+                    },
+                ],
+            },
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1"],
+                [{"source_id": "S1", "evidence_card_id": "E2", "role_for_claim": "primary_support"}],
+            ),
+            "expected.json": exp("mvr", 1, "validate_traceability", ["TRACE-SUP-DECL-001"], rationale="E2 not declared on claim"),
+        },
+    )
+
+    b(
+        "kb_as_corroboration_reported_claim",
+        {
+            **base,
+            "sources.json": src_bundle("KB:001", "S2", "kbx", "ob"),
+            "evidence-cards.json": {
+                "schema_version": "v19.0",
+                "evidence_cards": [
+                    {
+                        "evidence_id": "E1",
+                        "source_ids": ["S2"],
+                        "evidence_type": "article",
+                        "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "primary fact"},
+                        "supports": "direct",
+                        "confidence": "medium",
+                    },
+                    {
+                        "evidence_id": "E2",
+                        "source_ids": ["KB:001"],
+                        "evidence_type": "article",
+                        "extracted_fact_or_excerpt": {"kind": "excerpt", "text": "kb corroboration"},
+                        "supports": "indirect",
+                        "confidence": "medium",
+                    },
+                ],
+            },
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1", "E2"],
+                [
+                    {"source_id": "S2", "evidence_card_id": "E1", "role_for_claim": "primary_support"},
+                    {"source_id": "KB:001", "evidence_card_id": "E2", "role_for_claim": "corroboration"},
+                ],
+            ),
+            "expected.json": exp("mvr", 1, "validate_source_quality", ["kb_match_used_as_evidence"], rationale="KB corroboration"),
+        },
+    )
+
+    b(
+        "narrative_confirmed_exceeds_cap",
+        {
+            **base,
+            "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "confirmed_fact",
+                ["E1"],
+                [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "expected.json": exp("mvr", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="narrative max reported_claim"),
+        },
+    )
+
+    b(
+        "v6_deliv_att_missing",
+        {
+            **base,
+            "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1"],
+                [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "delivery-manifest.json": dm(True, attachments=[], artifact_ready_claim_allowed=True),
+            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-ATT-MISSING"], rationale="ready without attachments"),
+        },
+    )
+
+    b(
+        "v6_deliv_att_absolute_path",
+        {
+            **base,
+            "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1"],
+                [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "delivery-manifest.json": dm(True, attachments=[{"path": "/etc/passwd", "sha256": _sha()}]),
+            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-ATT-ABSOLUTE-PATH"], rationale="absolute attachment"),
+        },
+    )
+
+    b(
+        "v6_deliv_stub_ext",
+        {
+            **base,
+            "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
+            "claims-registry.json": claim_row(
+                "narrative_claim",
+                "reported_claim",
+                ["E1"],
+                [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
+            ),
+            "delivery-manifest.json": dm(
+                True,
+                stub_delivery=True,
+                attachments=[{"path": "out/scratch.tmp", "sha256": _sha()}],
+            ),
+            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-STUB-EXT"], rationale="stub tmp ext"),
+        },
+    )
+
+    rel_dir = FIX / "release_bad" / "release_pass_without_transcript"
+    rel_dir.mkdir(parents=True, exist_ok=True)
+    rt = {
+        "skill_version": RUN_VERSION,
+        "steps": [
+            {"name": "validate_skill", "rc": 0},
+            {"name": "check_schema_drift", "rc": 0},
+        ],
+        "transcript_sha256": "",
+        "generated_at": "2026-05-02T12:00:00Z",
+    }
+    body = {k: v for k, v in rt.items() if k != "transcript_sha256"}
+    h = hashlib.sha256()
+    h.update(json.dumps(body, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+    rt["transcript_sha256"] = h.hexdigest()
+    (rel_dir / "release-transcript.json").write_text(json.dumps(rt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (rel_dir / "release-report.md").write_text(
+        "# Release\n\nvalidate_traceability: pass\n",
+        encoding="utf-8",
+    )
+    (rel_dir / "expected.json").write_text(
+        json.dumps(
+            {
+                "expected_rc": 1,
+                "expected_checker": "validate_release_report",
+                "expected_issue_codes": ["release_pass_without_transcript"],
+                "rationale": "report pass line not in transcript",
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
     )
 
 

@@ -68,12 +68,20 @@ def main() -> int:
         for sup in cl.get("support_set") or []:
             if not isinstance(sup, dict):
                 continue
-            if str(sup.get("role_for_claim") or "") not in roles:
+            role_fc = str(sup.get("role_for_claim") or "")
+            if role_fc not in roles:
                 continue
             sid = str(sup.get("source_id") or "")
-            st = str(cl.get("status") or "")
-            if sid and (sid.upper().startswith("KB:") or sid.startswith("kb:")) and st == "confirmed_fact":
-                issues.append({"code": "kb_as_factual_source", "severity": "error", "path": sid, "detail": "KB id cannot sole factual source_id for confirmed_fact", "artifact": "claims-registry.json"})
+            if sid and (sid.upper().startswith("KB:") or sid.startswith("kb:")) and role_fc in ("primary_support", "corroboration"):
+                issues.append(
+                    {
+                        "code": "kb_match_used_as_evidence",
+                        "severity": "error",
+                        "path": sid,
+                        "detail": "KB source_id must not appear as primary_support or corroboration in support_set",
+                        "artifact": "claims-registry.json",
+                    }
+                )
             if sid:
                 sids.append(sid)
                 origins.append(sid_to_origin.get(sid, sid))

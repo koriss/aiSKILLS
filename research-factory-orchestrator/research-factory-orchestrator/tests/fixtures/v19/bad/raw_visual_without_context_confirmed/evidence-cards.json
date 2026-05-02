@@ -11,12 +11,7 @@
         "kind": "excerpt",
         "text": "caption"
       },
-      "supports": [
-        {
-          "claim_id": "C1",
-          "stance": "supports"
-        }
-      ],
+      "supports": "direct",
       "confidence": "medium"
     }
   ]

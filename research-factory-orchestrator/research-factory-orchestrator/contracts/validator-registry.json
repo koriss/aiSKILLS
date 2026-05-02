@@ -1,6 +1,6 @@
 {
-  "version": "19.0.1",
-  "description": "Curated validators for CI gating; v19.0.1 patch: core V1–V6 + v18.7 logical consistency + legacy delivery/manifest scripts.",
+  "version": "19.0.2",
+  "description": "Curated validators for CI gating; v19.0.2 patch: core V1–V6 + v18.7 logical consistency + legacy delivery/manifest scripts.",
   "validators": [
     {"id": "validate_skill", "path": "scripts/validate_skill.py", "phase": "l0"},
     {"id": "validate_delivery_manifest", "path": "scripts/validate_delivery_manifest.py", "phase": "l1"},

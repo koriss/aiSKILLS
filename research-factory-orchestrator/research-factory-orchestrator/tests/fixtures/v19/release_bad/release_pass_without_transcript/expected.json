@@ -1,0 +1,8 @@
+{
+  "expected_rc": 1,
+  "expected_checker": "validate_release_report",
+  "expected_issue_codes": [
+    "release_pass_without_transcript"
+  ],
+  "rationale": "report pass line not in transcript"
+}

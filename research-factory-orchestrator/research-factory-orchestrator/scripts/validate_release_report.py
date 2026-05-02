@@ -27,12 +27,26 @@ def main() -> int:
     args = ap.parse_args()
     tp = Path(args.transcript)
     if not tp.is_file():
-        print(json.dumps({"status": "fail", "reason": "missing transcript"}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": "fail", "reason": "missing transcript", "issue_code": "release_missing_transcript"},
+                ensure_ascii=False,
+            )
+        )
         return 1
     fresh = json.loads(tp.read_text(encoding="utf-8"))
     fresh_sha = _sha256_obj({k: v for k, v in fresh.items() if k != "transcript_sha256"})
     if fresh.get("transcript_sha256") and fresh["transcript_sha256"] != fresh_sha:
-        print(json.dumps({"status": "fail", "reason": "transcript self-hash mismatch (regenerate validate_release)"}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {
+                    "status": "fail",
+                    "reason": "transcript self-hash mismatch (regenerate validate_release)",
+                    "issue_code": "release_transcript_hash_mismatch",
+                },
+                ensure_ascii=False,
+            )
+        )
         return 1
 
     # F199-style: duplicate run_id across distinct smoke-derived dirs in transcript
@@ -48,7 +62,17 @@ def main() -> int:
             if rj.is_file():
                 run_ids.append(json.loads(rj.read_text(encoding="utf-8")).get("run_id"))
     if len(run_ids) >= 2 and len(set(run_ids)) < len(run_ids):
-        print(json.dumps({"status": "fail", "reason": "duplicate run_id across transcript run_dirs", "run_ids": run_ids}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {
+                    "status": "fail",
+                    "reason": "duplicate run_id across transcript run_dirs",
+                    "run_ids": run_ids,
+                    "issue_code": "release_duplicate_run_id",
+                },
+                ensure_ascii=False,
+            )
+        )
         return 1
 
     # Version consistency across embedded run_dirs vs runtime/version.json
@@ -67,7 +91,17 @@ def main() -> int:
                 vers.add(str(json.loads(rj.read_text(encoding="utf-8")).get("version") or ""))
     vers.discard("")
     if len(vers) > 1:
-        print(json.dumps({"status": "fail", "reason": "run.json version mismatch across transcript", "versions": sorted(vers)}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {
+                    "status": "fail",
+                    "reason": "run.json version mismatch across transcript",
+                    "versions": sorted(vers),
+                    "issue_code": "release_run_version_mismatch",
+                },
+                ensure_ascii=False,
+            )
+        )
         return 1
 
     def _ftm_stub_entries(run_dir: str) -> list[str]:
@@ -122,6 +156,7 @@ def main() -> int:
                     "status": "fail",
                     "reason": "feature_truth_matrix_stub_under_production_claim",
                     "ftm_issues": ftm_issues,
+                    "issue_code": "release_ftm_stub_under_production_claim",
                 },
                 ensure_ascii=False,
             )
@@ -135,7 +170,17 @@ def main() -> int:
         if lab and lab not in step_names and "validate" in lab.lower():
             # allow loose matching: substring
             if not any(lab in n or n in lab for n in step_names if n):
-                print(json.dumps({"status": "fail", "reason": "report claims pass without matching transcript step", "label": lab}, ensure_ascii=False))
+                print(
+                    json.dumps(
+                        {
+                            "status": "fail",
+                            "reason": "report claims pass without matching transcript step",
+                            "label": lab,
+                            "issue_code": "release_pass_without_transcript",
+                        },
+                        ensure_ascii=False,
+                    )
+                )
                 return 1
 
     print(json.dumps({"status": "pass", "report_checked": rp}, ensure_ascii=False))

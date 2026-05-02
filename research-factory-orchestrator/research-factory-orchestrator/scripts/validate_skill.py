@@ -2,7 +2,7 @@
 from pathlib import Path
 import ast, json, re, shutil, sys
 sys.dont_write_bytecode = True
-VERSION = "19.0.1"
+VERSION = "19.0.2"
 root = Path(__file__).resolve().parents[1]
 errors = []
 required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs"]

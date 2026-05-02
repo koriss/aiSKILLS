@@ -9,8 +9,8 @@ import subprocess
 import sys
 import tempfile
 from datetime import datetime, timezone
+from enum import StrEnum
 from pathlib import Path
-
 ROOT = Path(__file__).resolve().parents[1]
 CHAIN = [
     ("validate_artifact_schema", ROOT / "validators" / "core" / "validate_artifact_schema.py"),
@@ -20,6 +20,45 @@ CHAIN = [
     ("validate_final_answer", ROOT / "validators" / "core" / "validate_final_answer.py"),
     ("validate_delivery_truth", ROOT / "validators" / "core" / "validate_delivery_truth.py"),
 ]
+
+
+class ValidatorStatus(StrEnum):
+    PASS = "pass"
+    FAIL = "fail"
+    SKIPPED = "skipped"
+    CRASH = "crash"
+
+
+def _build_used_profile(profile_name: str, prof: dict[str, object]) -> dict[str, object]:
+    opts = prof.get("options")
+    if not isinstance(opts, dict):
+        opts = {}
+    ctp = prof.get("claim_type_policies")
+    if not isinstance(ctp, dict):
+        ctp = {}
+    br = prof.get("blocking_rules")
+    if not isinstance(br, dict):
+        br = {}
+    sp = prof.get("source_policy")
+    if not isinstance(sp, dict):
+        sp = {}
+    dp = prof.get("delivery_policy")
+    if not isinstance(dp, dict):
+        dp = {}
+    return {
+        "schema_version": prof.get("schema_version"),
+        "profile": profile_name,
+        "profile_id": str(prof.get("profile_id") or profile_name),
+        "profile_name": str(prof.get("profile_name") or prof.get("profile") or profile_name),
+        "description": prof.get("description"),
+        "parent_profile": prof.get("parent_profile"),
+        "options": opts,
+        "claim_type_policies": ctp,
+        "blocking_rules": br,
+        "source_policy": sp,
+        "delivery_policy": dp,
+        "auto_escalation": prof.get("auto_escalation") if isinstance(prof.get("auto_escalation"), dict) else {},
+    }
 
 
 def main() -> int:
@@ -37,25 +76,23 @@ def main() -> int:
         return 2
     prof = json.loads(prof_path.read_text(encoding="utf-8"))
     active = prof.get("active_validators") or [x[0] for x in CHAIN]
-    opts = prof.get("options")
-    if not isinstance(opts, dict):
-        opts = {}
-    used_profile = {
-        "profile": args.profile,
-        "schema_version": prof.get("schema_version"),
-        "options": opts,
-    }
-    (rd / "validation-profile-used.json").write_text(json.dumps(used_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    run = {}
+    if not isinstance(active, list):
+        active = [x[0] for x in CHAIN]
+    used_profile = _build_used_profile(args.profile, prof)
+    (rd / "validation-profile-used.json").write_text(
+        json.dumps(used_profile, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    run: dict[str, object] = {}
     if (rd / "run.json").is_file():
         try:
             run = json.loads((rd / "run.json").read_text(encoding="utf-8"))
         except Exception:
-            pass
+            run = {}
     run_id = str(run.get("run_id") or rd.name)
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
     py = sys.executable
-    results: list[dict] = []
+    results: list[dict[str, object]] = []
     prior_fail = False
     for vid, script in CHAIN:
         if vid not in active:
@@ -64,10 +101,19 @@ def main() -> int:
             results.append(
                 {
                     "validator_id": vid,
-                    "passed": True,
+                    "status": ValidatorStatus.SKIPPED.value,
+                    "passed": False,
                     "blocking": False,
                     "issues": [],
-                    "warnings": [{"code": "skipped_due_to_prior_failure", "severity": "warning", "path": "", "detail": "", "artifact": ""}],
+                    "warnings": [
+                        {
+                            "code": "skipped_due_to_prior_failure",
+                            "severity": "warning",
+                            "path": "",
+                            "detail": "",
+                            "artifact": "",
+                        }
+                    ],
                     "summary": "skipped",
                 }
             )
@@ -76,9 +122,18 @@ def main() -> int:
             results.append(
                 {
                     "validator_id": vid,
+                    "status": ValidatorStatus.CRASH.value,
                     "passed": False,
                     "blocking": True,
-                    "issues": [{"code": "CRASH", "severity": "error", "path": str(script), "detail": "missing script", "artifact": ""}],
+                    "issues": [
+                        {
+                            "code": "CRASH",
+                            "severity": "error",
+                            "path": str(script),
+                            "detail": "missing script",
+                            "artifact": "",
+                        }
+                    ],
                     "warnings": [],
                     "summary": "missing validator script",
                 }
@@ -102,7 +157,15 @@ def main() -> int:
                 "schema_version": "v19.0",
                 "passed": False,
                 "blocking": True,
-                "issues": [{"code": "CRASH", "severity": "error", "path": "", "detail": (p.stderr or "")[-800:], "artifact": ""}],
+                "issues": [
+                    {
+                        "code": "CRASH",
+                        "severity": "error",
+                        "path": "",
+                        "detail": (p.stderr or "")[-800:],
+                        "artifact": "",
+                    }
+                ],
                 "warnings": [],
                 "summary": "non-json stdout",
             }
@@ -114,24 +177,43 @@ def main() -> int:
         obj.setdefault("issues", [])
         obj.setdefault("warnings", [])
         obj.setdefault("summary", "")
-        results.append({k: obj[k] for k in ("validator_id", "passed", "blocking", "issues", "warnings", "summary")})
-        if p.returncode != 0 or obj.get("blocking"):
+        passed_ok = p.returncode == 0 and bool(obj.get("passed")) and not bool(obj.get("blocking"))
+        if passed_ok:
+            st = ValidatorStatus.PASS.value
+        elif isinstance(obj, dict) and (obj.get("issues") or obj.get("summary") or obj.get("validator_id") == vid):
+            st = ValidatorStatus.FAIL.value
+        else:
+            st = ValidatorStatus.CRASH.value
+        row = {
+            "validator_id": vid,
+            "status": st,
+            "passed": passed_ok,
+            "blocking": bool(obj.get("blocking")),
+            "issues": obj.get("issues") or [],
+            "warnings": obj.get("warnings") or [],
+            "summary": str(obj.get("summary") or ""),
+        }
+        results.append(row)
+        if not passed_ok or st == ValidatorStatus.CRASH.value:
             prior_fail = True
-    overall = all(r.get("passed") for r in results) and not any(r.get("blocking") for r in results)
-    transcript = {
+    statuses = [str(r.get("status") or "") for r in results]
+    all_pass = all(s == ValidatorStatus.PASS.value for s in statuses) and bool(results)
+    top = ValidatorStatus.PASS.value if all_pass else ValidatorStatus.FAIL.value
+    transcript: dict[str, object] = {
         "schema_version": "v19.0",
         "run_id": run_id,
         "profile_used": args.profile,
+        "status": top,
         "validators": results,
-        "overall_pass": overall,
-        "all_passed": overall,
+        "overall_pass": all_pass,
+        "all_passed": all_pass,
         "created_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
     out = rd / "validation-transcript.json"
     fd, tmp = tempfile.mkstemp(prefix="vt-", dir=str(rd), text=True)
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as f:
-            f.write(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n")
+            f.write(json.dumps(transcript, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
         Path(tmp).replace(out)
     except Exception:
         try:
@@ -139,8 +221,15 @@ def main() -> int:
         except OSError:
             pass
         raise
-    print(json.dumps({"status": "pass" if overall else "fail", "overall_pass": overall}, ensure_ascii=False, indent=2))
-    return 0 if overall else 1
+    print(
+        json.dumps(
+            {"status": top, "overall_pass": all_pass},
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0 if all_pass else 1
 
 
 if __name__ == "__main__":

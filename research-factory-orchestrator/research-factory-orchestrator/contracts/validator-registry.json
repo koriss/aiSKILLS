@@ -1,6 +1,6 @@
 {
-  "version": "19.0.3",
-  "description": "Curated validators for CI gating; v19.0.3: core V1–V6 + v18.7 logical consistency + legacy delivery/manifest scripts + release B4 gates + dual Telegram smokes (v18+v19 profile).",
+  "version": "19.0.4",
+  "description": "Curated validators for CI gating; v19.0.4: v19.0.3 baseline + release gates include CLI smoke (mvr) + corrupt-render rollback Reality Check + core-boundary-contract 19.0.4.",
   "validators": [
     {"id": "validate_skill", "path": "scripts/validate_skill.py", "phase": "l0"},
     {"id": "validate_delivery_manifest", "path": "scripts/validate_delivery_manifest.py", "phase": "l1"},

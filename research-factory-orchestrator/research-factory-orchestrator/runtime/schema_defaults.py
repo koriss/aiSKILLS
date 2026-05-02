@@ -1,4 +1,4 @@
-"""Schema-safe defaults for fail-closed rollback and smoke stubs (v19.0.3+)."""
+"""Schema-safe defaults for fail-closed rollback and smoke stubs (v19.0.4+)."""
 from __future__ import annotations
 
 import copy

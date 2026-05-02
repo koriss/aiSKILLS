@@ -1,13 +1,26 @@
 {
-  "version": "18.3.2",
-  "compatibility_monolith": "scripts/rfo_v18_core.py",
-  "target_components": [
-    "runtime.adapter",
-    "runtime.worker",
-    "runtime.outbox",
-    "runtime.validation",
-    "runtime.packaging",
-    "runtime.smoke"
+  "version": "19.0.4",
+  "description": "RFO runtime boundary: bounded modules under runtime/*_impl.py; CLI entry at runtime/cli.py; compatibility shim at runtime/impl.py.",
+  "entrypoints": {
+    "cli_main": "runtime/cli.py:main",
+    "legacy_compat_shim": "runtime/impl.py (deprecated re-exports; prefer runtime.cli + *_impl)",
+    "legacy_script_facade": "scripts/rfo_v18_core.py (thin forwarder to runtime.cli.main)"
+  },
+  "implementation_modules": [
+    "runtime/adapter_impl.py",
+    "runtime/worker_impl.py",
+    "runtime/outbox_impl.py",
+    "runtime/validate_impl.py",
+    "runtime/smoke_impl.py",
+    "runtime/failure_impl.py"
   ],
-  "rule": "new code should target bounded runtime modules; rfo_v18_core remains compatibility entrypoint until refactor completes"
+  "supporting_modules": [
+    "runtime/util.py",
+    "runtime/render.py",
+    "runtime/schema_defaults.py",
+    "runtime/publish_policy.py",
+    "runtime/capability.py",
+    "runtime/trace.py"
+  ],
+  "rule": "New orchestration code targets runtime/*_impl.py and runtime/cli.py. Do not grow scripts/rfo_v18_core.py beyond the compatibility facade."
 }

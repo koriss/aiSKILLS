@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unified release verification: skill validation, schema drift, smokes, failure corpus, B4 self-attestation (v19.0.3+)."""
+"""Unified release verification: skill validation, schema drift, smokes, failure corpus, B4 self-attestation (v19.0.4+)."""
 from __future__ import annotations
 
 import hashlib
@@ -25,8 +25,10 @@ REQUIRED_GATES: frozenset[str] = frozenset(
         "_smoke_subagent_isolation",
         "_smoke_pristine_run",
         "_smoke_rollback_creates_stubs",
+        "_smoke_corrupt_render",
         "smoke_telegram_v18",
         "smoke_telegram_v19",
+        "smoke_cli_v19",
         "failure_corpus",
         "validate_v19_fixture_suite",
         "validate_v19_release_bad_suite",
@@ -125,6 +127,9 @@ def main() -> int:
     prb_st = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_rollback_creates_stubs.py")], env, 300)
     steps.append(_step_tail("_smoke_rollback_creates_stubs", prb_st))
 
+    pcr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_corrupt_render.py")], env, 300)
+    steps.append(_step_tail("_smoke_corrupt_render", pcr))
+
     core = str(ROOT / "scripts" / "rfo_v18_core.py")
     smoke_root_v18 = Path(tempfile.mkdtemp(prefix="rfo-release-smoke-v18-"))
     p3 = _run(
@@ -171,6 +176,31 @@ def main() -> int:
     row_v19["rc"] = eff_rc
     steps.append(row_v19)
 
+    smoke_root_cli = Path(tempfile.mkdtemp(prefix="rfo-release-smoke-cli-"))
+    env_cli = {**env, "RFO_V19_PROFILE": "mvr"}
+    p_cli = _run(
+        py,
+        [py, "-S", core, "smoke", "--runs-root", str(smoke_root_cli), "--provider", "cli", "--interface", "direct_runtime"],
+        env_cli,
+        600,
+    )
+    smoke_report_cli = smoke_root_cli / "smoke-test-report.json"
+    run_dir_cli = _smoke_run_dir(smoke_root_cli)
+    extra_cli: dict[str, object] = {
+        "smoke_report_sha256": _sha256_file(smoke_report_cli) if smoke_report_cli.is_file() else "",
+        "smoke_run_dir": run_dir_cli,
+    }
+    eff_rc_cli = p_cli.returncode
+    if p_cli.returncode == 0 and run_dir_cli:
+        ok_c, note_c = _v19_post_smoke_ok(run_dir_cli)
+        if not ok_c:
+            eff_rc_cli = 1
+            extra_cli["v19_closure_error"] = note_c
+    extra_cli["rc_effective"] = eff_rc_cli
+    row_cli = _step_tail("smoke_cli_v19", p_cli, extra_cli)
+    row_cli["rc"] = eff_rc_cli
+    steps.append(row_cli)
+
     p4 = _run(py, [py, "-S", core, "failure"], env, 600)
     steps.append(_step_tail("failure_corpus", p4))
 
@@ -180,7 +210,7 @@ def main() -> int:
     prb = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_v19_release_bad_suite.py")], env, 120)
     steps.append(_step_tail("validate_v19_release_bad_suite", prb))
 
-    run_dir_nd = run_dir_v18 or run_dir_v19
+    run_dir_nd = run_dir_v18 or run_dir_v19 or run_dir_cli
     nd_rc = 1
     if run_dir_nd and Path(run_dir_nd).is_dir():
         p5 = _run(
@@ -202,7 +232,7 @@ def main() -> int:
         pass
 
     transcript: dict[str, object] = {
-        "version": skill_ver or "19.0.3",
+        "version": skill_ver or "19.0.4",
         "skill_version": skill_ver,
         "steps": steps,
         "transcript_sha256": "",
@@ -278,7 +308,7 @@ def main() -> int:
     failed = verdict != "READY"
 
     # cleanup temp smoke dirs (best effort)
-    for d in (smoke_root_v18, smoke_root_v19):
+    for d in (smoke_root_v18, smoke_root_v19, smoke_root_cli):
         try:
             shutil.rmtree(d, ignore_errors=True)
         except Exception:

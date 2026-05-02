@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Reality Check: closure invariant (v19.0.3).
+Reality Check: closure invariant (v19.0.4).
 
 Default verdict = NEEDS_WORK. Pass possible only if:
   - all required artifacts exist

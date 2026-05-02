@@ -2,7 +2,7 @@
 from pathlib import Path
 import ast, json, re, shutil, sys
 sys.dont_write_bytecode = True
-VERSION = "19.0.3"
+VERSION = "19.0.4"
 root = Path(__file__).resolve().parents[1]
 errors = []
 required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs"]
@@ -94,8 +94,12 @@ for d in ["references", "schemas", "kb", "templates", "examples", "tests"]:
 for py in root.rglob("*.py"):
     try: ast.parse(py.read_text(encoding="utf-8"))
     except Exception as e: errors.append(f"python_ast_error:{py.relative_to(root)}:{e}")
-# compileall and some tooling always write scripts/__pycache__; skill policy is no committed bytecode here.
-for _cache in (root / "scripts" / "__pycache__", root / "runtime" / "__pycache__"):
+# compileall and some tooling always write __pycache__; skill policy is no committed bytecode here.
+for _cache in (
+    root / "scripts" / "__pycache__",
+    root / "runtime" / "__pycache__",
+    root / "validators" / "core" / "__pycache__",
+):
     if _cache.is_dir():
         shutil.rmtree(_cache, ignore_errors=True)
 pycache = [str(p.relative_to(root)) for p in root.rglob("*") if p.name == "__pycache__" or p.suffix == ".pyc"]

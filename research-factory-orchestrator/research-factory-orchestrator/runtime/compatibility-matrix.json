@@ -1,5 +1,5 @@
 {
-  "skill_version": "19.0.3",
+  "skill_version": "19.0.4",
   "layouts": [
     {
       "runtime_artifact_layout": "v18-work-queue+outbox-acks",
@@ -7,5 +7,5 @@
       "status": "supported"
     }
   ],
-  "upgrade_notes": "v19.0.3 patch: fail-closed rollback minimal_valid + physical rollback stub; V6 semantic fixes (DELIV-STUB-EXT, DELIV-ATT-MISSING, DELIV-STUB-FORBIDDEN-ATTACHMENT); V1 walker oneOf/anyOf/allOf semantics; release B4 REQUIRED_GATES + dual Telegram smokes (v18 + RFO_V19_PROFILE=mvr); ADR-009/010 vocabulary/root patterns; validation-transcript schema REC-1 root permissive; state-machine queued→validation_failed. Prior v19.0.2: KISS validation-profile-used; V2 role_for_claim; V6 DELIV-EXT-CLI; semver-only strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
+  "upgrade_notes": "v19.0.4 patch: core-boundary-contract refresh (runtime/*_impl map); validate_release REQUIRED_GATES + smoke_cli_v19 + _smoke_corrupt_render; ADR-011 committed release-validation-transcript policy. v19.0.3 patch: fail-closed rollback minimal_valid + physical rollback stub; V6 semantic fixes (DELIV-STUB-EXT, DELIV-ATT-MISSING, DELIV-STUB-FORBIDDEN-ATTACHMENT); V1 walker oneOf/anyOf/allOf semantics; release B4 REQUIRED_GATES + dual Telegram smokes (v18 + RFO_V19_PROFILE=mvr); ADR-009/010 vocabulary/root patterns; validation-transcript schema REC-1 root permissive; state-machine queued→validation_failed. Prior v19.0.2: KISS validation-profile-used; V2 role_for_claim; V6 DELIV-EXT-CLI; semver-only strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
 }

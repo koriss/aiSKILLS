@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FIX = ROOT / "tests" / "fixtures" / "v19"
-RUN_VERSION = "19.0.3"
+RUN_VERSION = "19.0.4"
 
 
 def profile_used(profile_name: str) -> dict:

@@ -1,17 +1,17 @@
 {
-  "version": "19.0.4",
-  "skill_version": "19.0.4",
+  "version": "19.1.0",
+  "skill_version": "19.1.0",
   "steps": [
     {
       "name": "validate_skill",
       "rc": 0,
-      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"validator\": \"validate_skill\",\n  \"version\": \"19.0.4\",\n  \"skill_file_count\": 1272,\n  \"errors\": []\n}\n",
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"validator\": \"validate_skill\",\n  \"version\": \"19.1.0\",\n  \"skill_file_count\": 1360,\n  \"errors\": []\n}\n",
       "stderr_tail": ""
     },
     {
       "name": "check_schema_drift",
       "rc": 0,
-      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"schema_fingerprints\": {\n    \"scripts/validate_logical_consistency.py\": \"167790e522ae345f76fa1e3e113dff56404b5b8e7eeb7cec0a0575e4cf52fbe8\",\n    \"scripts/validate_release.py\": \"8cf3f3b7393fd3fadff8bf2e7d5fedfadf7ea3460a11e1e81bd7df1c8a288a10\",\n    \"scripts/run_core_validators.py\": \"96a91ad2d892c65a723d8c4470c93fd5f37c2f912eee09b26c17ba982e5149f1\",\n    \"validators/core/validate_traceability.py\": \"82c09fd41aee5ee07efd6720e7517ae99cad2e511a1577e92b9be4ccd38fec5f\",\n    \"validators/core/validate_delivery_truth.py\": \"6ea18f9e8af5d274b0163e35a2c7b4d72e32e3586245cb251fd7232719e1e7b6\",\n    \"scripts/check_validation_pass.py\": \"2c5c5650d0052c0f6fa11feb366ab2799754c3b9aa5a4885c52afc4cf9f50340\",\n    \"scripts/migrate_validator_invocation.py\": \"23e253007582c25e6cebeb9a7d4ef15e168bb0e843bfed19b4c8b80e87dde342\",\n    \"schemas/delivery-manifest.schema.json\": \"318897979a38f2445f18cf4f4b63b741bff8e84bd024153553e544d29df51c19\",\n    \"schemas/claim.schema.json\": \"c2a54e3edd3a79020a53d96cd7285512ddfb9a7dd053471e1416ce63576ef1cc\",\n    \"contracts/handoff-envelope.schema.json\": \"85353b8238418b4630fe0b84b5805833c977219818ccaa4ae7e91ea9340034c7\",\n    \"contracts/capability-token.schema.json\": \"264f68eb06b3d4670a6f3c373a59bcb52345d65b481813ef2f69afcb32721209\",\n    \"contracts/severity-matrix.json\": \"d8140e89d5f4824fba2aeff49bcb42f01e0b5ac6f3c5790e2ed4188fa2136056\",\n    \"contracts/slo-config.json\": \"f4b2d99e7af03c0f1201f4bc6bf69114d3a4b6abf8c21e258958f63391ac600d\",\n    \"contracts/state-machine.json\": \"7b382b15913dc8dc7bac0644535b66af894dd6a93346187ce54c5b03c7ab2e2d\",\n    \"schemas/core/claims-registry.schema.json\": \"521f05efdd9b3befa0f8d3da4c38c853d7b3a91cc5dc44571cc9b76dc6c2a14d\",\n    \"schemas/core/contradictions-lite.schema.json\": \"7cd2fd5695bd8e33c77651cf20124dc61148dfa1301bcea3373ac6fb6242af66\",\n    \"schemas/core/delivery-manifest.schema.json\": \"cdc63432864b4479fdcf5e0d640e981510e6e34e0f38134109b9858a4ae7d4d4\",\n    \"schemas/core/evidence-cards.schema.json\": \"28200a4dcf475020b4449ebf77e813f8a8f9434aa39b61ee963a412a376eb0de\",\n    \"schemas/core/final-answer-gate.schema.json\": \"4106e10aed2c597db4a1d58382f40f5ebde8cae03b1ce942268b9f43a6d706fa\",\n    \"schemas/core/sources.schema.json\": \"06b443a1aa4184fc63d815f17cae1ad3b41fae2e02a614bae7b99c01f36385c1\",\n    \"schemas/core/validation-transcript.schema.json\": \"78506123902aae116877db9b6a1e5d731187040b19021f73a8272125d635a48f\",\n    \"schemas/contradiction-matrix.schema.json\": \"70df7421bec44d1102fd9b3673f10a2492eb9f25cea43dc3d3db6218755ae851\"\n  }\n}\n",
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"schema_fingerprints\": {\n    \"scripts/validate_logical_consistency.py\": \"60cce9fbc45b3e4edf76da51485897dd3e2f98b516022787fa584c2781ffcd21\",\n    \"scripts/validate_release.py\": \"0b671284236b6a10e70a51c88b0fd2df3625ad0390864f2b7cf372cf555a910f\",\n    \"scripts/run_core_validators.py\": \"39edb708d1fdc83938d5c1e31288b8f41f82470c47b18fe580d1c53c2c008273\",\n    \"validators/core/validate_traceability.py\": \"82c09fd41aee5ee07efd6720e7517ae99cad2e511a1577e92b9be4ccd38fec5f\",\n    \"validators/core/validate_delivery_truth.py\": \"6ea18f9e8af5d274b0163e35a2c7b4d72e32e3586245cb251fd7232719e1e7b6\",\n    \"scripts/check_validation_pass.py\": \"2c5c5650d0052c0f6fa11feb366ab2799754c3b9aa5a4885c52afc4cf9f50340\",\n    \"scripts/migrate_validator_invocation.py\": \"23e253007582c25e6cebeb9a7d4ef15e168bb0e843bfed19b4c8b80e87dde342\",\n    \"schemas/delivery-manifest.schema.json\": \"318897979a38f2445f18cf4f4b63b741bff8e84bd024153553e544d29df51c19\",\n    \"schemas/claim.schema.json\": \"c2a54e3edd3a79020a53d96cd7285512ddfb9a7dd053471e1416ce63576ef1cc\",\n    \"contracts/handoff-envelope.schema.json\": \"85353b8238418b4630fe0b84b5805833c977219818ccaa4ae7e91ea9340034c7\",\n    \"contracts/capability-token.schema.json\": \"264f68eb06b3d4670a6f3c373a59bcb52345d65b481813ef2f69afcb32721209\",\n    \"contracts/severity-matrix.json\": \"d8140e89d5f4824fba2aeff49bcb42f01e0b5ac6f3c5790e2ed4188fa2136056\",\n    \"contracts/slo-config.json\": \"f4b2d99e7af03c0f1201f4bc6bf69114d3a4b6abf8c21e258958f63391ac600d\",\n    \"contracts/state-machine.json\": \"7b382b15913dc8dc7bac0644535b66af894dd6a93346187ce54c5b03c7ab2e2d\",\n    \"schemas/core/claims-registry.schema.json\": \"521f05efdd9b3befa0f8d3da4c38c853d7b3a91cc5dc44571cc9b76dc6c2a14d\",\n    \"schemas/core/contradictions-lite.schema.json\": \"7cd2fd5695bd8e33c77651cf20124dc61148dfa1301bcea3373ac6fb6242af66\",\n    \"schemas/core/delivery-manifest.schema.json\": \"cdc63432864b4479fdcf5e0d640e981510e6e34e0f38134109b9858a4ae7d4d4\",\n    \"schemas/core/evidence-cards.schema.json\": \"28200a4dcf475020b4449ebf77e813f8a8f9434aa39b61ee963a412a376eb0de\",\n    \"schemas/core/final-answer-gate.schema.json\": \"4106e10aed2c597db4a1d58382f40f5ebde8cae03b1ce942268b9f43a6d706fa\",\n    \"schemas/core/judge-council.schema.json\": \"d7448d9622a3b9cf21bb80fdfe03dc2247452a89c8563a2510a488e0f263d42b\",\n    \"schemas/core/source-policy.schema.json\": \"eed7fae903fb7b80b1f5d1a081f4c50573debd761dda415989421232dee08a17\",\n    \"schemas/core/sources.schema.json\": \"06b443a1aa4184fc63d815f17cae1ad3b41fae2e02a614bae7b99c01f36385c1\",\n    \"schemas/core/validation-transcript.schema.json\": \"e60235e1ffc5b6fd29b1be253f21490f90c967b8d1381a47c7592f9ac41cbd39\",\n    \"schemas/contradiction-matrix.schema.json\": \"70df7421bec44d1102fd9b3673f10a2492eb9f25cea43dc3d3db6218755ae851\"\n  }\n}\n",
       "stderr_tail": ""
     },
     {
@@ -41,46 +41,76 @@
     {
       "name": "_smoke_corrupt_render",
       "rc": 0,
-      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"run_dir\": \"/tmp/rfo-corrupt-render-v3ekghc5/runs/test_internal_audit_target_20260502T223101\",\n  \"validate_rc\": 1\n}\n",
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"run_dir\": \"/tmp/rfo-corrupt-render-pbzl9mrf/runs/test_internal_audit_target_20260505T171242\",\n  \"validate_rc\": 1\n}\n",
       "stderr_tail": ""
     },
     {
       "name": "smoke_telegram_v18",
       "rc": 0,
-      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-v18-w6ustiv5\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-v18-w6ustiv5/runs/test_internal_audit_target_20260502T223102\",\n  \"final_gate_status\": \"stub_only\"\n}\n",
+      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-v18-y9r9qd4s\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-v18-y9r9qd4s/runs/test_internal_audit_target_20260505T171243\",\n  \"final_gate_status\": \"fail\"\n}\n",
       "stderr_tail": "",
-      "smoke_report_sha256": "223fc9dc5ef0ad24fad034d3514ef50ffb9f4b7bf29c5754e9ba1a90993a9b5b",
-      "smoke_run_dir": "/tmp/rfo-release-smoke-v18-w6ustiv5/runs/test_internal_audit_target_20260502T223102"
+      "smoke_report_sha256": "6b11ec50e66a73d5cf4933d405ba3d7f1ed10865d26b02b387cdf432281e33ac",
+      "smoke_run_dir": "/tmp/rfo-release-smoke-v18-y9r9qd4s/runs/test_internal_audit_target_20260505T171243"
     },
     {
       "name": "smoke_telegram_v19",
       "rc": 0,
-      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-v19-t88deohn\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-v19-t88deohn/runs/test_internal_audit_target_20260502T223103\",\n  \"final_gate_status\": \"fail\"\n}\n",
+      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-v19-6iovp4wx\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-v19-6iovp4wx/runs/test_internal_audit_target_20260505T171244\",\n  \"final_gate_status\": \"fail\"\n}\n",
       "stderr_tail": "",
-      "smoke_report_sha256": "e4c142d047a20aaa0e7ccc71545655f8bcb6afa83bda7fea23a72fb0010fbe41",
-      "smoke_run_dir": "/tmp/rfo-release-smoke-v19-t88deohn/runs/test_internal_audit_target_20260502T223103",
+      "smoke_report_sha256": "1b5f0d1f1d6a360553d7d92b78558d23703851e734e83cdf854582940f6860b7",
+      "smoke_run_dir": "/tmp/rfo-release-smoke-v19-6iovp4wx/runs/test_internal_audit_target_20260505T171244",
       "rc_effective": 0
     },
     {
       "name": "smoke_cli_v19",
       "rc": 0,
-      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-cli-pt4d6n1c\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-cli-pt4d6n1c/runs/test_internal_audit_target_20260502T223104\",\n  \"final_gate_status\": \"fail\"\n}\n",
+      "stdout_tail": "{\n  \"smoke_test_passed\": true,\n  \"runs_root\": \"/tmp/rfo-release-smoke-cli-8vz5vh2q\",\n  \"run_dir\": \"/tmp/rfo-release-smoke-cli-8vz5vh2q/runs/test_internal_audit_target_20260505T171244\",\n  \"final_gate_status\": \"fail\"\n}\n",
       "stderr_tail": "",
-      "smoke_report_sha256": "f438009cfbab616707020ba7168f8c9a16639831ec474fba2e0a2270fde344c6",
-      "smoke_run_dir": "/tmp/rfo-release-smoke-cli-pt4d6n1c/runs/test_internal_audit_target_20260502T223104",
+      "smoke_report_sha256": "76da3ebc85f68c587b685fbb4e9e7f4d37f3104dd06a05bacf03aff28e5ec752",
+      "smoke_run_dir": "/tmp/rfo-release-smoke-cli-8vz5vh2q/runs/test_internal_audit_target_20260505T171244",
       "rc_effective": 0
     },
     {
       "name": "failure_corpus",
       "rc": 0,
-      "stdout_tail": "ch-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_malformed_html_delivered\",\n      \"validator\": \"validate_html_well_formed.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_claim_id_gap_without_skip_reason\",\n      \"validator\": \"validate_claim_id_continuity_or_skip_reason.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_chat_delivery_claim_before_ack_real_log\",\n      \"validator\": \"validate_chat_claims_against_delivery_manifest.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F195_validation_failed_with_delivered_artifacts\",\n      \"validator\": \"validate_no_delivery_after_validation_fail.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F195_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F198_local_path_in_chat\",\n      \"validator\": \"validate_no_local_paths_in_chat.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F198_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F201_LC04_validation_fail_with_final_answer_gate_passed\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F201_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F205_LC11_empty_delivery_manifest\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F205_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F206_LC09_mode_normalized_without_audit_field\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F206_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F207_LC16_production_with_stub_feature_truth_matrix\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F207_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    }\n  ],\n  \"bad_sample_mismatches\": [],\n  \"generated_at\": \"2026-05-02T22:31:05Z\"\n}\n",
+      "stdout_tail": "ch-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_malformed_html_delivered\",\n      \"validator\": \"validate_html_well_formed.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_claim_id_gap_without_skip_reason\",\n      \"validator\": \"validate_claim_id_continuity_or_skip_reason.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/bad_fake_rfo_full_report.html\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"case_chat_delivery_claim_before_ack_real_log\",\n      \"validator\": \"validate_chat_claims_against_delivery_manifest.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F195_validation_failed_with_delivered_artifacts\",\n      \"validator\": \"validate_no_delivery_after_validation_fail.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F195_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F198_local_path_in_chat\",\n      \"validator\": \"validate_no_local_paths_in_chat.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F198_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true\n    },\n    {\n      \"case_id\": \"F201_LC04_validation_fail_with_final_answer_gate_passed\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F201_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F205_LC11_empty_delivery_manifest\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F205_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F206_LC09_mode_normalized_without_audit_field\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F206_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    },\n    {\n      \"case_id\": \"F207_LC16_production_with_stub_feature_truth_matrix\",\n      \"validator\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py\",\n      \"bad_sample\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/failure-corpus/cases/F207_run_dir\",\n      \"returncode\": 1,\n      \"expected\": \"fail\",\n      \"ok\": true,\n      \"harness\": \"v18_7_logical_consistency\"\n    }\n  ],\n  \"bad_sample_mismatches\": [],\n  \"generated_at\": \"2026-05-05T17:12:46Z\"\n}\n",
       "stderr_tail": ""
     },
     {
       "name": "validate_v19_fixture_suite",
       "rc": 0,
       "stdout_tail": "",
-      "stderr_tail": "[fixture] good/mvr_minimal_valid\n[fixture] bad/claim_without_evidence\n[fixture] bad/cli_claimed_external_delivery\n[fixture] bad/cli_with_external_delivery_claim_allowed\n[fixture] bad/confirmed_from_social_only\n[fixture] bad/contradiction_required_but_missing\n[fixture] bad/duplicate_sources_counted_as_independent\n[fixture] bad/evidence_source_id_unknown\n[fixture] bad/evidence_supports_invalid_shape\n[fixture] bad/evidence_without_source\n[fixture] bad/final_answer_new_fact\n[fixture] bad/forecast_as_confirmed_fact\n[fixture] bad/geopolitical_intent_as_confirmed_fact\n[fixture] bad/kb_as_corroboration_reported_claim\n[fixture] bad/kb_match_used_as_evidence\n[fixture] bad/l0_scan_unknown_under_full_profile\n[fixture] bad/local_path_in_user_message\n[fixture] bad/narrative_confirmed_exceeds_cap\n[fixture] bad/raw_visual_without_context_confirmed\n[fixture] bad/support_set_decl_mismatch\n[fixture] bad/support_set_role_invalid\n[fixture] bad/support_set_source_mismatch\n[fixture] bad/v6_deliv_att_absolute_path\n[fixture] bad/v6_deliv_att_missing\n[fixture] bad/v6_deliv_stub_ext\n[fixture] bad/v6_deliv_stub_tmp_ext\n"
+      "stderr_tail": "[fixture] good/blinded_checker_match\n[fixture] good/judge_council_consensus\n[fixture] good/mvr_minimal_valid\n[fixture] good/source_policy_clean\n[fixture] bad/blinded_checker_mismatch\n[fixture] bad/claim_without_evidence\n[fixture] bad/cli_claimed_external_delivery\n[fixture] bad/cli_with_external_delivery_claim_allowed\n[fixture] bad/confirmed_from_social_only\n[fixture] bad/contradiction_required_but_missing\n[fixture] bad/duplicate_sources_counted_as_independent\n[fixture] bad/evidence_source_id_unknown\n[fixture] bad/evidence_supports_invalid_shape\n[fixture] bad/evidence_without_source\n[fixture] bad/final_answer_new_fact\n[fixture] bad/forecast_as_confirmed_fact\n[fixture] bad/geopolitical_intent_as_confirmed_fact\n[fixture] bad/instruction_injection_in_evidence\n[fixture] bad/judge_council_split_no_consensus\n[fixture] bad/kb_as_corroboration_reported_claim\n[fixture] bad/kb_match_used_as_evidence\n[fixture] bad/l0_scan_unknown_under_full_profile\n[fixture] bad/local_path_in_user_message\n[fixture] bad/narrative_confirmed_exceeds_cap\n[fixture] bad/raw_visual_without_context_confirmed\n[fixture] bad/source_policy_unknown_host\n[fixture] bad/support_set_decl_mismatch\n[fixture] bad/support_set_role_invalid\n[fixture] bad/support_set_source_mismatch\n[fixture] bad/typed_grounding_contradiction_silent_drop\n[fixture] bad/v6_deliv_att_absolute_path\n[fixture] bad/v6_deliv_att_missing\n[fixture] bad/v6_deliv_stub_ext\n[fixture] bad/v6_deliv_stub_tmp_ext\n"
+    },
+    {
+      "name": "_smoke_deterministic_replay",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"ok\",\n  \"run_dir\": \"/tmp/rfo-det-replay-jpk6_416/run\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "_smoke_trajectory_v19",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"ok\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "coverage_meta",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"ok\",\n  \"report\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/coverage-report.json\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "release_zip_triad",
+      "rc": 0,
+      "stdout_tail": "{\"zip_path\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/release-artifacts/research-factory-orchestrator-19.1.0.zip\", \"manifest_path\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/release-artifacts/release-manifest.json\", \"zip_sha256\": \"67307bce69938a6b0c38fa54e8cc751d6617ab9031707cb0dbd3aecdae08ad35\"}",
+      "stderr_tail": ""
+    },
+    {
+      "name": "_smoke_clean_install",
+      "rc": 0,
+      "stdout_tail": "{\n  \"status\": \"ok\",\n  \"zip\": \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/release-artifacts/research-factory-orchestrator-19.1.0.zip\"\n}\n",
+      "stderr_tail": ""
     },
     {
       "name": "validate_v19_release_bad_suite",
@@ -93,21 +123,21 @@
       "rc": 0,
       "stdout_tail": "",
       "stderr_tail": "",
-      "run_dir": "/tmp/rfo-release-smoke-v18-w6ustiv5/runs/test_internal_audit_target_20260502T223102"
+      "run_dir": "/tmp/rfo-release-smoke-v18-y9r9qd4s/runs/test_internal_audit_target_20260505T171243"
     },
     {
       "name": "validate_logical_consistency",
       "rc": 0,
-      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"violations\": [],\n  \"run_dir\": \"/tmp/rfo-release-smoke-v18-w6ustiv5/runs/test_internal_audit_target_20260502T223102\"\n}\n",
+      "stdout_tail": "{\n  \"status\": \"pass\",\n  \"violations\": [],\n  \"run_dir\": \"/tmp/rfo-release-smoke-v18-y9r9qd4s/runs/test_internal_audit_target_20260505T171243\"\n}\n",
       "stderr_tail": "",
-      "run_dir": "/tmp/rfo-release-smoke-v18-w6ustiv5/runs/test_internal_audit_target_20260502T223102"
+      "run_dir": "/tmp/rfo-release-smoke-v18-y9r9qd4s/runs/test_internal_audit_target_20260505T171243"
     },
     {
       "name": "_diff_telegram_against_golden",
       "rc": 0,
       "stdout_tail": "{\"status\": \"skip\", \"reason\": \"contracts/telegram-golden absent (D1 skeleton)\"}\n",
       "stderr_tail": "",
-      "run_dir": "/tmp/rfo-release-smoke-v18-w6ustiv5/runs/test_internal_audit_target_20260502T223102"
+      "run_dir": "/tmp/rfo-release-smoke-v18-y9r9qd4s/runs/test_internal_audit_target_20260505T171243"
     },
     {
       "name": "validate_release_report",
@@ -116,10 +146,10 @@
       "stderr_tail": ""
     }
   ],
-  "transcript_sha256": "61d63097bd88fab34e5f44251e7e359ac094159dffa4be0e9534a18d52ac96b9",
-  "generated_at": "2026-05-02T22:31:08.538083Z",
+  "transcript_sha256": "7570058427fb288e569d007772b7ff2bebb1b30ae771dff0364a59c01c5e1c0d",
+  "generated_at": "2026-05-05T17:12:57.896089Z",
   "overall_verdict": "READY",
-  "human_summary": "REQUIRED_GATES 16/16 passed; steps 17/17 rc=0",
+  "human_summary": "REQUIRED_GATES 21/21 passed; steps 22/22 rc=0",
   "blocking_failures": [],
   "next_actions": []
 }

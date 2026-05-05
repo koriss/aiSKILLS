@@ -18,6 +18,15 @@ from runtime.util import PKG_REQUIRED, jl, jr, jw, now, read_json_or_none, skill
 V19_PROFILES = frozenset({"mvr", "full-rigor", "propaganda-io", "book-verification"})
 
 
+def _append_run_event(rd: Path, event: str, fields: dict[str, object]) -> None:
+    """Append one JSON line to ``run-events.jsonl`` (OTel-style event names; ADR-013)."""
+    row: dict[str, object] = {"event": event, "timestamp": now()}
+    row.update(fields)
+    p = rd / "run-events.jsonl"
+    with p.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
 def _ensure_rollback_stub_html(rd: Path) -> None:
     """Create physical stub so V6 DELIV-ATT-MISSING does not fire on rollback attachment."""
     from runtime.schema_defaults import ROLLBACK_STUB_HTML
@@ -46,6 +55,11 @@ def _fail_closed_rollback(rd: Path, errs: list) -> None:
     st = dict(st)
     st.update({"state": "validation_failed"})
     jw(rd / "runtime-status.json", st)
+    _append_run_event(
+        rd,
+        "rollback.triggered",
+        {"reason": "fail_closed_validation", "errors_count": len(errs)},
+    )
     jl(
         rd / "observability-events.jsonl",
         {"event_name": "validation.fail_closed_rollback", "status": "ok", "errors_count": len(errs), "timestamp": now()},
@@ -59,9 +73,17 @@ def validate(rd):
         root = skill_root()
         runner = root / "scripts" / "run_core_validators.py"
         errs: list = []
+        if os.environ.get("RFO_NO_NETWORK", "").strip().lower() in ("1", "true", "yes"):
+            dm0 = read_json_or_none(rd / "delivery-manifest.json")
+            if isinstance(dm0, dict) and dm0.get("real_external_delivery") is True:
+                errs.append(
+                    {
+                        "rfo_no_network": "delivery-manifest.json has real_external_delivery=true under RFO_NO_NETWORK",
+                    }
+                )
         if not runner.is_file():
             errs.append({"missing_runner": str(runner)})
-        else:
+        elif not errs:
             p = subprocess.run(
                 [sys.executable, "-S", str(runner), "--run-dir", str(rd), "--profile", prof],
                 cwd=str(root),

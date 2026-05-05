@@ -6,6 +6,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 def _emit(passed: bool, blocking: bool, issues: list, warnings: list, summary: str) -> None:
@@ -23,6 +24,22 @@ def _emit(passed: bool, blocking: bool, issues: list, warnings: list, summary: s
             ensure_ascii=False,
         )
     )
+
+
+def _read_profile_rule(rd: Path, key: str) -> str:
+    pup = rd / "validation-profile-used.json"
+    if not pup.is_file():
+        return "warn"
+    try:
+        prof = json.loads(pup.read_text(encoding="utf-8"))
+    except Exception:
+        return "warn"
+    if not isinstance(prof, dict):
+        return "warn"
+    br = prof.get("blocking_rules")
+    if not isinstance(br, dict):
+        return "warn"
+    return str(br.get(key) or "warn").lower()
 
 
 def _load(p: Path) -> dict | None:
@@ -58,6 +75,51 @@ def main() -> int:
         if not sid:
             continue
         sid_to_origin[sid] = str(s.get("canonical_origin_id") or s.get("url_normalized") or sid)
+    policy_path = srcp.parent / "source-policy.json"
+    if policy_path.is_file():
+        pol = _load(policy_path) or {}
+        per = pol.get("per_host") if isinstance(pol.get("per_host"), dict) else {}
+        mode = _read_profile_rule(rd, "source_policy_unknown")
+        sev = "error" if mode == "block" else "warning"
+        seen_hosts: set[str] = set()
+        for s in items:
+            u = str(s.get("url") or "")
+            try:
+                host = (urlparse(u).hostname or "").lower()
+            except Exception:
+                host = ""
+            if not host or host in seen_hosts:
+                continue
+            seen_hosts.add(host)
+            row = per.get(host)
+            if row is None:
+                hit = {
+                    "code": "SOURCE-POLICY-UNKNOWN",
+                    "severity": sev,
+                    "path": host,
+                    "detail": "host missing from source-policy.json per_host",
+                    "artifact": "source-policy.json",
+                }
+                if sev == "error":
+                    issues.append(hit)
+                else:
+                    warnings.append(hit)
+            elif isinstance(row, dict):
+                for fld in ("robots_status", "tos_status", "license_status"):
+                    if str(row.get(fld) or "").lower() == "unknown":
+                        hit = {
+                            "code": "SOURCE-POLICY-UNKNOWN",
+                            "severity": sev,
+                            "path": f"{host}.{fld}",
+                            "detail": f"{fld}=unknown",
+                            "artifact": "source-policy.json",
+                        }
+                        if sev == "error":
+                            issues.append(hit)
+                        else:
+                            warnings.append(hit)
+                        break
+
     cr = _load(rd / "claims-registry.json") or {}
     for cl in cr.get("claims") or []:
         if not isinstance(cl, dict):
@@ -96,7 +158,7 @@ def main() -> int:
                 }
             )
     blocking = bool(issues)
-    _emit(not blocking, blocking, issues, warnings, "V3 source quality")
+    _emit(not blocking, blocking, issues, warnings, "V3 source quality / policy")
     return 0 if not blocking else 1
 
 

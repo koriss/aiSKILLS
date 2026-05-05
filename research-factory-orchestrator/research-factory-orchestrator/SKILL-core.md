@@ -1,6 +1,6 @@
 # Research Factory Orchestrator — v19 core operator sheet
 
-**Version:** `19.0.4` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Lenses:** `docs/adr/ADR-009-architectural-lenses.md` · **Root patterns:** `docs/adr/ADR-010-root-patterns.md` · **Release transcript policy:** `docs/adr/ADR-011-release-validation-transcript.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Patch notes:** `docs/release-notes/v19.0.4.md` (current), `docs/release-notes/v19.0.3.md` (prior) · **Legacy full overlay:** `SKILL.md` (v18.x retained)
+**Version:** `19.1.0` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Multi-agent / replay:** `docs/adr/ADR-012-multi-agent-verification.md`, `docs/adr/ADR-013-replayable-evidence.md` · **Lenses:** `docs/adr/ADR-009-architectural-lenses.md` · **Root patterns:** `docs/adr/ADR-010-root-patterns.md` · **Release transcript policy:** `docs/adr/ADR-011-release-validation-transcript.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Release notes:** `docs/release-notes/v19.1.md` (current), `docs/release-notes/v19.0.4.md` (prior) · **Legacy full overlay:** `SKILL.md` (v18.x retained)
 
 **Deprecation:** subagent / durable work-unit / shard-ledger flows remain **legacy-only** (see `SKILL.md`, `references/work-unit-contract.md`). The v19 **core path** is profiles + V1–V6 + `run_core_validators.py`; do not mix undocumented subagent overrides with `RFO_V19_PROFILE` runs.
 
@@ -33,9 +33,9 @@ Every factual claim must trace through **primary_support** / **corroboration** r
 |----|------|
 | V1 `validate_artifact_schema` | Core JSON artifacts present, parseable, `schema_version` **v19.0**. |
 | V2 `validate_traceability` | Sacred path; evidence must list sources; graph consistent. |
-| V3 `validate_source_quality` | Independence via `canonical_origin_id`; KB ids not counted as factual evidence. |
+| V3 `validate_source_quality` | Independence via `canonical_origin_id`; KB ids not counted as factual evidence; optional `source-policy.json` per-host advisory (`SOURCE-POLICY-UNKNOWN`). |
 | V4 `validate_claim_status` | Status caps + lite contradictions when required + L0 unknown under full profile. |
-| V5 `validate_final_answer` | `overconfidence_risk.blocking` / `warnings` / `signals` from final gate. |
+| V5 `validate_final_answer` | `overconfidence_risk.blocking` / `warnings` / `signals` from final gate; **EXTERNAL-INSTRUCTION-SIGNAL** on evidence excerpts (advisory by default). |
 | V6 `validate_delivery_truth` | Manifest vs hashes; CLI ⇒ no real external delivery; path-leak checks. |
 
 ## Profile pick

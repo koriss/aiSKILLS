@@ -13,6 +13,8 @@ Single source of truth for `tests/fixtures/v19/{good,bad}/*` and `tests/fixtures
 - `contradictions-lite.json` (only when the scenario requires contradiction scan)
 - `report/full-report.html` (optional)
 - `observability-events.jsonl` (optional, if used by a scenario)
+- `judge-council.json` (optional v19.1+ advisory council artifact; validated by `schemas/core/judge-council.schema.json` when present)
+- `source-policy.json` (optional v19.1+ per-host policy companion to `sources.json`)
 - `expected.json` (**mandatory** for every fixture)
 
 ## Forbidden in `tests/fixtures/v19/{good,bad}/*` (generated outputs)

@@ -1,6 +1,6 @@
 {
-  "skill_version": "19.0.4",
-  "runtime_contract": "19.0.4",
-  "failure_corpus_index_version": "19.0.3",
+  "skill_version": "19.1.0",
+  "runtime_contract": "19.1.0",
+  "failure_corpus_index_version": "19.1.0",
   "notes": "Bump this file when changing enums/required/additionalProperties on critical schemas (schema-drift gate)."
 }

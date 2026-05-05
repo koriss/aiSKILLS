@@ -1,0 +1,37 @@
+{
+  "schema_version": "v19.0",
+  "scan": {
+    "contradiction_level": 0,
+    "contradiction_scan_performed": true,
+    "scan_scope": "L0",
+    "high_severity_detected": true
+  },
+  "entries": [
+    {
+      "entry_id": "ENT-SILENT",
+      "claim_id": "SILENT_DROP_CLAIM",
+      "conflict_type": "numeric_mismatch",
+      "source_a_id": "S1",
+      "source_b_id": "S2",
+      "severity": "high",
+      "resolution_status": "unresolved",
+      "effect_on_claim_status": "blocked",
+      "rubric_a": {
+        "source_role": "journalist",
+        "interest_alignment": "unknown",
+        "access_level": "secondary",
+        "verification_mode": "aggregation",
+        "independence": "high",
+        "corroboration": "independent"
+      },
+      "rubric_b": {
+        "source_role": "journalist",
+        "interest_alignment": "unknown",
+        "access_level": "secondary",
+        "verification_mode": "aggregation",
+        "independence": "high",
+        "corroboration": "independent"
+      }
+    }
+  ]
+}

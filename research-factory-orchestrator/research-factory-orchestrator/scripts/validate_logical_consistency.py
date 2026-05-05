@@ -39,8 +39,16 @@ def _inv_lc01(rd: Path) -> list[dict]:
     if rs.get("state") != "validation_failed":
         out.append(_err("LC01", "critical", "validation fail must set runtime-status to validation_failed", ["runtime-status.json", str(rs.get("state"))]))
     ds = str(dm.get("delivery_status", "")).lower()
-    if ds not in ("failed",):
-        out.append(_err("LC01", "critical", "validation fail must set delivery-manifest delivery_status failed", ["delivery-manifest.json", ds]))
+    # v19 rollback uses enum value ``validation_failed`` (schema); legacy LC01 expected ``failed`` only.
+    if ds not in ("failed", "validation_failed"):
+        out.append(
+            _err(
+                "LC01",
+                "critical",
+                "validation fail must set delivery-manifest delivery_status failed or validation_failed",
+                ["delivery-manifest.json", ds],
+            )
+        )
     if fg.get("passed") is True:
         out.append(_err("LC01", "critical", "validation fail must set final-answer-gate.passed false", ["final-answer-gate.json"]))
     return out

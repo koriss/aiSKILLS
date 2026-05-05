@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/schemas/v19/source-policy.schema.json",
+  "title": "SourcePolicy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "per_host"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "v19.1" },
+    "per_host": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "robots_status": { "type": "string" },
+          "tos_status": { "type": "string" },
+          "license_status": { "type": "string" },
+          "pii_risk": { "type": "string" },
+          "crawl_policy": { "type": "string" },
+          "checked_at": { "type": "string" }
+        }
+      }
+    }
+  }
+}

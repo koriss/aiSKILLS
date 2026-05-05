@@ -135,6 +135,82 @@ def _check_expected(
     return errs
 
 
+def _check_advisory(name: str, tr: dict[str, object] | None, exp: dict[str, object]) -> list[str]:
+    """Optional expected.json.advisory_checks — v19.1+ advisory channel assertions (non-blocking validators)."""
+    errs: list[str] = []
+    ac = exp.get("advisory_checks")
+    if not ac or not isinstance(ac, dict):
+        return errs
+    if not tr:
+        errs.append(f"{name}: advisory_checks present but no transcript")
+        return errs
+    ch = tr.get("advisory_channels")
+    if not isinstance(ch, dict):
+        errs.append(f"{name}: advisory_checks requires transcript.advisory_channels object")
+        return errs
+    bc = ac.get("blinded_checker")
+    if isinstance(bc, dict):
+        blk = ch.get("blinded_checker")
+        if not isinstance(blk, dict):
+            errs.append(f"{name}: missing advisory_channels.blinded_checker")
+            return errs
+        st = str(blk.get("status") or "")
+        if "expect_status" in bc and st != str(bc.get("expect_status")):
+            errs.append(f"{name}: blinded_checker want status={bc.get('expect_status')!r} got {st!r}")
+        want_mismatch = bc.get("expect_any_mismatch")
+        if want_mismatch is True and st != "mismatch":
+            errs.append(f"{name}: blinded_checker expected status mismatch got {st!r}")
+        if want_mismatch is False and st == "mismatch":
+            errs.append(f"{name}: blinded_checker unexpected status mismatch")
+    jc = ac.get("judge_council")
+    if isinstance(jc, dict):
+        jco = ch.get("judge_council")
+        if not isinstance(jco, dict):
+            errs.append(f"{name}: missing advisory_channels.judge_council")
+            return errs
+        al = str(jco.get("alignment") or "")
+        if "expect_alignment" in jc and al != str(jc.get("expect_alignment")):
+            errs.append(f"{name}: judge_council want alignment={jc.get('expect_alignment')!r} got {al!r}")
+    tg = ac.get("typed_grounding")
+    if isinstance(tg, dict):
+        tgo = ch.get("typed_grounding")
+        if not isinstance(tgo, dict):
+            errs.append(f"{name}: missing advisory_channels.typed_grounding")
+        else:
+            infl = tgo.get("typed_groundedness_inflation") if isinstance(tgo.get("typed_groundedness_inflation"), list) else []
+            if tg.get("expect_inflation") is True and not infl:
+                errs.append(f"{name}: typed_grounding expected typed_groundedness_inflation non-empty")
+            if tg.get("expect_inflation") is False and infl:
+                errs.append(f"{name}: typed_grounding unexpected inflation {infl!r}")
+    vfa = ac.get("validate_final_answer")
+    if isinstance(vfa, dict):
+        want = [str(c) for c in (vfa.get("expect_warning_codes") or []) if c]
+        if want:
+            vals = [v for v in (tr or {}).get("validators") or [] if isinstance(v, dict)]
+            v5 = next((v for v in vals if str(v.get("validator_id") or "") == "validate_final_answer"), None)
+            if not v5:
+                errs.append(f"{name}: missing validate_final_answer in transcript for advisory_checks")
+            else:
+                wc = {str(w.get("code")) for w in v5.get("warnings") or [] if isinstance(w, dict)}
+                for c in want:
+                    if c not in wc:
+                        errs.append(f"{name}: want warning code {c!r} on validate_final_answer have {sorted(wc)}")
+    vsq = ac.get("validate_source_quality")
+    if isinstance(vsq, dict):
+        want = [str(c) for c in (vsq.get("expect_warning_codes") or []) if c]
+        if want:
+            vals = [v for v in (tr or {}).get("validators") or [] if isinstance(v, dict)]
+            v3 = next((v for v in vals if str(v.get("validator_id") or "") == "validate_source_quality"), None)
+            if not v3:
+                errs.append(f"{name}: missing validate_source_quality in transcript for advisory_checks")
+            else:
+                wc = {str(w.get("code")) for w in v3.get("warnings") or [] if isinstance(w, dict)}
+                for c in want:
+                    if c not in wc:
+                        errs.append(f"{name}: want warning code {c!r} on validate_source_quality have {sorted(wc)}")
+    return errs
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json-report", action="store_true", help="Emit one JSON summary line to stdout")
@@ -173,6 +249,7 @@ def main() -> int:
             rc, tr, raw = _run_one(fixture_dir, py, profile)
             errs = _check_expected(name, rc, tr, exp, raw)
             all_errs.extend(errs)
+            all_errs.extend(_check_advisory(name, tr, exp))
             summary["fixtures"].append({"name": name, "rc": rc, "errors": errs})
     summary["ok"] = not all_errs
     if args.json_report:

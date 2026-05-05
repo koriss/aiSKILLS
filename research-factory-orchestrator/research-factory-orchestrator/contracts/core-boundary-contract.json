@@ -1,5 +1,5 @@
 {
-  "version": "19.0.4",
+  "version": "19.1.0",
   "description": "RFO runtime boundary: bounded modules under runtime/*_impl.py; CLI entry at runtime/cli.py; compatibility shim at runtime/impl.py.",
   "entrypoints": {
     "cli_main": "runtime/cli.py:main",
@@ -22,5 +22,13 @@
     "runtime/capability.py",
     "runtime/trace.py"
   ],
-  "rule": "New orchestration code targets runtime/*_impl.py and runtime/cli.py. Do not grow scripts/rfo_v18_core.py beyond the compatibility facade."
+  "rule": "New orchestration code targets runtime/*_impl.py and runtime/cli.py. Do not grow scripts/rfo_v18_core.py beyond the compatibility facade.",
+  "validation_artifacts": [
+    "validation/blinded-checker-report.json",
+    "validation/typed-grounding-report.json",
+    "validation/sacred-path-graph.json",
+    "judge-council.json (optional, schema schemas/core/judge-council.schema.json)",
+    "source-policy.json (optional advisory, schema schemas/core/source-policy.schema.json)",
+    "run-events.jsonl (append-only validator / rollback trace)"
+  ]
 }

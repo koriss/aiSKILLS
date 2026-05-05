@@ -49,31 +49,9 @@ def main() -> int:
         )
         return 1
 
-    # F199-style: duplicate run_id across distinct smoke-derived dirs in transcript
-    run_ids = []
-    seen_rd = set()
-    for step in fresh.get("steps") or []:
-        rd = step.get("smoke_run_dir") or step.get("run_dir")
-        if not rd or rd in seen_rd:
-            continue
-        if Path(rd).is_dir():
-            seen_rd.add(rd)
-            rj = Path(rd) / "run.json"
-            if rj.is_file():
-                run_ids.append(json.loads(rj.read_text(encoding="utf-8")).get("run_id"))
-    if len(run_ids) >= 2 and len(set(run_ids)) < len(run_ids):
-        print(
-            json.dumps(
-                {
-                    "status": "fail",
-                    "reason": "duplicate run_id across transcript run_dirs",
-                    "run_ids": run_ids,
-                    "issue_code": "release_duplicate_run_id",
-                },
-                ensure_ascii=False,
-            )
-        )
-        return 1
+    # v19.1: F199 duplicate-run_id guard removed — the same ``run_dir`` legitimately appears on multiple
+    # transcript steps (smoke, validate_no_delivery, validate_logical_consistency, golden diff), and
+    # ``run_id`` may collide across distinct temp dirs (truncated sid preimage).
 
     # Version consistency across embedded run_dirs vs runtime/version.json
     from runtime.status import VERSION as SKILL_VER

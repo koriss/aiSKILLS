@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -101,6 +102,14 @@ PKG_REQUIRED = [
 
 
 def now() -> str:
+    """Wall-clock UTC ISO8601 with ``Z`` suffix.
+
+    When ``RFO_FIXED_TIME`` is set to a non-empty string, that value is returned
+    verbatim (must already end with ``Z`` for transcript byte-identity tests).
+    """
+    fix = os.environ.get("RFO_FIXED_TIME", "").strip()
+    if fix:
+        return fix
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
@@ -150,7 +159,14 @@ def slug(s: str) -> str:
 
 
 def sid(prefix: str, *parts: object) -> str:
-    return prefix + "-" + hashlib.sha256("\n".join(map(str, parts)).encode()).hexdigest()[:12]
+    """Stable short id from ``prefix`` and ``parts`` (SHA-256 truncated).
+
+    ``RFO_DETERMINISTIC_IDS=1`` appends ``RFO_ID_SALT`` (default empty) to the hash
+    preimage so cross-suite runs can align id namespaces without changing call sites.
+    """
+    salt = os.environ.get("RFO_ID_SALT", "") if os.environ.get("RFO_DETERMINISTIC_IDS", "").strip().lower() in ("1", "true", "yes") else ""
+    raw = hashlib.sha256(("\n".join(map(str, parts)) + salt).encode()).hexdigest()
+    return prefix + "-" + raw[:12]
 
 
 def jw(p: Path | str, o: object) -> None:

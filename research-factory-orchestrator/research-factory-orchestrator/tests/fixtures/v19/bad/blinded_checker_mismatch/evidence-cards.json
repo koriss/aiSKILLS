@@ -1,0 +1,16 @@
+{
+  "schema_version": "v19.0",
+  "evidence_cards": [
+    {
+      "evidence_id": "E1",
+      "source_ids": ["S1"],
+      "evidence_type": "article",
+      "extracted_fact_or_excerpt": {
+        "kind": "excerpt",
+        "text": "The company reported revenue of 42 million USD for the first quarter."
+      },
+      "supports": "direct",
+      "confidence": "medium"
+    }
+  ]
+}

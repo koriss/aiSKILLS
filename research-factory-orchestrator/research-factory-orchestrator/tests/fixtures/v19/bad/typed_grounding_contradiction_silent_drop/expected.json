@@ -1,0 +1,13 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 0,
+  "expected_validator": "",
+  "expected_issue_codes": [],
+  "allow_prior_fail": false,
+  "rationale": "high-severity contradiction references claim absent from registry → typed grounding inflation (GSAR property 5)",
+  "advisory_checks": {
+    "typed_grounding": {
+      "expect_inflation": true
+    }
+  }
+}

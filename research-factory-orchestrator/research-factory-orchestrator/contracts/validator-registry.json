@@ -1,6 +1,6 @@
 {
-  "version": "19.0.4",
-  "description": "Curated validators for CI gating; v19.0.4: v19.0.3 baseline + release gates include CLI smoke (mvr) + corrupt-render rollback Reality Check + core-boundary-contract 19.0.4.",
+  "version": "19.1.0",
+  "description": "Curated validators for CI gating; v19.1.0: v19.0.4 baseline + deterministic/trajectory/clean-install/coverage-meta smokes + release zip triad + advisory verification scripts (ADR-012/013).",
   "validators": [
     {"id": "validate_skill", "path": "scripts/validate_skill.py", "phase": "l0"},
     {"id": "validate_delivery_manifest", "path": "scripts/validate_delivery_manifest.py", "phase": "l1"},
@@ -36,6 +36,10 @@
     {"id": "validate_quote_supports_claim", "path": "scripts/validate_quote_supports_claim.py", "phase": "l2"},
     {"id": "validate_no_delivery_after_validation_fail", "path": "scripts/validate_no_delivery_after_validation_fail.py", "phase": "post_validation"},
     {"id": "validate_no_local_paths_in_chat", "path": "scripts/validate_no_local_paths_in_chat.py", "phase": "post_validation"},
-    {"id": "validate_logical_consistency", "path": "scripts/validate_logical_consistency.py", "phase": "post_validation"}
+    {"id": "validate_logical_consistency", "path": "scripts/validate_logical_consistency.py", "phase": "post_validation"},
+    {"id": "validate_validator_coverage", "path": "scripts/validate_validator_coverage.py", "phase": "post_validation"},
+    {"id": "_smoke_deterministic_replay", "path": "scripts/_smoke_deterministic_replay.py", "phase": "post_validation"},
+    {"id": "_smoke_trajectory_v19", "path": "scripts/_smoke_trajectory_v19.py", "phase": "post_validation"},
+    {"id": "_smoke_clean_install", "path": "scripts/_smoke_clean_install.py", "phase": "post_validation"}
   ]
 }

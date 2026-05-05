@@ -1,0 +1,11 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 0,
+  "expected_validator": "",
+  "expected_issue_codes": [],
+  "allow_prior_fail": false,
+  "advisory_checks": {
+    "blinded_checker": { "expect_status": "mismatch", "expect_any_mismatch": true }
+  },
+  "rationale": "V1–V6 still pass on linkage; blinded checker flags 99 vs 42 (advisory-only)"
+}

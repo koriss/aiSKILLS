@@ -1,4 +1,6 @@
-# RFO operating discipline (v19.0.4)
+# RFO operating discipline (v19.1.0)
+
+0a. **v19.1.0 verification + replay** — advisory channels (`blinded_checker`, `typed_grounding`, optional `judge_council`) + `run-events.jsonl` trajectory contract; deterministic knobs `RFO_FIXED_TIME` / `RFO_DETERMINISTIC_IDS` / `RFO_NO_NETWORK`; release zip triad + clean-install + coverage-meta gates per `docs/adr/ADR-012-multi-agent-verification.md` and `docs/adr/ADR-013-replayable-evidence.md`; see `docs/release-notes/v19.1.md`.
 
 0. **v19.0.4 boundary refresh** — `contracts/core-boundary-contract.json` @ 19.0.4 documents `runtime/*_impl.py` + `runtime/cli.py` + deprecated `runtime/impl.py` shim; release `REQUIRED_GATES` adds `smoke_cli_v19` + `_smoke_corrupt_render`; proof transcript policy: `docs/adr/ADR-011-release-validation-transcript.md`; see `docs/release-notes/v19.0.4.md`.
 

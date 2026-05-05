@@ -1,21 +1,21 @@
 {
-  "schema_version": "v19.0",
-  "skill_version": "19.0.3",
-  "description": "v19.0.3 failure-code overlay index for core validators and fixture suites.",
+  "schema_version": "v19.1",
+  "skill_version": "19.1.0",
+  "failure_corpus_index_version": "19.1.0",
+  "description": "v19.1.0 failure-code overlay: core validators + advisory / smoke meta-codes.",
   "v19_fixture_roots": {
     "good": "tests/fixtures/v19/good/mvr_minimal_valid",
     "bad": "tests/fixtures/v19/bad",
     "release_bad": "tests/fixtures/v19/release_bad"
   },
   "codes": [
-    {"code":"V1-SCHEMA-SOURCES","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/evidence_source_id_unknown"},
     {"code":"V1-SCHEMA-EVIDENCE-CARDS","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/evidence_supports_invalid_shape"},
     {"code":"V1-SCHEMA-CLAIMS-REGISTRY","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/support_set_role_invalid"},
-    {"code":"V1-SCHEMA-DELIVERY-MANIFEST","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/v6_deliv_att_missing"},
-    {"code":"V1-SCHEMA-FINAL-ANSWER-GATE","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/final_answer_new_fact"},
-    {"code":"V1-SCHEMA-CONTRADICTIONS-LITE","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"bad/l0_scan_unknown_under_full_profile"},
+    {"code":"new_fact_without_claim_id","category":"final-answer","severity":"error","owner_validator":"validate_final_answer","reproduces_in_fixture":"bad/final_answer_new_fact"},
+    {"code":"l0_unknown_blocked","category":"status-cap","severity":"error","owner_validator":"validate_claim_status","reproduces_in_fixture":"bad/l0_scan_unknown_under_full_profile"},
     {"code":"V1-SCHEMA-UNSUPPORTED-KEYWORD","category":"schema","severity":"error","owner_validator":"validate_artifact_schema","reproduces_in_fixture":"n/a"},
 
+    {"code":"TRACE-SUP-SOURCE-001","category":"traceability","severity":"error","owner_validator":"validate_traceability","reproduces_in_fixture":"bad/evidence_source_id_unknown"},
     {"code":"TRACE-SUP-SOURCE-001","category":"traceability","severity":"error","owner_validator":"validate_traceability","reproduces_in_fixture":"bad/support_set_source_mismatch"},
     {"code":"TRACE-SUP-DECL-001","category":"traceability","severity":"error","owner_validator":"validate_traceability","reproduces_in_fixture":"bad/support_set_decl_mismatch"},
 
@@ -25,11 +25,20 @@
     {"code":"weak_evidence_type_for_primary_support","category":"status-cap","severity":"error","owner_validator":"validate_claim_status","reproduces_in_fixture":"bad/confirmed_from_social_only"},
     {"code":"claim_status_cap_exceeded","category":"status-cap","severity":"error","owner_validator":"validate_claim_status","reproduces_in_fixture":"bad/narrative_confirmed_exceeds_cap"},
 
-    {"code":"DELIV-ATT-MISSING","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_att_missing"},
+    {"code":"DELIV-ATT-EMPTY-WITH-CLAIM","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_att_missing"},
     {"code":"DELIV-ATT-ABSOLUTE-PATH","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_att_absolute_path"},
     {"code":"DELIV-STUB-EXT","category":"delivery","severity":"error","owner_validator":"validate_delivery_truth","reproduces_in_fixture":"bad/v6_deliv_stub_ext"},
 
     {"code":"FIXTURE-HYGIENE-VIOLATION","category":"fixture-suite","severity":"error","owner_validator":"validate_v19_fixture_suite","reproduces_in_fixture":"suite-level"},
-    {"code":"FIXTURE-MISSING-EXPECTED","category":"fixture-suite","severity":"error","owner_validator":"validate_v19_fixture_suite","reproduces_in_fixture":"suite-level"}
+    {"code":"FIXTURE-MISSING-EXPECTED","category":"fixture-suite","severity":"error","owner_validator":"validate_v19_fixture_suite","reproduces_in_fixture":"suite-level"},
+
+    {"code":"BLIND-CHECK-MISMATCH","category":"advisory","severity":"advisory","owner_validator":"run_blinded_checker.py","reproduces_in_fixture":"bad/blinded_checker_mismatch"},
+    {"code":"TYPED-GROUNDEDNESS-LOW","category":"advisory","severity":"advisory","owner_validator":"run_typed_grounding.py","reproduces_in_fixture":"n/a"},
+    {"code":"TYPED-GROUNDEDNESS-INFLATION","category":"advisory","severity":"advisory","owner_validator":"run_typed_grounding.py","reproduces_in_fixture":"bad/typed_grounding_contradiction_silent_drop"},
+    {"code":"EXTERNAL-INSTRUCTION-SIGNAL","category":"advisory","severity":"advisory","owner_validator":"validate_final_answer","reproduces_in_fixture":"bad/instruction_injection_in_evidence"},
+    {"code":"SOURCE-POLICY-UNKNOWN","category":"advisory","severity":"advisory","owner_validator":"validate_source_quality","reproduces_in_fixture":"bad/source_policy_unknown_host"},
+    {"code":"TRAJECTORY-SKIP","category":"smoke","severity":"advisory","owner_validator":"_smoke_trajectory_v19.py","reproduces_in_fixture":"n/a"},
+    {"code":"DETERMINISTIC-DRIFT","category":"smoke","severity":"advisory","owner_validator":"_smoke_deterministic_replay.py","reproduces_in_fixture":"n/a"},
+    {"code":"COVERAGE-GAP","category":"meta","severity":"advisory","owner_validator":"validate_validator_coverage.py","reproduces_in_fixture":"n/a"}
   ]
 }

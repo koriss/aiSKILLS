@@ -1,0 +1,15 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 0,
+  "expected_validator": "",
+  "expected_issue_codes": [],
+  "allow_prior_fail": false,
+  "rationale": "instruction-like text in evidence excerpt — EXTERNAL-INSTRUCTION-SIGNAL advisory on V5",
+  "advisory_checks": {
+    "validate_final_answer": {
+      "expect_warning_codes": [
+        "EXTERNAL-INSTRUCTION-SIGNAL"
+      ]
+    }
+  }
+}

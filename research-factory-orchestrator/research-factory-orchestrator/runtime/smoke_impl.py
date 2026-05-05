@@ -9,6 +9,7 @@ import tempfile
 from pathlib import Path
 
 from runtime.util import jr, jw, now, skill_root
+from runtime import util as util_mod
 from runtime.status import VERSION
 from runtime.validate_impl import V19_PROFILES
 
@@ -44,7 +45,13 @@ def cmd_smoke(a):
     rep = {"smoke_test_version": VERSION, "runs_root": str(root), "steps": [], "report_path": str(root / "smoke-test-report.json"), "started_at": now()}
 
     def step(name, cmd):
-        p = subprocess.run(cmd, capture_output=True, text=True, timeout=240, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        p = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=240,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+        )
         rep["steps"].append({"name": name, "returncode": p.returncode, "stdout": p.stdout[-4000:], "stderr": p.stderr[-4000:]})
         jw(rep["report_path"], rep)
         if p.returncode:
@@ -71,6 +78,17 @@ def cmd_smoke(a):
         jw(rep["report_path"], rep)
         if effective_rc:
             raise RuntimeError("validate failed")
+
+    def step_deterministic_smoke() -> None:
+        """When ``RFO_FIXED_TIME`` is set, ``now()`` must be stable across calls (ADR-013)."""
+        a = util_mod.now()
+        b = util_mod.now()
+        rep["steps"].append({"name": "deterministic_time_probe", "first": a, "second": b, "match": a == b})
+        jw(rep["report_path"], rep)
+        if os.environ.get("RFO_FIXED_TIME", "").strip() and a != b:
+            raise RuntimeError("deterministic_time_probe: RFO_FIXED_TIME set but now() unstable")
+
+    step_deterministic_smoke()
 
     core = str(skill_root() / "scripts" / "rfo_v18_core.py")
     py = sys.executable

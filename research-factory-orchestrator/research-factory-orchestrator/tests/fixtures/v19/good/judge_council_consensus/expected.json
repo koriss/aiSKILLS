@@ -1,0 +1,11 @@
+{
+  "expected_profile": "mvr",
+  "expected_rc": 0,
+  "expected_validator": "",
+  "expected_issue_codes": [],
+  "allow_prior_fail": false,
+  "advisory_checks": {
+    "judge_council": {"expect_alignment": "match"}
+  },
+  "rationale": "optional judge-council.json unanimous pass aligns with computed consensus"
+}

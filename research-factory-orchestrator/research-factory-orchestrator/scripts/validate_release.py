@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -35,6 +36,11 @@ REQUIRED_GATES: frozenset[str] = frozenset(
         "validate_no_delivery_after_validation_fail",
         "validate_logical_consistency",
         "validate_release_report",
+        "_smoke_deterministic_replay",
+        "_smoke_trajectory_v19",
+        "coverage_meta",
+        "release_zip_triad",
+        "_smoke_clean_install",
     }
 )
 
@@ -77,6 +83,98 @@ def _smoke_run_dir(smoke_root: Path) -> str:
         return ""
 
 
+class _SP:
+    """Synthetic subprocess result for inline release steps."""
+
+    __slots__ = ("returncode", "stdout", "stderr")
+
+    def __init__(self, rc: int, stdout: str = "", stderr: str = "") -> None:
+        self.returncode = rc
+        self.stdout = stdout
+        self.stderr = stderr
+
+
+_ZIP_SKIP_DIR_PARTS: frozenset[str] = frozenset(
+    {
+        ".git",
+        "__pycache__",
+        ".venv",
+        "venv",
+        "node_modules",
+        ".mypy_cache",
+        ".pytest_cache",
+        ".ruff_cache",
+        "release-artifacts",
+    }
+)
+
+
+def _build_release_zip_triad(root: Path) -> tuple[int, dict[str, object]]:
+    """Stdlib zip + sha256 sidecar + release-manifest.json under ``release-artifacts/``."""
+    extra: dict[str, object] = {}
+    try:
+        ver = str(json.loads((root / "runtime" / "version.json").read_text(encoding="utf-8")).get("skill_version", ""))
+    except Exception:
+        ver = "19.1.0"
+    art = root / "release-artifacts"
+    art.mkdir(parents=True, exist_ok=True)
+    zip_name = f"research-factory-orchestrator-{ver}.zip"
+    zip_path = art / zip_name
+    try:
+        if zip_path.is_file():
+            zip_path.unlink()
+    except OSError:
+        pass
+    try:
+        with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            for path in root.rglob("*"):
+                if not path.is_file():
+                    continue
+                try:
+                    rel = path.relative_to(root)
+                except ValueError:
+                    continue
+                if any(p in _ZIP_SKIP_DIR_PARTS for p in rel.parts):
+                    continue
+                zf.write(path, arcname=str(rel).replace("\\", "/"))
+    except OSError as e:
+        extra["error"] = str(e)
+        return 1, extra
+    data = zip_path.read_bytes()
+    sha = hashlib.sha256(data).hexdigest()
+    (zip_path.parent / f"{zip_path.name}.sha256").write_text(f"{sha}  {zip_path.name}\n", encoding="utf-8")
+    git_commit = ""
+    try:
+        gr = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=8,
+            env=os.environ,
+        )
+        if gr.returncode == 0:
+            git_commit = (gr.stdout or "").strip()
+    except Exception:
+        git_commit = ""
+    manifest: dict[str, object] = {
+        "schema_version": "v19.1",
+        "release_id": zip_name.replace(".zip", ""),
+        "skill_version": ver,
+        "git_commit": git_commit,
+        "created_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "builder": "validate_release",
+        "zip_name": zip_name,
+        "zip_sha256": sha,
+        "zip_bytes": len(data),
+        "excluded_patterns": sorted(_ZIP_SKIP_DIR_PARTS),
+        "zip_path": str(zip_path.relative_to(root)),
+    }
+    man_path = art / "release-manifest.json"
+    man_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    extra.update({"zip_path": str(zip_path), "manifest_path": str(man_path), "zip_sha256": sha})
+    return 0, extra
+
+
 def _v19_post_smoke_ok(run_dir: str) -> tuple[bool, str]:
     """J5: after smoke rc==0, either overall_pass or rollback closure."""
     if not run_dir or not Path(run_dir).is_dir():
@@ -107,6 +205,10 @@ def main() -> int:
     out_path = ROOT / "release-validation-transcript.json"
     steps: list[dict[str, object]] = []
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+    # Release smokes must produce distinct run_id values in the transcript (validate_release_report F199).
+    # Host-wide B1 knobs would otherwise collapse IDs across temp smoke roots; dedicated scripts set their own env.
+    for _drop in ("RFO_DETERMINISTIC_IDS", "RFO_FIXED_TIME", "RFO_NO_NETWORK", "RFO_ID_SALT"):
+        env.pop(_drop, None)
     py = sys.executable
 
     p = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_skill.py")], env, 600)
@@ -207,6 +309,26 @@ def main() -> int:
     pv19 = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_v19_fixture_suite.py"), "--verbose"], env, 600)
     steps.append(_step_tail("validate_v19_fixture_suite", pv19))
 
+    pdr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_deterministic_replay.py")], env, 600)
+    steps.append(_step_tail("_smoke_deterministic_replay", pdr))
+
+    ptrj = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_trajectory_v19.py")], env, 300)
+    steps.append(_step_tail("_smoke_trajectory_v19", ptrj))
+
+    pcov = _run(
+        py,
+        [py, "-S", str(ROOT / "scripts" / "validate_validator_coverage.py"), "--out", str(ROOT / "coverage-report.json")],
+        env,
+        600,
+    )
+    steps.append(_step_tail("coverage_meta", pcov))
+
+    z_rc, z_extra = _build_release_zip_triad(ROOT)
+    steps.append(_step_tail("release_zip_triad", _SP(z_rc, json.dumps(z_extra, ensure_ascii=False), "")))
+
+    pci = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_clean_install.py")], env, 900)
+    steps.append(_step_tail("_smoke_clean_install", pci))
+
     prb = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_v19_release_bad_suite.py")], env, 120)
     steps.append(_step_tail("validate_v19_release_bad_suite", prb))
 
@@ -232,7 +354,7 @@ def main() -> int:
         pass
 
     transcript: dict[str, object] = {
-        "version": skill_ver or "19.0.4",
+        "version": skill_ver or "19.1.0",
         "skill_version": skill_ver,
         "steps": steps,
         "transcript_sha256": "",

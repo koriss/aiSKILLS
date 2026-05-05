@@ -1,0 +1,8 @@
+{
+  "schema_version": "v19.1",
+  "per_host": {
+    "other.example": {
+      "robots_status": "allow"
+    }
+  }
+}

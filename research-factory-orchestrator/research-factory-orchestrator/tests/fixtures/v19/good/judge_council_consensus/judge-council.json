@@ -1,0 +1,9 @@
+{
+  "schema_version": "v19.1",
+  "judges": [
+    {"id": "j1", "kind": "deterministic", "verdict": "pass"},
+    {"id": "j2", "kind": "deterministic", "verdict": "pass"},
+    {"id": "j3", "kind": "deterministic", "verdict": "pass"}
+  ],
+  "consensus": {"method": "unanimous", "reached": true}
+}

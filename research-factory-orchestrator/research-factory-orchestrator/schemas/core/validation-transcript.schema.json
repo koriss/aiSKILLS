@@ -30,7 +30,12 @@
     },
     "overall_pass": { "type": "boolean" },
     "all_passed": { "type": "boolean" },
-    "created_at": { "type": "string", "minLength": 1 }
+    "created_at": { "type": "string", "minLength": 1 },
+    "advisory_channels": {
+      "type": "object",
+      "description": "Optional v19.1+ advisory outputs (blinded checker, typed grounding, etc.); never affects schema_version const v19.0.",
+      "additionalProperties": true
+    }
   },
   "$defs": {
     "validatorResult": {

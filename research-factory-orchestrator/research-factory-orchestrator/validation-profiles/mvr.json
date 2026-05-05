@@ -45,7 +45,9 @@
     "local_path_leak_user_visible": "block",
     "external_delivery_claim_without_real_proof": "block",
     "kb_match_used_as_evidence": "block",
-    "l0_contradiction_scan_not_performed_for_profile": "warn"
+    "l0_contradiction_scan_not_performed_for_profile": "warn",
+    "external_instruction_in_evidence": "warn",
+    "source_policy_unknown": "warn"
   },
   "auto_escalation": {
     "enabled": true,

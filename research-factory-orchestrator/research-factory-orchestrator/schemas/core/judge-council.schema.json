@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/schemas/v19/judge-council.schema.json",
+  "title": "JudgeCouncil",
+  "description": "Optional v19.1 advisory council verdict artifact (deterministic/heuristic judges only in core).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "judges", "consensus"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "v19.1" },
+    "judges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "verdict"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": {
+            "type": "string",
+            "enum": ["deterministic", "heuristic", "llm"]
+          },
+          "verdict": {
+            "type": "string",
+            "enum": ["pass", "fail", "abstain"]
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "consensus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "reached"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["majority", "unanimous", "weighted"]
+        },
+        "reached": { "type": "boolean" },
+        "weights": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      }
+    }
+  }
+}

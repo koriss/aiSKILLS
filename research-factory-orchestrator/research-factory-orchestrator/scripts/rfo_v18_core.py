@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility facade: RFO v18 CLI. Implementation lives in runtime/impl.py via runtime.cli."""
+"""Deprecated compatibility shim — use ``scripts/rfo_runtime_core.py`` (RFO v19.2.0)."""
 from __future__ import annotations
 
 import sys

@@ -2,12 +2,16 @@
 from pathlib import Path
 import ast, json, re, shutil, sys
 sys.dont_write_bytecode = True
-VERSION = "19.1.0"
+VERSION = "19.2.0"
 root = Path(__file__).resolve().parents[1]
 errors = []
-required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs"]
+required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs","tools"]
 required_scripts = [
-    "rfo_v18_core.py", "interface_runtime_adapter.py", "runtime_job_worker.py", "outbox_delivery_worker.py",
+    "rfo_runtime_core.py",
+    "rfo_v18_core.py",
+    "interface_runtime_adapter.py",
+    "runtime_job_worker.py",
+    "outbox_delivery_worker.py",
     "run_research_factory.py", "build_research_package.py", "run_validator_dag.py", "smoke_test_interface_runtime.py",
     "validate_skill_discovery_frontmatter.py", "validate_package_claim_requires_zip.py", "validate_gate_consistency.py",
     "validate_late_results_protocol.py", "validate_v18_runtime_artifacts.py", "validate_all_python_ast.py", "validate_no_pycache.py",
@@ -31,6 +35,10 @@ required_scripts = [
     "validate_core_modularization_contract.py", "validate_no_html_string_gate_as_primary_contract.py",
     "validate_idempotent_outbox.py", "validate_cross_model_judge.py",
     "validate_release.py", "validate_release_report.py",
+    "validate_active_contract_versions.py", "validate_profile_policies_present.py",
+    "validate_no_scaffolds_in_production.py", "validate_no_failed_validation_in_production.py",
+    "validate_advisory_fixture_suite.py", "_smoke_v19_2_integration.py", "_smoke_v19_2_phase5_matrix.py",
+    "_smoke_telegram_agent_interface.py", "_smoke_telegram_real_send.py", "verify_openclaw_run.py",
     "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
     "validate_logical_consistency.py",
     "run_core_validators.py",
@@ -38,7 +46,7 @@ required_scripts = [
     "migrate_validator_invocation.py",
 ]
 required_providers = ["providers/telegram/telegram_delivery_adapter.py", "providers/cli/cli_delivery_adapter.py", "providers/webhook/webhook_delivery_adapter.py"]
-required_contracts = ["artifact-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "runtime-contract-v18.3.2.json", "core-boundary-contract.json"]
+required_contracts = ["artifact-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "legacy/runtime-contract-v18.3.2.json", "core-boundary-contract.json"]
 required_policies = ["source-quality-policy.json", "source-acquisition-policy.json", "execution-reliability-policy.json", "context-acquisition-policy.json"]
 required_schemas = ["claim-source-fit.schema.json", "claim-evidence-weight.schema.json", "source-acquisition-result.schema.json", "source-gap.schema.json", "model-call.schema.json", "worker-lease.schema.json", "execution-reliability-gate.schema.json", "context-load-request.schema.json", "read-ledger.schema.json", "context-claim-gate.schema.json", "active-context-manifest.schema.json", "attachment-ledger.schema.json", "user-visible-delivery.schema.json", "run-mode-classification.schema.json", "manual-fallback-ledger.schema.json"]
 for d in required_dirs:

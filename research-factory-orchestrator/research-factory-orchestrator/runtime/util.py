@@ -98,6 +98,10 @@ PKG_REQUIRED = [
     "artifact-manifest.json",
     "provenance-manifest.json",
     "validation-transcript.json",
+    # v19.2.0 dual-layout: root mirrors for collectors / coverage (see runtime/collector.py).
+    "sources.json",
+    "collection-result.json",
+    "collection-coverage-result.json",
 ]
 
 

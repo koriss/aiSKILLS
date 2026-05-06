@@ -1,21 +1,33 @@
 {
-  "version": "18.5.0",
+  "version": "19.2.0",
   "levels": {
     "SEV1": {
       "description": "Data integrity / security / cryptographic failure",
-      "examples": ["schema_drift", "prompt_injection_detected", "host_bypass_detected"]
+      "examples": [
+        "schema_drift",
+        "prompt_injection_detected",
+        "host_bypass_detected"
+      ]
     },
     "SEV2": {
       "description": "Delivery failed on paid / contractual path",
-      "examples": ["delivery_failed", "publish_blocked_after_payment"]
+      "examples": [
+        "delivery_failed",
+        "publish_blocked_after_payment"
+      ]
     },
     "SEV3": {
       "description": "Stub presented as sent",
-      "examples": ["stub_delivery_claimed_external"]
+      "examples": [
+        "stub_delivery_claimed_external"
+      ]
     },
     "SEV4": {
       "description": "Cosmetic / copy issues",
-      "examples": ["markdown_typo"]
+      "examples": [
+        "markdown_typo"
+      ]
     }
-  }
+  },
+  "inherits_from": "18.5.0"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "16.0.0-execution-integrity-lifecycle-hardening",
+  "version": "19.2.0",
   "commands": {
     "/research_factory_orchestrator": {
       "entrypoint": "scripts/run_research_factory.py",
@@ -19,5 +19,6 @@
         "single_worker"
       ]
     }
-  }
+  },
+  "inherits_from": "16.0.0-execution-integrity-lifecycle-hardening"
 }

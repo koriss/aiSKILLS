@@ -154,7 +154,7 @@ def main() -> int:
             gaps.append(f"corpus code {code!r} not observed in transcript for repro {repro!r} (have {sorted(obs)!r})")
 
     report: dict[str, object] = {
-        "schema_version": "v19.1",
+        "schema_version": "v19.2",
         "validators_with_bad_fixture": sorted(bad_validators),
         "good_fixture_ok": good_ok,
         "gaps": gaps,

@@ -1,0 +1,15 @@
+{
+  "schema_version": "v19.0",
+  "version": "19.2.0",
+  "title": "Production capability whitelist (feature-truth-matrix)",
+  "summary": "When run.json mode is production, every listed feature key must not be scaffold, stub, or missing.",
+  "required_features": [
+    "real_external_search_workers",
+    "wave_graph_collector",
+    "analytical_memo",
+    "io_propaganda_check",
+    "provider_telegram_real_send",
+    "external_collector",
+    "work_unit_executor"
+  ]
+}

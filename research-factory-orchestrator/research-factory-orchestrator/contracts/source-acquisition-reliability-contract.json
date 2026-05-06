@@ -1,5 +1,5 @@
 {
-  "version": "18.3.1-context-integrity-hotfix",
+  "version": "19.2.0",
   "required_artifacts": [
     "acquisition/source-candidates.json",
     "acquisition/source-acquisition-plan.json",
@@ -15,5 +15,6 @@
     "auth_required_not_used_as_verified",
     "fetch_timeout_does_not_kill_entire_run",
     "archive_copy_has_timestamp"
-  ]
+  ],
+  "inherits_from": "18.3.1-context-integrity-hotfix"
 }

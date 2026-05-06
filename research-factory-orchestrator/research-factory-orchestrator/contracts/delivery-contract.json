@@ -1,5 +1,5 @@
 {
-  "version": "15.0.0-runtime-contract-enforcement",
+  "version": "19.2.0",
   "required_attachments": [
     "standalone_html",
     "research_package"
@@ -9,5 +9,6 @@
     "no_tables": true,
     "no_local_paths": true,
     "no_raw_sensitive_contacts": true
-  }
+  },
+  "inherits_from": "15.0.0-runtime-contract-enforcement"
 }

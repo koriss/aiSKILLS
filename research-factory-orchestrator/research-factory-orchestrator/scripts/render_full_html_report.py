@@ -6,6 +6,11 @@ renderer that prevents fake runtime/proof claims by embedding actual run-dir JSO
 """
 from pathlib import Path
 import argparse, html, json, sys
+
+_SKILL_ROOT = Path(__file__).resolve().parents[1]
+if str(_SKILL_ROOT) not in sys.path:
+    sys.path.insert(0, str(_SKILL_ROOT))
+from runtime.legacy_compat import read_fag_gates
 from datetime import datetime, timezone
 
 RENDERER_VERSION = "17.3.0-report-proof-integrity-hardening"
@@ -92,6 +97,11 @@ def main():
     def esc(x):
         return html.escape("" if x is None else str(x))
 
+    _gchecks, _ = read_fag_gates(gate if isinstance(gate, dict) else {})
+    _prov = ((_gchecks.get("provider_ack_gate") or {}) if isinstance(_gchecks, dict) else {}).get("status")
+    _ext = ((_gchecks.get("external_delivery_gate") or {}) if isinstance(_gchecks, dict) else {}).get("status")
+    _fin = ((_gchecks.get("final_user_claim_gate") or {}) if isinstance(_gchecks, dict) else {}).get("status")
+
     sections = []
     sections.append(f"""
 <section id="run-metadata">
@@ -139,9 +149,9 @@ def main():
 <table>
 <tr><th>Field</th><th>Value</th></tr>
 <tr><td>delivery_status</td><td>{esc(delivery.get('delivery_status'))}</td></tr>
-<tr><td>provider_ack_gate</td><td>{esc((gate.get('gates') or {}).get('provider_ack_gate', {}).get('status'))}</td></tr>
-<tr><td>external_delivery_gate</td><td>{esc((gate.get('gates') or {}).get('external_delivery_gate', {}).get('status'))}</td></tr>
-<tr><td>final_user_claim_gate</td><td>{esc((gate.get('gates') or {}).get('final_user_claim_gate', {}).get('status'))}</td></tr>
+<tr><td>provider_ack_gate</td><td>{esc(_prov)}</td></tr>
+<tr><td>external_delivery_gate</td><td>{esc(_ext)}</td></tr>
+<tr><td>final_user_claim_gate</td><td>{esc(_fin)}</td></tr>
 <tr><td>final-answer-gate passed</td><td>{esc(gate.get('passed'))}</td></tr>
 </table>
 </section>

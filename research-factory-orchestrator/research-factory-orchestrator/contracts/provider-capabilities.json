@@ -1,5 +1,5 @@
 {
-  "version": "18.3.2",
+  "version": "19.2.0",
   "description": "Per-provider delivery semantics for outbox acks and gate truth.",
   "providers": {
     "cli": {
@@ -30,5 +30,6 @@
       "requires_provider_ack_id": false,
       "requires_attachment_id": false
     }
-  }
+  },
+  "inherits_from": "18.3.2"
 }

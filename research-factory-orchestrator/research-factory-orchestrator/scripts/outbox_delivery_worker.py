@@ -10,7 +10,7 @@ from pathlib import Path
 def recompute_delivery_state(run_dir: Path) -> None:
     run_dir = Path(run_dir).resolve()
     runs_root = run_dir.parent.parent
-    core = Path(__file__).resolve().parent / "rfo_v18_core.py"
+    core = Path(__file__).resolve().parent / "rfo_runtime_core.py"
     r = subprocess.run(
         [sys.executable, "-S", str(core), "outbox", "--runs-root", str(runs_root)],
         capture_output=True,
@@ -25,7 +25,7 @@ def recompute_delivery_state(run_dir: Path) -> None:
 
 
 def main() -> None:
-    core = Path(__file__).resolve().parent / "rfo_v18_core.py"
+    core = Path(__file__).resolve().parent / "rfo_runtime_core.py"
     sys.argv = [str(core), "outbox"] + sys.argv[1:]
     import runpy
 

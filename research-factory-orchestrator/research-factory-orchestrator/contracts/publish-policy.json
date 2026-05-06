@@ -1,7 +1,11 @@
 {
-  "version": "18.3.2",
+  "version": "19.2.0",
   "description": "Truth table for user-visible / billable publish vs run_mode, gates, acks, manual_fallback.",
-  "smoke_like_modes": ["smoke", "seed", "stub_test"],
+  "smoke_like_modes": [
+    "smoke",
+    "seed",
+    "stub_test"
+  ],
   "block_external_publish_on_smoke_like": true,
   "block_on_manual_fallback": true,
   "require_all_required_acks": true,
@@ -10,5 +14,6 @@
   "notes": [
     "external=true means real_external_delivery proven on all required acks (non-stub provider path).",
     "stub_only runs may still complete provider_ack_gate but must not set publish_allowed when require_external_delivery_for_user_publish is true."
-  ]
+  ],
+  "inherits_from": "18.3.2"
 }

@@ -1,6 +1,6 @@
 {
   "contract": "context-acquisition-integrity",
-  "version": "18.3.1-context-integrity-hotfix",
+  "version": "19.2.0",
   "required_artifacts": [
     "context/file-inventory.json",
     "context/context-budget-analysis.json",
@@ -39,5 +39,6 @@
     "F287",
     "F288",
     "F289"
-  ]
+  ],
+  "inherits_from": "18.3.1-context-integrity-hotfix"
 }

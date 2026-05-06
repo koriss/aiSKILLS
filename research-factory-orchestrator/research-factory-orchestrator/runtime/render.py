@@ -55,7 +55,7 @@ def claims(task):
             "source_ids": ["SRC-SEED-001"],
             "evidence_card_ids": ["EV-SEED-001"],
             "last_checked_at": now(),
-            "origin": "v18_seed_runtime",
+            "origin": "seed_runtime",
             "sensitive": False,
         }
         if s == "confirmed":
@@ -113,22 +113,76 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
         {"wave_id": "W2", "status": "completed", "purpose": "linked entities, contradictions and pivots"},
         {"wave_id": "W3", "status": "planned", "purpose": "source laundering, amplification and weak-tie expansion"},
     ]
-    jw(
-        rd / "claims/claims-registry.json",
-        {
-            "run_id": run_id,
-            "taxonomy_version": "v18",
-            "allowed_statuses": STATUSES,
-            "relevance_aware_factuality_score": 0.85,
-            "deflection_rate_when_no_grounding": 0.55,
-            "claims": cs,
-        },
-    )
+    claims_registry_subdir = {
+        "run_id": run_id,
+        "taxonomy_version": "v19.2",
+        "allowed_statuses": STATUSES,
+        "claims": cs,
+    }
+    jw(rd / "claims/claims-registry.json", claims_registry_subdir)
+    _status_to_v19 = {
+        "confirmed": "reported_claim",
+        "probable": "inferred_assessment",
+        "disputed": "disputed",
+        "doubtful": "insufficient_evidence",
+        "false": "contradicted",
+        "unsupported": "lead_only",
+    }
+
+    def _conf_to_v19(c: float) -> str:
+        if c >= 0.85:
+            return "high"
+        if c >= 0.6:
+            return "medium"
+        if c > 0:
+            return "low"
+        return "unknown"
+
+    claims_registry_root = {
+        "schema_version": "v19.0",
+        "claims": [
+            {
+                "claim_id": c["claim_id"],
+                "claim_text": c["text"],
+                "claim_type": "seed_decomposition",
+                "status": _status_to_v19.get(c["status"], "lead_only"),
+                "confidence": _conf_to_v19(c.get("confidence", 0)),
+                "evidence_card_ids": list(c.get("evidence_card_ids") or ["EV-SEED-001"]),
+                "support_set": [
+                    {
+                        "source_id": (c.get("source_ids") or ["SRC-SEED-001"])[0],
+                        "evidence_card_id": (c.get("evidence_card_ids") or ["EV-SEED-001"])[0],
+                        "role_for_claim": "lead",
+                    }
+                ],
+            }
+            for c in cs
+        ],
+    }
+    jw(rd / "claims-registry.json", claims_registry_root)
     jw(
         rd / "claims/claim-status-ledger.json",
         {"run_id": run_id, "claim_status_counts": {s: sum(1 for c in cs if c["status"] == s) for s in STATUSES}, "updated_at": now()},
     )
     jw(rd / "sources/sources.json", {"run_id": run_id, "sources": sources})
+    sources_root = {
+        "schema_version": "v19.0",
+        "sources": [
+            {
+                "source_id": "SRC-SEED-001",
+                "title": "User-provided seed / reply context",
+                "canonical_origin_id": "seed:user_input",
+                "source_role": "unknown",
+                "access_level": "primary_access",
+                "interest_alignment": "unknown",
+                "verification_mode": "testimony",
+                "independence": "unknown",
+                "citation_eligible": False,
+                "corroboration_type": "unknown",
+            }
+        ],
+    }
+    jw(rd / "sources.json", sources_root)
     jw(
         rd / "sources/source-quality.json",
         {"run_id": run_id, "quality_summary": {"primary_input": 1}, "warnings": ["External search workers are not executed in deterministic smoke mode."]},
@@ -136,6 +190,23 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
     jw(rd / "sources/source-conflict-matrix.json", {"run_id": run_id, "conflicts": []})
     jw(rd / "sources/source-laundering.json", {"run_id": run_id, "laundering_signals": []})
     jw(rd / "evidence/evidence-cards.json", {"run_id": run_id, "evidence_cards": ev})
+    evidence_root = {
+        "schema_version": "v19.0",
+        "evidence_cards": [
+            {
+                "evidence_id": "EV-SEED-001",
+                "source_ids": ["SRC-SEED-001"],
+                "claim_ids": [c["claim_id"] for c in cs],
+                "extracted_fact_or_excerpt": {
+                    "kind": "excerpt",
+                    "text": (seed_excerpt or "seed")[:1000] or "seed",
+                },
+                "supports": "contextual",
+                "confidence": "low",
+            }
+        ],
+    }
+    jw(rd / "evidence-cards.json", evidence_root)
     jw(
         rd / "raw-evidence/raw-evidence-vault.json",
         {"run_id": run_id, "items": [{"raw_id": "RAW-SEED-001", "kind": "user_seed", "content_preview": task[:500], "sensitivity": "internal_use"}]},
@@ -210,7 +281,7 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
         "narrative_map": [{"narrative_id": "N001", "claim": "Seed material may contain persuasion/framing elements", "confidence": "medium"}],
         "method_matches": [
             {"method": "fear appeal / risk amplification", "confidence": "low", "note": "Requires textual evidence review in full run."},
-            {"method": "source laundering check required", "confidence": "medium", "note": "v18 always opens this branch for public/political/media claims."},
+            {"method": "source laundering check required", "confidence": "medium", "note": "Runtime always opens this branch for public/political/media claims."},
         ],
         "source_laundering_map": [],
         "amplification_chain": [],
@@ -330,5 +401,24 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
     )
     tw(
         rd / "report/full-report.html",
-        f"<!DOCTYPE html><html lang='ru'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>RFO v18 Internal Analysis Report</title><style>body{{font-family:Arial,sans-serif;line-height:1.55;max-width:1100px;margin:0 auto;padding:24px;background:#f7f7f9;color:#111}}section{{background:white;border:1px solid #ddd;border-radius:10px;padding:18px;margin:14px 0}}h1,h2{{color:#17213a}}</style></head><body>{banner_html}<h1>Research Factory Orchestrator v18 — Internal Analysis/Audit Report</h1><p>run_id: {html.escape(run_id)} · job_id: {html.escape(job_id)}</p>{body}<section><h2>Embedded proof blocks</h2><p>HTML не является proof сам по себе; валидаторы сверяют blocks с файлами run-dir.</p>{scripts}</section></body></html>",
+        f"<!DOCTYPE html><html lang='ru'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>RFO v19 Internal Analysis Report</title><style>body{{font-family:Arial,sans-serif;line-height:1.55;max-width:1100px;margin:0 auto;padding:24px;background:#f7f7f9;color:#111}}section{{background:white;border:1px solid #ddd;border-radius:10px;padding:18px;margin:14px 0}}h1,h2{{color:#17213a}}</style></head><body>{banner_html}<h1>Research Factory Orchestrator v19 — Internal Analysis/Audit Report</h1><p>run_id: {html.escape(run_id)} · job_id: {html.escape(job_id)} · skill_version: {html.escape(VERSION)}</p>{body}<section><h2>Embedded proof blocks</h2><p>HTML не является proof сам по себе; валидаторы сверяют blocks с файлами run-dir.</p>{scripts}</section></body></html>",
     )
+    artifact_layout = {
+        "schema_version": "v19.0",
+        "run_id": run_id,
+        "skill_version": VERSION,
+        "layout": "v19-dual",
+        "root_artifacts": [
+            "claims-registry.json",
+            "sources.json",
+            "evidence-cards.json",
+            "report/full-report.html",
+        ],
+        "subdir_artifacts": [
+            "claims/claims-registry.json",
+            "sources/sources.json",
+            "evidence/evidence-cards.json",
+        ],
+        "note": "v19 runtime emits canonical copies at run-dir root for V1 and keeps subdir copies for legacy package builders.",
+    }
+    jw(rd / "artifact-layout.json", artifact_layout)

@@ -1,0 +1,18 @@
+{
+  "contract_id": "collection-coverage-contract",
+  "version": "v19.2.0",
+  "title": "Collection coverage thresholds (RFO v19.2.0)",
+  "summary": "Single source of truth for the minimum_independent_sources threshold consumed by both the strict-profile coverage validator and the runtime collector cap (RFO_MAX_EXTERNAL_SOURCES default).",
+  "minimum_independent_sources_default": 20,
+  "minimum_independent_sources_by_profile": {
+    "mvr": 0,
+    "source-packet": 0,
+    "full-rigor": 20,
+    "strict": 20
+  },
+  "rationale": "Phase 4C P0-1 closure: previous default RFO_MAX_EXTERNAL_SOURCES=8 made strict coverage unreachable even with a working backend. Cap now defaults to the contract minimum so strict coverage is operator-attainable out of the box.",
+  "linked_validators": [
+    "validate_collection_coverage",
+    "validate_seed_only_truth"
+  ]
+}

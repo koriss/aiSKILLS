@@ -1,5 +1,5 @@
 {
-  "version": "18.3.2",
+  "version": "19.2.0",
   "invariants": [
     "prepared_not_sent",
     "rendered_not_delivered",
@@ -17,5 +17,6 @@
     "sent above",
     "resent",
     "delivered"
-  ]
+  ],
+  "inherits_from": "18.3.2"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "17.1.0-runtime-lifecycle-hardening",
+  "version": "19.2.0",
   "required_paths": [
     "run.json",
     "entrypoint-proof.json",
@@ -32,5 +32,6 @@
   "forbidden_package_types_as_final": [
     "worker_bundle",
     "subagent_outputs_only"
-  ]
+  ],
+  "inherits_from": "17.1.0-runtime-lifecycle-hardening"
 }

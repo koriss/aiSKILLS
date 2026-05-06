@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator for OpenClaw: v19.1.0 core line (schemas/core, V1–V6 validators, run_core_validators + profiles + advisory verification / replay smokes). Condensed operator sheet in SKILL-core.md.
+description: Research Factory Orchestrator for OpenClaw: v19.2.0 core line (schemas/core, V1–V6 validators, run_core_validators + profiles + runtime truth + Telegram trace smokes + advisory verification / replay smokes). Condensed operator sheet in SKILL-core.md.
 license: internal
 metadata:
-  version: "19.1.0"
+  version: "19.2.0"
   package: openclaw-research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -16,12 +16,13 @@ metadata:
     - "19.0.3"
     - "19.0.4"
     - "19.1.0"
-  release: "19.1.0"
+    - "19.2.0"
+  release: "19.2.0"
 ---
 
 **Primary operator path:** use **`SKILL-core.md`** for v19 operation. This `SKILL.md` is retained as full reference text.
 
-**v19.1.0:** See `SKILL-core.md`, `docs/adr/ADR-012-multi-agent-verification.md`, `docs/adr/ADR-013-replayable-evidence.md`, `docs/release-notes/v19.1.md` (current) + `docs/adr/ADR-009-architectural-lenses.md`, `docs/adr/ADR-010-root-patterns.md`, `docs/adr/ADR-011-release-validation-transcript.md`, and prior `docs/release-notes/v19.0.4.md` … `v19.0.0-phase1.md`. v19 core path: `RFO_V19_PROFILE=mvr` (or full-rigor, propaganda-io, book-verification) + `scripts/run_core_validators.py`.
+**v19.2.0:** See `SKILL-core.md`, `docs/release-notes/v19.2.md` (current), `docs/adr/ADR-015-runtime-truth-restoration.md`, `docs/adr/ADR-014-telegram-operator-control-plane.md`, plus v19.1 docs: `docs/adr/ADR-012-multi-agent-verification.md`, `docs/adr/ADR-013-replayable-evidence.md`, `docs/release-notes/v19.1.md`, `docs/adr/ADR-009-architectural-lenses.md`, `docs/adr/ADR-010-root-patterns.md`, `docs/adr/ADR-011-release-validation-transcript.md`. v19 core path: `RFO_V19_PROFILE=mvr` (or full-rigor, propaganda-io, book-verification) + `scripts/run_core_validators.py`.
 
 ## HOW TO OPERATE THIS SKILL — mandatory operator protocol
 

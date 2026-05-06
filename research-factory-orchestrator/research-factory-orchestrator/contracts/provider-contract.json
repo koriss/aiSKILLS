@@ -1,5 +1,5 @@
 {
-  "version": "17.1.0-runtime-lifecycle-hardening",
+  "version": "19.2.0",
   "providers": {
     "cli": {
       "adapter": "providers/cli/cli_delivery_adapter.py",
@@ -73,5 +73,6 @@
       "default_mode": "stub",
       "stub_delivery_must_be_explicit": true
     }
-  }
+  },
+  "inherits_from": "17.1.0-runtime-lifecycle-hardening"
 }

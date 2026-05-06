@@ -1,5 +1,5 @@
 {
-  "version": "15.0.0-runtime-contract-enforcement",
+  "version": "19.2.0",
   "states": [
     "created",
     "compiled",
@@ -21,5 +21,6 @@
     "delivered",
     "failed",
     "cancelled"
-  ]
+  ],
+  "inherits_from": "15.0.0-runtime-contract-enforcement"
 }

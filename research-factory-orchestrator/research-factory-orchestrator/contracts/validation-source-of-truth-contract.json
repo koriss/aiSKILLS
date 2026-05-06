@@ -1,5 +1,5 @@
 {
-  "version": "18.3.2",
+  "version": "19.2.0",
   "machine_readable_artifacts_are_primary": true,
   "html_string_heuristics_allowed_for": [
     "render hygiene warnings"
@@ -9,5 +9,6 @@
     "delivery truth",
     "run mode truth",
     "source support truth"
-  ]
+  ],
+  "inherits_from": "18.3.2"
 }

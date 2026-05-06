@@ -1,5 +1,5 @@
 {
-  "version": "18.3.2",
+  "version": "19.2.0",
   "manual_fallback_allowed": true,
   "must_be_labelled": "manual preliminary draft, not validated RFO output",
   "rfo_claim_allowed_only_if": [
@@ -7,5 +7,6 @@
     "evidence/source ledgers updated",
     "source quality updated",
     "final gates rerun"
-  ]
+  ],
+  "inherits_from": "18.3.2"
 }

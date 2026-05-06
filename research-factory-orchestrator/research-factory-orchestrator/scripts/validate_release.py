@@ -2,13 +2,16 @@
 """Unified release verification: skill validation, schema drift, smokes, failure corpus, B4 self-attestation (v19.0.4+)."""
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
+import types
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -41,6 +44,15 @@ REQUIRED_GATES: frozenset[str] = frozenset(
         "coverage_meta",
         "release_zip_triad",
         "_smoke_clean_install",
+        "_smoke_v19_2_integration",
+        "_smoke_v19_2_phase5_matrix",
+        "validate_active_contract_versions",
+        "validate_profile_policies_present",
+        "validate_advisory_fixture_suite",
+        "validate_no_scaffolds_in_production",
+        "validate_no_failed_validation_in_production",
+        "_smoke_telegram_agent_interface",
+        "_smoke_telegram_real_send",
     }
 )
 
@@ -58,6 +70,31 @@ def _sha256_obj(o: object) -> str:
 
 
 def _run(py: str, cmd: list[str], env: dict[str, str], timeout: int = 600) -> subprocess.CompletedProcess[str]:
+    """T8.1: ``Popen(start_new_session=True)`` + ``killpg`` on timeout to avoid zombie children."""
+    if os.name != "nt":
+        proc = subprocess.Popen(
+            cmd,
+            cwd=str(ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            env=env,
+            start_new_session=True,
+        )
+        try:
+            out, err = proc.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            with contextlib.suppress(ProcessLookupError):
+                os.killpg(proc.pid, signal.SIGKILL)
+            out, err = proc.communicate(timeout=120)
+            fake = types.SimpleNamespace(
+                returncode=124,
+                stdout=out or "",
+                stderr=(err or "") + "\n[validate_release: subprocess killed after timeout]\n",
+            )
+            return fake  # type: ignore[return-value]
+        fake2 = types.SimpleNamespace(returncode=proc.returncode, stdout=out or "", stderr=err or "")
+        return fake2  # type: ignore[return-value]
     return subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True, timeout=timeout, env=env)
 
 
@@ -115,7 +152,7 @@ def _build_release_zip_triad(root: Path) -> tuple[int, dict[str, object]]:
     try:
         ver = str(json.loads((root / "runtime" / "version.json").read_text(encoding="utf-8")).get("skill_version", ""))
     except Exception:
-        ver = "19.1.0"
+        ver = "19.2.0"
     art = root / "release-artifacts"
     art.mkdir(parents=True, exist_ok=True)
     zip_name = f"research-factory-orchestrator-{ver}.zip"
@@ -157,7 +194,7 @@ def _build_release_zip_triad(root: Path) -> tuple[int, dict[str, object]]:
     except Exception:
         git_commit = ""
     manifest: dict[str, object] = {
-        "schema_version": "v19.1",
+        "schema_version": "v19.2",
         "release_id": zip_name.replace(".zip", ""),
         "skill_version": ver,
         "git_commit": git_commit,
@@ -232,12 +269,13 @@ def main() -> int:
     pcr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_corrupt_render.py")], env, 300)
     steps.append(_step_tail("_smoke_corrupt_render", pcr))
 
-    core = str(ROOT / "scripts" / "rfo_v18_core.py")
+    core = str(ROOT / "scripts" / "rfo_runtime_core.py")
     smoke_root_v18 = Path(tempfile.mkdtemp(prefix="rfo-release-smoke-v18-"))
+    env_v18 = {**env, "RFO_V19_PROFILE": "mvr"}
     p3 = _run(
         py,
         [py, "-S", core, "smoke", "--runs-root", str(smoke_root_v18), "--provider", "telegram", "--interface", "telegram"],
-        env,
+        env_v18,
         600,
     )
     smoke_report_v18 = smoke_root_v18 / "smoke-test-report.json"
@@ -315,6 +353,27 @@ def main() -> int:
     ptrj = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_trajectory_v19.py")], env, 300)
     steps.append(_step_tail("_smoke_trajectory_v19", ptrj))
 
+    pv192 = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_v19_2_integration.py")], env, 900)
+    steps.append(_step_tail("_smoke_v19_2_integration", pv192))
+
+    pv192b = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_v19_2_phase5_matrix.py")], env, 900)
+    steps.append(_step_tail("_smoke_v19_2_phase5_matrix", pv192b))
+
+    pact = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_active_contract_versions.py")], env, 120)
+    steps.append(_step_tail("validate_active_contract_versions", pact))
+
+    ppol = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_profile_policies_present.py")], env, 120)
+    steps.append(_step_tail("validate_profile_policies_present", ppol))
+
+    padv = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_advisory_fixture_suite.py")], env, 120)
+    steps.append(_step_tail("validate_advisory_fixture_suite", padv))
+
+    ptag = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_telegram_agent_interface.py")], env, 120)
+    steps.append(_step_tail("_smoke_telegram_agent_interface", ptag))
+
+    ptgr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_telegram_real_send.py")], env, 600)
+    steps.append(_step_tail("_smoke_telegram_real_send", ptgr))
+
     pcov = _run(
         py,
         [py, "-S", str(ROOT / "scripts" / "validate_validator_coverage.py"), "--out", str(ROOT / "coverage-report.json")],
@@ -333,6 +392,7 @@ def main() -> int:
     steps.append(_step_tail("validate_v19_release_bad_suite", prb))
 
     run_dir_nd = run_dir_v18 or run_dir_v19 or run_dir_cli
+    run_dir_prodish = run_dir_v19 or run_dir_cli or run_dir_nd
     nd_rc = 1
     if run_dir_nd and Path(run_dir_nd).is_dir():
         p5 = _run(
@@ -345,6 +405,24 @@ def main() -> int:
         steps.append(_step_tail("validate_no_delivery_after_validation_fail", p5, {"run_dir": run_dir_nd}))
     else:
         steps.append({"name": "validate_no_delivery_after_validation_fail", "rc": 1, "error": "no smoke run_dir"})
+    if run_dir_prodish and Path(run_dir_prodish).is_dir():
+        pns = _run(
+            py,
+            [py, "-S", str(ROOT / "scripts" / "validate_no_scaffolds_in_production.py"), "--run-dir", run_dir_prodish],
+            env,
+            120,
+        )
+        steps.append(_step_tail("validate_no_scaffolds_in_production", pns, {"run_dir": run_dir_prodish}))
+        pnf = _run(
+            py,
+            [py, "-S", str(ROOT / "scripts" / "validate_no_failed_validation_in_production.py"), "--run-dir", run_dir_prodish],
+            env,
+            120,
+        )
+        steps.append(_step_tail("validate_no_failed_validation_in_production", pnf, {"run_dir": run_dir_prodish}))
+    else:
+        steps.append({"name": "validate_no_scaffolds_in_production", "rc": 1, "error": "no smoke run_dir"})
+        steps.append({"name": "validate_no_failed_validation_in_production", "rc": 1, "error": "no smoke run_dir"})
 
     skill_ver = ""
     try:
@@ -354,7 +432,7 @@ def main() -> int:
         pass
 
     transcript: dict[str, object] = {
-        "version": skill_ver or "19.1.0",
+        "version": skill_ver or "19.2.0",
         "skill_version": skill_ver,
         "steps": steps,
         "transcript_sha256": "",

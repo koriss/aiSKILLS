@@ -178,10 +178,16 @@ def cmd_outbox(a):
         provider_pass = not missing and not any_failed and len(acks) == len(req)
         external = provider_pass and any_real and not any_stub
         stub_only = provider_pass and any_stub and not any_real
-        cr = jr(rd / "claims" / "claims-registry.json", {})
-        raf = float(cr.get("relevance_aware_factuality_score", 0.85))
-        dfl = float(cr.get("deflection_rate_when_no_grounding", 0.5))
-        citation_grounding_gate_pass = raf >= 0.7 and dfl >= 0.3
+        # Citation grounding will be properly produced by validator in Phase 4B/4C.
+        # Until then, omit RAF/DFL from artifacts (no magic literals leak into v19 surface).
+        citation_grounding_path = rd / "citation-grounding-result.json"
+        if citation_grounding_path.is_file():
+            cgr = jr(citation_grounding_path, {})
+            citation_grounding_gate_pass = bool(cgr.get("passed"))
+            cg_extra = {k: cgr[k] for k in ("relevance_aware_factuality_score", "deflection_rate_when_no_grounding") if k in cgr}
+        else:
+            citation_grounding_gate_pass = False
+            cg_extra = {}
         gates = {
             "provider_ack_gate": {"status": "pass" if provider_pass else "fail", "passed": provider_pass},
             "external_delivery_gate": {"status": "pass" if external else ("stub_only" if stub_only else "fail"), "passed": external, "stub_only": stub_only},
@@ -194,8 +200,8 @@ def cmd_outbox(a):
             "citation_grounding_gate": {
                 "status": "pass" if citation_grounding_gate_pass else "fail",
                 "passed": citation_grounding_gate_pass,
-                "relevance_aware_factuality_score": raf,
-                "deflection_rate_when_no_grounding": dfl,
+                "validator_result_present": citation_grounding_path.is_file(),
+                **cg_extra,
             },
         }
         run = jr(rd / "run.json")
@@ -203,9 +209,17 @@ def cmd_outbox(a):
         dstat = "failed" if any_failed else ("delivered" if external else ("stub_delivered" if stub_only else "partial_delivery"))
         fg_passed = bool(external and pub_ok and not any_failed and citation_grounding_gate_pass)
         fg_status = "fail" if any_failed or not citation_grounding_gate_pass else ("pass" if external else ("stub_only" if stub_only else "fail"))
+        prev_dm = jr(rd / "delivery-manifest.json", {})
+        provider_caps_snapshot = {}
+        for e in req:
+            ack = jr(rd / "delivery-acks" / f"{e}.json", {})
+            prov = ack.get("provider")
+            if prov and prov not in provider_caps_snapshot:
+                provider_caps_snapshot[prov] = _load_provider_caps(prov)
         jw(
             rd / "delivery-manifest.json",
             {
+                "schema_version": "v19.0",
                 "run_id": run.get("run_id"),
                 "job_id": run.get("job_id"),
                 "delivery_status": dstat,
@@ -213,12 +227,16 @@ def cmd_outbox(a):
                 "required_acks_missing": missing,
                 "stub_delivery": any_stub,
                 "real_external_delivery": external,
+                "artifact_ready_claim_allowed": (rd / "package/research-package.zip").exists() and not any_failed,
+                "external_delivery_claim_allowed": (external and pub_ok) and not any_failed,
+                "stub_delivery_disclosure_required": (any_stub or stub_only) and not external,
+                "provider_capability_snapshot": provider_caps_snapshot,
                 "delivery_claim_allowed": (external and pub_ok) and not any_failed,
                 "publish_allowed": pub_ok and not any_failed,
                 "publish_reason": pub_reason if not any_failed else "failed_ack_present",
-                "attachments": [],
+                "attachments": prev_dm.get("attachments") if isinstance(prev_dm.get("attachments"), list) else [],
                 "local_paths_exposed": False,
-                "created_at": now(),
+                "created_at": prev_dm.get("created_at") or now(),
                 "gates": gates,
                 "updated_at": now(),
             },
@@ -233,19 +251,63 @@ def cmd_outbox(a):
                 "all_required_externally_sent": external,
             },
         )
+        prev_fg = jr(rd / "final-answer-gate.json", {})
+        contradiction_echo = prev_fg.get("contradiction_echo") if isinstance(prev_fg.get("contradiction_echo"), dict) else {
+            "contradiction_level": 0,
+            "contradiction_scan_performed": False,
+            "scan_scope": "none",
+            "high_severity_detected": False,
+        }
+        overconfidence_risk = prev_fg.get("overconfidence_risk") if isinstance(prev_fg.get("overconfidence_risk"), dict) else {
+            "blocking": [],
+            "warnings": [],
+            "signals": {},
+        }
         jw(
             rd / "final-answer-gate.json",
             {
+                "schema_version": "v19.0",
                 "run_id": run.get("run_id"),
-                "job_id": run.get("job_id"),
                 "passed": fg_passed,
                 "status": fg_status,
-                "gates": gates,
-                "relevance_aware_factuality_score": raf,
-                "deflection_rate_when_no_grounding": dfl,
+                "checks": gates,
+                "contradiction_echo": contradiction_echo,
+                "overconfidence_risk": overconfidence_risk,
+                "created_at": prev_fg.get("created_at") or now(),
                 "updated_at": now(),
             },
         )
+        jw(
+            rd / "outbox-finalization.json",
+            {
+                "schema_version": "v19.0",
+                "run_id": run.get("run_id"),
+                "job_id": run.get("job_id"),
+                "finalized": True,
+                "delivery_status": dstat,
+                "publish_allowed": pub_ok and not any_failed,
+                "external_delivery": external,
+                "stub_only": stub_only,
+                "any_failed_acks": any_failed,
+                "citation_grounding_passed": citation_grounding_gate_pass,
+                "finalized_at": now(),
+            },
+        )
+        acks_check = [jr(rd / "delivery-acks" / f"{e}.json", {}) for e in req if (rd / "delivery-acks" / f"{e}.json").is_file()]
+        ftm_path = rd / "feature-truth-matrix.json"
+        if ftm_path.is_file() and any(
+            isinstance(x, dict)
+            and str(x.get("provider")) == "telegram"
+            and x.get("real_external_delivery") is True
+            and x.get("stub_delivery") is False
+            for x in acks_check
+        ):
+            ftm = jr(ftm_path, {})
+            feats = dict(ftm.get("features") or {})
+            feats["provider_telegram_real_send"] = "implemented_real_send"
+            ftm["features"] = feats
+            ftm["telegram_real_delivery_observed_at"] = now()
+            jw(ftm_path, ftm)
         st = jr(rd / "runtime-status.json")
         st.update({"state": dstat})
         jw(rd / "runtime-status.json", st)

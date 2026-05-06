@@ -18,6 +18,19 @@
     "snippet_only_never_confirmed": true,
     "kb_usage_mode": "off"
   },
+  "source_policy": {
+    "minimum_independent_sources": 30,
+    "snippet_citation_scope": "full",
+    "allow_seed_only_evidence": false,
+    "external_collection_required": true,
+    "web_search_required": true,
+    "source_packet_required": false
+  },
+  "delivery_policy": {
+    "required_for_production": true,
+    "allow_stub": false,
+    "external_delivery_required": true
+  },
   "claim_type_policies": {
     "narrative_claim": { "max_status": "reported_claim", "min_support_tier": "high" },
     "scientific_empirical": { "max_status": "confirmed_fact", "min_support_tier": "high" },

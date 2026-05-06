@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import zipfile
@@ -11,6 +12,18 @@ from runtime.render import render_all
 from runtime.schema_defaults import minimal_valid
 from runtime.status import VERSION
 from runtime.util import CHAT, PKG_REQUIRED, REQ_EVENTS, jw, jr, jl, now, sha, sid, skill_root, tw
+from runtime.citation_grounding import evaluate as _evaluate_citation_grounding
+from runtime.collector import collect as _collect_external
+from runtime.coverage import reconcile as _reconcile_coverage
+from runtime.profiles import resolve as _resolve_profile
+from runtime.work_units import execute_pending as _execute_work_units
+
+
+def _emit_event(rd: Path, name: str, payload: dict) -> None:
+    """Emit canonical v19 event (no v18.* prefix). Optionally dual-emit legacy name when RFO_LEGACY_EVENT_NAMES=1."""
+    jl(rd / "observability-events.jsonl", {"event_name": name, **payload})
+    if os.environ.get("RFO_LEGACY_EVENT_NAMES") == "1" and not name.startswith("v18."):
+        jl(rd / "observability-events.jsonl", {"event_name": "v18." + name, **payload, "legacy_alias": True})
 
 
 def _normalize_run_mode(requested: str) -> tuple[str, str | None]:
@@ -107,11 +120,9 @@ def cmd_run(a):
             overrides={
                 "run_id": run_id,
                 "job_id": job_id,
-                "command_id": cmd_id,
                 "delivery_status": "not_queued",
                 "stub_delivery": False,
                 "stub_delivery_disclosure_required": False,
-                "gates": {},
             },
         ),
     )
@@ -127,7 +138,7 @@ def cmd_run(a):
             },
         ),
     )
-    jl(rd / "observability-events.jsonl", {"event_name": "v18.runtime.started", "run_id": run_id, "job_id": job_id, "timestamp": now()})
+    _emit_event(rd, "runtime.started", {"run_id": run_id, "job_id": job_id, "timestamp": now()})
     feature_matrix = {
         "run_id": run_id,
         "version": VERSION,
@@ -160,7 +171,60 @@ def cmd_run(a):
         jw(rd / f"work-queue/pending/{wu['wu_id']}.json", {**wu, "run_id": run_id, "job_id": job_id, "target_fingerprint": ctx_base["target_fingerprint"]})
     tw(rd / "late-results-ledger.jsonl", json.dumps({"event_name": "late_window_opened", "run_id": run_id, "policy": "timeout results require accept/reject + amendment before finality", "timestamp": now()}, ensure_ascii=False) + "\n")
     tw(rd / "amendment-ledger.jsonl", json.dumps({"event_name": "no_amendments_yet", "run_id": run_id, "timestamp": now()}, ensure_ascii=False) + "\n")
+    profile_env = os.environ.get("RFO_RUN_PROFILE")
+    try:
+        profile_name, profile_policy = _resolve_profile(profile_env)
+    except ValueError as exc:
+        print(json.dumps({"error": "run_profile_resolution", "detail": str(exc)}, ensure_ascii=False))
+        raise SystemExit(2) from exc
+    jw(rd / "run-profile.json", {"schema_version": "v19.0", "profile": profile_name, "policy": profile_policy, "resolved_from": profile_env or "default", "resolved_at": now()})
+    wu_summary = _execute_work_units(rd, run_id, job_id, mode=mode, profile=profile_name)
+    feature_matrix["features"]["wave_graph_collector"] = (
+        "implemented_seed_only" if wu_summary["total_terminal"] == wu_summary["total_planned"] else "scaffold"
+    )
+    feature_matrix["features"]["work_unit_executor"] = "implemented"
+    feature_matrix["work_unit_summary"] = {
+        "total_planned": wu_summary["total_planned"],
+        "total_terminal": wu_summary["total_terminal"],
+        "by_status": wu_summary["by_status"],
+        "any_collected_sources": wu_summary["any_collected_sources"],
+    }
+    jw(rd / "feature-truth-matrix.json", feature_matrix)
     render_all(rd, a.task, run_id, job_id, cmd_id, a.provider)
+    collection_summary = _collect_external(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    coverage_result = _reconcile_coverage(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    citation_result = _evaluate_citation_grounding(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    feature_matrix["features"]["external_collector"] = (
+        "implemented_real" if collection_summary.get("external_web_search_executed") or collection_summary.get("external_source_packet_loaded") else "implemented_seed_only"
+    )
+    feature_matrix["collection_summary"] = {
+        "backend": collection_summary.get("backend"),
+        "external_web_search_executed": collection_summary.get("external_web_search_executed", False),
+        "external_source_packet_loaded": collection_summary.get("external_source_packet_loaded", False),
+        "web_search_attempted": collection_summary.get("web_search_attempted", False),
+        "web_search_succeeded": collection_summary.get("web_search_succeeded", False),
+        "web_search_result_count": collection_summary.get("web_search_result_count", 0),
+        "external_source_count": collection_summary.get("external_source_count", 0),
+        "seed_only": collection_summary.get("seed_only", True),
+    }
+    feature_matrix["coverage_summary"] = {
+        "profile": coverage_result.get("profile"),
+        "minimum_independent_sources": coverage_result.get("minimum_independent_sources"),
+        "observed_independent_sources": coverage_result.get("observed_independent_sources"),
+        "source_coverage_passed": coverage_result.get("source_coverage_passed"),
+        "collection_completed": coverage_result.get("collection_completed"),
+        "passed": coverage_result.get("passed"),
+        "failure_reasons": coverage_result.get("failure_reasons", []),
+    }
+    feature_matrix["citation_grounding_summary"] = {
+        "raf": citation_result.get("relevance_aware_factuality_score"),
+        "dfl": citation_result.get("deflection_rate_when_no_grounding"),
+        "passed": citation_result.get("passed"),
+        "requires_grounding": citation_result.get("requires_grounding"),
+        "claims_total": citation_result.get("claims_total"),
+        "claims_grounded": citation_result.get("claims_grounded"),
+    }
+    jw(rd / "feature-truth-matrix.json", feature_matrix)
     required = [
         "run.json",
         "entrypoint-proof.json",
@@ -176,7 +240,7 @@ def cmd_run(a):
     jw(rd / "artifact-manifest.json", {"run_id": run_id, "artifacts": [{"path": r, "exists": (rd / r).exists()} for r in required], "generated_at": now()})
     jw(rd / "provenance-manifest.json", {"run_id": run_id, "entrypoint": "scripts/run_research_factory.py", "proof_model": "artifact-backed"})
     jw(rd / "validation-transcript.json", {"run_id": run_id, "status": "pending_dag"})
-    jl(rd / "observability-events.jsonl", {"event_name": "v18.runtime.completed", "run_id": run_id, "job_id": job_id, "timestamp": now()})
+    _emit_event(rd, "runtime.completed", {"run_id": run_id, "job_id": job_id, "timestamp": now()})
     from runtime.handoff import emit_handoff
     from runtime.trace import append_trace_line
 
@@ -248,7 +312,7 @@ def cmd_worker(a):
     if a.dry_run:
         lease.unlink(missing_ok=True)
         raise SystemExit("dry-run intentionally does not execute runtime")
-    entry = str(skill_root() / "scripts" / "rfo_v18_core.py")
+    entry = str(skill_root() / "scripts" / "rfo_runtime_core.py")
     worker_mode = getattr(a, "mode", None) or job.get("run_mode") or "research"
     p = subprocess.run(
         [
@@ -287,7 +351,7 @@ def cmd_worker(a):
             "run_id": job["run_id"],
             "job_id": job["job_id"],
             "required_events": REQ_EVENTS,
-            "policy": "v18 3+1 chat blocks plus html/package files",
+            "policy": "v19 3+1 chat blocks plus html/package files",
             "dedup_window_hours": 72,
             "dlq_after_retries": 8,
             "max_retry_backoff_ms": 60000,

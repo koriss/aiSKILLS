@@ -1,0 +1,17 @@
+{
+  "run_id": "RUN-9c6be6060bb6",
+  "sources": [
+    {
+      "source_id": "SRC-SEED-001",
+      "title": "User-provided seed / reply context",
+      "canonical_origin_id": "seed:user_input",
+      "source_role": "unknown",
+      "access_level": "primary_access",
+      "interest_alignment": "unknown",
+      "verification_mode": "testimony",
+      "independence": "unknown",
+      "citation_eligible": false,
+      "corroboration_type": "unknown"
+    }
+  ]
+}

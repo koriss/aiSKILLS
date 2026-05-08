@@ -1,0 +1,9 @@
+{
+  "run_id": "RUN-08bbee6fe342",
+  "deviations": [],
+  "search_quality": {
+    "external_search_executed": false,
+    "note": "No external evidence collected; runtime structure only."
+  },
+  "tool_failures": []
+}

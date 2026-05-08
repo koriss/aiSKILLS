@@ -1,0 +1,22 @@
+{
+  "run_id": "RUN-db193bc0ad1c",
+  "claims": [],
+  "sources": [],
+  "evidence_cards": [],
+  "memo": {
+    "run_id": "RUN-db193bc0ad1c",
+    "title": "Аналитическая записка",
+    "executive_summary": "No external evidence collected; runtime structure only.",
+    "confidence": "low",
+    "data_gaps": [
+      "external evidence missing"
+    ]
+  },
+  "io_summary": {
+    "run_id": "RUN-db193bc0ad1c",
+    "method_matches": [],
+    "narrative_map": [],
+    "verdict": "insufficient_external_data"
+  },
+  "generated_at": "2026-05-08T15:17:43Z"
+}

@@ -1,0 +1,25 @@
+{
+  "run_id": "RUN-1d96f965b695",
+  "deviations": [],
+  "model_compliance": {
+    "plain_subagent_used": false,
+    "entrypoint_used": true,
+    "new_facts_in_summary": false
+  },
+  "search_quality": {
+    "external_search_executed": false,
+    "reason": "deterministic smoke mode"
+  },
+  "hallucination_risk": [
+    {
+      "area": "seed-only claims",
+      "risk": "medium",
+      "mitigation": "mark seed/probable until external evidence collected"
+    }
+  ],
+  "tool_failures": [],
+  "recommendations": [
+    "Run external search workers in production mode.",
+    "Keep evidence debt visible."
+  ]
+}

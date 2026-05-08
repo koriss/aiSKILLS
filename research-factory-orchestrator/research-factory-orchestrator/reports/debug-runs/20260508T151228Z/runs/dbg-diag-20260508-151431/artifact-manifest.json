@@ -1,0 +1,46 @@
+{
+  "run_id": "RUN-9c6be6060bb6",
+  "artifacts": [
+    {
+      "path": "run.json",
+      "exists": true
+    },
+    {
+      "path": "entrypoint-proof.json",
+      "exists": true
+    },
+    {
+      "path": "runtime-status.json",
+      "exists": true
+    },
+    {
+      "path": "report/full-report.html",
+      "exists": true
+    },
+    {
+      "path": "report/analytical-memo.json",
+      "exists": true
+    },
+    {
+      "path": "report/factual-dossier.json",
+      "exists": true
+    },
+    {
+      "path": "report/io-propaganda-check.json",
+      "exists": true
+    },
+    {
+      "path": "self-audit/runtime-self-audit.json",
+      "exists": true
+    },
+    {
+      "path": "graph/wave-plan.json",
+      "exists": true
+    },
+    {
+      "path": "chat/chat-message-plan.json",
+      "exists": true
+    }
+  ],
+  "generated_at": "2026-05-08T15:14:31Z"
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-14501b8f6dad",
+  "job_id": "JOB-9e714d746aac",
+  "mode": "research",
+  "profile": "full-rigor",
+  "executor_completed_at": "2026-05-08T15:14:31Z",
+  "total_planned": 12,
+  "total_terminal": 12,
+  "by_status": {
+    "completed_no_sources": 12
+  },
+  "any_collected_sources": false,
+  "work_units": [
+    {
+      "wu_id": "WU-001",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-002",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-003",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-004",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-005",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-006",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-007",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-008",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-009",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-010",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-011",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    },
+    {
+      "wu_id": "WU-012",
+      "status": "completed_no_sources",
+      "sources_collected": 0
+    }
+  ]
+}

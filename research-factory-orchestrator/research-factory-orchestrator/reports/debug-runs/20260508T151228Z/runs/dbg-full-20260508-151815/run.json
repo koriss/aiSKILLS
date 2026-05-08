@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN-d74cf32fa0cd",
+  "job_id": "JOB-859ec11ea648",
+  "command_id": "CMD-859ec11ea648",
+  "run_label": "dbg-full-20260508-151815",
+  "task": "Рефлексивное управление Россией через медиа с марта 2026",
+  "mode": "research",
+  "requested_mode": "research",
+  "version": "19.3",
+  "started_at": "2026-05-08T15:18:15Z",
+  "provider": "cli",
+  "interface": "direct_runtime",
+  "skill_root": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator",
+  "runs_root": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs",
+  "consent": {
+    "tmp_runs_root": true,
+    "env_chat_id": false
+  },
+  "rfo_allow_tmp_runs_root": true,
+  "rfo_allow_env_chat_id": false
+}

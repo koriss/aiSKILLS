@@ -1,0 +1,19 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-14501b8f6dad",
+  "job_id": "JOB-9e714d746aac",
+  "profile": "full-rigor",
+  "claims_total": 5,
+  "claims_grounded": 5,
+  "claims_no_support": 0,
+  "relevance_aware_factuality_score": 0.15,
+  "deflection_rate_when_no_grounding": 0.0,
+  "raf_threshold": 0.65,
+  "dfl_threshold": 0.25,
+  "passed": false,
+  "requires_grounding": true,
+  "failure_reasons": [
+    "raf_below_threshold: 0.15 < 0.65"
+  ],
+  "evaluated_at": "2026-05-08T15:14:31Z"
+}

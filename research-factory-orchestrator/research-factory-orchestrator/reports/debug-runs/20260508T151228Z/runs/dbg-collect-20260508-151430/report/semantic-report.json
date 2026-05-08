@@ -1,0 +1,88 @@
+{
+  "run_id": "RUN-716d2c940879",
+  "sections": [
+    "analytical_memo",
+    "factual_dossier",
+    "io_propaganda_check",
+    "target_graph",
+    "claims",
+    "evidence",
+    "sources",
+    "self_audit"
+  ],
+  "memo": {
+    "run_id": "RUN-716d2c940879",
+    "title": "Аналитическая записка",
+    "executive_summary": "Материал принят как внутренний аналитический объект; runtime создал структуру проверки, граф волн, claim taxonomy и self-audit контур.",
+    "situation_analysis": "Материал требует разложения на проверяемые утверждения, выделения источников, противоречий, нарративов и связей.",
+    "key_factors": [
+      "качество источников",
+      "повторяемость утверждений",
+      "независимые подтверждения",
+      "манипулятивная подача"
+    ],
+    "risks": [
+      "смешение факта и интерпретации",
+      "ложная уверенность модели",
+      "source laundering"
+    ],
+    "opportunities": [
+      "расширение поиска через граф связей",
+      "разделение точных/спорных/ложных утверждений",
+      "накопление raw evidence"
+    ],
+    "scenarios": [
+      {
+        "name": "минимальный",
+        "description": "фактчек исходных claims"
+      },
+      {
+        "name": "расширенный",
+        "description": "волновой графовый сбор и IO-check"
+      },
+      {
+        "name": "глубокий",
+        "description": "многоитерационный сбор с contradiction resolution"
+      }
+    ],
+    "recommendations": [
+      "Запускать wave collector до исчерпания frontier или бюджета.",
+      "Не переносить факты в memo без claim status."
+    ],
+    "confidence": "medium",
+    "data_gaps": [
+      "В smoke-run нет внешнего веб-сбора."
+    ]
+  },
+  "facts_summary": {
+    "total_claims": 5,
+    "confirmed": 4
+  },
+  "io_summary": {
+    "run_id": "RUN-716d2c940879",
+    "narrative_map": [
+      {
+        "narrative_id": "N001",
+        "claim": "Seed material may contain persuasion/framing elements",
+        "confidence": "medium"
+      }
+    ],
+    "method_matches": [
+      {
+        "method": "fear appeal / risk amplification",
+        "confidence": "low",
+        "note": "Requires textual evidence review in full run."
+      },
+      {
+        "method": "source laundering check required",
+        "confidence": "medium",
+        "note": "Runtime always opens this branch for public/political/media claims."
+      }
+    ],
+    "source_laundering_map": [],
+    "amplification_chain": [],
+    "actor_method_source_relations": [],
+    "verdict": "not_enough_external_data_in_smoke_run"
+  },
+  "generated_at": "2026-05-08T15:14:30Z"
+}

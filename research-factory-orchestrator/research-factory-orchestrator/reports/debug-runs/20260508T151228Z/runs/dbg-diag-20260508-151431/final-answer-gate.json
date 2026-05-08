@@ -1,0 +1,19 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-9c6be6060bb6",
+  "passed": false,
+  "status": "content_ready_delivery_not_proven",
+  "checks": {},
+  "contradiction_echo": {
+    "contradiction_level": 0,
+    "contradiction_scan_performed": false,
+    "scan_scope": "none",
+    "high_severity_detected": false
+  },
+  "overconfidence_risk": {
+    "blocking": [],
+    "warnings": [],
+    "signals": {}
+  },
+  "created_at": "2026-05-08T15:14:31Z"
+}

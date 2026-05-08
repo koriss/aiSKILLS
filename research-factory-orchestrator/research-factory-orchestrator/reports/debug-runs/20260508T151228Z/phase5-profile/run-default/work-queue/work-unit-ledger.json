@@ -1,0 +1,14 @@
+{
+  "run_id": "RUN-761db501dd73",
+  "job_id": "JOB-c0a92053c7ba",
+  "work_units": [],
+  "acceptance_gate": [
+    "run_id",
+    "job_id",
+    "wu_id",
+    "target_fingerprint",
+    "context_packet_hash_seen",
+    "schema_valid"
+  ],
+  "last_executor_run_at": "2026-05-08T15:17:43Z"
+}

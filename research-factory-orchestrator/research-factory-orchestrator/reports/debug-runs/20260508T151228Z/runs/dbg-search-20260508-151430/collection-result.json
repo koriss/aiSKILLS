@@ -1,0 +1,26 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-1d96f965b695",
+  "job_id": "JOB-d8fd32e00abe",
+  "profile": "full-rigor",
+  "backend": "stdlib_http_head",
+  "backend_reason": "",
+  "external_mode": "off",
+  "no_network": false,
+  "started_at": "2026-05-08T15:14:30Z",
+  "completed_at": "2026-05-08T15:14:31Z",
+  "external_source_packet_loaded": false,
+  "external_source_packet_path": "",
+  "web_search_attempted": true,
+  "web_search_succeeded": true,
+  "web_search_result_count": 2,
+  "external_web_search_executed": true,
+  "external_source_count": 2,
+  "seed_only": false,
+  "max_sources_cap": 20,
+  "seed_urls_provided": [
+    "https://example.com",
+    "https://www.wikipedia.org"
+  ],
+  "root_sources_count_after": 3
+}

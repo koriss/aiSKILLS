@@ -1,0 +1,16 @@
+{
+  "schema_version": "v19.0",
+  "wu_id": "WU-001",
+  "wave": "W1",
+  "run_id": "RUN-9c6be6060bb6",
+  "job_id": "JOB-d188560147a6",
+  "target_fingerprint": "TARGET-c5566872973a",
+  "status": "completed_no_sources",
+  "started_at": "2026-05-08T15:14:31Z",
+  "completed_at": "2026-05-08T15:14:31Z",
+  "sources_collected": 0,
+  "external_collection_executed": false,
+  "evidence_kind": "seed_only_baseline",
+  "context_packet_path": "context-packets/WU-001.context.json",
+  "evidence_sha256": "8271e0db5c868371fb971d7dd7a9225445e7d9ff1242a0a5c18f1d73e114a959"
+}

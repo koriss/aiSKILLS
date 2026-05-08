@@ -1,0 +1,21 @@
+{
+  "handoff_id": "HOFF-043560deedf8",
+  "from_phase": "run",
+  "to_phase": "render",
+  "payload_hash": "043560deedf89088cae0aa422e89debc993c29aad608259687f1538eed39dbaa",
+  "required_fields": [
+    "run_id",
+    "artifacts_ready"
+  ],
+  "success_response": "ACK",
+  "failure_response": "NACK",
+  "timeout_ms": 120000,
+  "on_failure_action": "block",
+  "prev_hash": "ac51a2f268bcba189098592e68d8adc0f1244eca2915337569cc681f4678ec07",
+  "created_at": "2026-05-08T15:17:43Z",
+  "payload": {
+    "run_id": "RUN-db193bc0ad1c",
+    "artifacts_ready": true
+  },
+  "skill_version": "19.3"
+}

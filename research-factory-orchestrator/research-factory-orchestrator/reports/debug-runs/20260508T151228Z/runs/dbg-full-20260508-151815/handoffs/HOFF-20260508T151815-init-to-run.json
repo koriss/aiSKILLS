@@ -1,0 +1,23 @@
+{
+  "handoff_id": "HOFF-4fc6990d6d3e",
+  "from_phase": "init",
+  "to_phase": "run",
+  "payload_hash": "4fc6990d6d3e7c7e5c29e55d05442ec0a9e6551a62d7cfc0ef4f663210813f20",
+  "required_fields": [
+    "run_id",
+    "job_id",
+    "task"
+  ],
+  "success_response": "ACK",
+  "failure_response": "NACK",
+  "timeout_ms": 120000,
+  "on_failure_action": "block",
+  "prev_hash": "0b3adb12ad4dffbc158670c017d190b75b767faeca7f4b2b4537065646c7b195",
+  "created_at": "2026-05-08T15:18:15Z",
+  "payload": {
+    "run_id": "RUN-d74cf32fa0cd",
+    "job_id": "JOB-859ec11ea648",
+    "task": "Рефлексивное управление Россией через медиа с марта 2026"
+  },
+  "skill_version": "19.3"
+}

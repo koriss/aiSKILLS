@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-716d2c940879",
+  "job_id": "JOB-ee2fdb51cd42",
+  "command_id": "CMD-ee2fdb51cd42",
+  "run_label": "dbg-collect-20260508-151430",
+  "run_dir": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs/dbg-collect-20260508-151430",
+  "task": "phase0 collect smoke",
+  "provider": "cli",
+  "interface": "direct_runtime",
+  "created_at": "2026-05-08T15:14:30Z",
+  "version": "19.3"
+}

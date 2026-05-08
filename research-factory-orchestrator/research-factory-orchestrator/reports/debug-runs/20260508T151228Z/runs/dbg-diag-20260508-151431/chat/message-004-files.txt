@@ -1,0 +1,2 @@
+ФАЙЛЫ
+HTML и research-package.zip подготовлены; внешнюю доставку можно утверждать только по delivery-manifest/ACK.

@@ -1,0 +1,34 @@
+{
+  "schema_version": "v19.0",
+  "profile": "mvr",
+  "policy": {
+    "label": "Minimum Viable Research",
+    "description": "Honest baseline. No external collection required. Stub-only delivery is allowed and explicitly disclosed.",
+    "source_policy": {
+      "external_collection_required": false,
+      "minimum_independent_sources": 0,
+      "source_packet_allowed": true,
+      "source_packet_required": false,
+      "web_search_required": false,
+      "stub_only_allowed": true
+    },
+    "delivery_policy": {
+      "stub_delivered_allowed": true,
+      "external_delivery_required": false,
+      "fail_on_validation_failed": true
+    },
+    "active_validators": [
+      "validate_artifact_schema",
+      "validate_work_unit_completion",
+      "validate_seed_only_truth",
+      "validate_error_log_quality",
+      "validate_source_provenance_distinction",
+      "validate_outbox_finalization",
+      "validate_root_vs_zip_artifact_truth",
+      "validate_collection_coverage_decoupled",
+      "validate_citation_grounding"
+    ]
+  },
+  "resolved_from": "mvr",
+  "resolved_at": "2026-05-08T15:14:30Z"
+}

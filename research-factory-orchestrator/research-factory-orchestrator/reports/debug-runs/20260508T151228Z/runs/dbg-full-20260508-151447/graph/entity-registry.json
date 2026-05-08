@@ -1,0 +1,29 @@
+{
+  "run_id": "RUN-29e97062122c",
+  "entities": [
+    {
+      "entity_id": "ENT-ROOT",
+      "label": "phase2 schema check",
+      "type": "target",
+      "confidence": 1
+    },
+    {
+      "entity_id": "ENT-FACT",
+      "label": "проверяемые факты",
+      "type": "claim_cluster",
+      "confidence": 0.85
+    },
+    {
+      "entity_id": "ENT-IO",
+      "label": "нарративы / манипуляции / пропаганда",
+      "type": "analysis_axis",
+      "confidence": 0.75
+    },
+    {
+      "entity_id": "ENT-SRC",
+      "label": "источники и документы",
+      "type": "source_cluster",
+      "confidence": 0.8
+    }
+  ]
+}

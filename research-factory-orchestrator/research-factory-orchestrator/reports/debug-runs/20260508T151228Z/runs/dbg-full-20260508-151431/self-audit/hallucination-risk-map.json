@@ -1,0 +1,10 @@
+{
+  "run_id": "RUN-14501b8f6dad",
+  "risks": [
+    {
+      "area": "seed-only claims",
+      "risk": "medium",
+      "mitigation": "mark seed/probable until external evidence collected"
+    }
+  ]
+}

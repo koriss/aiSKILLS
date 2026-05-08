@@ -1,0 +1,23 @@
+{
+  "handoff_id": "HOFF-7c69613e091c",
+  "from_phase": "init",
+  "to_phase": "run",
+  "payload_hash": "7c69613e091c465ace2b9a000b0434d4a63a70ba91417131657a3c6bb81a131d",
+  "required_fields": [
+    "run_id",
+    "job_id",
+    "task"
+  ],
+  "success_response": "ACK",
+  "failure_response": "NACK",
+  "timeout_ms": 120000,
+  "on_failure_action": "block",
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "created_at": "2026-05-08T15:17:43Z",
+  "payload": {
+    "run_id": "RUN-db193bc0ad1c",
+    "job_id": "JOB-bdb47619b1da",
+    "task": "phase5 full-rigor"
+  },
+  "skill_version": "19.3"
+}

@@ -190,10 +190,29 @@ def cmd_run(a):
     }
     jw(rd / "feature-truth-matrix.json", feature_matrix)
     ctx_base = {"run_id": run_id, "job_id": job_id, "command_id": cmd_id, "target_fingerprint": sid("TARGET", a.task), "task": a.task, "created_at": now()}
-    for wu in ["WU-001", "WU-007"]:
-        packet = {**ctx_base, "wu_id": wu, "context_packet_hash": sid("CTX", run_id, job_id, wu, a.task), "must_return_context_packet_hash_seen": True}
-        jw(rd / f"context-packets/{wu}.context.json", packet)
-    wus = [{"wu_id": f"WU-{i:03d}", "wave": "W1" if i <= 6 else "W2", "status": "planned", "context_packet": "context-packets/WU-001.context.json" if i <= 6 else "context-packets/WU-007.context.json"} for i in range(1, 13)]
+    work_units_path = rd / "work-units.json"
+    decomposition_path = rd / "decomposition.json"
+    wus = []
+    if work_units_path.is_file():
+        loaded = jr(work_units_path, {})
+        candidate = loaded.get("work_units") if isinstance(loaded, dict) else []
+        if isinstance(candidate, list):
+            wus = [wu for wu in candidate if isinstance(wu, dict) and wu.get("wu_id")]
+    elif decomposition_path.is_file():
+        loaded = jr(decomposition_path, {})
+        candidate = loaded.get("work_units") if isinstance(loaded, dict) else []
+        if isinstance(candidate, list):
+            wus = [wu for wu in candidate if isinstance(wu, dict) and wu.get("wu_id")]
+
+    for wu in wus:
+        wu_id = str(wu.get("wu_id", ""))
+        if not wu_id:
+            continue
+        packet = {**ctx_base, "wu_id": wu_id, "context_packet_hash": sid("CTX", run_id, job_id, wu_id, a.task), "must_return_context_packet_hash_seen": True}
+        jw(rd / f"context-packets/{wu_id}.context.json", packet)
+        wu.setdefault("status", "planned")
+        wu.setdefault("context_packet", f"context-packets/{wu_id}.context.json")
+
     jw(rd / "work-queue/work-unit-ledger.json", {"run_id": run_id, "job_id": job_id, "work_units": wus, "acceptance_gate": ["run_id", "job_id", "wu_id", "target_fingerprint", "context_packet_hash_seen", "schema_valid"]})
     for wu in wus:
         jw(rd / f"work-queue/pending/{wu['wu_id']}.json", {**wu, "run_id": run_id, "job_id": job_id, "target_fingerprint": ctx_base["target_fingerprint"]})
@@ -210,6 +229,8 @@ def cmd_run(a):
     feature_matrix["features"]["wave_graph_collector"] = (
         "implemented_seed_only" if wu_summary["total_terminal"] == wu_summary["total_planned"] else "scaffold"
     )
+    if wu_summary["total_planned"] == 0:
+        feature_matrix["features"]["work_unit_decomposition"] = "missing"
     feature_matrix["features"]["work_unit_executor"] = "implemented"
     feature_matrix["work_unit_summary"] = {
         "total_planned": wu_summary["total_planned"],
@@ -217,8 +238,6 @@ def cmd_run(a):
         "by_status": wu_summary["by_status"],
         "any_collected_sources": wu_summary["any_collected_sources"],
     }
-    jw(rd / "feature-truth-matrix.json", feature_matrix)
-    render_all(rd, a.task, run_id, job_id, cmd_id, a.provider)
     collection_summary = _collect_external(rd, run_id=run_id, job_id=job_id, profile=profile_name)
     coverage_result = _reconcile_coverage(rd, run_id=run_id, job_id=job_id, profile=profile_name)
     citation_result = _evaluate_citation_grounding(rd, run_id=run_id, job_id=job_id, profile=profile_name)
@@ -253,6 +272,7 @@ def cmd_run(a):
         "claims_grounded": citation_result.get("claims_grounded"),
     }
     jw(rd / "feature-truth-matrix.json", feature_matrix)
+    render_all(rd, a.task, run_id, job_id, cmd_id, a.provider)
     required = [
         "run.json",
         "entrypoint-proof.json",

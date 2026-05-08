@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN-b522be7fb1ac",
+  "job_id": "JOB-f25ed4e4e5e6",
+  "command_id": "CMD-f25ed4e4e5e6",
+  "run_label": "dbg-full-20260508-151705",
+  "task": "phase4 full rigor",
+  "mode": "research",
+  "requested_mode": "research",
+  "version": "19.3",
+  "started_at": "2026-05-08T15:17:05Z",
+  "provider": "cli",
+  "interface": "direct_runtime",
+  "skill_root": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator",
+  "runs_root": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs",
+  "consent": {
+    "tmp_runs_root": true,
+    "env_chat_id": false
+  },
+  "rfo_allow_tmp_runs_root": true,
+  "rfo_allow_env_chat_id": false
+}

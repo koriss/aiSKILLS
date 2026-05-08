@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-761db501dd73",
+  "job_id": "JOB-c0a92053c7ba",
+  "command_id": "CMD-c0a92053c7ba",
+  "run_label": "run-default",
+  "run_dir": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/phase5-profile/run-default",
+  "task": "phase5 default",
+  "provider": "cli",
+  "interface": "direct_runtime",
+  "created_at": "2026-05-08T15:17:43Z",
+  "version": "19.3"
+}

@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-14501b8f6dad",
+  "items": [
+    {
+      "raw_id": "RAW-SEED-001",
+      "kind": "user_seed",
+      "content_preview": "phase0 full smoke",
+      "sensitivity": "internal_use"
+    }
+  ]
+}

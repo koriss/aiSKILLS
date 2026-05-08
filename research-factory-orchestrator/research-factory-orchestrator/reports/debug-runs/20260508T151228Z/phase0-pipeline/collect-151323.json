@@ -1,0 +1,33 @@
+{
+  "command": "collect",
+  "args": [
+    "/usr/bin/python3",
+    "-S",
+    "runtime/cli.py",
+    "run",
+    "--project-dir",
+    "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs/dbg-collect-20260508-151323",
+    "--task",
+    "phase0 collect smoke",
+    "--mode",
+    "research",
+    "--provider",
+    "cli",
+    "--interface",
+    "direct_runtime",
+    "--runs-root",
+    "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs"
+  ],
+  "env": {
+    "RFO_ALLOW_TMP_RUNS_ROOT": "1",
+    "RFO_RUN_PROFILE": "mvr",
+    "RFO_SEED_URLS": "",
+    "RFO_SOURCE_PACKET": "",
+    "RFO_DEBUG_TS": "20260508T151228Z"
+  },
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/runtime/cli.py\", line 7, in <module>\n    from runtime.adapter_impl import cmd_adapter\nModuleNotFoundError: No module named 'runtime'\n",
+  "run_dir": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs/dbg-collect-20260508-151323",
+  "created_at": "20260508T151323Z"
+}

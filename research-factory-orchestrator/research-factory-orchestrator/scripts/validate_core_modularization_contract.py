@@ -15,7 +15,7 @@ def emit(status='pass', code='OK', **kw):
 
 def main():
     skill=Path(__file__).resolve().parents[1]
-    req=['runtime/adapter.py','runtime/worker.py','runtime/outbox.py','runtime/validation.py','runtime/packaging.py','runtime/smoke.py','contracts/core-boundary-contract.json']
+    req=['runtime/adapter.py','runtime/worker.py','runtime/outbox.py','runtime/validation.py','runtime/packaging.py','contracts/core-boundary-contract.json']
     missing=[r for r in req if not (skill/r).exists()]
     if missing: return emit('fail','F350', missing=missing)
     return emit('pass','F350', note='compatibility god module still exists; bounded wrappers/contracts present')

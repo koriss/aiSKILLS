@@ -37,8 +37,8 @@
     {"code":"TYPED-GROUNDEDNESS-INFLATION","category":"advisory","severity":"advisory","owner_validator":"run_typed_grounding.py","reproduces_in_fixture":"bad/typed_grounding_contradiction_silent_drop"},
     {"code":"EXTERNAL-INSTRUCTION-SIGNAL","category":"advisory","severity":"advisory","owner_validator":"validate_final_answer","reproduces_in_fixture":"bad/instruction_injection_in_evidence"},
     {"code":"SOURCE-POLICY-UNKNOWN","category":"advisory","severity":"advisory","owner_validator":"validate_source_quality","reproduces_in_fixture":"bad/source_policy_unknown_host"},
-    {"code":"TRAJECTORY-SKIP","category":"smoke","severity":"advisory","owner_validator":"_smoke_trajectory_v19.py","reproduces_in_fixture":"n/a"},
-    {"code":"DETERMINISTIC-DRIFT","category":"smoke","severity":"advisory","owner_validator":"_smoke_deterministic_replay.py","reproduces_in_fixture":"n/a"},
+    {"code":"TRAJECTORY-SKIP","category":"replay","severity":"advisory","owner_validator":"scripts/validate_state_transitions.py","reproduces_in_fixture":"n/a"},
+    {"code":"DETERMINISTIC-DRIFT","category":"replay","severity":"advisory","owner_validator":"scripts/validate_replay_determinism.py","reproduces_in_fixture":"n/a"},
     {"code":"COVERAGE-GAP","category":"meta","severity":"advisory","owner_validator":"validate_validator_coverage.py","reproduces_in_fixture":"n/a"},
 
     {"code":"RUNTIME-LEGACY-EMIT","category":"runtime-truth","severity":"meta","owner_validator":"runtime/worker_impl.py","reproduces_in_fixture":"n/a"},
@@ -68,8 +68,8 @@
     {"code":"PRODUCTION-CLAIM-MISMATCH-DELIVERY-STUB","category":"production-hygiene","severity":"meta","owner_validator":"scripts/validate_no_scaffolds_in_production.py","reproduces_in_fixture":"n/a"},
     {"code":"CONTRACT-VERSION-DRIFT-NON-V19-ACTIVE","category":"production-hygiene","severity":"meta","owner_validator":"scripts/validate_active_contract_versions.py","reproduces_in_fixture":"n/a"},
     {"code":"PROFILE-MISSING-SOURCE-OR-DELIVERY-POLICY","category":"production-hygiene","severity":"meta","owner_validator":"scripts/validate_profile_policies_present.py","reproduces_in_fixture":"n/a"},
-    {"code":"TELEGRAM-AGENT-CONTRACT-VIOLATION","category":"telegram","severity":"meta","owner_validator":"scripts/_smoke_telegram_agent_interface.py","reproduces_in_fixture":"n/a"},
-    {"code":"TELEGRAM-REAL-SEND-MISSING-HTTP-TRACE","category":"telegram","severity":"meta","owner_validator":"scripts/_smoke_telegram_real_send.py","reproduces_in_fixture":"n/a"},
+    {"code":"TELEGRAM-AGENT-CONTRACT-VIOLATION","category":"telegram","severity":"meta","owner_validator":"scripts/validate_telegram_delivery.py","reproduces_in_fixture":"n/a"},
+    {"code":"TELEGRAM-REAL-SEND-MISSING-HTTP-TRACE","category":"telegram","severity":"meta","owner_validator":"scripts/validate_telegram_delivery.py","reproduces_in_fixture":"n/a"},
     {"code":"ADVISORY-FIXTURE-GAP","category":"advisory","severity":"meta","owner_validator":"validate_advisory_fixture_suite.py","reproduces_in_fixture":"n/a"}
   ]
 }

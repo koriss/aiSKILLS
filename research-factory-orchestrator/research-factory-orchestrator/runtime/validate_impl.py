@@ -18,6 +18,22 @@ from runtime.util import PKG_REQUIRED, jl, jr, jw, now, read_json_or_none, skill
 V19_PROFILES = frozenset({"mvr", "full-rigor", "propaganda-io", "book-verification"})
 
 
+def _resolved_v19_profile_for_run_dir(rd: Path) -> str:
+    """Prefer profile recorded in the run dir; avoid relying on host-wide ``RFO_V19_PROFILE``."""
+    for rel in ("run-profile.json", "validation-profile-used.json"):
+        row = read_json_or_none(rd / rel)
+        if isinstance(row, dict):
+            cand = (
+                str(row.get("profile") or row.get("name") or "")
+                .strip()
+                .lower()
+            )
+            if cand in V19_PROFILES:
+                return cand
+    env_raw = os.environ.get("RFO_V19_PROFILE", "").strip().lower()
+    return env_raw if env_raw in V19_PROFILES else ""
+
+
 def _append_run_event(rd: Path, event: str, fields: dict[str, object]) -> None:
     """Append one JSON line to ``run-events.jsonl`` (OTel-style event names; ADR-013)."""
     row: dict[str, object] = {"event": event, "timestamp": now()}
@@ -79,7 +95,7 @@ def _fail_closed_rollback(rd: Path, errs: list) -> None:
 
 def validate(rd):
     rd = Path(rd)
-    prof = os.environ.get("RFO_V19_PROFILE", "").strip().lower()
+    prof = _resolved_v19_profile_for_run_dir(rd)
     if prof in V19_PROFILES:
         root = skill_root()
         runner = root / "scripts" / "run_core_validators.py"

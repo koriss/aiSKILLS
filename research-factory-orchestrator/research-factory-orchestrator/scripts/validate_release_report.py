@@ -59,7 +59,7 @@ def main() -> int:
     vers = {SKILL_VER}
     seen2 = set()
     for step in fresh.get("steps") or []:
-        rd = step.get("smoke_run_dir") or step.get("run_dir")
+        rd = step.get("artifact_execute_run_dir") or step.get("smoke_run_dir") or step.get("run_dir")
         if not rd or rd in seen2:
             continue
         if Path(rd).is_dir():
@@ -106,7 +106,7 @@ def main() -> int:
     ftm_issues: list[dict] = []
     seen_rd: set[str] = set()
     for step in fresh.get("steps") or []:
-        rd = step.get("smoke_run_dir") or step.get("run_dir")
+        rd = step.get("artifact_execute_run_dir") or step.get("smoke_run_dir") or step.get("run_dir")
         if not rd or not isinstance(rd, str) or rd in seen_rd:
             continue
         if not Path(rd).is_dir():

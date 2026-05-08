@@ -42,7 +42,6 @@ _SUBCOMMANDS = (
     "worker",
     "outbox",
     "validate",
-    "smoke",
     "failure",
 )
 

@@ -32,6 +32,39 @@ cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \
   python3 -S scripts/outbox_delivery_worker.py --runs-root ~/.openclaw/workspace/rfo-runs
 ```
 
+**Important:** `runtime_job_worker` only consumes `queue/pending/*.json`. Starting the worker alone (with no prior `interface_runtime_adapter adapter` enqueue) usually does nothing useful (`claimed:false`). The worker subprocess must inherit the same environment the run needs (e.g. `RFO_SOURCE_PACKET` when using a source packet).
+
+## Web search + SearXNG (canonical)
+
+Full external collection via SearXNG + `RFO_SOURCE_PACKET` + real queue + worker:
+
+1. Build / obtain a source packet (JSON with `sources[]`) and set `RFO_SOURCE_PACKET` to its **file path** for the worker process.
+2. **Enqueue** with `interface_runtime_adapter adapter` using `--runs-root` and `--task`. For routing metadata into Telegram delivery adapters use `--interface telegram` + `--provider telegram` plus host-supplied `--chat-id` / `--reply-to-message-id` (those fields are host concerns, not chat sends from the skill). For compute-only enqueue use `--interface cli --provider cli`.
+3. Run `runtime_job_worker.py --runs-root … --execute-runtime` (env must still include `RFO_SOURCE_PACKET` so the nested `rfo_runtime_core run` inherits it).
+
+Bundled bridge (implements 1–3 and post-steps) for operators:
+
+```bash
+cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \
+  python3 -S scripts/run_rfo_with_web_search.py \
+    --runs-root ~/.openclaw/workspace/rfo-runs \
+    --task "<user request>" \
+    [--profile mvr]
+```
+
+The bridge ends with stdout line **`__RFO_SKILL_AGENT_HANDOFF__=<json>`** plus `instructions_for_invoking_agent` inside that JSON — the **caller** consumes it and replies to whichever channel applies. This skill performs no outbound messaging. Optional `outbox_delivery_worker.py` remains a separate host/ops process when you deliberately want Telegram send from infra, not default from bridge.
+
+### Contract boundary (Adapter | Queue | Worker | Collector)
+
+- **Adapter** (`cmd_adapter`): allocates `runs/<label>/`, writes `jobs/runtime-job.json`, appends index, drops `queue/pending/<job_id>.json`.
+- **Queue**: `pending` → `running` → `done` (worker moves files + `worker.lease`).
+- **Worker** (`cmd_worker`): claims one pending job, runs `rfo_runtime_core run` **inheriting the current OS environment**, then packaging / outbox prep.
+- **Collector** (`collect`): reads `RFO_SOURCE_PACKET` file if present (`external_source_packet_loaded`); `RFO_SEED_URLS` probes are a separate branch. Breaking env inheritance (e.g. `subprocess.run(..., env={})` without merge) silently drops packets.
+
+## BATS embeddings index (OpenClaw ops)
+
+Failures such as **BATS 33/34 “embeddings index”** concern how much workspace memory OpenClaw indexes for tests, not RFO collector code. Mitigations: widen the indexed corpus (more eligible source files), adjust the indexer include policy, or change the embeddings threshold in the BATS scenario—treat as **platform ops**, orthogonal to collection truth flags.
+
 ## Hard prohibitions (enforced by code, not by convention)
 
 | Violation | Where it is caught | Exit code / error |

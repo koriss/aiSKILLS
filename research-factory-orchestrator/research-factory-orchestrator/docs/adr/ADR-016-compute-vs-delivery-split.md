@@ -10,7 +10,7 @@ External audits of v19.2.1 showed `interface_runtime_adapter` queues work; the w
 
 ## Decision
 
-1. **Skill (RFO) is compute-only** for the native `/research_factory_orchestrator` path: synchronous `cli execute --runs-root --task` allocates `run_dir`, renders artifacts, writes `final-answer.md`, `result-manifest.json`, `marker.json`, and prints **exactly one** stdout line `__OPENCLAW_SKILL_RESULT__=<json>` (all other diagnostics on stderr).
+1. **Skill (RFO) is compute-only** for the native `/research_factory_orchestrator` path: synchronous `cli execute --runs-root --task` allocates `run_dir`, renders artifacts, writes `final-answer.md`, `result-manifest.json`, `marker.json`, and prints **exactly one** stdout capsule `__RFO_SKILL_AGENT_HANDOFF__=<json>` with neutral `instructions_for_invoking_agent` (all other diagnostics on stderr).
 2. **OpenClaw gateway** parses the marker, validates `result-manifest.json` (JSON Schema + relative paths + sha256), delivers via the existing channel adapter (e.g. Telegram `sendMessage` / `sendDocument`), records audit, and **suppresses** the model-generated user reply on this path.
 3. **`final-answer-gate.json`**: in artifact mode, `passed` MAY be `true` when content is ready and delivery is explicitly deferred to the gateway (`status` documents gateway ownership); legacy `content_ready_delivery_not_proven` remains for queue/outbox flows.
 

@@ -1,4 +1,4 @@
-"""CLI entrypoint for RFO v19 runtime (adapter, execute, run, worker, outbox, validate, smoke, failure)."""
+"""CLI entrypoint for RFO v19 runtime (adapter, execute, run, worker, outbox, validate, failure)."""
 from __future__ import annotations
 
 import argparse
@@ -7,7 +7,6 @@ import sys
 from runtime.adapter_impl import cmd_adapter
 from runtime.failure_impl import cmd_failure
 from runtime.outbox_impl import cmd_outbox
-from runtime.smoke_impl import cmd_smoke
 from runtime.validate_impl import validate
 from runtime.artifact_execute_impl import cmd_execute
 from runtime.worker_impl import cmd_run, cmd_worker
@@ -29,7 +28,7 @@ def main():
     # update. ``chat_id`` MUST come from the incoming update (group chat,
     # different account, etc.); environment ``TELEGRAM_CHAT_ID`` is only
     # honoured by the delivery adapter when ``RFO_ALLOW_ENV_CHAT_ID=1`` is set
-    # explicitly (smoke tests).
+    # explicitly (explicit consent flows only).
     s.add_argument("--chat-id", default="")
     s.add_argument("--reply-to-message-id", default="")
     s.add_argument("--api-base", default="")
@@ -49,7 +48,7 @@ def main():
     s.add_argument(
         "--mode",
         default="research",
-        help="Canonical run mode (research|production|smoke); passed to nested runtime run.",
+        help="Canonical run mode (research|production); passed to nested runtime run.",
     )
     s = sub.add_parser("run")
     s.add_argument("--project-dir", required=True)
@@ -57,7 +56,7 @@ def main():
     s.add_argument(
         "--mode",
         default="research",
-        help="Canonical run mode after normalization (research|production|smoke); aliases e.g. AUTO_COMPILE_AND_EXECUTE map to research.",
+        help="Canonical run mode after normalization (research|production); aliases e.g. AUTO_COMPILE_AND_EXECUTE map to research.",
     )
     s.add_argument("--run-id")
     s.add_argument("--job-id")
@@ -83,14 +82,6 @@ def main():
     s.add_argument("--runs-root", required=True)
     s = sub.add_parser("validate")
     s.add_argument("--run-dir", required=True)
-    s = sub.add_parser("smoke")
-    s.add_argument("--provider", default="telegram")
-    s.add_argument("--interface", default="telegram")
-    s.add_argument("--conversation-id", default="test")
-    s.add_argument("--message-id", default="1")
-    s.add_argument("--user-id", default="me")
-    s.add_argument("--task", default="test internal audit target")
-    s.add_argument("--runs-root")
     sub.add_parser("failure")
     a = p.parse_args()
     return {
@@ -100,7 +91,6 @@ def main():
         "worker": cmd_worker,
         "outbox": cmd_outbox,
         "validate": lambda x: validate(x.run_dir),
-        "smoke": cmd_smoke,
         "failure": cmd_failure,
     }[a.cmd](a) or 0
 

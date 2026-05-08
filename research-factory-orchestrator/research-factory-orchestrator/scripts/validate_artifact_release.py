@@ -41,7 +41,7 @@ def main() -> int:
     except Exception as e:
         print(json.dumps({"ok": False, "error": f"bad_json:{e}"}, ensure_ascii=False))
         return 1
-    if man.get("contract") != "rfo-artifact-result-v1":
+    if man.get("contract") not in ("rfo-artifact-result-v1", "rfo-skill-agent-handoff-v1"):
         print(json.dumps({"ok": False, "error": "bad_contract"}, ensure_ascii=False))
         return 1
     st = man.get("status")

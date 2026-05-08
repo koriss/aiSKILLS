@@ -147,7 +147,7 @@ def enforce_runs_root_argv(argv: list[str]) -> None:
     """Validate ``--runs-root`` taken from ``argv`` if present."""
     raw = _extract_runs_root(argv)
     if raw is None:
-        return  # subcommand may not need --runs-root (e.g. smoke/failure)
+        return  # subcommand may not need --runs-root (e.g. failure)
     candidate = Path(raw).expanduser().resolve(strict=False)
     s = str(candidate)
 

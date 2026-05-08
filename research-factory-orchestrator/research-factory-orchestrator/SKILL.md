@@ -39,7 +39,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### v19 core validation
 
-- Use `RFO_V19_PROFILE` (`mvr`, `full-rigor`, `propaganda-io`, `book-verification`).
+- Prefer validation profile embedded in the run dir (`validation-profile-used.json`, `run-profile.json`); optionally override with `RFO_V19_PROFILE` (`mvr`, `full-rigor`, `propaganda-io`, `book-verification`).
 - Run `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>`.
 - Core validator stack is V1..V6 with fail-closed delivery truth.
 

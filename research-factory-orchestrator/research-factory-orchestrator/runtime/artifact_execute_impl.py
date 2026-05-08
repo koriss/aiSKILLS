@@ -15,18 +15,22 @@ from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
 from runtime.worker_impl import build_package, cmd_run
 
-MARKER_PREFIX = "__OPENCLAW_SKILL_RESULT__="
-CONTRACT = "rfo-artifact-result-v1"
+# Neutral stdout capsule for whoever invoked the skill (LLM gateway, cron, Telegram bridge, …).
+HANDOFF_STDOUT_PREFIX = "__RFO_SKILL_AGENT_HANDOFF__="
+# Declares result-manifest semantics; invoking host parses stdout + reads artifacts under run_dir.
+RESULT_MANIFEST_CONTRACT = "rfo-skill-agent-handoff-v1"
+
+DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT = [
+    "This process is compute-only: it writes artifacts under run_dir and does not open chat sessions or outbound channels.",
+    "Present the substantive answer using final-answer.md or report/full-report.html (and analytical-memo if present).",
+    "If your environment can attach files for the human, attach paths listed under result-manifest.json.artifacts;",
+    "only claim artifacts were handed off after your layer actually exposes them.",
+]
 
 
 def _seed_interface_and_job(rd: Path, c: dict, task: str) -> None:
     req_id = sid("REQ", "artifact_execute", "cli", "", "", task)
-    delivery = {
-        "chat_id": None,
-        "reply_to_message_id": None,
-        "api_base": None,
-        "source": "artifact_execute_compute_only",
-    }
+    delivery = {"mode": "agent_handoff_only", "source": "artifact_execute_compute_only"}
     jw(
         rd / "interface/interface-request.json",
         {
@@ -117,7 +121,7 @@ def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: lis
         )
     out: dict = {
         "schema_version": "v1",
-        "contract": CONTRACT,
+        "contract": RESULT_MANIFEST_CONTRACT,
         "status": status,
         "primary_format": "markdown",
         "artifacts": arts,
@@ -137,6 +141,57 @@ def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: lis
 
 def _normalize_exit(status: str) -> int:
     return {"ok": 0, "partial": 10, "failed": 20}.get(status, 20)
+
+
+def emit_agent_skill_handoff(
+    rd: Path,
+    task: str,
+    *,
+    status: str | None = None,
+    errors: list | None = None,
+) -> tuple[str, int]:
+    """Persist ``result-manifest.json``, ``marker.json``, and emit the agent handoff line on stdout.
+
+    The invoking agent/gateway parses the single stdout line prefixed with ``HANDOFF_STDOUT_PREFIX``.
+    """
+    rd = Path(rd).resolve()
+    errs = list(errors) if errors else []
+    if not (rd / "final-answer.md").is_file():
+        _write_final_answer(rd, task)
+    run_json = jr(rd / "run.json", {})
+    run_id = str(run_json.get("run_id") or rd.name)
+    job_id = str(run_json.get("job_id") or "UNKNOWN")
+    resolved = status
+    if resolved is None:
+        resolved = "ok"
+        for p in ("report/full-report.html", "final-answer.md"):
+            if not (rd / p).is_file():
+                resolved = "failed"
+                errs.append(
+                    {
+                        "code": "missing_required_artifact",
+                        "message": p,
+                        "where": "emit_agent_skill_handoff.verify",
+                    },
+                )
+                break
+    manifest = _build_manifest(rd, run_id, job_id, resolved, errs)
+    jw(rd / "result-manifest.json", manifest)
+    payload = {
+        "skill": "research-factory-orchestrator",
+        "skill_version": VERSION,
+        "run_id": run_id,
+        "run_dir": str(rd),
+        "manifest": "result-manifest.json",
+        "contract": RESULT_MANIFEST_CONTRACT,
+        "status": resolved,
+        "computes_only": True,
+        "instructions_for_invoking_agent": list(DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT),
+        "task_excerpt": (task[:500] + ("…" if len(task) > 500 else "")),
+    }
+    jw(rd / "marker.json", payload)
+    print(HANDOFF_STDOUT_PREFIX + json.dumps(payload, ensure_ascii=False), flush=True)
+    return resolved, _normalize_exit(resolved)
 
 
 def cmd_execute(a) -> int:
@@ -227,9 +282,12 @@ def cmd_execute(a) -> int:
         "run_id": c["run_id"],
         "run_dir": str(rd),
         "manifest": "result-manifest.json",
-        "contract": CONTRACT,
+        "contract": RESULT_MANIFEST_CONTRACT,
         "status": status,
+        "computes_only": True,
+        "instructions_for_invoking_agent": list(DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT),
+        "task_excerpt": (task[:500] + ("…" if len(task) > 500 else "")),
     }
     jw(rd / "marker.json", payload)
-    print(MARKER_PREFIX + json.dumps(payload, ensure_ascii=False), flush=True)
+    print(HANDOFF_STDOUT_PREFIX + json.dumps(payload, ensure_ascii=False), flush=True)
     return _normalize_exit(status)

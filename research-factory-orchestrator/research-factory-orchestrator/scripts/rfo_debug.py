@@ -148,32 +148,10 @@ def _execute_runtime(
     return result.returncode
 
 
-def _execute_smoke(*, timeout: int) -> int:
-    ts = _load_ts()
-    runs_root = ROOT / "reports" / "debug-runs" / ts / "runs"
-    runs_root.mkdir(parents=True, exist_ok=True)
-    env = _build_env(ts, profile="", seed_urls="", source_packet="")
-    cmd = [
-        sys.executable,
-        "-S",
-        "scripts/smoke_test_interface_runtime.py",
-    ]
-    result = _run_command(cmd, env, timeout)
-    run_dir = ""
-    parsed = _extract_json_object(result.stdout)
-    if parsed.get("run_dir"):
-        run_dir = str(parsed.get("run_dir"))
-    out = _log_path(ts, "smoke")
-    _write_result(out, command_name="smoke", args=cmd, env=env, result=result, run_dir=run_dir)
-    print(str(out))
-    return result.returncode
-
-
 def _parse() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="RFO debug pipeline runner")
     sub = p.add_subparsers(dest="command", required=True)
 
-    sub.add_parser("smoke")
     for name in ("collect", "search", "full", "diag"):
         sp = sub.add_parser(name)
         sp.add_argument("--task", default=f"debug {name} run")
@@ -188,9 +166,6 @@ def _parse() -> argparse.Namespace:
 
 def main() -> int:
     a = _parse()
-    if a.command == "smoke":
-        return _execute_smoke(timeout=a.timeout)
-
     return _execute_runtime(
         command_name=a.command,
         task=a.task,

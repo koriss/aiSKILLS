@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "contract_id": "rfo-artifact-result-v1",
-  "title": "RFO v19.3 compute-only artifact result",
-  "description": "Skill emits run_dir/result-manifest.json + stdout marker __OPENCLAW_SKILL_RESULT__=<json>. Gateway validates, delivers, suppresses LLM reply.",
-  "stdout_marker_prefix": "__OPENCLAW_SKILL_RESULT__=",
+  "contract_id": "rfo-skill-agent-handoff-v1",
+  "title": "RFO v19.3 compute-only artifact result (agent handoff)",
+  "description": "Skill emits run_dir/result-manifest.json + stdout line __RFO_SKILL_AGENT_HANDOFF__=<json>. Invoking host/agent reads instructions and performs any outbound delivery.",
+  "stdout_marker_prefix": "__RFO_SKILL_AGENT_HANDOFF__=",
   "manifest_relative_path": "result-manifest.json",
   "marker_relative_path": "marker.json",
   "exit_status_map": {

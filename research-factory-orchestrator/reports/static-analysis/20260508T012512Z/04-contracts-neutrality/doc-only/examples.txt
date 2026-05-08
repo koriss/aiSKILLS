@@ -1,0 +1,61 @@
+examples/v17-interface-sample/queue/pending/JOB-samplev17.json:8:  "created_from_interface": "telegram",
+examples/v17-interface-sample/queue/pending/JOB-samplev17.json:9:  "provider": "telegram",
+examples/v15-sample-run/report/semantic-report.json:14:      "telegram_plan": "telegram/telegram-message-plan.json"
+examples/v17-interface-sample/runs/RUN-samplev17/jobs/runtime-job.json:8:  "created_from_interface": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/jobs/runtime-job.json:9:  "provider": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/outbox/outbox-policy.json:4:  "provider": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/outbox/OUT-0001.json:5:  "interface": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/outbox/OUT-0001.json:6:  "provider": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/delivery-acks/OUT-0001.json:5:  "provider": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/interface/interface-request.json:3:  "interface": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/interface/interface-request.json:4:  "provider": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/interface/normalized-command.json:3:  "interface": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/interface/normalized-command.json:4:  "provider": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/chat/chat-message-plan.json:3:  "interface": "telegram",
+examples/v17-interface-sample/runs/RUN-samplev17/chat/chat-message-plan.json:4:  "provider": "telegram",
+examples/v15-sample-run/report/full-report.html:1:<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{font-family:system-ui;margin:0;background:#f7f7f5;color:#171717}.shell{max-width:1100px;margin:auto;padding:16px}.section{background:white;border:1px solid #ddd;border-radius:16px;padding:18px;margin:16px 0}.table-wrap{overflow-x:auto}.banner{background:#111;color:white;text-align:center;padding:10px;font-weight:700}</style></head><body><div class="banner">ТОЛЬКО ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ · НЕ ДЛЯ ПУБЛИЧНОГО РАСПРОСТРАНЕНИЯ</div><main class="shell"><section class="section"><h1>Sample v15 runtime test</h1><p>Standalone report generated from semantic-report.json.</p></section><section class="section"><h2>Structured data</h2><div class="table-wrap"><table><tr><th>Field</th><th>Value</th></tr><tr><td>Status</td><td>Generated</td></tr></table></div></section><footer class="section"><strong>Ограничение использования:</strong> материалы «для служебного пользования» не предназначены для обнародования или противоправных целей.</footer></main><script type="application/json" id="semantic-report-json">{"report_meta": {"run_id": "ea58e6fc", "topic": "Sample v15 runtime test", "slug": "sample-v15-runtime-test", "created_at": "2026-04-29T01:16:36Z", "updated_at": "2026-04-29T01:16:36Z", "status": "created", "skill_version": "15.0.0-runtime-contract-enforcement", "mode": "AUTO_COMPILE_AND_EXECUTE", "paths": {"html_report": "report/full-report.html", "research_package": "package/research-package.zip", "telegram_plan": "telegram/telegram-message-plan.json"}}, "summary": {}, "sections": [], "claims": [], "sources": []}</script><script type="application/json" id="artifact-manifest-json">{"run_id": "ea58e6fc", "artifacts": [{"path": "report/full-report.html"}, {"path": "package/research-package.zip"}], "updated_at": "2026-04-29T00:00:00Z"}</script><script type="application/json" id="provenance-manifest-json">{"run_id": "ea58e6fc", "entities": [{"entity_id": "report/full-report.html", "type": "report"}, {"entity_id": "package/research-package.zip", "type": "package"}], "activities": [{"activity_id": "runtime.init", "type": "init_runtime", "time": "2026-04-29T01:16:52Z"}, {"activity_id": "render.report", "type": "render", "time": "2026-04-29T01:16:52Z"}], "agents": [{"agent_id": "orchestrator", "type": "runtime"}, {"agent_id": "validator-dag", "type": "validator"}], "relations": [{"type": "wasGeneratedBy", "entity": "report/full-report.html", "activity": "render.report"}], "created_at": "2026-04-29T01:16:52Z"}</script><script type="application/json" id="validation-transcript-json">{"run_id": "ea58e6fc", "validators": [], "all_passed": true, "created_at": "2026-04-29T00:00:00Z"}</script><script type="application/json" id="delivery-manifest-json">{"run_id": "ea58e6fc", "delivery_status": "delivered", "local_paths_exposed": false, "attachments": [{"type": "standalone_html", "required": true, "sent": true}, {"type": "research_package", "required": true, "sent": true}], "telegram_messages": [], "created_at": "2026-04-29T00:00:00Z"}</script></body></html>
+examples/v15-sample-run/run.json:13:    "telegram_plan": "telegram/telegram-message-plan.json"
+examples/v17-interface-sample/runs/RUN-samplev17/provider-payloads/telegram/OUT-0001.json:3:  "provider": "telegram",
+examples/report-delivery/sample-telegram-summary.json:3:  "verdict": "Это демонстрационный Telegram summary. Он plain text, без HTML и Markdown-разметки.",
+examples/report-delivery/sample-telegram-summary.json:19:      "text": "Большие таблицы не отправляются в Telegram."
+examples/report-delivery/sample-telegram-summary.json:30:      "text": "✅ Telegram messages должны быть plain text."
+examples/report-delivery/sample-telegram-summary.json:44:      "label": "Telegram plain text policy"
+examples/report-delivery/telegram/telegram-message-002.txt:4:2. Большие таблицы не отправляются в Telegram.
+examples/report-delivery/telegram/telegram-message-005.txt:4:[2] Telegram plain text policy
+examples/report-delivery/telegram/telegram-message-001.txt:3:Это демонстрационный Telegram summary. Он plain text, без HTML и Markdown-разметки.
+examples/report-delivery/telegram/telegram-message-plan.json:6:      "message_id": "telegram-message-001",
+examples/report-delivery/telegram/telegram-message-plan.json:10:      "path": "telegram-message-001.txt",
+examples/report-delivery/telegram/telegram-message-plan.json:14:      "message_id": "telegram-message-002",
+examples/report-delivery/telegram/telegram-message-plan.json:18:      "path": "telegram-message-002.txt",
+examples/report-delivery/telegram/telegram-message-plan.json:22:      "message_id": "telegram-message-003",
+examples/report-delivery/telegram/telegram-message-plan.json:26:      "path": "telegram-message-003.txt",
+examples/report-delivery/telegram/telegram-message-plan.json:30:      "message_id": "telegram-message-004",
+examples/report-delivery/telegram/telegram-message-plan.json:34:      "path": "telegram-message-004.txt",
+examples/report-delivery/telegram/telegram-message-plan.json:38:      "message_id": "telegram-message-005",
+examples/report-delivery/telegram/telegram-message-plan.json:42:      "path": "telegram-message-005.txt",
+examples/report-delivery/telegram/telegram-message-plan.json:46:      "message_id": "telegram-message-006",
+examples/report-delivery/telegram/telegram-message-plan.json:50:      "path": "telegram-message-006.txt",
+examples/report-delivery/telegram/telegram-message-003.txt:5:✅ Telegram messages должны быть plain text.
+examples/v15-sample-run/subagents/SA-003/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-011/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-002/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-001/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-005/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-006/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-012/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-010/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-004/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-009/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-007/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/v15-sample-run/subagents/SA-008/context-packet.json:12:    "raw sensitive data in Telegram"
+examples/report-delivery/sample-report.json:21:        "text": "Telegram summary должен быть plain text, не HTML."
+examples/report-delivery/sample-report.json:108:      "text": "Telegram messages should use plain text.",
+examples/report-delivery/sample-report.json:126:      "title": "Telegram policy",
+examples/report-delivery/sample-report.json:127:      "full_url": "https://example.com/telegram-policy"
+examples/report-delivery/sample-full-report.html:139:<article class="card"><p>Telegram summary должен быть plain text, не HTML.</p></article></div>
+examples/report-delivery/sample-full-report.html:159:<p>Telegram messages should use plain text.<sup class="ref-marker"><a href="#ref-2">[2]</a></sup></p>
+examples/report-delivery/sample-full-report.html:191:<li id="ref-2"><a href="https://example.com/telegram-policy" target="_blank" rel="noopener noreferrer">https://example.com/telegram-policy</a><br><small>S002 — Telegram policy</small></li></ol>
+examples/report-delivery/sample-full-report.html:239:        &quot;text&quot;: &quot;Telegram summary должен быть plain text, не HTML.&quot;
+examples/report-delivery/sample-full-report.html:326:      &quot;text&quot;: &quot;Telegram messages should use plain text.&quot;,
+examples/report-delivery/sample-full-report.html:344:      &quot;title&quot;: &quot;Telegram policy&quot;,
+examples/report-delivery/sample-full-report.html:345:      &quot;full_url&quot;: &quot;https://example.com/telegram-policy&quot;

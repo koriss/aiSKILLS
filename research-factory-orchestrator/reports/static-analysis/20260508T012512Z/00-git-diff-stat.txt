@@ -1,0 +1,25 @@
+ .../research-factory-orchestrator/CHANGELOG.md     |  11 ++
+ .../research-factory-orchestrator/SKILL.md         |  10 +-
+ .../contracts/provider-capabilities.json           |   2 +-
+ .../contracts/provider-contract.json               |  29 +---
+ .../adr/ADR-014-telegram-operator-control-plane.md |   4 +-
+ .../telegram/telegram_delivery_adapter.py          | 112 -------------
+ .../providers/webhook/webhook_delivery_adapter.py  |  56 ++++---
+ .../runtime/adapter_impl.py                        |  16 ++
+ .../research-factory-orchestrator/runtime/cli.py   |  33 ++++
+ .../runtime/outbox_impl.py                         | 170 +++++++++++++++----
+ .../runtime/validate_impl.py                       |  20 ++-
+ .../runtime/version.json                           |   6 +-
+ .../runtime/worker_impl.py                         |  28 ++++
+ .../scripts/_smoke_telegram_agent_interface.py     |  38 -----
+ .../scripts/_smoke_telegram_real_send.py           | 116 -------------
+ .../scripts/build_research_package.py              |  26 +--
+ .../scripts/interface_runtime_adapter.py           |  84 +++++++++-
+ .../scripts/outbox_delivery_worker.py              |  55 ++++++-
+ .../scripts/rfo_runtime_core.py                    |  22 ++-
+ .../scripts/runtime_job_worker.py                  |  43 ++++-
+ .../scripts/validate_logical_consistency.py        |   3 +
+ .../scripts/validate_release.py                    | 101 ++++++------
+ .../scripts/validate_skill.py                      |  11 +-
+ .../scripts/verify_openclaw_run.py                 | 183 +++++++++++++++++++++
+ 24 files changed, 729 insertions(+), 450 deletions(-)

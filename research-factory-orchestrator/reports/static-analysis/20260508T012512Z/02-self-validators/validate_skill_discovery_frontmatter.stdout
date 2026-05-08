@@ -1,0 +1,8 @@
+{
+  "status": "fail",
+  "validator": "validate_skill_discovery_frontmatter",
+  "version": "18.3.2-delivery-truth-smoke-runtime-contract-hotfix",
+  "errors": [
+    "wrong_or_missing_metadata_version_v18_3_2"
+  ]
+}

@@ -1,0 +1,118 @@
+runtime/cli.py:5:1: 'sys' imported but unused
+runtime/outbox_impl.py:11:1: 'runtime.util.sid' imported but unused
+runtime/validators_core.py:2:1: 'json' imported but unused
+runtime/work_units.py:15:1: 'json' imported but unused
+scripts/_audit_composition_schemas.py:7:1: 'sys' imported but unused
+scripts/_smoke_subagent_isolation.py:16:5: 'runtime.validate_impl as _v' imported but unused
+scripts/_smoke_v19_2_1_honesty.py:101:9: local variable 'o' is assigned to but never used
+scripts/_smoke_v19_2_1_honesty.py:307:9: local variable 'o' is assigned to but never used
+scripts/_test_mvr_profile_seed_only_disclosure.py:35:1: 'tempfile' imported but unused
+scripts/_test_mvr_profile_seed_only_disclosure.py:290:5: local variable 'p_rt' is assigned to but never used
+scripts/_test_mvr_profile_seed_only_disclosure.py:344:15: f-string is missing placeholders
+scripts/_test_mvr_profile_seed_only_disclosure.py:368:11: f-string is missing placeholders
+scripts/_test_mvr_profile_seed_only_disclosure.py:381:9: local variable 'status' is assigned to but never used
+scripts/_test_mvr_profile_seed_only_disclosure.py:392:15: f-string is missing placeholders
+scripts/_test_mvr_profile_seed_only_disclosure.py:395:15: f-string is missing placeholders
+scripts/build_context_budget_analysis.py:3:1: 'hashlib' imported but unused
+scripts/build_context_budget_analysis.py:3:1: 're' imported but unused
+scripts/build_context_budget_analysis.py:3:1: 'time' imported but unused
+scripts/build_sacred_path_graph.py:7:1: 'sys' imported but unused
+scripts/build_skill_inventory.py:3:1: 're' imported but unused
+scripts/build_skill_inventory.py:3:1: 'time' imported but unused
+scripts/check_schema_drift.py:7:1: 'sys' imported but unused
+scripts/common_runtime.py:3:1: 'hashlib' imported but unused
+scripts/interface_common.py:3:1: 're' imported but unused
+scripts/render_pipeline_answer_from_ledgers.py:3:1: 'sys' imported but unused
+scripts/run_blinded_checker.py:8:1: 'sys' imported but unused
+scripts/run_rfo_full_research.py:371:9: f-string is missing placeholders
+scripts/run_rfo_full_research.py:392:9: f-string is missing placeholders
+scripts/run_rfo_with_web_search.py:33:1: 'time' imported but unused
+scripts/run_rfo_with_web_search.py:38:1: 'datetime.datetime' imported but unused
+scripts/run_rfo_with_web_search.py:38:1: 'datetime.timezone' imported but unused
+scripts/run_rfo_with_web_search.py:40:1: 'typing.Optional' imported but unused
+scripts/run_rfo_with_web_search.py:127:5: local variable 'STATUSES' is assigned to but never used
+scripts/run_typed_grounding.py:7:1: 'sys' imported but unused
+scripts/validate_active_contract_versions.py:10:1: 'sys' imported but unused
+scripts/validate_advisory_fixture_suite.py:10:1: 'sys' imported but unused
+scripts/validate_artifact_release.py:9:1: 'sys' imported but unused
+scripts/validate_citation_grounding.py:17:1: 'sys' imported but unused
+scripts/validate_claim_source_fit.py:2:1: 're' imported but unused
+scripts/validate_collection_coverage_decoupled.py:19:1: 'sys' imported but unused
+scripts/validate_context_budget_policy.py:2:1: 're' imported but unused
+scripts/validate_context_claim_gate.py:3:1: 'hashlib' imported but unused
+scripts/validate_context_claim_gate.py:3:1: 're' imported but unused
+scripts/validate_context_claim_gate.py:3:1: 'time' imported but unused
+scripts/validate_context_claim_gate.py:15:5: local variable 'forbidden' is assigned to but never used
+scripts/validate_core_modularization_contract.py:2:1: 'sys' imported but unused
+scripts/validate_core_modularization_contract.py:2:1: 're' imported but unused
+scripts/validate_cron_isolation.py:2:1: 're' imported but unused
+scripts/validate_cross_model_judge.py:7:1: 'sys' imported but unused
+scripts/validate_delivery_claim_matches_manifest.py:2:1: 're' imported but unused
+scripts/validate_error_log_quality.py:21:1: 'sys' imported but unused
+scripts/validate_execution_reliability_gate.py:2:1: 're' imported but unused
+scripts/validate_finalize_marker_required.py:2:1: 're' imported but unused
+scripts/validate_heartbeat_required_for_running.py:2:1: 're' imported but unused
+scripts/validate_html_semantic_tables.py:3:1: 're' imported but unused
+scripts/validate_html_well_formed.py:3:1: 'sys' imported but unused
+scripts/validate_idempotent_outbox.py:13:1: 'sys' imported but unused
+scripts/validate_item.py:3:1: 'subprocess' imported but unused
+scripts/validate_late_results_not_merged.py:2:1: 're' imported but unused
+scripts/validate_local_model_circuit_breaker.py:2:1: 're' imported but unused
+scripts/validate_manual_fallback_not_presented_as_rfo.py:2:1: 're' imported but unused
+scripts/validate_model_call_ledger.py:2:1: 're' imported but unused
+scripts/validate_no_ambient_context_runtime_override.py:2:1: 're' imported but unused
+scripts/validate_no_failed_validation_in_production.py:7:1: 'sys' imported but unused
+scripts/validate_no_html_string_gate_as_primary_contract.py:2:1: 'sys' imported but unused
+scripts/validate_no_html_string_gate_as_primary_contract.py:2:1: 're' imported but unused
+scripts/validate_no_large_model_generated_html.py:2:1: 're' imported but unused
+scripts/validate_no_name_only_matches.py:14:9: local variable 'soft' is assigned to but never used
+scripts/validate_no_plain_subagent_for_full_workspace_read.py:3:1: 'hashlib' imported but unused
+scripts/validate_no_plain_subagent_for_full_workspace_read.py:3:1: 're' imported but unused
+scripts/validate_no_plain_subagent_for_full_workspace_read.py:3:1: 'time' imported but unused
+scripts/validate_no_reasoning_leak_in_chat_payload.py:3:1: 'hashlib' imported but unused
+scripts/validate_no_reasoning_leak_in_chat_payload.py:3:1: 're' imported but unused
+scripts/validate_no_reasoning_leak_in_chat_payload.py:3:1: 'time' imported but unused
+scripts/validate_no_scaffolds_in_production.py:7:1: 'sys' imported but unused
+scripts/validate_no_smoke_as_context_proof.py:3:1: 'hashlib' imported but unused
+scripts/validate_no_smoke_as_context_proof.py:3:1: 're' imported but unused
+scripts/validate_no_smoke_as_context_proof.py:3:1: 'time' imported but unused
+scripts/validate_outbox_event_semantics.py:3:1: 'os' imported but unused
+scripts/validate_outbox_finalization.py:21:1: 'sys' imported but unused
+scripts/validate_partial_output_not_complete.py:2:1: 're' imported but unused
+scripts/validate_political_actor_not_statistics.py:2:1: 're' imported but unused
+scripts/validate_profile_policies_present.py:6:1: 'sys' imported but unused
+scripts/validate_profile_validator_alignment.py:19:1: 'sys' imported but unused
+scripts/validate_read_claim_requires_ledger.py:3:1: 'hashlib' imported but unused
+scripts/validate_read_claim_requires_ledger.py:3:1: 'time' imported but unused
+scripts/validate_release.py:395:9: local variable 'nd_rc' is assigned to but never used
+scripts/validate_release.py:450:9: local variable 'lc_rc' is assigned to but never used
+scripts/validate_replay_determinism.py:5:1: 'hashlib' imported but unused
+scripts/validate_retry_action_required.py:2:1: 're' imported but unused
+scripts/validate_retry_idempotency.py:2:1: 're' imported but unused
+scripts/validate_root_vs_zip_artifact_truth.py:29:1: 'sys' imported but unused
+scripts/validate_runtime.py:8:1: 'sys' imported but unused
+scripts/validate_runtime_contract_current.py:2:1: 'sys' imported but unused
+scripts/validate_runtime_contract_current.py:2:1: 're' imported but unused
+scripts/validate_schema_field_coverage.py:6:1: 'sys' imported but unused
+scripts/validate_seed_claims_not_presented_as_domain_analysis.py:2:1: 're' imported but unused
+scripts/validate_seed_only_truth.py:20:1: 'sys' imported but unused
+scripts/validate_self_claim_not_external_confirmation.py:2:1: 're' imported but unused
+scripts/validate_skill_markdown_injection.py:7:1: 'sys' imported but unused
+scripts/validate_smoke_failure_modes_are_not_prod_acceptance.py:2:1: 're' imported but unused
+scripts/validate_snippet_only_not_confirmed.py:2:1: 're' imported but unused
+scripts/validate_snippet_only_not_full_report.py:2:1: 're' imported but unused
+scripts/validate_source_gap_reflected_in_final_verdict.py:2:1: 're' imported but unused
+scripts/validate_source_laundering.py:2:1: 're' imported but unused
+scripts/validate_source_provenance_distinction.py:20:1: 'sys' imported but unused
+scripts/validate_source_quality_schema.py:2:1: 're' imported but unused
+scripts/validate_subprocess_timeouts.py:16:1: 'sys' imported but unused
+scripts/validate_timeout_reflected_in_claim_caps.py:2:1: 're' imported but unused
+scripts/validate_user_visible_delivery_ack.py:2:1: 're' imported but unused
+scripts/validate_v18_legacy_compat.py:20:1: 'sys' imported but unused
+scripts/validate_work_unit_completion.py:19:1: 'sys' imported but unused
+scripts/validate_work_unit_size_limits.py:2:1: 're' imported but unused
+scripts/validate_worker_bundle_not_research_package.py:2:1: 'pathlib.Path' imported but unused
+scripts/validate_worker_lease_lifecycle.py:2:1: 're' imported but unused
+scripts/verify_openclaw_run.py:31:1: 'sys' imported but unused
+scripts/verify_openclaw_run.py:130:5: local variable 'delivery_not_proven' is assigned to but never used
+tools/agent_telegram/telegram_bot.py:10:1: 'sys' imported but unused

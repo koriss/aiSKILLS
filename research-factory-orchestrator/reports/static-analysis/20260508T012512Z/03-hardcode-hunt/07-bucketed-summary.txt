@@ -1,0 +1,137 @@
+--- RUNTIME: runtime/ matches in 01-search-engines.txt ---
+(none)
+
+--- PROVIDERS: providers/ matches in 01-search-engines.txt ---
+(none)
+
+--- CONTRACTS: contracts/ matches in 01-search-engines.txt ---
+(none)
+
+--- POLICIES: policies/ matches in 01-search-engines.txt ---
+(none)
+
+--- SCRIPTS: scripts/ matches in 01-search-engines.txt ---
+./scripts/run_rfo_with_web_search.py:5:Full pipeline: SearXNG → fetch → RFO source_packet → real claims → render → outbox
+./scripts/run_rfo_with_web_search.py:8:  collector.py не умеет в SearXNG — только HEAD probe URL из RFO_SEED_URLS.
+./scripts/run_rfo_with_web_search.py:13:  1. SearXNG search + fetch страниц
+./scripts/run_rfo_with_web_search.py:51:_SEARCH_ENDPOINT = os.environ.get("RFO_SEARXNG_URL", "http://searxng:8080")
+./scripts/run_rfo_with_web_search.py:60:    """Query SearXNG. Returns list of {url, title, snippet}."""
+./scripts/run_rfo_with_web_search.py:79:        print(f"[search] SearXNG error: {e}", file=sys.stderr)
+./scripts/run_rfo_with_web_search.py:86:    url = f"https://en.wikipedia.org/w/api.php?action=opensearch&search={q}&format=json&limit={num}"
+./scripts/run_rfo_with_web_search.py:144:        src_id = src.get("source_id", f"SRC-SEARX-{i+1:03d}")
+./scripts/run_rfo_with_web_search.py:198:        is_wiki = "wikipedia.org" in url
+./scripts/run_rfo_with_web_search.py:200:            "source_id": f"SRC-SEARX-{i+1:03d}",
+./scripts/run_rfo_with_web_search.py:288:    parser = argparse.ArgumentParser(description="RFO + SearXNG web search bridge")
+./scripts/run_rfo_with_web_search.py:303:    print("[1/5] Searching SearXNG...")
+./scripts/run_rfo_with_web_search.py:306:        print("[1/5] SearXNG failed — trying Wikipedia fallback...")
+./scripts/run_rfo_full_research.py:3:RFO Full Research — SearXNG Web Search Primary
+./scripts/run_rfo_full_research.py:6:  1. SearXNG (primary) — реальный web search с Google/Bing/Wikipedia engines
+./scripts/run_rfo_full_research.py:35:_SEARXNG = os.environ.get("RFO_SEARXNG_URL", "http://searxng:8080")
+./scripts/run_rfo_full_research.py:43:    """Run a real web search via SearXNG."""
+./scripts/run_rfo_full_research.py:63:        print(f"[search] SearXNG error: {e}")
+./scripts/run_rfo_full_research.py:70:    url = (f"https://en.wikipedia.org/w/api.php"
+./scripts/run_rfo_full_research.py:156:        url = f"https://en.wikipedia.org/wiki/{urllib.parse.quote(title.replace(' ', '_'))}"
+./scripts/run_rfo_full_research.py:179:    # ── SearXNG web results (non-Wikipedia, non-noise)
+./scripts/run_rfo_full_research.py:306:        "profile": "search-primary", "backend": "searxng",
+./scripts/run_rfo_full_research.py:307:        "backend_reason": f"SearXNG {len(search_results)} results → {len(sources)} sources",
+./scripts/run_rfo_full_research.py:325:            {"wave_id": "W0", "status": "completed", "purpose": f"SearXNG search: {len(search_results)} results"},
+./scripts/run_rfo_full_research.py:341:                             f"SearXNG search returned {len(search_results)} results."),
+./scripts/run_rfo_full_research.py:343:            "SearXNG web search (Google, Bing, Wikipedia engines)",
+./scripts/run_rfo_full_research.py:371:        f"Метод: SearXNG (primary) + Wikipedia API + web fetch",
+./scripts/run_rfo_full_research.py:516:  <div class="m">📊 Источников: <b>{len(sources)}</b> | 📋 Фактов: <b>{len(claims)}</b> | SearXNG (primary) + Wikipedia + web fetch</div>
+./scripts/run_rfo_full_research.py:553:    print("[1/3] SearXNG web search...")
+
+--- TOOLS: tools/ matches in 01-search-engines.txt ---
+(none)
+
+--- TEMPLATES: templates/ matches in 01-search-engines.txt ---
+(none)
+
+--- RUNTIME: runtime/ matches in 02-delivery-channels.txt ---
+./runtime/adapter_impl.py:27:        "chat_id": _opt(getattr(a, "chat_id", "")),
+./runtime/artifact_execute_impl.py:24:        "chat_id": None,
+./runtime/cli.py:29:    # update. ``chat_id`` MUST come from the incoming update (group chat,
+./runtime/compatibility-matrix.json:15:  "upgrade_notes": "v19.2.0: runtime truth restoration (v19-dual-layout supported; v18 layout legacy_supported), Telegram real sendMessage when TELEGRAM_API_BASE is set, integration smokes + honesty verifier. v19.1.0 minor: multi-agent advisory channels (blinded checker, typed grounding, judge-council schema) + replayable evidence (run-events, deterministic/trajectory smokes) + release zip triad + clean-install + coverage-meta (ADR-012/013; docs/release-notes/v19.1.md). v19.0.4 patch: core-boundary-contract refresh (runtime/*_impl map); validate_release REQUIRED_GATES + smoke_cli_v19 + _smoke_corrupt_render; ADR-011 committed release-validation-transcript policy. v19.0.3 patch: fail-closed rollback minimal_valid + physical rollback stub; V6 semantic fixes (DELIV-STUB-EXT, DELIV-ATT-MISSING, DELIV-STUB-FORBIDDEN-ATTACHMENT); V1 walker oneOf/anyOf/allOf semantics; release B4 REQUIRED_GATES + dual Telegram smokes (v18 + RFO_V19_PROFILE=mvr); ADR-009/010 vocabulary/root patterns; validation-transcript schema REC-1 root permissive; state-machine queued→validation_failed. Prior v19.0.2: KISS validation-profile-used; V2 role_for_claim; V6 DELIV-EXT-CLI; semver-only strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
+
+--- PROVIDERS: providers/ matches in 02-delivery-channels.txt ---
+(none)
+
+--- CONTRACTS: contracts/ matches in 02-delivery-channels.txt ---
+(none)
+
+--- POLICIES: policies/ matches in 02-delivery-channels.txt ---
+(none)
+
+--- SCRIPTS: scripts/ matches in 02-delivery-channels.txt ---
+./scripts/_smoke_v19_2_1_honesty.py:6:1. canonical path + chat_id passed + api_base set → real delivery, verifier 0 lies.
+./scripts/_smoke_v19_2_1_honesty.py:69:    """Canonical skill, allowed runs-root, env-consent chat_id, sentinel token.
+./scripts/validate_no_provider_hardcode_text.py:7:    re.compile(r'sendMessage|sendDocument', re.I),
+./scripts/interface_runtime_adapter.py:17:  ``--chat-id``               Telegram chat_id from the *incoming* update.
+./scripts/interface_runtime_adapter.py:22:                              ``https://api.telegram.org``); also taken
+./scripts/interface_runtime_adapter.py:26:``delivery.chat_id``, ``delivery.reply_to_message_id`` and
+./scripts/validate_provider_specific_logic_not_in_runtime.py:15:    re.compile(r'sendMessage|sendDocument', re.I),
+./scripts/_rfo_path_guard.py:65:    "      --api-base \"${TELEGRAM_API_BASE:-https://api.telegram.org}\" \\\n"
+./scripts/verify_openclaw_run.py:20:  through the silent stub path without explicit consent (chat_id missing,
+
+--- TOOLS: tools/ matches in 02-delivery-channels.txt ---
+./tools/agent_telegram/telegram_bot.py:15:    base = os.environ.get("TELEGRAM_API_BASE", "https://api.telegram.org").rstrip("/")
+./tools/agent_telegram/config.example.env:4:TELEGRAM_API_BASE=https://api.telegram.org
+./tools/agent_telegram/security.py:19:def chat_id_allowed(chat_id: str) -> bool:
+./tools/agent_telegram/security.py:23:    return str(chat_id).strip() in allow
+
+--- TEMPLATES: templates/ matches in 02-delivery-channels.txt ---
+(none)
+
+--- RUNTIME: runtime/ matches in 04-backend-envs.txt ---
+./runtime/compatibility-matrix.json:15:  "upgrade_notes": "v19.2.0: runtime truth restoration (v19-dual-layout supported; v18 layout legacy_supported), Telegram real sendMessage when TELEGRAM_API_BASE is set, integration smokes + honesty verifier. v19.1.0 minor: multi-agent advisory channels (blinded checker, typed grounding, judge-council schema) + replayable evidence (run-events, deterministic/trajectory smokes) + release zip triad + clean-install + coverage-meta (ADR-012/013; docs/release-notes/v19.1.md). v19.0.4 patch: core-boundary-contract refresh (runtime/*_impl map); validate_release REQUIRED_GATES + smoke_cli_v19 + _smoke_corrupt_render; ADR-011 committed release-validation-transcript policy. v19.0.3 patch: fail-closed rollback minimal_valid + physical rollback stub; V6 semantic fixes (DELIV-STUB-EXT, DELIV-ATT-MISSING, DELIV-STUB-FORBIDDEN-ATTACHMENT); V1 walker oneOf/anyOf/allOf semantics; release B4 REQUIRED_GATES + dual Telegram smokes (v18 + RFO_V19_PROFILE=mvr); ADR-009/010 vocabulary/root patterns; validation-transcript schema REC-1 root permissive; state-machine queued→validation_failed. Prior v19.0.2: KISS validation-profile-used; V2 role_for_claim; V6 DELIV-EXT-CLI; semver-only strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
+
+--- PROVIDERS: providers/ matches in 04-backend-envs.txt ---
+(none)
+
+--- CONTRACTS: contracts/ matches in 04-backend-envs.txt ---
+(none)
+
+--- POLICIES: policies/ matches in 04-backend-envs.txt ---
+(none)
+
+--- SCRIPTS: scripts/ matches in 04-backend-envs.txt ---
+./scripts/_smoke_v19_2_1_honesty.py:21:``RFO_ALLOW_ENV_CHAT_ID=1`` and a sentinel ``TELEGRAM_BOT_TOKEN`` and verify
+./scripts/_smoke_v19_2_1_honesty.py:83:            "TELEGRAM_BOT_TOKEN": "0:smoke-sentinel-token-do-not-use",
+./scripts/_smoke_v19_2_1_honesty.py:223:        for k in ("RFO_ALLOW_ENV_CHAT_ID", "TELEGRAM_CHAT_ID", "TELEGRAM_BOT_TOKEN"):
+./scripts/_smoke_v19_2_1_honesty.py:286:            "TELEGRAM_BOT_TOKEN": "0:smoke-sentinel",
+./scripts/_smoke_v19_2_1_repro_after_fix.py:134:            "TELEGRAM_BOT_TOKEN": "",
+./scripts/interface_runtime_adapter.py:23:                              from ``TELEGRAM_API_BASE`` if not provided.
+./scripts/_rfo_path_guard.py:65:    "      --api-base \"${TELEGRAM_API_BASE:-https://api.telegram.org}\" \\\n"
+
+--- TOOLS: tools/ matches in 04-backend-envs.txt ---
+./tools/agent_telegram/security.py:28:    for name in ("TELEGRAM_BOT_TOKEN", "TELEGRAM_WEBHOOK_SECRET", "TELEGRAM_API_BASE"):
+./tools/agent_telegram/config.example.env:2:TELEGRAM_BOT_TOKEN=
+./tools/agent_telegram/config.example.env:4:TELEGRAM_API_BASE=https://api.telegram.org
+./tools/agent_telegram/telegram_bot.py:14:    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+./tools/agent_telegram/telegram_bot.py:15:    base = os.environ.get("TELEGRAM_API_BASE", "https://api.telegram.org").rstrip("/")
+./tools/agent_telegram/telegram_bot.py:17:        print(json.dumps({"error": "TELEGRAM_BOT_TOKEN_required"}, ensure_ascii=False))
+
+--- TEMPLATES: templates/ matches in 04-backend-envs.txt ---
+(none)
+
+--- RUNTIME: runtime/ matches in 05-http-clients-runtime.txt ---
+(none)
+
+--- PROVIDERS: providers/ matches in 05-http-clients-runtime.txt ---
+(none)
+
+--- CONTRACTS: contracts/ matches in 05-http-clients-runtime.txt ---
+(none)
+
+--- POLICIES: policies/ matches in 05-http-clients-runtime.txt ---
+(none)
+
+--- SCRIPTS: scripts/ matches in 05-http-clients-runtime.txt ---
+(none)
+
+--- TOOLS: tools/ matches in 05-http-clients-runtime.txt ---
+(none)
+
+--- TEMPLATES: templates/ matches in 05-http-clients-runtime.txt ---
+(none)
+

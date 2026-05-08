@@ -1,0 +1,3 @@
+usage: validate_canonical_package_layout.py [-h] --skill-dir SKILL_DIR
+                                            package_zip
+validate_canonical_package_layout.py: error: the following arguments are required: package_zip, --skill-dir

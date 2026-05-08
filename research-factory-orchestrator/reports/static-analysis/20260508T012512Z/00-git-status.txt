@@ -1,0 +1,44 @@
+ M research-factory-orchestrator/research-factory-orchestrator/CHANGELOG.md
+ M research-factory-orchestrator/research-factory-orchestrator/SKILL.md
+ M research-factory-orchestrator/research-factory-orchestrator/contracts/provider-capabilities.json
+ M research-factory-orchestrator/research-factory-orchestrator/contracts/provider-contract.json
+ M research-factory-orchestrator/research-factory-orchestrator/docs/adr/ADR-014-telegram-operator-control-plane.md
+ D research-factory-orchestrator/research-factory-orchestrator/providers/telegram/telegram_delivery_adapter.py
+ M research-factory-orchestrator/research-factory-orchestrator/providers/webhook/webhook_delivery_adapter.py
+ M research-factory-orchestrator/research-factory-orchestrator/runtime/adapter_impl.py
+ M research-factory-orchestrator/research-factory-orchestrator/runtime/cli.py
+ M research-factory-orchestrator/research-factory-orchestrator/runtime/outbox_impl.py
+ M research-factory-orchestrator/research-factory-orchestrator/runtime/validate_impl.py
+ M research-factory-orchestrator/research-factory-orchestrator/runtime/version.json
+ M research-factory-orchestrator/research-factory-orchestrator/runtime/worker_impl.py
+ D research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_telegram_agent_interface.py
+ D research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_telegram_real_send.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/build_research_package.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/interface_runtime_adapter.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/outbox_delivery_worker.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/rfo_runtime_core.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/runtime_job_worker.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/validate_logical_consistency.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/validate_release.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/validate_skill.py
+ M research-factory-orchestrator/research-factory-orchestrator/scripts/verify_openclaw_run.py
+?? research-factory-orchestrator/reports/static-analysis/
+?? research-factory-orchestrator/research-factory-orchestrator/AGENTS.md
+?? research-factory-orchestrator/research-factory-orchestrator/contracts/artifact-result-contract.json
+?? research-factory-orchestrator/research-factory-orchestrator/docs/adr/ADR-016-compute-vs-delivery-split.md
+?? research-factory-orchestrator/research-factory-orchestrator/docs/qa/
+?? research-factory-orchestrator/research-factory-orchestrator/docs/release-notes/v19.2.1.md
+?? research-factory-orchestrator/research-factory-orchestrator/docs/release-notes/v19.3.md
+?? research-factory-orchestrator/research-factory-orchestrator/runtime/artifact_execute_impl.py
+?? research-factory-orchestrator/research-factory-orchestrator/schemas/skill-result.schema.json
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_rfo_path_guard.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_v19_2_1_honesty.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_v19_2_1_repro_after_fix.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_v19_2_1_repro_baseline.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_v19_3_artifact_only.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_smoke_v19_3_concurrency.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/_test_mvr_profile_seed_only_disclosure.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/gc_old_runs.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/run_rfo_full_research.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/run_rfo_with_web_search.py
+?? research-factory-orchestrator/research-factory-orchestrator/scripts/validate_artifact_release.py

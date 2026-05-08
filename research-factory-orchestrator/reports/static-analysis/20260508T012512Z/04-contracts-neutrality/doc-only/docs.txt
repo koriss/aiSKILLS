@@ -1,0 +1,60 @@
+docs/baseline/README.md:7:- **S4 / smoke**: `python3 -S scripts/rfo_v18_core.py smoke --provider telegram`.
+docs/qa/v19_2_loop_iterations.md:13:  - Result: no lie entries (`lies=[]`), artifact signal indicates `delivery_status=stub_delivered`, `real_external_delivery=false` (expected for local no-telegram-token path)
+docs/qa/v19_2_loop_iterations.md:20:## Iteration 3 (telegram delivery contract)
+docs/qa/v19_2_loop_iterations.md:26:- In this host environment, production Telegram delivery requires real bot token/chat route in runtime path; standalone loop run remained `stub_delivered` while dedicated real-send smoke with mock transport passed.
+docs/baseline/v18.3.2-baseline-summary.json:4:  "smoke": "scripts/rfo_v18_core.py smoke (telegram stub) — final_gate_status stub_only expected",
+docs/diagnostics/v19_2_agent_honesty_methodology.md:19:3. For Telegram claims, require `_smoke_telegram_real_send` **HTTP hit** evidence
+docs/diagnostics/v19_2_agent_honesty_methodology.md:20:   (mock server counts real `sendMessage` calls).
+docs/adr/ADR-016-compute-vs-delivery-split.md:9:External audits of v19.2.1 showed `interface_runtime_adapter` queues work; the worker performs render+package; outbox/Telegram adapters perform delivery. A gateway hook placed **after** adapter exec only sees `{"queued": true}` and an empty or incomplete `run_dir`.
+docs/adr/ADR-016-compute-vs-delivery-split.md:14:2. **OpenClaw gateway** parses the marker, validates `result-manifest.json` (JSON Schema + relative paths + sha256), delivers via the existing channel adapter (e.g. Telegram `sendMessage` / `sendDocument`), records audit, and **suppresses** the model-generated user reply on this path.
+docs/adr/ADR-016-compute-vs-delivery-split.md:27:- Accept `chat_id`, bot tokens, or Telegram API base in argv/env for execute mode.
+docs/adr/ADR-016-compute-vs-delivery-split.md:28:- Call Telegram or webhook delivery from the skill process.
+docs/adr/ADR-016-compute-vs-delivery-split.md:39:- Pass `chat_id` into the skill argv/env.
+docs/adr/ADR-016-compute-vs-delivery-split.md:44:- Validator matrix drops mandatory in-skill Telegram smokes; release adds `validate_artifact_release` / artifact smoke gates.
+docs/adr/ADR-016-compute-vs-delivery-split.md:45:- ADR-014 remains valid for **operator** control-plane concerns; delivery proof for user-visible Telegram moves to **gateway audit** on the native route.
+docs/adr/ADR-016-compute-vs-delivery-split.md:49:  U[User / Telegram] --> G[OpenClaw gateway]
+docs/adr/ADR-014-telegram-operator-control-plane.md:1:# ADR-014 — Telegram operator control plane (v19.2.0)
+docs/adr/ADR-014-telegram-operator-control-plane.md:5:Superseded for **delivery posture** by [ADR-015 — Compute vs delivery split](./ADR-015-compute-vs-delivery-split.md) (v19.3): user-visible Telegram delivery and proofing move to **OpenClaw gateway**; the skill stays compute-only with a stdout marker + `result-manifest.json`.
+docs/adr/ADR-014-telegram-operator-control-plane.md:11:Packaged runs must keep a **stdlib-only** delivery adapter under `providers/telegram/`
+docs/adr/ADR-014-telegram-operator-control-plane.md:17:1. **Split responsibility** — runtime adapter = minimal `sendMessage` when
+docs/adr/ADR-014-telegram-operator-control-plane.md:25:5. **Webhook HMAC** — `webhook_server.py` verifies `X-Telegram-Bot-Api-Secret-Token`
+docs/release-notes/v19.2.md:7:flags are truthful, and Telegram delivery can be proven with a **mock Bot API** trace.
+docs/release-notes/v19.2.md:13:- **Telegram** — `providers/telegram/telegram_delivery_adapter.py` performs real
+docs/release-notes/v19.2.md:14:  `sendMessage` when `TELEGRAM_API_BASE` is set; operator tools under
+docs/release-notes/v19.2.md:28:- `docs/adr/ADR-014-telegram-operator-control-plane.md`
+docs/release-notes/v19.3.md:7:- **Gateway** (OpenClaw): native `/research_factory_orchestrator` runs execute, validates manifest, delivers to Telegram, **suppresses** default LLM reply; audit log records outcomes.
+docs/release-notes/v19.3.md:8:- **Validators**: Telegram-specific provider files and smokes are no longer required for `validate_skill` / default `validate_release` gates; use `validate_artifact_release` for artifact contract checks.
+docs/adr/ADR-015-runtime-truth-restoration.md:31:- Release gate time increases (extra smokes + Telegram traces + advisory stub).
+docs/release-notes/v19.0.4.md:27:- CLI smoke uses the same post-smoke closure checks as Telegram v19 (`_v19_post_smoke_ok`).
+docs/release-notes/v19.2.1.md:8:stub delivery when Telegram routing data is missing.
+docs/release-notes/v19.2.1.md:18:- **Telegram delivery truth path** — `chat_id` resolution now follows strict
+docs/release-notes/v19.2.1.md:34:  the incoming Telegram update.
+docs/release-notes/v19.2.1.md:40:- `docs/adr/ADR-014-telegram-operator-control-plane.md`
+docs/release-notes/v19.0.3.md:23:- `must_ok` superset: `_audit_composition_schemas`, `_smoke_subagent_isolation`, `_smoke_pristine_run`, `_smoke_rollback_creates_stubs`, **dual Telegram smokes** (`smoke_telegram_v18` + `smoke_telegram_v19` with `RFO_V19_PROFILE=mvr`), existing suites + logical consistency + `validate_release_report`.
+docs/release-notes/v19.0.3.md:33:- `scripts/_diff_telegram_against_golden.py`: skips if `contracts/telegram-golden/` absent (**not** `must_ok` until v19.0.4).
+docs/v19/delivery-truth-core.md:14:| `external_delivery_claim_allowed` | User-visible channel (Telegram, webhook, …) proves delivery |
+docs/v19/delivery-truth-core.md:25:4. **ack_namespace:** matches provider (`cli:` local synthetic, `tg:msg:` telegram, `webhook:` …).
+docs/v19/delivery-truth-core.md:28:7. **no_local_path_leak:** scan **user_visible_artifacts** list (not only `chat/message-*.txt`): includes HTML/MD reports, `delivery-summary.json`, `verification-report.html`, telegram payloads, error snippets copied into chat.
+docs/diagnostics/v19_2_root_cause_inventory.md:136:`runtime/outbox_impl.py` orchestrates per-provider gates. There is **no real Telegram send adapter** in `runtime/` — `provider_telegram_real_send` is `"stub"` in the feature matrix because the actual adapter is in `tools/agent_telegram/` from the v19.0.5 fork (Phase 7 port). Until Phase 7 lands, `mvr` profile keeps `delivery_mode: stub_allowed_explicit` (already correct in `validation-profiles/mvr.json:25`); `full-rigor` keeps `real_external_only_unless_explicit_stub` (already correct in `validation-profiles/full-rigor.json:25`).
+docs/project-handoff-v18.1.1.md:101:Minimal concrete flow for Telegram-like use:
+docs/project-handoff-v18.1.1.md:106:  --interface telegram \
+docs/project-handoff-v18.1.1.md:107:  --provider telegram \
+docs/project-handoff-v18.1.1.md:202:Caveat: `stub_only` means local provider stub acknowledgements were used. It does not prove that external Telegram successfully received a file. It proves local runtime/outbox/provider-stub path.
+docs/project-handoff-v18.1.1.md:241:- Telegram got huge tables;
+docs/project-handoff-v18.1.1.md:285:Telegram renderer
+docs/project-handoff-v18.1.1.md:339:Not telegram-runtime-adapter.
+docs/project-handoff-v18.1.1.md:364:providers/telegram/telegram_delivery_adapter.py
+docs/project-handoff-v18.1.1.md:605:HTML must be standalone: embedded CSS, no external theme dependency. Chat messages must be Telegram/mobile safe.
+docs/project-handoff-v18.1.1.md:627:providers/telegram/
+docs/project-handoff-v18.1.1.md:632:Research runtime must not hardcode Telegram. Telegram is a provider, not the center of the system.
+docs/project-handoff-v18.1.1.md:660:Telegram/chat summary requirements:
+docs/project-handoff-v18.1.1.md:805:- avoid raw sensitive data in Telegram/chat;
+docs/project-handoff-v18.1.1.md:928:  --provider telegram \
+docs/project-handoff-v18.1.1.md:929:  --interface telegram \
+docs/project-handoff-v18.1.1.md:976:After restart in Telegram:
+docs/project-handoff-v18.1.1.md:1024:- Telegram logic in generic runtime layer;
+docs/project-handoff-v18.1.1.md:1080:- add real Telegram attachment proof if environment supports it.
+docs/project-handoff-v18.1.1.md:1151:Before changing anything, inspect the actual archive: file count, size, SKILL.md frontmatter, references/kb/templates/schemas/contracts/failure-corpus preservation, Python AST, no pycache. Run validate_skill_discovery_frontmatter.py, validate_skill.py, validate_all_python_ast.py, validate_no_pycache.py and smoke_test_interface_runtime.py. Do not claim E2E Telegram delivery unless there is real provider ack, not only stub_only.
+docs/reliability/source-quality-weighting-system.md:54:Блогер/Telegram-канал/оппозиционный источник может быть:
+docs/reliability/source-quality-weighting-system.md:689:### 12.3 Telegram summary
+docs/reliability/execution-stability-hardening-analysis.md:100:HTML report + Telegram delivery

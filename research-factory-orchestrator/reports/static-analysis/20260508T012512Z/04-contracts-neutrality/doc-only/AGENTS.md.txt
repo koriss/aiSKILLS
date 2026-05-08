@@ -1,0 +1,6 @@
+14:    --interface telegram --provider telegram \
+17:    --api-base "${TELEGRAM_API_BASE:-https://api.telegram.org}" \
+22:extracted from the incoming Telegram update by the host (e.g.
+41:| Invoking adapter without `--chat-id` and without `RFO_ALLOW_ENV_CHAT_ID=1` | `providers/telegram/telegram_delivery_adapter._resolve_routing` | `LIE-DETECTED-DELIVERY-STUB-WITHOUT-CONSENT` in `runtime/errors.jsonl`, `external_delivery_gate.status="delivery_not_proven"` |
+60:`interface-request.json`, env, or fallback to `https://api.telegram.org`.
+66:`chat_id`, producing a "successful" stub-only delivery while the narrative

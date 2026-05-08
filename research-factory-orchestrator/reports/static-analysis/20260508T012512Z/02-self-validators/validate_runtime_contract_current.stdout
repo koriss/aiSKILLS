@@ -1,0 +1,5 @@
+{
+  "status": "fail",
+  "code": "F340",
+  "message": "current runtime contract does not list init_runtime outputs"
+}

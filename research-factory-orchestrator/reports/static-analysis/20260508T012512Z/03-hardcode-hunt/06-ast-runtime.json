@@ -1,0 +1,186 @@
+{
+  "runtime/artifact_execute_impl.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 151,
+        "name": "RFO_RUN_PROFILE",
+        "kind": "subscript"
+      },
+      {
+        "line": 160,
+        "name": "RFO_SEED_URLS",
+        "kind": "subscript"
+      },
+      {
+        "line": 156,
+        "name": "RFO_EXTERNAL_COLLECTION",
+        "kind": "subscript"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/capability.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 14,
+        "name": "RFO_CAP_SECRET",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/collector.py": {
+    "url_strings": [
+      {
+        "line": 36,
+        "value": "RFO/19.2.0 (+https://github.com/openclaw/research-factory-orchestrator)"
+      }
+    ],
+    "env_lookups": [
+      {
+        "line": 52,
+        "name": "RFO_MAX_EXTERNAL_SOURCES",
+        "kind": "get"
+      },
+      {
+        "line": 85,
+        "name": "RFO_SOURCE_PACKET",
+        "kind": "get"
+      },
+      {
+        "line": 83,
+        "name": "RFO_NO_NETWORK",
+        "kind": "get"
+      },
+      {
+        "line": 40,
+        "name": "RFO_SEED_URLS",
+        "kind": "get"
+      },
+      {
+        "line": 84,
+        "name": "RFO_EXTERNAL_COLLECTION",
+        "kind": "get"
+      },
+      {
+        "line": 130,
+        "name": "RFO_HTTP_TIMEOUT",
+        "kind": "get"
+      }
+    ],
+    "network_imports": [
+      {
+        "line": 29,
+        "import": "urllib.request"
+      }
+    ]
+  },
+  "runtime/profiles.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 34,
+        "name": "RFO_RUN_PROFILE",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/smoke_impl.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 88,
+        "name": "RFO_FIXED_TIME",
+        "kind": "get"
+      },
+      {
+        "line": 62,
+        "name": "RFO_V19_PROFILE",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/util.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 171,
+        "name": "RFO_ID_SALT",
+        "kind": "get"
+      },
+      {
+        "line": 114,
+        "name": "RFO_FIXED_TIME",
+        "kind": "get"
+      },
+      {
+        "line": 171,
+        "name": "RFO_DETERMINISTIC_IDS",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/validate_impl.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 88,
+        "name": "RFO_V19_PROFILE",
+        "kind": "get"
+      },
+      {
+        "line": 93,
+        "name": "RFO_NO_NETWORK",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/work_units.py": {
+    "url_strings": [],
+    "env_lookups": [
+      {
+        "line": 59,
+        "name": "RFO_LEGACY_EVENT_NAMES",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  },
+  "runtime/worker_impl.py": {
+    "url_strings": [
+      {
+        "line": 271,
+        "value": "runtime.completed"
+      }
+    ],
+    "env_lookups": [
+      {
+        "line": 202,
+        "name": "RFO_RUN_PROFILE",
+        "kind": "get"
+      },
+      {
+        "line": 25,
+        "name": "RFO_LEGACY_EVENT_NAMES",
+        "kind": "get"
+      },
+      {
+        "line": 84,
+        "name": "RFO_ALLOW_TMP_RUNS_ROOT",
+        "kind": "get"
+      },
+      {
+        "line": 85,
+        "name": "RFO_ALLOW_ENV_CHAT_ID",
+        "kind": "get"
+      }
+    ],
+    "network_imports": []
+  }
+}

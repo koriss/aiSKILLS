@@ -1,0 +1,1 @@
+runtime/collector.py:67:        with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 (operator-controlled URL)

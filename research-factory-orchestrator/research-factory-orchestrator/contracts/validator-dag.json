@@ -7,7 +7,7 @@
   ],
   "validators": [
     "validate_skill_discovery_frontmatter.py",
-    "validate_v18_runtime_artifacts.py",
+    "validate_runtime_artifacts.py",
     "validate_package_claim_requires_zip.py",
     "validate_gate_consistency.py",
     "validate_late_results_protocol.py",

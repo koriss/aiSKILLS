@@ -3,7 +3,7 @@
   "job_id": "JOB-GOOD-PROOF",
   "command_id": "CMD-GOOD-PROOF",
   "passed": true,
-  "gates": {
+  "checks": {
     "external_delivery_gate": {
       "status": "pass"
     },

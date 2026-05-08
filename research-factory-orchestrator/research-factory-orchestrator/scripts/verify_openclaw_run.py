@@ -123,8 +123,8 @@ def _check_runs_root(rd: Path) -> tuple[str | None, str | None]:
 
 def _check_delivery_stub_without_consent(rd: Path, dm: dict) -> str | None:
     # Avoid the forbidden legacy ``dm.get("gate" + "s")`` spelling spelled out as one token (T5.11f AST gate).
-    gates = dm.get("gate" + "s") if isinstance(dm.get("gate" + "s"), dict) else {}
-    ext = gates.get("external_delivery_gate") if isinstance(gates.get("external_delivery_gate"), dict) else {}
+    checks = dm.get("checks") if isinstance(dm.get("checks"), dict) else {}
+    ext = checks.get("external_delivery_gate") if isinstance(checks.get("external_delivery_gate"), dict) else {}
     status = str(ext.get("status") or "").lower()
     stub_only = bool(ext.get("stub_only"))
     delivery_not_proven = bool(ext.get("delivery_not_proven"))

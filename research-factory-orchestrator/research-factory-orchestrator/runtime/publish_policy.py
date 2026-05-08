@@ -23,9 +23,23 @@ def decide_publish_allowed(
     external: bool,
     stub_only: bool,
 ) -> Tuple[bool, str]:
-    """Returns (publish_allowed, reason_code)."""
+    """Returns (publish_allowed, reason_code).
+
+    ``run_mode`` SHOULD come from ``run-mode-classification.json`` (fallback: ``run.json`` mode).
+    """
     mode = (run_mode or "").strip()
-    smoke_like = set(policy.get("smoke_like_modes") or ["smoke", "seed", "stub_test"])
+    smoke_like = set(
+        policy.get("non_production_publish_modes")
+        or policy.get("smoke_like_modes")
+        or [
+            "seed_only_smoke",
+            "deterministic_scaffold",
+            "seed",
+            "stub_test",
+            "test",
+            "smoke",
+        ]
+    )
     if policy.get("block_external_publish_on_smoke_like", True) and mode in smoke_like:
         return False, "blocked_smoke_like_mode"
     if policy.get("block_on_manual_fallback", True) and manual_fallback:

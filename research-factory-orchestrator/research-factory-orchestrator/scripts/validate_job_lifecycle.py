@@ -34,10 +34,10 @@ def main():
     if status.get('run_id') != run_id: errors.append('runtime-status run_id mismatch')
     if status.get('state') not in ['delivered','stub_delivered']: errors.append(f'runtime-status state must be delivered/stub_delivered after outbox worker, got {status.get("state")!r}')
     if manifest.get('required_acks_present') is not True: errors.append('delivery-manifest.required_acks_present must be true')
-    gates = manifest["gates"] if "gates" in manifest and isinstance(manifest["gates"], dict) else {}
-    provider=(gates.get('provider_ack_gate') or {}).get('status')
-    external=(gates.get('external_delivery_gate') or {}).get('status')
-    final_claim=(gates.get('final_user_claim_gate') or {}).get('status')
+    checks = manifest["checks"] if "checks" in manifest and isinstance(manifest["checks"], dict) else {}
+    provider=(checks.get('provider_ack_gate') or {}).get('status')
+    external=(checks.get('external_delivery_gate') or {}).get('status')
+    final_claim=(checks.get('final_user_claim_gate') or {}).get('status')
     if provider != 'pass': errors.append('provider_ack_gate must pass after ACKs')
     if manifest.get('delivery_status') == 'stub_delivered':
         if external != 'stub_only': errors.append('stub lifecycle external_delivery_gate must be stub_only')

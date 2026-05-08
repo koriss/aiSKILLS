@@ -1,8 +1,10 @@
-# v18.3.2 Modularization Roadmap
+# v18.3.2 Modularization Roadmap (historical note)
 
-## Finding
+Superseded in-tree: implementation lives under `runtime/*_impl.py`, `scripts/rfo_runtime_core.py`, `scripts/validate_runtime_artifacts.py`, and [`contracts/core-boundary-contract.json`](../../contracts/core-boundary-contract.json). The old monolith entry `scripts/rfo_v18_core.py` has been removed.
 
-`rfo_v18_core.py` is currently a compatibility god module: adapter, orchestration, worker, outbox, validation, smoke/failure harness, rendering, and packaging live in one file. This is a high architectural risk.
+## Finding (archival)
+
+Historical risk was a single-script god module coupling adapter, orchestration, worker, outbox, validation, harness, rendering, and packaging.
 
 ## Hotfix scope
 
@@ -14,7 +16,7 @@ runtime/worker.py
 runtime/outbox.py
 runtime/validation.py
 runtime/packaging.py
-runtime/smoke.py
+~~runtime/smoke.py~~ removed
 contracts/core-boundary-contract.json
 ```
 

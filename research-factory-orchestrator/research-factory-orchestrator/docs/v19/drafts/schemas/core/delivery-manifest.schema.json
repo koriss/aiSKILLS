@@ -86,7 +86,7 @@
       "type": "array",
       "items": { "type": "string" }
     },
-    "gates": { "type": "object", "additionalProperties": true },
+    "checks": { "type": "object", "additionalProperties": true },
     "user_visible_artifact_paths": {
       "type": "array",
       "items": { "type": "string" }

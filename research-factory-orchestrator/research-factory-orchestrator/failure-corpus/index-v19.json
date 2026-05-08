@@ -60,7 +60,7 @@
     {"code":"SNIPPET-CITATION-ELIGIBLE-LEAK","category":"static-audit","severity":"meta","owner_validator":"runtime/collector.py","reproduces_in_fixture":"n/a"},
     {"code":"COLLECTION-WU-COMPLETED-WITHOUT-SOURCES","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_work_unit_completion.py","reproduces_in_fixture":"n/a"},
     {"code":"STRICT-PROFILE-IMPERATIVE-OVERRIDE-DRIFT","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_profile_validator_alignment.py","reproduces_in_fixture":"n/a"},
-    {"code":"LEGACY-GATES-IN-ACTIVE-PATH","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_legacy_compat.py","reproduces_in_fixture":"n/a"},
+    {"code":"LEGACY-GATES-IN-ACTIVE-PATH","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_logical_consistency.py","reproduces_in_fixture":"n/a"},
     {"code":"LEGACY-RAF-DFL-HARDCODED-IN-RENDER","category":"static-audit","severity":"meta","owner_validator":"runtime/render.py","reproduces_in_fixture":"n/a"},
     {"code":"CODE-HYGIENE-FORBIDDEN-TOKEN-LEAK","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_code_hygiene.py","reproduces_in_fixture":"n/a"},
     {"code":"SUBPROCESS-MISSING-TIMEOUT","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_subprocess_timeouts.py","reproduces_in_fixture":"n/a"},

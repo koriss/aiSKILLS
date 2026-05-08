@@ -13,7 +13,7 @@
     "OUT-0002",
     "OUT-0003"
   ],
-  "gates": {
+  "checks": {
     "provider_ack_gate": {
       "status": "pass",
       "passed": true,

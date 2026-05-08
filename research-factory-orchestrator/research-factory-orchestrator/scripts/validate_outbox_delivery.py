@@ -22,7 +22,7 @@ def main():
     else:
         m = json.loads(manifest.read_text(encoding="utf-8"))
         if m.get("delivery_status") not in ["delivered", "stub_delivered"]: errors.append(f"delivery-manifest not terminal: {m.get('delivery_status')}")
-        g = m["gates"] if "gates" in m and isinstance(m["gates"], dict) else {}
+        g = m["checks"] if "checks" in m and isinstance(m["checks"], dict) else {}
         if (g.get("provider_ack_gate") or {}).get("status") != "pass": errors.append("provider_ack_gate not pass")
         if m.get("delivery_status") == "stub_delivered":
             if (g.get("external_delivery_gate") or {}).get("status") != "stub_only": errors.append("stub external_delivery_gate not stub_only")

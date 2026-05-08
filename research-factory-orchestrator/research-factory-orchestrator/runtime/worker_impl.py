@@ -36,7 +36,10 @@ def _normalize_run_mode(requested: str) -> tuple[str, str | None]:
         "development": "research",
         "prod": "production",
     }
-    if low in ("research", "production", "smoke"):
+    if low == "smoke":
+        canonical, normalized_from = "research", raw
+        return canonical, normalized_from
+    if low in ("research", "production"):
         canonical = low
     elif low in aliases:
         canonical = aliases[low]

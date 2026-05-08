@@ -8,13 +8,12 @@ errors = []
 required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs","tools"]
 required_scripts = [
     "rfo_runtime_core.py",
-    "rfo_v18_core.py",
     "interface_runtime_adapter.py",
     "runtime_job_worker.py",
     "outbox_delivery_worker.py",
     "run_research_factory.py", "build_research_package.py", "run_validator_dag.py",
     "validate_skill_discovery_frontmatter.py", "validate_package_claim_requires_zip.py", "validate_gate_consistency.py",
-    "validate_late_results_protocol.py", "validate_v18_runtime_artifacts.py", "validate_all_python_ast.py", "validate_no_pycache.py",
+    "validate_late_results_protocol.py", "validate_runtime_artifacts.py", "validate_all_python_ast.py", "validate_no_pycache.py",
     "validate_startup_runtime_proof.py", "validate_status_claim_consistency.py", "validate_no_skill_md_imitation.py",
     "validate_command_router_mapping.py", "validate_runtime_entrypoint.py", "validate_canonical_package_layout.py",
     "validate_delivery_manifest_requires_ack.py", "validate_provider_specific_logic_not_in_runtime.py", "render_full_html_report.py",
@@ -47,7 +46,7 @@ required_scripts = [
 ]
 # v19.3: compute-only — only the CLI pass-through adapter is required for packaging.
 required_providers = ["providers/cli/cli_delivery_adapter.py"]
-required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "core-boundary-contract.json"]
+required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "seed-only-run-contract.json", "manual-fallback-contract.json", "core-boundary-contract.json"]
 required_policies = ["source-quality-policy.json", "source-acquisition-policy.json", "execution-reliability-policy.json", "context-acquisition-policy.json"]
 required_schemas = ["claim-source-fit.schema.json", "claim-evidence-weight.schema.json", "source-acquisition-result.schema.json", "source-gap.schema.json", "model-call.schema.json", "worker-lease.schema.json", "execution-reliability-gate.schema.json", "context-load-request.schema.json", "read-ledger.schema.json", "context-claim-gate.schema.json", "active-context-manifest.schema.json", "attachment-ledger.schema.json", "user-visible-delivery.schema.json", "run-mode-classification.schema.json", "manual-fallback-ledger.schema.json", "skill-result.schema.json"]
 for d in required_dirs:

@@ -8,7 +8,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("delivery_manifest"); args = ap.parse_args()
     d = json.loads(Path(args.delivery_manifest).read_text(encoding="utf-8")); errors = []
     status = d.get("delivery_status")
-    gates = d["gates"] if "gates" in d and isinstance(d["gates"], dict) else {}
+    gates = d["checks"] if "checks" in d and isinstance(d["checks"], dict) else {}
     if d.get("local_paths_exposed"):
         errors.append("local_paths_exposed=true")
     if status in TERMINAL:

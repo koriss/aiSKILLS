@@ -15,7 +15,7 @@ def main() -> int:
     fg = json.loads((rd / "final-answer-gate.json").read_text(encoding="utf-8")) if (rd / "final-answer-gate.json").exists() else {}
     dm = json.loads((rd / "delivery-manifest.json").read_text(encoding="utf-8")) if (rd / "delivery-manifest.json").exists() else {}
     vt = json.loads((rd / "validation-transcript.json").read_text(encoding="utf-8")) if (rd / "validation-transcript.json").exists() else {}
-    gates = fg["gates"] if "gates" in fg and isinstance(fg["gates"], dict) else {}
+    gates = fg["checks"] if "checks" in fg and isinstance(fg["checks"], dict) else {}
     need = [
         "provider_ack_gate",
         "external_delivery_gate",

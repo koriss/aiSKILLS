@@ -73,7 +73,7 @@ def main():
     s.add_argument(
         "--mode",
         default="research",
-        choices=("research", "production", "smoke"),
+        choices=("research", "production"),
         help="Propagated to nested run --mode (canonical).",
     )
     s.add_argument("--execute-runtime", action="store_true")

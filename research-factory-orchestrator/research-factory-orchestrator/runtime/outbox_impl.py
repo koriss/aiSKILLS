@@ -31,6 +31,9 @@ def _publish_tuple(rd: Path, external: bool, stub_only: bool, provider_pass: boo
     root = skill_root()
     pol = jr(root / "contracts" / "publish-policy.json", {})
     run = jr(rd / "run.json", {})
+    rm_cls = jr(rd / "run-mode-classification.json", {})
+    classified = str(rm_cls.get("run_mode") or "").strip()
+    effective_mode = classified if classified else str(run.get("mode", "") or "")
     audit = jr(rd / "self-audit" / "runtime-self-audit.json", {})
     manual = bool(audit.get("manual_fallback_presented_as_rfo"))
     spec = importlib.util.spec_from_file_location("rfo_publish_policy", root / "runtime" / "publish_policy.py")
@@ -39,7 +42,7 @@ def _publish_tuple(rd: Path, external: bool, stub_only: bool, provider_pass: boo
         spec.loader.exec_module(mod)
         return mod.decide_publish_allowed(
             policy=pol,
-            run_mode=str(run.get("mode", "")),
+            run_mode=effective_mode,
             manual_fallback=manual,
             provider_pass=provider_pass,
             any_failed=any_failed,
@@ -255,7 +258,7 @@ def cmd_outbox(a):
             ext_gate["reasons"] = delivery_not_proven_reasons
         if final_status := (delivery_not_proven_reasons[0] if delivery_not_proven_reasons else None):
             ext_gate["primary_reason"] = final_status
-        gates = {
+        checks = {
             "provider_ack_gate": {"status": "pass" if provider_pass else "fail", "passed": provider_pass},
             "external_delivery_gate": ext_gate,
             "final_user_claim_gate": {"status": ext_status, "passed": external, "stub_only": stub_only, "delivery_not_proven": any_delivery_not_proven},
@@ -322,7 +325,7 @@ def cmd_outbox(a):
                 "attachments": prev_dm.get("attachments") if isinstance(prev_dm.get("attachments"), list) else [],
                 "local_paths_exposed": False,
                 "created_at": prev_dm.get("created_at") or now(),
-                "gates": gates,
+                "checks": checks,
                 "updated_at": now(),
             },
         )
@@ -353,7 +356,7 @@ def cmd_outbox(a):
             "run_id": run.get("run_id"),
             "passed": fg_passed,
             "status": fg_status,
-            "checks": gates,
+            "checks": checks,
             "contradiction_echo": contradiction_echo,
             "overconfidence_risk": overconfidence_risk,
             "created_at": prev_fg.get("created_at") or now(),
@@ -406,7 +409,7 @@ def cmd_outbox(a):
         st.update({"state": dstat})
         jw(rd / "runtime-status.json", st)
         # Rebuild package after outbox mutates root artifacts so root-vs-zip truth
-        # compares the finalized manifest/gates, not stale pre-outbox copies.
+        # compares the finalized manifest/checks, not stale pre-outbox copies.
         pkg_builder = skill_root() / "scripts" / "build_research_package.py"
         if pkg_builder.is_file():
             try:

@@ -30,8 +30,9 @@ def main():
         if ack.get("status") not in ["sent", "duplicate"]: errors.append(f"{event_id}: ack status invalid for terminal provider ACK")
         if ack.get("idempotency_key") != ev.get("idempotency_key"): errors.append(f"{event_id}: idempotency_key mismatch")
         if ack.get("stub_delivery") is True and ack.get("real_external_delivery") is True: errors.append(f"{event_id}: ack cannot be both stub and real external")
-    gates = manifest["gates"] if "gates" in manifest and isinstance(manifest["gates"], dict) else {}
-    if (gates.get("provider_ack_gate") or {}).get("status") != "pass": errors.append("provider_ack_gate is not pass")
+    checks = manifest["checks"] if "checks" in manifest and isinstance(manifest["checks"], dict) else {}
+    if (checks.get("provider_ack_gate") or {}).get("status") != "pass":
+        errors.append("provider_ack_gate is not pass")
     if attachment.get("all_required_acknowledged") is not True and attachment.get("all_required_sent") is not True: errors.append("attachment-ledger required attachments not acknowledged")
     if manifest.get("delivery_status") == "stub_delivered":
         if gate.get("passed") is not False: errors.append("stub_delivered must not set final-answer-gate.passed=true")

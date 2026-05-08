@@ -6,7 +6,7 @@
 
 ## 2. Components
 
-- `runtime/impl.py` — orchestration
+- `runtime/cli.py` + `runtime/*_impl.py` — orchestration
 - `runtime/handoff.py` — signed envelopes
 - `runtime/trace.py` — tamper-evident trace chain
 - `runtime/capability.py` — scoped agency (OWASP LLM08)

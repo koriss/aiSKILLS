@@ -1,0 +1,12 @@
+{
+  "version": "19.3.0",
+  "description": "v19 constraints for seed-only / low-evidence classified runs — not claimed as full external research.",
+  "harness_is_local_only": true,
+  "seed_only_max_claim_level": "runtime_structure_only",
+  "forbidden_user_claims": [
+    "full research completed",
+    "factchecked report completed",
+    "domain analysis completed"
+  ],
+  "schema_version": "v19"
+}

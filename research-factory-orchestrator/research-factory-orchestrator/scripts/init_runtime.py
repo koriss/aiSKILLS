@@ -171,7 +171,7 @@ def main():
         "self_audit_gate":{"status":"fail","passed":False},
         "package_gate":{"status":"fail","passed":False},
     }
-    jwrite(root/"final-answer-gate.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"passed":False,"status":"fail","gates":init_gates,"created_at":now()})
+    jwrite(root/"final-answer-gate.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"passed":False,"status":"fail","checks":init_gates,"created_at":now()})
     jwrite(root/"report/semantic-report.json", {"report_meta":run,"summary":{},"sections":[],"claims":[],"sources":[]})
     twrite(root/"report/full-report.html", "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'></head><body><h1>Runtime initialization report shell</h1><script type='application/json' id='artifact-manifest-json'>{}</script><script type='application/json' id='provenance-manifest-json'>{}</script><script type='application/json' id='validation-transcript-json'>{}</script><script type='application/json' id='delivery-manifest-json'>{}</script><script type='application/json' id='runtime-status-json'>{}</script><script type='application/json' id='entrypoint-proof-json'>{}</script></body></html>")
     chat_plan={"run_id":run_id,"job_id":job_id,"command_id":command_id,"provider":args.provider,"plain_text_only":True,"mobile_safe":True,"no_tables":True,"no_local_paths":True,"split_policy":{"max_message_chars":3500,"logical_blocks":True},"messages":[],"attachments":[],"created_at":now()}

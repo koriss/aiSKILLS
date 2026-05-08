@@ -1,10 +1,13 @@
 {
-  "version": "19.2.0",
-  "description": "Truth table for user-visible / billable publish vs run_mode, gates, acks, manual_fallback.",
-  "smoke_like_modes": [
-    "smoke",
+  "version": "19.3.0",
+  "description": "Truth table for user-visible publish vs classified run_mode, checks, acks, manual_fallback.",
+  "non_production_publish_modes": [
+    "seed_only_smoke",
+    "deterministic_scaffold",
     "seed",
-    "stub_test"
+    "stub_test",
+    "test",
+    "smoke"
   ],
   "block_external_publish_on_smoke_like": true,
   "block_on_manual_fallback": true,
@@ -12,8 +15,7 @@
   "require_no_failed_acks": true,
   "require_external_delivery_for_user_publish": true,
   "notes": [
-    "external=true means real_external_delivery proven on all required acks (non-stub provider path).",
-    "stub_only runs may still complete provider_ack_gate but must not set publish_allowed when require_external_delivery_for_user_publish is true."
-  ],
-  "inherits_from": "18.3.2"
+    "effective run_mode SHOULD be run-mode-classification.json.run_mode (Outbox computes this).",
+    "external=true means real_external_delivery proven on all required acks (non-stub provider path)."
+  ]
 }

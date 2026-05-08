@@ -16,7 +16,7 @@
     "schema_version": { "type": "string", "const": "v1" },
     "contract": {
       "type": "string",
-      "enum": ["rfo-artifact-result-v1", "rfo-skill-agent-handoff-v1"]
+      "const": "rfo-skill-agent-handoff-v1"
     },
     "status": {
       "type": "string",

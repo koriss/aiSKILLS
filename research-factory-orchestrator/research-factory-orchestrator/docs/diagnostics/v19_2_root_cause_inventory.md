@@ -111,7 +111,7 @@ Plus `runtime/schema_defaults.py` adds `"validation_failed"` for V1 rollback. Al
 - `runtime/render.py:96` — `"strength": "seed_only"` on a confidence cluster (semantically correct: this is a default cluster strength, not a runtime flag).
 - `scripts/validate_seed_claims_not_presented_as_domain_analysis.py` — guard.
 - `scripts/validate_smoke_run_not_presented_as_research.py` — guard.
-- `contracts/smoke-run-contract.json` — contract reference.
+- `contracts/seed-only-run-contract.json` — seed-only governance contract.
 
 `external_collection_executed` does **not** appear anywhere in this repo. It exists only in the hardened archive (the audit refers to `runtime/external_collect.py:144`). Phase 4 + 4C T4C.2 will introduce it as **split flags** instead of one bool: `web_search_attempted`, `web_search_result_count`, `web_search_succeeded`, `source_packet_loaded`, `external_sources_loaded`. No legacy bool to preserve.
 

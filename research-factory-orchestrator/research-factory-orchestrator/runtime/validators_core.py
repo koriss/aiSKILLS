@@ -24,11 +24,14 @@ def run_mode_truth(rd: Path):
     r=Result('run_mode_truth')
     rm=load_json(rd/'run-mode-classification.json',{}) or {}
     fg=load_json(rd/'final-answer-gate.json',{}) or {}
-    mode=rm.get('run_mode')
-    if mode in ('smoke','seed','test') and rm.get('production_publish_allowed'):
-        r.add('F310','critical','smoke/seed/test run has production_publish_allowed=true',['run-mode-classification.json'])
-    if mode in ('smoke','seed','test') and fg.get('passed'):
-        r.add('F311','critical','smoke/seed/test run has final-answer-gate passed',['final-answer-gate.json'])
+    mode=str(rm.get('run_mode') or '')
+    non_prod_modes = frozenset({
+        'smoke','seed','test','seed_only_smoke','deterministic_scaffold','stub_test'
+    })
+    if mode in non_prod_modes and rm.get('production_publish_allowed'):
+        r.add('F310','critical','non-production classified run has production_publish_allowed=true',['run-mode-classification.json'])
+    if mode in non_prod_modes and fg.get('passed'):
+        r.add('F311','critical','non-production classified run has final-answer-gate passed',['final-answer-gate.json'])
     return r.as_dict()
 
 def manual_fallback_truth(rd: Path):

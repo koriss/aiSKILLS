@@ -1,5 +1,5 @@
 {
-  "version": "17.1.0-runtime-lifecycle-hardening",
+  "version": "19.2.0",
   "outbox_dir": "outbox",
   "event_schema": "schemas/outbox-event.schema.json",
   "delivery_ack_schema": "schemas/delivery-ack.schema.json",
@@ -36,5 +36,6 @@
   "terminal_statuses": [
     "delivered",
     "stub_delivered"
-  ]
+  ],
+  "inherits_from": "17.1.0-runtime-lifecycle-hardening"
 }

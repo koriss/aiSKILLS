@@ -22,7 +22,7 @@ if str(ROOT) not in sys.path:
 
 
 def main() -> int:
-    core = str(ROOT / "scripts" / "rfo_v18_core.py")
+    core = str(ROOT / "scripts" / "rfo_runtime_core.py")
     py = sys.executable
     runs_root = Path(tempfile.mkdtemp(prefix="rfo-corrupt-render-"))
     env_base = {k: v for k, v in os.environ.items() if k != "RFO_V19_PROFILE"}

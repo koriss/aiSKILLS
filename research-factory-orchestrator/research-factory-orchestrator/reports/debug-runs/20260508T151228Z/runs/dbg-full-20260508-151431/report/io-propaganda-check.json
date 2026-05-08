@@ -1,0 +1,26 @@
+{
+  "run_id": "RUN-14501b8f6dad",
+  "narrative_map": [
+    {
+      "narrative_id": "N001",
+      "claim": "Seed material may contain persuasion/framing elements",
+      "confidence": "medium"
+    }
+  ],
+  "method_matches": [
+    {
+      "method": "fear appeal / risk amplification",
+      "confidence": "low",
+      "note": "Requires textual evidence review in full run."
+    },
+    {
+      "method": "source laundering check required",
+      "confidence": "medium",
+      "note": "Runtime always opens this branch for public/political/media claims."
+    }
+  ],
+  "source_laundering_map": [],
+  "amplification_chain": [],
+  "actor_method_source_relations": [],
+  "verdict": "not_enough_external_data_in_smoke_run"
+}

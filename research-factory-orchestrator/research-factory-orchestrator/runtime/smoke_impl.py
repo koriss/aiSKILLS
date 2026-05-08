@@ -90,7 +90,7 @@ def cmd_smoke(a):
 
     step_deterministic_smoke()
 
-    core = str(skill_root() / "scripts" / "rfo_v18_core.py")
+    core = str(skill_root() / "scripts" / "rfo_runtime_core.py")
     py = sys.executable
     step("adapter", [py, "-S", core, "adapter", "--runs-root", str(root), "--interface", a.interface, "--provider", a.provider, "--conversation-id", a.conversation_id, "--message-id", a.message_id, "--user-id", a.user_id, "--task", a.task])
     step("worker", [py, "-S", core, "worker", "--runs-root", str(root), "--mode", "research", "--execute-runtime"])

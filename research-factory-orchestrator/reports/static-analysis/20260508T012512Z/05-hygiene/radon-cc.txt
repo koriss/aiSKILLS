@@ -1,0 +1,519 @@
+runtime/judge_panel.py
+    F 17:0 run_position_swap_judges - B (6)
+runtime/smoke_impl.py
+    F 17:0 _v19_rollback_closure_ok - C (13)
+runtime/profiles.py
+    F 29:0 resolve - C (12)
+runtime/schema_defaults.py
+    F 73:0 _synth_value - D (21)
+    F 120:0 minimal_valid - B (10)
+    F 102:0 _synth_object - B (6)
+runtime/work_units.py
+    F 88:0 execute_pending - B (7)
+runtime/worker_impl.py
+    F 51:0 cmd_run - D (23)
+    F 319:0 cmd_worker - C (11)
+    F 303:0 build_package - B (9)
+    F 29:0 _normalize_run_mode - B (6)
+runtime/validators_core.py
+    F 8:0 delivery_truth - C (13)
+    F 41:0 evidence_truth - C (13)
+    F 56:0 payload_safety - B (10)
+    F 23:0 run_mode_truth - B (7)
+runtime/outbox_impl.py
+    F 51:0 cmd_outbox - F (128)
+runtime/util.py
+    F 11:0 _load_claim_statuses - B (6)
+runtime/capability.py
+    F 26:0 verify - B (10)
+runtime/render.py
+    F 76:0 render_all - D (27)
+runtime/slo.py
+    F 15:0 compute_slis - C (12)
+runtime/merkle_anchor.py
+    F 10:0 merkle_root - B (6)
+runtime/failure_impl.py
+    F 14:0 cmd_failure - F (43)
+runtime/output_filter.py
+    F 15:0 scan_text - B (6)
+runtime/artifact_execute_impl.py
+    F 141:0 cmd_execute - C (20)
+    F 90:0 _build_manifest - B (7)
+runtime/validate_impl.py
+    F 86:0 validate - F (63)
+runtime/publish_policy.py
+    F 16:0 decide_publish_allowed - C (16)
+runtime/citation_grounding.py
+    F 49:0 evaluate - C (14)
+runtime/legacy_compat.py
+    F 28:0 read_fag_gates - B (6)
+runtime/coverage.py
+    F 24:0 reconcile - D (26)
+runtime/collector.py
+    F 75:0 collect - D (25)
+    F 208:0 _update_sources_with_collection - B (10)
+scripts/_smoke_v19_2_1_repro_after_fix.py
+    F 127:0 case_d_no_chat_id_no_consent - C (15)
+    F 43:0 _run - B (7)
+    F 82:0 case_b_restored_bak_refuses - B (6)
+    F 107:0 case_c_tmp_without_consent - B (6)
+scripts/run_blinded_checker.py
+    F 44:0 main - D (24)
+    F 31:0 _evidence_text - B (8)
+scripts/validate_source_gap_reflected_in_final_verdict.py
+    F 28:0 main - B (7)
+scripts/build_skill_inventory.py
+    F 13:0 main - B (8)
+scripts/validate_source_laundering.py
+    F 28:0 main - B (6)
+scripts/validate_skill_markdown_injection.py
+    F 17:0 main - B (9)
+scripts/validate_validator_coverage.py
+    F 98:0 main - D (26)
+    F 50:0 _issue_codes_from_transcript - C (14)
+scripts/watchdog.py
+    F 8:0 main - B (8)
+scripts/validate_outbox_delivery.py
+    F 5:0 main - D (29)
+scripts/validate_int_coverage_matrix.py
+    F 7:0 main - B (10)
+scripts/validate_work_unit_compilation.py
+    F 4:0 main - B (8)
+scripts/validate_trace_hash_chain.py
+    F 18:0 main - B (8)
+scripts/validate_cross_model_judge.py
+    F 11:0 main - C (17)
+scripts/_smoke_v19_2_1_honesty.py
+    F 68:0 case_1_canonical_consented_smoke - C (16)
+    F 217:0 case_4_no_chat_id_no_consent - C (15)
+    F 275:0 case_5_consented_env_chat_id - C (11)
+    F 333:0 main - B (10)
+    F 146:0 case_2_bak_skill_copy_refused - B (7)
+    F 181:0 case_3_tmp_runs_root_without_consent - B (7)
+scripts/validate_chat_claims_against_delivery_manifest.py
+    F 12:0 main - C (19)
+scripts/validate_chat_message_plan.py
+    F 17:0 main - E (33)
+scripts/validate_package.py
+    F 4:0 main - B (9)
+scripts/validate_error_log_quality.py
+    F 55:0 main - D (30)
+scripts/validate_source_quality_schema.py
+    F 28:0 main - B (6)
+scripts/gc_old_runs.py
+    F 22:0 main - B (8)
+scripts/validate_wiki_inline_citations.py
+    F 9:0 main - C (16)
+scripts/match_io_methods.py
+    F 5:0 main - B (6)
+scripts/validate_v19_release_bad_suite.py
+    F 36:0 main - E (36)
+scripts/validate_user_visible_delivery_ack.py
+    F 16:0 main - B (7)
+scripts/migrate_validator_invocation.py
+    F 24:0 main - B (6)
+scripts/validate_runtime.py
+    F 38:0 validate_current - C (13)
+scripts/_test_mvr_profile_seed_only_disclosure.py
+    F 321:0 main - D (22)
+    F 131:0 check_seed_only_content - C (20)
+    F 52:0 check_delivery_truth_violation - C (13)
+    F 251:0 run_fresh_smoke_test - B (7)
+    F 213:0 check_v1_v5_pass - B (6)
+scripts/validate_source_provenance_distinction.py
+    F 40:0 main - C (20)
+scripts/validate_provider_payload.py
+    F 7:0 main - B (8)
+scripts/validate_no_single_int_lockin.py
+    F 5:0 main - B (9)
+scripts/validate_search_ledger.py
+    F 18:0 main - B (10)
+scripts/validate_report_structure.py
+    F 14:0 main - B (9)
+scripts/test_delivery_gate_negative_cases.py
+    F 40:0 main - C (15)
+    F 13:0 make_run - C (14)
+scripts/validate_heartbeat_required_for_running.py
+    F 28:0 main - B (6)
+scripts/validate_stage_records.py
+    F 5:0 main - B (10)
+scripts/validate_artifact_release.py
+    F 27:0 main - C (15)
+scripts/validate_html_semantic_tables.py
+    F 22:0 main - B (7)
+scripts/validate_claim_id_continuity_or_skip_reason.py
+    F 9:0 main - C (13)
+scripts/validate_idempotent_outbox.py
+    F 17:0 main - D (25)
+scripts/check_schema_drift.py
+    F 35:0 main - B (6)
+scripts/validate_state_transitions.py
+    F 12:0 main - C (14)
+scripts/validate_html_source_links.py
+    F 5:0 main - B (7)
+scripts/validate_code_hygiene.py
+    F 5:0 main - C (16)
+scripts/validate_html_proof_matches_runtime_artifacts.py
+    F 27:0 main - C (20)
+scripts/validate_partial_output_not_complete.py
+    F 28:0 main - B (7)
+scripts/validate_completion_proof.py
+    F 10:0 main - C (15)
+scripts/validate_outgoing_message_claims.py
+    F 16:0 _scan_outbox_tool_issues - B (9)
+    F 32:0 main - B (7)
+scripts/validate_no_smoke_as_context_proof.py
+    F 6:0 main - B (9)
+scripts/validate_runtime_entrypoint.py
+    F 5:0 main - B (9)
+scripts/validate_summary_no_new_facts.py
+    F 8:0 main - B (7)
+scripts/validate_outbox_finalization.py
+    F 40:0 main - C (19)
+scripts/interface_runtime_adapter.py
+    F 50:0 main - B (6)
+scripts/_smoke_corrupt_render.py
+    F 24:0 main - C (13)
+scripts/validate_no_name_only_matches.py
+    F 5:0 main - B (8)
+scripts/validate_evidence_debt.py
+    F 5:0 main - B (6)
+scripts/validate_read_claim_requires_ledger.py
+    F 7:0 main - B (8)
+scripts/check_validation_pass.py
+    F 11:0 main - C (13)
+scripts/validate_shard_ledger.py
+    F 7:0 main - C (11)
+scripts/run_core_validators.py
+    F 135:0 main - F (63)
+    F 47:0 _advisory_judge_council - E (34)
+    F 103:0 _build_used_profile - B (10)
+scripts/_smoke_v19_2_integration.py
+    F 265:0 _scenario_mvr_pristine_v1_pass - C (11)
+    F 189:0 _scenario_mvr_no_network_v19_validate - B (10)
+    F 299:0 _scenario_no_active_legacy_gates_ast - B (8)
+    F 125:0 _scenario_required_no_network - B (7)
+    F 156:0 _scenario_no_v18_event_leak - B (7)
+    F 229:0 _scenario_source_packet_load - B (7)
+    F 326:0 _scenario_no_v18_emit_strings - B (6)
+scripts/validate_active_contract_versions.py
+    F 39:0 main - B (8)
+scripts/validate_no_premature_stopping.py
+    F 5:0 main - B (6)
+scripts/validate_social_profile_linkage.py
+    F 5:0 main - B (10)
+scripts/validate_all_source_fusion.py
+    F 5:0 main - B (6)
+scripts/_smoke_v19_3_concurrency.py
+    F 48:0 main - B (7)
+scripts/validate_no_delivery_after_validation_fail.py
+    F 10:0 main - C (13)
+scripts/validate_html_report.py
+    F 24:0 main - C (14)
+scripts/validate_delivery_manifest.py
+    F 7:0 main - E (32)
+scripts/validate_inference_not_confirmed_fact.py
+    F 5:0 main - C (11)
+scripts/validate_root_vs_zip_artifact_truth.py
+    F 64:0 main - C (15)
+scripts/validate_v18_legacy_compat.py
+    F 53:0 main - C (13)
+scripts/validate_html_well_formed.py
+    F 45:0 validate - C (17)
+scripts/inference_broker.py
+    F 5:0 main - B (6)
+scripts/_smoke_rollback_creates_stubs.py
+    F 90:0 _assert_stubs - D (26)
+scripts/validate_claim_citation_links.py
+    F 5:0 main - B (7)
+scripts/_audit_composition_schemas.py
+    F 37:0 _walk - C (14)
+    F 14:0 _props_deep - B (7)
+scripts/_rfo_path_guard.py
+    F 146:0 enforce_runs_root_argv - C (12)
+    F 81:0 enforce_canonical_skill_path - B (7)
+scripts/render_full_html_report.py
+    F 41:0 main - C (19)
+scripts/validate_capability_scope.py
+    F 10:0 main - B (7)
+scripts/validate_telegram_no_tables_strict.py
+    F 7:0 main - B (6)
+scripts/validate_source_provenance.py
+    F 7:0 main - B (9)
+scripts/validate_research_package.py
+    F 7:0 main - B (7)
+scripts/validate_context_claim_gate.py
+    F 8:0 main - B (10)
+scripts/validate_smoke_run_not_presented_as_research.py
+    F 16:0 main - B (6)
+scripts/validate_standalone_html.py
+    F 6:0 main - C (11)
+scripts/validate_item.py
+    F 41:0 main - B (8)
+scripts/validate_person_data_classification.py
+    F 5:0 main - B (6)
+scripts/validate_v19_fixture_suite.py
+    F 138:0 _check_advisory - F (62)
+    F 81:0 _check_expected - E (39)
+    F 214:0 main - C (15)
+scripts/validate_profile_policies_present.py
+    F 30:0 main - B (9)
+scripts/validate_source_family_confidence.py
+    F 5:0 main - B (6)
+scripts/validate_claim_source_fit.py
+    F 28:0 main - B (6)
+scripts/validate_handoff_envelope.py
+    F 24:0 main - C (11)
+scripts/validate_embedded_io_kb.py
+    F 12:0 main - C (17)
+scripts/validate_confirmed_fact_source_support.py
+    F 4:0 main - B (10)
+scripts/validate_search_strategy_has_ledger.py
+    F 4:0 main - B (6)
+scripts/validate_workplan.py
+    F 5:0 main - B (8)
+scripts/select_report_archetype.py
+    F 5:0 score_archetype - B (6)
+scripts/validate_profile_validator_alignment.py
+    F 43:0 main - D (22)
+scripts/validate_worker_lease_lifecycle.py
+    F 28:0 main - B (8)
+scripts/_diff_telegram_against_golden.py
+    F 18:0 _deep_diff - C (16)
+    F 50:0 main - B (10)
+scripts/validate_coverage_matrix.py
+    F 7:0 main - B (8)
+scripts/validate_no_scaffolds_in_production.py
+    F 32:0 main - C (13)
+scripts/validate_delivery_manifest_requires_ack.py
+    F 9:0 main - E (34)
+scripts/compile_work_units.py
+    F 5:0 main - B (7)
+scripts/run_typed_grounding.py
+    F 60:0 main - F (44)
+    F 47:0 _high_contradiction_claim_ids - B (8)
+scripts/validate_gate_semantics.py
+    F 11:0 main - E (33)
+scripts/validate_claim_citation_map.py
+    F 5:0 main - C (11)
+scripts/validate_release_report.py
+    F 23:0 main - E (39)
+scripts/validate_no_reasoning_leak_in_chat_payload.py
+    F 7:0 main - B (10)
+scripts/validate_subprocess_timeouts.py
+    M 33:4 _Visitor.visit_Call - C (12)
+    C 29:0 _Visitor - B (8)
+    F 67:0 main - B (7)
+scripts/run_rfo_full_research.py
+    F 283:0 write_artifacts - C (17)
+    F 142:0 build_sources - C (16)
+scripts/validate_global_merge.py
+    F 13:0 main - B (9)
+scripts/validate_status_claim_consistency.py
+    F 7:0 main - B (7)
+scripts/validate_quote_supports_claim.py
+    F 10:0 main - C (13)
+scripts/run_rfo_with_web_search.py
+    F 286:0 main - C (19)
+    F 189:0 build_source_packet - B (10)
+scripts/validate_self_claim_not_external_confirmation.py
+    F 28:0 main - B (6)
+scripts/validate_semantic_intent_alignment.py
+    F 19:0 main - C (11)
+scripts/validate_shard_contracts.py
+    F 5:0 main - B (8)
+scripts/validate_stub_delivery_not_external.py
+    F 7:0 main - C (19)
+scripts/_smoke_v19_2_1_repro_baseline.py
+    F 68:0 main - D (26)
+scripts/validate_validation_transcript.py
+    F 5:0 main - B (7)
+scripts/validate_research_package_zip.py
+    F 37:0 main - C (13)
+scripts/validate_html_embedded_proofs.py
+    F 26:0 main - B (8)
+scripts/validate_no_failed_validation_in_production.py
+    F 30:0 main - C (19)
+scripts/validate_person_data_classification_gate.py
+    F 5:0 main - B (6)
+scripts/validate_manual_fallback_not_presented_as_rfo.py
+    F 16:0 main - B (6)
+scripts/validate_release.py
+    F 241:0 main - E (38)
+    F 149:0 _build_release_zip_triad - C (13)
+    F 215:0 _v19_post_smoke_ok - B (10)
+    F 72:0 _run - B (7)
+scripts/validate_all_items.py
+    F 5:0 main - B (9)
+scripts/verify_openclaw_run.py
+    F 186:0 main - D (21)
+    F 124:0 _check_delivery_stub_without_consent - C (16)
+    F 69:0 _check_skill_path - C (13)
+    F 163:0 _check_narrative_without_evidence - B (10)
+    F 103:0 _check_runs_root - B (8)
+    F 49:0 _read_jsonl - B (7)
+scripts/validate_normalized_command.py
+    F 5:0 main - B (6)
+scripts/validate_delivery_claim_matches_manifest.py
+    F 16:0 main - B (6)
+scripts/validate_no_pipeline_claims_without_artifacts.py
+    F 23:0 main - B (7)
+scripts/build_context_budget_analysis.py
+    F 6:0 main - C (12)
+scripts/validate_replay_determinism.py
+    F 11:0 main - B (9)
+scripts/build_sacred_path_graph.py
+    F 22:0 main - F (45)
+scripts/validate_retry_action_required.py
+    F 28:0 main - B (6)
+scripts/validate_html_no_placeholder.py
+    F 16:0 main - B (7)
+scripts/_smoke_subagent_isolation.py
+    F 13:0 main - B (6)
+scripts/validate_identity_resolution.py
+    F 5:0 main - B (8)
+scripts/validate_collection_coverage.py
+    F 4:0 main - B (8)
+scripts/validate_collection_coverage_decoupled.py
+    F 38:0 main - D (21)
+scripts/validate_source_count_consistency.py
+    F 5:0 main - B (8)
+scripts/validate_no_data_loss.py
+    F 5:0 main - B (9)
+scripts/validate_artifact_manifest.py
+    F 10:0 main - C (11)
+scripts/_smoke_v19_2_phase5_matrix.py
+    F 17:0 main - B (6)
+scripts/validate_final_gate_required_for_completion_claim.py
+    F 16:0 main - B (6)
+scripts/validate_no_local_paths_in_chat.py
+    F 24:0 main - B (9)
+scripts/validate_social_profile_binding.py
+    F 5:0 main - B (10)
+scripts/validate_subagent_quorum.py
+    F 4:0 main - B (7)
+scripts/query_io_kb.py
+    F 5:0 main - B (6)
+scripts/validate_interface_adapter_contract.py
+    F 5:0 main - B (7)
+scripts/validate_snippet_only_not_confirmed.py
+    F 28:0 main - B (6)
+scripts/validate_generator_hygiene.py
+    F 8:0 main - C (16)
+scripts/validate_snippet_only_not_full_report.py
+    F 16:0 main - B (9)
+scripts/validate_identity_conflicts.py
+    F 5:0 main - B (6)
+scripts/validate_report_runtime_claim_requires_entrypoint.py
+    F 14:0 main - C (11)
+scripts/validate_job_lifecycle.py
+    F 14:0 main - E (39)
+scripts/reality_checker.py
+    F 10:0 main - C (16)
+scripts/validate_schemas.py
+    F 4:0 main - B (6)
+scripts/validate_run_id_consistency.py
+    F 25:0 main - C (18)
+scripts/validate_collection_feasibility.py
+    F 7:0 main - B (6)
+scripts/validate_sensitive_node_classification.py
+    F 7:0 main - C (11)
+scripts/validate_worker_required_outputs.py
+    F 5:0 main - B (6)
+scripts/validate_outbox_event_semantics.py
+    F 15:0 main - D (30)
+scripts/validate_startup_runtime_proof.py
+    F 5:0 main - B (9)
+scripts/_smoke_deterministic_replay.py
+    F 69:0 main - B (6)
+scripts/validate_snapshot_immutability.py
+    F 23:0 main - C (17)
+scripts/validate_logical_consistency.py
+    F 28:0 _inv_lc01 - B (9)
+    F 96:0 _inv_lc05 - B (9)
+    F 140:0 _inv_lc08 - B (9)
+    F 234:0 _inv_lc14 - B (8)
+    F 255:0 _inv_lc16 - B (8)
+    F 294:0 main - B (8)
+    F 115:0 _inv_lc06 - B (7)
+    F 127:0 _inv_lc07 - B (7)
+    F 185:0 _inv_lc11 - B (7)
+    F 57:0 _inv_lc02 - B (6)
+    F 70:0 _inv_lc03 - B (6)
+    F 82:0 _inv_lc04 - B (6)
+    F 158:0 _inv_lc09 - B (6)
+    F 283:0 _inv_lc15 - B (6)
+scripts/split_telegram_messages.py
+    F 27:0 main - C (14)
+    F 10:0 split_long_text - B (6)
+scripts/validate_no_plain_subagent_for_full_workspace_read.py
+    F 6:0 main - B (9)
+scripts/validate_interface_return_path_claim.py
+    F 18:0 main - B (9)
+scripts/validate_summary_no_new_claims.py
+    F 18:0 main - B (10)
+    F 9:0 iter_claim_refs - B (7)
+scripts/validate_person_profile_claims.py
+    F 5:0 main - C (11)
+scripts/security_scan_skill.py
+    F 15:0 main - B (8)
+scripts/validate_rfo_command_did_not_spawn_plain_subagent.py
+    F 14:0 main - B (8)
+scripts/validate_no_attachment_claim_without_ack.py
+    F 16:0 main - B (10)
+scripts/validate_telegram_plain_text.py
+    F 10:0 main - B (6)
+scripts/_smoke_trajectory_v19.py
+    F 81:0 _check_trajectory_good - C (15)
+    F 111:0 main - B (10)
+    F 63:0 _load_events - B (6)
+scripts/validate_no_large_telegram_tables.py
+    F 5:0 main - C (11)
+scripts/validate_citation_grounding.py
+    F 36:0 main - D (25)
+scripts/validate_io_method_matches.py
+    F 4:0 main - B (8)
+scripts/validate_seed_only_truth.py
+    F 53:0 main - E (32)
+scripts/validate_no_shard_scope_reduction.py
+    F 5:0 main - B (9)
+scripts/validate_no_global_overclaiming.py
+    F 13:0 main - B (7)
+scripts/validate_telegram_delivery.py
+    F 22:0 main - C (11)
+    F 15:0 validate_tables - B (8)
+scripts/validate_work_unit_completion.py
+    F 52:0 main - E (35)
+scripts/_smoke_clean_install.py
+    F 47:0 main - C (14)
+scripts/validate_seed_claims_not_presented_as_domain_analysis.py
+    F 16:0 main - B (10)
+scripts/init_runtime.py
+    F 104:0 main - C (11)
+    F 6:0 make_work_units - B (6)
+    F 24:0 ensure_interface_context - B (6)
+scripts/validate_political_actor_not_statistics.py
+    F 28:0 main - B (7)
+scripts/_smoke_v19_3_artifact_only.py
+    F 15:0 main - C (11)
+scripts/validate_no_external_kb_dependency.py
+    F 10:0 main - B (8)
+scripts/validate_command_router_mapping.py
+    F 5:0 main - B (9)
+scripts/validate_provider_specific_logic_not_in_runtime.py
+    F 27:0 main - B (10)
+scripts/validate_no_all_int_overclaiming.py
+    F 7:0 main - B (6)
+scripts/package_skill.py
+    F 12:0 main - B (8)
+scripts/validate_execution_reliability_gate.py
+    F 28:0 main - B (6)
+tools/inject_fixture_noise.py
+    F 27:0 main - B (9)
+tools/agent_telegram/webhook_server.py
+    C 19:0 Handler - B (6)
+tools/agent_telegram/security.py
+    F 26:0 redact_secrets - B (8)
+
+294 blocks (classes, functions, methods) analyzed.
+Average complexity: C (12.877551020408163)

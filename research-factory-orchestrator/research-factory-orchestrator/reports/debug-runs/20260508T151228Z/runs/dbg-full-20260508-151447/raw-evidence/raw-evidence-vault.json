@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-29e97062122c",
+  "items": [
+    {
+      "raw_id": "RAW-SEED-001",
+      "kind": "user_seed",
+      "content_preview": "phase2 schema check",
+      "sensitivity": "internal_use"
+    }
+  ]
+}

@@ -25,6 +25,19 @@
     "cross_platform_trace": true,
     "kb_usage_mode": "reference_only"
   },
+  "source_policy": {
+    "minimum_independent_sources": 15,
+    "snippet_citation_scope": "context_only",
+    "allow_seed_only_evidence": false,
+    "external_collection_required": true,
+    "web_search_required": true,
+    "source_packet_required": false
+  },
+  "delivery_policy": {
+    "required_for_production": true,
+    "allow_stub": false,
+    "external_delivery_required": true
+  },
   "propaganda_io_rules": {
     "mode": "pattern_detection_and_mapping",
     "kb_usage": {

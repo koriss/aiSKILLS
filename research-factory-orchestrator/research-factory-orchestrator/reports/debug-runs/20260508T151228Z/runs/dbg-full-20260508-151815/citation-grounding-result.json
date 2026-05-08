@@ -1,0 +1,21 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-d74cf32fa0cd",
+  "job_id": "JOB-859ec11ea648",
+  "profile": "full-rigor",
+  "claims_total": 0,
+  "claims_grounded": 0,
+  "claims_no_support": 0,
+  "relevance_aware_factuality_score": 0.0,
+  "deflection_rate_when_no_grounding": 1.0,
+  "raf_threshold": 0.65,
+  "dfl_threshold": 0.25,
+  "passed": false,
+  "requires_grounding": true,
+  "failure_reasons": [
+    "raf_below_threshold: 0.0 < 0.65",
+    "dfl_above_threshold: 1.0 > 0.25",
+    "no_grounded_claims"
+  ],
+  "evaluated_at": "2026-05-08T15:18:15Z"
+}

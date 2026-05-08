@@ -1,0 +1,2 @@
+7:- Telegram routing hardening: `chat_id` resolution `request -> argv -> env(consent) -> fail`
+18:- Telegram: real `sendMessage` path + operator `tools/agent_telegram/` + mock API

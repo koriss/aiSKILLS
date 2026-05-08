@@ -1,0 +1,9 @@
+./contracts/delivery-contract.json:7:  "telegram": {
+./contracts/provider-capabilities.json:12:    "telegram": {
+./contracts/golden-reference.md:1:# Telegram golden snapshots (D2)
+./contracts/golden-reference.md:5:Optional **`contracts/telegram-golden/`** directory holds a frozen `delivery-manifest.json` (and optional `allowlist-paths.txt`) for regression diffing of Telegram-shaped smoke runs.
+./contracts/golden-reference.md:10:   `python3 -S scripts/rfo_v18_core.py smoke --runs-root /tmp/rfo-golden --provider telegram --interface telegram`
+./contracts/golden-reference.md:11:2. Copy `delivery-manifest.json` from the resolved `run_dir` into `contracts/telegram-golden/delivery-manifest.json`.
+./contracts/golden-reference.md:18:- If `contracts/telegram-golden/` is **missing** → exit **0** with skip JSON (skeleton only in v19.0.3).
+./contracts/interface-adapter-contract.json:5:    "telegram",
+./contracts/interface-adapter-contract.json:10:    "telegram",

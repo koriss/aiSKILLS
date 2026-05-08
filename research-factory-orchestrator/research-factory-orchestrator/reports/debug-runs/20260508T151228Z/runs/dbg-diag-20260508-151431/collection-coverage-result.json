@@ -1,0 +1,18 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-9c6be6060bb6",
+  "job_id": "JOB-d188560147a6",
+  "profile": "source-packet",
+  "minimum_independent_sources": 0,
+  "observed_independent_sources": 1,
+  "source_coverage_passed": true,
+  "collection_completed": true,
+  "external_web_search_executed": false,
+  "external_source_packet_loaded": false,
+  "passed": false,
+  "failure_reasons": [
+    "source_packet_required_not_loaded",
+    "external_collection_required_no_backend"
+  ],
+  "evaluated_at": "2026-05-08T15:14:31Z"
+}

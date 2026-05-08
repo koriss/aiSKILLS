@@ -14,7 +14,7 @@ def main():
         return 1
     failed = []
     for item in items:
-        res = subprocess.run([sys.executable, str(script), str(item)], capture_output=True, text=True)
+        res = subprocess.run([sys.executable, str(script), str(item)], capture_output=True, text=True, timeout=120)
         if res.returncode != 0:
             failed.append(f"{item}:\n{res.stderr}")
     if failed:

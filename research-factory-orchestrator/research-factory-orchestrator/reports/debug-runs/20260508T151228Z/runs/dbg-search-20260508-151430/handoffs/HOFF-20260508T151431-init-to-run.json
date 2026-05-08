@@ -1,0 +1,23 @@
+{
+  "handoff_id": "HOFF-d77cd7110a7a",
+  "from_phase": "init",
+  "to_phase": "run",
+  "payload_hash": "d77cd7110a7a053cb6d9f3f19833ad48be1a4d2195d9778b8cb7f88a7afab08e",
+  "required_fields": [
+    "run_id",
+    "job_id",
+    "task"
+  ],
+  "success_response": "ACK",
+  "failure_response": "NACK",
+  "timeout_ms": 120000,
+  "on_failure_action": "block",
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "created_at": "2026-05-08T15:14:31Z",
+  "payload": {
+    "run_id": "RUN-1d96f965b695",
+    "job_id": "JOB-d8fd32e00abe",
+    "task": "phase0 search smoke"
+  },
+  "skill_version": "19.3"
+}

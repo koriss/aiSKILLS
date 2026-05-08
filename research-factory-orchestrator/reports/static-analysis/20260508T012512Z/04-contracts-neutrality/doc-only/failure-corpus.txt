@@ -1,0 +1,22 @@
+failure-corpus/case_telegram_local_path_leak.json:4:  "bad_output_pattern": "Telegram message includes /home/node path",
+failure-corpus/case_telegram_local_path_leak.json:5:  "expected_guard": "no local paths in user-facing Telegram",
+failure-corpus/cases/case_telegram_local_path_leak.json:4:  "bad_output_pattern": "Telegram includes /home/node path",
+failure-corpus/cases/case_telegram_local_path_leak.json:5:  "expected_guard": "no local paths in Telegram",
+failure-corpus/index.json:368:    "cases/real-2026-04-30-rfo-telegram-fake-runtime.json"
+failure-corpus/cases/F207_run_dir/run.json:5:  "provider": "telegram",
+failure-corpus/cases/bad_provider_hardcode.txt:1:Research runtime calls telegram send directly.
+failure-corpus/cases/real-2026-04-30-late-sa011-after-report.json:10:  "source": "user-provided real Telegram failure"
+failure-corpus/cases/case_telegram_table_rendering.json:4:  "bad_output_pattern": "Markdown or ASCII table in Telegram",
+failure-corpus/cases/real-2026-04-30-manual-report-proof-conflict.json:10:  "source": "user-provided real Telegram failure"
+failure-corpus/cases/real-2026-04-30-rfo-telegram-fake-runtime.json:2:  "case_id": "real-2026-04-30-rfo-telegram-fake-runtime",
+failure-corpus/cases/real-2026-04-30-rfo-telegram-fake-runtime.json:4:  "summary": "Real Telegram log where /research_factory_orchestrator was routed to plain subagent and report claimed runtime/package/delivery without proof."
+failure-corpus/cases/real-2026-04-30-missing-frontmatter-discovery.json:7:  "source": "user-provided real Telegram failure"
+failure-corpus/cases/real-2026-04-30-claimed-zip-missing.json:3:  "description": "Telegram claimed 98KB ZIP but ZIP was absent/not delivered",
+failure-corpus/cases/real-2026-04-30-claimed-zip-missing.json:10:  "source": "user-provided real Telegram failure"
+failure-corpus/case_telegram_table_rendering.json:4:  "bad_output_pattern": "Markdown/ASCII table sent to Telegram",
+failure-corpus/index-v19.json:5:  "description": "v19.2.0 failure-code overlay: v19.1 baseline + runtime-truth / telegram / advisory meta registry.",
+failure-corpus/index-v19.json:71:    {"code":"TELEGRAM-AGENT-CONTRACT-VIOLATION","category":"telegram","severity":"meta","owner_validator":"scripts/_smoke_telegram_agent_interface.py","reproduces_in_fixture":"n/a"},
+failure-corpus/index-v19.json:72:    {"code":"TELEGRAM-REAL-SEND-MISSING-HTTP-TRACE","category":"telegram","severity":"meta","owner_validator":"scripts/_smoke_telegram_real_send.py","reproduces_in_fixture":"n/a"},
+failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt:3:[30.04.2026 0:17] Борзых: Понял. Запускаю полный Research Factory Orchestrator по этому тексту. Это займёт время — генерируется полный пакет с артефактами, HTML-отчётом и research-package.zip. Результат придёт в Telegram.
+failure-corpus/cases/real_2026_04_30_fake_rfo_telegram_log.txt:5:HTML-отчёт (36КБ) отправлен в Telegram. Пакет: reports/rfo-surveillance-2026-04-29/
+failure-corpus/cases/bad_fake_rfo_full_report.html:383:    <li><a href="https://en.wikipedia.org/wiki/Moscow">https://en.wikipedia.org/wiki/Moscow</a><div class="source-meta">Wikipedia | Moscow article | accessed 2026-04-29 | supports: C001</div></li>

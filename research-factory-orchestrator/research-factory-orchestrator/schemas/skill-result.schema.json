@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-factory-orchestrator.local/schemas/skill-result.schema.json",
+  "title": "RFO artifact result manifest (v19.3)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract",
+    "status",
+    "artifacts",
+    "errors",
+    "metadata"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "v1" },
+    "contract": { "type": "string", "const": "rfo-artifact-result-v1" },
+    "status": {
+      "type": "string",
+      "enum": ["ok", "partial", "failed"]
+    },
+    "primary_text": { "type": "string", "maxLength": 8192 },
+    "primary_format": { "type": "string", "enum": ["plain", "markdown"] },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "role",
+          "media_type",
+          "filename",
+          "size_bytes",
+          "sha256",
+          "required"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*\\.\\./)[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*$"
+          },
+          "role": { "type": "string", "enum": ["answer", "report", "package", "other"] },
+          "media_type": { "type": "string" },
+          "filename": { "type": "string" },
+          "size_bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message", "where"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "where": { "type": "string" }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["run_id", "skill", "skill_version", "created_at"],
+      "properties": {
+        "run_id": { "type": "string" },
+        "job_id": { "type": "string" },
+        "skill": { "type": "string" },
+        "skill_version": { "type": "string" },
+        "created_at": { "type": "string" }
+      }
+    }
+  }
+}

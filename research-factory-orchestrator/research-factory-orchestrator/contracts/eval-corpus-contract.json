@@ -1,5 +1,6 @@
 {
-  "version": "15.0.0-runtime-contract-enforcement",
+  "version": "19.2.0",
   "bad_samples_must_fail": true,
-  "good_samples_must_pass": true
+  "good_samples_must_pass": true,
+  "inherits_from": "15.0.0-runtime-contract-enforcement"
 }

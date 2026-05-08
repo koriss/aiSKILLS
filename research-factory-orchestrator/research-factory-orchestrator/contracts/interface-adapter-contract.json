@@ -1,5 +1,5 @@
 {
-  "version": "17.1.0-chat-outbox-semantics-stage05",
+  "version": "19.2.0",
   "supported_interfaces": [
     "generic_chat",
     "telegram",
@@ -21,5 +21,6 @@
     "direct_model_response_for_runtime_command",
     "provider_specific_runtime_logic",
     "provider_specific_research_pipeline"
-  ]
+  ],
+  "inherits_from": "17.1.0-chat-outbox-semantics-stage05"
 }

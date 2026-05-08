@@ -1,0 +1,5 @@
+{
+  "run_id": "RUN-9c6be6060bb6",
+  "entrypoint": "scripts/run_research_factory.py",
+  "proof_model": "artifact-backed"
+}

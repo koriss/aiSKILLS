@@ -1,0 +1,15 @@
+{
+  "run_id": "RUN-14501b8f6dad",
+  "matches": [
+    {
+      "method": "fear appeal / risk amplification",
+      "confidence": "low",
+      "note": "Requires textual evidence review in full run."
+    },
+    {
+      "method": "source laundering check required",
+      "confidence": "medium",
+      "note": "Runtime always opens this branch for public/political/media claims."
+    }
+  ]
+}

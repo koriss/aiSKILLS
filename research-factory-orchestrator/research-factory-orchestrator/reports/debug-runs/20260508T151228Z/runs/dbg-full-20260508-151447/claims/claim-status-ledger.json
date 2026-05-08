@@ -1,0 +1,15 @@
+{
+  "run_id": "RUN-29e97062122c",
+  "claim_status_counts": {
+    "confirmed": 4,
+    "probable": 1,
+    "disputed": 0,
+    "contradicted": 0,
+    "false": 0,
+    "unsupported": 0,
+    "unknown": 0,
+    "stale": 0,
+    "inferred": 0
+  },
+  "updated_at": "2026-05-08T15:14:47Z"
+}

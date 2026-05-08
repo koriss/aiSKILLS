@@ -8,6 +8,13 @@ from runtime.render import allocate
 from runtime.util import jl, jw, now, sid
 
 
+def _opt(value: str | None) -> str | None:
+    if value is None:
+        return None
+    s = str(value).strip()
+    return s or None
+
+
 def cmd_adapter(a):
     task = (a.task or a.reply_text or "").strip()
     if not task:
@@ -15,6 +22,13 @@ def cmd_adapter(a):
     c = allocate(a.runs_root, task, a.provider, a.interface)
     rd = Path(c["run_dir"])
     req_id = sid("REQ", a.interface, a.provider, a.conversation_id, a.message_id, task)
+    # v19.2.1: capture dynamic delivery routing from incoming Telegram update.
+    delivery = {
+        "chat_id": _opt(getattr(a, "chat_id", "")),
+        "reply_to_message_id": _opt(getattr(a, "reply_to_message_id", "")),
+        "api_base": _opt(getattr(a, "api_base", "")),
+        "source": "interface_request_argv",
+    }
     jw(
         rd / "interface/interface-request.json",
         {
@@ -23,6 +37,7 @@ def cmd_adapter(a):
             "conversation_id": a.conversation_id,
             "message_id": a.message_id,
             "reply_text_available": bool(a.reply_text),
+            "delivery": delivery,
             "delivery_constraints": {"mobile_safe": True, "no_tables": True, "max_message_chars": 3500, "attachments_allowed": True},
             "received_at": now(),
         },
@@ -35,6 +50,7 @@ def cmd_adapter(a):
             "request_id": req_id,
             "command": "/research_factory_orchestrator",
             "topic_extracted_from_reply": bool(a.reply_text and not a.task),
+            "delivery": delivery,
             "created_at": now(),
         },
     )

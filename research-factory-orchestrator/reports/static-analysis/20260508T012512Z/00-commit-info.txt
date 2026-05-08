@@ -1,0 +1,62 @@
+commit cf7b09f9173921aa215e48cb33f499ad9f66a5cc
+Author: koriss <redice.guard@gmail.com>
+Date:   Fri May 8 01:28:39 2026 +0000
+
+    chore(rfo): sync project workspace ← canonical /opt v19.3
+    
+    Source: /opt/openclaw/data/workspace/skills/research-factory-orchestrator/
+    Skill version: 19.3 (runtime_contract 19.3, failure_corpus_index 19.2.1)
+    
+    24 files changed, 729 insertions(+), 450 deletions(-)
+    + 19 new files from canonical, 3 telegram-specific files removed
+    (providers/telegram/telegram_delivery_adapter.py + 2 telegram smoke
+    tests). tools/agent_telegram/ kept (operator-side, not deployed).
+    
+    Co-authored-by: Cursor <cursoragent@cursor.com>
+
+ .../research-factory-orchestrator/AGENTS.md        |  70 +++
+ .../research-factory-orchestrator/CHANGELOG.md     |  11 +
+ .../research-factory-orchestrator/SKILL.md         |  10 +-
+ .../contracts/artifact-result-contract.json        |  15 +
+ .../contracts/provider-capabilities.json           |   2 +-
+ .../contracts/provider-contract.json               |  29 +-
+ .../adr/ADR-014-telegram-operator-control-plane.md |   4 +-
+ .../docs/adr/ADR-016-compute-vs-delivery-split.md  |  56 ++
+ .../docs/qa/v19_2_loop_iterations.md               |  27 +
+ .../docs/release-notes/v19.2.1.md                  |  41 ++
+ .../docs/release-notes/v19.3.md                    |  18 +
+ .../telegram/telegram_delivery_adapter.py          | 112 ----
+ .../providers/webhook/webhook_delivery_adapter.py  |  56 +-
+ .../runtime/adapter_impl.py                        |  16 +
+ .../runtime/artifact_execute_impl.py               | 233 +++++++++
+ .../research-factory-orchestrator/runtime/cli.py   |  33 ++
+ .../runtime/outbox_impl.py                         | 170 ++++--
+ .../runtime/validate_impl.py                       |  20 +-
+ .../runtime/version.json                           |   6 +-
+ .../runtime/worker_impl.py                         |  28 +
+ .../schemas/skill-result.schema.json               |  80 +++
+ .../scripts/_rfo_path_guard.py                     | 200 +++++++
+ .../scripts/_smoke_telegram_agent_interface.py     |  38 --
+ .../scripts/_smoke_telegram_real_send.py           | 116 -----
+ .../scripts/_smoke_v19_2_1_honesty.py              | 364 +++++++++++++
+ .../scripts/_smoke_v19_2_1_repro_after_fix.py      | 200 +++++++
+ .../scripts/_smoke_v19_2_1_repro_baseline.py       | 192 +++++++
+ .../scripts/_smoke_v19_3_artifact_only.py          |  62 +++
+ .../scripts/_smoke_v19_3_concurrency.py            |  74 +++
+ .../_test_mvr_profile_seed_only_disclosure.py      | 431 +++++++++++++++
+ .../scripts/build_research_package.py              |  26 +-
+ .../scripts/gc_old_runs.py                         |  63 +++
+ .../scripts/interface_runtime_adapter.py           |  84 ++-
+ .../scripts/outbox_delivery_worker.py              |  55 +-
+ .../scripts/rfo_runtime_core.py                    |  22 +-
+ .../scripts/run_rfo_full_research.py               | 580 +++++++++++++++++++++
+ .../scripts/run_rfo_with_web_search.py             | 431 +++++++++++++++
+ .../scripts/runtime_job_worker.py                  |  43 +-
+ .../scripts/validate_artifact_release.py           |  77 +++
+ .../scripts/validate_logical_consistency.py        |   3 +
+ .../scripts/validate_release.py                    | 101 ++--
+ .../scripts/validate_skill.py                      |  11 +-
+ .../scripts/verify_openclaw_run.py                 | 183 +++++++
+ 43 files changed, 3943 insertions(+), 450 deletions(-)
+Sync commit: cf7b09f9173921aa215e48cb33f499ad9f66a5cc
+Snapshot commit (worktree pre-sync): 6ba4165

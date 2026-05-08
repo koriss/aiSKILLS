@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import zipfile
@@ -11,6 +12,18 @@ from runtime.render import render_all
 from runtime.schema_defaults import minimal_valid
 from runtime.status import VERSION
 from runtime.util import CHAT, PKG_REQUIRED, REQ_EVENTS, jw, jr, jl, now, sha, sid, skill_root, tw
+from runtime.citation_grounding import evaluate as _evaluate_citation_grounding
+from runtime.collector import collect as _collect_external
+from runtime.coverage import reconcile as _reconcile_coverage
+from runtime.profiles import resolve as _resolve_profile
+from runtime.work_units import execute_pending as _execute_work_units
+
+
+def _emit_event(rd: Path, name: str, payload: dict) -> None:
+    """Emit canonical v19 event (no v18.* prefix). Optionally dual-emit legacy name when RFO_LEGACY_EVENT_NAMES=1."""
+    jl(rd / "observability-events.jsonl", {"event_name": name, **payload})
+    if os.environ.get("RFO_LEGACY_EVENT_NAMES") == "1" and not name.startswith("v18."):
+        jl(rd / "observability-events.jsonl", {"event_name": "v18." + name, **payload, "legacy_alias": True})
 
 
 def _normalize_run_mode(requested: str) -> tuple[str, str | None]:
@@ -59,6 +72,23 @@ def cmd_run(a):
         )
     requested_mode = getattr(a, "mode", None) or "research"
     mode, normalized_from = _normalize_run_mode(requested_mode)
+    # v19.2.1 honesty hardening: persist the canonical skill_root, consent
+    # flags, and runs_root so the verifier can check whether this run was
+    # launched from the right place. ``skill_root()`` already resolves to
+    # ``Path(__file__).parent.parent`` for the worker module.
+    try:
+        sk_root = str(skill_root().resolve())
+    except Exception:
+        sk_root = ""
+    consent = {
+        "tmp_runs_root": os.environ.get("RFO_ALLOW_TMP_RUNS_ROOT") == "1",
+        "env_chat_id": os.environ.get("RFO_ALLOW_ENV_CHAT_ID") == "1",
+    }
+    runs_root_str = ""
+    try:
+        runs_root_str = str(Path(getattr(a, "runs_root", "")).resolve()) if getattr(a, "runs_root", None) else ""
+    except Exception:
+        runs_root_str = str(getattr(a, "runs_root", "") or "")
     run_payload = {
         "run_id": run_id,
         "job_id": job_id,
@@ -71,6 +101,11 @@ def cmd_run(a):
         "started_at": now(),
         "provider": a.provider,
         "interface": a.interface,
+        "skill_root": sk_root,
+        "runs_root": runs_root_str,
+        "consent": consent,
+        "rfo_allow_tmp_runs_root": consent["tmp_runs_root"],
+        "rfo_allow_env_chat_id": consent["env_chat_id"],
     }
     if normalized_from is not None:
         run_payload["normalized_from"] = normalized_from
@@ -83,6 +118,12 @@ def cmd_run(a):
             "command_id": cmd_id,
             "entrypoint": "scripts/run_research_factory.py",
             "entrypoint_version": VERSION,
+            "entrypoint_skill_root": sk_root,
+            "skill_root": sk_root,
+            "runs_root": runs_root_str,
+            "consent": consent,
+            "rfo_allow_tmp_runs_root": consent["tmp_runs_root"],
+            "rfo_allow_env_chat_id": consent["env_chat_id"],
             "not_plain_subagent": True,
             "not_skill_md_imitation": True,
         },
@@ -107,11 +148,9 @@ def cmd_run(a):
             overrides={
                 "run_id": run_id,
                 "job_id": job_id,
-                "command_id": cmd_id,
                 "delivery_status": "not_queued",
                 "stub_delivery": False,
                 "stub_delivery_disclosure_required": False,
-                "gates": {},
             },
         ),
     )
@@ -127,7 +166,7 @@ def cmd_run(a):
             },
         ),
     )
-    jl(rd / "observability-events.jsonl", {"event_name": "v18.runtime.started", "run_id": run_id, "job_id": job_id, "timestamp": now()})
+    _emit_event(rd, "runtime.started", {"run_id": run_id, "job_id": job_id, "timestamp": now()})
     feature_matrix = {
         "run_id": run_id,
         "version": VERSION,
@@ -151,15 +190,88 @@ def cmd_run(a):
     }
     jw(rd / "feature-truth-matrix.json", feature_matrix)
     ctx_base = {"run_id": run_id, "job_id": job_id, "command_id": cmd_id, "target_fingerprint": sid("TARGET", a.task), "task": a.task, "created_at": now()}
-    for wu in ["WU-001", "WU-007"]:
-        packet = {**ctx_base, "wu_id": wu, "context_packet_hash": sid("CTX", run_id, job_id, wu, a.task), "must_return_context_packet_hash_seen": True}
-        jw(rd / f"context-packets/{wu}.context.json", packet)
-    wus = [{"wu_id": f"WU-{i:03d}", "wave": "W1" if i <= 6 else "W2", "status": "planned", "context_packet": "context-packets/WU-001.context.json" if i <= 6 else "context-packets/WU-007.context.json"} for i in range(1, 13)]
+    work_units_path = rd / "work-units.json"
+    decomposition_path = rd / "decomposition.json"
+    wus = []
+    if work_units_path.is_file():
+        loaded = jr(work_units_path, {})
+        candidate = loaded.get("work_units") if isinstance(loaded, dict) else []
+        if isinstance(candidate, list):
+            wus = [wu for wu in candidate if isinstance(wu, dict) and wu.get("wu_id")]
+    elif decomposition_path.is_file():
+        loaded = jr(decomposition_path, {})
+        candidate = loaded.get("work_units") if isinstance(loaded, dict) else []
+        if isinstance(candidate, list):
+            wus = [wu for wu in candidate if isinstance(wu, dict) and wu.get("wu_id")]
+
+    for wu in wus:
+        wu_id = str(wu.get("wu_id", ""))
+        if not wu_id:
+            continue
+        packet = {**ctx_base, "wu_id": wu_id, "context_packet_hash": sid("CTX", run_id, job_id, wu_id, a.task), "must_return_context_packet_hash_seen": True}
+        jw(rd / f"context-packets/{wu_id}.context.json", packet)
+        wu.setdefault("status", "planned")
+        wu.setdefault("context_packet", f"context-packets/{wu_id}.context.json")
+
     jw(rd / "work-queue/work-unit-ledger.json", {"run_id": run_id, "job_id": job_id, "work_units": wus, "acceptance_gate": ["run_id", "job_id", "wu_id", "target_fingerprint", "context_packet_hash_seen", "schema_valid"]})
     for wu in wus:
         jw(rd / f"work-queue/pending/{wu['wu_id']}.json", {**wu, "run_id": run_id, "job_id": job_id, "target_fingerprint": ctx_base["target_fingerprint"]})
     tw(rd / "late-results-ledger.jsonl", json.dumps({"event_name": "late_window_opened", "run_id": run_id, "policy": "timeout results require accept/reject + amendment before finality", "timestamp": now()}, ensure_ascii=False) + "\n")
     tw(rd / "amendment-ledger.jsonl", json.dumps({"event_name": "no_amendments_yet", "run_id": run_id, "timestamp": now()}, ensure_ascii=False) + "\n")
+    profile_env = os.environ.get("RFO_RUN_PROFILE")
+    try:
+        profile_name, profile_policy = _resolve_profile(profile_env)
+    except ValueError as exc:
+        print(json.dumps({"error": "run_profile_resolution", "detail": str(exc)}, ensure_ascii=False))
+        raise SystemExit(2) from exc
+    jw(rd / "run-profile.json", {"schema_version": "v19.0", "profile": profile_name, "policy": profile_policy, "resolved_from": profile_env or "default", "resolved_at": now()})
+    wu_summary = _execute_work_units(rd, run_id, job_id, mode=mode, profile=profile_name)
+    feature_matrix["features"]["wave_graph_collector"] = (
+        "implemented_seed_only" if wu_summary["total_terminal"] == wu_summary["total_planned"] else "scaffold"
+    )
+    if wu_summary["total_planned"] == 0:
+        feature_matrix["features"]["work_unit_decomposition"] = "missing"
+    feature_matrix["features"]["work_unit_executor"] = "implemented"
+    feature_matrix["work_unit_summary"] = {
+        "total_planned": wu_summary["total_planned"],
+        "total_terminal": wu_summary["total_terminal"],
+        "by_status": wu_summary["by_status"],
+        "any_collected_sources": wu_summary["any_collected_sources"],
+    }
+    collection_summary = _collect_external(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    coverage_result = _reconcile_coverage(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    citation_result = _evaluate_citation_grounding(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    feature_matrix["features"]["external_collector"] = (
+        "implemented_real" if collection_summary.get("external_web_search_executed") or collection_summary.get("external_source_packet_loaded") else "implemented_seed_only"
+    )
+    feature_matrix["collection_summary"] = {
+        "backend": collection_summary.get("backend"),
+        "external_web_search_executed": collection_summary.get("external_web_search_executed", False),
+        "external_source_packet_loaded": collection_summary.get("external_source_packet_loaded", False),
+        "web_search_attempted": collection_summary.get("web_search_attempted", False),
+        "web_search_succeeded": collection_summary.get("web_search_succeeded", False),
+        "web_search_result_count": collection_summary.get("web_search_result_count", 0),
+        "external_source_count": collection_summary.get("external_source_count", 0),
+        "seed_only": collection_summary.get("seed_only", True),
+    }
+    feature_matrix["coverage_summary"] = {
+        "profile": coverage_result.get("profile"),
+        "minimum_independent_sources": coverage_result.get("minimum_independent_sources"),
+        "observed_independent_sources": coverage_result.get("observed_independent_sources"),
+        "source_coverage_passed": coverage_result.get("source_coverage_passed"),
+        "collection_completed": coverage_result.get("collection_completed"),
+        "passed": coverage_result.get("passed"),
+        "failure_reasons": coverage_result.get("failure_reasons", []),
+    }
+    feature_matrix["citation_grounding_summary"] = {
+        "raf": citation_result.get("relevance_aware_factuality_score"),
+        "dfl": citation_result.get("deflection_rate_when_no_grounding"),
+        "passed": citation_result.get("passed"),
+        "requires_grounding": citation_result.get("requires_grounding"),
+        "claims_total": citation_result.get("claims_total"),
+        "claims_grounded": citation_result.get("claims_grounded"),
+    }
+    jw(rd / "feature-truth-matrix.json", feature_matrix)
     render_all(rd, a.task, run_id, job_id, cmd_id, a.provider)
     required = [
         "run.json",
@@ -176,7 +288,7 @@ def cmd_run(a):
     jw(rd / "artifact-manifest.json", {"run_id": run_id, "artifacts": [{"path": r, "exists": (rd / r).exists()} for r in required], "generated_at": now()})
     jw(rd / "provenance-manifest.json", {"run_id": run_id, "entrypoint": "scripts/run_research_factory.py", "proof_model": "artifact-backed"})
     jw(rd / "validation-transcript.json", {"run_id": run_id, "status": "pending_dag"})
-    jl(rd / "observability-events.jsonl", {"event_name": "v18.runtime.completed", "run_id": run_id, "job_id": job_id, "timestamp": now()})
+    _emit_event(rd, "runtime.completed", {"run_id": run_id, "job_id": job_id, "timestamp": now()})
     from runtime.handoff import emit_handoff
     from runtime.trace import append_trace_line
 
@@ -248,7 +360,7 @@ def cmd_worker(a):
     if a.dry_run:
         lease.unlink(missing_ok=True)
         raise SystemExit("dry-run intentionally does not execute runtime")
-    entry = str(skill_root() / "scripts" / "rfo_v18_core.py")
+    entry = str(skill_root() / "scripts" / "rfo_runtime_core.py")
     worker_mode = getattr(a, "mode", None) or job.get("run_mode") or "research"
     p = subprocess.run(
         [
@@ -287,7 +399,7 @@ def cmd_worker(a):
             "run_id": job["run_id"],
             "job_id": job["job_id"],
             "required_events": REQ_EVENTS,
-            "policy": "v18 3+1 chat blocks plus html/package files",
+            "policy": "v19 3+1 chat blocks plus html/package files",
             "dedup_window_hours": 72,
             "dlq_after_retries": 8,
             "max_retry_backoff_ms": 60000,

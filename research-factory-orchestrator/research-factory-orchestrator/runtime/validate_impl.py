@@ -27,6 +27,23 @@ def _append_run_event(rd: Path, event: str, fields: dict[str, object]) -> None:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
+def _run_validator_with_run_dir(sp: Path, rd: Path, root: Path, timeout: int = 180) -> subprocess.CompletedProcess[str]:
+    """Run validator with argv fallback: ``--run-dir`` first, positional ``run_dir`` second.
+
+    Some legacy validators still expose positional ``run_dir`` only.
+    To keep runtime validate deterministic (and avoid false FAILs caused only by
+    argparse shape drift), we retry once with positional argument when stderr
+    indicates ``--run-dir`` is unrecognized.
+    """
+    env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+    cmd = [sys.executable, "-S", str(sp), "--run-dir", str(rd)]
+    p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=str(root), env=env)
+    if p.returncode == 2 and "unrecognized arguments: --run-dir" in (p.stderr or ""):
+        cmd2 = [sys.executable, "-S", str(sp), str(rd)]
+        p = subprocess.run(cmd2, capture_output=True, text=True, timeout=timeout, cwd=str(root), env=env)
+    return p
+
+
 def _ensure_rollback_stub_html(rd: Path) -> None:
     """Create physical stub so V6 DELIV-ATT-MISSING does not fire on rollback attachment."""
     from runtime.schema_defaults import ROLLBACK_STUB_HTML
@@ -147,8 +164,12 @@ def validate(rd):
     bad = [c.get("claim_id") for c in cs if not c.get("status") or not c.get("evidence_card_ids")]
     if bad:
         errs.append({"bad_claims": bad})
+    from runtime.legacy_compat import read_fag_gates
+
     fg = jr(rd / "final-answer-gate.json")
-    gates = fg.get("gates", {})
+    gates, gates_source = read_fag_gates(fg)
+    if gates_source == "missing" and isinstance(fg, dict) and "gates" in fg and isinstance(fg["gates"], dict):
+        errs.append({"v18_gates_present_in_v19_fag": list(fg["gates"].keys())})
     needed = [
         "provider_ack_gate",
         "external_delivery_gate",
@@ -185,6 +206,15 @@ def validate(rd):
         "validate_no_delivery_after_validation_fail",
         "validate_no_local_paths_in_chat",
         "validate_logical_consistency",
+        # v19.2.0 truth gates (PROFILE-VALIDATOR-DRIFT closure: registry ⊇ runner ⊇ profile)
+        "validate_work_unit_completion",
+        "validate_seed_only_truth",
+        "validate_error_log_quality",
+        "validate_source_provenance_distinction",
+        "validate_outbox_finalization",
+        "validate_root_vs_zip_artifact_truth",
+        "validate_collection_coverage_decoupled",
+        "validate_v18_legacy_compat",
     }
     if not errs:
         for v in vlist:
@@ -194,8 +224,7 @@ def validate(rd):
             sp = root / v.get("path", "")
             if not sp.is_file():
                 continue
-            cmd = [sys.executable, "-S", str(sp), str(rd)]
-            p = subprocess.run(cmd, capture_output=True, text=True, timeout=180, cwd=str(root), env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+            p = _run_validator_with_run_dir(sp, rd, root, timeout=180)
             if p.returncode != 0:
                 dag_errs.append({"validator": vid, "rc": p.returncode, "stderr": (p.stderr or "")[-1200:]})
         vs = root / "scripts" / "validate_skill.py"

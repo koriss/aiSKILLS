@@ -1,0 +1,22 @@
+{
+  "run_id": "RUN-08bbee6fe342",
+  "claims": [],
+  "sources": [],
+  "evidence_cards": [],
+  "memo": {
+    "run_id": "RUN-08bbee6fe342",
+    "title": "Аналитическая записка",
+    "executive_summary": "No external evidence collected; runtime structure only.",
+    "confidence": "low",
+    "data_gaps": [
+      "external evidence missing"
+    ]
+  },
+  "io_summary": {
+    "run_id": "RUN-08bbee6fe342",
+    "method_matches": [],
+    "narrative_map": [],
+    "verdict": "insufficient_external_data"
+  },
+  "generated_at": "2026-05-08T15:17:13Z"
+}

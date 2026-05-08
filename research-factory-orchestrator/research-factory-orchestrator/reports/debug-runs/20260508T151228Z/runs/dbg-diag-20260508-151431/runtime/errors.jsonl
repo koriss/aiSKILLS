@@ -1,0 +1,1 @@
+{"code": "EXTERNAL-COLLECTION-NO-SEEDS", "context": {"external_mode": "off", "profile": "source-packet"}, "detail": "RFO_SEED_URLS empty; collector cannot probe", "pid": 3337957, "severity": "warning", "timestamp": "2026-05-08T15:14:31Z"}

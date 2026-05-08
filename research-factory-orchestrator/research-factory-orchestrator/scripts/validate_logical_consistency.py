@@ -84,6 +84,9 @@ def _inv_lc04(rd: Path) -> list[dict]:
     fg = _load(rd / "final-answer-gate.json") or {}
     if not fg.get("passed"):
         return out
+    # v19.3 artifact-only execute: gateway owns delivery; no full validate transcript in-run.
+    if str(fg.get("status", "")).lower() == "artifact_ready_gateway_delivers":
+        return out
     vt = _load(rd / "validation-transcript.json") or {}
     if str(vt.get("status", "")).lower() != "pass":
         out.append(_err("LC04", "critical", "final-answer-gate passed requires validation-transcript status pass", ["validation-transcript.json", "final-answer-gate.json"]))

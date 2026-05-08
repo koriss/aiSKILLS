@@ -1,0 +1,17 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-1d96f965b695",
+  "job_id": "JOB-d8fd32e00abe",
+  "profile": "full-rigor",
+  "minimum_independent_sources": 20,
+  "observed_independent_sources": 3,
+  "source_coverage_passed": false,
+  "collection_completed": true,
+  "external_web_search_executed": true,
+  "external_source_packet_loaded": false,
+  "passed": false,
+  "failure_reasons": [
+    "source_coverage_below_threshold"
+  ],
+  "evaluated_at": "2026-05-08T15:14:31Z"
+}

@@ -24,6 +24,19 @@
     "kb_usage_mode": "off",
     "delivery_mode": "stub_allowed_explicit"
   },
+  "source_policy": {
+    "minimum_independent_sources": 1,
+    "snippet_citation_scope": "lead",
+    "allow_seed_only_evidence": true,
+    "external_collection_required": false,
+    "web_search_required": false,
+    "source_packet_required": false
+  },
+  "delivery_policy": {
+    "required_for_production": false,
+    "allow_stub": true,
+    "external_delivery_required": false
+  },
   "claim_type_policies": {
     "forecast": { "max_status": "forecast_scenario", "min_support_tier": "medium" },
     "geopolitical_intent_assessment": { "max_status": "inferred_assessment", "min_support_tier": "medium" },

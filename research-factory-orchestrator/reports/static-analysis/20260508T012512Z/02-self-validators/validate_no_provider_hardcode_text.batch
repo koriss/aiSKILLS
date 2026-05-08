@@ -1,0 +1,12 @@
+# validate_no_provider_hardcode_text — batch run on each file
+FAIL [runtime/compatibility-matrix.json] :: provider-specific delivery hardcode detected: sendMessage|sendDocument; TELEGRAM_[A-Z_]+
+FAIL [runtime/cli.py] :: provider-specific delivery hardcode detected: TELEGRAM_[A-Z_]+
+FAIL [scripts/_smoke_v19_2_1_repro_after_fix.py] :: provider-specific delivery hardcode detected: TELEGRAM_[A-Z_]+
+FAIL [scripts/_smoke_v19_2_1_honesty.py] :: provider-specific delivery hardcode detected: TELEGRAM_[A-Z_]+
+FAIL [scripts/interface_runtime_adapter.py] :: provider-specific delivery hardcode detected: api\.telegram\.org; TELEGRAM_[A-Z_]+
+FAIL [scripts/validate_no_provider_hardcode_text.py] :: provider-specific delivery hardcode detected: sendMessage|sendDocument
+FAIL [scripts/_rfo_path_guard.py] :: provider-specific delivery hardcode detected: api\.telegram\.org; TELEGRAM_[A-Z_]+
+FAIL [scripts/validate_provider_specific_logic_not_in_runtime.py] :: provider-specific delivery hardcode detected: sendMessage|sendDocument
+FAIL [AGENTS.md] :: provider-specific delivery hardcode detected: api\.telegram\.org; TELEGRAM_[A-Z_]+
+FAIL [CHANGELOG.md] :: provider-specific delivery hardcode detected: sendMessage|sendDocument
+checked=384 fails=10

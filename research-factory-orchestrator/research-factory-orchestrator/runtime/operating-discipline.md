@@ -1,4 +1,6 @@
-# RFO operating discipline (v19.1.0)
+# RFO operating discipline (v19.2.0)
+
+0c. **Runtime truth vs rollback** — `cmd_run` emission + V1 artifact layout are the single source of truth; fail-closed rollback must **not** mask a pristine `overall_pass=true` pass (no dependency on rollback closure for green smokes).
 
 0a. **v19.1.0 verification + replay** — advisory channels (`blinded_checker`, `typed_grounding`, optional `judge_council`) + `run-events.jsonl` trajectory contract; deterministic knobs `RFO_FIXED_TIME` / `RFO_DETERMINISTIC_IDS` / `RFO_NO_NETWORK`; release zip triad + clean-install + coverage-meta gates per `docs/adr/ADR-012-multi-agent-verification.md` and `docs/adr/ADR-013-replayable-evidence.md`; see `docs/release-notes/v19.1.md`.
 

@@ -1,5 +1,5 @@
 {
-  "version": "15.0.0-runtime-contract-enforcement",
+  "version": "19.2.0",
   "critical_schemas_additional_properties_false": [
     "run.schema.json",
     "work-unit-plan.schema.json",
@@ -10,5 +10,6 @@
     "artifact-manifest.schema.json",
     "provenance-manifest.schema.json",
     "final-answer-gate.schema.json"
-  ]
+  ],
+  "inherits_from": "15.0.0-runtime-contract-enforcement"
 }

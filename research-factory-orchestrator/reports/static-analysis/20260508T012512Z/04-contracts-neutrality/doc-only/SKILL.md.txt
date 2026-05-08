@@ -1,0 +1,32 @@
+27:**v19.2.1:** See `SKILL-core.md`, `docs/release-notes/v19.2.1.md` (current), `docs/release-notes/v19.2.md`, `docs/adr/ADR-015-runtime-truth-restoration.md`, `docs/adr/ADR-014-telegram-operator-control-plane.md`, plus v19.1 docs: `docs/adr/ADR-012-multi-agent-verification.md`, `docs/adr/ADR-013-replayable-evidence.md`, `docs/release-notes/v19.1.md`, `docs/adr/ADR-009-architectural-lenses.md`, `docs/adr/ADR-010-root-patterns.md`, `docs/adr/ADR-011-release-validation-transcript.md`. v19 core path: `RFO_V19_PROFILE=mvr` (or full-rigor, propaganda-io, book-verification) + `scripts/run_core_validators.py`.
+203:python3 -S scripts/interface_runtime_adapter.py --runs-root /tmp/rfo-runs --interface telegram --provider telegram --task "..."
+279:The final delivery must include a semantic report model, a standalone single-file HTML report, and a Telegram plain-text delivery plan.
+288:telegram-summary.json
+289:telegram-message-plan.json
+290:telegram-message-001.txt
+291:telegram-delivery-validation.json
+298:full-report.html must be a standalone single-file artifact suitable for opening directly from Telegram.
+304:Telegram rule:
+307:Telegram messages must be plain text by default.
+308:Do not rely on Telegram HTML parse_mode, Markdown, or MarkdownV2.
+309:Do not send large tables in Telegram messages.
+310:If Telegram summary is long, split by semantic blocks, not by raw character count first.
+317:Executive summary and Telegram summary must not introduce facts absent from verified/allowed claims.
+1698:- `references/telegram-mobile-reading-policy.md`
+1699:- `references/telegram-source-shortlist-policy.md`
+1700:- `references/telegram-no-large-tables-policy.md`
+1701:- `references/telegram-message-splitting-policy.md`
+1702:- `references/telegram-plain-text-policy.md`
+1799:No Telegram tables.
+1800:No local filesystem paths in Telegram.
+1804:No raw sensitive contact/address data in Telegram.
+1854:→ telegram-message-plan.json
+1881:Raw evidence belongs in the package. Telegram is safe briefing only. HTML may include a marked service-use annex.
+2003:No Telegram tables.
+2004:No local filesystem paths in Telegram.
+2008:No raw sensitive contact/address data in Telegram.
+2042:→ HTML/Telegram renderers
+2123:v17 removes provider-specific Telegram hardcoding from the runtime. The research runtime is interface-agnostic.
+2147:Research runtime must not know whether the command came from Telegram, CLI, Web, Slack, Discord, Matrix or another chat surface.
+2173:v17.2 separates provider ACK proof from real external delivery proof. Stub Telegram/webhook adapters may prove local provider-pipeline handling, but they must not be promoted to external delivery claims.
+2257:Real Telegram failures from 2026-04-30 are regression cases: plain subagent routing,

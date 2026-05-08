@@ -1,0 +1,701 @@
+{
+  "files_scanned": 320,
+  "edge_count": 86,
+  "layer_edges": {
+    "providers->runtime": 1,
+    "runtime->runtime": 66,
+    "scripts->runtime": 19
+  },
+  "leaks_runtime_to_below": [],
+  "cycles_in_runtime": [],
+  "edges": [
+    {
+      "src": "providers.cli.cli_delivery_adapter",
+      "src_file": "providers/cli/cli_delivery_adapter.py",
+      "src_layer": "providers",
+      "target": "runtime.capability",
+      "target_layer": "runtime",
+      "lineno": 9
+    },
+    {
+      "src": "runtime.adapter",
+      "src_file": "runtime/adapter.py",
+      "src_layer": "runtime",
+      "target": "runtime.adapter_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.adapter_impl",
+      "src_file": "runtime/adapter_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.render",
+      "target_layer": "runtime",
+      "lineno": 7
+    },
+    {
+      "src": "runtime.adapter_impl",
+      "src_file": "runtime/adapter_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 8
+    },
+    {
+      "src": "runtime.artifact_execute_impl",
+      "src_file": "runtime/artifact_execute_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.profiles",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.artifact_execute_impl",
+      "src_file": "runtime/artifact_execute_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.render",
+      "target_layer": "runtime",
+      "lineno": 12
+    },
+    {
+      "src": "runtime.artifact_execute_impl",
+      "src_file": "runtime/artifact_execute_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 13
+    },
+    {
+      "src": "runtime.artifact_execute_impl",
+      "src_file": "runtime/artifact_execute_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 14
+    },
+    {
+      "src": "runtime.artifact_execute_impl",
+      "src_file": "runtime/artifact_execute_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.worker_impl",
+      "target_layer": "runtime",
+      "lineno": 15
+    },
+    {
+      "src": "runtime.citation_grounding",
+      "src_file": "runtime/citation_grounding.py",
+      "src_layer": "runtime",
+      "target": "runtime.profiles",
+      "target_layer": "runtime",
+      "lineno": 22
+    },
+    {
+      "src": "runtime.citation_grounding",
+      "src_file": "runtime/citation_grounding.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 23
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.adapter_impl",
+      "target_layer": "runtime",
+      "lineno": 7
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.failure_impl",
+      "target_layer": "runtime",
+      "lineno": 8
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.outbox_impl",
+      "target_layer": "runtime",
+      "lineno": 9
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.smoke_impl",
+      "target_layer": "runtime",
+      "lineno": 10
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.validate_impl",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.artifact_execute_impl",
+      "target_layer": "runtime",
+      "lineno": 12
+    },
+    {
+      "src": "runtime.cli",
+      "src_file": "runtime/cli.py",
+      "src_layer": "runtime",
+      "target": "runtime.worker_impl",
+      "target_layer": "runtime",
+      "lineno": 13
+    },
+    {
+      "src": "runtime.collector",
+      "src_file": "runtime/collector.py",
+      "src_layer": "runtime",
+      "target": "runtime.error_log",
+      "target_layer": "runtime",
+      "lineno": 32
+    },
+    {
+      "src": "runtime.collector",
+      "src_file": "runtime/collector.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 33
+    },
+    {
+      "src": "runtime.coverage",
+      "src_file": "runtime/coverage.py",
+      "src_layer": "runtime",
+      "target": "runtime.profiles",
+      "target_layer": "runtime",
+      "lineno": 20
+    },
+    {
+      "src": "runtime.coverage",
+      "src_file": "runtime/coverage.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 21
+    },
+    {
+      "src": "runtime.failure_impl",
+      "src_file": "runtime/failure_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 10
+    },
+    {
+      "src": "runtime.failure_impl",
+      "src_file": "runtime/failure_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.handoff",
+      "src_file": "runtime/handoff.py",
+      "src_layer": "runtime",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 10
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.adapter_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.cli",
+      "target_layer": "runtime",
+      "lineno": 5
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.failure_impl",
+      "target_layer": "runtime",
+      "lineno": 6
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.outbox_impl",
+      "target_layer": "runtime",
+      "lineno": 7
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.smoke_impl",
+      "target_layer": "runtime",
+      "lineno": 8
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.validate_impl",
+      "target_layer": "runtime",
+      "lineno": 9
+    },
+    {
+      "src": "runtime.impl",
+      "src_file": "runtime/impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.worker_impl",
+      "target_layer": "runtime",
+      "lineno": 10
+    },
+    {
+      "src": "runtime.outbox",
+      "src_file": "runtime/outbox.py",
+      "src_layer": "runtime",
+      "target": "runtime.outbox_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.outbox_impl",
+      "src_file": "runtime/outbox_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.outbox_impl",
+      "src_file": "runtime/outbox_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.event_history",
+      "target_layer": "runtime",
+      "lineno": 182
+    },
+    {
+      "src": "runtime.outbox_impl",
+      "src_file": "runtime/outbox_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.output_filter",
+      "target_layer": "runtime",
+      "lineno": 72
+    },
+    {
+      "src": "runtime.outbox_impl",
+      "src_file": "runtime/outbox_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.capability",
+      "target_layer": "runtime",
+      "lineno": 87
+    },
+    {
+      "src": "runtime.packaging",
+      "src_file": "runtime/packaging.py",
+      "src_layer": "runtime",
+      "target": "runtime.worker_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.render",
+      "src_file": "runtime/render.py",
+      "src_layer": "runtime",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 8
+    },
+    {
+      "src": "runtime.render",
+      "src_file": "runtime/render.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 9
+    },
+    {
+      "src": "runtime.schema_defaults",
+      "src_file": "runtime/schema_defaults.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 10
+    },
+    {
+      "src": "runtime.smoke",
+      "src_file": "runtime/smoke.py",
+      "src_layer": "runtime",
+      "target": "runtime.smoke_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.smoke_impl",
+      "src_file": "runtime/smoke_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.smoke_impl",
+      "src_file": "runtime/smoke_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime",
+      "target_layer": "runtime",
+      "lineno": 12
+    },
+    {
+      "src": "runtime.smoke_impl",
+      "src_file": "runtime/smoke_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 13
+    },
+    {
+      "src": "runtime.smoke_impl",
+      "src_file": "runtime/smoke_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.validate_impl",
+      "target_layer": "runtime",
+      "lineno": 14
+    },
+    {
+      "src": "runtime.validate_impl",
+      "src_file": "runtime/validate_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.schema_defaults",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.validate_impl",
+      "src_file": "runtime/validate_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 16
+    },
+    {
+      "src": "runtime.validate_impl",
+      "src_file": "runtime/validate_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.schema_defaults",
+      "target_layer": "runtime",
+      "lineno": 49
+    },
+    {
+      "src": "runtime.validate_impl",
+      "src_file": "runtime/validate_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.legacy_compat",
+      "target_layer": "runtime",
+      "lineno": 167
+    },
+    {
+      "src": "runtime.validation",
+      "src_file": "runtime/validation.py",
+      "src_layer": "runtime",
+      "target": "runtime.validate_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.validators_core",
+      "src_file": "runtime/validators_core.py",
+      "src_layer": "runtime",
+      "target": "runtime.validator_sdk",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.work_units",
+      "src_file": "runtime/work_units.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 20
+    },
+    {
+      "src": "runtime.worker",
+      "src_file": "runtime/worker.py",
+      "src_layer": "runtime",
+      "target": "runtime.worker_impl",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.render",
+      "target_layer": "runtime",
+      "lineno": 11
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.schema_defaults",
+      "target_layer": "runtime",
+      "lineno": 12
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 13
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 14
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.citation_grounding",
+      "target_layer": "runtime",
+      "lineno": 15
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.collector",
+      "target_layer": "runtime",
+      "lineno": 16
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.coverage",
+      "target_layer": "runtime",
+      "lineno": 17
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.profiles",
+      "target_layer": "runtime",
+      "lineno": 18
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.work_units",
+      "target_layer": "runtime",
+      "lineno": 19
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.handoff",
+      "target_layer": "runtime",
+      "lineno": 272
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.trace",
+      "target_layer": "runtime",
+      "lineno": 273
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.event_history",
+      "target_layer": "runtime",
+      "lineno": 295
+    },
+    {
+      "src": "runtime.worker_impl",
+      "src_file": "runtime/worker_impl.py",
+      "src_layer": "runtime",
+      "target": "runtime.event_history",
+      "target_layer": "runtime",
+      "lineno": 440
+    },
+    {
+      "src": "scripts._smoke_subagent_isolation",
+      "src_file": "scripts/_smoke_subagent_isolation.py",
+      "src_layer": "scripts",
+      "target": "runtime.validate_impl",
+      "target_layer": "runtime",
+      "lineno": 16
+    },
+    {
+      "src": "scripts._validator_sdk",
+      "src_file": "scripts/_validator_sdk.py",
+      "src_layer": "scripts",
+      "target": "runtime.validator_sdk",
+      "target_layer": "runtime",
+      "lineno": 4
+    },
+    {
+      "src": "scripts.build_research_package",
+      "src_file": "scripts/build_research_package.py",
+      "src_layer": "scripts",
+      "target": "runtime.worker_impl",
+      "target_layer": "runtime",
+      "lineno": 13
+    },
+    {
+      "src": "scripts.interface_runtime_adapter",
+      "src_file": "scripts/interface_runtime_adapter.py",
+      "src_layer": "scripts",
+      "target": "runtime.cli",
+      "target_layer": "runtime",
+      "lineno": 76
+    },
+    {
+      "src": "scripts.outbox_delivery_worker",
+      "src_file": "scripts/outbox_delivery_worker.py",
+      "src_layer": "scripts",
+      "target": "runtime.cli",
+      "target_layer": "runtime",
+      "lineno": 67
+    },
+    {
+      "src": "scripts.render_full_html_report",
+      "src_file": "scripts/render_full_html_report.py",
+      "src_layer": "scripts",
+      "target": "runtime.legacy_compat",
+      "target_layer": "runtime",
+      "lineno": 13
+    },
+    {
+      "src": "scripts.rfo_runtime_core",
+      "src_file": "scripts/rfo_runtime_core.py",
+      "src_layer": "scripts",
+      "target": "runtime.cli",
+      "target_layer": "runtime",
+      "lineno": 30
+    },
+    {
+      "src": "scripts.rfo_v18_core",
+      "src_file": "scripts/rfo_v18_core.py",
+      "src_layer": "scripts",
+      "target": "runtime.cli",
+      "target_layer": "runtime",
+      "lineno": 12
+    },
+    {
+      "src": "scripts.run_rfo_full_research",
+      "src_file": "scripts/run_rfo_full_research.py",
+      "src_layer": "scripts",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 32
+    },
+    {
+      "src": "scripts.run_rfo_with_web_search",
+      "src_file": "scripts/run_rfo_with_web_search.py",
+      "src_layer": "scripts",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 48
+    },
+    {
+      "src": "scripts.run_rfo_with_web_search",
+      "src_file": "scripts/run_rfo_with_web_search.py",
+      "src_layer": "scripts",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 221
+    },
+    {
+      "src": "scripts.run_rfo_with_web_search",
+      "src_file": "scripts/run_rfo_with_web_search.py",
+      "src_layer": "scripts",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 271
+    },
+    {
+      "src": "scripts.run_rfo_with_web_search",
+      "src_file": "scripts/run_rfo_with_web_search.py",
+      "src_layer": "scripts",
+      "target": "runtime.render",
+      "target_layer": "runtime",
+      "lineno": 381
+    },
+    {
+      "src": "scripts.run_rfo_with_web_search",
+      "src_file": "scripts/run_rfo_with_web_search.py",
+      "src_layer": "scripts",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 382
+    },
+    {
+      "src": "scripts.run_rfo_with_web_search",
+      "src_file": "scripts/run_rfo_with_web_search.py",
+      "src_layer": "scripts",
+      "target": "runtime.util",
+      "target_layer": "runtime",
+      "lineno": 394
+    },
+    {
+      "src": "scripts.runtime_job_worker",
+      "src_file": "scripts/runtime_job_worker.py",
+      "src_layer": "scripts",
+      "target": "runtime.cli",
+      "target_layer": "runtime",
+      "lineno": 35
+    },
+    {
+      "src": "scripts.validate_chat_claims_against_delivery_manifest",
+      "src_file": "scripts/validate_chat_claims_against_delivery_manifest.py",
+      "src_layer": "scripts",
+      "target": "runtime.legacy_compat",
+      "target_layer": "runtime",
+      "lineno": 8
+    },
+    {
+      "src": "scripts.validate_gate_consistency",
+      "src_file": "scripts/validate_gate_consistency.py",
+      "src_layer": "scripts",
+      "target": "runtime.legacy_compat",
+      "target_layer": "runtime",
+      "lineno": 8
+    },
+    {
+      "src": "scripts.validate_release_report",
+      "src_file": "scripts/validate_release_report.py",
+      "src_layer": "scripts",
+      "target": "runtime.status",
+      "target_layer": "runtime",
+      "lineno": 57
+    }
+  ]
+}

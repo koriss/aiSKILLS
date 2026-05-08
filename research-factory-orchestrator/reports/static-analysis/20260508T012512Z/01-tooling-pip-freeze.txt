@@ -1,0 +1,14 @@
+bandit==1.9.4
+colorama==0.4.6
+mando==0.7.1
+markdown-it-py==4.2.0
+mdurl==0.1.2
+pyflakes==3.4.0
+Pygments==2.20.0
+PyYAML==6.0.3
+radon==6.0.1
+rich==15.0.0
+ruff==0.15.12
+six==1.17.0
+stevedore==5.7.0
+vulture==2.16

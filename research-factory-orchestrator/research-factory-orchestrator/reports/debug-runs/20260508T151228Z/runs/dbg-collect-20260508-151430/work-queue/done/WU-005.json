@@ -1,0 +1,9 @@
+{
+  "wu_id": "WU-005",
+  "wave": "W1",
+  "status": "planned",
+  "context_packet": "context-packets/WU-001.context.json",
+  "run_id": "RUN-716d2c940879",
+  "job_id": "JOB-ee2fdb51cd42",
+  "target_fingerprint": "TARGET-9644377bc380"
+}

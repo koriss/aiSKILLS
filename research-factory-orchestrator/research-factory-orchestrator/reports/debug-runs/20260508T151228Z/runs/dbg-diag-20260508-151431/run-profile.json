@@ -1,0 +1,34 @@
+{
+  "schema_version": "v19.0",
+  "profile": "source-packet",
+  "policy": {
+    "label": "Operator-Supplied Source Packet",
+    "description": "Operator pre-curates sources via RFO_SOURCE_PACKET=<path>. Web search is not required and must not be reported as executed.",
+    "source_policy": {
+      "external_collection_required": true,
+      "minimum_independent_sources": 0,
+      "source_packet_allowed": true,
+      "source_packet_required": true,
+      "web_search_required": false,
+      "stub_only_allowed": false
+    },
+    "delivery_policy": {
+      "stub_delivered_allowed": false,
+      "external_delivery_required": true,
+      "fail_on_validation_failed": true
+    },
+    "active_validators": [
+      "validate_artifact_schema",
+      "validate_work_unit_completion",
+      "validate_seed_only_truth",
+      "validate_error_log_quality",
+      "validate_source_provenance_distinction",
+      "validate_outbox_finalization",
+      "validate_root_vs_zip_artifact_truth",
+      "validate_collection_coverage_decoupled",
+      "validate_citation_grounding"
+    ]
+  },
+  "resolved_from": "source-packet",
+  "resolved_at": "2026-05-08T15:14:31Z"
+}

@@ -1,31 +1,43 @@
 #!/usr/bin/env python3
-"""Webhook delivery adapter with optional capability-token verification."""
-from pathlib import Path
-import argparse, datetime, json
+"""Inert webhook delivery adapter (v19.3+). External HTTP delivery removed from skill; gateway owns channel send."""
+from __future__ import annotations
+
+import argparse
+import datetime
+import json
 import sys
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from runtime.capability import verify
+from pathlib import Path
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--run-dir', required=False)
-ap.add_argument('--event-id', required=False)
-ap.add_argument('--event-json', required=False)
-ap.add_argument('--capability-token', required=False)
-ap.add_argument('--action', required=False, default='deliver_external:webhook')
+ap.add_argument("--run-dir", required=False)
+ap.add_argument("--event-id", required=False)
+ap.add_argument("--event-json", required=False)
+ap.add_argument("--capability-token", required=False)
+ap.add_argument("--action", required=False, default="deliver_external:webhook")
 args = ap.parse_args()
 
-now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+now = (
+    datetime.datetime.now(datetime.timezone.utc)
+    .replace(microsecond=0)
+    .isoformat()
+    .replace("+00:00", "Z")
+)
 event = {}
 if args.event_json and Path(args.event_json).exists():
-    event = json.loads(Path(args.event_json).read_text(encoding='utf-8'))
+    event = json.loads(Path(args.event_json).read_text(encoding="utf-8"))
 
-if args.capability_token:
-    tp = Path(args.capability_token)
-    token = json.loads(tp.read_text(encoding='utf-8')) if tp.is_file() else {}
-    if not verify(token, args.action):
-        print(json.dumps({'provider': 'webhook', 'status': 'failed', 'reason': 'capability_denied'}, ensure_ascii=False))
-        raise SystemExit(1)
-
-print(json.dumps({'provider': 'webhook', 'event_id': args.event_id or event.get('event_id'), 'status': 'sent', 'stub_delivery': True, 'real_external_delivery': False, 'acked_at': now}, ensure_ascii=False))
+print(
+    json.dumps(
+        {
+            "provider": "webhook",
+            "event_id": args.event_id or event.get("event_id"),
+            "status": "inert",
+            "stub_delivery": True,
+            "real_external_delivery": False,
+            "note": "v19.3: webhook adapter is inert; use gateway-side delivery for external channels.",
+            "acked_at": now,
+        },
+        ensure_ascii=False,
+    )
+)
+sys.exit(0)

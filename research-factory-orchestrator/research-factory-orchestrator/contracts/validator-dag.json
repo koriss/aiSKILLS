@@ -1,5 +1,5 @@
 {
-  "version": "18.1.1-full-overlay-from-v17.3-base-validator-dag",
+  "version": "19.2.0",
   "base": "17.3.0-report-proof-integrity-hardening",
   "overlays": [
     "18.0.0-internal-analysis-audit-runtime",
@@ -34,5 +34,6 @@
     "final_pass_with_failed_gate",
     "timeout_promoted_to_complete",
     "late_result_without_accept_reject"
-  ]
+  ],
+  "inherits_from": "18.1.1-full-overlay-from-v17.3-base-validator-dag"
 }

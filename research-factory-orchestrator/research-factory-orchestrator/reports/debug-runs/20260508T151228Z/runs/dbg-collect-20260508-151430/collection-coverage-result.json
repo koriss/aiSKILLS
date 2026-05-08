@@ -1,0 +1,15 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-716d2c940879",
+  "job_id": "JOB-ee2fdb51cd42",
+  "profile": "mvr",
+  "minimum_independent_sources": 0,
+  "observed_independent_sources": 1,
+  "source_coverage_passed": true,
+  "collection_completed": true,
+  "external_web_search_executed": false,
+  "external_source_packet_loaded": false,
+  "passed": true,
+  "failure_reasons": [],
+  "evaluated_at": "2026-05-08T15:14:30Z"
+}

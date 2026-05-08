@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN-29e97062122c",
+  "job_id": "JOB-432935a0b3bf",
+  "command_id": "CMD-432935a0b3bf",
+  "run_label": "dbg-full-20260508-151447",
+  "task": "phase2 schema check",
+  "mode": "research",
+  "requested_mode": "research",
+  "version": "19.3",
+  "started_at": "2026-05-08T15:14:47Z",
+  "provider": "cli",
+  "interface": "direct_runtime",
+  "skill_root": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator",
+  "runs_root": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs",
+  "consent": {
+    "tmp_runs_root": true,
+    "env_chat_id": false
+  },
+  "rfo_allow_tmp_runs_root": true,
+  "rfo_allow_env_chat_id": false
+}

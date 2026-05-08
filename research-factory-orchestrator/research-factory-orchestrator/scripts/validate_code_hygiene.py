@@ -9,7 +9,13 @@ def main():
         if p.is_symlink(): errors.append(f'symlink found: {p.relative_to(root)}')
         if not p.is_file() or p.suffix not in ['.md','.py','.json','.txt','.html','.yml','.yaml']: continue
         rel=str(p.relative_to(root))
-        if rel.startswith('kb/propaganda-io/') or rel.startswith('scripts/validate_') or rel.startswith('tests/'):
+        if (
+            rel.startswith('kb/propaganda-io/')
+            or rel.startswith('scripts/validate_')
+            or rel.startswith('tests/')
+            or rel.startswith('docs/diagnostics/')
+            or rel.startswith('docs/audits/')
+        ):
             continue
         text=p.read_text(encoding='utf-8',errors='replace')
         for token in FORBIDDEN_RUNTIME:

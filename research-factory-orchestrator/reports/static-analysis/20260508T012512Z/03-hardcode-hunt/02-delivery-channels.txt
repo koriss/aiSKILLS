@@ -1,0 +1,29 @@
+./CHANGELOG.md:7:- Telegram routing hardening: `chat_id` resolution `request -> argv -> env(consent) -> fail`
+./CHANGELOG.md:18:- Telegram: real `sendMessage` path + operator `tools/agent_telegram/` + mock API
+./AGENTS.md:17:    --api-base "${TELEGRAM_API_BASE:-https://api.telegram.org}" \
+./AGENTS.md:60:`interface-request.json`, env, or fallback to `https://api.telegram.org`.
+./AGENTS.md:66:`chat_id`, producing a "successful" stub-only delivery while the narrative
+./runtime/adapter_impl.py:27:        "chat_id": _opt(getattr(a, "chat_id", "")),
+./scripts/_smoke_v19_2_1_honesty.py:6:1. canonical path + chat_id passed + api_base set → real delivery, verifier 0 lies.
+./scripts/_smoke_v19_2_1_honesty.py:69:    """Canonical skill, allowed runs-root, env-consent chat_id, sentinel token.
+./scripts/validate_no_provider_hardcode_text.py:7:    re.compile(r'sendMessage|sendDocument', re.I),
+./scripts/interface_runtime_adapter.py:17:  ``--chat-id``               Telegram chat_id from the *incoming* update.
+./scripts/interface_runtime_adapter.py:22:                              ``https://api.telegram.org``); also taken
+./scripts/interface_runtime_adapter.py:26:``delivery.chat_id``, ``delivery.reply_to_message_id`` and
+./runtime/artifact_execute_impl.py:24:        "chat_id": None,
+./runtime/cli.py:29:    # update. ``chat_id`` MUST come from the incoming update (group chat,
+./scripts/validate_provider_specific_logic_not_in_runtime.py:15:    re.compile(r'sendMessage|sendDocument', re.I),
+./scripts/_rfo_path_guard.py:65:    "      --api-base \"${TELEGRAM_API_BASE:-https://api.telegram.org}\" \\\n"
+./runtime/compatibility-matrix.json:15:  "upgrade_notes": "v19.2.0: runtime truth restoration (v19-dual-layout supported; v18 layout legacy_supported), Telegram real sendMessage when TELEGRAM_API_BASE is set, integration smokes + honesty verifier. v19.1.0 minor: multi-agent advisory channels (blinded checker, typed grounding, judge-council schema) + replayable evidence (run-events, deterministic/trajectory smokes) + release zip triad + clean-install + coverage-meta (ADR-012/013; docs/release-notes/v19.1.md). v19.0.4 patch: core-boundary-contract refresh (runtime/*_impl map); validate_release REQUIRED_GATES + smoke_cli_v19 + _smoke_corrupt_render; ADR-011 committed release-validation-transcript policy. v19.0.3 patch: fail-closed rollback minimal_valid + physical rollback stub; V6 semantic fixes (DELIV-STUB-EXT, DELIV-ATT-MISSING, DELIV-STUB-FORBIDDEN-ATTACHMENT); V1 walker oneOf/anyOf/allOf semantics; release B4 REQUIRED_GATES + dual Telegram smokes (v18 + RFO_V19_PROFILE=mvr); ADR-009/010 vocabulary/root patterns; validation-transcript schema REC-1 root permissive; state-machine queued→validation_failed. Prior v19.0.2: KISS validation-profile-used; V2 role_for_claim; V6 DELIV-EXT-CLI; semver-only strings. v19.0.0 phase 1: schemas/core + validation-profiles; validators/core V1–V6; run_core_validators + check_validation_pass; RFO_V19_PROFILE; SKILL-core.md; migrate_validator_invocation.py; index-v19.json. v18.7.0: LC01–LC16, F201–F207, FTM. v18.5.1: fail-closed rollback; delivery validators."
+./scripts/verify_openclaw_run.py:20:  through the silent stub path without explicit consent (chat_id missing,
+./docs/diagnostics/v19_2_agent_honesty_methodology.md:20:   (mock server counts real `sendMessage` calls).
+./docs/release-notes/v19.2.1.md:18:- **Telegram delivery truth path** — `chat_id` resolution now follows strict
+./docs/release-notes/v19.2.md:14:  `sendMessage` when `TELEGRAM_API_BASE` is set; operator tools under
+./docs/adr/ADR-016-compute-vs-delivery-split.md:14:2. **OpenClaw gateway** parses the marker, validates `result-manifest.json` (JSON Schema + relative paths + sha256), delivers via the existing channel adapter (e.g. Telegram `sendMessage` / `sendDocument`), records audit, and **suppresses** the model-generated user reply on this path.
+./docs/adr/ADR-016-compute-vs-delivery-split.md:27:- Accept `chat_id`, bot tokens, or Telegram API base in argv/env for execute mode.
+./docs/adr/ADR-016-compute-vs-delivery-split.md:39:- Pass `chat_id` into the skill argv/env.
+./docs/adr/ADR-014-telegram-operator-control-plane.md:17:1. **Split responsibility** — runtime adapter = minimal `sendMessage` when
+./tools/agent_telegram/telegram_bot.py:15:    base = os.environ.get("TELEGRAM_API_BASE", "https://api.telegram.org").rstrip("/")
+./tools/agent_telegram/config.example.env:4:TELEGRAM_API_BASE=https://api.telegram.org
+./tools/agent_telegram/security.py:19:def chat_id_allowed(chat_id: str) -> bool:
+./tools/agent_telegram/security.py:23:    return str(chat_id).strip() in allow

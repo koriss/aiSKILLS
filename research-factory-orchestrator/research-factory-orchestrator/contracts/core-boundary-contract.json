@@ -1,10 +1,10 @@
 {
-  "version": "19.1.0",
+  "version": "19.2.0",
   "description": "RFO runtime boundary: bounded modules under runtime/*_impl.py; CLI entry at runtime/cli.py; compatibility shim at runtime/impl.py.",
   "entrypoints": {
     "cli_main": "runtime/cli.py:main",
     "legacy_compat_shim": "runtime/impl.py (deprecated re-exports; prefer runtime.cli + *_impl)",
-    "legacy_script_facade": "scripts/rfo_v18_core.py (thin forwarder to runtime.cli.main)"
+    "legacy_script_facade": "scripts/rfo_v18_core.py (deprecated shim); canonical: scripts/rfo_runtime_core.py → runtime.cli.main"
   },
   "implementation_modules": [
     "runtime/adapter_impl.py",
@@ -30,5 +30,6 @@
     "judge-council.json (optional, schema schemas/core/judge-council.schema.json)",
     "source-policy.json (optional advisory, schema schemas/core/source-policy.schema.json)",
     "run-events.jsonl (append-only validator / rollback trace)"
-  ]
+  ],
+  "inherits_from": "19.1.0"
 }

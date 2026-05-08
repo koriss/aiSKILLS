@@ -1,0 +1,21 @@
+{
+  "handoff_id": "HOFF-848eda012731",
+  "from_phase": "render",
+  "to_phase": "outbox",
+  "payload_hash": "848eda0127316519a629bdb651d35e6197e5d77359574ff4d78975c349396591",
+  "required_fields": [
+    "run_id",
+    "chat_plan"
+  ],
+  "success_response": "ACK",
+  "failure_response": "NACK",
+  "timeout_ms": 120000,
+  "on_failure_action": "block",
+  "prev_hash": "2e1710fcf098d6fbc3ddf8cffeaecc35ced10f8cd72cd40db364befd303812ce",
+  "created_at": "2026-05-08T15:17:13Z",
+  "payload": {
+    "run_id": "RUN-08bbee6fe342",
+    "chat_plan": "chat/chat-message-plan.json"
+  },
+  "skill_version": "19.3"
+}

@@ -1,0 +1,14 @@
+validator	exit_code	stdout_lines	stderr_lines	args
+validate_no_provider_hardcode_text	1	0	14	.
+validate_provider_specific_logic_not_in_runtime	1	0	1	.
+validate_no_external_kb_dependency	0	1	0	
+validate_runtime_contract_current	1	5	0	
+validate_interface_adapter_contract	0	1	0	.
+validate_command_router_mapping	0	1	0	.
+validate_no_ambient_context_runtime_override	0	1	0	
+validate_skill	1	9	0	
+validate_skill_discovery_frontmatter	1	8	0	
+validate_canonical_package_layout	SKIP	0	0	requires_package_zip
+validate_code_hygiene	1	0	4	
+validate_all_python_ast	0	4	0	
+validate_no_pycache	1	1236	0	

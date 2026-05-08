@@ -1,0 +1,26 @@
+{
+  "run_id": "RUN-1d96f965b695",
+  "edges": [
+    {
+      "edge_id": "E001",
+      "from": "ENT-ROOT",
+      "to": "ENT-FACT",
+      "relation": "decomposes_into",
+      "status": "confirmed"
+    },
+    {
+      "edge_id": "E002",
+      "from": "ENT-ROOT",
+      "to": "ENT-IO",
+      "relation": "requires_io_check",
+      "status": "confirmed"
+    },
+    {
+      "edge_id": "E003",
+      "from": "ENT-ROOT",
+      "to": "ENT-SRC",
+      "relation": "requires_sources",
+      "status": "confirmed"
+    }
+  ]
+}

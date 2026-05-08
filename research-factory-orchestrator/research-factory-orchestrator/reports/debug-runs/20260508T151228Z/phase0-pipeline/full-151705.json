@@ -1,0 +1,34 @@
+{
+  "command": "full",
+  "args": [
+    "/usr/bin/python3",
+    "-S",
+    "-m",
+    "runtime.cli",
+    "run",
+    "--project-dir",
+    "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs/dbg-full-20260508-151705",
+    "--task",
+    "phase4 full rigor",
+    "--mode",
+    "research",
+    "--provider",
+    "cli",
+    "--interface",
+    "direct_runtime",
+    "--runs-root",
+    "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs"
+  ],
+  "env": {
+    "RFO_ALLOW_TMP_RUNS_ROOT": "1",
+    "RFO_RUN_PROFILE": "full-rigor",
+    "RFO_SEED_URLS": "",
+    "RFO_SOURCE_PACKET": "https://www.reuters.com,https://www.bbc.com",
+    "RFO_DEBUG_TS": "20260508T151228Z"
+  },
+  "exit_code": 0,
+  "stdout": "{\n  \"runtime_initialized\": true,\n  \"run_id\": \"RUN-b522be7fb1ac\",\n  \"job_id\": \"JOB-f25ed4e4e5e6\",\n  \"version\": \"19.3\",\n  \"state\": \"content_rendered\"\n}\n",
+  "stderr": "",
+  "run_dir": "/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/reports/debug-runs/20260508T151228Z/runs/dbg-full-20260508-151705",
+  "created_at": "20260508T151705Z"
+}

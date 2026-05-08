@@ -1,0 +1,13 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-b522be7fb1ac",
+  "job_id": "JOB-f25ed4e4e5e6",
+  "mode": "research",
+  "profile": "full-rigor",
+  "executor_completed_at": "2026-05-08T15:17:05Z",
+  "total_planned": 0,
+  "total_terminal": 0,
+  "by_status": {},
+  "any_collected_sources": false,
+  "work_units": []
+}

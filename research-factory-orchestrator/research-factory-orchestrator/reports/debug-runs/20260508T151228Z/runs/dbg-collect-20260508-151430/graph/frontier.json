@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-716d2c940879",
+  "frontier": [
+    {
+      "frontier_id": "F-W3-001",
+      "wave_id": "W3",
+      "query": "source laundering and amplification chain",
+      "priority": "medium",
+      "status": "planned"
+    }
+  ]
+}

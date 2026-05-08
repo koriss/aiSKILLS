@@ -1,0 +1,13 @@
+[Unit]
+Description=RFO Telegram webhook (example)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/openclaw/skills/research-factory-orchestrator
+EnvironmentFile=-/etc/rfo/telegram.env
+ExecStart=/usr/bin/python3 -S tools/agent_telegram/webhook_server.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+{
+  "run_id": "RUN-14501b8f6dad",
+  "max_depth": 4,
+  "stop_when": [
+    "no_new_entities",
+    "low_relevance",
+    "budget_exhausted"
+  ]
+}

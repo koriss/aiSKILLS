@@ -47,7 +47,7 @@ def main():
     try:
         stub=make_run(base, provider="telegram", ack_mode="stub")
         odw.recompute_delivery_state(stub)
-        md=read(stub/"delivery-manifest.json"); fg=read(stub/"final-answer-gate.json"); g=fg.get("gates") or {}
+        md=read(stub/"delivery-manifest.json"); fg=read(stub/"final-answer-gate.json"); g=(fg["gates"] if "gates" in fg and isinstance(fg["gates"], dict) else {})
         if md.get("delivery_status") != "stub_delivered": errors.append("stub case did not become stub_delivered")
         if md.get("delivery_claim_allowed") is not False: errors.append("stub case allowed delivery claim")
         if fg.get("passed") is not False: errors.append("stub case set final passed true")

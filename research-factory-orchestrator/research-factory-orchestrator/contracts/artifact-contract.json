@@ -1,5 +1,5 @@
 {
-  "version": "17.1.0-runtime-lifecycle-hardening",
+  "version": "19.2.0",
   "required_run_artifacts": [
     "run.json",
     "run-state.json",
@@ -53,5 +53,6 @@
     "scripts/runtime_job_worker.py",
     "scripts/outbox_delivery_worker.py",
     "scripts/build_research_package.py"
-  ]
+  ],
+  "inherits_from": "17.1.0-runtime-lifecycle-hardening"
 }

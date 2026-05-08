@@ -11,7 +11,14 @@ def main():
     total_bytes=sum(p.stat().st_size for p in files)
     est_tokens=max(1,total_bytes//4)
     operational_core=[]
-    for rel in ['SKILL.md','scripts/rfo_v18_core.py','scripts/interface_runtime_adapter.py','scripts/runtime_job_worker.py','scripts/outbox_delivery_worker.py','contracts/validator-dag.json']:
+    for rel in [
+        "SKILL.md",
+        "scripts/rfo_runtime_core.py",
+        "scripts/interface_runtime_adapter.py",
+        "scripts/runtime_job_worker.py",
+        "scripts/outbox_delivery_worker.py",
+        "contracts/validator-dag.json",
+    ]:
         if (root/rel).exists(): operational_core.append(rel)
     result={
       'root':str(root),'total_files':len(files),'total_bytes':total_bytes,'estimated_tokens':est_tokens,

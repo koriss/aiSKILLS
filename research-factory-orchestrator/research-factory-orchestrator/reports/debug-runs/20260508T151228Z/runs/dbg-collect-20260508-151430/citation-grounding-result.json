@@ -1,0 +1,17 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-716d2c940879",
+  "job_id": "JOB-ee2fdb51cd42",
+  "profile": "mvr",
+  "claims_total": 5,
+  "claims_grounded": 5,
+  "claims_no_support": 0,
+  "relevance_aware_factuality_score": 0.15,
+  "deflection_rate_when_no_grounding": 0.0,
+  "raf_threshold": 0.65,
+  "dfl_threshold": 0.25,
+  "passed": true,
+  "requires_grounding": false,
+  "failure_reasons": [],
+  "evaluated_at": "2026-05-08T15:14:30Z"
+}

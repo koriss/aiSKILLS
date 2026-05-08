@@ -1,0 +1,1209 @@
+[1mproviders/cli/cli_delivery_adapter.py[0m[36m:[0m4[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mproviders/cli/cli_delivery_adapter.py[0m[36m:[0m9[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mruntime/cli.py[0m[36m:[0m5[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mruntime/outbox_impl.py[0m[36m:[0m11[36m:[0m51[36m:[0m [1m[31mF401[0m [[36m*[0m] `runtime.util.sid` imported but unused
+[1mruntime/validators_core.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mruntime/validators_core.py[0m[36m:[0m2[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `json` imported but unused
+[1mruntime/work_units.py[0m[36m:[0m15[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `json` imported but unused
+[1mscripts/_audit_composition_schemas.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/_diff_telegram_against_golden.py[0m[36m:[0m27[36m:[0m8[36m:[0m [1m[31mE721[0m Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+[1mscripts/_smoke_v19_2_1_honesty.py[0m[36m:[0m101[36m:[0m9[36m:[0m [1m[31mF841[0m Local variable `o` is assigned to but never used
+[1mscripts/_smoke_v19_2_1_honesty.py[0m[36m:[0m131[36m:[0m39[36m:[0m [1m[31mE741[0m Ambiguous variable name: `l`
+[1mscripts/_smoke_v19_2_1_honesty.py[0m[36m:[0m307[36m:[0m9[36m:[0m [1m[31mF841[0m Local variable `o` is assigned to but never used
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m35[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `tempfile` imported but unused
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m198[36m:[0m37[36m:[0m [1m[31mE741[0m Ambiguous variable name: `l`
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m290[36m:[0m5[36m:[0m [1m[31mF841[0m Local variable `p_rt` is assigned to but never used
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m344[36m:[0m15[36m:[0m [1m[31mF541[0m [[36m*[0m] f-string without any placeholders
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m368[36m:[0m11[36m:[0m [1m[31mF541[0m [[36m*[0m] f-string without any placeholders
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m381[36m:[0m9[36m:[0m [1m[31mF841[0m Local variable `status` is assigned to but never used
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m392[36m:[0m15[36m:[0m [1m[31mF541[0m [[36m*[0m] f-string without any placeholders
+[1mscripts/_test_mvr_profile_seed_only_disclosure.py[0m[36m:[0m395[36m:[0m15[36m:[0m [1m[31mF541[0m [[36m*[0m] f-string without any placeholders
+[1mscripts/build_context_budget_analysis.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/build_context_budget_analysis.py[0m[36m:[0m3[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/build_context_budget_analysis.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/build_context_budget_analysis.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/build_context_budget_analysis.py[0m[36m:[0m22[36m:[0m31[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/build_context_budget_analysis.py[0m[36m:[0m32[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/build_provenance_manifest.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/build_research_package.py[0m[36m:[0m13[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mscripts/build_sacred_path_graph.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/build_skill_inventory.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/build_skill_inventory.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/build_skill_inventory.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/build_skill_inventory.py[0m[36m:[0m26[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/check_schema_drift.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/common_runtime.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/common_runtime.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/common_runtime.py[0m[36m:[0m20[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/common_runtime.py[0m[36m:[0m26[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/compile_work_units.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/compile_work_units.py[0m[36m:[0m6[36m:[0m76[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/compile_work_units.py[0m[36m:[0m6[36m:[0m121[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/compile_work_units.py[0m[36m:[0m6[36m:[0m167[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/compile_work_units.py[0m[36m:[0m7[36m:[0m27[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/inference_broker.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/inference_broker.py[0m[36m:[0m13[36m:[0m28[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/inference_broker.py[0m[36m:[0m13[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/inference_broker.py[0m[36m:[0m14[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/inference_broker.py[0m[36m:[0m17[36m:[0m48[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/inference_broker.py[0m[36m:[0m20[36m:[0m73[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/inference_broker.py[0m[36m:[0m22[36m:[0m80[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/inference_broker.py[0m[36m:[0m24[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/init_runtime.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/init_runtime.py[0m[36m:[0m117[36m:[0m32[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/interface_common.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/interface_common.py[0m[36m:[0m3[36m:[0m33[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/match_io_methods.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/match_io_methods.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m6[36m:[0m79[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m6[36m:[0m160[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m6[36m:[0m199[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m6[36m:[0m247[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m7[36m:[0m75[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m8[36m:[0m111[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m12[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m14[36m:[0m71[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/match_io_methods.py[0m[36m:[0m15[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/match_io_methods.py[0m[36m:[0m17[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/package_skill.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/query_io_kb.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/query_io_kb.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/query_io_kb.py[0m[36m:[0m6[36m:[0m59[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/query_io_kb.py[0m[36m:[0m6[36m:[0m140[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/query_io_kb.py[0m[36m:[0m6[36m:[0m188[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/query_io_kb.py[0m[36m:[0m7[36m:[0m112[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/query_io_kb.py[0m[36m:[0m7[36m:[0m139[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/query_io_kb.py[0m[36m:[0m10[36m:[0m17[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/query_io_kb.py[0m[36m:[0m13[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/render_full_html_report.py[0m[36m:[0m8[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/render_full_html_report.py[0m[36m:[0m13[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mscripts/render_full_html_report.py[0m[36m:[0m14[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mscripts/render_pipeline_answer_from_ledgers.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/render_pipeline_answer_from_ledgers.py[0m[36m:[0m3[36m:[0m24[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/render_standalone_html_report.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/render_telegram_messages.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/rfo_v18_core.py[0m[36m:[0m12[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mscripts/run_blinded_checker.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/run_failure_corpus_evals.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/run_research_factory.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/run_rfo_full_research.py[0m[36m:[0m371[36m:[0m9[36m:[0m [1m[31mF541[0m [[36m*[0m] f-string without any placeholders
+[1mscripts/run_rfo_full_research.py[0m[36m:[0m392[36m:[0m9[36m:[0m [1m[31mF541[0m [[36m*[0m] f-string without any placeholders
+[1mscripts/run_rfo_with_web_search.py[0m[36m:[0m33[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/run_rfo_with_web_search.py[0m[36m:[0m38[36m:[0m22[36m:[0m [1m[31mF401[0m [[36m*[0m] `datetime.datetime` imported but unused
+[1mscripts/run_rfo_with_web_search.py[0m[36m:[0m38[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `datetime.timezone` imported but unused
+[1mscripts/run_rfo_with_web_search.py[0m[36m:[0m40[36m:[0m20[36m:[0m [1m[31mF401[0m [[36m*[0m] `typing.Optional` imported but unused
+[1mscripts/run_rfo_with_web_search.py[0m[36m:[0m127[36m:[0m5[36m:[0m [1m[31mF841[0m Local variable `STATUSES` is assigned to but never used
+[1mscripts/run_typed_grounding.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/run_validator_dag.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/security_scan_skill.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/select_report_archetype.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m7[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m11[36m:[0m54[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m12[36m:[0m57[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m12[36m:[0m103[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m13[36m:[0m68[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m13[36m:[0m100[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m14[36m:[0m25[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m14[36m:[0m97[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m17[36m:[0m15[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m17[36m:[0m95[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m21[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m21[36m:[0m78[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m22[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/smoke_test_interface_runtime.py[0m[36m:[0m30[36m:[0m23[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/source_acquisition_broker.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/source_acquisition_broker.py[0m[36m:[0m13[36m:[0m28[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/source_acquisition_broker.py[0m[36m:[0m13[36m:[0m52[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/source_acquisition_broker.py[0m[36m:[0m20[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/split_telegram_messages.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/split_telegram_messages.py[0m[36m:[0m46[36m:[0m42[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/split_telegram_messages.py[0m[36m:[0m47[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m10[36m:[0m14[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m10[36m:[0m59[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m16[36m:[0m18[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m21[36m:[0m39[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m22[36m:[0m38[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m23[36m:[0m36[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m41[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m41[36m:[0m79[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m50[36m:[0m47[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m50[36m:[0m87[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m51[36m:[0m57[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m52[36m:[0m57[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m53[36m:[0m41[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m54[36m:[0m80[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m57[36m:[0m47[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m58[36m:[0m52[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m59[36m:[0m56[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m60[36m:[0m40[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m63[36m:[0m92[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m66[36m:[0m82[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m70[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/test_delivery_gate_negative_cases.py[0m[36m:[0m73[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_active_contract_versions.py[0m[36m:[0m10[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_advisory_fixture_suite.py[0m[36m:[0m10[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_all_items.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_all_python_ast.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_all_python_ast.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_all_python_ast.py[0m[36m:[0m8[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_all_source_fusion.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_artifact_manifest.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_artifact_release.py[0m[36m:[0m9[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_canonical_package_layout.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_chat_claims_against_delivery_manifest.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_chat_claims_against_delivery_manifest.py[0m[36m:[0m8[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mscripts/validate_chat_claims_against_delivery_manifest.py[0m[36m:[0m13[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_chat_claims_against_delivery_manifest.py[0m[36m:[0m13[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_chat_claims_against_delivery_manifest.py[0m[36m:[0m14[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_chat_message_plan.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_citation_grounding.py[0m[36m:[0m17[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_claim_citation_links.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_claim_citation_map.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_claim_id_continuity_or_skip_reason.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_claim_id_continuity_or_skip_reason.py[0m[36m:[0m10[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_claim_id_continuity_or_skip_reason.py[0m[36m:[0m10[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_claim_source_fit.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m6[36m:[0m114[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m6[36m:[0m145[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m7[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m10[36m:[0m98[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m22[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m24[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m25[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m27[36m:[0m21[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m29[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m30[36m:[0m40[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_code_hygiene.py[0m[36m:[0m31[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m5[36m:[0m79[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m5[36m:[0m123[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m6[36m:[0m66[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m6[36m:[0m127[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m7[36m:[0m69[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m8[36m:[0m91[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m10[36m:[0m15[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m11[36m:[0m88[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m12[36m:[0m84[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m13[36m:[0m35[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m15[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m16[36m:[0m47[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_collection_coverage.py[0m[36m:[0m17[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_collection_coverage_decoupled.py[0m[36m:[0m19[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_collection_feasibility.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_command_router_mapping.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_completion_proof.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m5[36m:[0m69[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m6[36m:[0m73[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m6[36m:[0m130[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m8[36m:[0m64[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m12[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m13[36m:[0m53[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_confirmed_fact_source_support.py[0m[36m:[0m14[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m32[36m:[0m67[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m33[36m:[0m68[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_budget_policy.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m3[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m7[36m:[0m114[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m13[36m:[0m170[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m15[36m:[0m5[36m:[0m [1m[31mF841[0m Local variable `forbidden` is assigned to but never used
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m18[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m18[36m:[0m89[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m19[36m:[0m37[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_context_claim_gate.py[0m[36m:[0m21[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_contract_registry.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m6[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m7[36m:[0m42[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m10[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m10[36m:[0m70[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m11[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m12[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m14[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m15[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_contract_registry.py[0m[36m:[0m16[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m2[36m:[0m14[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m20[36m:[0m15[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_core_modularization_contract.py[0m[36m:[0m22[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_coverage_matrix.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m32[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m33[36m:[0m51[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cron_isolation.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_cross_model_judge.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_delivery_claim_matches_manifest.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_delivery_claim_matches_manifest.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_delivery_claim_matches_manifest.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_claim_matches_manifest.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_claim_matches_manifest.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_claim_matches_manifest.py[0m[36m:[0m23[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m8[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m8[36m:[0m73[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m9[36m:[0m77[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m15[36m:[0m54[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m19[36m:[0m19[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m21[36m:[0m41[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m23[36m:[0m41[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m28[36m:[0m46[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m29[36m:[0m56[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m30[36m:[0m56[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m31[36m:[0m35[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m32[36m:[0m40[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m33[36m:[0m37[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m35[36m:[0m55[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m36[36m:[0m55[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m37[36m:[0m86[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m39[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m40[36m:[0m67[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest.py[0m[36m:[0m41[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m10[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m10[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m11[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m13[36m:[0m35[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m15[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m16[36m:[0m52[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m16[36m:[0m97[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m18[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m19[36m:[0m57[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m20[36m:[0m45[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m21[36m:[0m45[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m23[36m:[0m47[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m24[36m:[0m28[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m24[36m:[0m79[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m25[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m25[36m:[0m80[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m26[36m:[0m24[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m27[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m29[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m30[36m:[0m58[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m31[36m:[0m67[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m32[36m:[0m90[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m34[36m:[0m70[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m35[36m:[0m115[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m37[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m38[36m:[0m61[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m39[36m:[0m60[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m40[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m42[36m:[0m42[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m43[36m:[0m56[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m47[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m48[36m:[0m74[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_delivery_manifest_requires_ack.py[0m[36m:[0m49[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m5[36m:[0m23[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m5[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m10[36m:[0m28[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m10[36m:[0m46[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m13[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m13[36m:[0m114[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m14[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m14[36m:[0m90[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m15[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m18[36m:[0m86[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m21[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m23[36m:[0m107[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m24[36m:[0m67[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m25[36m:[0m173[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m28[36m:[0m47[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m30[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m31[36m:[0m42[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_io_kb.py[0m[36m:[0m32[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m6[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m7[36m:[0m70[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m10[36m:[0m17[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m12[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m13[36m:[0m34[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m15[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m16[36m:[0m48[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_embedded_proof_blocks.py[0m[36m:[0m17[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_error_log_quality.py[0m[36m:[0m21[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_evidence_debt.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m32[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m33[36m:[0m87[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_execution_reliability_gate.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m5[36m:[0m69[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m5[36m:[0m118[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m6[36m:[0m73[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m6[36m:[0m84[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m11[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m12[36m:[0m47[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_failure_packet_on_timeout.py[0m[36m:[0m13[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_final_answer_gate.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_final_gate_required_for_completion_claim.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_final_gate_required_for_completion_claim.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_final_gate_required_for_completion_claim.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_final_gate_required_for_completion_claim.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_final_gate_required_for_completion_claim.py[0m[36m:[0m25[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_finalize_marker_required.py[0m[36m:[0m34[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m8[36m:[0m1[36m:[0m [1m[31mE402[0m Module level import not at top of file
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m10[36m:[0m29[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m10[36m:[0m74[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m10[36m:[0m96[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m19[36m:[0m100[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_consistency.py[0m[36m:[0m21[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m12[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m12[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m13[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m14[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m15[36m:[0m34[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m16[36m:[0m31[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m18[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m19[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m23[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m24[36m:[0m32[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m25[36m:[0m51[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m26[36m:[0m51[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m31[36m:[0m68[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m33[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m34[36m:[0m35[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m35[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m36[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m37[36m:[0m44[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m39[36m:[0m77[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m40[36m:[0m62[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m41[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m43[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m44[36m:[0m47[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_gate_semantics.py[0m[36m:[0m45[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m9[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m9[36m:[0m114[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m9[36m:[0m145[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m10[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m10[36m:[0m41[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m18[36m:[0m61[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m21[36m:[0m98[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m23[36m:[0m114[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m26[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m28[36m:[0m21[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m30[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m31[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_generator_hygiene.py[0m[36m:[0m32[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_global_merge.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m32[36m:[0m9[36m:[0m [1m[31mE741[0m Ambiguous variable name: `l`
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m33[36m:[0m70[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_heartbeat_required_for_running.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_html_embedded_proofs.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_embedded_proofs.py[0m[36m:[0m27[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_embedded_proofs.py[0m[36m:[0m27[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_no_placeholder.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_no_placeholder.py[0m[36m:[0m17[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_no_placeholder.py[0m[36m:[0m17[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_no_placeholder.py[0m[36m:[0m20[36m:[0m106[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_proof_matches_runtime_artifacts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_proof_matches_runtime_artifacts.py[0m[36m:[0m28[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_proof_matches_runtime_artifacts.py[0m[36m:[0m28[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_report.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_semantic_tables.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_semantic_tables.py[0m[36m:[0m3[36m:[0m23[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_html_source_links.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m5[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m7[36m:[0m52[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m7[36m:[0m131[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m9[36m:[0m111[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m10[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_html_tables_mobile_safe.py[0m[36m:[0m11[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_html_well_formed.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_html_well_formed.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_idempotent_outbox.py[0m[36m:[0m13[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_identity_conflicts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_identity_resolution.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m6[36m:[0m69[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m7[36m:[0m73[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m7[36m:[0m130[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m9[36m:[0m64[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m13[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m14[36m:[0m59[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_inference_not_confirmed_fact.py[0m[36m:[0m15[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_int_coverage_matrix.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_interface_adapter_contract.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_interface_return_path_claim.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m6[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m7[36m:[0m74[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m9[36m:[0m96[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m10[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_kb_no_operational_output.py[0m[36m:[0m11[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m5[36m:[0m66[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m6[36m:[0m73[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m6[36m:[0m140[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m9[36m:[0m51[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m10[36m:[0m61[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m12[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m13[36m:[0m44[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_io_method_matches.py[0m[36m:[0m14[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_item.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_item.py[0m[36m:[0m3[36m:[0m29[36m:[0m [1m[31mF401[0m [[36m*[0m] `subprocess` imported but unused
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m15[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m15[36m:[0m80[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m15[36m:[0m125[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m16[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m16[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m17[36m:[0m28[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m17[36m:[0m83[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m19[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m19[36m:[0m86[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m20[36m:[0m24[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m20[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m21[36m:[0m33[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m22[36m:[0m47[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m23[36m:[0m44[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m24[36m:[0m37[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m27[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m28[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m30[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m34[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m35[36m:[0m65[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m36[36m:[0m57[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m41[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m43[36m:[0m35[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m44[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m45[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m46[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m47[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m49[36m:[0m55[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m50[36m:[0m62[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m51[36m:[0m42[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m52[36m:[0m62[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m56[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m57[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_job_lifecycle.py[0m[36m:[0m58[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_late_results_not_merged.py[0m[36m:[0m34[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m4[36m:[0m29[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m4[36m:[0m74[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m4[36m:[0m96[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m7[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m9[36m:[0m59[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_late_results_protocol.py[0m[36m:[0m11[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_local_model_circuit_breaker.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_manual_fallback_not_presented_as_rfo.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_manual_fallback_not_presented_as_rfo.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_manual_fallback_not_presented_as_rfo.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_manual_fallback_not_presented_as_rfo.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_manual_fallback_not_presented_as_rfo.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_manual_fallback_not_presented_as_rfo.py[0m[36m:[0m22[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m32[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_model_call_ledger.py[0m[36m:[0m34[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_negative_identity_wording.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_negative_identity_wording.py[0m[36m:[0m6[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_negative_identity_wording.py[0m[36m:[0m6[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_negative_identity_wording.py[0m[36m:[0m10[36m:[0m94[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_negative_identity_wording.py[0m[36m:[0m11[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_negative_identity_wording.py[0m[36m:[0m12[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_all_int_overclaiming.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m33[36m:[0m15[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_ambient_context_runtime_override.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m21[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m27[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_attachment_claim_without_ack.py[0m[36m:[0m29[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_biometric_identity_claim.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m5[36m:[0m79[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m5[36m:[0m120[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m6[36m:[0m25[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m6[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m11[36m:[0m60[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m12[36m:[0m41[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m13[36m:[0m47[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m14[36m:[0m21[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m16[36m:[0m23[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m19[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m20[36m:[0m44[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_dangling_artifact_links.py[0m[36m:[0m21[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_data_loss.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_direct_interface_response.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_external_kb_dependency.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_failed_validation_in_production.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_no_fake_int_claims.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_global_overclaiming.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m2[36m:[0m14[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_html_string_gate_as_primary_contract.py[0m[36m:[0m24[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_model_generated_html.py[0m[36m:[0m34[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_large_telegram_tables.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_local_paths_as_delivery.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_local_paths_as_delivery.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_local_paths_as_delivery.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_local_paths_as_delivery.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_local_paths_as_delivery.py[0m[36m:[0m23[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m6[36m:[0m17[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m8[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m8[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m8[36m:[0m80[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m10[36m:[0m57[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m11[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m13[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m14[36m:[0m44[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_local_paths_in_telegram.py[0m[36m:[0m15[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_manual_check_final_proof.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_name_only_matches.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_name_only_matches.py[0m[36m:[0m14[36m:[0m9[36m:[0m [1m[31mF841[0m Local variable `soft` is assigned to but never used
+[1mscripts/validate_no_pipeline_claims_without_artifacts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_plain_subagent_for_full_workspace_read.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_plain_subagent_for_full_workspace_read.py[0m[36m:[0m3[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/validate_no_plain_subagent_for_full_workspace_read.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_no_plain_subagent_for_full_workspace_read.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/validate_no_plain_subagent_for_full_workspace_read.py[0m[36m:[0m16[36m:[0m185[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_plain_subagent_for_full_workspace_read.py[0m[36m:[0m18[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_premature_stopping.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_provider_hardcode_text.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m3[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m12[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m16[36m:[0m46[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m18[36m:[0m157[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_reasoning_leak_in_chat_payload.py[0m[36m:[0m20[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_scaffolds_in_production.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m4[36m:[0m69[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m6[36m:[0m17[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m8[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m8[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m8[36m:[0m80[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m11[36m:[0m27[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m12[36m:[0m27[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m14[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m15[36m:[0m55[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_sensitive_data_in_telegram.py[0m[36m:[0m16[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_shard_scope_reduction.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_single_int_lockin.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m5[36m:[0m77[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m8[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m8[36m:[0m78[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m9[36m:[0m46[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_subagent_run.py[0m[36m:[0m10[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m5[36m:[0m68[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m7[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m7[36m:[0m79[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m8[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_single_work_unit_run.py[0m[36m:[0m9[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_skill_md_imitation.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m3[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m3[36m:[0m28[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m11[36m:[0m97[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m13[36m:[0m149[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_no_smoke_as_context_proof.py[0m[36m:[0m15[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_no_unmerged_shards.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_normalized_command.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m6[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m6[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m7[36m:[0m30[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m7[36m:[0m83[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m8[36m:[0m18[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m12[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m14[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m14[36m:[0m76[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m17[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m18[36m:[0m67[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m19[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m20[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m21[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m24[36m:[0m75[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m26[36m:[0m70[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m28[36m:[0m84[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m29[36m:[0m60[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m31[36m:[0m79[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m32[36m:[0m59[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m33[36m:[0m25[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m36[36m:[0m91[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m37[36m:[0m85[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m39[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m40[36m:[0m65[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_outbox_delivery.py[0m[36m:[0m41[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_outbox_event_semantics.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_outbox_event_semantics.py[0m[36m:[0m3[36m:[0m24[36m:[0m [1m[31mF401[0m [[36m*[0m] `os` imported but unused
+[1mscripts/validate_outbox_finalization.py[0m[36m:[0m21[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_package.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m4[36m:[0m29[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m4[36m:[0m74[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m4[36m:[0m96[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m9[36m:[0m18[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m12[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m16[36m:[0m34[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_package_claim_requires_zip.py[0m[36m:[0m18[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_partial_output_not_complete.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_person_data_classification.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_person_data_classification_gate.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_person_profile_claims.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_political_actor_not_statistics.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_profile_policies_present.py[0m[36m:[0m6[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_profile_validator_alignment.py[0m[36m:[0m19[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_provider_payload.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_provider_specific_logic_not_in_runtime.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_read_claim_requires_ledger.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_read_claim_requires_ledger.py[0m[36m:[0m3[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/validate_read_claim_requires_ledger.py[0m[36m:[0m3[36m:[0m32[36m:[0m [1m[31mF401[0m [[36m*[0m] `time` imported but unused
+[1mscripts/validate_read_claim_requires_ledger.py[0m[36m:[0m13[36m:[0m49[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_read_claim_requires_ledger.py[0m[36m:[0m15[36m:[0m178[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_read_claim_requires_ledger.py[0m[36m:[0m17[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_release.py[0m[36m:[0m395[36m:[0m9[36m:[0m [1m[31mF841[0m Local variable `nd_rc` is assigned to but never used
+[1mscripts/validate_release.py[0m[36m:[0m450[36m:[0m9[36m:[0m [1m[31mF841[0m Local variable `lc_rc` is assigned to but never used
+[1mscripts/validate_replay_determinism.py[0m[36m:[0m5[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `hashlib` imported but unused
+[1mscripts/validate_report_runtime_claim_requires_entrypoint.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_report_runtime_claim_requires_entrypoint.py[0m[36m:[0m15[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_report_runtime_claim_requires_entrypoint.py[0m[36m:[0m15[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_report_structure.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_research_package.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_research_package_zip.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_resume_plan.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m29[36m:[0m59[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_action_required.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m31[36m:[0m40[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_idempotency.py[0m[36m:[0m33[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_retry_ledger.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_rfo_command_did_not_spawn_plain_subagent.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_rfo_command_did_not_spawn_plain_subagent.py[0m[36m:[0m15[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_rfo_command_did_not_spawn_plain_subagent.py[0m[36m:[0m15[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_rfo_command_did_not_spawn_plain_subagent.py[0m[36m:[0m16[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_root_vs_zip_artifact_truth.py[0m[36m:[0m29[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_run_id_consistency.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_runtime.py[0m[36m:[0m8[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_runtime.py[0m[36m:[0m8[36m:[0m24[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m2[36m:[0m14[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_runtime_contract_current.py[0m[36m:[0m22[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m5[36m:[0m61[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m5[36m:[0m108[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m9[36m:[0m86[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m10[36m:[0m52[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_runtime_created_required_artifacts.py[0m[36m:[0m11[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_runtime_entrypoint.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_runtime_job_queued.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_schema_field_coverage.py[0m[36m:[0m6[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_schemas.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_search_ledger.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m5[36m:[0m61[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m6[36m:[0m28[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m6[36m:[0m64[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m8[36m:[0m99[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m12[36m:[0m72[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m13[36m:[0m54[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_search_strategy_has_ledger.py[0m[36m:[0m14[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_seed_claims_not_presented_as_domain_analysis.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_seed_claims_not_presented_as_domain_analysis.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_seed_claims_not_presented_as_domain_analysis.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_seed_claims_not_presented_as_domain_analysis.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_seed_claims_not_presented_as_domain_analysis.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_seed_claims_not_presented_as_domain_analysis.py[0m[36m:[0m25[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_seed_only_truth.py[0m[36m:[0m20[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_self_claim_not_external_confirmation.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_sensitive_node_classification.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_shard_contracts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_shard_ledger.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_shard_outputs.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_skill.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_skill.py[0m[36m:[0m54[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m56[36m:[0m40[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m71[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m74[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m76[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m77[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m80[36m:[0m23[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m82[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m83[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m86[36m:[0m23[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m88[36m:[0m12[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m89[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m92[36m:[0m30[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m95[36m:[0m76[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m96[36m:[0m25[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m98[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m100[36m:[0m20[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m102[36m:[0m36[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m104[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m105[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m115[36m:[0m11[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m117[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m120[36m:[0m40[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m121[36m:[0m48[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m122[36m:[0m47[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m123[36m:[0m55[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m124[36m:[0m52[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m125[36m:[0m58[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m126[36m:[0m59[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill.py[0m[36m:[0m127[36m:[0m55[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill_discovery_frontmatter.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_skill_discovery_frontmatter.py[0m[36m:[0m13[36m:[0m76[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill_discovery_frontmatter.py[0m[36m:[0m14[36m:[0m48[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill_discovery_frontmatter.py[0m[36m:[0m15[36m:[0m71[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_skill_discovery_frontmatter.py[0m[36m:[0m17[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_skill_markdown_injection.py[0m[36m:[0m7[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_smoke_failure_modes_are_not_prod_acceptance.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_smoke_failure_modes_are_not_prod_acceptance.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_smoke_failure_modes_are_not_prod_acceptance.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_failure_modes_are_not_prod_acceptance.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_failure_modes_are_not_prod_acceptance.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_failure_modes_are_not_prod_acceptance.py[0m[36m:[0m23[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_run_not_presented_as_research.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_smoke_run_not_presented_as_research.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_run_not_presented_as_research.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_run_not_presented_as_research.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_smoke_run_not_presented_as_research.py[0m[36m:[0m24[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_snippet_only_not_confirmed.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_full_report.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_snippet_only_not_full_report.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_snippet_only_not_full_report.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_full_report.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_full_report.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_snippet_only_not_full_report.py[0m[36m:[0m25[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_social_profile_binding.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_social_profile_linkage.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_count_consistency.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_family_confidence.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m31[36m:[0m56[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m32[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m36[36m:[0m68[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_gap_reflected_in_final_verdict.py[0m[36m:[0m38[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_laundering.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_source_laundering.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_laundering.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_provenance.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_provenance_distinction.py[0m[36m:[0m20[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m34[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_source_quality_schema.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stage_records.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_standalone_html.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_standalone_html.py[0m[36m:[0m7[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m7[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m7[36m:[0m89[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m8[36m:[0m70[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m9[36m:[0m43[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m10[36m:[0m28[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m11[36m:[0m71[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m12[36m:[0m39[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m14[36m:[0m28[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m15[36m:[0m65[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m15[36m:[0m123[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m16[36m:[0m15[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m18[36m:[0m21[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m20[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m21[36m:[0m43[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_standalone_html.py[0m[36m:[0m22[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_startup_runtime_proof.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_status_claim_consistency.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m8[36m:[0m35[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m8[36m:[0m63[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m9[36m:[0m28[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m13[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m14[36m:[0m72[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m15[36m:[0m63[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m17[36m:[0m84[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m18[36m:[0m83[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m19[36m:[0m44[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m20[36m:[0m62[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m21[36m:[0m61[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m27[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m28[36m:[0m67[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_stub_delivery_not_external.py[0m[36m:[0m29[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m5[36m:[0m69[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m6[36m:[0m73[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m7[36m:[0m51[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m7[36m:[0m110[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m8[36m:[0m20[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m9[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m10[36m:[0m39[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m12[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m13[36m:[0m43[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_subagent_quorum.py[0m[36m:[0m14[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_subprocess_timeouts.py[0m[36m:[0m16[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_summary_no_new_claims.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_summary_no_new_facts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m10[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m11[36m:[0m28[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m12[36m:[0m34[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m13[36m:[0m33[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m16[36m:[0m14[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m18[36m:[0m23[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m20[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m23[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m23[36m:[0m71[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m23[36m:[0m118[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m23[36m:[0m149[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m24[36m:[0m43[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m26[36m:[0m47[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m27[36m:[0m47[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m31[36m:[0m31[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m32[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m32[36m:[0m71[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m34[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m35[36m:[0m38[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m36[36m:[0m39[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m38[36m:[0m21[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m40[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m41[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_delivery.py[0m[36m:[0m42[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_message_lengths.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m4[36m:[0m46[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m4[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m6[36m:[0m17[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m8[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m8[36m:[0m58[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m8[36m:[0m80[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m11[36m:[0m74[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m13[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m14[36m:[0m36[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_telegram_no_tables_strict.py[0m[36m:[0m15[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_telegram_plain_text.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_timeout_reflected_in_claim_caps.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_tool_call_claims.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_unsearched_categories.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_user_visible_delivery_ack.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_user_visible_delivery_ack.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_user_visible_delivery_ack.py[0m[36m:[0m7[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_user_visible_delivery_ack.py[0m[36m:[0m8[36m:[0m8[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_user_visible_delivery_ack.py[0m[36m:[0m9[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_user_visible_delivery_ack.py[0m[36m:[0m23[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_v18_legacy_compat.py[0m[36m:[0m20[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_v18_runtime_artifacts.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_v18_runtime_artifacts.py[0m[36m:[0m6[36m:[0m44[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_v18_runtime_artifacts.py[0m[36m:[0m7[36m:[0m29[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_v18_runtime_artifacts.py[0m[36m:[0m7[36m:[0m74[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_validation_transcript.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_watchdog_state.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_wiki_inline_citations.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m5[36m:[0m33[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m5[36m:[0m68[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m5[36m:[0m126[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m6[36m:[0m72[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m6[36m:[0m100[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m7[36m:[0m36[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m9[36m:[0m31[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m12[36m:[0m26[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m14[36m:[0m50[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m15[36m:[0m49[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_compilation.py[0m[36m:[0m16[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_completion.py[0m[36m:[0m19[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m32[36m:[0m64[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m33[36m:[0m50[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_work_unit_size_limits.py[0m[36m:[0m35[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_bundle_not_research_package.py[0m[36m:[0m2[36m:[0m21[36m:[0m [1m[31mF401[0m [[36m*[0m] `pathlib.Path` imported but unused
+[1mscripts/validate_worker_bundle_not_research_package.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m2[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m2[36m:[0m19[36m:[0m [1m[31mF401[0m [[36m*[0m] `re` imported but unused
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m8[36m:[0m53[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m11[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m16[36m:[0m16[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m17[36m:[0m29[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m20[36m:[0m92[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m23[36m:[0m13[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m24[36m:[0m45[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m29[36m:[0m20[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m30[36m:[0m22[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m31[36m:[0m22[36m:[0m [1m[31mE702[0m Multiple statements on one line (semicolon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m32[36m:[0m9[36m:[0m [1m[31mE741[0m Ambiguous variable name: `l`
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m33[36m:[0m67[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m34[36m:[0m70[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_lease_lifecycle.py[0m[36m:[0m36[36m:[0m24[36m:[0m [1m[31mE701[0m Multiple statements on one line (colon)
+[1mscripts/validate_worker_required_outputs.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/validate_workplan.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mscripts/verify_openclaw_run.py[0m[36m:[0m31[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+[1mscripts/verify_openclaw_run.py[0m[36m:[0m130[36m:[0m5[36m:[0m [1m[31mF841[0m Local variable `delivery_not_proven` is assigned to but never used
+[1mscripts/watchdog.py[0m[36m:[0m3[36m:[0m1[36m:[0m [1m[31mE401[0m [[36m*[0m] Multiple imports on one line
+[1mtools/agent_telegram/telegram_bot.py[0m[36m:[0m10[36m:[0m8[36m:[0m [1m[31mF401[0m [[36m*[0m] `sys` imported but unused
+Found 1207 errors.
+[[36m*[0m] 303 fixable with the `--fix` option (10 hidden fixes can be enabled with the `--unsafe-fixes` option).

@@ -9,6 +9,7 @@ from runtime.failure_impl import cmd_failure
 from runtime.outbox_impl import cmd_outbox
 from runtime.smoke_impl import cmd_smoke
 from runtime.validate_impl import validate
+from runtime.artifact_execute_impl import cmd_execute
 from runtime.worker_impl import cmd_run, cmd_worker
 
 
@@ -24,6 +25,32 @@ def main():
     s.add_argument("--user-id", default="")
     s.add_argument("--task", default="")
     s.add_argument("--reply-text", default="")
+    # v19.2.1 honesty hardening: dynamic delivery routing from incoming Telegram
+    # update. ``chat_id`` MUST come from the incoming update (group chat,
+    # different account, etc.); environment ``TELEGRAM_CHAT_ID`` is only
+    # honoured by the delivery adapter when ``RFO_ALLOW_ENV_CHAT_ID=1`` is set
+    # explicitly (smoke tests).
+    s.add_argument("--chat-id", default="")
+    s.add_argument("--reply-to-message-id", default="")
+    s.add_argument("--api-base", default="")
+    s = sub.add_parser("execute")
+    s.add_argument("--runs-root", required=True)
+    s.add_argument("--task", required=True)
+    s.add_argument(
+        "--profile",
+        default="",
+        help="Sets RFO_RUN_PROFILE for this run (mvr | full-rigor | source-packet). Empty: env/default.",
+    )
+    s.add_argument(
+        "--seed-urls",
+        default="",
+        help="Comma-separated URLs for RFO_SEED_URLS (stdlib HEAD probes).",
+    )
+    s.add_argument(
+        "--mode",
+        default="research",
+        help="Canonical run mode (research|production|smoke); passed to nested runtime run.",
+    )
     s = sub.add_parser("run")
     s.add_argument("--project-dir", required=True)
     s.add_argument("--task", required=True)
@@ -37,6 +64,11 @@ def main():
     s.add_argument("--command-id")
     s.add_argument("--provider", default="cli")
     s.add_argument("--interface", default="direct_runtime")
+    s.add_argument(
+        "--runs-root",
+        default="",
+        help="Optional runs root for honesty metadata (artifact execute path sets this).",
+    )
     s = sub.add_parser("worker")
     s.add_argument("--runs-root", required=True)
     s.add_argument(
@@ -63,6 +95,7 @@ def main():
     a = p.parse_args()
     return {
         "adapter": cmd_adapter,
+        "execute": cmd_execute,
         "run": cmd_run,
         "worker": cmd_worker,
         "outbox": cmd_outbox,

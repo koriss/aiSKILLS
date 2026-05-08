@@ -17,8 +17,8 @@ def main():
     if errors:
         print("\n".join(errors), file=sys.stderr); return 1
     manifest = load(manifest_path); final = load(final_path)
-    gates = manifest.get("gates") or {}
-    final_gates = final.get("gates") or {}
+    gates = manifest["gates"] if "gates" in manifest and isinstance(manifest["gates"], dict) else {}
+    final_gates = final["gates"] if "gates" in final and isinstance(final["gates"], dict) else {}
     for g in REQUIRED_GATES:
         if g not in gates: errors.append(f"manifest missing gate {g}")
         if g not in final_gates: errors.append(f"final-answer-gate missing gate {g}")

@@ -13,7 +13,7 @@ def main():
         if manifest.get("real_external_delivery") is not False: errors.append("stub manifest claims real_external_delivery")
         if manifest.get("external_delivery_claim_allowed") is not False: errors.append("stub manifest allows external_delivery_claim")
         if manifest.get("delivery_claim_allowed") is not False: errors.append("stub manifest allows delivery_claim_allowed")
-        gates=manifest.get("gates") or {}
+        gates = manifest["gates"] if "gates" in manifest and isinstance(manifest["gates"], dict) else {}
         if (gates.get("external_delivery_gate") or {}).get("status") != "stub_only": errors.append("stub external_delivery_gate is not stub_only")
         if (gates.get("final_user_claim_gate") or {}).get("status") != "stub_only": errors.append("stub final_user_claim_gate is not stub_only")
         if final.get("passed") is not False: errors.append("stub final-answer-gate passed=true")

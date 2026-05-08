@@ -18,7 +18,7 @@ def main():
     c=load_json(skill/'contracts/validation-source-of-truth-contract.json', {})
     if not c.get('machine_readable_artifacts_are_primary'):
         return emit('fail','F352', message='validation source-of-truth contract missing')
-    core=(skill/'scripts/rfo_v18_core.py').read_text(encoding='utf-8', errors='ignore')
+    core=(skill / "scripts" / "rfo_runtime_core.py").read_text(encoding="utf-8", errors="ignore")
     uses_html_heuristics='VALIDATION_GATE: PASSED' in core or "'Placeholder' in htmltxt" in core
     return emit('warning' if uses_html_heuristics else 'pass','F352', html_heuristics_present=uses_html_heuristics, note='warning only in v18.3.2; refactor planned')
 if __name__=='__main__': raise SystemExit(main())

@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import argparse, json, sys
+
+_ROOT = Path(__file__).resolve().parents[1]
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
+from runtime.legacy_compat import read_fag_gates
+
 ap=argparse.ArgumentParser(); ap.add_argument('--run-dir', required=True); args=ap.parse_args(); rd=Path(args.run_dir)
 errors=[]
 fg=json.loads((rd/'final-answer-gate.json').read_text(encoding='utf-8')) if (rd/'final-answer-gate.json').exists() else {}
-gates=fg.get('gates',{})
+gates, _gs = read_fag_gates(fg if isinstance(fg, dict) else {})
 if fg.get('passed') and any(not g.get('passed') for g in gates.values() if isinstance(g,dict) and g.get('status')!='stub_only'):
     errors.append('final_pass_with_failed_gate')
 if gates.get('external_delivery_gate',{}).get('status')=='stub_only' and fg.get('passed'):

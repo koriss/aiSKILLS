@@ -1,0 +1,106 @@
+flowchart LR
+  classDef hot fill:#ffe0e0,stroke:#c00,stroke-width:2px
+  classDef leaf fill:#eef,stroke:#669
+
+  runtime["runtime"]
+  adapter["adapter"]
+  adapter_impl["adapter_impl"]
+  artifact_execute_impl["artifact_execute_impl"]
+  capability["capability"]
+  citation_grounding["citation_grounding"]
+  cli["cli"]
+  collector["collector"]
+  coverage["coverage"]
+  error_log["error_log"]
+  event_history["event_history"]
+  failure_impl["failure_impl"]
+  handoff["handoff"]
+  impl["impl"]
+  legacy_compat["legacy_compat"]
+  outbox["outbox"]
+  outbox_impl["outbox_impl"]
+  output_filter["output_filter"]
+  packaging["packaging"]
+  profiles["profiles"]
+  render["render"]
+  schema_defaults["schema_defaults"]
+  smoke["smoke"]
+  smoke_impl["smoke_impl"]
+  status["status"]
+  trace["trace"]
+  util["util"]
+  validate_impl["validate_impl"]
+  validation["validation"]
+  validator_sdk["validator_sdk"]
+  validators_core["validators_core"]
+  work_units["work_units"]
+  worker["worker"]
+  worker_impl["worker_impl"]
+
+  adapter --> adapter_impl
+  adapter_impl --> render
+  adapter_impl --> util
+  artifact_execute_impl --> profiles
+  artifact_execute_impl --> render
+  artifact_execute_impl --> status
+  artifact_execute_impl --> util
+  artifact_execute_impl --> worker_impl
+  citation_grounding --> profiles
+  citation_grounding --> util
+  cli --> adapter_impl
+  cli --> artifact_execute_impl
+  cli --> failure_impl
+  cli --> outbox_impl
+  cli --> smoke_impl
+  cli --> validate_impl
+  cli --> worker_impl
+  collector --> error_log
+  collector --> util
+  coverage --> profiles
+  coverage --> util
+  failure_impl --> status
+  failure_impl --> util
+  handoff --> status
+  impl --> adapter_impl
+  impl --> cli
+  impl --> failure_impl
+  impl --> outbox_impl
+  impl --> smoke_impl
+  impl --> validate_impl
+  impl --> worker_impl
+  outbox --> outbox_impl
+  outbox_impl --> capability
+  outbox_impl --> event_history
+  outbox_impl --> output_filter
+  outbox_impl --> util
+  packaging --> worker_impl
+  render --> status
+  render --> util
+  schema_defaults --> util
+  smoke --> smoke_impl
+  smoke_impl --> runtime
+  smoke_impl --> status
+  smoke_impl --> util
+  smoke_impl --> validate_impl
+  validate_impl --> legacy_compat
+  validate_impl --> schema_defaults
+  validate_impl --> util
+  validation --> validate_impl
+  validators_core --> validator_sdk
+  work_units --> util
+  worker --> worker_impl
+  worker_impl --> citation_grounding
+  worker_impl --> collector
+  worker_impl --> coverage
+  worker_impl --> event_history
+  worker_impl --> handoff
+  worker_impl --> profiles
+  worker_impl --> render
+  worker_impl --> schema_defaults
+  worker_impl --> status
+  worker_impl --> trace
+  worker_impl --> util
+  worker_impl --> work_units
+
+  class worker_impl,cli,impl hot
+  class util,status leaf

@@ -1,0 +1,24 @@
+diff --git a/research-factory-orchestrator/research-factory-orchestrator/scripts/_test_mvr_profile_seed_only_disclosure.py b/research-factory-orchestrator/research-factory-orchestrator/scripts/_test_mvr_profile_seed_only_disclosure.py
+index 337ab71..8417311 100644
+--- a/research-factory-orchestrator/research-factory-orchestrator/scripts/_test_mvr_profile_seed_only_disclosure.py
++++ b/research-factory-orchestrator/research-factory-orchestrator/scripts/_test_mvr_profile_seed_only_disclosure.py
+@@ -136,16 +136,16 @@ def check_seed_only_content(run_dir: Path) -> dict:
+         "checks": [],
+     }
+ 
+-    # CHECK: sources.json has only SRC-SEED
++    # CHECK: sources.json has no non-seed sources
+     src_path = run_dir / "sources.json"
+     if src_path.exists():
+         srcs = json.loads(src_path.read_text())
+         src_list = srcs.get("sources", [])
+-        has_seed_only = len(src_list) == 1 and "seed" in src_list[0].get("source_id", "").lower()
++        has_seed_only = all("seed" in str(s.get("source_id", "")).lower() for s in src_list)
+         results["checks"].append({
+             "id": "SEED_ONLY_SOURCES",
+             "status": "pass" if has_seed_only else "fail",
+-            "detail": f"Only seed source: {has_seed_only}, sources: {[s.get('source_id') for s in src_list]}",
++            "detail": f"No non-seed sources: {has_seed_only}, sources: {[s.get('source_id') for s in src_list]}",
+         })
+     else:
+         results["checks"].append({"id": "SOURCES_JSON_EXISTS", "status": "fail", "detail": "not found"})

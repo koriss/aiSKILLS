@@ -1,0 +1,18 @@
+{
+  "schema_version": "v19.0",
+  "run_id": "RUN-d74cf32fa0cd",
+  "skill_version": "19.3",
+  "layout": "v19-dual",
+  "root_artifacts": [
+    "claims-registry.json",
+    "sources.json",
+    "evidence-cards.json",
+    "report/full-report.html"
+  ],
+  "subdir_artifacts": [
+    "claims/claims-registry.json",
+    "sources/sources.json",
+    "evidence/evidence-cards.json"
+  ],
+  "note": "v19 runtime emits canonical copies at run-dir root and keeps subdir copies for compatibility."
+}

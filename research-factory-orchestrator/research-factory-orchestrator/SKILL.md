@@ -1,6 +1,6 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator for OpenClaw: v19.3 artifact-only compute path with profile-driven V1-V6 validation and gateway-side delivery truth.
+description: Research Factory Orchestrator for OpenClaw: v19.3+ artifact-only compute path with profile-driven V1-V6 validation; user-visible delivery is host-owned (stdout handoff).
 license: internal
 metadata:
   version: "19.3"
@@ -19,7 +19,8 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Allowed execution paths
 
-- `python3 -S scripts/interface_runtime_adapter.py --runs-root <runs-root> --interface <interface> --provider <provider> --task "..."`
+- `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."`
+- `python3 -S scripts/run_rfo_with_web_search.py --runs-root <runs-root> --web-search-json-api-base <relay-base-url> --task "..."` (default profile `live-bridge`; requires relay URL or non-zero exit)
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
 - `python3 -S scripts/outbox_delivery_worker.py --runs-root <runs-root>`
 - `python3 -S scripts/run_research_factory.py --project-dir <run-dir> --task "..."`

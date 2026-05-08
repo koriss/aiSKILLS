@@ -17,18 +17,15 @@ def main():
     sub = p.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("adapter")
     s.add_argument("--runs-root", required=True)
-    s.add_argument("--interface", default="telegram")
-    s.add_argument("--provider", default="telegram")
+    s.add_argument("--interface", default="cli")
+    s.add_argument("--provider", default="cli")
     s.add_argument("--conversation-id", default="")
     s.add_argument("--message-id", default="")
     s.add_argument("--user-id", default="")
     s.add_argument("--task", default="")
     s.add_argument("--reply-text", default="")
-    # v19.2.1 honesty hardening: dynamic delivery routing from incoming Telegram
-    # update. ``chat_id`` MUST come from the incoming update (group chat,
-    # different account, etc.); environment ``TELEGRAM_CHAT_ID`` is only
-    # honoured by the delivery adapter when ``RFO_ALLOW_ENV_CHAT_ID=1`` is set
-    # explicitly (explicit consent flows only).
+    # Optional routing hints for whichever host adapter records them in interface-request.json;
+    # the skill does not perform outbound messaging to external channels.
     s.add_argument("--chat-id", default="")
     s.add_argument("--reply-to-message-id", default="")
     s.add_argument("--api-base", default="")

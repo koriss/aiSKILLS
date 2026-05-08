@@ -1,5 +1,13 @@
 # Changelog
 
+## 19.4.x — bridge + compute-only boundary
+
+- Default bridge profile `live-bridge`; relay base URL required (no baked search host).
+- Removed in-tree Telegram delivery (`providers/telegram/`, `tools/agent_telegram/`)
+  and optional golden diff helper; docs/schemas label legacy `telegram_messages` field.
+- Outbox: missing provider adapter is `failed` with `PROVIDER-DELIVERY-ADAPTER-MISSING`,
+  not silent `sent`. Feature matrix uses `external_user_visible_delivery_via_skill`.
+
 ## 19.2.1 — 2026-05-07
 
 - Honesty hardening: canonical skill-path + runs-root guardrails with explicit

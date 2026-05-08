@@ -8,7 +8,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-from runtime.error_log import append_error
 from runtime.util import REQ_EVENTS, jr, jw, now, sid, skill_root
 
 
@@ -20,7 +19,7 @@ def _load_provider_caps(provider: str) -> dict:
     data = jr(p, {})
     row = (data.get("providers") or {}).get(provider) or {}
     return {
-        "stub_delivery": bool(row.get("stub_delivery", provider in ("telegram", "webhook"))),
+        "stub_delivery": bool(row.get("stub_delivery", provider == "webhook")),
         "external": bool(row.get("external", False)),
         "user_visible_delivery": bool(row.get("user_visible_delivery", row.get("external", False))),
         "requires_provider_ack_id": bool(row.get("requires_provider_ack_id", False)),
@@ -116,8 +115,7 @@ def cmd_outbox(a):
                             )
                             # Parse adapter stdout even on non-zero exit: some adapters
                             # intentionally return structured JSON refusal payloads with
-                            # exit!=0 (e.g. telegram delivery errors) and we must preserve
-                            # reason/chat_id_source/api_base_source for honest manifests.
+                            # exit!=0 and we must preserve reason/aux fields for manifests.
                             try:
                                 adapter_out = json.loads(pr.stdout.strip() or "{}")
                                 if not isinstance(adapter_out, dict):
@@ -134,30 +132,24 @@ def cmd_outbox(a):
                         except Exception:
                             status = "failed"
                     else:
-                        status = "sent"
+                        status = "failed"
+                        adapter_out = {
+                            "status": "failed",
+                            "reason": "PROVIDER-DELIVERY-ADAPTER-MISSING",
+                            "delivery_not_proven": True,
+                        }
             if adapter_out:
                 stub = bool(adapter_out.get("stub_delivery", stub))
                 real_ext = bool(adapter_out.get("real_external_delivery", False))
             else:
                 ok_delivery = status in ("sent", "stub")
                 real_ext = ok_delivery and caps["external"] and (not stub)
-            # v19.2.1 honesty hardening: surface explicit refusal reasons
-            # (e.g. ``TELEGRAM-CHAT-ID-MISSING``) and the
-            # ``delivery_not_proven`` flag from the provider adapter to the
-            # ack so verifier and manifest can classify them as
-            # delivery-not-proven instead of stub_only.
+            # v19.2.1 honesty hardening: surface explicit refusal reasons and the
+            # ``delivery_not_proven`` flag from the provider adapter to the ack.
             adapter_reason = str(adapter_out.get("reason") or "").strip() if adapter_out else ""
             adapter_delivery_not_proven = bool(adapter_out.get("delivery_not_proven")) if adapter_out else False
             adapter_chat_id_source = str(adapter_out.get("chat_id_source") or "").strip() if adapter_out else ""
             adapter_api_base_source = str(adapter_out.get("api_base_source") or "").strip() if adapter_out else ""
-            if adapter_delivery_not_proven and adapter_reason == "TELEGRAM-CHAT-ID-MISSING":
-                append_error(
-                    rd,
-                    code="LIE-DETECTED-DELIVERY-STUB-WITHOUT-CONSENT",
-                    severity="error",
-                    detail="telegram delivery not proven: missing chat id consent",
-                    context={"event_id": ev.get("event_id"), "provider": ev.get("provider")},
-                )
             ack_id = f"ACK-{ev['event_id']}"
             created_ts = now()
             pp_path = rd / "provider-payloads" / f"{ev['event_id']}.json"
@@ -236,10 +228,8 @@ def cmd_outbox(a):
         else:
             citation_grounding_gate_pass = False
             cg_extra = {}
-        # v19.2.1 honesty hardening: when adapters explicitly refuse to send
-        # (e.g. ``TELEGRAM-CHAT-ID-MISSING``), classify the gate as
-        # ``delivery_not_proven`` and surface the concrete reason instead of
-        # collapsing into ``stub_only`` / ``fail``.
+        # v19.2.1 honesty hardening: when adapters explicitly refuse to send,
+        # classify the gate as ``delivery_not_proven`` and surface reasons.
         if external:
             ext_status = "pass"
         elif any_delivery_not_proven:
@@ -365,7 +355,7 @@ def cmd_outbox(a):
         if delivery_not_proven_reasons:
             fag_obj["delivery_not_proven_reasons"] = delivery_not_proven_reasons
         if fg_status == "delivery_not_proven":
-            fag_obj["primary_reason"] = delivery_not_proven_reasons[0] if delivery_not_proven_reasons else "TELEGRAM-DELIVERY-NOT-PROVEN"
+            fag_obj["primary_reason"] = delivery_not_proven_reasons[0] if delivery_not_proven_reasons else "DELIVERY-NOT-PROVEN"
         jw(
             rd / "final-answer-gate.json",
             fag_obj,
@@ -390,21 +380,6 @@ def cmd_outbox(a):
             rd / "outbox-finalization.json",
             of_obj,
         )
-        acks_check = [jr(rd / "delivery-acks" / f"{e}.json", {}) for e in req if (rd / "delivery-acks" / f"{e}.json").is_file()]
-        ftm_path = rd / "feature-truth-matrix.json"
-        if ftm_path.is_file() and any(
-            isinstance(x, dict)
-            and str(x.get("provider")) == "telegram"
-            and x.get("real_external_delivery") is True
-            and x.get("stub_delivery") is False
-            for x in acks_check
-        ):
-            ftm = jr(ftm_path, {})
-            feats = dict(ftm.get("features") or {})
-            feats["provider_telegram_real_send"] = "implemented_real_send"
-            ftm["features"] = feats
-            ftm["telegram_real_delivery_observed_at"] = now()
-            jw(ftm_path, ftm)
         st = jr(rd / "runtime-status.json")
         st.update({"state": dstat})
         jw(rd / "runtime-status.json", st)

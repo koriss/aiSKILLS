@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 """
-RFO Full Research — SearXNG Web Search Primary
+RFO full research standalone driver (relay + HTTP fetch).
 
-Strategy:
-  1. SearXNG (primary) — реальный web search с Google/Bing/Wikipedia engines
-  2. Content fetch — Wikipedia API для full-text, HTTP fetch для остального
-  3. Skip: Cloudflare-gated, entertainment, non-medical
+JSON relay HTTP base is **never** inferred; export ``RFO_WEB_SEARCH_JSON_API_BASE``
+(or ``RFO_SEARXNG_URL`` rename for migration).
 
-Usage:
-  python3 -S scripts/run_rfo_full_research.py \
-    --runs-root /home/node/.openclaw/workspace/rfo-runs \
-    --task "хантавирус" \
-    --chat-id 38425045
+Optional presets (Wikipedia bundles, topic wiki lists) execute only when
+``RFO_EMBEDDED_PRESETS=1`` to avoid baked-in topical defaults.
 """
 from __future__ import annotations
 
@@ -32,17 +27,28 @@ sys.path.insert(0, str(SKILL_ROOT))
 from runtime.util import jw, tw, now, sid, slug  # noqa: E402
 
 # ── config ─────────────────────────────────────────────────────────────────────
-_SEARXNG = os.environ.get("RFO_SEARXNG_URL", "http://searxng:8080")
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
-_USER_AGENT = "RFO/19.3-SearchPrimary (+https://github.com/openclaw)"
+_USER_AGENT = os.environ.get(
+    "RFO_WEB_SEARCH_USER_AGENT", "RFO/19.4-FullRelay (+https://github.com/openclaw/research-factory-orchestrator)"
+)
+
+
+def relay_api_base(cli_base: str) -> str | None:
+    for raw in ((cli_base or "").strip(), os.environ.get("RFO_WEB_SEARCH_JSON_API_BASE", "").strip(), os.environ.get("RFO_SEARXNG_URL", "").strip()):
+        if raw:
+            return raw.rstrip("/")
+    return None
 _MAX_CHARS = 4000
 _MAX_RESULTS = 10
 
 # ── search ────────────────────────────────────────────────────────────────────
-def search_searxng(query: str, num: int = _MAX_RESULTS) -> list[dict]:
-    """Run a real web search via SearXNG."""
-    q = urllib.parse.quote(query)
-    url = f"{_SEARXNG}/search?q={q}&format=json&engines=google,bing,wikipedia&num={num}"
+def search_json_relay(api_base: str, query: str, num: int = _MAX_RESULTS) -> list[dict]:
+    base = api_base.rstrip("/")
+    params: dict[str, str] = {"q": query, "format": "json", "num": str(num)}
+    eng = os.environ.get("RFO_WEB_SEARCH_ENGINES", "").strip()
+    if eng:
+        params["engines"] = eng
+    url = f"{base}/search?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=_HTTP_TIMEOUT + 5) as resp:
@@ -60,16 +66,26 @@ def search_searxng(query: str, num: int = _MAX_RESULTS) -> list[dict]:
                 })
             return results
     except Exception as e:
-        print(f"[search] SearXNG error: {e}")
+        print(f"[search] relay error: {e}")
         return []
 
 
 def fetch_wiki_extract(title: str) -> tuple[str, str]:
-    """Fetch one Wikipedia page full-text extract."""
-    q = urllib.parse.quote(title)
-    url = (f"https://en.wikipedia.org/w/api.php"
-           f"?action=query&titles={q}&prop=extracts&explaintext"
-           f"&format=json&redirects=1")
+    """Fetch Wikipedia extract; operator supplies full query endpoint stem (action=query…)."""
+    api = os.environ.get("RFO_MEDIAWIKI_API_QUERY_URL", "").strip()
+    if not api:
+        return "", "RFO_MEDIAWIKI_API_QUERY_URL unset"
+    join = "&" if "?" in api else "?"
+    url = api + join + urllib.parse.urlencode(
+        {
+            "action": "query",
+            "titles": title,
+            "prop": "extracts",
+            "explaintext": "1",
+            "format": "json",
+            "redirects": "1",
+        }
+    )
     req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
@@ -140,20 +156,24 @@ _TOPIC_WIKI_PAGES = {
 
 
 def build_sources(task: str, search_results: list[dict]) -> list[dict]:
-    """Build clean sources: Wikipedia full-text + fetched web content."""
+    """Build clean sources: optional Wikipedia full-text + fetched web content."""
     sources = []
 
-    # ── Wikipedia full-text for authoritative base
-    wiki_pages = _TOPIC_WIKI_PAGES.get(task.lower().strip()) or \
-                 _TOPIC_WIKI_PAGES.get(task.lower().split()[0], [])
-    if not wiki_pages:
-        wiki_pages = [task.title()]
+    wiki_pages: list[str] = []
+    if os.environ.get("RFO_EMBEDDED_PRESETS", "").strip().lower() in ("1", "true", "yes") and os.environ.get(
+        "RFO_MEDIAWIKI_API_QUERY_URL", ""
+    ).strip():
+        wiki_pages = _TOPIC_WIKI_PAGES.get(task.lower().strip()) or _TOPIC_WIKI_PAGES.get(task.lower().split()[0], [])
+        if not wiki_pages:
+            wiki_pages = [task.title()]
+    wiki_origin = os.environ.get("RFO_MEDIAWIKI_PAGE_ORIGIN", "https://en.wikipedia.org").rstrip("/")
 
     for i, title in enumerate(wiki_pages[:10]):
         text, err = fetch_wiki_extract(title)
         if not text:
             continue
-        url = f"https://en.wikipedia.org/wiki/{urllib.parse.quote(title.replace(' ', '_'))}"
+        slug = urllib.parse.quote(title.replace(" ", "_"))
+        url = f"{wiki_origin}/wiki/{slug}"
         sources.append({
             "source_id": f"SRC-WIKI-{i+1:03d}",
             "title": title,
@@ -176,7 +196,7 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
     # Deduplicate by URL (already have Wikipedia sources)
     wiki_urls = {s["url"] for s in sources}
 
-    # ── SearXNG web results (non-Wikipedia, non-noise)
+    # ── Relay web rows (non-Wikipedia, non-noise)
     for i, r in enumerate(search_results):
         url = r["url"]
         if url in wiki_urls:
@@ -209,7 +229,7 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
             "independence": "medium",
             "citation_eligible": True,
             "corroboration_type": "corroborated",
-            "fetch_method": "searxng_bridge",
+            "fetch_method": "relay_primary_fetch",
             "content": content[:_MAX_CHARS],
             "content_error": err,
             "is_wikipedia": False,
@@ -267,7 +287,7 @@ def allocate_run(runs_root: Path, task: str):
     entry = {
         "run_id": run_id, "job_id": job_id, "command_id": cmd_id,
         "run_label": label, "run_dir": str(rd), "task": task,
-        "provider": "telegram", "interface": "telegram",
+        "provider": "cli", "interface": "cli",
         "created_at": now(), "version": "19.3-search-primary",
     }
     jw(rd / "run-catalog-entry.json", entry)
@@ -303,8 +323,9 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
     # collection result
     jw(rd / "collection-result.json", {
         "schema_version": "v19.0", "run_id": run_id, "job_id": job_id,
-        "profile": "search-primary", "backend": "searxng",
-        "backend_reason": f"SearXNG {len(search_results)} results → {len(sources)} sources",
+        "profile": "search-primary",
+        "backend": "json_relay_prefetch",
+        "backend_reason": f"relay {len(search_results)} results → {len(sources)} sources",
         "external_mode": "optional", "no_network": False,
         "started_at": now(), "completed_at": now(),
         "external_source_packet_loaded": False,
@@ -322,7 +343,7 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
         json.dumps({"event_name": "wave.updated", "run_id": run_id, **w, "timestamp": now()},
                     ensure_ascii=False) + "\n"
         for w in [
-            {"wave_id": "W0", "status": "completed", "purpose": f"SearXNG search: {len(search_results)} results"},
+            {"wave_id": "W0", "status": "completed", "purpose": f"JSON relay search: {len(search_results)} results"},
             {"wave_id": "W1", "status": "completed", "purpose": f"Wikipedia full-text: {len(wiki_srcs)} pages"},
             {"wave_id": "W2", "status": "completed", "purpose": f"Web content fetch: {len(web_srcs)} pages"},
             {"wave_id": "W3", "status": "completed", "purpose": f"Claim extraction: {len(claims)} claims"},
@@ -338,9 +359,9 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
         "confidence": "high",
         "executive_summary": (f"Исследование '{task}': {len(sources)} источников "
                              f"({len(wiki_srcs)} Wikipedia, {len(web_srcs)} веб). "
-                             f"SearXNG search returned {len(search_results)} results."),
+                             f"JSON relay search returned {len(search_results)} results."),
         "methodology": [
-            "SearXNG web search (Google, Bing, Wikipedia engines)",
+            "JSON relay web search (upstream engines negotiated by relay)",
             "Wikipedia API full-text extraction",
             "Web content fetch and cleaning",
             "Claim decomposition per source",
@@ -368,7 +389,7 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
         f"Исследование: {task}",
         f"Search results: {len(search_results)} | Sources: {len(sources)} ({len(wiki_srcs)} wiki, {len(web_srcs)} web)",
         f"Claims: {len(claims)}",
-        f"Метод: SearXNG (primary) + Wikipedia API + web fetch",
+        f"Метод: relay JSON prefetch (primary) + Wikipedia API + web fetch",
         "Уверенность: high",
         "",
         "Источники (Wikipedia):",
@@ -424,7 +445,7 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
     jw(rd / "final-answer-gate.json", {
         "schema_version": "v19.0", "run_id": run_id,
         "passed": True,
-        "status": "content_rendered_searxng_primary",
+        "status": "content_rendered_relay_json_primary",
         "checks": {},
         "overconfidence_risk": {"blocking": [], "warnings": [], "signals": {}},
         "created_at": now(),
@@ -451,7 +472,7 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
         jw(rd / f"outbox/{ev['id']}.json", {
             "event_id": ev["id"], "run_id": run_id, "job_id": job_id,
             "type": "send_file" if ev["id"] == "OUT-0005" else "send_message",
-            "provider": "telegram",
+            "provider": "cli",
             "payload_path": ev["path"],
             "payload_kind": ev["kind"],
             "file_kind": "html_report" if ev["id"] == "OUT-0005" else None,
@@ -513,7 +534,7 @@ h2{{color:#1a237e;font-size:1.1rem;margin:24px 0 10px;border-bottom:2px solid #3
 </style></head><body>
 <div class="c">
   <h1>🔬 {task}</h1>
-  <div class="m">📊 Источников: <b>{len(sources)}</b> | 📋 Фактов: <b>{len(claims)}</b> | SearXNG (primary) + Wikipedia + web fetch</div>
+  <div class="m">📊 Источников: <b>{len(sources)}</b> | 📋 Фактов: <b>{len(claims)}</b> | JSON relay + Wikipedia + web fetch</div>
   <h2>📋 Факты</h2>
   {''.join(claim_html(c) for c in claims)}
   <h2>📚 Источники</h2>
@@ -539,19 +560,25 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--runs-root", required=True)
     p.add_argument("--task", required=True)
-    p.add_argument("--chat-id", default="38425045")
-    p.add_argument("--reply-to-message-id", default="3697")
+    p.add_argument("--web-search-json-api-base", default="", help="Relay origin (overrides env for this run)")
     args = p.parse_args()
 
     task = args.task
     runs_root = Path(args.runs_root).resolve()
+    relay = relay_api_base(args.web_search_json_api_base)
+    if not relay:
+        print(
+            "[fatal] JSON relay base missing. Set --web-search-json-api-base or RFO_WEB_SEARCH_JSON_API_BASE.",
+            file=sys.stderr,
+        )
+        return 2
 
     print(f"\n{'='*60}")
-    print(f"[RFO-SearchPrimary] {task}")
+    print(f"[RFO full-research] {task}")
     print(f"{'='*60}\n")
 
-    print("[1/3] SearXNG web search...")
-    search_results = search_searxng(task, num=_MAX_RESULTS)
+    print("[1/3] JSON relay search...")
+    search_results = search_json_relay(relay, task, num=_MAX_RESULTS)
     print(f"[1/3] → {len(search_results)} results")
 
     print("[2/3] Building sources (Wikipedia + fetched web)...")

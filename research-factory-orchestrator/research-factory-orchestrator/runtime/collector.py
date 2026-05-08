@@ -120,6 +120,9 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
         backend = "no_network"
         backend_reason = "RFO_NO_NETWORK=1"
         append_error(rd, code="EXTERNAL-COLLECTION-DISABLED", severity="warning", detail="RFO_NO_NETWORK=1 set; external collection skipped", context={"profile": profile, "external_mode": external_mode})
+    elif external_source_packet_loaded:
+        backend = "source_packet"
+        backend_reason = "RFO_SOURCE_PACKET"
     elif not seeds:
         backend = "no_seeds"
         backend_reason = "RFO_SEED_URLS not set"

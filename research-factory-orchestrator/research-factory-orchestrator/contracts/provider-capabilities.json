@@ -9,13 +9,6 @@
       "requires_provider_ack_id": false,
       "requires_attachment_id": false
     },
-    "telegram": {
-      "stub_delivery": true,
-      "external": true,
-      "user_visible_delivery": true,
-      "requires_provider_ack_id": true,
-      "requires_attachment_id": true
-    },
     "webhook": {
       "stub_delivery": true,
       "external": false,

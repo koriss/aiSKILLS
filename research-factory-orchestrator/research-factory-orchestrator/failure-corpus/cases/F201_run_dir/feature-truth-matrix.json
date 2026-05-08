@@ -2,7 +2,7 @@
   "run_id": "failure-corpus-f201-lc04",
   "version": "18.7.0",
   "features": {
-    "provider_telegram_real_send": "implemented",
+    "external_user_visible_delivery_via_skill": "implemented",
     "real_external_search_workers": "implemented"
   },
   "rule": "fixture"

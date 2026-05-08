@@ -120,7 +120,7 @@ Plus `runtime/schema_defaults.py` adds `"validation_failed"` for V1 rollback. Al
 ```text
 "wave_graph_collector": "scaffold",
 "real_external_search_workers": "missing",
-"provider_telegram_real_send": "stub",
+"external_user_visible_delivery_via_skill": "not_applicable",
 "analytical_memo": "scaffold",
 "factual_dossier": "scaffold",
 "io_propaganda_check": "scaffold",
@@ -133,7 +133,11 @@ Phases 3 + 4 + 7 must update each value to `implemented` only when the correspon
 
 ## H8 — Providers
 
-`runtime/outbox_impl.py` orchestrates per-provider gates. There is **no real Telegram send adapter** in `runtime/` — `provider_telegram_real_send` is `"stub"` in the feature matrix because the actual adapter is in `tools/agent_telegram/` from the v19.0.5 fork (Phase 7 port). Until Phase 7 lands, `mvr` profile keeps `delivery_mode: stub_allowed_explicit` (already correct in `validation-profiles/mvr.json:25`); `full-rigor` keeps `real_external_only_unless_explicit_stub` (already correct in `validation-profiles/full-rigor.json:25`).
+`runtime/outbox_impl.py` orchestrates per-provider gates for adapters shipped in
+`providers/` (today `cli` and `webhook`). User-visible channel sends are **not**
+implemented in this skill tree; `external_user_visible_delivery_via_skill` in the
+feature matrix is `not_applicable`. Profile delivery semantics remain in
+`validation-profiles/*.json` and `contracts/run-profiles.json`.
 
 ---
 

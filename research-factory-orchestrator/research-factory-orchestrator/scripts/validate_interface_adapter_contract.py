@@ -15,7 +15,7 @@ def main():
     for f in ["supported_interfaces", "supported_providers", "required_adapter_outputs", "forbidden"]:
         if not d.get(f):
             errors.append(f"missing/empty {f}")
-    for provider in ["telegram", "cli"]:
+    for provider in ["cli", "webhook"]:
         if provider not in d.get("supported_providers", []):
             errors.append(f"{provider} provider not declared")
     if errors:

@@ -16,8 +16,8 @@ Use this checklist before trusting any “PASS” narrative.
 1. Run `scripts/validate_release.py` (or the `REQUIRED_GATES` subset you are iterating).
 2. Never accept “validate passed” without `release-validation-transcript.json` **rc**
    fields for each gate.
-3. For Telegram claims, require `_smoke_telegram_real_send` **HTTP hit** evidence
-   (mock server counts real `sendMessage` calls).
+3. For **user-visible send** claims, require evidence from the **host** (gateway logs,
+   channel IDs, HTTP traces). This skill does not ship messenger delivery code.
 4. For coverage claims, require `collection-coverage-result.json` and
    `source_coverage_passed` alignment (see ADR-015).
 

@@ -1,31 +1,29 @@
-# ADR-014 — Telegram operator control plane (v19.2.0)
+# ADR-014 — Telegram operator control plane (historical)
 
 ## Status
 
-Superseded for **delivery posture** by [ADR-015 — Compute vs delivery split](./ADR-015-compute-vs-delivery-split.md) (v19.3): user-visible Telegram delivery and proofing move to **OpenClaw gateway**; the skill stays compute-only with a stdout marker + `result-manifest.json`.
+**Superseded.** User-visible messaging and channel-specific proofing live in the
+**host** (e.g. OpenClaw gateway). This skill is compute-only: artifacts +
+**`__RFO_SKILL_AGENT_HANDOFF__=`** on stdout. See
+[ADR-015 — Runtime truth restoration](./ADR-015-runtime-truth-restoration.md).
 
-Historically accepted — implemented in v19.2.0 (`tools/agent_telegram/`, `_smoke_telegram_*`) before the split.
+The repository **no longer** ships `providers/telegram/`, `tools/agent_telegram/`,
+or `_smoke_telegram_*` entrypoints. The sections below describe the **v19.2.0**
+design only for archive readers.
 
-## Context
+## Context (v19.2.0)
 
-Packaged runs must keep a **stdlib-only** delivery adapter under `providers/telegram/`
-for `runtime/outbox_impl.py`. Host operators also need a **separate** control plane
-for webhooks, long-poll bots, and secret rotation without growing runtime core.
+Operators wanted a stdlib-only adapter plus a separate control plane for
+webhooks, bots, and secret rotation without bloating `runtime/`.
 
-## Decision
+## Decision (historical)
 
-1. **Split responsibility** — runtime adapter = minimal `sendMessage` when
-   `TELEGRAM_API_BASE` + token + chat id are present; operator tools live under
-   `tools/agent_telegram/`.
-2. **Chat allowlist** — optional `TELEGRAM_ALLOWED_CHAT_IDS` enforced in
-   `tools/agent_telegram/security.py` for operator entrypoints.
-3. **Secret redaction** — `security.redact_secrets` scrubs tokens before logging.
-4. **Fixed argv** — `tools/agent_telegram/runner.py` documents subprocess policy
-   (no shell, explicit argv).
-5. **Webhook HMAC** — `webhook_server.py` verifies `X-Telegram-Bot-Api-Secret-Token`
-   when `TELEGRAM_WEBHOOK_SECRET` is set (host should still terminate TLS in nginx).
+1. Runtime adapter invoked Bot API `sendMessage` when base URL, token, and chat id were present; companion tools lived under `tools/agent_telegram/`.
+2. Optional chat allowlists and webhook HMAC verification in operator scripts.
+3. Release gates included Telegram-oriented smokes.
 
-## Consequences
+## Consequences (historical)
 
-- Two smokes are mandatory in `REQUIRED_GATES`: interface contract + mock Bot API
-  trace (`_smoke_telegram_agent_interface`, `_smoke_telegram_real_send`).
+- Tight coupling between “skill tree” and a specific messenger complicated the
+  compute/delivery boundary; ADR-015 and later refactors reversed that for the
+  packaged skill.

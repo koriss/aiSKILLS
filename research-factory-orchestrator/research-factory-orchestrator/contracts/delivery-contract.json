@@ -4,7 +4,7 @@
     "standalone_html",
     "research_package"
   ],
-  "telegram": {
+  "compact_chat_payload": {
     "plain_text_only": true,
     "no_tables": true,
     "no_local_paths": true,

@@ -22,7 +22,7 @@ def cmd_adapter(a):
     c = allocate(a.runs_root, task, a.provider, a.interface)
     rd = Path(c["run_dir"])
     req_id = sid("REQ", a.interface, a.provider, a.conversation_id, a.message_id, task)
-    # v19.2.1: capture dynamic delivery routing from incoming Telegram update.
+    # Optional delivery routing hints from the invoking host (not used for outbound sends from this repo).
     delivery = {
         "chat_id": _opt(getattr(a, "chat_id", "")),
         "reply_to_message_id": _opt(getattr(a, "reply_to_message_id", "")),

@@ -58,11 +58,8 @@ _CANONICAL_HINT = (
     "Canonical invocation:\n"
     "  cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \\\n"
     "    python3 -S scripts/interface_runtime_adapter.py \\\n"
-    "      --runs-root ~/.openclaw/workspace/rfo-runs \\\n"
-    "      --interface telegram --provider telegram \\\n"
-    "      --chat-id \"$TELEGRAM_INCOMING_CHAT_ID\" \\\n"
-    "      --reply-to-message-id \"$TELEGRAM_INCOMING_MESSAGE_ID\" \\\n"
-    "      --api-base \"${TELEGRAM_API_BASE:-https://api.telegram.org}\" \\\n"
+    "      adapter --runs-root ~/.openclaw/workspace/rfo-runs \\\n"
+    "      --interface cli --provider cli \\\n"
     "      --task \"...\"\n"
 )
 

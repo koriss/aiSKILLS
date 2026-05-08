@@ -59,9 +59,9 @@ All registry ids from `contracts/validator-registry.json` v19.0.1:
 | `validate_self_claim_not_external_confirmation` | core (V6) |
 | `validate_summary_no_new_facts` | core (V5) |
 | `validate_summary_no_new_claims` | core (V5) |
-| `validate_telegram_no_tables_strict` | heavy |
-| `validate_telegram_plain_text` | heavy |
-| `validate_telegram_message_lengths` | heavy |
+| `validate_telegram_no_tables_strict` | archived script (not in `validator-registry.json`) |
+| `validate_telegram_plain_text` | archived script (not in registry) |
+| `validate_telegram_message_lengths` | archived script (not in registry) |
 | `validate_stub_delivery_not_external` | core (V6) |
 | `validate_seed_claims_not_presented_as_domain_analysis` | core (V4) |
 | `validate_snippet_only_not_confirmed` | core (V4) |

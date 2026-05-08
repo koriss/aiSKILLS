@@ -8,6 +8,8 @@ Canonical entrypoint: `scripts/interface_runtime_adapter.py`
 
 This document is written for a new agent/session that needs to continue the project without repeating old mistakes. Treat it as project memory plus release-state briefing. Do not treat it as proof by itself: every claim about a release must be verified against the actual archive, manifest, checksums and validation transcript.
 
+**Stale paths:** sections below that cite `providers/telegram/` or messenger-specific smokes describe the **v18.1.1** snapshot; the current skill tree is compute-only for external channels (see `AGENTS.md`).
+
 ---
 
 ## 1. One-sentence definition

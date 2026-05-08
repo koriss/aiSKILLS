@@ -60,6 +60,34 @@
         "validate_citation_grounding"
       ]
     },
+    "live-bridge": {
+      "label": "Prefetch relay + packaged sources (production bridge path)",
+      "description": "Host prefetches URLs via configurable JSON relay, supplies RFO_SOURCE_PACKET. Collector HEAD-probe optional; relay performed outside collector. Intended default for scripts/run_rfo_with_web_search.py.",
+      "source_policy": {
+        "external_collection_required": true,
+        "minimum_independent_sources": 8,
+        "source_packet_allowed": true,
+        "source_packet_required": true,
+        "web_search_required": false,
+        "stub_only_allowed": false
+      },
+      "delivery_policy": {
+        "stub_delivered_allowed": true,
+        "external_delivery_required": false,
+        "fail_on_validation_failed": true
+      },
+      "active_validators": [
+        "validate_artifact_schema",
+        "validate_work_unit_completion",
+        "validate_seed_only_truth",
+        "validate_error_log_quality",
+        "validate_source_provenance_distinction",
+        "validate_outbox_finalization",
+        "validate_root_vs_zip_artifact_truth",
+        "validate_collection_coverage_decoupled",
+        "validate_citation_grounding"
+      ]
+    },
     "full-rigor": {
       "label": "Full Rigor (Strict)",
       "description": "Live web search required. Coverage threshold = collection-coverage-contract.minimum_independent_sources_default (20). Stub-only is forbidden. Citation grounding gate must pass.",

@@ -201,7 +201,7 @@
         "shortlist"
       ],
       "avoid_blocks": [
-        "huge matrix in telegram"
+        "huge matrix in chat payload"
       ],
       "mobile_notes": [
         "wide table in HTML, summary cards in Telegram"

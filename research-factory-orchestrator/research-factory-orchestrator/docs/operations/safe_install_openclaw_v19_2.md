@@ -17,8 +17,8 @@
 1. **Backup** — `cp -a /opt/openclaw/skills/research-factory-orchestrator /opt/openclaw/_backup/rfo-$(date +%F)` (adjust paths to your layout).
 2. **Atomic replace** — unpack zip to a temp dir, then `mv` the new tree over the
    old skill directory in one rename (fail-closed rollback = restore backup).
-3. **Allowlist** — refresh `agent.skills` / host allowlists to include any new
-   `tools/agent_telegram/` entrypoints you expose.
+3. **Allowlist** — refresh `agent.skills` / host allowlists for any **host-owned**
+   bots or gateways (not shipped inside this skill tree).
 4. **Sanity** — run slash-command smoke paths documented in `SKILL-core.md`.
 
 ## Post-install evidence

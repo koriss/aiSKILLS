@@ -2,12 +2,10 @@
   "version": "19.2.0",
   "supported_interfaces": [
     "generic_chat",
-    "telegram",
     "cli",
     "web"
   ],
   "supported_providers": [
-    "telegram",
     "cli",
     "webhook"
   ],

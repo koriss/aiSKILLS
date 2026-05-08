@@ -8,7 +8,7 @@
     "wave_graph_collector",
     "analytical_memo",
     "io_propaganda_check",
-    "provider_telegram_real_send",
+    "external_user_visible_delivery_via_skill",
     "external_collector",
     "work_unit_executor"
   ]

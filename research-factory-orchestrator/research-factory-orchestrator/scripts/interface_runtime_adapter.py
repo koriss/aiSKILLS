@@ -12,20 +12,10 @@ This is the only canonical script for the bot to call. It hard-guards:
   is permitted only with ``RFO_ALLOW_TMP_RUNS_ROOT=1`` consent). On
   violation: exit code ``12`` and stamp ``RFO-RUNS-ROOT-FORBIDDEN``.
 
-It accepts new optional delivery flags introduced in v19.2.1:
-
-  ``--chat-id``               Telegram chat_id from the *incoming* update.
-                              Required for real (non-stub) delivery.
-  ``--reply-to-message-id``   message_id of the user's incoming message,
-                              used as ``reply_to_message_id`` on send.
-  ``--api-base``              Telegram Bot API base URL (default
-                              ``https://api.telegram.org``); also taken
-                              from ``TELEGRAM_API_BASE`` if not provided.
-
-These are persisted into ``interface/interface-request.json`` under
-``delivery.chat_id``, ``delivery.reply_to_message_id`` and
-``delivery.api_base`` respectively, where the Telegram delivery adapter
-picks them up at outbox time (see ``providers/telegram/telegram_delivery_adapter.py``).
+Optional flags ``--chat-id``, ``--reply-to-message-id``, and ``--api-base`` are
+recorded verbatim into ``interface/interface-request.json`` under
+``delivery.*`` for the host process only. This skill computes artifacts and
+local outbox stubs; any real user-visible send happens outside this repository.
 
 Backwards compatible with v19.2.0: if invoked without an explicit
 sub-command word, dispatches to ``adapter`` (legacy behaviour).

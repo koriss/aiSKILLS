@@ -2,6 +2,6 @@
   "run_id": "failure-corpus-f207-lc16",
   "mode": "production",
   "requested_mode": "production",
-  "provider": "telegram",
+  "provider": "cli",
   "version": "18.7.0-logical-consistency"
 }

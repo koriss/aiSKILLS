@@ -9,7 +9,7 @@
     "outbox_delivery_worker": "implemented",
     "wave_graph_collector": "scaffold",
     "real_external_search_workers": "missing",
-    "provider_telegram_real_send": "stub",
+    "external_user_visible_delivery_via_skill": "stub",
     "late_result_protocol": "implemented_scaffold",
     "deterministic_html_renderer": "implemented_scaffold",
     "analytical_memo": "scaffold",

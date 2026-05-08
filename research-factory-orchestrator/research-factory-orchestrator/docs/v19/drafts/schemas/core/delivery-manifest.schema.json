@@ -57,6 +57,7 @@
       "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
     },
     "telegram_messages": {
+      "description": "Legacy field name for optional compact chat-segment payloads in older packages.",
       "type": "array",
       "items": { "type": "object", "additionalProperties": true }
     },

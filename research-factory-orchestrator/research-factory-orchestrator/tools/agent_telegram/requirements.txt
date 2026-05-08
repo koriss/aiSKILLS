@@ -1,1 +1,0 @@
-# Intentionally empty: operator plane is stdlib-only in v19.2.0.

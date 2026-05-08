@@ -18,3 +18,16 @@
 9. **Logical consistency**: after validation, `scripts/validate_logical_consistency.py` must pass on the run-dir; `run.json` records `mode`, `requested_mode`, and `normalized_from` when the effective mode differs from the operator request; production runs must not leave `feature-truth-matrix.json` features in `stub`/`missing`/`scaffold`.
 
 10. **Pragmatic Rigor core**: optional `RFO_V19_PROFILE` (`mvr`, `full-rigor`, `propaganda-io`, `book-verification`) switches `runtime/validate_impl.validate` to `scripts/run_core_validators.py` (V1–V6); frozen contracts live under `schemas/core/`; operator summary in `SKILL-core.md`.
+
+11. **Default bridge pipeline (agents calling `run_rfo_with_web_search.py` with task + `--runs-root`)** — step → invariant (verify in code after changes):
+
+    | Step | Invariant |
+    | --- | --- |
+    | `main()` / argv | Relay base `--web-search-json-api-base` or `RFO_WEB_SEARCH_JSON_API_BASE` (legacy name `RFO_SEARXNG_URL`): missing → immediate non-zero exit. |
+    | Prefetch | `RFO_SOURCE_PACKET` written before adapter; independent source count meets `live-bridge` / `--num-sources` policy or bridge exits early. |
+    | `interface_runtime_adapter` | `adapter` sub-command; enqueue uses `cli`/`webhook`-capable manifests; optional routing fields recorded only for hosts. |
+    | Worker `--execute-runtime` | Profile resolves (default from bridge `live-bridge`); collector loads packet → no `EXTERNAL-COLLECTION-NO-SEEDS` solely because seeds are absent while packet succeeded. |
+    | Coverage | `web_search_required` aligns with prefetch (see `contracts/run-profiles.json` profile `live-bridge`). |
+    | Handoff stdout | Exactly one `__RFO_SKILL_AGENT_HANDOFF__=` line; caller performs external UX. |
+
+    Operational deploy: sync the refreshed skill directory to whichever workspace path invokes `scripts/run_rfo_with_web_search.py`; no Telegram-specific code ships in-repo.

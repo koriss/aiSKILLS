@@ -1,27 +1,22 @@
 #!/usr/bin/env python3
 """
-RFO v19.3 Web Search Integration Bridge
+RFO v19.4 — JSON relay prefetch bridge (neutral contract)
 
-Full pipeline: SearXNG → fetch → RFO source_packet → real claims → render → outbox
+collector.py делает только HEAD‑probe семян или загрузку RFO_SOURCE_PACKET; список
+URL для исследования собирается здесь через **настраиваемый** HTTP JSON relay
+(типичный эндпоинт вида `/search?q=…&format=json`; хост задаёт оператор).
 
-Проблема которую решает:
-  collector.py не умеет в SearXNG — только HEAD probe URL из RFO_SEED_URLS.
-  render.py claims() генерирует 5 процессных claim'ов из таска, не из источников.
-  sources.json заполняется из source_packet, но в claims не конвертируется.
+Обязательно задать базу через ``--web-search-json-api-base`` или
+``RFO_WEB_SEARCH_JSON_API_BASE`` (совместимо: ``RFO_SEARXNG_URL`` только как имя
+переменной для миграции; значение всегда задаёт оператор).
 
-Решение:
-  1. SearXNG search + fetch страниц
-  2. RFO_SOURCE_PACKET с full text content_snippet
-  3. Post-collection: патчим claims-registry реальными claim'ами из source_packet
-  4. Перезапускаем render с патченными данными
-  5. Одна строка stdout ``__RFO_SKILL_AGENT_HANDOFF__=…`` для вызывающего агента (никаких чат-сетей из скилла)
+Поток:
+  1. relay search + HTTP fetch страниц
+  2. RFO_SOURCE_PACKET + очередь RFO как обычно
+  3. патчи claims-registry / re-render / stdout ``__RFO_SKILL_AGENT_HANDOFF__=``
 
-Usage:
-  python3 -S scripts/run_rfo_with_web_search.py \
-    --runs-root ~/path/to/rfo-runs \
-    --task "хантавирус" \
-    --num-sources 8 \
-    [--profile mvr]
+По умолчанию ``--profile live-bridge`` (строже mvr).
+Для экспресс-режима: ``--profile mvr``.
 """
 from __future__ import annotations
 
@@ -49,9 +44,8 @@ sys.path.insert(0, str(SKILL_ROOT))
 from runtime.util import now  # noqa: E402
 
 # ── config ────────────────────────────────────────────────────────────────────
-_SEARCH_ENDPOINT = os.environ.get("RFO_SEARXNG_URL", "http://searxng:8080")
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
-_USER_AGENT = "RFO/19.3-WebSearch (+https://github.com/openclaw/research-factory-orchestrator)"
+_USER_AGENT = os.environ.get("RFO_WEB_SEARCH_USER_AGENT", "RFO/19.4-RelayPrefetch (+https://github.com/openclaw/research-factory-orchestrator)")
 _MAX_CHARS_PER_SOURCE = 3000   # truncate content per source
 _MAX_SOURCES = 8
 
@@ -109,10 +103,28 @@ def _apply_profile_env(env: dict[str, str], profile: str) -> None:
 
 
 # ── search ────────────────────────────────────────────────────────────────────
-def search_searxng(query: str, num: int = _MAX_SOURCES) -> list[dict]:
-    """Query SearXNG. Returns list of {url, title, snippet}."""
-    q = urllib.parse.quote(query)
-    url = f"{_SEARCH_ENDPOINT}/search?q={q}&format=json&engines=google,bing,wikipedia&num={num}"
+def resolve_relay_bases(cli_base: str) -> list[str]:
+    """Relay API roots (scheme+host[+path]), no literals: operator supplies all."""
+    seen: list[str] = []
+    for raw in (
+        (cli_base or "").strip(),
+        os.environ.get("RFO_WEB_SEARCH_JSON_API_BASE", "").strip(),
+        os.environ.get("RFO_SEARXNG_URL", "").strip(),
+        os.environ.get("RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE", "").strip(),
+    ):
+        if raw and raw not in seen:
+            seen.append(raw.rstrip("/"))
+    return seen
+
+
+def query_json_search_relay(api_base: str, query: str, num: int) -> list[dict]:
+    """JSON relay search; ``api_base`` is origin only; path ``/search`` appended (SearxNG-style)."""
+    base = api_base.rstrip("/")
+    params: dict[str, str] = {"q": query, "format": "json", "num": str(num)}
+    eng = os.environ.get("RFO_WEB_SEARCH_ENGINES", "").strip()
+    if eng:
+        params["engines"] = eng
+    url = f"{base}/search?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=_HTTP_TIMEOUT + 3) as resp:
@@ -122,29 +134,16 @@ def search_searxng(query: str, num: int = _MAX_SOURCES) -> list[dict]:
                 raw_url = r.get("url", "")
                 if not raw_url.startswith("http"):
                     continue
-                results.append({
-                    "url": raw_url,
-                    "title": r.get("title", "")[:300],
-                    "snippet": (r.get("content") or "")[:500],
-                })
+                results.append(
+                    {
+                        "url": raw_url,
+                        "title": r.get("title", "")[:300],
+                        "snippet": (r.get("content") or "")[:500],
+                    }
+                )
             return results
     except Exception as e:
-        print(f"[search] SearXNG error: {e}", file=sys.stderr)
-        return []
-
-
-def search_wikipedia_fallback(query: str, num: int = _MAX_SOURCES) -> list[dict]:
-    """Wikipedia API opensearch fallback."""
-    q = urllib.parse.quote(query)
-    url = f"https://en.wikipedia.org/w/api.php?action=opensearch&search={q}&format=json&limit={num}"
-    req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
-    try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read())
-            titles, _, urls = data[1], data[2], data[3]
-            return [{"url": u, "title": t, "snippet": ""} for t, u in zip(titles, urls)]
-    except Exception as e:
-        print(f"[search] Wikipedia fallback error: {e}", file=sys.stderr)
+        print(f"[search] relay error ({api_base}): {e}", file=sys.stderr)
         return []
 
 
@@ -194,7 +193,7 @@ def extract_claims_from_content(sources: list[dict], task: str) -> list[dict]:
             continue
         claim_id = f"C-SRCH-{i+1:03d}"
         ev_id = f"EV-C-SRCH-{i+1:03d}"
-        src_id = src.get("source_id", f"SRC-SEARX-{i+1:03d}")
+        src_id = src.get("source_id", f"SRC-RELAY-{i+1:03d}")
 
         # Derive status from source type
         status = "confirmed" if src.get("verification_mode") == "raw_document" else "probable"
@@ -208,7 +207,7 @@ def extract_claims_from_content(sources: list[dict], task: str) -> list[dict]:
             "source_ids": [src_id],
             "evidence_card_ids": [ev_id],
             "last_checked_at": now(),
-            "origin": "searxng_bridge",
+            "origin": "relay_prefetch_bridge",
             "sensitive": False,
             "verbatim_supports": [
                 {
@@ -250,18 +249,18 @@ def build_source_packet(search_results: list[dict]) -> dict:
         snippet = r.get("snippet", "") or content[:300]
         is_wiki = "wikipedia.org" in url
         sources.append({
-            "source_id": f"SRC-SEARX-{i+1:03d}",
+            "source_id": f"SRC-RELAY-{i+1:03d}",
             "title": r.get("title", url)[:200],
             "canonical_origin_id": url,
             "url": url,
-            "source_role": "breaking" if any(y in (r.get("snippet","") + r.get("title","")) for y in ("2026","2025","outbreak")) else "background",
+            "source_role": "background",
             "access_level": "primary_access",
             "interest_alignment": "neutral",
             "verification_mode": "raw_document" if is_wiki else "testimony",
             "independence": "high" if is_wiki else "medium",
             "citation_eligible": True,
             "corroboration_type": "authoritative" if is_wiki else "corroborated",
-            "fetch_method": "searxng_bridge",
+            "fetch_method": "relay_prefetch_bridge",
             "content_snippet": content or snippet,
             "content_fetch_error": err,
         })
@@ -335,47 +334,96 @@ def patch_sources_json(rd: Path, sources: list[dict]) -> None:
     print(f"[patch] sources.json → {len(sources)} sources")
 
 
+def minimum_sources_policy(profile_name: str) -> int:
+    """Minimum independent-looking sources from run-profile contract."""
+    try:
+        from runtime.profiles import resolve as rp
+
+        _, pol = rp(profile_name)
+        sp = pol.get("source_policy") if isinstance(pol, dict) else {}
+        mi = sp.get("minimum_independent_sources", 1) if isinstance(sp, dict) else 1
+        return max(1, int(mi))
+    except Exception:
+        return 1
+
+
+def strict_packet_preflight(profile_lc: str, packet: dict, min_need: int) -> tuple[bool, str]:
+    if profile_lc == "mvr":
+        return True, ""
+    rows = packet.get("sources") if isinstance(packet.get("sources"), list) else []
+    with_body = sum(1 for s in rows if isinstance(s, dict) and str(s.get("content_snippet") or "").strip())
+    if len(rows) < min_need:
+        return False, f"packet has {len(rows)} URLs < minimum {min_need}"
+    if with_body < min_need:
+        return False, f"sources_with_body={with_body} < minimum {min_need}"
+    return True, ""
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 def main() -> int:
     import argparse
 
-    parser = argparse.ArgumentParser(description="RFO + SearXNG web search bridge")
+    parser = argparse.ArgumentParser(description="RFO relay prefetch bridge (handoff stdout only)")
     parser.add_argument("--runs-root", required=True)
     parser.add_argument("--task", required=True)
     parser.add_argument("--num-sources", type=int, default=_MAX_SOURCES)
-    parser.add_argument("--profile", default="mvr")
-    parser.add_argument("--chat-id", default="38425045")
-    parser.add_argument("--reply-to-message-id", default="3697")
     parser.add_argument(
-        "--api-base",
+        "--web-search-json-api-base",
         default="",
-        help="Telegram API base (optional); also reads TELEGRAM_API_BASE from environment.",
+        help="HTTP JSON relay origin (no /search suffix). Overrides RFO_WEB_SEARCH_JSON_API_BASE for this run.",
     )
+    parser.add_argument("--profile", default="live-bridge")
     parser.add_argument(
-        "--skip-outbox",
+        "--allow-gate-stub",
         action="store_true",
-        help="Skip outbox_delivery_worker (e.g. when OpenClaw delivers via stdout marker).",
+        help="Write optimistic final-answer-gate stub (normally disabled for strict profiles)",
     )
     args = parser.parse_args()
 
     task = args.task
+    prof_lc = args.profile.strip().lower()
     print(f"\n{'='*60}")
-    print(f"[RFO+Search] Starting: {task[:80]}")
+    print(f"[RFO relay] Starting: profile={prof_lc} task={task[:80]!r}")
     print(f"{'='*60}\n")
 
-    # Step 1: Search
-    print("[1/5] Searching SearXNG...")
-    results = search_searxng(task, num=args.num_sources)
+    relays = resolve_relay_bases(args.web_search_json_api_base)
+    if not relays:
+        print(
+            "[fatal] JSON relay API base unset. Pass --web-search-json-api-base or export "
+            "RFO_WEB_SEARCH_JSON_API_BASE (legacy alias: RFO_SEARXNG_URL). No baked-in hostname.",
+            file=sys.stderr,
+        )
+        return 2
+
+    print("[1/5] Query JSON relay...")
+    results: list[dict] = []
+    for base in relays:
+        results = query_json_search_relay(base, task, args.num_sources)
+        if results:
+            break
+
     if not results:
-        print("[1/5] SearXNG failed — trying Wikipedia fallback...")
-        results = search_wikipedia_fallback(task, num=args.num_sources)
-    print(f"[1/5] Got {len(results)} search results")
+        msg = "[1/5] Relay returned zero URLs."
+        if prof_lc == "mvr":
+            print(f"{msg} continuing with empty scaffold (profile=mvr)")
+        else:
+            print(msg, file=sys.stderr)
+            print("Relax with --profile mvr or tune RFO_WEB_SEARCH_* / relay availability.", file=sys.stderr)
+            return 2
+
+    print(f"[1/5] Got {len(results)} relay rows")
 
     # Step 2: Build source packet with fetched content
     print("[2/5] Building source packet with fetched content...")
     packet = build_source_packet(results)
-    n_with_content = sum(1 for s in packet["sources"] if s.get("content_snippet"))
-    print(f"[2/5] {len(packet['sources'])} sources, {n_with_content} with content")
+    n_with_content = sum(1 for s in packet["sources"] if str(s.get("content_snippet") or "").strip())
+    print(f"[2/5] {len(packet['sources'])} sources, {n_with_content} with non-empty bodies")
+
+    min_need = minimum_sources_policy(args.profile)
+    ok_pf, pf_detail = strict_packet_preflight(prof_lc, packet, min_need)
+    if not ok_pf:
+        print(f"[2/5] packet preflight fail: {pf_detail}", file=sys.stderr)
+        return 2
 
     packet_path: str | None = None
     try:
@@ -390,7 +438,6 @@ def main() -> int:
 
         env: dict[str, str] = {str(k): str(v) for k, v in os.environ.items()}
         env["RFO_SOURCE_PACKET"] = packet_path
-        env.setdefault("RFO_EXTERNAL_COLLECTION", "off")
         _apply_profile_env(env, args.profile)
 
         adapter_script = SKILL_ROOT / "scripts" / "interface_runtime_adapter.py"
@@ -525,23 +572,26 @@ def main() -> int:
         except Exception as e:
             print(f"[4/5] Re-render error (non-fatal): {e}")
 
-        try:
-            from runtime.util import jw
+        if prof_lc == "mvr" or args.allow_gate_stub:
+            try:
+                from runtime.util import jw
 
-            jw(
-                latest_run / "final-answer-gate.json",
-                {
-                    "schema_version": "v19.0",
-                    "run_id": run_id,
-                    "passed": True,
-                    "status": "content_rendered_searxng_bridge",
-                    "checks": {},
-                    "overconfidence_risk": {"blocking": [], "warnings": [], "signals": {}},
-                    "created_at": now(),
-                },
-            )
-        except Exception as e:
-            print(f"[4/5] gate update error: {e}")
+                jw(
+                    latest_run / "final-answer-gate.json",
+                    {
+                        "schema_version": "v19.0",
+                        "run_id": run_id,
+                        "passed": True,
+                        "status": "content_rendered_relay_prefetch",
+                        "checks": {},
+                        "overconfidence_risk": {"blocking": [], "warnings": [], "signals": {}},
+                        "created_at": now(),
+                    },
+                )
+            except Exception as e:
+                print(f"[4/5] gate update error: {e}")
+        else:
+            print("[4/5] Leaving final-answer-gate untouched (live-bridge: run validators for truth)")
 
         print("[5/5] Stdout agent handoff (see __RFO_SKILL_AGENT_HANDOFF__=… on last line).")
         from runtime.artifact_execute_impl import emit_agent_skill_handoff

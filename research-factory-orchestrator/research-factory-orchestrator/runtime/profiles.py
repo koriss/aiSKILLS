@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 _DEFAULT = "mvr"
-_KNOWN = ("mvr", "source-packet", "full-rigor")
+_KNOWN = ("mvr", "source-packet", "live-bridge", "full-rigor")
 
 
 def _path() -> Path:

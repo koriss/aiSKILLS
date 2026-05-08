@@ -1,27 +1,22 @@
-# Telegram golden snapshots (D2)
+# Delivery manifest golden snapshots (archived procedure)
 
-## Purpose
+## Status
 
-Optional **`contracts/telegram-golden/`** directory holds a frozen `delivery-manifest.json` (and optional `allowlist-paths.txt`) for regression diffing of Telegram-shaped smoke runs.
+The optional **`contracts/telegram-golden/`** directory and the diff helper
+**`scripts/_diff_telegram_against_golden.py`** were removed from the tree.
+Older release notes may still mention them; do not follow those steps.
 
-## Capture procedure
+## Current practice
 
-1. Run a successful smoke with the target provider/interface, e.g.
-   `python3 -S scripts/rfo_runtime_core.py smoke --runs-root /tmp/rfo-golden --provider telegram --interface telegram`
-2. Copy `delivery-manifest.json` from the resolved `run_dir` into `contracts/telegram-golden/delivery-manifest.json`.
-3. Add volatile dotted paths (e.g. `.run_id`, `.created_at`, `.attachments`) to `allowlist-paths.txt` one path per line (`#` comments allowed).
+- Regression and honesty checks use **`scripts/verify_openclaw_run.py`** and the
+  validator stack referenced from **`contracts/validator-registry.json`**.
+- Default enqueue path is **`--interface cli --provider cli`**; user-visible
+  delivery is outside this repository (see **`docs/adr/ADR-015-runtime-truth-restoration.md`**).
 
-## Diff procedure
+## If you need a frozen `delivery-manifest.json`
 
-`python3 -S scripts/_diff_telegram_against_golden.py <run_dir>`
-
-- If `contracts/telegram-golden/` is **missing** -> exit **0** with skip JSON.
-- If golden exists → deep-compare against `run_dir/delivery-manifest.json` honoring allowlist.
-
-## Promotion to release gate (v19.0.4)
-
-**v19.0.4** will promote **D1** to **`must_ok`** after a frozen snapshot is committed and CI is wired to fail on unexpected drift.
-
-## Golden refresh criteria
-
-Refresh the golden snapshot **only** on intentional contract or smoke-output changes (document the reason in the release notes).
+1. Run a smoke or full pipeline that produces a `run_dir` you trust.
+2. Copy `run_dir/delivery-manifest.json` to a **private** fixture location
+   (team process), not necessarily under `contracts/`.
+3. Document volatile keys (timestamps, ids) in your own allowlist; there is
+   no built-in deep-diff step in CI for Telegram-shaped manifests anymore.

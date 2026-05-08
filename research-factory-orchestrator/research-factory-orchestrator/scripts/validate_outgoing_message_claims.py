@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 DELIVERED = re.compile(
-    r"(отправлен|доставлен|sent to Telegram|HTML-отч[её]т.*отправлен)",
+    r"(отправлен|доставлен|HTML-отч[её]т.*отправлен|\bsent\b.*\b(chat|channel|user)\b)",
     re.I,
 )
 
@@ -22,7 +22,7 @@ def _scan_outbox_tool_issues(rd: Path) -> list[dict]:
         ev = json.loads(p.read_text(encoding="utf-8"))
         prov = str(ev.get("provider") or "")
         typ = str(ev.get("type") or "")
-        if typ == "send_message" and prov not in ("telegram", "cli", "webhook", ""):
+        if typ == "send_message" and prov not in ("cli", "webhook", ""):
             issues.append({"event_id": ev.get("event_id"), "kind": "tool_selection_hallucination", "detail": "unexpected provider for send_message"})
         if typ == "send_message" and not ev.get("payload_path"):
             issues.append({"event_id": ev.get("event_id"), "kind": "tool_usage_hallucination", "detail": "missing payload_path"})

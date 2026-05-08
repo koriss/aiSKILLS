@@ -357,11 +357,6 @@ def main() -> int:
     transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
     out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    # D1 skeleton (optional, never blocks release)
-    if run_dir_execute and Path(run_dir_execute).is_dir():
-        pd = _run(py, [py, "-S", str(ROOT / "scripts" / "_diff_telegram_against_golden.py"), run_dir_execute], env, 60)
-        steps.append(_step_tail("_diff_telegram_against_golden", pd, {"run_dir": run_dir_execute}))
-
     transcript["steps"] = steps
     transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
     out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

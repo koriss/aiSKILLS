@@ -27,6 +27,23 @@ def _append_run_event(rd: Path, event: str, fields: dict[str, object]) -> None:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
+def _run_validator_with_run_dir(sp: Path, rd: Path, root: Path, timeout: int = 180) -> subprocess.CompletedProcess[str]:
+    """Run validator with argv fallback: ``--run-dir`` first, positional ``run_dir`` second.
+
+    Some legacy validators still expose positional ``run_dir`` only.
+    To keep runtime validate deterministic (and avoid false FAILs caused only by
+    argparse shape drift), we retry once with positional argument when stderr
+    indicates ``--run-dir`` is unrecognized.
+    """
+    env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+    cmd = [sys.executable, "-S", str(sp), "--run-dir", str(rd)]
+    p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=str(root), env=env)
+    if p.returncode == 2 and "unrecognized arguments: --run-dir" in (p.stderr or ""):
+        cmd2 = [sys.executable, "-S", str(sp), str(rd)]
+        p = subprocess.run(cmd2, capture_output=True, text=True, timeout=timeout, cwd=str(root), env=env)
+    return p
+
+
 def _ensure_rollback_stub_html(rd: Path) -> None:
     """Create physical stub so V6 DELIV-ATT-MISSING does not fire on rollback attachment."""
     from runtime.schema_defaults import ROLLBACK_STUB_HTML
@@ -207,8 +224,7 @@ def validate(rd):
             sp = root / v.get("path", "")
             if not sp.is_file():
                 continue
-            cmd = [sys.executable, "-S", str(sp), "--run-dir", str(rd)]
-            p = subprocess.run(cmd, capture_output=True, text=True, timeout=180, cwd=str(root), env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+            p = _run_validator_with_run_dir(sp, rd, root, timeout=180)
             if p.returncode != 0:
                 dag_errs.append({"validator": vid, "rc": p.returncode, "stderr": (p.stderr or "")[-1200:]})
         vs = root / "scripts" / "validate_skill.py"

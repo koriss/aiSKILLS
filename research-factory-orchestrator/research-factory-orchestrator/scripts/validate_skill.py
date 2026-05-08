@@ -2,7 +2,7 @@
 from pathlib import Path
 import ast, json, re, shutil, sys
 sys.dont_write_bytecode = True
-VERSION = "19.2.0"
+VERSION = "19.3"
 root = Path(__file__).resolve().parents[1]
 errors = []
 required_dirs = ["contracts","scripts","schemas","references","failure-corpus","providers","kb","templates","examples","tests","case-library","policies","docs","tools"]
@@ -38,17 +38,18 @@ required_scripts = [
     "validate_active_contract_versions.py", "validate_profile_policies_present.py",
     "validate_no_scaffolds_in_production.py", "validate_no_failed_validation_in_production.py",
     "validate_advisory_fixture_suite.py", "_smoke_v19_2_integration.py", "_smoke_v19_2_phase5_matrix.py",
-    "_smoke_telegram_agent_interface.py", "_smoke_telegram_real_send.py", "verify_openclaw_run.py",
+    "validate_artifact_release.py", "_smoke_v19_3_artifact_only.py", "verify_openclaw_run.py",
     "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
     "validate_logical_consistency.py",
     "run_core_validators.py",
     "check_validation_pass.py",
     "migrate_validator_invocation.py",
 ]
-required_providers = ["providers/telegram/telegram_delivery_adapter.py", "providers/cli/cli_delivery_adapter.py", "providers/webhook/webhook_delivery_adapter.py"]
-required_contracts = ["artifact-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "legacy/runtime-contract-v18.3.2.json", "core-boundary-contract.json"]
+# v19.3: compute-only — only the CLI pass-through adapter is required for packaging.
+required_providers = ["providers/cli/cli_delivery_adapter.py"]
+required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "legacy/runtime-contract-v18.3.2.json", "core-boundary-contract.json"]
 required_policies = ["source-quality-policy.json", "source-acquisition-policy.json", "execution-reliability-policy.json", "context-acquisition-policy.json"]
-required_schemas = ["claim-source-fit.schema.json", "claim-evidence-weight.schema.json", "source-acquisition-result.schema.json", "source-gap.schema.json", "model-call.schema.json", "worker-lease.schema.json", "execution-reliability-gate.schema.json", "context-load-request.schema.json", "read-ledger.schema.json", "context-claim-gate.schema.json", "active-context-manifest.schema.json", "attachment-ledger.schema.json", "user-visible-delivery.schema.json", "run-mode-classification.schema.json", "manual-fallback-ledger.schema.json"]
+required_schemas = ["claim-source-fit.schema.json", "claim-evidence-weight.schema.json", "source-acquisition-result.schema.json", "source-gap.schema.json", "model-call.schema.json", "worker-lease.schema.json", "execution-reliability-gate.schema.json", "context-load-request.schema.json", "read-ledger.schema.json", "context-claim-gate.schema.json", "active-context-manifest.schema.json", "attachment-ledger.schema.json", "user-visible-delivery.schema.json", "run-mode-classification.schema.json", "manual-fallback-ledger.schema.json", "skill-result.schema.json"]
 for d in required_dirs:
     if not (root/d).is_dir(): errors.append(f"missing_dir:{d}")
 for s in required_scripts:

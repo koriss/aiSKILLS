@@ -11,7 +11,7 @@
     },
     "telegram": {
       "stub_delivery": true,
-      "external": false,
+      "external": true,
       "user_visible_delivery": true,
       "requires_provider_ack_id": true,
       "requires_attachment_id": true

@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted — implemented in v19.2.0 (`tools/agent_telegram/`, `_smoke_telegram_*`).
+Superseded for **delivery posture** by [ADR-015 — Compute vs delivery split](./ADR-015-compute-vs-delivery-split.md) (v19.3): user-visible Telegram delivery and proofing move to **OpenClaw gateway**; the skill stays compute-only with a stdout marker + `result-manifest.json`.
+
+Historically accepted — implemented in v19.2.0 (`tools/agent_telegram/`, `_smoke_telegram_*`) before the split.
 
 ## Context
 

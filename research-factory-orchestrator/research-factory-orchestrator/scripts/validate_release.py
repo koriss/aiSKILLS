@@ -30,8 +30,10 @@ REQUIRED_GATES: frozenset[str] = frozenset(
         "_smoke_pristine_run",
         "_smoke_rollback_creates_stubs",
         "_smoke_corrupt_render",
-        "smoke_telegram_v18",
-        "smoke_telegram_v19",
+        "smoke_artifact_execute_v19_3",
+        "validate_artifact_release",
+        "_smoke_v19_3_artifact_only",
+        "_smoke_v19_3_concurrency",
         "smoke_cli_v19",
         "failure_corpus",
         "validate_v19_fixture_suite",
@@ -51,8 +53,6 @@ REQUIRED_GATES: frozenset[str] = frozenset(
         "validate_advisory_fixture_suite",
         "validate_no_scaffolds_in_production",
         "validate_no_failed_validation_in_production",
-        "_smoke_telegram_agent_interface",
-        "_smoke_telegram_real_send",
     }
 )
 
@@ -266,58 +266,55 @@ def main() -> int:
     prb_st = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_rollback_creates_stubs.py")], env, 300)
     steps.append(_step_tail("_smoke_rollback_creates_stubs", prb_st))
 
-    pcr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_corrupt_render.py")], env, 300)
+    env_corrupt = {**env, "RFO_ALLOW_TMP_RUNS_ROOT": "1"}
+    pcr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_corrupt_render.py")], env_corrupt, 300)
     steps.append(_step_tail("_smoke_corrupt_render", pcr))
 
     core = str(ROOT / "scripts" / "rfo_runtime_core.py")
-    smoke_root_v18 = Path(tempfile.mkdtemp(prefix="rfo-release-smoke-v18-"))
-    env_v18 = {**env, "RFO_V19_PROFILE": "mvr"}
-    p3 = _run(
+    smoke_root_execute = Path(tempfile.mkdtemp(prefix="rfo-release-execute-v19-3-"))
+    env_ex = {**env, "RFO_V19_PROFILE": "mvr", "RFO_ALLOW_TMP_RUNS_ROOT": "1"}
+    pex = _run(
         py,
-        [py, "-S", core, "smoke", "--runs-root", str(smoke_root_v18), "--provider", "telegram", "--interface", "telegram"],
-        env_v18,
+        [
+            py,
+            "-S",
+            str(ROOT / "scripts" / "interface_runtime_adapter.py"),
+            "execute",
+            "--runs-root",
+            str(smoke_root_execute),
+            "--task",
+            "release_gate_artifact_execute_v19_3",
+        ],
+        env_ex,
         600,
     )
-    smoke_report_v18 = smoke_root_v18 / "smoke-test-report.json"
-    run_dir_v18 = _smoke_run_dir(smoke_root_v18)
+    run_dir_execute = _smoke_run_dir(smoke_root_execute)
     steps.append(
         _step_tail(
-            "smoke_telegram_v18",
-            p3,
-            {
-                "smoke_report_sha256": _sha256_file(smoke_report_v18) if smoke_report_v18.is_file() else "",
-                "smoke_run_dir": run_dir_v18,
-            },
+            "smoke_artifact_execute_v19_3",
+            pex,
+            {"smoke_run_dir": run_dir_execute},
         )
     )
+    p_art_val = _SP(1, "", "no_run_dir")
+    if run_dir_execute and Path(run_dir_execute).is_dir():
+        p_art_val = _run(
+            py,
+            [py, "-S", str(ROOT / "scripts" / "validate_artifact_release.py"), "--run-dir", run_dir_execute],
+            env,
+            120,
+        )
+    steps.append(_step_tail("validate_artifact_release", p_art_val, {"run_dir": run_dir_execute}))
 
-    smoke_root_v19 = Path(tempfile.mkdtemp(prefix="rfo-release-smoke-v19-"))
-    env_v19 = {**env, "RFO_V19_PROFILE": "mvr"}
-    p3b = _run(
-        py,
-        [py, "-S", core, "smoke", "--runs-root", str(smoke_root_v19), "--provider", "telegram", "--interface", "telegram"],
-        env_v19,
-        600,
-    )
-    smoke_report_v19 = smoke_root_v19 / "smoke-test-report.json"
-    run_dir_v19 = _smoke_run_dir(smoke_root_v19)
-    extra: dict[str, object] = {
-        "smoke_report_sha256": _sha256_file(smoke_report_v19) if smoke_report_v19.is_file() else "",
-        "smoke_run_dir": run_dir_v19,
-    }
-    eff_rc = p3b.returncode
-    if p3b.returncode == 0 and run_dir_v19:
-        ok, note = _v19_post_smoke_ok(run_dir_v19)
-        if not ok:
-            eff_rc = 1
-            extra["v19_closure_error"] = note
-    extra["rc_effective"] = eff_rc
-    row_v19 = _step_tail("smoke_telegram_v19", p3b, extra)
-    row_v19["rc"] = eff_rc
-    steps.append(row_v19)
+    pv19art = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_v19_3_artifact_only.py")], env, 300)
+    steps.append(_step_tail("_smoke_v19_3_artifact_only", pv19art))
+
+    env_conc = {**env, "RFO_ALLOW_TMP_RUNS_ROOT": "1"}
+    pv19conc = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_v19_3_concurrency.py")], env_conc, 1800)
+    steps.append(_step_tail("_smoke_v19_3_concurrency", pv19conc))
 
     smoke_root_cli = Path(tempfile.mkdtemp(prefix="rfo-release-smoke-cli-"))
-    env_cli = {**env, "RFO_V19_PROFILE": "mvr"}
+    env_cli = {**env, "RFO_V19_PROFILE": "mvr", "RFO_ALLOW_TMP_RUNS_ROOT": "1"}
     p_cli = _run(
         py,
         [py, "-S", core, "smoke", "--runs-root", str(smoke_root_cli), "--provider", "cli", "--interface", "direct_runtime"],
@@ -368,12 +365,6 @@ def main() -> int:
     padv = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_advisory_fixture_suite.py")], env, 120)
     steps.append(_step_tail("validate_advisory_fixture_suite", padv))
 
-    ptag = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_telegram_agent_interface.py")], env, 120)
-    steps.append(_step_tail("_smoke_telegram_agent_interface", ptag))
-
-    ptgr = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_telegram_real_send.py")], env, 600)
-    steps.append(_step_tail("_smoke_telegram_real_send", ptgr))
-
     pcov = _run(
         py,
         [py, "-S", str(ROOT / "scripts" / "validate_validator_coverage.py"), "--out", str(ROOT / "coverage-report.json")],
@@ -391,8 +382,8 @@ def main() -> int:
     prb = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_v19_release_bad_suite.py")], env, 120)
     steps.append(_step_tail("validate_v19_release_bad_suite", prb))
 
-    run_dir_nd = run_dir_v18 or run_dir_v19 or run_dir_cli
-    run_dir_prodish = run_dir_v19 or run_dir_cli or run_dir_nd
+    run_dir_nd = run_dir_execute or run_dir_cli
+    run_dir_prodish = run_dir_cli or run_dir_nd
     nd_rc = 1
     if run_dir_nd and Path(run_dir_nd).is_dir():
         p5 = _run(
@@ -466,9 +457,9 @@ def main() -> int:
     out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     # D1 skeleton (optional, never blocks release)
-    if run_dir_v18 and Path(run_dir_v18).is_dir():
-        pd = _run(py, [py, "-S", str(ROOT / "scripts" / "_diff_telegram_against_golden.py"), run_dir_v18], env, 60)
-        steps.append(_step_tail("_diff_telegram_against_golden", pd, {"run_dir": run_dir_v18}))
+    if run_dir_execute and Path(run_dir_execute).is_dir():
+        pd = _run(py, [py, "-S", str(ROOT / "scripts" / "_diff_telegram_against_golden.py"), run_dir_execute], env, 60)
+        steps.append(_step_tail("_diff_telegram_against_golden", pd, {"run_dir": run_dir_execute}))
 
     transcript["steps"] = steps
     transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
@@ -508,7 +499,7 @@ def main() -> int:
     failed = verdict != "READY"
 
     # cleanup temp smoke dirs (best effort)
-    for d in (smoke_root_v18, smoke_root_v19, smoke_root_cli):
+    for d in (smoke_root_execute, smoke_root_cli):
         try:
             shutil.rmtree(d, ignore_errors=True)
         except Exception:

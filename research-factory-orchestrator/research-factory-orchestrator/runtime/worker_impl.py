@@ -72,6 +72,23 @@ def cmd_run(a):
         )
     requested_mode = getattr(a, "mode", None) or "research"
     mode, normalized_from = _normalize_run_mode(requested_mode)
+    # v19.2.1 honesty hardening: persist the canonical skill_root, consent
+    # flags, and runs_root so the verifier can check whether this run was
+    # launched from the right place. ``skill_root()`` already resolves to
+    # ``Path(__file__).parent.parent`` for the worker module.
+    try:
+        sk_root = str(skill_root().resolve())
+    except Exception:
+        sk_root = ""
+    consent = {
+        "tmp_runs_root": os.environ.get("RFO_ALLOW_TMP_RUNS_ROOT") == "1",
+        "env_chat_id": os.environ.get("RFO_ALLOW_ENV_CHAT_ID") == "1",
+    }
+    runs_root_str = ""
+    try:
+        runs_root_str = str(Path(getattr(a, "runs_root", "")).resolve()) if getattr(a, "runs_root", None) else ""
+    except Exception:
+        runs_root_str = str(getattr(a, "runs_root", "") or "")
     run_payload = {
         "run_id": run_id,
         "job_id": job_id,
@@ -84,6 +101,11 @@ def cmd_run(a):
         "started_at": now(),
         "provider": a.provider,
         "interface": a.interface,
+        "skill_root": sk_root,
+        "runs_root": runs_root_str,
+        "consent": consent,
+        "rfo_allow_tmp_runs_root": consent["tmp_runs_root"],
+        "rfo_allow_env_chat_id": consent["env_chat_id"],
     }
     if normalized_from is not None:
         run_payload["normalized_from"] = normalized_from
@@ -96,6 +118,12 @@ def cmd_run(a):
             "command_id": cmd_id,
             "entrypoint": "scripts/run_research_factory.py",
             "entrypoint_version": VERSION,
+            "entrypoint_skill_root": sk_root,
+            "skill_root": sk_root,
+            "runs_root": runs_root_str,
+            "consent": consent,
+            "rfo_allow_tmp_runs_root": consent["tmp_runs_root"],
+            "rfo_allow_env_chat_id": consent["env_chat_id"],
             "not_plain_subagent": True,
             "not_skill_md_imitation": True,
         },

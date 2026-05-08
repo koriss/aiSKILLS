@@ -1,5 +1,16 @@
 # Changelog
 
+## 19.2.1 — 2026-05-07
+
+- Honesty hardening: canonical skill-path + runs-root guardrails with explicit
+  refusal stamps (`RFO-NON-CANONICAL-SKILL-PATH`, `RFO-RUNS-ROOT-FORBIDDEN`).
+- Telegram routing hardening: `chat_id` resolution `request -> argv -> env(consent) -> fail`
+  and explicit `delivery_not_proven` flow without silent `stub_only` fallback.
+- Verifier hardening: added lie classes for wrong skill path, wrong runs root,
+  delivery stub without consent, and narrative without evidence.
+- Smoke/repro wrappers: added `_smoke_v19_2_1_honesty.py`,
+  `_smoke_v19_2_1_repro_baseline.py`, `_smoke_v19_2_1_repro_after_fix.py`.
+
 ## 19.2.0 — 2026-05-02
 
 - Runtime truth restoration: v19 artifact emission, collection/coverage decoupling,

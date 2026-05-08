@@ -27,7 +27,9 @@ from _rfo_path_guard import (  # noqa: E402  - imported after sys.path fixup
 enforce_canonical_skill_path(__file__)
 enforce_runs_root_argv(sys.argv[1:])
 
-from runtime.cli import main  # noqa: E402
+from runtime.status import VERSION  # noqa: E402
+from runtime.util import now, jw      # noqa: E402
+from runtime.cli import main          # noqa: E402
 
 if __name__ == "__main__":
     raise SystemExit(main())

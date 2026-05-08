@@ -142,12 +142,9 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
                         "access_level": "primary_access",
                         "interest_alignment": "unknown",
                         "verification_mode": "raw_document",
-                        "citation_scope": "raw_document",
                         "independence": "unknown",
                         "citation_eligible": True,
                         "corroboration_type": "unknown",
-                        "fetch_method": "stdlib_http_head",
-                        "fetch_status_code": int(res.get("status_code") or 0),
                     }
                 )
             else:

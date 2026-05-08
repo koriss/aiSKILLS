@@ -11,6 +11,7 @@ from types import SimpleNamespace
 from runtime.profiles import resolve as _resolve_profile
 from runtime.render import allocate
 from runtime.status import VERSION
+from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
 from runtime.worker_impl import build_package, cmd_run
 
@@ -182,13 +183,14 @@ def cmd_execute(a) -> int:
         _write_final_answer(rd, task)
         jw(
             rd / "final-answer-gate.json",
-            {
-                "run_id": c["run_id"],
-                "passed": True,
-                "status": "artifact_ready_gateway_delivers",
-                "note": "v19.3: user-visible delivery is gateway-owned on native route; skill emits artifacts only.",
-                "generated_at": now(),
-            },
+            minimal_valid(
+                "final-answer-gate",
+                overrides={
+                    "run_id": c["run_id"],
+                    "passed": True,
+                    "status": "pass",
+                },
+            ),
         )
     except SystemExit as se:
         code = se.code

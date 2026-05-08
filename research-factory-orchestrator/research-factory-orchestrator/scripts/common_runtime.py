@@ -2,7 +2,7 @@
 from pathlib import Path
 import json, datetime, re, hashlib
 
-VERSION = "18.3.2-delivery-truth-smoke-runtime-contract-hotfix"
+VERSION = "19.3.0"
 STATES = ["created","compiled","collecting","subagents_running","subagent_timeout_detected","recovery_running","quorum_check","coverage_check","partial_ready","synthesis_ready","validating","delivery_ready","delivered","failed","cancelled"]
 AXES = ["entity_resolution","primary_origin_sources","broad_sweep","contrary_adversarial_search","source_quality_provenance","timeline_freshness","structured_data","claim_factcheck","strong_tie_pivoting","contact_media_graph","raw_evidence_vault","synthesis_merge"]
 SOURCE_FAMILIES = ["primary_or_origin","official_or_institutional","independent_media","registry_or_database","contrary_or_debunking","archive_or_cached"]

@@ -54,5 +54,5 @@ def main():
         errors.append(f'unknown delivery_status: {manifest.get("delivery_status")!r}')
     if errors:
         print('\n'.join(errors), file=sys.stderr); return 1
-    print('OK: job lifecycle validates v17.2 proof semantics'); return 0
+    print('OK: job lifecycle semantics validate'); return 0
 if __name__=='__main__': raise SystemExit(main())

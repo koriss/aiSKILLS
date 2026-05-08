@@ -15,7 +15,7 @@
 ## Iteration 2 (profile+hardening matrix)
 - Command: `python3 -S scripts/_smoke_v19_2_integration.py`
 - Result: `passed=true`
-- Covered checks: profile matrix (mvr/full-rigor/required), v18 leak guards, profile/registry alignment, subprocess timeout guard, contract/policy guards.
+- Covered checks: profile matrix (mvr/full-rigor/required), legacy-leak guards, profile/registry alignment, subprocess timeout guard, contract/policy guards.
 
 ## Iteration 3 (telegram delivery contract)
 - Command: `python3 -S scripts/_smoke_telegram_real_send.py`

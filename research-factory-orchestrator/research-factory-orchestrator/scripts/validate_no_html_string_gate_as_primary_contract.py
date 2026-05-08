@@ -20,6 +20,6 @@ def main():
         return emit('fail','F352', message='validation source-of-truth contract missing')
     core=(skill / "scripts" / "rfo_runtime_core.py").read_text(encoding="utf-8", errors="ignore")
     uses_html_heuristics='VALIDATION_GATE: PASSED' in core or "'Placeholder' in htmltxt" in core
-    return emit('warning' if uses_html_heuristics else 'pass','F352', html_heuristics_present=uses_html_heuristics, note='warning only in v18.3.2; refactor planned')
+    return emit('warning' if uses_html_heuristics else 'pass','F352', html_heuristics_present=uses_html_heuristics, note='warning only; html heuristics should not be primary contract')
 if __name__=='__main__': raise SystemExit(main())
 

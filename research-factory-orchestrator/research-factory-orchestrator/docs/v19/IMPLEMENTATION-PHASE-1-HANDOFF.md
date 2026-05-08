@@ -2,7 +2,7 @@
 
 **Prerequisite:** design sign-off using `DESIGN-REVIEW.md`.
 
-**Parallel:** complete v18.7 (production-mode + `validate_logical_consistency.py`) independently; do not block on v19.
+**Parallel:** complete production-mode logical-consistency track independently; do not block on v19.
 
 ## Phase 1 scope (recommended order)
 
@@ -26,7 +26,7 @@
 
 - All fixtures green/red as expected against six validators.
 - MVR profile run completes on reference run-dir in <N seconds (set budget during impl).
-- Release proof uses deduped `run_id` rules + version alignment (carry forward v18.5.1 fixes).
+- Release proof uses deduped `run_id` rules + version alignment.
 
 ## Recommended hardening (after research — see D15)
 

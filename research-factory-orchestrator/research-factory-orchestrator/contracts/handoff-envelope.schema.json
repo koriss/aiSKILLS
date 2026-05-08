@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://research-factory-orchestrator.local/schemas/handoff-envelope.schema.json",
-  "title": "RFO phase handoff envelope (v18.5)",
+  "title": "RFO phase handoff envelope (v19)",
   "type": "object",
   "required": [
     "from_phase",

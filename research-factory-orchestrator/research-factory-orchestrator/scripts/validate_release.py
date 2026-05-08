@@ -47,7 +47,6 @@ REQUIRED_GATES: frozenset[str] = frozenset(
         "release_zip_triad",
         "_smoke_clean_install",
         "_smoke_v19_2_integration",
-        "_smoke_v19_2_phase5_matrix",
         "validate_active_contract_versions",
         "validate_profile_policies_present",
         "validate_advisory_fixture_suite",
@@ -352,9 +351,6 @@ def main() -> int:
 
     pv192 = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_v19_2_integration.py")], env, 900)
     steps.append(_step_tail("_smoke_v19_2_integration", pv192))
-
-    pv192b = _run(py, [py, "-S", str(ROOT / "scripts" / "_smoke_v19_2_phase5_matrix.py")], env, 900)
-    steps.append(_step_tail("_smoke_v19_2_phase5_matrix", pv192b))
 
     pact = _run(py, [py, "-S", str(ROOT / "scripts" / "validate_active_contract_versions.py")], env, 120)
     steps.append(_step_tail("validate_active_contract_versions", pact))

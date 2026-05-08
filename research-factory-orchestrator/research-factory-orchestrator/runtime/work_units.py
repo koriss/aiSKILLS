@@ -56,8 +56,6 @@ WU_TERMINAL = tuple(sorted(WUStatus.TERMINAL))
 
 def _emit(rd: Path, name: str, payload: dict) -> None:
     jl(rd / "observability-events.jsonl", {"event_name": name, **payload})
-    if os.environ.get("RFO_LEGACY_EVENT_NAMES") == "1":
-        jl(rd / "observability-events.jsonl", {"event_name": "v18." + name, **payload, "legacy_alias": True})
 
 
 def _wu_evidence(rd: Path, wu: dict, sources_collected: int, status: str, started_at: str, completed_at: str) -> Path:

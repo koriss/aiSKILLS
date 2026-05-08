@@ -41,5 +41,5 @@ def main():
         if final.get("passed") is not True: errors.append("real delivered requires final-answer-gate.passed=true")
     if errors:
         print("\n".join(errors), file=sys.stderr); return 1
-    print("OK: v17.2 gate semantics validate"); return 0
+    print("OK: gate semantics validate"); return 0
 if __name__ == "__main__": raise SystemExit(main())

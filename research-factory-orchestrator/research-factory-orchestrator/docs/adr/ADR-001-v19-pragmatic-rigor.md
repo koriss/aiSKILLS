@@ -6,7 +6,7 @@ Accepted (design phase) — 2026-05-02
 
 ## Context
 
-- v18.5.1 fixed critical delivery/validation truth gaps but the skill remains **ceremony-heavy** (2255-line SKILL, 189 validators, 16 active in DAG, ~150 orphan).
+- Legacy releases fixed critical delivery/validation truth gaps but the skill remains **ceremony-heavy** (2255-line SKILL, 189 validators, 16 active in DAG, ~150 orphan).
 - Sacred Path (Source → Evidence → Claim) is declared but not uniformly fail-closed.
 - `propaganda-io` KB is large (~18MB) and risks being mistaken for **evidence** rather than **reference**.
 - Contradiction matrix documentation/schema is largely a stub.
@@ -57,7 +57,7 @@ See [D9 ci-vs-runtime](../v19/ci-vs-runtime.md).
 ## Consequences
 
 - Large migration / collapse of SKILL + validator DAG in implementation phase.
-- v18.7 logical-consistency track remains independent hotfix until merged.
+- The logical-consistency track remains independent hotfix until merged.
 
 ## References
 

@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse, re, sys, json
 CURRENT_VERSION='12.0.0-report-delivery-system'
 PROTECTED_PREFIXES=('scripts/validate_', 'scripts/security_', 'kb/propaganda-io/_raw/')
-STALE_TOKENS=['v4-strict','v5-full-html-report','v6-enforced','v7-proof','v8-identity-package','v9-exhaustive-osint','v10-durable-fusion','v11-self-contained-kb']
+STALE_TOKENS=['v4-strict','v5-full-html-report','v6-enforced','v7-proof','v8-identity-package','v9-exhaustive-osint','v10-durable-fusion','v11-self-contained-kb',*[f"v{i}" for i in range(12,19)]]
 def read(p): return p.read_text(encoding='utf-8',errors='replace')
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--skill-dir',default=str(Path(__file__).resolve().parents[1])); ap.add_argument('--json-out'); args=ap.parse_args()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read validation-transcript.json and exit 0 iff validation passed (v18 legacy or v19)."""
+"""Read validation-transcript.json and exit 0 iff validation passed (v19)."""
 from __future__ import annotations
 
 import argparse

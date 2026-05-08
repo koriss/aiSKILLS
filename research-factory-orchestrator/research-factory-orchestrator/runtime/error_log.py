@@ -1,6 +1,6 @@
-"""Structured error log for runtime failures (RFO v19.2.0).
+"""Structured error log for runtime failures (RFO v19.3.0).
 
-Closes runtime feedback hole observed in v18.5.1 cycle: ``.errors.log`` was
+Closes runtime feedback hole observed in an earlier cycle: ``.errors.log`` was
 629 bytes for 10 RFO runs and missed every meaningful failure (delivery
 stub_only, fetch errors, validation failures). This module appends one JSON
 event per error/warning to ``runtime/errors.jsonl`` so validate_error_log_quality

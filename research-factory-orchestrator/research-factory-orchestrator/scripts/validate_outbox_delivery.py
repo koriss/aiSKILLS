@@ -37,5 +37,5 @@ def main():
         if fg.get("delivery_status") == "delivered" and fg.get("passed") is not True: errors.append("real final-answer-gate not passed")
     if errors:
         print("\n".join(errors), file=sys.stderr); return 1
-    print("OK: outbox delivery validates v17.2 proof semantics"); return 0
+    print("OK: outbox delivery semantics validate"); return 0
 if __name__ == "__main__": raise SystemExit(main())

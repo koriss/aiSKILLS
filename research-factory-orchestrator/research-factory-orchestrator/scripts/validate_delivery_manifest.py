@@ -37,5 +37,5 @@ def main():
         if provider_gate != "pass" or external_gate != "pass" or final_gate != "pass": errors.append("delivered requires provider/external/final gates pass")
     if errors:
         print("\n".join(errors), file=sys.stderr); return 1
-    print("OK: delivery manifest validates v17.2 proof semantics"); return 0
+    print("OK: delivery manifest semantics validate"); return 0
 if __name__ == "__main__": raise SystemExit(main())

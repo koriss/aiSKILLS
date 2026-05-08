@@ -13,7 +13,7 @@ This directory contains **design-only** artifacts for v19. No changes to active 
 | D5 | [contradiction-matrix-levels.md](./contradiction-matrix-levels.md) | L0/L1/L2, neutral rubric, scan metadata |
 | D6 | [delivery-truth-core.md](./delivery-truth-core.md) | V6 minimal invariants, stub vs external split |
 | D7 | [schemas-core.md](./schemas-core.md) | Core schema selection + link to strict drafts |
-| D8 | [migration-map.md](./migration-map.md) | v18 → v19 mapping (16 DAG + 34 registry) |
+| D8 | [migration-map.md](./migration-map.md) | pre-v19 -> v19 mapping (16 DAG + 34 registry) |
 | D9 | [ci-vs-runtime.md](./ci-vs-runtime.md) | Boundary, no `jq` in runtime |
 | D10 | [failure-fixtures.md](./failure-fixtures.md) | Bad/good fixture plan before validators |
 | D11 | [status-vocabulary.md](./status-vocabulary.md) | Frozen enums and status caps |
@@ -34,5 +34,5 @@ This directory contains **design-only** artifacts for v19. No changes to active 
 
 ## Parallel tracks
 
-- **v18.7**: production-mode + logical consistency validator (separate plan).
+- **legacy hardening track**: production-mode + logical consistency validator (separate plan).
 - **v19 implementation**: starts after design sign-off.

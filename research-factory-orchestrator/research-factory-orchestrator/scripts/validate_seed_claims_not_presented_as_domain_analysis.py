@@ -17,7 +17,7 @@ def main():
     root=Path(sys.argv[1]) if len(sys.argv)>1 else Path('.')
     claims=load_json(root/'claims/claims-registry.json', {}) or {}
     cs=claims.get('claims', []) if isinstance(claims, dict) else []
-    seed_only=cs and all(str(c.get('origin','')).startswith('v18_seed') or c.get('source_ids')==['SRC-SEED-001'] for c in cs)
+    seed_only=cs and all(str(c.get('origin','')).startswith('seed') or c.get('source_ids')==['SRC-SEED-001'] for c in cs)
     gate=load_json(root/'final-answer-gate.json', {}) or {}
     if seed_only and gate.get('passed') is True:
         return emit('fail','F312', message='seed-only claims cannot pass as domain analysis')

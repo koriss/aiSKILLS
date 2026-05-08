@@ -1,7 +1,7 @@
 {
   "task_id": "{{TASK_ID}}",
   "item_id": "{{ITEM_ID}}",
-  "pipeline_version": "v12-report-delivery-system",
+  "pipeline_version": "19.3.0",
   "stage_count_required": 21,
   "stage_count_completed": 0,
   "artifacts": [],

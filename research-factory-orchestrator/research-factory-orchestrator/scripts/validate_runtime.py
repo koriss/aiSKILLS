@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the CURRENT v18 runtime skeleton produced by scripts/init_runtime.py.
-
-This validator intentionally does not validate the legacy items/_template/* layout.
-Use --legacy only when validating archived pre-v18 skeletons.
-"""
+"""Validate the current v19 runtime skeleton produced by scripts/init_runtime.py."""
 from pathlib import Path
 import argparse, json, sys
 
@@ -19,15 +15,6 @@ CURRENT_REQUIRED = [
     "interface/interface-request.json", "interface/normalized-command.json", "jobs/runtime-job.json", "outbox/outbox-policy.json",
 ]
 CURRENT_REQUIRED_DIRS = ["work-units", "subagents", "ledgers", "claims", "evidence", "raw-evidence", "report", "chat", "outbox", "delivery-acks", "provider-payloads"]
-LEGACY_REQUIRED = [
-    "runtime-contract.json", "runtime-state.json", "queue.json", "artifact-manifest.json", "tool-registry.json",
-    "tool-permissions.json", "stage-records.json", "task-ledger.md", "progress-ledger.md",
-    "items/_template/search-strategy.md", "items/_template/sources.json", "items/_template/source-quality.json", "items/_template/source-snapshots.json", "items/_template/contradiction-matrix.json",
-    "items/_template/evidence-cards.json", "items/_template/evidence-map.json", "items/_template/claims-registry.json",
-    "items/_template/fact-check.html", "items/_template/citation-locator.html", "items/_template/adversarial-review.json",
-    "items/_template/error-audit.json", "items/_template/final-answer-gate.json", "items/_template/chat-summary.json", "items/_template/html-report-delivery.json", "items/_template/full-report.html",
-    "items/_template/final.html",
-]
 
 def check_json(path: Path, errors):
     try:
@@ -59,24 +46,13 @@ def validate_current(root: Path):
                 pass
     return errors
 
-def validate_legacy(root: Path):
-    errors=[]
-    for rel in LEGACY_REQUIRED:
-        p=root/rel
-        if not p.exists() or p.stat().st_size == 0:
-            errors.append({"path": rel, "error": "missing_or_empty_legacy"})
-        elif rel.endswith(".json"):
-            check_json(p, errors)
-    return errors
-
 def main():
     ap=argparse.ArgumentParser(description="Validate RFO runtime artifacts.")
     ap.add_argument("project_dir")
-    ap.add_argument("--profile", choices=["current", "legacy"], default="current")
     args=ap.parse_args()
     root=Path(args.project_dir)
-    errors = validate_current(root) if args.profile == "current" else validate_legacy(root)
-    result={"status":"pass" if not errors else "fail", "profile":args.profile, "project_dir":str(root), "errors":errors}
+    errors = validate_current(root)
+    result={"status":"pass" if not errors else "fail", "profile":"current", "project_dir":str(root), "errors":errors}
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if not errors else 1
 if __name__=="__main__":

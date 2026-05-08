@@ -4,7 +4,7 @@ These items come from post-design research. They **do not** add a seventh core v
 
 ## 1. Release provenance (zip triad)
 
-For each release zip (e.g. v18.7 GA, v19 phase 1):
+For each release zip (e.g. v19 phase 1):
 
 - `*.zip`
 - `*.zip.sha256`

@@ -6,6 +6,9 @@ def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--skill-dir',default=str(Path(__file__).resolve().parents[1])); ap.add_argument('--json-out'); args=ap.parse_args()
     root=Path(args.skill_dir); errors=[]
     for p in root.rglob('*'):
+        rel = p.relative_to(root)
+        if rel.parts and rel.parts[0] == '.venv':
+            continue
         if p.is_symlink(): errors.append(f'symlink found: {p.relative_to(root)}')
         if not p.is_file() or p.suffix not in ['.md','.py','.json','.txt','.html','.yml','.yaml']: continue
         rel=str(p.relative_to(root))

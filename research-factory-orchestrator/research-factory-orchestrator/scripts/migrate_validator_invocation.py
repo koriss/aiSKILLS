@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit JSON mapping legacy validator ids to v19 core runner (no mass-rewrite)."""
+"""Emit JSON mapping validator ids to v19 core runner (no mass-rewrite)."""
 from __future__ import annotations
 
 import argparse
@@ -17,7 +17,7 @@ LEGACY_TO_V19 = {
     "validate_claim_status": {"v19": "validate_claim_status", "via": "scripts/run_core_validators.py"},
     "validate_final_answer": {"v19": "validate_final_answer", "via": "scripts/run_core_validators.py"},
     "validate_delivery_truth": {"v19": "validate_delivery_truth", "via": "scripts/run_core_validators.py"},
-    "validate_logical_consistency": {"v19": None, "via": "scripts/validate_logical_consistency.py", "note": "v18.7 LC gate; not folded into V1–V6"},
+    "validate_logical_consistency": {"v19": None, "via": "scripts/validate_logical_consistency.py", "note": "LC gate; parallel to V1–V6"},
 }
 
 
@@ -30,7 +30,7 @@ def main() -> int:
     rows = []
     for v in reg.get("validators") or []:
         vid = v.get("id") or ""
-        rows.append({"id": vid, "path": v.get("path"), "migration": LEGACY_TO_V19.get(vid, {"v19": None, "via": "legacy_dag", "note": "run via runtime/validate_impl.py DAG"})})
+        rows.append({"id": vid, "path": v.get("path"), "migration": LEGACY_TO_V19.get(vid, {"v19": None, "via": "validator_dag", "note": "run via runtime/validate_impl.py DAG"})})
     out = {"schema_version": "v19.0", "validators": rows, "runner_profiles": ["mvr", "full-rigor", "propaganda-io", "book-verification"]}
     text = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
     if args.output:

@@ -1,4 +1,4 @@
-# D8 — Migration map (v18.5.1 → v19)
+# D8 — Migration map (pre-v19 -> v19)
 
 ## Scope policy (design phase)
 
@@ -11,7 +11,7 @@
 
 ## Six core validators — absorption map (17 DAG)
 
-| v18.5.1 DAG validator | v19 core | Rationale |
+| Legacy DAG validator | v19 core | Rationale |
 |----------------------|----------|-----------|
 | `validate_schema_field_coverage` | **V1** | Schema / field coverage gate |
 | `validate_skill_markdown_injection` | **V1** | Structural / injection safety |
@@ -78,7 +78,7 @@ All registry ids from `contracts/validator-registry.json` v19.0.1:
 | `validate_quote_supports_claim` | core (V2) |
 | `validate_no_delivery_after_validation_fail` | core (V6) |
 | `validate_no_local_paths_in_chat` | core (V6) |
-| `validate_logical_consistency` | **post_validation** (v18.7 LC01–LC16; not part of V1–V6 core chain) |
+| `validate_logical_consistency` | **post_validation** (LC01–LC16; not part of V1–V6 core chain) |
 
 > Note: registry version `19.0.1` lists **35** validators (includes `validate_logical_consistency`).
 

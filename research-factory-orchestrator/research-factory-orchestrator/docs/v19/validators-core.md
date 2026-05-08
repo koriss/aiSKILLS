@@ -125,7 +125,7 @@ Examples of **blocking**: `new_fact_without_claim_id`, `absolute_statement_witho
 
 ## V6 — `validate_delivery_truth`
 
-**Purpose:** Minimal **operational safety** (v18.5.1 lessons preserved).
+**Purpose:** Minimal **operational safety** (legacy lessons preserved).
 
 **Split claims (mandatory fields in manifest — see D6):**
 

@@ -1,60 +1,48 @@
 # Research Factory Orchestrator — v19 core operator sheet
 
-**Version:** `19.2.0` · **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md` · **Runtime truth:** `docs/adr/ADR-015-runtime-truth-restoration.md` · **Telegram operator plane:** `docs/adr/ADR-014-telegram-operator-control-plane.md` · **Multi-agent / replay:** `docs/adr/ADR-012-multi-agent-verification.md`, `docs/adr/ADR-013-replayable-evidence.md` · **Lenses:** `docs/adr/ADR-009-architectural-lenses.md` · **Root patterns:** `docs/adr/ADR-010-root-patterns.md` · **Release transcript policy:** `docs/adr/ADR-011-release-validation-transcript.md` · **Handoff:** `docs/v19/IMPLEMENTATION-PHASE-1-HANDOFF.md` · **Release notes:** `docs/release-notes/v19.2.md` (current), `docs/release-notes/v19.1.md`, `docs/release-notes/v19.0.4.md` (prior) · **Legacy full overlay:** `SKILL.md` (v18.x retained)
-
-**Deprecation:** subagent / durable work-unit / shard-ledger flows remain **legacy-only** (see `SKILL.md`, `references/work-unit-contract.md`). The v19 **core path** is profiles + V1–V6 + `run_core_validators.py`; do not mix undocumented subagent overrides with `RFO_V19_PROFILE` runs.
+**Version:** `19.3`  
+**ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md`  
+**Runtime truth:** `docs/adr/ADR-015-runtime-truth-restoration.md`
 
 ## Role
 
-OpenClaw skill: orchestrate research runs, gate delivery truth, and emit audit-ready artifacts. v19 adds **six core validators** (V1–V6) behind `scripts/run_core_validators.py` and frozen schemas under `schemas/core/`.
+OpenClaw skill for research orchestration with artifact-first compute, profile-driven validation, and delivery truth gating.
 
-## Eight-phase pipeline (conceptual)
+## Eight-phase pipeline
 
-1. **Intake** — task envelope, mode (`research` / `production` / `smoke`), provider caps.  
-2. **Context** — bounded context packets; no ambient override of SKILL/runtime contracts.  
-3. **Acquisition** — sources brokered per policy; KB usage explicit per profile.  
-4. **Synthesis** — claims registry + evidence cards; sacred path **claim → evidence → source**.  
-5. **Contradiction / scan** — L0–L2 per profile; `unknown` under **full-rigor** blocks pass.  
-6. **Final answer** — `final-answer-gate.json` with `overconfidence_risk` blocking codes (see D4).  
-7. **Validation** — legacy DAG **or** v19 core: set `RFO_V19_PROFILE` to `mvr` | `full-rigor` | `propaganda-io` | `book-verification` to run V1→V6 instead of the v18 DAG.  
-8. **Delivery** — delivery-manifest truth split: artifact-ready vs external delivery; fail-closed rollback on validation fail (v18.5.1 preserved).
+1. Intake
+2. Context
+3. Acquisition
+4. Synthesis
+5. Contradiction scan
+6. Final answer gate
+7. Validation
+8. Delivery
 
 ## Sacred path
 
-Every factual claim must trace through **primary_support** / **corroboration** roles in `claims-registry.support_set` to an evidence card with **non-empty `source_ids`** resolving to `sources.json`. Snippet/lead roles cannot justify `confirmed_fact`.
+Every factual claim must trace through claim -> evidence -> source with explicit ids.
 
-## Status vocabulary (caps)
+## V1–V6
 
-`forecast` → max `forecast_scenario`; `geopolitical_intent_assessment` → max `inferred_assessment`; social-only or raw visual cannot back `confirmed_fact`. Profiles tighten **blocking_rules** and **claim_type_policies** (see `validation-profiles/*.json`).
+- V1 `validate_artifact_schema`: artifacts parse and satisfy v19 schema.
+- V2 `validate_traceability`: sacred path consistency.
+- V3 `validate_source_quality`: source role and independence constraints.
+- V4 `validate_claim_status`: claim status, caps, contradiction guards.
+- V5 `validate_final_answer`: risk blocks and final gate semantics.
+- V6 `validate_delivery_truth`: artifact/delivery consistency and no fake delivery.
 
-## V1–V6 (one line each)
+## Profiles
 
-| Id | Role |
-|----|------|
-| V1 `validate_artifact_schema` | Core JSON artifacts present, parseable, `schema_version` **v19.0**. |
-| V2 `validate_traceability` | Sacred path; evidence must list sources; graph consistent. |
-| V3 `validate_source_quality` | Independence via `canonical_origin_id`; KB ids not counted as factual evidence; optional `source-policy.json` per-host advisory (`SOURCE-POLICY-UNKNOWN`). |
-| V4 `validate_claim_status` | Status caps + lite contradictions when required + L0 unknown under full profile. |
-| V5 `validate_final_answer` | `overconfidence_risk.blocking` / `warnings` / `signals` from final gate; **EXTERNAL-INSTRUCTION-SIGNAL** on evidence excerpts (advisory by default). |
-| V6 `validate_delivery_truth` | Manifest vs hashes; CLI ⇒ no real external delivery; path-leak checks. |
+- `mvr`
+- `full-rigor`
+- `propaganda-io`
+- `book-verification`
 
-## Profile pick
+Run:
 
-- **`mvr`** — default minimal rigor, fast gate.  
-- **`full-rigor`** — stricter contradiction + L0 unknown blocks.  
-- **`propaganda-io`** — IO laundering checks; `kb_match_is_evidence: false` enforced in profile JSON.  
-- **`book-verification`** — book-grade corroboration thresholds.
+`python -S scripts/run_core_validators.py --run-dir <run_dir> --profile mvr`
 
-Run: `python -S scripts/run_core_validators.py --run-dir <run_dir> --profile mvr`. CI pass check: `python -S scripts/check_validation_pass.py --run-dir <run_dir>`.
+## Logical consistency (LC01–LC16)
 
-## v18.7 logical consistency (parallel)
-
-`scripts/validate_logical_consistency.py` remains in **release** and **failure corpus** paths (LC01–LC16). Not replaced by V1–V6.
-
-## Migration
-
-`python -S scripts/migrate_validator_invocation.py` prints (or `-o file`) legacy registry id → v19 runner mapping. **`failure-corpus/index-v19.json`** lists overlays + v19 fixture roots.
-
-## Compatibility
-
-Full historical SKILL text lives in **`SKILL.md`** only (overlay duplicate removed in v19.0.2). Runtime version: `runtime/version.json` (see `v19.0.4` / `v19.0.3` release notes for closure + boundary gates).
+`scripts/validate_logical_consistency.py` remains an explicit parallel gate for release/failure-corpus workflows.

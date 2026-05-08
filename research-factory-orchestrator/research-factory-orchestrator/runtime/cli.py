@@ -1,4 +1,4 @@
-"""CLI entrypoint for RFO v18 runtime (subcommands: adapter, run, worker, outbox, validate, smoke, failure)."""
+"""CLI entrypoint for RFO v19 runtime (adapter, execute, run, worker, outbox, validate, smoke, failure)."""
 from __future__ import annotations
 
 import argparse

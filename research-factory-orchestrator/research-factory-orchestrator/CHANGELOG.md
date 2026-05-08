@@ -8,8 +8,8 @@
   and explicit `delivery_not_proven` flow without silent `stub_only` fallback.
 - Verifier hardening: added lie classes for wrong skill path, wrong runs root,
   delivery stub without consent, and narrative without evidence.
-- Smoke/repro wrappers: added `_smoke_v19_2_1_honesty.py`,
-  `_smoke_v19_2_1_repro_baseline.py`, `_smoke_v19_2_1_repro_after_fix.py`.
+- Smoke/repro wrappers: added `_smoke_v19_2_1_honesty.py` and
+  `_smoke_v19_2_1_repro_baseline.py` (legacy repro scripts retired in v19-only cleanup).
 
 ## 19.2.0 — 2026-05-02
 

@@ -61,7 +61,7 @@ These are **profile-gated** and may ship under `heavy/` in implementation; they 
 
 ## Registry note
 
-`contracts/validator-registry.json` (v18.5.1) contains **34** curated validators for CI / selective DAG — all receive a v19 destination in [migration-map.md](./migration-map.md).
+`contracts/validator-registry.json` contains curated validators for CI / selective DAG — all receive a v19 destination in [migration-map.md](./migration-map.md).
 
 ## Draft files
 

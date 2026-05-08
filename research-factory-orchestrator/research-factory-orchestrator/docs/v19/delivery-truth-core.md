@@ -20,7 +20,7 @@ Manifest and gate MUST distinguish:
 ## Minimum checks (V6)
 
 1. **file_exists:** every artifact path in manifest exists on disk (or declared remote fetch succeeded — policy TBD).
-2. **artifact_hash:** hashes match entries; strengthen beyond naive ACK string match (v18.5.0 lesson).
+2. **artifact_hash:** hashes match entries; strengthen beyond naive ACK string match.
 3. **provider_ack_or_explicit_stub:** ACK id present **or** `stub_delivery=true` with disclosure and `real_external_delivery=false`.
 4. **ack_namespace:** matches provider (`cli:` local synthetic, `tg:msg:` telegram, `webhook:` …).
 5. **provider_capability_snapshot:** frozen view of provider capabilities at validation time; `cli` ⇒ `real_external_delivery=false` **always**.
@@ -38,5 +38,5 @@ Manifest and gate MUST distinguish:
 
 Not strictly V6-only but **must** appear in release validation:
 
-- No duplicate `run_id` posing as distinct steps (v18.5.1 dedupe lesson).
+- No duplicate `run_id` posing as distinct steps.
 - Version drift: all proof `run.json` / `runtime-status.json` versions match release tag.

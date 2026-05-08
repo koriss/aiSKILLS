@@ -45,5 +45,5 @@ def main():
         errors.append(f"delivery_status is not terminal delivered/stub_delivered: {manifest.get('delivery_status')}")
     if errors:
         print("\n".join(errors), file=sys.stderr); return 1
-    print("OK: delivery manifest has ACK proof and v17.2 gate semantics"); return 0
+    print("OK: delivery manifest has ACK proof and gate semantics"); return 0
 if __name__ == "__main__": raise SystemExit(main())

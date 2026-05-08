@@ -1,6 +1,6 @@
 {
   "created_at": "2026-04-28T00:14:20Z",
-  "version": "v12-prep",
+  "version": "19.3.0",
   "archetypes": [
     {
       "id": "entity_profile",

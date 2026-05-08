@@ -14,7 +14,7 @@ Use this checklist before declaring design phase **complete**.
 - [ ] V1+V2+V3+V4+V5 together cover: artifacts exist → chain complete → thresholds → final text mapping.
 - [ ] [`sacred-path-contract.md`](./sacred-path-contract.md) matches `validators-core.md` and profile copies of the six-validator list.
 
-## Truth-gate preservation (v18.5.1)
+## Truth-gate preservation
 
 - [ ] V6 explicitly encodes: stub ≠ external, fail-closed rollback expectations, expanded path leak scan beyond chat txt only.
 - [ ] No regression of CLI external delivery false positives called out in ADR-001.

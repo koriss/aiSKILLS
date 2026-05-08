@@ -54,7 +54,6 @@
     {"id": "validate_outbox_finalization", "path": "scripts/validate_outbox_finalization.py", "phase": "post_validation"},
     {"id": "validate_root_vs_zip_artifact_truth", "path": "scripts/validate_root_vs_zip_artifact_truth.py", "phase": "post_validation"},
     {"id": "validate_collection_coverage_decoupled", "path": "scripts/validate_collection_coverage_decoupled.py", "phase": "post_validation"},
-    {"id": "validate_v18_legacy_compat", "path": "scripts/validate_v18_legacy_compat.py", "phase": "post_validation"},
     {"id": "validate_subprocess_timeouts", "path": "scripts/validate_subprocess_timeouts.py", "phase": "l0"},
     {"id": "validate_profile_validator_alignment", "path": "scripts/validate_profile_validator_alignment.py", "phase": "l0"}
   ]

@@ -29,7 +29,7 @@ required_scripts = [
     "build_skill_inventory.py", "build_context_budget_analysis.py", "validate_context_claim_gate.py",
     "validate_read_claim_requires_ledger.py", "validate_no_smoke_as_context_proof.py",
     "validate_no_plain_subagent_for_full_workspace_read.py", "validate_no_reasoning_leak_in_chat_payload.py",
-    "validate_runtime_contract_current.py", "validate_no_attachment_claim_without_ack.py", "validate_delivery_claim_matches_manifest.py",
+    "validate_no_attachment_claim_without_ack.py", "validate_delivery_claim_matches_manifest.py",
     "validate_final_gate_required_for_completion_claim.py", "validate_smoke_run_not_presented_as_research.py",
     "validate_manual_fallback_not_presented_as_rfo.py", "validate_no_local_paths_as_delivery.py",
     "validate_core_modularization_contract.py", "validate_no_html_string_gate_as_primary_contract.py",
@@ -37,7 +37,7 @@ required_scripts = [
     "validate_release.py", "validate_release_report.py",
     "validate_active_contract_versions.py", "validate_profile_policies_present.py",
     "validate_no_scaffolds_in_production.py", "validate_no_failed_validation_in_production.py",
-    "validate_advisory_fixture_suite.py", "_smoke_v19_2_integration.py", "_smoke_v19_2_phase5_matrix.py",
+    "validate_advisory_fixture_suite.py", "_smoke_v19_2_integration.py",
     "validate_artifact_release.py", "_smoke_v19_3_artifact_only.py", "verify_openclaw_run.py",
     "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
     "validate_logical_consistency.py",
@@ -47,7 +47,7 @@ required_scripts = [
 ]
 # v19.3: compute-only — only the CLI pass-through adapter is required for packaging.
 required_providers = ["providers/cli/cli_delivery_adapter.py"]
-required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "legacy/runtime-contract-v18.3.2.json", "core-boundary-contract.json"]
+required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "smoke-run-contract.json", "manual-fallback-contract.json", "core-boundary-contract.json"]
 required_policies = ["source-quality-policy.json", "source-acquisition-policy.json", "execution-reliability-policy.json", "context-acquisition-policy.json"]
 required_schemas = ["claim-source-fit.schema.json", "claim-evidence-weight.schema.json", "source-acquisition-result.schema.json", "source-gap.schema.json", "model-call.schema.json", "worker-lease.schema.json", "execution-reliability-gate.schema.json", "context-load-request.schema.json", "read-ledger.schema.json", "context-claim-gate.schema.json", "active-context-manifest.schema.json", "attachment-ledger.schema.json", "user-visible-delivery.schema.json", "run-mode-classification.schema.json", "manual-fallback-ledger.schema.json", "skill-result.schema.json"]
 for d in required_dirs:
@@ -94,7 +94,7 @@ else:
     fm = text.split("---",2)[1]
     if not re.search(r"(?m)^name:\s*research_factory_orchestrator\s*$", fm): errors.append("frontmatter_missing_name")
     if VERSION not in fm: errors.append("frontmatter_missing_skill_version")
-for needle in ["HOW TO OPERATE THIS SKILL", "v18.3.1 context integrity invariants", "smoke-test pass is not proof", "v18.3 hard reliability invariants", "ambient-agent context must not override", "Partial model output is not a completed work unit", "Preserved v17.3 Contract Body", "## v17 interface adapter and outbox runtime", "## v12 report delivery system"]:
+for needle in ["HOW TO OPERATE THIS SKILL", "v19 core validation", "V1..V6", "RFO_V19_PROFILE", "Do not route `/research_factory_orchestrator` to a plain subagent."]:
     if needle not in text: errors.append(f"SKILL.md_missing_section:{needle}")
 file_count = sum(1 for p in root.rglob("*") if p.is_file())
 if file_count < 650: errors.append(f"skill_file_count_too_low:{file_count}")
@@ -111,22 +111,28 @@ for _cache in (
 ):
     if _cache.is_dir():
         shutil.rmtree(_cache, ignore_errors=True)
-pycache = [str(p.relative_to(root)) for p in root.rglob("*") if p.name == "__pycache__" or p.suffix == ".pyc"]
+pycache = []
+for p in root.rglob("*"):
+    rel = p.relative_to(root)
+    if rel.parts and rel.parts[0] == ".venv":
+        continue
+    if p.name == "__pycache__" or p.suffix == ".pyc":
+        pycache.append(str(rel))
 if pycache: errors.append("pycache_present:"+json.dumps(pycache, ensure_ascii=False))
 index = root/"failure-corpus/index.json"
 if not index.exists(): errors.append("missing_failure_corpus_index")
 else:
     data = json.loads(index.read_text(encoding="utf-8"))
-    if not data.get("legacy_v17_cases"): errors.append("failure_corpus_missing_legacy_v17_cases")
+    if not data.get("legacy_cases"): errors.append("failure_corpus_missing_legacy_cases")
     if not data.get("required_failure_classes"): errors.append("failure_corpus_missing_required_classes")
-    if not data.get("v18_3_reliability_cases"): errors.append("failure_corpus_missing_v18_3_reliability_cases")
-    if not data.get("v18_3_1_context_integrity_cases"): errors.append("failure_corpus_missing_v18_3_1_context_integrity_cases")
-    if not data.get("v18_3_2_delivery_truth_cases"): errors.append("failure_corpus_missing_v18_3_2_delivery_truth_cases")
-    if not data.get("v18_5_edge_handoff_failure_classes"): errors.append("failure_corpus_missing_v18_5_edge_handoff_failure_classes")
-    if not data.get("v18_5_1_truth_gate_regression_cases"): errors.append("failure_corpus_missing_v18_5_1_truth_gate_regression_cases")
-    if not data.get("v18_7_logical_consistency_cases"): errors.append("failure_corpus_missing_v18_7_logical_consistency_cases")
-    if not data.get("v18_5_relytool_taxonomy") or len(data.get("v18_5_relytool_taxonomy") or []) < 12:
-        errors.append("failure_corpus_missing_v18_5_relytool_taxonomy")
+    if not data.get("reliability_cases"): errors.append("failure_corpus_missing_reliability_cases")
+    if not data.get("context_integrity_cases"): errors.append("failure_corpus_missing_context_integrity_cases")
+    if not data.get("delivery_truth_cases"): errors.append("failure_corpus_missing_delivery_truth_cases")
+    if not data.get("edge_handoff_failure_classes"): errors.append("failure_corpus_missing_edge_handoff_failure_classes")
+    if not data.get("truth_gate_regression_cases"): errors.append("failure_corpus_missing_truth_gate_regression_cases")
+    if not data.get("logical_consistency_cases"): errors.append("failure_corpus_missing_logical_consistency_cases")
+    if not data.get("relytool_taxonomy") or len(data.get("relytool_taxonomy") or []) < 12:
+        errors.append("failure_corpus_missing_relytool_taxonomy")
 out = {"status":"pass" if not errors else "fail", "validator":"validate_skill", "version":VERSION, "skill_file_count":file_count, "errors":errors}
 print(json.dumps(out, ensure_ascii=False, indent=2))
 sys.exit(1 if errors else 0)

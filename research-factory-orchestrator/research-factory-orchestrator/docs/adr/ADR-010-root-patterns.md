@@ -8,7 +8,7 @@ Accepted — documentation-only (v19.0.3), companion to ADR-009.
 
 1. **Silent skip on rollback** — conditional writes (`if dm:`) break closure invariants; proof layer must **always** materialize rollback artifacts.
 2. **Validator / schema semantic drift** — checks named for one invariant (e.g. “missing attachment”) implemented as another (e.g. “empty list”); requires **issue-code accurate semantics** + fixture coverage.
-3. **Release path not exercising production profile** — green CI on legacy-only smoke while v19 profile path fails in the field; **dual smokes** (`smoke_telegram_v18` + `smoke_telegram_v19`) are mandatory gates.
+3. **Release path not exercising production profile** — green CI on legacy-only smoke while v19 profile path fails in the field; **dual smokes** are mandatory gates.
 
 ## Three design rules (non-negotiable for future releases)
 

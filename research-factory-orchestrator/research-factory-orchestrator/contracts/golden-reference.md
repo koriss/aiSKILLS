@@ -6,8 +6,8 @@ Optional **`contracts/telegram-golden/`** directory holds a frozen `delivery-man
 
 ## Capture procedure
 
-1. Run a successful smoke with the target provider/interface, e.g.  
-   `python3 -S scripts/rfo_v18_core.py smoke --runs-root /tmp/rfo-golden --provider telegram --interface telegram`
+1. Run a successful smoke with the target provider/interface, e.g.
+   `python3 -S scripts/rfo_runtime_core.py smoke --runs-root /tmp/rfo-golden --provider telegram --interface telegram`
 2. Copy `delivery-manifest.json` from the resolved `run_dir` into `contracts/telegram-golden/delivery-manifest.json`.
 3. Add volatile dotted paths (e.g. `.run_id`, `.created_at`, `.attachments`) to `allowlist-paths.txt` one path per line (`#` comments allowed).
 
@@ -15,7 +15,7 @@ Optional **`contracts/telegram-golden/`** directory holds a frozen `delivery-man
 
 `python3 -S scripts/_diff_telegram_against_golden.py <run_dir>`
 
-- If `contracts/telegram-golden/` is **missing** → exit **0** with skip JSON (skeleton only in v19.0.3).
+- If `contracts/telegram-golden/` is **missing** -> exit **0** with skip JSON.
 - If golden exists → deep-compare against `run_dir/delivery-manifest.json` honoring allowlist.
 
 ## Promotion to release gate (v19.0.4)

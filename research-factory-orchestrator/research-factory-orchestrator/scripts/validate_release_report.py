@@ -123,7 +123,7 @@ def main() -> int:
 
     text = Path(rp).read_text(encoding="utf-8", errors="replace")
     low = text.lower()
-    # FTM (v18.7): report must not claim production readiness while embedded smoke run_dir still has stub/missing FTM rows
+    # FTM: report must not claim production readiness while embedded smoke run_dir still has stub/missing FTM rows
     prod_pass_claim = bool(
         re.search(r"(production|prod)\s*(cycle|mode|run).{0,240}(pass|complete|green|ready|success)", low, re.DOTALL)
     ) or ("production" in low and re.search(r"(release|validation|smoke).{0,120}(pass|complete|green)", low, re.DOTALL))

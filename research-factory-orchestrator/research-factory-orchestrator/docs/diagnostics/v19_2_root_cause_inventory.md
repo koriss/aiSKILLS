@@ -23,37 +23,37 @@ This is **not** a re-audit of the ChatGPT "truth-integration hardened" archive (
 
 ---
 
-## H2 — Field diff (v18 vs v19) in active runtime
+## H2 — Field diff (legacy vs v19) in active runtime
 
 | File | Line | Symbol | Issue | Phase |
 |---|---|---|---|---|
-| `runtime/worker_impl.py` | 114 | `"gates": {}` in delivery-manifest overrides | v18 field name; v19 uses `checks` | Phase 2 (T2.x) |
-| `runtime/worker_impl.py` | 130 | `event_name: "v18.runtime.started"` | hardcoded v18 string in events | Phase 2 (T2.x) |
-| `runtime/worker_impl.py` | 179 | `event_name: "v18.runtime.completed"` | hardcoded v18 string in events | Phase 2 (T2.x) |
+| `runtime/worker_impl.py` | 114 | `"gates": {}` in delivery-manifest overrides | legacy field name; v19 uses `checks` | Phase 2 (T2.x) |
+| `runtime/worker_impl.py` | 130 | `event_name: "legacy.runtime.started"` | hardcoded legacy string in events | Phase 2 (T2.x) |
+| `runtime/worker_impl.py` | 179 | `event_name: "legacy.runtime.completed"` | hardcoded legacy string in events | Phase 2 (T2.x) |
 | `runtime/outbox_impl.py` | 182–183 | `cr.get("relevance_aware_factuality_score", 0.85)` / `cr.get("deflection_rate_when_no_grounding", 0.5)` | magic optimistic defaults from claims-registry | Phase 4C (T4C.6) + Phase 4B (`validate_citation_grounding`) |
 | `runtime/outbox_impl.py` | 184 | `citation_grounding_gate_pass = raf >= 0.7 and dfl >= 0.3` | citation grounding decided in outbox by magic defaults instead of validator | Phase 4B (`validate_citation_grounding` → outbox reads validator verdict) |
-| `runtime/outbox_impl.py` | 222, 243 | `"gates": gates` written into `delivery-manifest.json` and `final-answer-gate.json` | v18 key in v19 active artifacts | Phase 2 (T2.2) |
-| `runtime/outbox_impl.py` | 244–245 | RAF/DFL float fields written into `final-answer-gate.json` | v18 field names persisted | Phase 4C (T4C.6) |
+| `runtime/outbox_impl.py` | 222, 243 | `"gates": gates` written into `delivery-manifest.json` and `final-answer-gate.json` | legacy key in v19 active artifacts | Phase 2 (T2.2) |
+| `runtime/outbox_impl.py` | 244–245 | RAF/DFL float fields written into `final-answer-gate.json` | legacy field names persisted | Phase 4C (T4C.6) |
 | `runtime/render.py` | 122–123 | `"relevance_aware_factuality_score": 0.85`, `"deflection_rate_when_no_grounding": 0.55` | hardcoded magic in claims-registry | Phase 4C (T4C.6) |
-| `runtime/render.py` | 333 | HTML title `"Research Factory Orchestrator v18 — Internal Analysis/Audit Report"` | v18 string in user-visible HTML | Phase 2 (T2.x) |
-| `runtime/validate_impl.py` | 151 | `gates = fg.get("gates", {})` | reads only v18 key, breaks against v19 emitter | Phase 4C (T4C.5) → move to `legacy_compat.py` |
-| `runtime/failure_impl.py` | 89 | `"missing v18.7 bad run_dir"` | v18 string in skipped reason | Phase 9 (versions/docs sweep) |
-| `runtime/operating-discipline.md` | 16 | `"v18.7"` in invariant text | v18 reference in active discipline | Phase 9 |
+| `runtime/render.py` | 333 | HTML title `"Research Factory Orchestrator legacy — Internal Analysis/Audit Report"` | legacy string in user-visible HTML | Phase 2 (T2.x) |
+| `runtime/validate_impl.py` | 151 | `gates = fg.get("gates", {})` | reads only legacy key, breaks against v19 emitter | Phase 4C (T4C.5) -> move to compat shim |
+| `runtime/failure_impl.py` | 89 | `"missing legacy bad run_dir"` | legacy string in skipped reason | Phase 9 (versions/docs sweep) |
+| `runtime/operating-discipline.md` | 16 | `"legacy.7"` in invariant text | legacy reference in active discipline | Phase 9 |
 
-**Cross-check vs static audit P1-1..P1-10:** every audit row points to a file that exists in the hardened archive but not yet in this repo (`runtime/external_collect.py`, `runtime/work_units.py`, `runtime/v19_core_artifacts.py`, `runtime/truth_integration.py`). Those are **net-new** modules built in Phase 4 / 4B / 4C. The repo-side v18 fields above are independent and must be killed in Phase 2 + 4C even before the new modules land.
+**Cross-check vs static audit P1-1..P1-10:** every audit row points to a file that exists in the hardened archive but not yet in this repo (`runtime/external_collect.py`, `runtime/work_units.py`, `runtime/v19_core_artifacts.py`, `runtime/truth_integration.py`). Those are **net-new** modules built in Phase 4 / 4B / 4C. The repo-side legacy fields above are independent and must be killed in Phase 2 + 4C even before the new modules land.
 
 ---
 
-## H3 — Hardcoded v18 strings (literal `v18.`, `LIGHTWEIGHT_RESEARCH`)
+## H3 — Hardcoded legacy strings (`legacy.`, `LIGHTWEIGHT_RESEARCH`)
 
 | Token | File | Line | Verdict | Phase |
 |---|---|---|---|---|
 | `LIGHTWEIGHT_RESEARCH` | `examples/example-simple-research.md` | 5 | violates `validate_code_hygiene` | Phase 4C (T4C.8) |
 | `LIGHTWEIGHT_RESEARCH` | `tests/quality-gates/no-lightweight-mode.md` | 3 | guideline against it (allowed) | keep |
 | `LIGHTWEIGHT_RESEARCH` | `scripts/validate_code_hygiene.py` | 4 | enforcement allowlist target (allowed) | keep |
-| `v18.runtime.started` / `v18.runtime.completed` | `runtime/worker_impl.py` | 130, 179 | event name literals | Phase 2 |
-| `RFO v18 ... Internal Analysis/Audit Report` | `runtime/render.py` | 333 | user-visible HTML title | Phase 2 |
-| `missing v18.7 bad run_dir` | `runtime/failure_impl.py` | 89 | skipped-reason string | Phase 9 |
+| `legacy.runtime.started` / `legacy.runtime.completed` | `runtime/worker_impl.py` | 130, 179 | event name literals | Phase 2 |
+| `RFO legacy ... Internal Analysis/Audit Report` | `runtime/render.py` | 333 | user-visible HTML title | Phase 2 |
+| `missing legacy bad run_dir` | `runtime/failure_impl.py` | 89 | skipped-reason string | Phase 9 |
 
 **Note:** `LIGHTWEIGHT_RESEARCH` does **not** appear in `SKILL.md`. The leak is isolated to `examples/example-simple-research.md`.
 
@@ -93,10 +93,10 @@ Plus `runtime/schema_defaults.py` adds `"validation_failed"` for V1 rollback. Al
 
 | Entrypoint | Role | Action |
 |---|---|---|
-| `scripts/rfo_v18_core.py` | thin facade `from runtime.cli import main` | rename to `rfo_runtime_core.py` (Phase 6 T6.2) + leave deprecated shim |
-| `scripts/runtime_job_worker.py` | shim that `runpy.run_path(rfo_v18_core)` with `argv=["...", "worker", ...]` | retarget to `rfo_runtime_core.py` (Phase 6 T6.2) |
-| `scripts/run_research_factory.py` | research orchestrator | inspect for v18 references in Phase 6 |
-| 17 dependents of `rfo_v18_core` (`scripts/*` + `runtime/{smoke,worker}_impl.py`) | string references | sweep in Phase 6 T6.2 |
+| `scripts/rfo_runtime_core.py` | thin facade `from runtime.cli import main` | keep canonical facade (Phase 6 T6.2) |
+| `scripts/runtime_job_worker.py` | shim that `runpy.run_path(rfo_runtime_core)` with `argv=["...", "worker", ...]` | retarget to `rfo_runtime_core.py` (Phase 6 T6.2) |
+| `scripts/run_research_factory.py` | research orchestrator | inspect for legacy references in Phase 6 |
+| 17 dependents of `rfo_runtime_core` (`scripts/*` + `runtime/{smoke,worker}_impl.py`) | string references | sweep in Phase 6 T6.2 |
 
 **Critical:** `runtime_job_worker.py` does not execute work units. It just runs **one** `pending[0]` job through `cmd_run` (which itself only renders). The 12 work units written to `work-queue/pending/WU-XXX.json` are never claimed, never executed. This is the root cause of `feature-truth-matrix["analytical_memo"] = "scaffold"`, `["wave_graph_collector"] = "scaffold"`, etc.
 
@@ -157,10 +157,10 @@ The static audit findings cover modules **not yet present** in this repo (`runti
 
 These items **not** previously enumerated as discrete tasks need to be folded into the named phases:
 
-1. **Phase 2:** rename event `v18.runtime.{started,completed}` → `runtime.{started,completed}` and add `validate_no_v18_event_strings` guard against future re-emission.
-2. **Phase 2:** retitle HTML report `runtime/render.py:333` to v19 wording; add `validate_no_v18_html_branding` guard.
+1. **Phase 2:** rename event `legacy.runtime.{started,completed}` -> `runtime.{started,completed}` and add `validate_no_legacy_event_strings` guard against future re-emission.
+2. **Phase 2:** retitle HTML report `runtime/render.py:333` to v19 wording; add `validate_no_legacy_html_branding` guard.
 3. **Phase 6:** SLO leak fix — `runtime/slo.py:22` must not count `stub_delivered` as `delivery_ok` in `production` mode; new validator `validate_slo_stub_delivery_not_production_ok`.
-4. **Phase 9:** sweep remaining `v18.7`/`v18` strings in `runtime/operating-discipline.md` and `runtime/failure_impl.py:89`.
+4. **Phase 9:** sweep remaining legacy strings in `runtime/operating-discipline.md` and `runtime/failure_impl.py:89`.
 
 All four deltas are minor — they slot into existing phase scopes without creating new phases.
 
@@ -172,7 +172,7 @@ Phase 1 cross-cut investigations confirm:
 
 - The **runtime executor gap** (Phase 3) is the largest single contributor to the operator-reported "10 runs, 0 real output" failure mode — `cmd_worker` does not iterate WU pending directory.
 - The **outbox magic defaults** (Phase 4C T4C.6 — RAF/DFL=0.85/0.55, 0.7/0.3 thresholds) is the second largest — it lets a content-only run pass `citation_grounding_gate` without any real grounding.
-- The **v18 emit set** (Phase 2 + 4C T4C.5) is mechanical; tests are easy.
+- The **legacy emit set** (Phase 2 + 4C T4C.5) is mechanical; tests are easy.
 - The **net-new modules** (`external_collect`, `work_units`, `legacy_compat`, etc.) must satisfy P0/P1 negative requirements from day one.
 
-Phase 1 closed. Proceeding to Phase 2 — kill v18 emission.
+Phase 1 closed. Proceeding to Phase 2 — kill legacy emission.

@@ -1,4 +1,4 @@
-"""Failure corpus coverage report (required F-classes + legacy bad-sample harness)."""
+"""Failure corpus coverage report (required F-classes + bad-sample harness)."""
 from __future__ import annotations
 
 import json
@@ -50,7 +50,7 @@ def cmd_failure(a):
     cases_dir = root / "failure-corpus" / "cases"
     scenarios = []
     bad_runs = []
-    for case in idx.get("legacy_v17_cases") or []:
+    for case in idx.get("legacy_cases") or []:
         if not isinstance(case, dict):
             continue
         val, bad = case.get("validator"), case.get("bad_sample")
@@ -73,7 +73,7 @@ def cmd_failure(a):
         scenarios.append(row)
         if not ok_bad:
             bad_runs.append(row)
-    for case in idx.get("v18_7_logical_consistency_cases") or []:
+    for case in idx.get("logical_consistency_cases") or []:
         if not isinstance(case, dict):
             continue
         val = case.get("validator") or "validate_logical_consistency.py"
@@ -86,7 +86,7 @@ def cmd_failure(a):
             scenarios.append({"case_id": case.get("case_id"), "skipped": True, "reason": "missing logical consistency script", "validator": val})
             continue
         if not bp.is_dir():
-            scenarios.append({"case_id": case.get("case_id"), "skipped": True, "reason": "missing v18.7 bad run_dir", "bad_sample": str(bp)})
+            scenarios.append({"case_id": case.get("case_id"), "skipped": True, "reason": "missing logical-consistency bad run_dir", "bad_sample": str(bp)})
             continue
         exp = case.get("expected_bad", "fail")
         p = subprocess.run([sys.executable, "-S", str(sp), str(bp)], capture_output=True, text=True, cwd=str(root), timeout=120)
@@ -98,7 +98,7 @@ def cmd_failure(a):
             "returncode": p.returncode,
             "expected": exp,
             "ok": ok_bad,
-            "harness": "v18_7_logical_consistency",
+            "harness": "logical_consistency",
         }
         scenarios.append(row)
         if not ok_bad:
@@ -115,7 +115,7 @@ def cmd_failure(a):
         "required_failure_classes_total": len(required),
         "covered_failure_classes_total": len(covered & required),
         "coverage_missing": missing,
-        "legacy_bad_sample_runs": scenarios,
+        "bad_sample_runs": scenarios,
         "bad_sample_mismatches": bad_runs,
         "generated_at": now(),
     }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Guard: runtime/errors.jsonl must be present and useful when failures occurred.
 
-Closes regression observed in v18.5.1 cycle: ``.errors.log`` was 629 bytes for
+Closes a prior regression where ``.errors.log`` was 629 bytes for
 10 RFO runs, hiding every meaningful failure (delivery stub_only, fetch errors,
 validation failures). This guard scores the log along three dimensions:
 

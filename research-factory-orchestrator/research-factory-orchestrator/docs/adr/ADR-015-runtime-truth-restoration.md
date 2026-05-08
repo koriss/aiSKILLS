@@ -6,7 +6,7 @@ Accepted — implemented across Phases 2–6 + integration smokes (`_smoke_v19_2
 
 ## Context
 
-v19 validators assumed artifacts that runtime did not always emit (v18-shaped
+v19 validators assumed artifacts that runtime did not always emit (legacy-shaped
 fields, rollback masking pristine passes, collection/coverage vocabulary drift).
 This produced **green smokes with false production posture**.
 

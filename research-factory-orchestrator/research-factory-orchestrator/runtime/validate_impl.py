@@ -28,13 +28,7 @@ def _append_run_event(rd: Path, event: str, fields: dict[str, object]) -> None:
 
 
 def _run_validator_with_run_dir(sp: Path, rd: Path, root: Path, timeout: int = 180) -> subprocess.CompletedProcess[str]:
-    """Run validator with argv fallback: ``--run-dir`` first, positional ``run_dir`` second.
-
-    Some legacy validators still expose positional ``run_dir`` only.
-    To keep runtime validate deterministic (and avoid false FAILs caused only by
-    argparse shape drift), we retry once with positional argument when stderr
-    indicates ``--run-dir`` is unrecognized.
-    """
+    """Run validator with argv fallback: ``--run-dir`` first, positional ``run_dir`` second."""
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
     cmd = [sys.executable, "-S", str(sp), "--run-dir", str(rd)]
     p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=str(root), env=env)
@@ -164,11 +158,9 @@ def validate(rd):
     bad = [c.get("claim_id") for c in cs if not c.get("status") or not c.get("evidence_card_ids")]
     if bad:
         errs.append({"bad_claims": bad})
-    from runtime.legacy_compat import read_fag_gates
-
     fg = jr(rd / "final-answer-gate.json")
-    gates, gates_source = read_fag_gates(fg)
-    if gates_source == "missing" and isinstance(fg, dict) and "gates" in fg and isinstance(fg["gates"], dict):
+    gates = fg.get("checks", {}) if isinstance(fg, dict) and isinstance(fg.get("checks"), dict) else {}
+    if isinstance(fg, dict) and "gates" in fg and isinstance(fg["gates"], dict):
         errs.append({"v18_gates_present_in_v19_fag": list(fg["gates"].keys())})
     needed = [
         "provider_ack_gate",
@@ -214,7 +206,6 @@ def validate(rd):
         "validate_outbox_finalization",
         "validate_root_vs_zip_artifact_truth",
         "validate_collection_coverage_decoupled",
-        "validate_v18_legacy_compat",
     }
     if not errs:
         for v in vlist:

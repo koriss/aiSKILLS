@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse, json, re
 
-CLAIMS = re.compile(r"Research Factory Orchestrator|full pipeline|runtime_version|runtime-status-json|entrypoint-proof-json|v17\.|v18\.", re.I)
+CLAIMS = re.compile(r"Research Factory Orchestrator|full pipeline|runtime_version|runtime-status-json|entrypoint-proof-json", re.I)
 
 def read_texts(path):
     p=Path(path)

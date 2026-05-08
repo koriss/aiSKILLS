@@ -1,5 +1,5 @@
 {
-  "version": "18.3.1-context-integrity-hotfix",
+  "version": "19.3.0",
   "purpose": "Protect RFO runtime from LLM idle timeouts, provider request timeouts, subagent timeouts, local model disconnects, partial outputs, late results and cron contention.",
   "timeouts": {
     "platform_idle_timeout_sec_observed": 120,

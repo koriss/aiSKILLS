@@ -2,7 +2,7 @@
   "schema_version": "v19.2",
   "skill_version": "19.2.0",
   "failure_corpus_index_version": "19.2.0",
-  "description": "v19.2.0 failure-code overlay: v19.1 baseline + runtime-truth / telegram / advisory meta registry.",
+  "description": "v19.2.0 failure-code overlay: v19 baseline + runtime-truth / telegram / advisory meta registry.",
   "v19_fixture_roots": {
     "good": "tests/fixtures/v19/good/mvr_minimal_valid",
     "bad": "tests/fixtures/v19/bad",
@@ -41,7 +41,7 @@
     {"code":"DETERMINISTIC-DRIFT","category":"smoke","severity":"advisory","owner_validator":"_smoke_deterministic_replay.py","reproduces_in_fixture":"n/a"},
     {"code":"COVERAGE-GAP","category":"meta","severity":"advisory","owner_validator":"validate_validator_coverage.py","reproduces_in_fixture":"n/a"},
 
-    {"code":"RUNTIME-V18-EMIT","category":"runtime-truth","severity":"meta","owner_validator":"runtime/worker_impl.py","reproduces_in_fixture":"n/a"},
+    {"code":"RUNTIME-LEGACY-EMIT","category":"runtime-truth","severity":"meta","owner_validator":"runtime/worker_impl.py","reproduces_in_fixture":"n/a"},
     {"code":"WORK-UNIT-NOT-EXECUTED","category":"runtime-truth","severity":"meta","owner_validator":"runtime/work_units.py","reproduces_in_fixture":"n/a"},
     {"code":"EXTERNAL-COLLECTION-MISREPORTED","category":"runtime-truth","severity":"meta","owner_validator":"runtime/collector.py","reproduces_in_fixture":"n/a"},
     {"code":"LAYOUT-SPLIT-V1-ROOT-VS-RUNTIME-SUBDIR","category":"runtime-truth","severity":"meta","owner_validator":"runtime/render.py","reproduces_in_fixture":"n/a"},
@@ -60,7 +60,7 @@
     {"code":"SNIPPET-CITATION-ELIGIBLE-LEAK","category":"static-audit","severity":"meta","owner_validator":"runtime/collector.py","reproduces_in_fixture":"n/a"},
     {"code":"COLLECTION-WU-COMPLETED-WITHOUT-SOURCES","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_work_unit_completion.py","reproduces_in_fixture":"n/a"},
     {"code":"STRICT-PROFILE-IMPERATIVE-OVERRIDE-DRIFT","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_profile_validator_alignment.py","reproduces_in_fixture":"n/a"},
-    {"code":"LEGACY-V18-GATES-IN-ACTIVE-PATH","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_v18_legacy_compat.py","reproduces_in_fixture":"n/a"},
+    {"code":"LEGACY-GATES-IN-ACTIVE-PATH","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_legacy_compat.py","reproduces_in_fixture":"n/a"},
     {"code":"LEGACY-RAF-DFL-HARDCODED-IN-RENDER","category":"static-audit","severity":"meta","owner_validator":"runtime/render.py","reproduces_in_fixture":"n/a"},
     {"code":"CODE-HYGIENE-FORBIDDEN-TOKEN-LEAK","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_code_hygiene.py","reproduces_in_fixture":"n/a"},
     {"code":"SUBPROCESS-MISSING-TIMEOUT","category":"static-audit","severity":"meta","owner_validator":"scripts/validate_subprocess_timeouts.py","reproduces_in_fixture":"n/a"},

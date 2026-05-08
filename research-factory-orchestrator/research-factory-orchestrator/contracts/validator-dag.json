@@ -35,5 +35,5 @@
     "timeout_promoted_to_complete",
     "late_result_without_accept_reject"
   ],
-  "inherits_from": "18.1.1-full-overlay-from-v17.3-base-validator-dag"
+  "notes": "v19-only validator DAG"
 }

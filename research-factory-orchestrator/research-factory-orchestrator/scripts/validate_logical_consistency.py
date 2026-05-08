@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cross-artifact logical consistency (v18.7): LC01–LC16. Stdlib only; JSON on stdout; rc=1 on violations."""
+"""Cross-artifact logical consistency: LC01-LC16. Stdlib only; JSON on stdout; rc=1 on violations."""
 from __future__ import annotations
 
 import argparse
@@ -39,7 +39,7 @@ def _inv_lc01(rd: Path) -> list[dict]:
     if rs.get("state") != "validation_failed":
         out.append(_err("LC01", "critical", "validation fail must set runtime-status to validation_failed", ["runtime-status.json", str(rs.get("state"))]))
     ds = str(dm.get("delivery_status", "")).lower()
-    # v19 rollback uses enum value ``validation_failed`` (schema); legacy LC01 expected ``failed`` only.
+    # v19 rollback uses enum value ``validation_failed`` (schema); LC01 also accepts historical ``failed``.
     if ds not in ("failed", "validation_failed"):
         out.append(
             _err(
@@ -215,7 +215,7 @@ def _inv_lc12(rd: Path, skill_root: Path) -> list[dict]:
             low = p.read_text(encoding="utf-8", errors="replace").lower()
             for n in needles:
                 if n in low:
-                    out.append(_err("LC12", "medium", "forbidden legacy update phrase in active doc", [str(p), n]))
+                    out.append(_err("LC12", "medium", "forbidden stale update phrase in active doc", [str(p), n]))
     return out
 
 
@@ -253,7 +253,7 @@ def _inv_lc14(rd: Path) -> list[dict]:
 
 
 def _inv_lc16(rd: Path) -> list[dict]:
-    """Production runs must not mark critical features stub/missing in feature-truth-matrix (v18.7 F207)."""
+    """Production runs must not mark critical features stub/missing in feature-truth-matrix (F207)."""
     out: list[dict] = []
     run = _load(rd / "run.json") or {}
     if str(run.get("mode", "")).lower() != "production":

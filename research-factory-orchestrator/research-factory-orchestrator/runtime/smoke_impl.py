@@ -40,17 +40,21 @@ def _v19_rollback_closure_ok(rd: Path) -> bool:
 
 
 def cmd_smoke(a):
-    root = Path(a.runs_root or tempfile.mkdtemp(prefix="rfo-v18-smoke-"))
+    os.environ.setdefault("RFO_V19_PROFILE", "mvr")
+    root = Path(a.runs_root or tempfile.mkdtemp(prefix="rfo-v19-smoke-"))
     root.mkdir(parents=True, exist_ok=True)
     rep = {"smoke_test_version": VERSION, "runs_root": str(root), "steps": [], "report_path": str(root / "smoke-test-report.json"), "started_at": now()}
 
     def step(name, cmd):
+        run_env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+        run_env.setdefault("RFO_ALLOW_TMP_RUNS_ROOT", "1")
+        run_env.setdefault("RFO_V19_PROFILE", "mvr")
         p = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=240,
-            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+            env=run_env,
         )
         rep["steps"].append({"name": name, "returncode": p.returncode, "stdout": p.stdout[-4000:], "stderr": p.stderr[-4000:]})
         jw(rep["report_path"], rep)
@@ -58,7 +62,10 @@ def cmd_smoke(a):
             raise RuntimeError(name + " failed")
 
     def step_validate_v19_aware(rd: Path, cmd: list[str]) -> None:
-        p = subprocess.run(cmd, capture_output=True, text=True, timeout=240, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        run_env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+        run_env.setdefault("RFO_ALLOW_TMP_RUNS_ROOT", "1")
+        run_env.setdefault("RFO_V19_PROFILE", "mvr")
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=240, env=run_env)
         prof = os.environ.get("RFO_V19_PROFILE", "").strip().lower()
         effective_rc = p.returncode
         note = ""

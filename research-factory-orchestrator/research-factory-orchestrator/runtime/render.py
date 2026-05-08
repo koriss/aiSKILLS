@@ -72,6 +72,11 @@ def _load_waves(rd: Path) -> list[dict]:
     return waves if isinstance(waves, list) else []
 
 
+def _seed_only_mode(rd: Path) -> bool:
+    c = _load_json(rd / "collection-result.json", {})
+    return bool(isinstance(c, dict) and c.get("seed_only") is True)
+
+
 def render_all(rd, task, run_id, job_id, cmd_id, provider):
     cs = _load_claims(rd)
     sources = _load_sources(rd)
@@ -79,7 +84,14 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
     nodes, edges = _load_graph(rd)
     waves = _load_waves(rd)
 
-    external_source_count = sum(1 for s in sources if isinstance(s, dict) and s.get("source_role") != "seed")
+    seed_only = _seed_only_mode(rd)
+    external_source_count = sum(
+        1
+        for s in sources
+        if isinstance(s, dict)
+        and s.get("source_role") != "seed"
+        and not str(s.get("source_id") or "").startswith("stub:")
+    )
     user_visible_research = external_source_count > 0
     disclaimer = (
         "No external evidence collected; runtime structure only."
@@ -87,7 +99,48 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
         else "External evidence present."
     )
 
-    # Keep root/subdir compatibility without fabricating any missing records.
+    if seed_only and not cs:
+        cs = [
+            {
+                "claim_id": "stub:seed-only",
+                "claim_text": "No externally collected claims for this seed-only run.",
+                "claim_type": "inferred_assessment",
+                "status": "insufficient_evidence",
+                "confidence": "low",
+                "evidence_card_ids": ["stub:seed-only"],
+                "support_set": [
+                    {
+                        "source_id": "stub:seed-only",
+                        "evidence_card_id": "stub:seed-only",
+                        "role_for_claim": "context",
+                    }
+                ],
+            }
+        ]
+    if seed_only and not evidence:
+        evidence = [
+            {
+                "evidence_id": "stub:seed-only",
+                "source_ids": ["stub:seed-only"],
+                "claim_ids": ["stub:seed-only"],
+                "evidence_type": "other",
+                "extracted_fact_or_excerpt": {
+                    "kind": "extracted_fact",
+                    "text": "Seed-only run generated no external evidence.",
+                },
+                "supports": "contextual",
+                "confidence": "low",
+            }
+        ]
+
+    claims_bundle = {"schema_version": "v19.0", "claims": cs}
+    evidence_bundle = {"schema_version": "v19.0", "evidence_cards": evidence}
+    sources_bundle = {"schema_version": "v19.0", "sources": sources}
+
+    # Keep root/subdir compatibility while preserving v19 schema at root.
+    jw(rd / "claims-registry.json", claims_bundle)
+    jw(rd / "evidence-cards.json", evidence_bundle)
+    jw(rd / "sources.json", sources_bundle)
     jw(rd / "claims/claims-registry.json", {"run_id": run_id, "claims": cs})
     jw(rd / "sources/sources.json", {"run_id": run_id, "sources": sources})
     jw(rd / "evidence/evidence-cards.json", {"run_id": run_id, "evidence_cards": evidence})

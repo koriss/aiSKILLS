@@ -20,10 +20,8 @@ from runtime.work_units import execute_pending as _execute_work_units
 
 
 def _emit_event(rd: Path, name: str, payload: dict) -> None:
-    """Emit canonical v19 event (no v18.* prefix). Optionally dual-emit legacy name when RFO_LEGACY_EVENT_NAMES=1."""
+    """Emit canonical v19 event (no legacy aliases)."""
     jl(rd / "observability-events.jsonl", {"event_name": name, **payload})
-    if os.environ.get("RFO_LEGACY_EVENT_NAMES") == "1" and not name.startswith("v18."):
-        jl(rd / "observability-events.jsonl", {"event_name": "v18." + name, **payload, "legacy_alias": True})
 
 
 def _normalize_run_mode(requested: str) -> tuple[str, str | None]:
@@ -320,10 +318,38 @@ def cmd_run(a):
     print(json.dumps({"runtime_initialized": True, "run_id": run_id, "job_id": job_id, "version": VERSION, "state": "content_rendered"}, ensure_ascii=False, indent=2))
 
 
-def build_package(rd):
+def _is_seed_only_or_artifact_only(rd: Path) -> bool:
+    rd = Path(rd)
+    profile_names: set[str] = set()
+    for rel in ("run-profile.json", "validation-profile-used.json"):
+        p = rd / rel
+        if not p.is_file():
+            continue
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            data = {}
+        if isinstance(data, dict):
+            name = str(data.get("profile") or data.get("name") or "").strip().lower()
+            if name:
+                profile_names.add(name)
+    if "artifact-only" in profile_names or "artifact_only" in profile_names:
+        return True
+    c = jr(rd / "collection-result.json", {})
+    if isinstance(c, dict) and c.get("seed_only") is True:
+        return True
+    rp = jr(rd / "run.json", {})
+    if isinstance(rp, dict):
+        mode = str(rp.get("mode") or "").strip().lower()
+        if mode in {"artifact_only", "artifact-only"}:
+            return True
+    return False
+
+
+def build_package(rd, *, allow_stub: bool = False):
     rd = Path(rd)
     miss = [r for r in PKG_REQUIRED if not (rd / r).exists()]
-    if miss:
+    if miss and not allow_stub:
         raise SystemExit("missing required package paths: " + ", ".join(miss))
     pkg = rd / "package/research-package.zip"
     pkg.parent.mkdir(parents=True, exist_ok=True)
@@ -333,6 +359,18 @@ def build_package(rd):
                 z.write(p, p.relative_to(rd).as_posix())
     m = {"package_path": "package/research-package.zip", "size_bytes": pkg.stat().st_size, "sha256": sha(pkg), "built_at": now()}
     jw(rd / "package/research-package-manifest.json", m)
+    jw(
+        rd / "package/manifest.json",
+        {
+            "schema_version": "v19.0",
+            "mode": "artifact_only" if allow_stub else "full",
+            "required_paths_total": len(PKG_REQUIRED),
+            "present_paths_count": len(PKG_REQUIRED) - len(miss),
+            "missing_paths": miss,
+            "missing_policy": "artifact_only_seed_only_skip" if allow_stub else "strict",
+            "built_at": now(),
+        },
+    )
     print(json.dumps(m, ensure_ascii=False, indent=2))
 
 
@@ -455,7 +493,7 @@ def cmd_worker(a):
             "created_at": now(),
         },
     )
-    build_package(rd)
+    build_package(rd, allow_stub=_is_seed_only_or_artifact_only(rd))
     try:
         from runtime.event_history import append_side_effect
 

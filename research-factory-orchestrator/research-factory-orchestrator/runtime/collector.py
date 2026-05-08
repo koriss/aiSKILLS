@@ -33,7 +33,7 @@ from runtime.error_log import append_error
 from runtime.util import jw, now, sid
 
 
-_USER_AGENT = "RFO/19.2.0 (+https://github.com/openclaw/research-factory-orchestrator)"
+_USER_AGENT = "RFO/19.3.0 (+https://github.com/openclaw/research-factory-orchestrator)"
 
 
 def _seed_urls() -> list[str]:
@@ -195,6 +195,7 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
         "external_web_search_executed": external_web_search_executed,
         "external_source_count": len(collected_sources),
         "seed_only": not (external_web_search_executed or external_source_packet_loaded),
+        "synthetic_count": 0,
         "max_sources_cap": _max_sources(),
         "seed_urls_provided": seeds,
     }
@@ -203,9 +204,8 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
 
 
 def _update_sources_with_collection(rd: Path, summary: dict, collected_sources: list[dict]) -> dict:
-    """Merge collected sources into the v19 root sources.json (and v18 subdir copy)."""
+    """Merge collected sources into the v19 root sources.json."""
     root = rd / "sources.json"
-    sub = rd / "sources" / "sources.json"
     base = {
         "schema_version": "v19.0",
         "sources": [],
@@ -222,11 +222,24 @@ def _update_sources_with_collection(rd: Path, summary: dict, collected_sources: 
         if s.get("source_id") and s["source_id"] not in seen_ids:
             base["sources"].append(s)
             seen_ids.add(s["source_id"])
+    if summary.get("seed_only") is True and not base.get("sources"):
+        base["sources"].append(
+            {
+                "source_id": "stub:seed-only",
+                "title": "Seed-only synthetic source",
+                "canonical_origin_id": "stub:seed-only",
+                "source_role": "unknown",
+                "access_level": "unknown",
+                "interest_alignment": "unknown",
+                "verification_mode": "opinion",
+                "independence": "unknown",
+                "citation_eligible": False,
+                "corroboration_type": "unknown",
+            }
+        )
+        summary["synthetic_count"] = 1
     base["schema_version"] = "v19.0"
     jw(root, base)
-    # Subdir mirror keeps run_id field for legacy package builders.
-    sub_payload = {"run_id": summary.get("run_id"), "sources": base["sources"]}
-    jw(sub, sub_payload)
     summary["root_sources_count_after"] = len(base["sources"])
     jw(rd / "collection-result.json", summary)
     return summary

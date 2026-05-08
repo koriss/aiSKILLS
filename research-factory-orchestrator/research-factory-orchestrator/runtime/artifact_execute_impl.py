@@ -179,7 +179,7 @@ def cmd_execute(a) -> int:
     try:
         with contextlib.redirect_stdout(sys.stderr):
             cmd_run(ns)
-            build_package(rd)
+            build_package(rd, allow_stub=True)
         _write_final_answer(rd, task)
         jw(
             rd / "final-answer-gate.json",

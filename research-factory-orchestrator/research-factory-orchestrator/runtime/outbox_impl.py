@@ -8,6 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from runtime.error_log import append_error
 from runtime.util import REQ_EVENTS, jr, jw, now, sid, skill_root
 
 
@@ -146,6 +147,14 @@ def cmd_outbox(a):
             adapter_delivery_not_proven = bool(adapter_out.get("delivery_not_proven")) if adapter_out else False
             adapter_chat_id_source = str(adapter_out.get("chat_id_source") or "").strip() if adapter_out else ""
             adapter_api_base_source = str(adapter_out.get("api_base_source") or "").strip() if adapter_out else ""
+            if adapter_delivery_not_proven and adapter_reason == "TELEGRAM-CHAT-ID-MISSING":
+                append_error(
+                    rd,
+                    code="LIE-DETECTED-DELIVERY-STUB-WITHOUT-CONSENT",
+                    severity="error",
+                    detail="telegram delivery not proven: missing chat id consent",
+                    context={"event_id": ev.get("event_id"), "provider": ev.get("provider")},
+                )
             ack_id = f"ACK-{ev['event_id']}"
             created_ts = now()
             pp_path = rd / "provider-payloads" / f"{ev['event_id']}.json"
@@ -213,7 +222,7 @@ def cmd_outbox(a):
         # is captured separately below.
         provider_pass = not missing and not any_failed and len(acks) == len(req)
         external = provider_pass and any_real and not any_stub
-        stub_only = provider_pass and any_stub and not any_real
+        stub_only = provider_pass and any_stub and not any_real and not any_delivery_not_proven
         # Citation grounding will be properly produced by validator in Phase 4B/4C.
         # Until then, omit RAF/DFL from artifacts (no magic literals leak into v19 surface).
         citation_grounding_path = rd / "citation-grounding-result.json"
@@ -230,7 +239,7 @@ def cmd_outbox(a):
         # collapsing into ``stub_only`` / ``fail``.
         if external:
             ext_status = "pass"
-        elif any_delivery_not_proven and not any_stub:
+        elif any_delivery_not_proven:
             ext_status = "delivery_not_proven"
         elif stub_only:
             ext_status = "stub_only"
@@ -268,7 +277,7 @@ def cmd_outbox(a):
             dstat = "failed"
         elif external:
             dstat = "delivered"
-        elif any_delivery_not_proven and not any_stub:
+        elif any_delivery_not_proven:
             dstat = "delivery_not_proven"
         elif stub_only:
             dstat = "stub_delivered"
@@ -279,7 +288,7 @@ def cmd_outbox(a):
             fg_status = "fail"
         elif external:
             fg_status = "pass"
-        elif any_delivery_not_proven and not any_stub:
+        elif any_delivery_not_proven:
             fg_status = "delivery_not_proven"
         elif stub_only:
             fg_status = "stub_only"

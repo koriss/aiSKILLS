@@ -136,14 +136,48 @@ def main() -> int:
         except Exception:
             tr = {}
         if isinstance(tr, dict) and str(tr.get("status") or "").lower() == "fail":
-            if isinstance(dm, dict) and str(dm.get("delivery_status") or "") not in (
+            collection_result = {}
+            cr = rd / "collection-result.json"
+            if cr.is_file():
+                try:
+                    collection_result = json.loads(cr.read_text(encoding="utf-8"))
+                except Exception:
+                    collection_result = {}
+            run_profile = {}
+            rp = rd / "run-profile.json"
+            if rp.is_file():
+                try:
+                    run_profile = json.loads(rp.read_text(encoding="utf-8"))
+                except Exception:
+                    run_profile = {}
+            source_policy = run_profile.get("source_policy") if isinstance(run_profile, dict) else {}
+            external_required = True
+            if isinstance(source_policy, dict) and source_policy.get("external_collection_required") is False:
+                external_required = False
+            seed_only = isinstance(collection_result, dict) and collection_result.get("seed_only") is True
+            allow_not_queued = seed_only or (external_required is False)
+            allowed_fail_statuses = {
                 "failed",
                 "validation_failed",
                 "cancelled",
                 "stub_delivered",
                 "content_ready_delivery_not_proven",
-            ):
-                issues.append({"code": "rollback_not_explicit", "severity": "error", "path": "delivery_status", "detail": str(dm.get("delivery_status")), "artifact": "delivery-manifest.json"})
+            }
+            if allow_not_queued:
+                allowed_fail_statuses.add("not_queued")
+            if isinstance(dm, dict) and str(dm.get("delivery_status") or "") not in allowed_fail_statuses:
+                reason = "must be explicit fail-state"
+                if allow_not_queued:
+                    reason = "must be explicit fail-state (not_queued allowed for seed_only or external_collection_required=false)"
+                issues.append(
+                    {
+                        "code": "rollback_not_explicit",
+                        "severity": "error",
+                        "path": "delivery_status",
+                        "detail": f"{dm.get('delivery_status')} ({reason})",
+                        "artifact": "delivery-manifest.json",
+                    }
+                )
     blocking = bool(issues)
     _emit(not blocking, blocking, issues, warnings, "V6 delivery truth")
     return 0 if not blocking else 1

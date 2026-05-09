@@ -27,7 +27,8 @@
     "outbox/outbox-policy.json",
     "outbox/OUT-0001.json",
     "outbox/OUT-0002.json",
-    "outbox/OUT-0003.json"
+    "outbox/OUT-0005.json",
+    "outbox/OUT-0006.json"
   ],
   "forbidden_package_types_as_final": [
     "worker_bundle",

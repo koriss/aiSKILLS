@@ -70,7 +70,9 @@ def cmd_outbox(a):
             )
             payload_path = (rd / ev["payload_path"]) if ev.get("payload_path") else None
             payload_ok = bool(payload_path and payload_path.is_file())
-            if payload_ok and ev.get("type") == "send_message" and payload_path and str(payload_path).endswith(".txt"):
+            if payload_ok and ev.get("type") == "send_message" and payload_path and (
+                str(payload_path).endswith(".txt") or str(payload_path).endswith(".md")
+            ):
                 try:
                     from runtime.output_filter import assert_safe_payload
 

@@ -35,12 +35,10 @@ def _load_claim_statuses() -> tuple[list[str], dict]:
 
 
 STATUSES, CLAIM_STATUS_LEGACY_ALIASES = _load_claim_statuses()
-REQ_EVENTS = ["OUT-0001", "OUT-0002", "OUT-0003", "OUT-0004", "OUT-0005", "OUT-0006"]
+REQ_EVENTS = ["OUT-0001", "OUT-0002", "OUT-0005", "OUT-0006"]
 CHAT = [
-    ("OUT-0001", "analytical_memo", "chat/message-001-analytical-memo.txt"),
-    ("OUT-0002", "factual_dossier", "chat/message-002-facts.txt"),
-    ("OUT-0003", "io_propaganda_check", "chat/message-003-io-propaganda-check.txt"),
-    ("OUT-0004", "files_and_delivery_status", "chat/message-004-files.txt"),
+    ("OUT-0001", "analysis", "chat/01-analysis.md"),
+    ("OUT-0002", "facts_with_links", "chat/02-facts.md"),
 ]
 
 

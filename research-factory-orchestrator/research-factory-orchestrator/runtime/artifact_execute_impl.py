@@ -10,6 +10,11 @@ from types import SimpleNamespace
 
 from runtime.profiles import resolve as _resolve_profile
 from runtime.render import allocate
+from runtime.report_html import (
+    content_profile_for_manifest,
+    ensure_canonical_full_report_html,
+    sniff_html_document,
+)
 from runtime.status import VERSION
 from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
@@ -22,7 +27,7 @@ RESULT_MANIFEST_CONTRACT = "rfo-skill-agent-handoff-v1"
 
 DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT = [
     "This process is compute-only: it writes artifacts under run_dir and does not open chat sessions or outbound channels.",
-    "Present the substantive answer using final-answer.md or report/full-report.html (and analytical-memo if present).",
+    "Primary human-readable outputs: chat/01-analysis.md (analysis + IO check), chat/02-facts.md (claims with URLs), report/full-report.html.",
     "If your environment can attach files for the human, attach paths listed under result-manifest.json.artifacts;",
     "only claim artifacts were handed off after your layer actually exposes them.",
 ]
@@ -73,6 +78,21 @@ def _seed_interface_and_job(rd: Path, c: dict, task: str) -> None:
 
 
 def _write_final_answer(rd: Path, task: str) -> None:
+    primary = rd / "chat/01-analysis.md"
+    if primary.is_file():
+        body = primary.read_text(encoding="utf-8", errors="replace")[:12000]
+        lines = [
+            "# Final answer (artifact)",
+            "",
+            f"**Task (excerpt):** {task[:2000]!r}",
+            "",
+            "(Derived from `chat/01-analysis.md`.)",
+            "",
+            body,
+            "",
+        ]
+        (rd / "final-answer.md").write_text("\n".join(lines), encoding="utf-8")
+        return
     memo = jr(rd / "report/analytical-memo.json", {})
     summary = str(memo.get("executive_summary") or "").strip()
     lines = [
@@ -92,33 +112,72 @@ def _write_final_answer(rd: Path, task: str) -> None:
     (rd / "final-answer.md").write_text("\n".join(lines), encoding="utf-8")
 
 
+def _host_visible_run_dir(rd: Path) -> str | None:
+    """Optional host path hint when container prefix map is configured (derivative only)."""
+    host_root = (os.environ.get("RFO_HOST_WORKSPACE_ROOT") or "").strip()
+    if not host_root:
+        return None
+    cont = (
+        os.environ.get("RFO_CONTAINER_WORKSPACE_PREFIX") or "/home/node/.openclaw/workspace"
+    ).strip().rstrip("/")
+    rd_s = str(rd.resolve())
+    if not rd_s.startswith(cont + "/") and rd_s != cont:
+        return None
+    suffix = rd_s[len(cont) :].lstrip("/")
+    hp = Path(host_root).expanduser().resolve()
+    return str(hp / suffix) if suffix else str(hp)
+
+
 def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: list) -> dict:
+    primary_path = rd / "chat/01-analysis.md"
     primary = ""
-    if (rd / "final-answer.md").is_file():
+    if primary_path.is_file():
+        primary = primary_path.read_text(encoding="utf-8", errors="replace")[:3500]
+    elif (rd / "final-answer.md").is_file():
         primary = (rd / "final-answer.md").read_text(encoding="utf-8", errors="replace")[:3500]
     arts = []
     for path, role, media, fn, required in (
-        ("final-answer.md", "answer", "text/markdown", "final-answer.md", True),
+        ("chat/01-analysis.md", "analysis", "text/markdown", "01-analysis.md", True),
+        ("chat/02-facts.md", "facts", "text/markdown", "02-facts.md", True),
         ("report/full-report.html", "report", "text/html", "report.html", True),
         ("package/research-package.zip", "package", "application/zip", "research-package.zip", False),
     ):
         f = rd / path
         if not f.is_file():
             if required and status == "ok":
-                # partial: missing required artifact
                 pass
             continue
-        arts.append(
-            {
-                "path": path,
-                "role": role,
-                "media_type": media,
-                "filename": fn,
-                "size_bytes": f.stat().st_size,
-                "sha256": sha(f),
-                "required": required,
-            }
+        art: dict = {
+            "path": path,
+            "role": role,
+            "media_type": media,
+            "filename": fn,
+            "size_bytes": f.stat().st_size,
+            "sha256": sha(f),
+            "required": required,
+        }
+        if path == "report/full-report.html":
+            head = f.read_bytes()[:8192].decode("utf-8", errors="replace")
+            sniff = sniff_html_document(head)
+            art["report_html_sniff"] = sniff
+            art["content_profile"] = content_profile_for_manifest(sniff)
+        arts.append(art)
+    quality = jr(rd / "report/quality-metadata.json", {})
+    meta = {
+        "run_id": run_id,
+        "job_id": job_id,
+        "skill": "research-factory-orchestrator",
+        "skill_version": VERSION,
+        "created_at": now(),
+    }
+    host_rd = _host_visible_run_dir(rd)
+    if host_rd:
+        meta["run_dir_host"] = host_rd
+        meta["run_dir_host_disclaimer"] = (
+            "Hint only when RFO_HOST_WORKSPACE_ROOT matches actual bind mount; "
+            "canonical path is container run_dir / marker.run_dir."
         )
+
     out: dict = {
         "schema_version": "v1",
         "contract": RESULT_MANIFEST_CONTRACT,
@@ -126,17 +185,30 @@ def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: lis
         "primary_format": "markdown",
         "artifacts": arts,
         "errors": errors,
-        "metadata": {
-            "run_id": run_id,
-            "job_id": job_id,
-            "skill": "research-factory-orchestrator",
-            "skill_version": VERSION,
-            "created_at": now(),
-        },
+        "metadata": meta,
     }
+    if isinstance(quality, dict) and quality:
+        out["quality"] = quality
     if primary.strip():
         out["primary_text"] = primary
     return out
+
+
+def _write_result_json(rd: Path, manifest: dict) -> None:
+    jw(
+        rd / "result.json",
+        {
+            "schema_version": "v1",
+            "contract": "rfo-result-json-v1",
+            "status": manifest.get("status"),
+            "deliverables": [
+                {"path": a.get("path"), "role": a.get("role"), "media_type": a.get("media_type")}
+                for a in manifest.get("artifacts", [])
+                if isinstance(a, dict)
+            ],
+            "quality": manifest.get("quality") if isinstance(manifest.get("quality"), dict) else {},
+        },
+    )
 
 
 def _normalize_exit(status: str) -> int:
@@ -156,7 +228,7 @@ def emit_agent_skill_handoff(
     """
     rd = Path(rd).resolve()
     errs = list(errors) if errors else []
-    if not (rd / "final-answer.md").is_file():
+    if not (rd / "chat/01-analysis.md").is_file():
         _write_final_answer(rd, task)
     run_json = jr(rd / "run.json", {})
     run_id = str(run_json.get("run_id") or rd.name)
@@ -164,7 +236,7 @@ def emit_agent_skill_handoff(
     resolved = status
     if resolved is None:
         resolved = "ok"
-        for p in ("report/full-report.html", "final-answer.md"):
+        for p in ("report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md"):
             if not (rd / p).is_file():
                 resolved = "failed"
                 errs.append(
@@ -175,8 +247,43 @@ def emit_agent_skill_handoff(
                     },
                 )
                 break
+    if resolved == "ok":
+        ok_rep, rep_note = ensure_canonical_full_report_html(rd)
+        if not ok_rep:
+            resolved = "partial"
+            errs.append(
+                {
+                    "code": "report_html_ensure_failed",
+                    "message": rep_note,
+                    "where": "emit_agent_skill_handoff.ensure_canonical_full_report_html",
+                },
+            )
+    req_triple = ("report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md")
+    missing_after = [p for p in req_triple if not (rd / p).is_file()]
+    seen_missing_msgs = {
+        e.get("message")
+        for e in errs
+        if isinstance(e, dict)
+        and e.get("code") == "missing_required_artifact"
+        and e.get("message")
+    }
+    if missing_after:
+        resolved = "failed"
+        for p in missing_after:
+            if p in seen_missing_msgs:
+                continue
+            seen_missing_msgs.add(p)
+            errs.append(
+                {
+                    "code": "missing_required_artifact",
+                    "message": p,
+                    "where": "emit_agent_skill_handoff.post_ensure",
+                },
+            )
+
     manifest = _build_manifest(rd, run_id, job_id, resolved, errs)
     jw(rd / "result-manifest.json", manifest)
+    _write_result_json(rd, manifest)
     payload = {
         "skill": "research-factory-orchestrator",
         "skill_version": VERSION,
@@ -189,6 +296,9 @@ def emit_agent_skill_handoff(
         "instructions_for_invoking_agent": list(DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT),
         "task_excerpt": (task[:500] + ("…" if len(task) > 500 else "")),
     }
+    host_vis = _host_visible_run_dir(rd)
+    if host_vis:
+        payload["run_dir_host"] = host_vis
     jw(rd / "marker.json", payload)
     print(HANDOFF_STDOUT_PREFIX + json.dumps(payload, ensure_ascii=False), flush=True)
     return resolved, _normalize_exit(resolved)
@@ -262,7 +372,7 @@ def cmd_execute(a) -> int:
             encoding="utf-8",
         )
     if status == "ok":
-        req_paths = ("report/full-report.html", "final-answer.md")
+        req_paths = ("report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md")
         miss = [p for p in req_paths if not (rd / p).is_file()]
         if miss:
             status = "failed"
@@ -276,6 +386,7 @@ def cmd_execute(a) -> int:
 
     manifest = _build_manifest(rd, c["run_id"], c["job_id"], status, errors)
     jw(rd / "result-manifest.json", manifest)
+    _write_result_json(rd, manifest)
     payload = {
         "skill": "research-factory-orchestrator",
         "skill_version": VERSION,

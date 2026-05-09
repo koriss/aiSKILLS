@@ -7,7 +7,8 @@
   "required_outbox_events": [
     "OUT-0001",
     "OUT-0002",
-    "OUT-0003"
+    "OUT-0005",
+    "OUT-0006"
   ],
   "outbox_events": [
     {

@@ -1,12 +1,18 @@
 """Deterministic artifact rendering for RFO run directories."""
 from __future__ import annotations
 
-import html
 import json
 from pathlib import Path
 
+from runtime.chat_md import (
+    apply_facts_gate,
+    build_analysis_markdown,
+    build_facts_markdown,
+    compute_quality_metadata,
+)
+from runtime.report_html import build_full_report_html, write_canonical_full_report_html
 from runtime.status import VERSION
-from runtime.util import jr, jw, now, sid, slug, tw
+from runtime.util import jr, jw, now, sid, slug
 
 
 def allocate(runs_root, task, provider, interface):
@@ -133,6 +139,9 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
             }
         ]
 
+    cs, facts_gate_meta = apply_facts_gate(cs, sources)
+    jw(rd / "report/facts-gate-meta.json", facts_gate_meta)
+
     claims_bundle = {"schema_version": "v19.0", "claims": cs}
     evidence_bundle = {"schema_version": "v19.0", "evidence_cards": evidence}
     sources_bundle = {"schema_version": "v19.0", "sources": sources}
@@ -178,12 +187,52 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
     jw(rd / "report/factual-dossier.json", factual)
     jw(rd / "report/io-propaganda-check.json", io)
     jw(rd / "self-audit/runtime-self-audit.json", audit)
-    jw(rd / "chat/chat-message-plan.json", {"run_id": run_id, "job_id": job_id, "provider": provider, "messages": []})
+    (rd / "chat").mkdir(parents=True, exist_ok=True)
+    analysis_md = build_analysis_markdown(
+        memo, io, disclaimer, user_visible_research, rd
+    )
+    facts_md = build_facts_markdown(cs, sources)
+    tw(rd / "chat/01-analysis.md", analysis_md)
+    tw(rd / "chat/02-facts.md", facts_md)
 
-    tw(rd / "chat/message-001-analytical-memo.txt", f"{memo['title']}\n{memo['executive_summary']}\n")
-    tw(rd / "chat/message-002-facts.txt", f"Claims: {len(cs)}\nSources: {len(sources)}\nEvidence: {len(evidence)}\n")
-    tw(rd / "chat/message-003-io-propaganda-check.txt", f"IO verdict: {io['verdict']}\n")
-    tw(rd / "chat/message-004-files.txt", "Files prepared; external delivery must be proven by delivery-manifest/ACK.\n")
+    qmeta = compute_quality_metadata(rd, seed_only, facts_gate_meta, cs, sources)
+    jw(rd / "report/quality-metadata.json", qmeta)
+
+    jw(
+        rd / "chat/chat-message-plan.json",
+        {
+            "run_id": run_id,
+            "job_id": job_id,
+            "provider": provider,
+            "plain_text_only": True,
+            "mobile_safe": True,
+            "no_tables": True,
+            "no_local_paths": True,
+            "no_premature_delivery_claims": True,
+            "split_policy": {"max_message_chars": 3500, "logical_blocks": True},
+            "delivery_claim_policy": {"may_claim_files_delivered": False},
+            "messages": [
+                {
+                    "message_id": "message-001",
+                    "id": "message-001",
+                    "kind": "analysis",
+                    "path": "chat/01-analysis.md",
+                    "contains_delivery_claim": False,
+                },
+                {
+                    "message_id": "message-002",
+                    "id": "message-002",
+                    "kind": "facts_with_links",
+                    "path": "chat/02-facts.md",
+                    "contains_delivery_claim": False,
+                },
+            ],
+            "attachments": [
+                {"event_id": "OUT-0005", "kind": "html_report", "path": "report/full-report.html"},
+                {"event_id": "OUT-0006", "kind": "research_package", "path": "package/research-package.zip"},
+            ],
+        },
+    )
 
     semantic = {
         "run_id": run_id,
@@ -196,66 +245,29 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
     }
     jw(rd / "report/semantic-report.json", semantic)
 
-    def sec(title: str, body: str) -> str:
-        return f"<section><h2>{html.escape(title)}</h2>{body}</section>"
-
-    claim_items = "".join(
-        f"<li><b>{html.escape(str(c.get('claim_id', 'n/a')))}</b> {html.escape(str(c.get('claim_text') or c.get('text') or ''))}</li>"
-        for c in cs
-    ) or "<li>no claims</li>"
-    source_items = "".join(
-        f"<li>{html.escape(str(s.get('source_id', 'n/a')))} — {html.escape(str(s.get('title', '')))}</li>"
-        for s in sources
-    ) or "<li>no sources</li>"
-    evidence_items = "".join(
-        f"<li>{html.escape(str(e.get('evidence_id') or e.get('evidence_card_id') or 'n/a'))}</li>" for e in evidence
-    ) or "<li>no evidence cards</li>"
-
-    body = (
-        sec("Analytical memo", f"<p>{html.escape(memo['executive_summary'])}</p>")
-        + sec("Claims", f"<ul>{claim_items}</ul>")
-        + sec("Sources", f"<ul>{source_items}</ul>")
-        + sec("Evidence cards", f"<ul>{evidence_items}</ul>")
-        + sec("Wave graph", f"<p>waves loaded: {len(waves)}</p>")
-        + sec("Self audit", f"<p>{html.escape(disclaimer)}</p>")
+    html_doc = build_full_report_html(
+        rd=rd,
+        task=task,
+        run_id=run_id,
+        job_id=job_id,
+        cmd_id=cmd_id,
+        provider=provider,
+        memo=memo,
+        claims=cs,
+        sources=sources,
+        evidence=evidence,
+        waves=waves,
+        nodes=nodes,
+        edges=edges,
+        io=io,
+        audit=audit,
+        disclaimer=disclaimer,
+        user_visible_research=user_visible_research,
+        factual=factual,
+        generated_at=now(),
+        version=VERSION,
     )
-    proofs = [
-        "run.json",
-        "entrypoint-proof.json",
-        "runtime-status.json",
-        "claims/claims-registry.json",
-        "evidence/evidence-cards.json",
-        "report/analytical-memo.json",
-        "report/factual-dossier.json",
-        "report/io-propaganda-check.json",
-        "self-audit/runtime-self-audit.json",
-        "delivery-manifest.json",
-        "final-answer-gate.json",
-    ]
-    scripts = "".join(
-        f"<script type='application/json' id='{p.replace('/', '-').replace('.', '-')}-json'>{html.escape((rd / p).read_text(encoding='utf-8'))}</script>"
-        for p in proofs
-        if (rd / p).exists()
-    )
-    run_meta = jr(rd / "run.json", {})
-    mode_s = html.escape(str(run_meta.get("mode", "unknown")))
-    prov_s = html.escape(str(provider or ""))
-    banner_obj = {
-        "rfo_run_mode": run_meta.get("mode"),
-        "provider": provider,
-        "skill_version": VERSION,
-        "user_visible_research": user_visible_research,
-        "note": "Smoke/seed/stub runs must not read as production research until gates pass.",
-    }
-    banner_json = html.escape(json.dumps(banner_obj, ensure_ascii=False))
-    banner_html = (
-        f"<header role='banner' style='background:#1a237e;color:#fff;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px'><strong>RFO run-mode banner</strong> · mode=<code>{mode_s}</code> · provider=<code>{prov_s}</code> · user_visible_research={str(user_visible_research).lower()} · {html.escape(disclaimer)}</header>"
-        f"<script type='application/json' id='rfo-run-mode-banner'>{banner_json}</script>"
-    )
-    tw(
-        rd / "report/full-report.html",
-        f"<!DOCTYPE html><html lang='ru'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>RFO v19 Internal Analysis Report</title><style>body{{font-family:Arial,sans-serif;line-height:1.55;max-width:1100px;margin:0 auto;padding:24px;background:#f7f7f9;color:#111}}section{{background:white;border:1px solid #ddd;border-radius:10px;padding:18px;margin:14px 0}}h1,h2{{color:#17213a}}</style></head><body>{banner_html}<h1>Research Factory Orchestrator v19 — Internal Analysis/Audit Report</h1><p>run_id: {html.escape(run_id)} · job_id: {html.escape(job_id)} · skill_version: {html.escape(VERSION)}</p>{body}<section><h2>Embedded proof blocks</h2><p>HTML не является proof сам по себе; валидаторы сверяют blocks с файлами run-dir.</p>{scripts}</section></body></html>",
-    )
+    write_canonical_full_report_html(rd, html_doc, source="render_all")
     artifact_layout = {
         "schema_version": "v19.0",
         "run_id": run_id,
@@ -266,6 +278,8 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
             "sources.json",
             "evidence-cards.json",
             "report/full-report.html",
+            "chat/01-analysis.md",
+            "chat/02-facts.md",
         ],
         "subdir_artifacts": [
             "claims/claims-registry.json",

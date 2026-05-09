@@ -24,7 +24,8 @@ SCRIPTS_DIR = SKILL_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(SKILL_ROOT))
 
-from runtime.util import jw, tw, now, sid, slug  # noqa: E402
+from runtime.report_html import write_canonical_full_report_html  # noqa: E402
+from runtime.util import jw, now, sid, slug, tw  # noqa: E402
 
 from rfo_relay_search_helpers import build_relay_params, rank_relay_rows_for_task, relay_fetch_cap  # noqa: E402
 
@@ -453,7 +454,7 @@ def write_artifacts(rd: Path, entry: dict, sources: list[dict],
 
     # HTML report
     html = build_html(task, sources, claims, run_id)
-    (rd / "report/full-report.html").write_text(html, encoding="utf-8")
+    write_canonical_full_report_html(rd, html, source="run_rfo_full_research")
 
     # outbox
     outbox = [

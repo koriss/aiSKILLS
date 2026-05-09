@@ -4,9 +4,10 @@ import argparse, json, os, re, sys
 
 ABS_PATH = re.compile(r'(^/|^[A-Za-z]:\\)')
 REQUIRED = {
-    'OUT-0001': {'type': 'send_message', 'payload_kind': 'chat_message', 'file_kind': None},
-    'OUT-0002': {'type': 'send_file', 'payload_kind': 'attachment', 'file_kind': 'html_report'},
-    'OUT-0003': {'type': 'send_file', 'payload_kind': 'attachment', 'file_kind': 'research_package'},
+    'OUT-0001': {'type': 'send_message', 'payload_kind': 'analysis', 'file_kind': None},
+    'OUT-0002': {'type': 'send_message', 'payload_kind': 'facts_with_links', 'file_kind': None},
+    'OUT-0005': {'type': 'send_file', 'payload_kind': 'attachment', 'file_kind': 'html_report'},
+    'OUT-0006': {'type': 'send_file', 'payload_kind': 'attachment', 'file_kind': 'research_package'},
 }
 
 def jread(path):

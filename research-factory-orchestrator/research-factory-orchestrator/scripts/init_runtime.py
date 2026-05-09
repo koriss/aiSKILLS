@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
+import argparse
+import hashlib
+import json
+import sys
 from pathlib import Path
-import argparse, hashlib, json
-from common_runtime import VERSION, AXES, SOURCE_FAMILIES, now, slugify, jwrite, twrite, event, jread
+
+_SKILL_ROOT = Path(__file__).resolve().parent.parent
+if str(_SKILL_ROOT) not in sys.path:
+    sys.path.insert(0, str(_SKILL_ROOT))
+
+from common_runtime import AXES, SOURCE_FAMILIES, VERSION, event, jread, jwrite, now, slugify, twrite
+
+from runtime.report_html import write_canonical_full_report_html  # noqa: E402
+
 
 def make_work_units():
     units=[]
@@ -173,7 +184,11 @@ def main():
     }
     jwrite(root/"final-answer-gate.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"passed":False,"status":"fail","checks":init_gates,"created_at":now()})
     jwrite(root/"report/semantic-report.json", {"report_meta":run,"summary":{},"sections":[],"claims":[],"sources":[]})
-    twrite(root/"report/full-report.html", "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'></head><body><h1>Runtime initialization report shell</h1><script type='application/json' id='artifact-manifest-json'>{}</script><script type='application/json' id='provenance-manifest-json'>{}</script><script type='application/json' id='validation-transcript-json'>{}</script><script type='application/json' id='delivery-manifest-json'>{}</script><script type='application/json' id='runtime-status-json'>{}</script><script type='application/json' id='entrypoint-proof-json'>{}</script></body></html>")
+    write_canonical_full_report_html(
+        root,
+        "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'></head><body><h1>Runtime initialization report shell</h1><script type='application/json' id='artifact-manifest-json'>{}</script><script type='application/json' id='provenance-manifest-json'>{}</script><script type='application/json' id='validation-transcript-json'>{}</script><script type='application/json' id='delivery-manifest-json'>{}</script><script type='application/json' id='runtime-status-json'>{}</script><script type='application/json' id='entrypoint-proof-json'>{}</script></body></html>",
+        source="init_runtime",
+    )
     chat_plan={"run_id":run_id,"job_id":job_id,"command_id":command_id,"provider":args.provider,"plain_text_only":True,"mobile_safe":True,"no_tables":True,"no_local_paths":True,"split_policy":{"max_message_chars":3500,"logical_blocks":True},"messages":[],"attachments":[],"created_at":now()}
     jwrite(root/"chat/chat-message-plan.json", chat_plan)
     event(root, "rfo.runtime.initialized", run_id=run_id, job_id=job_id, command_id=command_id)

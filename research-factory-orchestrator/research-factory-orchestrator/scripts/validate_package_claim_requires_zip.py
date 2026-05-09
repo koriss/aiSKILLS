@@ -4,7 +4,7 @@ import argparse, json, re, sys
 ap=argparse.ArgumentParser(); ap.add_argument('--run-dir', required=True); args=ap.parse_args(); rd=Path(args.run_dir)
 errors=[]
 texts=[]
-for rel in ['chat/message-004-files.txt','delivery-manifest.json','attachment-ledger.json','report/full-report.html']:
+for rel in ['chat/02-facts.md', 'chat/01-analysis.md', 'delivery-manifest.json', 'attachment-ledger.json', 'report/full-report.html']:
     p=rd/rel
     if p.exists(): texts.append((rel,p.read_text(encoding='utf-8',errors='ignore')))
 claim_words=re.compile(r'(zip|archive|архив|research-package\.zip|артефакт[ыов]*\s+отправ)', re.I)

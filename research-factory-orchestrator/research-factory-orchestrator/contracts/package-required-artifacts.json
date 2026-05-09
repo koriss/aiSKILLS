@@ -254,6 +254,18 @@
       "line_schema": null
     },
     {
+      "relpath": "report/facts-gate-meta.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "report/quality-metadata.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
       "relpath": "report/semantic-report.json",
       "kind": "json",
       "core_schema": "pkg-generic-object",
@@ -272,25 +284,13 @@
       "line_schema": null
     },
     {
-      "relpath": "chat/message-001-analytical-memo.txt",
+      "relpath": "chat/01-analysis.md",
       "kind": "text",
       "core_schema": "pkg-stub-empty-string",
       "line_schema": null
     },
     {
-      "relpath": "chat/message-002-facts.txt",
-      "kind": "text",
-      "core_schema": "pkg-stub-empty-string",
-      "line_schema": null
-    },
-    {
-      "relpath": "chat/message-003-io-propaganda-check.txt",
-      "kind": "text",
-      "core_schema": "pkg-stub-empty-string",
-      "line_schema": null
-    },
-    {
-      "relpath": "chat/message-004-files.txt",
+      "relpath": "chat/02-facts.md",
       "kind": "text",
       "core_schema": "pkg-stub-empty-string",
       "line_schema": null

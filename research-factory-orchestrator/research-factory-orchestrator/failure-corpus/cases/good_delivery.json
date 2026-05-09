@@ -11,7 +11,8 @@
   "required_outbox_events": [
     "OUT-0001",
     "OUT-0002",
-    "OUT-0003"
+    "OUT-0005",
+    "OUT-0006"
   ],
   "checks": {
     "provider_ack_gate": {
@@ -40,6 +41,13 @@
     },
     {
       "event_id": "OUT-0002",
+      "event_type": "send_message",
+      "ack_status": "sent",
+      "real_external_delivery": true,
+      "stub_delivery": false
+    },
+    {
+      "event_id": "OUT-0005",
       "event_type": "send_file",
       "file_kind": "html_report",
       "ack_status": "sent",
@@ -47,7 +55,7 @@
       "stub_delivery": false
     },
     {
-      "event_id": "OUT-0003",
+      "event_id": "OUT-0006",
       "event_type": "send_file",
       "file_kind": "research_package",
       "ack_status": "sent",
@@ -57,14 +65,14 @@
   ],
   "attachments": [
     {
-      "event_id": "OUT-0002",
+      "event_id": "OUT-0005",
       "type": "standalone_html",
       "required": true,
       "sent": true,
       "externally_sent": true
     },
     {
-      "event_id": "OUT-0003",
+      "event_id": "OUT-0006",
       "type": "research_package",
       "required": true,
       "sent": true,

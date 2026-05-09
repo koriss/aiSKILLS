@@ -4,8 +4,8 @@ import argparse, json, sys
 
 REQUIRED_RUN_FILES = [
     'entrypoint-proof.json','runtime-status.json','package/research-package.zip','chat/chat-message-plan.json',
-    'outbox/OUT-0001.json','outbox/OUT-0002.json','outbox/OUT-0003.json',
-    'delivery-acks/OUT-0001.json','delivery-acks/OUT-0002.json','delivery-acks/OUT-0003.json',
+    'outbox/OUT-0001.json','outbox/OUT-0002.json','outbox/OUT-0005.json','outbox/OUT-0006.json',
+    'delivery-acks/OUT-0001.json','delivery-acks/OUT-0002.json','delivery-acks/OUT-0005.json','delivery-acks/OUT-0006.json',
     'delivery-manifest.json','attachment-ledger.json','final-answer-gate.json',
 ]
 
@@ -21,7 +21,7 @@ def main():
     if job.get('status')!='done': errors.append(f'job status must be done after worker lifecycle, got {job.get("status")!r}')
     if job.get('runtime_executed') is not True: errors.append('job.runtime_executed must be true')
     if job.get('package_built') is not True: errors.append('job.package_built must be true')
-    if job.get('outbox_events') != 3: errors.append('job.outbox_events must equal 3')
+    if job.get('outbox_events') != 4: errors.append('job.outbox_events must equal 4')
     for folder,should_exist in [('done',True),('pending',False),('running',False),('failed',False)]:
         p=runs_root/'queue'/folder/f'{job_id}.json'
         if should_exist and not p.exists(): errors.append(f'job not found in queue/{folder}: {job_id}')

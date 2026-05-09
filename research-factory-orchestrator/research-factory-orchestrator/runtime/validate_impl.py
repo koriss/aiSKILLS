@@ -146,8 +146,6 @@ def validate(rd):
         errs.append({"report_generator_identity_conflict": "Deep Investigation Agent mixed with RFO claim"})
     if "VALIDATION_GATE: PASSED" in htmltxt and ("FAIL" in htmltxt or "TIMEOUT" in htmltxt or "PARTIAL" in htmltxt):
         errs.append({"gate_consistency": "validation passed text conflicts with failed/partial gates"})
-    if "research-package.zip" in (rd / "chat/message-004-files.txt").read_text(encoding="utf-8") and not (rd / "package/research-package.zip").exists():
-        errs.append({"package_claim_without_zip": True})
     if not (rd / "feature-truth-matrix.json").exists():
         errs.append({"missing_feature_truth_matrix": True})
     if not (rd / "late-results-ledger.jsonl").exists():
@@ -167,7 +165,7 @@ def validate(rd):
             errs.append({"bad_package_zip": str(e)})
     plan = jr(rd / "chat/chat-message-plan.json")
     kinds = [m.get("kind") for m in plan.get("messages", [])]
-    for k in ["analytical_memo", "factual_dossier", "io_propaganda_check", "files_and_delivery_status"]:
+    for k in ["analysis", "facts_with_links"]:
         if k not in kinds:
             errs.append({"missing_chat_kind": k})
     cs = jr(rd / "claims/claims-registry.json").get("claims", [])

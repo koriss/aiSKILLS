@@ -7,6 +7,7 @@ metadata:
   package: openclaw-research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
+  telegram_native_bridge: "scripts/run_rfo_with_web_search.py"
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
@@ -19,8 +20,9 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Allowed execution paths
 
+- **Telegram slash (`/research_factory_orchestrator`)** — host OpenClaw runs **`scripts/run_rfo_with_web_search.py`** (relay bridge); see `docs/runtime-paths.md`.
 - `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."`
-- `python3 -S scripts/run_rfo_with_web_search.py --runs-root <runs-root> --web-search-json-api-base <relay-base-url> --task "..."` (default profile `live-bridge`; requires relay URL or non-zero exit)
+- `python3 -S scripts/run_rfo_with_web_search.py --runs-root <runs-root> --web-search-json-api-base <relay-base-url> --task "..."` (default profile `live-bridge`; optional **`RFO_BRIDGE_RENDER_STRICT=1`** to fail closed if re-render throws)
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
 - `python3 -S scripts/outbox_delivery_worker.py --runs-root <runs-root>`
 - `python3 -S scripts/run_research_factory.py --project-dir <run-dir> --task "..."`
@@ -31,6 +33,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 - Do not claim delivery without `delivery-manifest.json` + `attachment-ledger.json` + provider ack.
 - Do not treat smoke/seed-only artifacts as completed production research.
 - Do not publish local filesystem paths as proof of delivery.
+- Do not save long HTML dumps as loose **`*.html`** in the workspace root — canonical **`report/full-report.html`** lives only under the **`run_dir`**; use **`*.md`** drafts inside that run-dir when scribbling intermediate prose.
 
 ### Runtime truth contract
 
@@ -46,6 +49,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### References
 
+- `docs/runtime-paths.md` — Telegram vs artifact execute vs workers (single-page map).
 - `SKILL-core.md`
 - `docs/v19/README.md`
 - `docs/v19/validators-core.md`

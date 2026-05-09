@@ -7,8 +7,8 @@ ABS_PATH = re.compile(r'(^|\s)(/home/[^\s]+|/tmp/[^\s]+|/mnt/[^\s]+|[A-Za-z]:\\[
 DELIVERED_CLAIM = re.compile(r'(доставлен[оы]?|отправлен[оы]?|sent|delivered|attached|прикреплен[оы]?|во вложении)', re.I)
 
 REQUIRED_ATTACHMENTS = {
-    'OUT-0002': 'html_report',
-    'OUT-0003': 'research_package',
+    'OUT-0005': 'html_report',
+    'OUT-0006': 'research_package',
 }
 
 def jread(path):

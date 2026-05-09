@@ -589,6 +589,19 @@ def main() -> int:
             render_all(latest_run, task, run_id, job_id_gate, cmd_id_gate, "cli")
             print("[4/5] Re-render complete")
         except Exception as e:
+            strict = (
+                os.environ.get("RFO_BRIDGE_RENDER_STRICT", "").strip().lower()
+                in ("1", "true", "yes")
+            )
+            msg = f"[4/5] Re-render error: {e}"
+            if strict:
+                print(msg, file=sys.stderr)
+                print(
+                    "[4/5] RFO_BRIDGE_RENDER_STRICT enabled — aborting before handoff (exit 21). "
+                    "Unset or set RFO_BRIDGE_RENDER_STRICT=0 for non-fatal bridge behavior.",
+                    file=sys.stderr,
+                )
+                return 21
             print(f"[4/5] Re-render error (non-fatal): {e}")
 
         if prof_lc == "mvr" or args.allow_gate_stub:

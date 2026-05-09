@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse, json, sys
 
-REQUIRED_EVENTS = ["OUT-0001", "OUT-0002", "OUT-0003"]
+REQUIRED_EVENTS = ["OUT-0001", "OUT-0002", "OUT-0005", "OUT-0006"]
 
 def jread(path): return json.loads(Path(path).read_text(encoding="utf-8"))
 

@@ -378,6 +378,11 @@ def main() -> int:
         action="store_true",
         help="Write optimistic final-answer-gate stub (normally disabled for strict profiles)",
     )
+    parser.add_argument(
+        "--best-effort-continue",
+        action="store_true",
+        help="After worker subprocess non-zero exit, continue bridge steps instead of failing (default off).",
+    )
     args = parser.parse_args()
 
     task = args.task
@@ -488,6 +493,7 @@ def main() -> int:
         print(f"[3/5] Queued run_dir: {latest_run}")
 
         worker_claimed = False
+        worker_hard_failed = False
         last_worker_out = ""
         for attempt in range(_WORKER_RETRY_MAX):
             proc = subprocess.run(
@@ -515,18 +521,25 @@ def main() -> int:
             if proc.returncode != 0:
                 print(f"[3/5] worker exit {proc.returncode}", file=sys.stderr)
                 print(last_worker_out[:2500], file=sys.stderr)
+                if args.best_effort_continue:
+                    worker_hard_failed = True
+                    print("[3/5] WARN: --best-effort-continue set; continuing bridge despite worker failure.")
+                    break
                 return 1
             print(f"[3/5] worker not claimed ({reason}), retry {attempt + 1}/{_WORKER_RETRY_MAX}")
             time.sleep(_WORKER_RETRY_BASE_S + 0.12 * attempt)
 
         if not worker_claimed:
-            print(
-                "[3/5] ERROR: worker did not claim a pending job after retries — "
-                "check queue/pending and worker.lease",
-                file=sys.stderr,
-            )
-            print(last_worker_out[:2500], file=sys.stderr)
-            return 1
+            if args.best_effort_continue and worker_hard_failed and latest_run.is_dir():
+                print("[3/5] WARN: proceeding with incomplete worker run (best-effort).")
+            else:
+                print(
+                    "[3/5] ERROR: worker did not claim a pending job after retries — "
+                    "check queue/pending and worker.lease",
+                    file=sys.stderr,
+                )
+                print(last_worker_out[:2500], file=sys.stderr)
+                return 1
 
         if not latest_run.is_dir():
             print(f"[3/5] ERROR: run dir missing: {latest_run}", file=sys.stderr)

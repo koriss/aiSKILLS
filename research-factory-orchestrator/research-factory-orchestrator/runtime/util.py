@@ -42,67 +42,33 @@ CHAT = [
     ("OUT-0003", "io_propaganda_check", "chat/message-003-io-propaganda-check.txt"),
     ("OUT-0004", "files_and_delivery_status", "chat/message-004-files.txt"),
 ]
-PKG_REQUIRED = [
-    "run.json",
-    "run-catalog-entry.json",
-    "entrypoint-proof.json",
-    "runtime-status.json",
-    "observability-events.jsonl",
-    "trace.jsonl",
-    "feature-truth-matrix.json",
-    "work-queue/work-unit-ledger.json",
-    "late-results-ledger.jsonl",
-    "amendment-ledger.jsonl",
-    "interface/interface-request.json",
-    "interface/normalized-command.json",
-    "jobs/runtime-job.json",
-    "graph/target-graph.json",
-    "graph/entity-registry.json",
-    "graph/edge-ledger.json",
-    "graph/frontier.json",
-    "graph/wave-plan.json",
-    "graph/wave-events.jsonl",
-    "claims/claims-registry.json",
-    "claims/claim-status-ledger.json",
-    "evidence/evidence-cards.json",
-    "sources/sources.json",
-    "sources/source-quality.json",
-    "sources/source-conflict-matrix.json",
-    "sources/source-laundering.json",
-    "synthesis/synthesis-events.jsonl",
-    "synthesis/open-questions.json",
-    "synthesis/evidence-debt.json",
-    "synthesis/contradiction-matrix.json",
-    "io/io-method-matches.json",
-    "io/narrative-map.json",
-    "io/source-laundering-map.json",
-    "io/amplification-chain.json",
-    "self-audit/runtime-self-audit.json",
-    "self-audit/model-compliance-ledger.json",
-    "self-audit/search-quality-ledger.json",
-    "self-audit/deviation-ledger.json",
-    "self-audit/hallucination-risk-map.json",
-    "report/analytical-memo.json",
-    "report/factual-dossier.json",
-    "report/io-propaganda-check.json",
-    "report/semantic-report.json",
-    "report/full-report.html",
-    "chat/chat-message-plan.json",
-    "chat/message-001-analytical-memo.txt",
-    "chat/message-002-facts.txt",
-    "chat/message-003-io-propaganda-check.txt",
-    "chat/message-004-files.txt",
-    "delivery-manifest.json",
-    "attachment-ledger.json",
-    "final-answer-gate.json",
-    "artifact-manifest.json",
-    "provenance-manifest.json",
-    "validation-transcript.json",
-    # v19.2.0 dual-layout: root mirrors for collectors / coverage (see runtime/collector.py).
-    "sources.json",
-    "collection-result.json",
-    "collection-coverage-result.json",
-]
+
+
+def package_required_artifacts_path() -> Path:
+    """Canonical contract listing every path required in ``research-package.zip``."""
+    return Path(__file__).resolve().parent.parent / "contracts" / "package-required-artifacts.json"
+
+
+def load_pkg_required_paths() -> list[str]:
+    """Load ordered ``relpath`` list from ``contracts/package-required-artifacts.json``."""
+    p = package_required_artifacts_path()
+    try:
+        o = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    arts = o.get("artifacts")
+    if not isinstance(arts, list):
+        return []
+    out: list[str] = []
+    for a in arts:
+        if isinstance(a, dict):
+            rel = a.get("relpath")
+            if isinstance(rel, str) and rel.strip():
+                out.append(rel.strip())
+    return out
+
+
+PKG_REQUIRED = load_pkg_required_paths()
 
 
 def now() -> str:

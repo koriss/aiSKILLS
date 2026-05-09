@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RFO JSONL single-line event",
+  "type": "object",
+  "properties": {
+    "event_name": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "run_id": { "type": "string" }
+  },
+  "required": ["event_name", "timestamp"],
+  "additionalProperties": true
+}

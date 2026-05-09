@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Minimal HTML scaffold document",
+  "type": "string",
+  "const": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"/><title>RFO</title></head><body></body></html>"
+}

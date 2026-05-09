@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+from runtime.schema_synth import synth_from_json_schema as _synth_from_schema
 from runtime.util import now
 
 ZERO64 = "0" * 64
@@ -70,51 +71,7 @@ def _load_schema(schema_name: str) -> dict[str, Any] | None:
         return None
 
 
-def _synth_value(sub: dict[str, Any], root: dict[str, Any]) -> Any:
-    if "const" in sub:
-        return sub["const"]
-    if "enum" in sub and isinstance(sub["enum"], list) and sub["enum"]:
-        return sub["enum"][0]
-    t = sub.get("type")
-    if t == "string":
-        return ""
-    if t == "integer":
-        return 0
-    if t == "number":
-        return 0
-    if t == "boolean":
-        return False
-    if t == "array":
-        return []
-    if t == "object" or ("properties" in sub and isinstance(sub.get("properties"), dict)):
-        return _synth_object(sub, root)
-    if "oneOf" in sub and isinstance(sub.get("oneOf"), list):
-        for br in sub["oneOf"]:
-            if isinstance(br, dict):
-                return _synth_value(br, root)
-    if "anyOf" in sub and isinstance(sub.get("anyOf"), list):
-        for br in sub["anyOf"]:
-            if isinstance(br, dict):
-                return _synth_value(br, root)
-    return None
-
-
-def _synth_object(schema: dict[str, Any], root: dict[str, Any]) -> dict[str, Any]:
-    out: dict[str, Any] = {}
-    props = schema.get("properties") if isinstance(schema.get("properties"), dict) else {}
-    req = schema.get("required") if isinstance(schema.get("required"), list) else []
-    for rk in req:
-        if rk not in props or not isinstance(props[rk], dict):
-            continue
-        out[rk] = _synth_value(props[rk], root)
-    return out
-
-
-def _synth_from_schema(schema: dict[str, Any]) -> dict[str, Any]:
-    root = schema
-    if schema.get("type") == "object" or isinstance(schema.get("properties"), dict):
-        return _synth_object(schema, root)
-    return {}
+# JSON Schema synthesis lives in ``runtime.schema_synth`` (single implementation).
 
 
 def minimal_valid(schema_name: str, overrides: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -132,9 +89,10 @@ def minimal_valid(schema_name: str, overrides: Mapping[str, Any] | None = None) 
     if schema is not None:
         try:
             synth = _synth_from_schema(schema)
-            for k, v in synth.items():
-                if k not in base or base[k] in (None, "", [], {}):
-                    base[k] = v
+            if isinstance(synth, dict):
+                for k, v in synth.items():
+                    if k not in base or base[k] in (None, "", [], {}):
+                        base[k] = v
         except Exception:
             pass
     if overrides:

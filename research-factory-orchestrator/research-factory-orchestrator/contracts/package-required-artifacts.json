@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "relpath": "run.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "run-catalog-entry.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "entrypoint-proof.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "runtime-status.json",
+      "kind": "json",
+      "core_schema": "runtime-status",
+      "line_schema": null
+    },
+    {
+      "relpath": "observability-events.jsonl",
+      "kind": "jsonl",
+      "core_schema": null,
+      "line_schema": "pkg-jsonl-event"
+    },
+    {
+      "relpath": "trace.jsonl",
+      "kind": "jsonl",
+      "core_schema": null,
+      "line_schema": "pkg-jsonl-event"
+    },
+    {
+      "relpath": "feature-truth-matrix.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "work-queue/work-unit-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "late-results-ledger.jsonl",
+      "kind": "jsonl",
+      "core_schema": null,
+      "line_schema": "pkg-jsonl-event"
+    },
+    {
+      "relpath": "amendment-ledger.jsonl",
+      "kind": "jsonl",
+      "core_schema": null,
+      "line_schema": "pkg-jsonl-event"
+    },
+    {
+      "relpath": "interface/interface-request.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "interface/normalized-command.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "jobs/runtime-job.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "graph/target-graph.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "graph/entity-registry.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "graph/edge-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "graph/frontier.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "graph/wave-plan.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "graph/wave-events.jsonl",
+      "kind": "jsonl",
+      "core_schema": null,
+      "line_schema": "pkg-jsonl-event"
+    },
+    {
+      "relpath": "claims/claims-registry.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "claims/claim-status-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "evidence/evidence-cards.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "sources/sources.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "sources/source-quality.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "sources/source-conflict-matrix.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "sources/source-laundering.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "synthesis/synthesis-events.jsonl",
+      "kind": "jsonl",
+      "core_schema": null,
+      "line_schema": "pkg-jsonl-event"
+    },
+    {
+      "relpath": "synthesis/open-questions.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "synthesis/evidence-debt.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "synthesis/contradiction-matrix.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "io/io-method-matches.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "io/narrative-map.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "io/source-laundering-map.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "io/amplification-chain.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "self-audit/runtime-self-audit.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "self-audit/model-compliance-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "self-audit/search-quality-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "self-audit/deviation-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "self-audit/hallucination-risk-map.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "report/analytical-memo.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "report/factual-dossier.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "report/io-propaganda-check.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "report/semantic-report.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "report/full-report.html",
+      "kind": "text",
+      "core_schema": "pkg-stub-html",
+      "line_schema": null
+    },
+    {
+      "relpath": "chat/chat-message-plan.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "chat/message-001-analytical-memo.txt",
+      "kind": "text",
+      "core_schema": "pkg-stub-empty-string",
+      "line_schema": null
+    },
+    {
+      "relpath": "chat/message-002-facts.txt",
+      "kind": "text",
+      "core_schema": "pkg-stub-empty-string",
+      "line_schema": null
+    },
+    {
+      "relpath": "chat/message-003-io-propaganda-check.txt",
+      "kind": "text",
+      "core_schema": "pkg-stub-empty-string",
+      "line_schema": null
+    },
+    {
+      "relpath": "chat/message-004-files.txt",
+      "kind": "text",
+      "core_schema": "pkg-stub-empty-string",
+      "line_schema": null
+    },
+    {
+      "relpath": "delivery-manifest.json",
+      "kind": "json",
+      "core_schema": "delivery-manifest",
+      "line_schema": null
+    },
+    {
+      "relpath": "attachment-ledger.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "final-answer-gate.json",
+      "kind": "json",
+      "core_schema": "final-answer-gate",
+      "line_schema": null
+    },
+    {
+      "relpath": "artifact-manifest.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "provenance-manifest.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "validation-transcript.json",
+      "kind": "json",
+      "core_schema": "validation-transcript",
+      "line_schema": null
+    },
+    {
+      "relpath": "sources.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "collection-result.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
+      "relpath": "collection-coverage-result.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 import zipfile
 from pathlib import Path
 
@@ -36,10 +37,7 @@ def _normalize_run_mode(requested: str) -> tuple[str, str | None]:
         "development": "research",
         "prod": "production",
     }
-    if low == "smoke":
-        canonical, normalized_from = "research", raw
-        return canonical, normalized_from
-    if low in ("research", "production"):
+    if low in ("research", "production", "smoke"):
         canonical = low
     elif low in aliases:
         canonical = aliases[low]
@@ -179,7 +177,7 @@ def cmd_run(a):
             "outbox_delivery_worker": "implemented",
             "wave_graph_collector": "scaffold",
             "real_external_search_workers": "missing",
-            "external_user_visible_delivery_via_skill": "not_applicable",
+            "provider_telegram_real_send": "stub",
             "late_result_protocol": "implemented_scaffold",
             "deterministic_html_renderer": "implemented_scaffold",
             "analytical_memo": "scaffold",
@@ -274,9 +272,6 @@ def cmd_run(a):
     }
     jw(rd / "feature-truth-matrix.json", feature_matrix)
     render_all(rd, a.task, run_id, job_id, cmd_id, a.provider)
-    from runtime.pkg_required_scaffold import ensure_pkg_required_paths
-
-    ensure_pkg_required_paths(rd, run_id, job_id, cmd_id)
     required = [
         "run.json",
         "entrypoint-proof.json",
@@ -380,6 +375,26 @@ def build_package(rd, *, allow_stub: bool = False):
     print(json.dumps(m, ensure_ascii=False, indent=2))
 
 
+def _unlink_stale_lease(lease: Path, ttl_s: float) -> None:
+    if not lease.is_file() or ttl_s <= 0:
+        return
+    try:
+        age = time.time() - lease.stat().st_mtime
+    except OSError:
+        return
+    if age >= ttl_s:
+        lease.unlink(missing_ok=True)
+
+
+def _return_job_pending(runq_path: Path, pending_path: Path) -> None:
+    if not runq_path.is_file():
+        return
+    try:
+        runq_path.replace(pending_path)
+    except OSError:
+        pass
+
+
 def cmd_worker(a):
     root = Path(a.runs_root)
     pending = sorted((root / "queue/pending").glob("*.json"))
@@ -388,8 +403,10 @@ def cmd_worker(a):
         return
     if not a.execute_runtime and not a.dry_run:
         raise SystemExit("explicit --execute-runtime or --dry-run required")
+    stale_ttl_s = float(os.environ.get("RFO_WORKER_LEASE_STALE_SECONDS", "900"))
     job = jr(pending[0])
     rd = Path(job["run_dir"])
+    job_pending_path = pending[0]
     runq = root / "queue/running" / pending[0].name
     done = root / "queue/done" / pending[0].name
     runq.parent.mkdir(parents=True, exist_ok=True)
@@ -397,123 +414,146 @@ def cmd_worker(a):
     lease = root / "queue/worker.lease"
     tok = sid("LEASE", pending[0].name, now())
     if lease.exists():
+        _unlink_stale_lease(lease, stale_ttl_s)
+    if lease.exists():
         print(json.dumps({"claimed": False, "reason": "lease_present"}, ensure_ascii=False))
         return
-    lease.write_text(json.dumps({"token": tok, "job_file": pending[0].name, "run_dir": str(rd), "created_at": now()}, ensure_ascii=False) + "\n", encoding="utf-8")
-    pending[0].replace(runq)
+    lease_payload = {
+        "token": tok,
+        "pid": os.getpid(),
+        "job_file": pending[0].name,
+        "run_dir": str(rd),
+        "created_at": now(),
+    }
+    lease.write_text(json.dumps(lease_payload, ensure_ascii=False) + "\n", encoding="utf-8")
+    try:
+        job_pending_path.replace(runq)
+    except OSError:
+        lease.unlink(missing_ok=True)
+        raise
     if a.dry_run:
         lease.unlink(missing_ok=True)
+        _return_job_pending(runq, job_pending_path)
         raise SystemExit("dry-run intentionally does not execute runtime")
     entry = str(skill_root() / "scripts" / "rfo_runtime_core.py")
     worker_mode = getattr(a, "mode", None) or job.get("run_mode") or "research"
-    p = subprocess.run(
-        [
-            sys.executable,
-            "-S",
-            entry,
-            "run",
-            "--project-dir",
-            str(rd),
-            "--task",
-            job["task"],
-            "--run-id",
-            job["run_id"],
-            "--job-id",
-            job["job_id"],
-            "--command-id",
-            job["command_id"],
-            "--mode",
-            worker_mode,
-            "--provider",
-            job.get("provider", "cli"),
-            "--interface",
-            job.get("created_from_interface", "generic"),
-        ],
-        capture_output=True,
-        text=True,
-        timeout=240,
-    )
+    job_after_move = jr(runq)
+    p = None
+    try:
+        p = subprocess.run(
+            [
+                sys.executable,
+                "-S",
+                entry,
+                "run",
+                "--project-dir",
+                str(rd),
+                "--task",
+                job_after_move["task"],
+                "--run-id",
+                job_after_move["run_id"],
+                "--job-id",
+                job_after_move["job_id"],
+                "--command-id",
+                job_after_move["command_id"],
+                "--mode",
+                worker_mode,
+                "--provider",
+                job_after_move.get("provider", "cli"),
+                "--interface",
+                job_after_move.get("created_from_interface", "generic"),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=240,
+        )
+    except subprocess.TimeoutExpired:
+        lease.unlink(missing_ok=True)
+        _return_job_pending(runq, job_pending_path)
+        print(json.dumps({"error": "worker_subprocess_timeout", "timeout_seconds": 240}, ensure_ascii=False), file=sys.stderr)
+        raise SystemExit(124) from None
+
+    assert p is not None
     if p.returncode:
         lease.unlink(missing_ok=True)
+        _return_job_pending(runq, job_pending_path)
         print(p.stdout + p.stderr)
         raise SystemExit(p.returncode)
+    jw(
+        rd / "outbox/outbox-policy.json",
+        {
+            "run_id": job["run_id"],
+            "job_id": job["job_id"],
+            "required_events": REQ_EVENTS,
+            "policy": "v19 3+1 chat blocks plus html/package files",
+            "dedup_window_hours": 72,
+            "dlq_after_retries": 8,
+            "max_retry_backoff_ms": 60000,
+            "retry_jitter_ms": 250,
+        },
+    )
+    for eid, kind, path in CHAT:
+        jw(
+            rd / "outbox" / f"{eid}.json",
+            {
+                "event_id": eid,
+                "run_id": job["run_id"],
+                "job_id": job["job_id"],
+                "type": "send_message",
+                "provider": job.get("provider", "cli"),
+                "payload_path": path,
+                "payload_kind": kind,
+                "required_for_final_delivery": True,
+                "status": "pending",
+                "idempotency_key": sid("IDEMP", eid, path, job.get("provider", "cli")),
+                "created_at": now(),
+            },
+        )
+    jw(
+        rd / "outbox/OUT-0005.json",
+        {
+            "event_id": "OUT-0005",
+            "run_id": job["run_id"],
+            "job_id": job["job_id"],
+            "type": "send_file",
+            "provider": job.get("provider", "cli"),
+            "payload_path": "report/full-report.html",
+            "file_kind": "html_report",
+            "required_for_final_delivery": True,
+            "status": "pending",
+            "idempotency_key": sid("IDEMP", "OUT-0005", "report/full-report.html", job.get("provider", "cli")),
+            "created_at": now(),
+        },
+    )
+    jw(
+        rd / "outbox/OUT-0006.json",
+        {
+            "event_id": "OUT-0006",
+            "run_id": job["run_id"],
+            "job_id": job["job_id"],
+            "type": "send_file",
+            "provider": job.get("provider", "cli"),
+            "payload_path": "package/research-package.zip",
+            "file_kind": "research_package",
+            "required_for_final_delivery": True,
+            "status": "pending",
+            "idempotency_key": sid("IDEMP", "OUT-0006", "package/research-package.zip", job.get("provider", "cli")),
+            "created_at": now(),
+        },
+    )
+    build_package(rd, allow_stub=_is_seed_only_or_artifact_only(rd))
     try:
-        jw(
-            rd / "outbox/outbox-policy.json",
-            {
-                "run_id": job["run_id"],
-                "job_id": job["job_id"],
-                "required_events": REQ_EVENTS,
-                "policy": "v19 3+1 chat blocks plus html/package files",
-                "dedup_window_hours": 72,
-                "dlq_after_retries": 8,
-                "max_retry_backoff_ms": 60000,
-                "retry_jitter_ms": 250,
-            },
-        )
-        for eid, kind, path in CHAT:
-            jw(
-                rd / "outbox" / f"{eid}.json",
-                {
-                    "event_id": eid,
-                    "run_id": job["run_id"],
-                    "job_id": job["job_id"],
-                    "type": "send_message",
-                    "provider": job.get("provider", "cli"),
-                    "payload_path": path,
-                    "payload_kind": kind,
-                    "required_for_final_delivery": True,
-                    "status": "pending",
-                    "idempotency_key": sid("IDEMP", eid, path, job.get("provider", "cli")),
-                    "created_at": now(),
-                },
-            )
-        jw(
-            rd / "outbox/OUT-0005.json",
-            {
-                "event_id": "OUT-0005",
-                "run_id": job["run_id"],
-                "job_id": job["job_id"],
-                "type": "send_file",
-                "provider": job.get("provider", "cli"),
-                "payload_path": "report/full-report.html",
-                "file_kind": "html_report",
-                "required_for_final_delivery": True,
-                "status": "pending",
-                "idempotency_key": sid("IDEMP", "OUT-0005", "report/full-report.html", job.get("provider", "cli")),
-                "created_at": now(),
-            },
-        )
-        jw(
-            rd / "outbox/OUT-0006.json",
-            {
-                "event_id": "OUT-0006",
-                "run_id": job["run_id"],
-                "job_id": job["job_id"],
-                "type": "send_file",
-                "provider": job.get("provider", "cli"),
-                "payload_path": "package/research-package.zip",
-                "file_kind": "research_package",
-                "required_for_final_delivery": True,
-                "status": "pending",
-                "idempotency_key": sid("IDEMP", "OUT-0006", "package/research-package.zip", job.get("provider", "cli")),
-                "created_at": now(),
-            },
-        )
-        build_package(rd, allow_stub=_is_seed_only_or_artifact_only(rd))
-        try:
-            from runtime.event_history import append_side_effect
+        from runtime.event_history import append_side_effect
 
-            append_side_effect(rd, "package_built", {"run_id": job["run_id"], "job_id": job["job_id"]}, {"ok": True})
-        except Exception:
-            pass
-        st = jr(rd / "runtime-status.json")
-        st.update({"state": "delivery_queued"})
-        jw(rd / "runtime-status.json", st)
-        job.update({"status": "done", "runtime_executed": True, "package_built": True, "outbox_events": 6})
-        jw(rd / "jobs/runtime-job.json", job)
-        jw(done, job)
-        runq.unlink(missing_ok=True)
-        print(json.dumps({"claimed": True, "status": "done", "run_id": job["run_id"], "outbox_events": 6}, ensure_ascii=False, indent=2))
-    finally:
-        lease.unlink(missing_ok=True)
+        append_side_effect(rd, "package_built", {"run_id": job["run_id"], "job_id": job["job_id"]}, {"ok": True})
+    except Exception:
+        pass
+    st = jr(rd / "runtime-status.json")
+    st.update({"state": "delivery_queued"})
+    jw(rd / "runtime-status.json", st)
+    job.update({"status": "done", "runtime_executed": True, "package_built": True, "outbox_events": 6})
+    jw(rd / "jobs/runtime-job.json", job)
+    jw(done, job)
+    runq.unlink(missing_ok=True)
+    lease.unlink(missing_ok=True)
+    print(json.dumps({"claimed": True, "status": "done", "run_id": job["run_id"], "outbox_events": 6}, ensure_ascii=False, indent=2))

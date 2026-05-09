@@ -26,6 +26,8 @@ sys.path.insert(0, str(SKILL_ROOT))
 
 from runtime.util import jw, tw, now, sid, slug  # noqa: E402
 
+from rfo_relay_search_helpers import build_relay_params, rank_relay_rows_for_task, relay_fetch_cap  # noqa: E402
+
 # ── config ─────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
 _USER_AGENT = os.environ.get(
@@ -44,10 +46,8 @@ _MAX_RESULTS = 10
 # ── search ────────────────────────────────────────────────────────────────────
 def search_json_relay(api_base: str, query: str, num: int = _MAX_RESULTS) -> list[dict]:
     base = api_base.rstrip("/")
-    params: dict[str, str] = {"q": query, "format": "json", "num": str(num)}
-    eng = os.environ.get("RFO_WEB_SEARCH_ENGINES", "").strip()
-    if eng:
-        params["engines"] = eng
+    fetch_n = relay_fetch_cap(num)
+    params = build_relay_params(query, fetch_n)
     url = f"{base}/search?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
@@ -64,7 +64,7 @@ def search_json_relay(api_base: str, query: str, num: int = _MAX_RESULTS) -> lis
                     "snippet": (r.get("content") or "")[:500],
                     "engine": r.get("engine", ""),
                 })
-            return results
+            return rank_relay_rows_for_task(query, results, limit=num)
     except Exception as e:
         print(f"[search] relay error: {e}")
         return []

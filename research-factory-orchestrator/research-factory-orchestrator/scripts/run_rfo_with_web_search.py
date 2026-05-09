@@ -43,6 +43,12 @@ sys.path.insert(0, str(SKILL_ROOT))
 
 from runtime.util import now  # noqa: E402
 
+from rfo_relay_search_helpers import (  # noqa: E402
+    build_relay_params,
+    rank_relay_rows_for_task,
+    relay_fetch_cap,
+)
+
 # ── config ────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
 _USER_AGENT = os.environ.get("RFO_WEB_SEARCH_USER_AGENT", "RFO/19.4-RelayPrefetch (+https://github.com/openclaw/research-factory-orchestrator)")
@@ -120,10 +126,8 @@ def resolve_relay_bases(cli_base: str) -> list[str]:
 def query_json_search_relay(api_base: str, query: str, num: int) -> list[dict]:
     """JSON relay search; ``api_base`` is origin only; path ``/search`` appended (SearxNG-style)."""
     base = api_base.rstrip("/")
-    params: dict[str, str] = {"q": query, "format": "json", "num": str(num)}
-    eng = os.environ.get("RFO_WEB_SEARCH_ENGINES", "").strip()
-    if eng:
-        params["engines"] = eng
+    fetch_n = relay_fetch_cap(num)
+    params = build_relay_params(query, fetch_n)
     url = f"{base}/search?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
@@ -141,7 +145,7 @@ def query_json_search_relay(api_base: str, query: str, num: int) -> list[dict]:
                         "snippet": (r.get("content") or "")[:500],
                     }
                 )
-            return results
+            return rank_relay_rows_for_task(query, results, limit=num)
     except Exception as e:
         print(f"[search] relay error ({api_base}): {e}", file=sys.stderr)
         return []
@@ -535,7 +539,9 @@ def main() -> int:
             else:
                 print(
                     "[3/5] ERROR: worker did not claim a pending job after retries — "
-                    "check queue/pending and worker.lease",
+                    "check queue/pending and queue/worker.lease "
+                    "(canonical: <runs-root>/queue/worker.lease). "
+                    "If lease is stale, set RFO_WORKER_LEASE_STALE_SECONDS or remove the file after verifying no worker holds it.",
                     file=sys.stderr,
                 )
                 print(last_worker_out[:2500], file=sys.stderr)

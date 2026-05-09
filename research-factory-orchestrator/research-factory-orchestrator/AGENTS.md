@@ -56,7 +56,8 @@ The bridge exits non-zero if the relay base URL is missing. It ends with stdout 
 ### Contract boundary (Adapter | Queue | Worker | Collector)
 
 - **Adapter** (`cmd_adapter`): allocates `runs/<label>/`, writes `jobs/runtime-job.json`, appends index, drops `queue/pending/<job_id>.json`.
-- **Queue**: `pending` → `running` → `done` (worker moves files + `worker.lease`).
+- **Queue**: `pending` → `running` → `done` (worker moves files under `queue/` and acquires **`queue/worker.lease`** — not `runs-root/worker.lease`).
+- **Recovery**: `python3 -S scripts/rfo_queue_recover.py --runs-root <runs-root>` moves inconsistent `queue/running/*.json` back to `pending/` when runtime failed or inner `status` is still `queued`.
 - **Worker** (`cmd_worker`): claims one pending job, runs `rfo_runtime_core run` **inheriting the current OS environment**, then packaging / outbox prep.
 - **Collector** (`collect`): reads `RFO_SOURCE_PACKET` file if present (`external_source_packet_loaded`); `RFO_SEED_URLS` probes are a separate branch. Breaking env inheritance (e.g. `subprocess.run(..., env={})` without merge) silently drops packets.
 

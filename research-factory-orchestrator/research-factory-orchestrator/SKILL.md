@@ -3,14 +3,14 @@ name: research_factory_orchestrator
 description: Research Factory Orchestrator for OpenClaw: v19.3+ artifact-only compute path with profile-driven V1-V6 validation; user-visible delivery is host-owned (stdout handoff).
 license: internal
 metadata:
-  version: "19.3"
+  version: "19.3.1"
   package: openclaw-research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.3"
+  release: "19.3.1"
 ---
 
 ## HOW TO OPERATE THIS SKILL

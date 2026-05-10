@@ -18,6 +18,7 @@ from runtime.report_html import (
 from runtime.status import VERSION
 from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
+from runtime.chat_md import sanitize_chat_body_for_plain_channels
 from runtime.worker_impl import build_package, cmd_run
 
 # Neutral stdout capsule for whoever invoked the skill (LLM gateway, cron, host relay bridge, …).
@@ -118,7 +119,9 @@ def _seed_interface_and_job(rd: Path, c: dict, task: str) -> None:
 def _write_final_answer(rd: Path, task: str) -> None:
     primary = rd / "chat/01-analysis.md"
     if primary.is_file():
-        body = primary.read_text(encoding="utf-8", errors="replace")[:12000]
+        body = sanitize_chat_body_for_plain_channels(
+            primary.read_text(encoding="utf-8", errors="replace")[:12000]
+        )
         lines = [
             "# Final answer (artifact)",
             "",
@@ -147,7 +150,9 @@ def _write_final_answer(rd: Path, task: str) -> None:
         "Full HTML report and optional research package are separate artifacts per `result-manifest.json`.",
         "",
     ]
-    (rd / "final-answer.md").write_text("\n".join(lines), encoding="utf-8")
+    (rd / "final-answer.md").write_text(
+        sanitize_chat_body_for_plain_channels("\n".join(lines)), encoding="utf-8"
+    )
 
 
 def _host_visible_run_dir(rd: Path) -> str | None:
@@ -170,9 +175,13 @@ def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: lis
     primary_path = rd / "chat/01-analysis.md"
     primary = ""
     if primary_path.is_file():
-        primary = primary_path.read_text(encoding="utf-8", errors="replace")[:3500]
+        primary = sanitize_chat_body_for_plain_channels(
+            primary_path.read_text(encoding="utf-8", errors="replace")[:3500]
+        )
     elif (rd / "final-answer.md").is_file():
-        primary = (rd / "final-answer.md").read_text(encoding="utf-8", errors="replace")[:3500]
+        primary = sanitize_chat_body_for_plain_channels(
+            (rd / "final-answer.md").read_text(encoding="utf-8", errors="replace")[:3500]
+        )
     arts = []
     for path, role, media, fn, required in (
         ("chat/01-analysis.md", "analysis", "text/markdown", "01-analysis.md", True),

@@ -29,6 +29,10 @@
 - `docs/v19/failure-fixtures.md`
 - `docs/adr/ADR-001-v19-pragmatic-rigor.md`
 - `docs/qa/assertion-command-matrix.md`
+- `docs/qa/RFO-DEEP-ANALYSIS-2026-05.md`
+- `docs/qa/RFO-REMEDIATION-ROADMAP.md`
+- `docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md`
+- `docs/qa/RFO-TRUTH-CONTRACTS-ALIGNMENT.md`
 - `kb/README.md`
 - `prompts/README.md`
 - `references/README.md`
@@ -73,6 +77,15 @@
 ### Matrix
 
 - **`docs/qa/assertion-command-matrix.md`** — таблица «утверждение → команда проверки» для закрытия матрицы из плана.
+
+### Wave H — deep remediation (2026-05 incident documentation)
+
+- **`docs/qa/RFO-DEEP-ANALYSIS-2026-05.md`** — единый разбор симптомов (lease / mvr / delivery boundary) и классификация failure modes.
+- **`docs/qa/RFO-REMEDIATION-ROADMAP.md`** — дорожная карта workstream’ов (очередь, профили, delivery UX, bridge, контракты).
+- **`docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md`** — безопасный triage `queue/worker.lease` и recovery.
+- **`docs/qa/RFO-TRUTH-CONTRACTS-ALIGNMENT.md`** — выравнивание `runtime-status`, manifest, feature-truth, handoff.
+- **`docs/qa/RFO-REMAINING-PLAN.md`** — секция D: статус документов deep remediation.
+- **`docs/qa/assertion-command-matrix.md`** — строки верификации на новые документы.
 
 ## Реестр команд (smoke)
 

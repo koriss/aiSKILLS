@@ -98,6 +98,34 @@ It is intentionally short and executable.
 4. `R3` then `R4` (neutrality completion + wrapper retirement)
 5. `R1` and `R2` maintained as portability references
 
+## D — Deep remediation documentation (post 2026-05 incident analysis)
+
+Operational narrative: dual-track run (direct factory vs relay bridge), stale `queue/worker.lease`, `mvr` seed-only evidence, `delivery_status: not_queued`.
+
+| id | artifact | status |
+|----|-----------|--------|
+| `deep-doc-analysis` | `docs/qa/RFO-DEEP-ANALYSIS-2026-05.md` | completed |
+| `deep-doc-roadmap` | `docs/qa/RFO-REMEDIATION-ROADMAP.md` | completed |
+| `deep-doc-lease-runbook` | `docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md` | completed |
+| `deep-doc-truth-map` | `docs/qa/RFO-TRUTH-CONTRACTS-ALIGNMENT.md` | completed |
+| `deep-doc-matrix-rows` | `docs/qa/assertion-command-matrix.md` updated (deep remediation rows) | completed |
+
+Follow-up coding items that remain intentionally open are listed **by workstream** in `RFO-REMEDIATION-ROADMAP.md` (workstreams A–E forward phases).
+
+## E — Deep remediation execution phases (forward work)
+
+Ordered program for closing **Critical/High** items from [RFO-DEEP-ANALYSIS-2026-05.md](./RFO-DEEP-ANALYSIS-2026-05.md). Status here is **planning tracker**; detailed acceptance lives in the roadmap.
+
+| Phase | Focus | Primary artifacts / code | Exit criteria (summary) |
+|-------|--------|--------------------------|-------------------------|
+| **E1** | Queue/lease liveness + operator ergonomics | `worker_impl.py`, `RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md` | No starvation from poison jobs; lease triage ≤5 min; stderr/runbook pointers where applicable |
+| **E2** | Truth boundary (compute vs delivery) + outbox coherence | `artifact_execute_impl.py`, `outbox_impl.py`, `validate_gate_semantics.py` | Gates and manifests cannot be misread as “delivered” when only compute ran |
+| **E3** | Profile / validation parity (epistemic harm) | profiles, `verify_skill_run_claims.py`, playbook | Hard tasks do not silently present stub/seed as full external research |
+| **E4** | Anti-regression & contracts | `RFO-TRUTH-CONTRACTS-ALIGNMENT.md`, `assertion-command-matrix.md`, schemas | Schema/contract changes paired with validator + matrix updates |
+| **E5** | Operational guardrails hardened | bridge sanity gate, `errors.jsonl` volume review | Best-effort and relay paths fail closed; observability budget acceptable |
+
+**Cross-links:** [RFO-REMEDIATION-ROADMAP.md](./RFO-REMEDIATION-ROADMAP.md) (workstreams A–E), [NEUTRALITY-SCAN.md](./NEUTRALITY-SCAN.md) (canonical doc bundle table).
+
 ## Done definition
 - All items above are merged in this repository.
 - If code is later ported elsewhere, this file records the target commit/hash copied out.

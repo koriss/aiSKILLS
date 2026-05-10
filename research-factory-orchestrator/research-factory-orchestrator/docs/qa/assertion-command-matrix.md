@@ -22,5 +22,14 @@ Single place to map **documentation claims** to **commands** that prove or falsi
 | Vendor-neutral doc surface gate | `rg` command documented in `docs/qa/NEUTRALITY-SCAN.md` (allowed residuals only) |
 | Handoff parser robust to extra stdout lines | `python3 -m unittest tests.test_parse_handoff_stdout_reference` |
 | `primary_text` usage policy documented | `docs/qa/MANIFEST-PRIMARY-TEXT-POLICY.md` present and referenced by delivery layer docs |
+| Post-incident deep analysis (queue / profile / delivery) | `docs/qa/RFO-DEEP-ANALYSIS-2026-05.md` present; cross-checks ADR-016 boundary claims |
+| Remediation backlog after deep analysis | `docs/qa/RFO-REMEDIATION-ROADMAP.md` lists workstreams A–E + rollback + acceptance |
+| Worker lease triage & recovery | `docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md` (§0 five-minute triage) + env `RFO_WORKER_LEASE_STALE_SECONDS` |
+| Truth contracts (state vs delivery vs evidence) | `docs/qa/RFO-TRUTH-CONTRACTS-ALIGNMENT.md` maps artifacts ↔ semantics |
+| **Lease class:** stale lease / poison parking / token matches selected pending | Code review `runtime/worker_impl.py` (`cmd_worker`, `_unlink_stale_lease`, failure-meta); manual relay smoke [playbook § Relay busy](./RFO-FULL-RESEARCH-PLAYBOOK.md#relay-busy--lease-races) |
+| **Bridge class:** best-effort handoff must not fire on incomplete worker artifacts | Run `scripts/run_rfo_with_web_search.py` with `--best-effort-continue` on a deliberately broken worker run; expect **non-zero** exit when sanity gate fails (no `__RFO_SKILL_AGENT_HANDOFF__=`) |
+| **Gate class:** `final-answer-gate` semantics vs delivery proof | `python3 -S scripts/validate_gate_semantics.py --run-dir <run-dir>` and `python3 -S scripts/validate_logical_consistency.py --run-dir <run-dir>`; cross-read `final-answer-gate.json` + `delivery-manifest.json` |
+| **Drift class:** feature truth matrix vs validators / marketing | Diff `config/feature-truth-matrix.json` (or packaged path) vs `docs/qa/RFO-TRUTH-CONTRACTS-ALIGNMENT.md` §5; run `python3 -S scripts/verify_skill_run_claims.py --run-dir <run-dir>` |
+| **MVR / evidence class:** seed-only must not read as “fully researched” | `verify_skill_run_claims.py` + inspect `collection-result.json` / source packet paths; profile preflight in [RFO-FULL-RESEARCH-PLAYBOOK.md](./RFO-FULL-RESEARCH-PLAYBOOK.md) |
 
 **Canonical semver:** always read `skill_version` from `runtime/version.json`, not from duplicate headers alone.

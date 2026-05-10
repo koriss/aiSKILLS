@@ -26,6 +26,10 @@
 | docs/qa/RFO-FULL-RESEARCH-PLAYBOOK.md | normative | new | GH1–GH3 relay/troubleshooting | validate_skill peer |
 | docs/qa/RFO-MERGE-ANTI-REGRESSION.md | normative | new | §0A merge чеклист | human |
 | docs/qa/NEUTRALITY-SCAN.md | normative | new | rg gate + allowed residuals | human |
+| docs/qa/RFO-DEEP-ANALYSIS-2026-05.md | narrative | new | Incident + RCA bundle (oil-reserves log) | human |
+| docs/qa/RFO-REMEDIATION-ROADMAP.md | normative | new | WS1–WS5 phases / acceptance | human |
+| docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md | normative | new | Lease triage + safe recovery | human |
+| docs/qa/RFO-TRUTH-CONTRACTS-ALIGNMENT.md | normative | new | Artifact ↔ semantics map | human |
 | docs/adr/ADR-019-host-handoff-stdout-scanning.md | normative | new | upstream parse guidance | human |
 | kb/README.md | narrative | new | Маркер non-canonical | — |
 | prompts/README.md | narrative | new | Маркер non-canonical | — |

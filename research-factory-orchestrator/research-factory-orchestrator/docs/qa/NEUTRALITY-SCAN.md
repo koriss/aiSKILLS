@@ -3,6 +3,19 @@
 This file records the markdown scan required by plan todo `neutral-06-gate-rg`.
 It is also the canonical residual allowlist for `repo-neutrality-full-sweep`.
 
+## Canonical RFO deep analysis bundle (remediation / incident)
+
+For **end-to-end failure diagnosis**, queue/lease incidents, truth vs delivery semantics, and contract alignment — use this documentation set (do not rely on chat summaries alone):
+
+| Doc | Purpose |
+|-----|---------|
+| [RFO-DEEP-ANALYSIS-2026-05.md](./RFO-DEEP-ANALYSIS-2026-05.md) | Incident timeline, fault taxonomy, critical findings, repro matrix, blast radius |
+| [RFO-REMEDIATION-ROADMAP.md](./RFO-REMEDIATION-ROADMAP.md) | Workstreams A–E, rollback, acceptance |
+| [RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md](./RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md) | 5-minute triage + safe lease recovery |
+| [RFO-TRUTH-CONTRACTS-ALIGNMENT.md](./RFO-TRUTH-CONTRACTS-ALIGNMENT.md) | Runtime → contracts → validators → report mapping and drift pairs |
+
+The **assertion ↔ command** checklist for regression checks is [`assertion-command-matrix.md`](./assertion-command-matrix.md).
+
 ## Command
 
 ```bash

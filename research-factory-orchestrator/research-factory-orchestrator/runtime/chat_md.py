@@ -2,10 +2,186 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 from runtime.report_html import build_source_index, load_io_layer_files
 from runtime.util import jr
+
+
+# Characters used in monospace / Unicode tree “tables” — strip for chat payloads.
+_BOX_DRAWING = frozenset("│├└┘┌┐┬┴┼─━║═╔╗╚╝╠╣╦╩╬")
+def sanitize_chat_body_for_plain_channels(body: str) -> str:
+    """Remove ASCII/Unicode pipe tables and box-drawing tree lines.
+
+    Intended for Telegram and other chats where monospace tables mangled readability.
+    Fenced ``` blocks are preserved verbatim.
+    Markdown pipe-table blocks convert to hyphen bullets (cells joined by em dash).
+
+    References: ``references/plain-text-user-visible-policy.md``, ADR-017 chat roles.
+    """
+    if not body or not body.strip():
+        return body
+    lines = body.split("\n")
+    out: list[str] = []
+    in_fence = False
+    i = 0
+    n = len(lines)
+    while i < n:
+        raw = lines[i]
+        stripped = raw.strip()
+
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            out.append(raw)
+            i += 1
+            continue
+        if in_fence:
+            out.append(raw)
+            i += 1
+            continue
+
+        if stripped and _looks_like_md_table_run(lines, i):
+            block: list[str] = []
+            j = i
+            while j < n and lines[j].strip() and _is_md_pipe_table_line(lines[j].strip()):
+                block.append(lines[j].strip())
+                j += 1
+            converted = _md_pipe_table_block_to_bullets(block)
+            out.extend(converted if converted else ["- _(tabular block converted to bullets — full detail in HTML report)_"])
+            i = j
+            continue
+
+        if stripped and _is_box_tree_or_table_line(raw):
+            rest = _flatten_tree_line(raw.rstrip("\n")).strip()
+            if rest:
+                out.append("- " + rest if not rest.startswith(("- ", "• ", "* ")) else rest)
+            i += 1
+            continue
+
+        out.append(raw)
+        i += 1
+
+    return "\n".join(out)
+
+
+def _compact_for_sep_match(s: str) -> str:
+    return s.replace(" ", "").replace("\t", "")
+
+
+def _is_md_sep_row(s: str) -> bool:
+    """GFM separator row: | :--- | :---: | ---: |."""
+    compact = _compact_for_sep_match(s)
+    if "|" not in compact or "-" not in compact:
+        return False
+    for part in compact.strip("|").split("|"):
+        if not part:
+            continue
+        if set(part) - set("-:"):
+            return False
+        if "-" not in part:
+            return False
+    return True
+
+
+def _is_md_pipe_table_line(s: str) -> bool:
+    st = (s or "").strip()
+    if not st:
+        return False
+    if st.startswith("<"):
+        return False
+    if _is_md_sep_row(st):
+        return True
+    return "|" in st and st.count("|") >= 2
+
+
+def _looks_like_md_table_run(lines: list[str], idx: int) -> bool:
+    """Treat as table when separator follows header, or two consecutive dense pipe-rows."""
+    if idx >= len(lines):
+        return False
+    ws = lines[idx].strip()
+    if not ws or ws.startswith("```"):
+        return False
+    if not _is_md_pipe_table_line(ws) or _is_md_sep_row(ws):
+        return False
+    if idx + 1 >= len(lines):
+        return ws.strip().startswith("|") and ws.count("|") >= 2
+    nxt = lines[idx + 1].strip()
+    if _is_md_sep_row(nxt):
+        return True
+    if _is_md_pipe_table_line(nxt) and not _is_md_sep_row(nxt):
+        return True
+    return False
+
+
+def _md_pipe_row_cells(s: str) -> list[str]:
+    chunk = s.strip()
+    if chunk.startswith("|"):
+        chunk = chunk[1:]
+    if chunk.endswith("|"):
+        chunk = chunk[:-1]
+    cells = [c.strip() for c in chunk.split("|")]
+    while cells and cells[-1] == "":
+        cells.pop()
+    while cells and cells[0] == "":
+        cells.pop(0)
+    return cells
+
+
+def _md_pipe_table_block_to_bullets(block: list[str]) -> list[str]:
+    bullets: list[str] = []
+    sep_idx = next((k for k, ln in enumerate(block) if _is_md_sep_row(ln)), None)
+    hdr: list[str] | None = None
+    if sep_idx is not None and sep_idx > 0:
+        hdr = _md_pipe_row_cells(block[sep_idx - 1])
+        body_rows = block[sep_idx + 1 :]
+    else:
+        body_rows = list(block)
+
+    for row_line in body_rows:
+        if _is_md_sep_row(row_line):
+            continue
+        cells = _md_pipe_row_cells(row_line)
+        if not cells:
+            continue
+        if hdr and len(hdr) == len(cells):
+            chunks: list[str] = []
+            for h, v in zip(hdr, cells):
+                if h and v:
+                    chunks.append(f"{h}: {v}")
+                elif v:
+                    chunks.append(v)
+                elif h:
+                    chunks.append(str(h))
+            bullets.append("- " + " — ".join(chunks))
+        else:
+            bullets.append("- " + " — ".join(cells))
+    return bullets
+
+
+def _is_box_tree_or_table_line(raw: str) -> bool:
+    s = raw.strip()
+    if not s:
+        return False
+    if "├──" in raw or "└──" in raw or "├─" in raw or "└─" in raw:
+        return True
+    if raw.lstrip().startswith("│"):
+        ratio = sum(1 for ch in raw if ch in _BOX_DRAWING or ch == "-") / max(len(raw), 1)
+        if ratio > 0.2 and raw.count("|") == 0:
+            return True
+    if "|" not in raw and "-" * 18 in raw and len(raw.strip()) <= 160:
+        if set(raw.strip()) <= set("- ─=\t│"):
+            return True
+    return False
+
+
+def _flatten_tree_line(raw: str) -> str:
+    s = raw.lstrip("\t ")
+    prev = None
+    while s != prev:
+        prev = s
+        s = re.sub(r"^[├└│┘┐┌┬┴┼─\-\+╠═║╚╔╗╝╣╩╦]+[\s│]*", "", s)
+    return s.strip()
 
 
 def _source_url(s: dict) -> str:
@@ -154,7 +330,7 @@ def build_analysis_markdown(
         ]
     )
     parts.append(extra_io.rstrip())
-    return "\n".join(parts).strip() + "\n"
+    return sanitize_chat_body_for_plain_channels("\n".join(parts).strip() + "\n")
 
 
 def build_facts_markdown(claims: list[dict], sources: list[dict]) -> str:
@@ -209,7 +385,7 @@ def build_facts_markdown(claims: list[dict], sources: list[dict]) -> str:
         lines.append("")
     if len(lines) <= 5:
         lines.append("_(no claims)_\n")
-    return "\n".join(lines)
+    return sanitize_chat_body_for_plain_channels("\n".join(lines))
 
 
 def compute_quality_metadata(

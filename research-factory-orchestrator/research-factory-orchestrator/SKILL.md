@@ -51,6 +51,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 - `docs/runtime-paths.md` — native relay vs artifact execute vs workers (single-page map).
 - `docs/qa/RFO-FULL-RESEARCH-PLAYBOOK.md` — golden paths, relay steps, troubleshooting (links to SKILL-core / profiles, no duplicate env tables).
+- `docs/qa/TELEGRAM-LONGFORM-OUTPUT.md` — оформление длинных сообщений под Telegram списками/секциями без md-таблиц (доставка остаётся на стороне хоста по ADR-016).
 - `SKILL-core.md`
 - `docs/v19/README.md`
 - `docs/v19/validators-core.md`

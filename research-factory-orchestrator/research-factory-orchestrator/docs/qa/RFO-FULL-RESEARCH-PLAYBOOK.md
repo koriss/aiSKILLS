@@ -2,7 +2,7 @@
 
 Canonical operator knobs live in **`SKILL-core.md`** and **`docs/PROFILE_DEFAULTS.md`**; this playbook adds **routing**, **relay sequence**, **troubleshooting**, and **truth boundaries** without duplicating every env variable.
 
-Related: [`RFO-CANONICAL-WORK-ROOTS`](./RFO-CANONICAL-WORK-ROOTS.md), [`assertion-command-matrix`](./assertion-command-matrix.md), [`RFO-MERGE-ANTI-REGRESSION`](./RFO-MERGE-ANTI-REGRESSION.md), ADRs **001**, **016**, **018**.
+Related: [`RFO-CANONICAL-WORK-ROOTS`](./RFO-CANONICAL-WORK-ROOTS.md), [`assertion-command-matrix`](./assertion-command-matrix.md), [`RFO-MERGE-ANTI-REGRESSION`](./RFO-MERGE-ANTI-REGRESSION.md), [`TELEGRAM-LONGFORM-OUTPUT`](./TELEGRAM-LONGFORM-OUTPUT.md) (оформление канала), ADRs **001**, **016**, **018**.
 
 ---
 
@@ -52,7 +52,8 @@ The **external orchestrator** reads `result-manifest.json`, optional `marker.jso
 8. [Glossary — relay vs agent tools](#glossary--relay-vs-agent-tools)
 9. [Source quality vs pipeline health](#source-quality-vs-pipeline-health)
 10. [Track C — optional future work-unit bootstrap](#track-c--optional-future-work-unit-bootstrap)
-11. [Troubleshooting](#troubleshooting)
+11. [Telegram — длинные сообщения (списки, не таблицы)](#telegram--длинные-сообщения-списки-не-таблицы)
+12. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -143,6 +144,18 @@ Symptom: bridge retries (“not claimed” / stale lease) while a **parallel wor
 
 ---
 
+## Telegram — длинные сообщения (списки, не таблицы)
+
+ADR-016: **отправка в Telegram — зона хоста**, не скилла. Если оператор или вторая модель готовят **пересказ или выжимку** под канал (в т.ч. после артефактов RFO), используй формат без markdown-таблиц — секции `───`, заголовки «эмодзи + строка», списки `1.` / `•`, по странам — дерево `├──` / `└──`.
+
+Источник правды в этом репо: **[`TELEGRAM-LONGFORM-OUTPUT.md`](./TELEGRAM-LONGFORM-OUTPUT.md)**; правило Cursor: **`.cursor/rules/telegram-longform-list-format.mdc`**.
+
+Однострочник для любой модели:
+
+> Ответ для Telegram: секции через строку `───`, заголовки — эмодзи + текст, без markdown-таблиц; числа — списками или построчно; по странам — блоки с `├──` / `└──`. Стиль как в примерах Digital Genomics / рынок пост-СССР (Kazachkov).
+
+---
+
 ## Troubleshooting
 
 | Symptom | Checks |
@@ -151,10 +164,10 @@ Symptom: bridge retries (“not claimed” / stale lease) while a **parallel wor
 | Empty `sources` / `collection-result` anomalies | Collector logs, relay JSON shape, HEAD vs GET policy flags |
 | `validate_skill` failure | Package `cwd`, stale partial checkout, compare `scripts/validate_skill.py` list |
 | HTML missing wiki refs | `python3 -m unittest tests.test_report_html_citations`, rerun render step |
+| Verifier lie classes | Run `scripts/verify_skill_run_claims.py`; inspect `delivery-manifest.json` + `runtime/errors.jsonl` |
+| “Completed” vs stub | Read `delivery-manifest.json` gates, not prose in chat excerpts |
 
 ## Deterministic test command
 
 - Prefer explicit discovery to avoid false-green `Ran 0 tests` runs:
   `python3 -m unittest discover -s tests -p "test_*.py"`.
-| Verifier lie classes | Run `scripts/verify_skill_run_claims.py`; inspect `delivery-manifest.json` + `runtime/errors.jsonl` |
-| “Completed” vs stub | Read `delivery-manifest.json` gates, not prose in chat excerpts |

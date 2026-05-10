@@ -539,7 +539,7 @@ def cmd_worker(a):
     runq.parent.mkdir(parents=True, exist_ok=True)
     done.parent.mkdir(parents=True, exist_ok=True)
     lease = root / "queue/worker.lease"
-    tok = sid("LEASE", pending[0].name, now())
+    tok = sid("LEASE", selected_pending.name, now())
     if lease.exists():
         _unlink_stale_lease(lease, stale_ttl_s)
     if lease.exists():

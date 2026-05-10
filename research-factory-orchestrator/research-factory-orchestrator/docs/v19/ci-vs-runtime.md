@@ -35,4 +35,4 @@ Pure Python replacement for shell `jq` one-liners:
 
 ## Transcript contract
 
-CI must consume the **same** `validation-transcript.json` schema as runtime (draft: `drafts/schemas/core/validation-transcript.schema.json`).
+CI must consume the **same** `validation-transcript.json` schema as runtime. Frozen runtime copy: [`schemas/core/validation-transcript.schema.json`](../../schemas/core/validation-transcript.schema.json) (design draft remains at `drafts/schemas/core/validation-transcript.schema.json`).

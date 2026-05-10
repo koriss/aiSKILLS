@@ -55,3 +55,7 @@ tests/fixtures/v19/
 ## Failure corpus registration
 
 Mapping these to `F2xx` classes and `failure-corpus/index.json` updates is **implementation phase** (explicitly out of design scope).
+
+### Version alignment
+
+- [`failure-corpus/index.json`](../../failure-corpus/index.json) field **`version`** must stay aligned with **`failure_corpus_index_version`** in [`runtime/version.json`](../../runtime/version.json) (same semver string). Bump both together when the regression index contract changes.

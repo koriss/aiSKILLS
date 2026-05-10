@@ -12,6 +12,8 @@
 | Delivery manifest | `delivery-manifest.json` | `drafts/schemas/core/delivery-manifest.schema.json` |
 | Validation transcript | `validation-transcript.json` | `drafts/schemas/core/validation-transcript.schema.json` |
 
+**Runtime contour:** validators and gates load **frozen** JSON Schema copies under [`schemas/core/`](../../schemas/core/) (same logical artifacts as in the table). The `drafts/schemas/core/` tree remains the **design reference** and may be diffed against `schemas/core/` when freezing changes.
+
 **Note:** `validation-transcript.json` is **core** — runner and truth-gate depend on it; omitting its schema was a design gap, now closed.
 
 ## Mapping from existing `schemas/*.schema.json` (113 → 7)

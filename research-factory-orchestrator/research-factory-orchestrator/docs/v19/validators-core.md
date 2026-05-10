@@ -152,3 +152,9 @@ Examples of **blocking**: `new_fact_without_claim_id`, `absolute_statement_witho
 
 1. V1 → V2 → V3 → V4 → V5 → V6 (strict pipeline).
 2. Any blocking failure in an earlier stage may short-circuit later stages **but** transcript must record skipped stages as `skipped_due_to_prior_failure`.
+
+---
+
+## Repository script inventory (guardrails)
+
+The six validators above are the **portable runtime chain**. OpenClaw packaging and repo hygiene additionally require many scripts under `scripts/`. The **authoritative allowlist** is `required_scripts` in [`scripts/validate_skill.py`](../../scripts/validate_skill.py); do not duplicate the list in prose — link to the file to avoid drift.

@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted (design phase) — 2026-05-02
+Accepted — implemented in current **v19.3.x** line (core validators, profiles, schemas under `schemas/core/`). Original acceptance record: 2026-05-02.
 
 ## Context
 

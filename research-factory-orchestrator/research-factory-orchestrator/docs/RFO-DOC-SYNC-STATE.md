@@ -1,0 +1,87 @@
+# RFO — документ состояния синхронизации доков и проверок
+
+Журнал ведётся **на границе объектов**: после завершения работы над файлом/блоком — запись здесь и в `docs/AUDIT-LEDGER.md`, затем переход к следующему объекту.
+
+## Шапка сессии
+
+| Поле | Значение |
+|------|-----------|
+| Дата (UTC) | 2026-05-10 |
+| Git branch | `cleanup/v19-only-version-purge` |
+| Начальный commit | `76b59ce` |
+| `skill_version` (канон) | `19.3.1` из `runtime/version.json` |
+| `failure_corpus_index_version` (канон) | `19.2.1` из `runtime/version.json` |
+
+## Master list — затронутые пути
+
+Полный перечень файлов, изменённых или созданных в ходе этой синхронизации:
+
+- `docs/RFO-DOC-SYNC-STATE.md` (этот файл)
+- `docs/AUDIT-LEDGER.md`
+- `README.md`
+- `docs/v19/README.md`
+- `failure-corpus/index.json`
+- `docs/v19/ci-vs-runtime.md`
+- `docs/v19/run-core-validators-spec.md`
+- `docs/v19/validators-core.md`
+- `docs/v19/schemas-core.md`
+- `docs/v19/failure-fixtures.md`
+- `docs/adr/ADR-001-v19-pragmatic-rigor.md`
+- `docs/qa/assertion-command-matrix.md`
+- `kb/README.md`
+- `prompts/README.md`
+- `references/README.md`
+- `examples/README.md`
+
+## Журнал по волнам / объектам
+
+### Wave A — входные точки
+
+- **README.md** — добавлена отсылка к `runtime/version.json` и CHANGELOG как к источнику semver.
+- **CHANGELOG.md** — просмотр: актуален относительно линии 19.4.x / 19.3.x; правок не потребовалось.
+- **SKILL.md / SKILL-core.md** — просмотр: версии и пути согласованы с `runtime/version.json`; правок не потребовалось.
+- **AGENTS.md** — просмотр: шаблон вызова и границы хоста согласованы с artifact-only контуром; правок не потребовалось.
+- **docs/v19/README.md** — переписан ввод: убрано ложное «design-only / no changes to runtime»; добавлены ссылки на текущую линию и ADR.
+- **docs/PROFILE_DEFAULTS.md** — сверено с `contracts/run-profiles.json` (`default_profile`: `mvr`) и дефолтами `run_rfo_with_web_search.py` / `run_core_validators.py`; правок не потребовалось.
+
+### Wave B — validators / CI–runtime
+
+- **docs/v19/ci-vs-runtime.md** — путь к схеме transcript обновлён на актуальный `schemas/core/validation-transcript.schema.json`.
+- **docs/v19/run-core-validators-spec.md** — CLI приведён к `python3 -S`; профили описаны как реализованные (`validation-profiles/` в корне репо).
+- **docs/v19/validators-core.md** — добавлена ссылка на инвентарь обязательных скриптов в `scripts/validate_skill.py`.
+
+### Wave C — схемы
+
+- **docs/v19/schemas-core.md** — уточнено наличие замороженных копий в `schemas/core/` для рантайм-контура.
+- **contracts/golden-reference.md** — ревью: текущая практика без telegram-golden; согласовано с ADR по delivery truth.
+- **contracts/fixture-hygiene.md** — ревью: требования к `tests/fixtures/v19/*` согласованы с скриптами suite.
+
+### Wave D — failure corpus
+
+- **failure-corpus/index.json** — поле `version` выровнено к `19.2.1` для согласования с `failure_corpus_index_version` в `runtime/version.json`.
+- **docs/v19/failure-fixtures.md** — добавлено правило согласования версий индекса и runtime.
+
+### Wave E — ADR
+
+- **docs/adr/ADR-001-v19-pragmatic-rigor.md** — статус обновлён: решение принято и реализовано в линии v19.3.x.
+
+### Wave F–G — references / kb / prompts
+
+- Добавлены **`kb/README.md`**, **`prompts/README.md`**, **`references/README.md`**, **`examples/README.md`** с явной маркировкой non-canonical / illustrative относительно `SKILL.md`, `runtime/`, `contracts/`, `scripts/validate_skill.py`.
+
+### Matrix
+
+- **`docs/qa/assertion-command-matrix.md`** — таблица «утверждение → команда проверки» для закрытия матрицы из плана.
+
+## Реестр команд (smoke)
+
+| Команда | Исход |
+|---------|--------|
+| `python3 -S scripts/validate_skill.py` | pass (после удаления артефактных `tests/__pycache__` на рабочей копии) |
+| `python3 -S scripts/rfo_runtime_core.py failure` | отчёт покрытия F-классов (может быть `status: fail` при неполном покрытии — известное состояние индекса, не регрессия док-синка) |
+
+## Если пиздец (откат)
+
+1. Критичные файлы: `SKILL.md`, `runtime/version.json`, `failure-corpus/index.json`, корневые контракты в `contracts/`.
+2. Откат к известному хорошему коммиту: **`76b59ce`** (начало этой синхронизации) или более позднему чекпоинту после локального коммита.
+3. Повторная проверка: `python3 -S scripts/validate_skill.py` из корня пакета скилла.

@@ -1,12 +1,12 @@
 {
-  "version": "19.0.1",
-  "description": "Merged regression index for active v19.0.1 line; legacy cases retained for regression only.",
+  "version": "19.2.1",
+  "description": "Merged regression index; version aligns with runtime/version.json failure_corpus_index_version. Legacy cases retained for regression only.",
   "legacy_cases_total": 20,
   "legacy_cases": [
     {
       "case_id": "case_telegram_table_rendering",
       "failure_type": "telegram_table",
-      "validator": "validate_telegram_no_tables_strict.py",
+      "validator": "validate_plain_text_no_tables_strict.py",
       "bad_sample": "bad_telegram_table.txt",
       "good_sample": "good_telegram.txt",
       "expected_bad": "fail",
@@ -18,7 +18,7 @@
     {
       "case_id": "case_telegram_local_path_leak",
       "failure_type": "local_path",
-      "validator": "validate_no_local_paths_in_telegram.py",
+      "validator": "validate_no_local_paths_in_plain_text.py",
       "bad_sample": "bad_local_path.txt",
       "good_sample": "good_telegram.txt",
       "expected_bad": "fail",

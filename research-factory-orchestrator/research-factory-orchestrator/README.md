@@ -25,3 +25,5 @@ Ship: executive summary, main findings, evidence-backed analysis, claim verifica
 
 ## Files
 See `SKILL.md` for full state machines, security, and rubric.
+
+**Release line:** canonical semver for the skill is `skill_version` in [`runtime/version.json`](runtime/version.json); human-readable history in [`CHANGELOG.md`](CHANGELOG.md).

@@ -9,6 +9,7 @@
 | Дата (UTC) | 2026-05-10 |
 | Git branch | `cleanup/v19-only-version-purge` |
 | Начальный commit | `76b59ce` |
+| Checkpoint commit (doc-sync bundle) | `71b722e` |
 | `skill_version` (канон) | `19.3.1` из `runtime/version.json` |
 | `failure_corpus_index_version` (канон) | `19.2.1` из `runtime/version.json` |
 
@@ -77,11 +78,11 @@
 
 | Команда | Исход |
 |---------|--------|
-| `python3 -S scripts/validate_skill.py` | pass (после удаления артефактных `tests/__pycache__` на рабочей копии) |
+| `python3 -S scripts/validate_skill.py` | pass (после удаления артефактных `tests/__pycache__` на рабочей копии); повторно **pass** после коммита `71b722e` |
 | `python3 -S scripts/rfo_runtime_core.py failure` | отчёт покрытия F-классов (может быть `status: fail` при неполном покрытии — известное состояние индекса, не регрессия док-синка) |
 
 ## Если пиздец (откат)
 
 1. Критичные файлы: `SKILL.md`, `runtime/version.json`, `failure-corpus/index.json`, корневые контракты в `contracts/`.
-2. Откат к известному хорошему коммиту: **`76b59ce`** (начало этой синхронизации) или более позднему чекпоинту после локального коммита.
+2. Откат к известному хорошему коммиту: **`71b722e`** (зафиксированный doc-sync) или **`76b59ce`** (начало этой синхронизации до бандла).
 3. Повторная проверка: `python3 -S scripts/validate_skill.py` из корня пакета скилла.

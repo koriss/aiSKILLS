@@ -31,9 +31,7 @@ from rfo_relay_search_helpers import build_relay_params, rank_relay_rows_for_tas
 
 # ── config ─────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
-_USER_AGENT = os.environ.get(
-    "RFO_WEB_SEARCH_USER_AGENT", "RFO/19.4-FullRelay (+https://github.com/openclaw/research-factory-orchestrator)"
-)
+_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or "RFO/19.4-FullRelay"
 
 
 def relay_api_base(cli_base: str) -> str | None:
@@ -167,7 +165,14 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
         wiki_pages = _TOPIC_WIKI_PAGES.get(task.lower().strip()) or _TOPIC_WIKI_PAGES.get(task.lower().split()[0], [])
         if not wiki_pages:
             wiki_pages = [task.title()]
-    wiki_origin = os.environ.get("RFO_MEDIAWIKI_PAGE_ORIGIN", "https://en.wikipedia.org").rstrip("/")
+    wiki_origin = os.environ.get("RFO_MEDIAWIKI_PAGE_ORIGIN", "").strip().rstrip("/")
+    if wiki_pages and not wiki_origin:
+        print(
+            "[wiki] RFO_MEDIAWIKI_PAGE_ORIGIN is unset; skipping embedded Wikipedia preset rows "
+            "(set e.g. https://en.wikipedia.org).",
+            file=sys.stderr,
+        )
+        wiki_pages = []
 
     for i, title in enumerate(wiki_pages[:10]):
         text, err = fetch_wiki_extract(title)

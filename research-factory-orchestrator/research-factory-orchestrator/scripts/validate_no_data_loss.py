@@ -14,8 +14,9 @@ def main():
     for n in data.get("extracted_nodes", []):
         if n.get("collected") and n.get("stored_in_package") is False:
             errors.append(f"{n.get('node_id','?')}: collected but not stored")
-        if n.get("shown_in_telegram") and n.get("sensitivity") in ["personal_public","private_or_sensitive","unknown"]:
-            errors.append(f"{n.get('node_id','?')}: sensitive node shown in Telegram")
+        shown_uv = n.get("shown_in_user_visible_copy") or n.get("shown_in_telegram")
+        if shown_uv and n.get("sensitivity") in ["personal_public","private_or_sensitive","unknown"]:
+            errors.append(f"{n.get('node_id','?')}: sensitive node surfaced in user-visible copy")
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1

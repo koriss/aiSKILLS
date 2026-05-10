@@ -2,8 +2,8 @@
   "case_id": "case_telegram_local_path_leak",
   "failure_type": "local_path",
   "bad_output_pattern": "Telegram includes /home/node path",
-  "expected_guard": "no local paths in Telegram",
-  "validator": "validate_no_local_paths_in_telegram.py",
+  "expected_guard": "no local paths in user-visible output",
+  "validator": "validate_no_local_paths_in_plain_text.py",
   "bad_sample": "bad_local_path.txt",
   "good_sample": "good_telegram.txt"
 }

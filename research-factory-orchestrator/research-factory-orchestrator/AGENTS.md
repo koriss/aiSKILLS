@@ -1,11 +1,26 @@
 # AGENTS.md — RFO ≥ v19.2.1 honesty contract
 
-This file defines the **only** allowed way for an agent (including the guest
-agent inside `openclaw-cli`) to invoke Research Factory Orchestrator (RFO).
-Violations are caught by `scripts/_rfo_path_guard.py` at process start and by
-`scripts/verify_openclaw_run.py` after a run finishes.
+This file defines an **allowed** pattern for agents invoking Research Factory Orchestrator (RFO). Path guards (`scripts/_rfo_path_guard.py`) enforce canonical skill layout and approved `--runs-root` values; post-run checks may use `scripts/verify_openclaw_run.py` where applicable.
 
-## Canonical entrypoint
+## What you must parameterize (any host)
+
+| Variable / flag | Role |
+|-----------------|------|
+| `<SKILL_ROOT>` | Directory containing this package (`research-factory-orchestrator/`). |
+| `RFO_RUNS_ROOT` or `--runs-root` | Persistent runs queue root (see `docs/adr/ADR-RFO_PORTABLE.md`). |
+| Relay / bridge | `RFO_WEB_SEARCH_JSON_API_BASE` when using `scripts/run_rfo_with_web_search.py`. |
+
+## Canonical entrypoint (template)
+
+```bash
+cd <SKILL_ROOT> && \
+  python3 -S scripts/interface_runtime_adapter.py \
+    adapter --runs-root "${RFO_RUNS_ROOT}" \
+    --interface cli --provider cli \
+    --task "<user request as a single string>"
+```
+
+### Example: OpenClaw-style paths
 
 ```bash
 cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \

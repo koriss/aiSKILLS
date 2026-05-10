@@ -63,7 +63,7 @@ No package = no delivery.
 - `semantic-report.json`
 - `report-archetype-selection.json`
 - `standalone-html-validation.json`
-- `telegram-summary.json`
-- `telegram-message-plan.json`
-- `telegram-delivery-validation.json`
+- `user-visible-summary.json`
+- `plain-text-message-plan.json`
+- `user-visible-delivery-validation.json`
 - `summary-no-new-facts-validation.json`

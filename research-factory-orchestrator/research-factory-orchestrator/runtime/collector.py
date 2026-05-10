@@ -33,7 +33,7 @@ from runtime.error_log import append_error
 from runtime.util import jw, now, sid
 
 
-_USER_AGENT = "RFO/19.3.0 (+https://github.com/openclaw/research-factory-orchestrator)"
+_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or "RFO/19.3.0-collector"
 
 
 def _seed_urls() -> list[str]:

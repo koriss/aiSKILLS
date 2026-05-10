@@ -10,6 +10,9 @@ URL для исследования собирается здесь через *
 ``RFO_WEB_SEARCH_JSON_API_BASE`` (совместимо: ``RFO_SEARXNG_URL`` только как имя
 переменной для миграции; значение всегда задаёт оператор).
 
+Опционально: ``RFO_WIKIPEDIA_HEURISTIC=1`` — считать URL с ``wikipedia.org`` сырым
+документом (иначе эвристика выключена).
+
 Поток:
   1. relay search + HTTP fetch страниц
   2. RFO_SOURCE_PACKET + очередь RFO как обычно
@@ -51,7 +54,7 @@ from rfo_relay_search_helpers import (  # noqa: E402
 
 # ── config ────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
-_USER_AGENT = os.environ.get("RFO_WEB_SEARCH_USER_AGENT", "RFO/19.4-RelayPrefetch (+https://github.com/openclaw/research-factory-orchestrator)")
+_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or "RFO/19.4-RelayPrefetch"
 _MAX_CHARS_PER_SOURCE = 3000   # truncate content per source
 _MAX_SOURCES = 8
 
@@ -192,7 +195,15 @@ def extract_claims_from_content(sources: list[dict], task: str) -> list[dict]:
     claims = []
     evidence_cards = []
     for i, src in enumerate(sources):
-        content = src.get("content_snippet", "")
+        content = str(src.get("content_snippet") or src.get("content") or "").strip()
+        if not content:
+            title = str(src.get("title") or "").strip()
+            url = str(src.get("url") or src.get("canonical_origin_id") or "").strip()
+            parts = [p for p in (title, url) if p]
+            err = str(src.get("content_fetch_error") or "").strip()
+            if err:
+                parts.append(f"[fetch: {err[:120]}]")
+            content = " ".join(parts).strip()
         if not content:
             continue
         claim_id = f"C-SRCH-{i+1:03d}"
@@ -251,7 +262,8 @@ def build_source_packet(search_results: list[dict]) -> dict:
             continue
         content, err = fetch_text(url)
         snippet = r.get("snippet", "") or content[:300]
-        is_wiki = "wikipedia.org" in url
+        wiki_flag = os.environ.get("RFO_WIKIPEDIA_HEURISTIC", "").strip().lower() in ("1", "true", "yes")
+        is_wiki = wiki_flag and "wikipedia.org" in url
         sources.append({
             "source_id": f"SRC-RELAY-{i+1:03d}",
             "title": r.get("title", url)[:200],
@@ -389,6 +401,22 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    def _experiment_bridge_ok() -> bool:
+        return os.environ.get("RFO_EXPERIMENT_BRIDGE", "").strip().lower() in ("1", "true", "yes")
+
+    def _smoke_env() -> bool:
+        return os.environ.get("RFO_SMOKE", "").strip().lower() in ("1", "true", "yes")
+
+    if (args.allow_gate_stub or args.best_effort_continue) and not (
+        _experiment_bridge_ok() or _smoke_env()
+    ):
+        print(
+            "[fatal] --allow-gate-stub / --best-effort-continue require "
+            "RFO_EXPERIMENT_BRIDGE=1 (or RFO_SMOKE=1 for smoke runs).",
+            file=sys.stderr,
+        )
+        return 2
+
     task = args.task
     prof_lc = args.profile.strip().lower()
     print(f"\n{'='*60}")
@@ -414,7 +442,18 @@ def main() -> int:
     if not results:
         msg = "[1/5] Relay returned zero URLs."
         if prof_lc == "mvr":
-            print(f"{msg} continuing with empty scaffold (profile=mvr)")
+            allow_empty = os.environ.get("RFO_ALLOW_MVR_EMPTY_RELAY", "").strip().lower() in (
+                "1",
+                "true",
+                "yes",
+            )
+            if not allow_empty:
+                print(
+                    f"{msg} profile=mvr requires RFO_ALLOW_MVR_EMPTY_RELAY=1 to continue with an empty scaffold.",
+                    file=sys.stderr,
+                )
+                return 2
+            print(f"{msg} continuing with empty scaffold (mvr + RFO_ALLOW_MVR_EMPTY_RELAY)")
         else:
             print(msg, file=sys.stderr)
             print("Relax with --profile mvr or tune RFO_WEB_SEARCH_* / relay availability.", file=sys.stderr)

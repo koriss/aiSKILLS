@@ -20,7 +20,7 @@ from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
 from runtime.worker_impl import build_package, cmd_run
 
-# Neutral stdout capsule for whoever invoked the skill (LLM gateway, cron, Telegram bridge, …).
+# Neutral stdout capsule for whoever invoked the skill (LLM gateway, cron, host relay bridge, …).
 HANDOFF_STDOUT_PREFIX = "__RFO_SKILL_AGENT_HANDOFF__="
 # Declares result-manifest semantics; invoking host parses stdout + reads artifacts under run_dir.
 RESULT_MANIFEST_CONTRACT = "rfo-skill-agent-handoff-v1"
@@ -117,9 +117,9 @@ def _host_visible_run_dir(rd: Path) -> str | None:
     host_root = (os.environ.get("RFO_HOST_WORKSPACE_ROOT") or "").strip()
     if not host_root:
         return None
-    cont = (
-        os.environ.get("RFO_CONTAINER_WORKSPACE_PREFIX") or "/home/node/.openclaw/workspace"
-    ).strip().rstrip("/")
+    cont = (os.environ.get("RFO_CONTAINER_WORKSPACE_PREFIX") or "").strip().rstrip("/")
+    if not cont:
+        return None
     rd_s = str(rd.resolve())
     if not rd_s.startswith(cont + "/") and rd_s != cont:
         return None

@@ -17,9 +17,13 @@ from runtime.status import VERSION
 
 class TestWikiCitations(unittest.TestCase):
     def test_source_index_and_ref_in_output(self) -> None:
-        rd = Path(__file__).resolve().parent.parent / "reports" / "debug-runs" / "20260508T151228Z" / "runs" / "dbg-full-20260508-151447"
-        if not (rd / "run.json").is_file():
-            self.skipTest("fixture run-dir not present")
+        rd = (
+            Path(__file__).resolve().parent
+            / "fixtures"
+            / "html-report-run"
+            / "dbg-full-20260508-151447"
+        )
+        self.assertTrue((rd / "run.json").is_file(), f"missing fixture run-dir: {rd}")
         sources = json.loads((rd / "sources.json").read_text(encoding="utf-8"))["sources"]
         idx = build_source_index(sources)
         self.assertGreater(len(idx), 0)

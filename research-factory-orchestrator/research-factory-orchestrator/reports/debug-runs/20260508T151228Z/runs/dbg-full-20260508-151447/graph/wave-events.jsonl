@@ -1,4 +1,0 @@
-{"event_name": "wave.updated", "run_id": "RUN-29e97062122c", "wave_id": "W0", "status": "completed", "purpose": "seed target and user claims", "timestamp": "2026-05-08T15:14:47Z"}
-{"event_name": "wave.updated", "run_id": "RUN-29e97062122c", "wave_id": "W1", "status": "completed", "purpose": "direct facts and primary source sweep", "timestamp": "2026-05-08T15:14:47Z"}
-{"event_name": "wave.updated", "run_id": "RUN-29e97062122c", "wave_id": "W2", "status": "completed", "purpose": "linked entities, contradictions and pivots", "timestamp": "2026-05-08T15:14:47Z"}
-{"event_name": "wave.updated", "run_id": "RUN-29e97062122c", "wave_id": "W3", "status": "planned", "purpose": "source laundering, amplification and weak-tie expansion", "timestamp": "2026-05-08T15:14:47Z"}

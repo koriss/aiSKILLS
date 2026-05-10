@@ -2,26 +2,28 @@
 
 This document fixes **vector F** (“which code path ran?”): a single checklist for operators and coding agents.
 
-## Production Telegram (OpenClaw opt-openclaw)
+## Native relay (host agent / gateway)
 
-1. User sends **`/research_factory_orchestrator <task>`** in Telegram.
-2. **Whitelist native handler:** `extensions/telegram/src/bot-native-commands.ts` resolves the skill under `workspace/skills/research-factory-orchestrator/`.
+Typical OpenClaw-style deployment:
+
+1. Operator invokes **`/research_factory_orchestrator <task>`** through the host UI (slash command).
+2. **Native handler** in the host extension resolves the skill under `workspace/skills/research-factory-orchestrator/`.
 3. **Bridge process:**  
    `python3 -S scripts/run_rfo_with_web_search.py --runs-root <workspace>/rfo-runs --task "<task>"`  
    (+ relay env / `--web-search-json-api-base` as deployed).  
-   This is **not** `scripts/interface_runtime_adapter.py` for the slash command path.
+   This is **not** `scripts/interface_runtime_adapter.py` for the slash-command path.
 4. Worker / collector stages inside the bridge write the run-dir; **`render_all`** may re-render HTML; **`ensure_canonical_full_report_html`** + **`emit_agent_skill_handoff`** finalize `report/full-report.html` and **`result-manifest.json`**.
-5. **Gateway delivery:** `src/auto-reply/reply/skill-artifact-delivery.ts` reads **`marker.run_dir`** + manifest; sends Telegram documents / chunked text.
+5. **Host delivery:** the gateway reads **`marker.run_dir`** + manifest from the handoff and attaches artifacts / chunked text to the operator channel (implementation is host-owned).
 
 ## Artifact-only CLI (`compute-only` execute)
 
 1. Invocation: **`python3 -S -m runtime.artifact_execute_impl`** or **`scripts/interface_runtime_adapter.py execute --task … --runs-root …`** (per your wrapper).
 2. **`cmd_execute` → `cmd_run` + `build_package` → `_build_manifest` + stdout handoff**.
-3. No Telegram in this layer; attaching files is the host’s responsibility.
+3. No outbound channel logic in this layer; attaching files is the host’s responsibility.
 
 ## Legacy / auxiliary
 
-- **`scripts/runtime_job_worker.py` / `outbox_delivery_worker.py`** — queued worker pipeline (not the Telegram v19.3 native path).
+- **`scripts/runtime_job_worker.py` / `outbox_delivery_worker.py`** — queued worker pipeline (not the v19.3 native slash path).
 - **`scripts/run_research_factory.py`** — direct run-dir pipeline.
 - **HTML tooling:** **`scripts/rfo_render.py`** with subcommands `canonical` | `semantic-shell` (thin wrappers remain for backwards compatibility).
 
@@ -37,7 +39,7 @@ This document fixes **vector F** (“which code path ran?”): a single checklis
 
 ## Agent hygiene (avoid vector B)
 
-- Do **not** drop long **`*.html`** “reports” in the **workspace root**; Telegram delivery only follows **`run_dir`** from the marker/manifest.
+- Do **not** drop long **`*.html`** “reports” in the **workspace root**; host delivery only follows **`run_dir`** from the marker/manifest.
 - Prefer **`*.md`** drafts **inside** the active run-dir (or a clearly marked scratch subtree), not ad-hoc HTML next to unrelated projects.
 
 ## Host vs container paths (vector J)

@@ -1,9 +1,0 @@
-{
-  "run_id": "RUN-716d2c940879",
-  "quality_summary": {
-    "primary_input": 1
-  },
-  "warnings": [
-    "External search workers are not executed in deterministic smoke mode."
-  ]
-}

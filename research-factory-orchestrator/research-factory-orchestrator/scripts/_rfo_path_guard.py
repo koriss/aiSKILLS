@@ -19,7 +19,7 @@ Override env vars (consent for smoke / dev only)
 -------------------------------------------------
 ``RFO_RUNS_ROOT``               extra absolute path that is treated as an
                                 allowed runs-root (in addition to the
-                                default ``$HOME/.openclaw/workspace/rfo-runs``).
+                                default under ``$HOME``; see ADR RFO_PORTABLE).
 ``RFO_ALLOW_TMP_RUNS_ROOT=1``   permit ``/tmp`` or ``/var/tmp`` as runs-root
                                 (used by smoke tests; logged in
                                 ``feature-truth-matrix.json`` as
@@ -55,12 +55,11 @@ RUNS_ROOT_ENV = "RFO_RUNS_ROOT"
 ALLOW_TMP_ENV = "RFO_ALLOW_TMP_RUNS_ROOT"
 
 _CANONICAL_HINT = (
-    "Canonical invocation:\n"
-    "  cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \\\n"
-    "    python3 -S scripts/interface_runtime_adapter.py \\\n"
-    "      adapter --runs-root ~/.openclaw/workspace/rfo-runs \\\n"
-    "      --interface cli --provider cli \\\n"
-    "      --task \"...\"\n"
+    "Canonical invocation (host supplies paths):\n"
+    "  cd <SKILL_ROOT> && python3 -S scripts/interface_runtime_adapter.py \\\n"
+    "    adapter --runs-root \"$RFO_RUNS_ROOT\" \\\n"
+    "    --interface cli --provider cli --task \"...\"\n"
+    "Set RFO_RUNS_ROOT to your persistent runs-root (see docs/adr/ADR-RFO_PORTABLE.md).\n"
 )
 
 
@@ -127,7 +126,10 @@ def _extract_runs_root(argv: list[str]) -> str | None:
 
 def _allowed_runs_roots() -> list[Path]:
     home = Path.home()
-    roots: list[Path] = [home / ".openclaw" / "workspace" / "rfo-runs"]
+    roots: list[Path] = [
+        home / ".openclaw" / "workspace" / "rfo-runs",
+        home / "rfo-runs",
+    ]
     extra = os.environ.get(RUNS_ROOT_ENV, "").strip()
     if extra:
         roots.append(Path(extra).expanduser())

@@ -6,7 +6,20 @@
 
 ## Role
 
-OpenClaw skill for research orchestration with artifact-first compute, profile-driven validation, and delivery truth gating.
+Host-invoked research orchestration skill: artifact-first compute, profile-driven validation, and delivery truth gating. **Delivery** (chat apps, email, etc.) is configured by the host; this repo stays compute + artifacts.
+
+### What the host must supply
+
+| Concern | Typical env / argv |
+|--------|---------------------|
+| Runs filesystem | `--runs-root` / `RFO_RUNS_ROOT` (see `docs/adr/ADR-RFO_PORTABLE.md`) |
+| JSON relay (bridge) | `RFO_WEB_SEARCH_JSON_API_BASE` or `--web-search-json-api-base` |
+| Run profile | `RFO_RUN_PROFILE` or bridge `--profile` (`live-bridge` vs `mvr`; see `docs/PROFILE_DEFAULTS.md`) |
+| User-agent strings | Optional `RFO_WEB_SEARCH_USER_AGENT` (defaults are neutral; no vendor URL) |
+| Wikipedia URL heuristic (bridge) | `RFO_WIKIPEDIA_HEURISTIC=1` to treat `wikipedia.org` as raw-document |
+| mvr + empty relay | `RFO_ALLOW_MVR_EMPTY_RELAY=1` |
+| Risky bridge flags | `RFO_EXPERIMENT_BRIDGE=1` for `--allow-gate-stub` / `--best-effort-continue` (or `RFO_SMOKE=1`) |
+| Container path hints | `RFO_HOST_WORKSPACE_ROOT` + `RFO_CONTAINER_WORKSPACE_PREFIX` (both optional; prefix required if mapping) |
 
 ## Eight-phase pipeline
 

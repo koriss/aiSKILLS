@@ -206,6 +206,16 @@ def compute_quality_metadata(
     """Machine-readable quality flags for ``result-manifest.json`` / optional ``result.json``."""
     coll = jr(rd / "collection-result.json", {})
     any_url = bool(any(_source_url(s) for s in sources if isinstance(s, dict)))
+    seed_stub = False
+    hydrated = False
+    for c in claims or []:
+        if not isinstance(c, dict):
+            continue
+        meta = c.get("meta") if isinstance(c.get("meta"), dict) else {}
+        if meta.get("origin") == "seed_only_stub":
+            seed_stub = True
+        if meta.get("origin") == "hydrate_from_sources":
+            hydrated = True
     return {
         "seed_only": bool(seed_only),
         "facts_have_links": any_url,
@@ -213,4 +223,8 @@ def compute_quality_metadata(
         "confirmed_without_source_allowed": False,
         "facts_gate": facts_gate_meta,
         "collection_seed_only": bool(isinstance(coll, dict) and coll.get("seed_only")),
+        "synthetic_claim_markers": {
+            "seed_only_stub": seed_stub,
+            "hydrated_from_sources": hydrated,
+        },
     }

@@ -9,7 +9,7 @@ import time
 import zipfile
 from pathlib import Path
 
-from runtime.render import render_all
+from runtime.render import hydrate_claims_if_needed, render_all
 from runtime.schema_defaults import minimal_valid
 from runtime.status import VERSION
 from runtime.util import CHAT, PKG_REQUIRED, REQ_EVENTS, jw, jr, jl, now, sha, sid, skill_root, tw
@@ -177,7 +177,7 @@ def cmd_run(a):
             "outbox_delivery_worker": "implemented",
             "wave_graph_collector": "scaffold",
             "real_external_search_workers": "missing",
-            "provider_telegram_real_send": "stub",
+            "provider_outbound_real_send": "stub",
             "late_result_protocol": "implemented_scaffold",
             "deterministic_html_renderer": "implemented_scaffold",
             "analytical_memo": "scaffold",
@@ -239,6 +239,7 @@ def cmd_run(a):
     }
     collection_summary = _collect_external(rd, run_id=run_id, job_id=job_id, profile=profile_name)
     coverage_result = _reconcile_coverage(rd, run_id=run_id, job_id=job_id, profile=profile_name)
+    hydrate_claims_if_needed(rd, a.task, run_id=run_id)
     citation_result = _evaluate_citation_grounding(rd, run_id=run_id, job_id=job_id, profile=profile_name)
     feature_matrix["features"]["external_collector"] = (
         "implemented_real" if collection_summary.get("external_web_search_executed") or collection_summary.get("external_source_packet_loaded") else "implemented_seed_only"
@@ -343,6 +344,38 @@ def _is_seed_only_or_artifact_only(rd: Path) -> bool:
     if isinstance(rp, dict):
         mode = str(rp.get("mode") or "").strip().lower()
         if mode in {"artifact_only", "artifact-only"}:
+            return True
+    return False
+
+
+def _collect_profile_names(rd: Path) -> set[str]:
+    names: set[str] = set()
+    rd = Path(rd)
+    for rel in ("run-profile.json", "validation-profile-used.json"):
+        p = rd / rel
+        if not p.is_file():
+            continue
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            data = {}
+        if isinstance(data, dict):
+            name = str(data.get("profile") or data.get("name") or "").strip().lower()
+            if name:
+                names.add(name)
+    return names
+
+
+def _build_package_allow_stub(rd: Path) -> bool:
+    """Zip packaging may skip strict PKG_REQUIRED paths for seed/artifact-only/live-bridge prefetch."""
+    if _is_seed_only_or_artifact_only(rd):
+        return True
+    profiles = _collect_profile_names(rd)
+    if "live-bridge" in profiles:
+        cr = jr(rd / "collection-result.json", {})
+        if isinstance(cr, dict) and (
+            cr.get("external_source_packet_loaded") or cr.get("external_web_search_executed")
+        ):
             return True
     return False
 
@@ -541,7 +574,7 @@ def cmd_worker(a):
             "created_at": now(),
         },
     )
-    build_package(rd, allow_stub=_is_seed_only_or_artifact_only(rd))
+    build_package(rd, allow_stub=_build_package_allow_stub(rd))
     try:
         from runtime.event_history import append_side_effect
 

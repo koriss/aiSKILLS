@@ -1,0 +1,32 @@
+---
+description: Canonical paths and git layout for aiSKILLS / Research Factory Orchestrator — read before edits and commits.
+globs:
+alwaysApply: true
+---
+
+# RFO workspace (canonical)
+
+## Git — корень репозитория
+
+- **Не** использовать «голый» `~/home/kazak` как корень гита для этого проекта (частый источник путаницы).
+- Корень **`aiSKILLS`**: **`/home/kazak/_projects/aiSKILLS`**. Все операции **`git`** (status, commit, push, `-C`): отсюда или с **`git -C /home/kazak/_projects/aiSKILLS ...`**.
+
+## Каталог пакета RFO («навык» для кода runtime/scripts/contracts)
+
+Уровнем ниже монорепо-папки `research-factory-orchestrator/`:
+
+```text
+/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/
+```
+
+Это основной **`cwd`** для `python3 -S scripts/...`, `validate_skill`, запусков `interface_runtime_adapter`, изменений под `runtime/`, `scripts/`, `contracts/`.
+
+## Краткая шпаргалка
+
+| Что             | Абсолютный путь |
+|-----------------|-----------------|
+| Git root        | `/home/kazak/_projects/aiSKILLS` |
+| RFO код и скрипты | `/home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator` |
+| Remote (типично) | `origin` → приватный форк пользователя |
+
+Активную ветку смотреть: **`git -C ... branch --show-current`** (не захардкожена в этом правиле).

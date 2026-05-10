@@ -13,3 +13,4 @@ composition-audit-report.json
 coverage-report.json
 release-artifacts/
 release-validation-transcript.json
+reports/debug-runs/

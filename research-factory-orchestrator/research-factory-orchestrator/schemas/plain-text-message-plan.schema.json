@@ -1,21 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "UserVisibleDelivery",
+  "title": "PlainTextMessagePlan",
   "type": "object",
   "properties": {
     "delivery_id": {
       "type": "string"
     },
-    "summary_path": {
+    "parse_mode": {
       "type": "string"
     },
-    "message_plan_path": {
-      "type": "string"
-    },
-    "message_files": {
+    "messages": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object"
       }
     },
     "attachments": {
@@ -24,15 +21,17 @@
         "type": "object"
       }
     },
-    "validated": {
+    "plain_text_only": {
+      "type": "boolean"
+    },
+    "no_large_tables": {
       "type": "boolean"
     }
   },
   "additionalProperties": true,
   "required": [
-    "delivery_id",
-    "message_files",
+    "messages",
     "attachments",
-    "validated"
+    "plain_text_only"
   ]
 }

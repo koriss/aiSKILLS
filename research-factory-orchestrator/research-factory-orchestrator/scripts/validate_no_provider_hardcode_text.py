@@ -6,9 +6,9 @@ BAD = [
     re.compile(r'api\.telegram\.org', re.I),
     re.compile(r'sendMessage|sendDocument', re.I),
     re.compile(r'TELEGRAM_[A-Z_]+'),
-    re.compile(r'research\s+runtime\s+calls\s+telegram', re.I),
-    re.compile(r'runtime\s+hardcodes?\s+telegram', re.I),
-    re.compile(r'telegram\s+send\s+directly', re.I),
+    re.compile(r'research\s+runtime\s+calls\s+outbound\s+chat\s+api', re.I),
+    re.compile(r'runtime\s+hardcodes?\s+outbound\s+provider', re.I),
+    re.compile(r'outbound\s+send\s+directly\s+from\s+runtime', re.I),
 ]
 
 def main():

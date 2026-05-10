@@ -1,38 +1,45 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "UserVisibleDelivery",
+  "title": "PlainTextMessage",
   "type": "object",
   "properties": {
-    "delivery_id": {
+    "message_id": {
       "type": "string"
     },
-    "summary_path": {
+    "sequence": {
+      "type": "integer"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "block_type": {
       "type": "string"
     },
-    "message_plan_path": {
+    "text": {
       "type": "string"
     },
-    "message_files": {
+    "char_count": {
+      "type": "integer"
+    },
+    "claim_ids": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "attachments": {
+    "source_ids": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "string"
       }
-    },
-    "validated": {
-      "type": "boolean"
     }
   },
   "additionalProperties": true,
   "required": [
-    "delivery_id",
-    "message_files",
-    "attachments",
-    "validated"
+    "message_id",
+    "sequence",
+    "block_type",
+    "text",
+    "char_count"
   ]
 }

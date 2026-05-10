@@ -1,8 +1,0 @@
-{
-  "run_id": "RUN-9c6be6060bb6",
-  "p0_evidence_debt": 0,
-  "p1_evidence_debt": 2,
-  "items": [
-    "External source collection not executed in deterministic smoke mode."
-  ]
-}

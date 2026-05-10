@@ -1,1 +1,0 @@
-Files prepared; external delivery must be proven by delivery-manifest/ACK.

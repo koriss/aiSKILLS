@@ -40,7 +40,7 @@
       }
     },
     "telegram_messages": {
-      "description": "Legacy field name for optional compact chat-segment payloads in older packages.",
+      "description": "Legacy optional channel-specific chat segments from older host integrations; new deployments SHOULD use channel-neutral delivery metadata elsewhere in this object.",
       "type": "array",
       "items": {
         "type": "object"

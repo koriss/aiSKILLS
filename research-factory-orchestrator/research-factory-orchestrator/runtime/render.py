@@ -12,7 +12,7 @@ from runtime.chat_md import (
 )
 from runtime.report_html import build_full_report_html, write_canonical_full_report_html
 from runtime.status import VERSION
-from runtime.util import jr, jw, now, sid, slug
+from runtime.util import jr, jw, now, sid, slug, tw
 
 
 def allocate(runs_root, task, provider, interface):
@@ -83,6 +83,109 @@ def _seed_only_mode(rd: Path) -> bool:
     return bool(isinstance(c, dict) and c.get("seed_only") is True)
 
 
+def _source_body_for_claim(src: dict) -> str:
+    """Derive claim text from a source row; tolerate missing fetched body."""
+    cs = str(src.get("content_snippet") or src.get("content") or "").strip()
+    if cs:
+        return cs[:500]
+    title = str(src.get("title") or "").strip()
+    url = str(src.get("url") or src.get("canonical_origin_id") or "").strip()
+    parts: list[str] = []
+    if title:
+        parts.append(title)
+    if url:
+        parts.append(url)
+    err = str(src.get("content_fetch_error") or src.get("content_error") or "").strip()
+    if err:
+        parts.append(f"[fetch: {err[:120]}]")
+    body = " ".join(parts).strip()
+    return body[:500] if body else "(no extractable text)"
+
+
+def _conf_bucket_for_evidence(conf: float) -> str:
+    if conf >= 0.85:
+        return "high"
+    if conf >= 0.6:
+        return "medium"
+    return "low"
+
+
+def hydrate_claims_if_needed(rd: Path, task: str, *, run_id: str | None = None) -> bool:
+    """If external sources exist but claims-registry is empty, synthesize v19 claims + evidence.
+
+    Ensures citation grounding and downstream validators see non-empty claims when
+    ``sources.json`` already lists externally collected rows (relay packet, seeds, etc.).
+    Writes ``meta.origin=hydrate_from_sources`` on synthetic claims for disclosure.
+    """
+    rd = Path(rd)
+    if _seed_only_mode(rd):
+        return False
+    cs = _load_claims(rd)
+    if cs:
+        return False
+    sources = _load_sources(rd)
+    external = [
+        s
+        for s in sources
+        if isinstance(s, dict)
+        and s.get("source_role") != "seed"
+        and not str(s.get("source_id") or "").startswith("stub:")
+    ]
+    if not external:
+        return False
+    rid = run_id or ""
+    if not rid:
+        run_payload = _load_json(rd / "run.json", {})
+        rid = str(run_payload.get("run_id") or rd.name)
+
+    v19_claims: list[dict] = []
+    evidence_cards: list[dict] = []
+    for i, src in enumerate(external):
+        body = _source_body_for_claim(src)
+        src_id = str(src.get("source_id") or f"SRC-HYDR-{i+1:03d}")
+        claim_id = f"C-HYDR-{i+1:03d}"
+        ev_id = f"EV-HYDR-{i+1:03d}"
+        vm = src.get("verification_mode")
+        status_v19 = "reported_claim" if vm == "raw_document" else "inferred_assessment"
+        conf_f = 0.88 if vm == "raw_document" else 0.72
+        v19_claims.append(
+            {
+                "claim_id": claim_id,
+                "claim_text": body,
+                "claim_type": "source_derived",
+                "status": status_v19,
+                "confidence": _conf_bucket_for_evidence(conf_f),
+                "evidence_card_ids": [ev_id],
+                "support_set": [
+                    {
+                        "source_id": src_id,
+                        "evidence_card_id": ev_id,
+                        "role_for_claim": "primary_support",
+                    }
+                ],
+                "meta": {"synthetic": True, "origin": "hydrate_from_sources"},
+            }
+        )
+        evidence_cards.append(
+            {
+                "evidence_id": ev_id,
+                "source_ids": [src_id],
+                "claim_ids": [claim_id],
+                "extracted_fact_or_excerpt": {"kind": "excerpt", "text": body[:400]},
+                "supports": "direct",
+                "confidence": _conf_bucket_for_evidence(conf_f),
+            }
+        )
+
+    bundle = {"schema_version": "v19.0", "claims": v19_claims}
+    ev_bundle = {"schema_version": "v19.0", "evidence_cards": evidence_cards}
+    jw(rd / "claims-registry.json", bundle)
+    jw(rd / "claims/claims-registry.json", {"run_id": rid, "taxonomy_version": "v19.2", "claims": v19_claims})
+    jw(rd / "evidence-cards.json", ev_bundle)
+    jw(rd / "evidence/evidence-cards.json", {"run_id": rid, "evidence_cards": evidence_cards})
+    return True
+
+
 def render_all(rd, task, run_id, job_id, cmd_id, provider):
     cs = _load_claims(rd)
     sources = _load_sources(rd)
@@ -121,6 +224,7 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
                         "role_for_claim": "context",
                     }
                 ],
+                "meta": {"synthetic": True, "origin": "seed_only_stub"},
             }
         ]
     if seed_only and not evidence:

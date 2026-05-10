@@ -6,7 +6,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-DELIVERED_RE = re.compile(r"(отправлен|отправлено|доставлен|доставлено|прид[её]т в Telegram|sent to Telegram|HTML-отч[её]т.*отправлен|пакет.*отправлен|package.*sent)", re.I)
+DELIVERED_RE = re.compile(r"(отправлен|отправлено|доставлен|доставлено|доставлено в чат|sent to user|HTML-отч[её]т.*отправлен|пакет.*отправлен|package.*sent)", re.I)
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("path"); args=ap.parse_args()

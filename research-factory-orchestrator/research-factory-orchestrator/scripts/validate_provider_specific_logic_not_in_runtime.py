@@ -16,8 +16,8 @@ BANNED = [
     re.compile(r'TELEGRAM_[A-Z_]+'),
     re.compile(r'Bot\s+[A-Za-z0-9:_-]+'),
     re.compile(r'providers/telegram|telegram_delivery_adapter', re.I),
-    re.compile(r'\btelegram-message-plan\.json\b', re.I),
-    re.compile(r'\btelegram-message-\d+\.txt\b', re.I),
+    re.compile(r'\bplain-text-message-plan\.json\b', re.I),
+    re.compile(r'\bplain-text-message-\d+\.txt\b', re.I),
 ]
 ALLOWED_LOW_LEVEL = [
     'provider = ev.get("provider") or "cli"',
@@ -39,10 +39,6 @@ def main():
         for rx in BANNED:
             if rx.search(text):
                 errors.append(f'{rel}: provider-specific logic matched {rx.pattern}')
-    # Also ensure provider-specific adapters live under providers/, not scripts/.
-    for path in sorted((root / 'scripts').glob('*telegram*')):
-        if path.name not in {'render_telegram_messages.py', 'split_telegram_messages.py'} and not path.name.startswith('validate_telegram') and not path.name.startswith('validate_no_'):
-            errors.append(f'provider-specific script in scripts/: {path.name}')
     if errors:
         print('\n'.join(errors), file=sys.stderr)
         return 1

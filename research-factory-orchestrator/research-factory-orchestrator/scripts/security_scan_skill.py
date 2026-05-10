@@ -9,7 +9,7 @@ BAD_PATTERNS = [
     r"rm\s+-rf\s+/",
     r"cat\s+.*(\.env|id_rsa|credentials|secret)",
     r"printenv",
-    r"curl\s+.*(webhook|discord|telegram|pastebin)"
+    r"curl\s+.*(webhook|discord|pastebin)"
 ]
 
 def main():

@@ -1,4 +1,0 @@
-{"event_name": "runtime.started", "run_id": "RUN-5dd0c94a8c9c", "job_id": "JOB-50a0acf8fe87", "timestamp": "2026-05-08T15:17:05Z"}
-{"event_name": "runtime.completed", "run_id": "RUN-5dd0c94a8c9c", "job_id": "JOB-50a0acf8fe87", "timestamp": "2026-05-08T15:17:05Z"}
-{"event_name": "runtime.started", "run_id": "RUN-b522be7fb1ac", "job_id": "JOB-f25ed4e4e5e6", "timestamp": "2026-05-08T15:17:05Z"}
-{"event_name": "runtime.completed", "run_id": "RUN-b522be7fb1ac", "job_id": "JOB-f25ed4e4e5e6", "timestamp": "2026-05-08T15:17:05Z"}

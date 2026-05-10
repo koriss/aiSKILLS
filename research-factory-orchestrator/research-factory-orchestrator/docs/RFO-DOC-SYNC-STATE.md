@@ -86,3 +86,16 @@
 1. Критичные файлы: `SKILL.md`, `runtime/version.json`, `failure-corpus/index.json`, корневые контракты в `contracts/`.
 2. Откат к известному хорошему коммиту: **`71b722e`** (зафиксированный doc-sync) или **`76b59ce`** (начало этой синхронизации до бандла).
 3. Повторная проверка: `python3 -S scripts/validate_skill.py` из корня пакета скилла.
+
+## Wave — QA quality / playbooks (2026-05-10)
+
+- Добавлены `docs/qa/RFO-CANONICAL-WORK-ROOTS.md`, `RFO-VERSION-QUALITY-MATRIX.md`, `RFO-FULL-RESEARCH-PLAYBOOK.md`, `RFO-MERGE-ANTI-REGRESSION.md`; расширен `docs/qa/assertion-command-matrix.md`.
+- Honesty verifier canonical: `scripts/verify_skill_run_claims.py` + wrapper `verify_openclaw_run.py`; `validator_id` в JSON → **verify_skill_run_claims**.
+- Handoff downstream index: `agent-handoff/bundle-manifest.json`; роли промптов `prompts/roles/*.md`; ADR **`docs/adr/ADR-019-host-handoff-stdout-scanning.md`** (upstream parse).
+- Neutrality gate: `docs/qa/NEUTRALITY-SCAN.md` with explicit `rg` command and allowed residuals.
+- `kb/propaganda-io/` на канонической копии: манифест + `io-kb-unified/`, без восстановления из ZIP `_tmp/rfo`.
+
+### Дополнение master list затронутых путей
+
+- `CHANGELOG.md`, `SKILL.md`, `runtime/report_html.py`, `runtime/chat_md.py`, `runtime/artifact_execute_impl.py`, `scripts/validate_skill.py`, `scripts/_rfo_path_guard.py`, `scripts/verify_skill_run_claims.py`, `scripts/verify_openclaw_run.py`
+- `prompts/README.md`, `prompts/roles/*.md`, `contracts/golden-reference.md`, `docs/AUDIT-LEDGER.md`, `docs/adr/ADR-019-host-handoff-stdout-scanning.md`, `docs/qa/NEUTRALITY-SCAN.md`

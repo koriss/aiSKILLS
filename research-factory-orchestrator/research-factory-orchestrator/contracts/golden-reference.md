@@ -8,7 +8,7 @@ Older release notes may still mention them; do not follow those steps.
 
 ## Current practice
 
-- Regression and honesty checks use **`scripts/verify_openclaw_run.py`** and the
+- Regression and honesty checks use **`scripts/verify_skill_run_claims.py`** (`validator_id`; legacy wrapper `verify_openclaw_run.py`) and the
   validator stack referenced from **`contracts/validator-registry.json`**.
 - Default enqueue path is **`--interface cli --provider cli`**; user-visible
   delivery is outside this repository (see **`docs/adr/ADR-015-runtime-truth-restoration.md`**).

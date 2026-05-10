@@ -20,7 +20,13 @@
 | docs/v19/schemas-core.md | normative | OK | Примечание про schemas/core копии | validate_skill |
 | docs/v19/failure-fixtures.md | normative | OK | Правило версий индекса vs runtime | validate_skill |
 | docs/adr/ADR-001-v19-pragmatic-rigor.md | normative | OK | Status: implemented | — |
-| docs/qa/assertion-command-matrix.md | normative | new | Матрица утверждение→команда | validate_skill |
+| docs/qa/assertion-command-matrix.md | normative | OK | Строки bridge/packet/bundle/smoke/manual | validate_skill |
+| docs/qa/RFO-CANONICAL-WORK-ROOTS.md | normative | new | Карта git vs пакета | human |
+| docs/qa/RFO-VERSION-QUALITY-MATRIX.md | narrative | new | ZIP инвентарь vs канон | human |
+| docs/qa/RFO-FULL-RESEARCH-PLAYBOOK.md | normative | new | GH1–GH3 relay/troubleshooting | validate_skill peer |
+| docs/qa/RFO-MERGE-ANTI-REGRESSION.md | normative | new | §0A merge чеклист | human |
+| docs/qa/NEUTRALITY-SCAN.md | normative | new | rg gate + allowed residuals | human |
+| docs/adr/ADR-019-host-handoff-stdout-scanning.md | normative | new | upstream parse guidance | human |
 | kb/README.md | narrative | new | Маркер non-canonical | — |
 | prompts/README.md | narrative | new | Маркер non-canonical | — |
 | references/README.md | narrative | new | Маркер non-canonical | — |

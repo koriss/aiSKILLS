@@ -37,7 +37,7 @@ required_scripts = [
     "validate_active_contract_versions.py", "validate_profile_policies_present.py",
     "validate_no_scaffolds_in_production.py", "validate_no_failed_validation_in_production.py",
     "validate_advisory_fixture_suite.py",
-    "validate_artifact_release.py", "verify_openclaw_run.py",
+    "validate_artifact_release.py", "verify_skill_run_claims.py", "verify_openclaw_run.py",
     "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
     "validate_logical_consistency.py",
     "run_core_validators.py",

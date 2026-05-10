@@ -23,9 +23,11 @@ URL для исследования собирается здесь через *
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
+import shutil
 import sys
 import time
 import tempfile
@@ -44,6 +46,8 @@ SCRIPTS_DIR = SKILL_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(SKILL_ROOT))
 
+from runtime.schema_defaults import minimal_valid  # noqa: E402
+from runtime.status import VERSION  # noqa: E402
 from runtime.util import now  # noqa: E402
 
 from rfo_relay_search_helpers import (  # noqa: E402
@@ -54,7 +58,7 @@ from rfo_relay_search_helpers import (  # noqa: E402
 
 # ── config ────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
-_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or "RFO/19.4-RelayPrefetch"
+_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or f"RFO/{VERSION}-RelayPrefetch"
 _MAX_CHARS_PER_SOURCE = 3000   # truncate content per source
 _MAX_SOURCES = 8
 
@@ -283,6 +287,113 @@ def build_source_packet(search_results: list[dict]) -> dict:
     return {"sources": sources}
 
 
+# Keys allowed on each source record under ``schemas/core/sources.schema.json``.
+_SOURCE_SCHEMA_KEYS: frozenset[str] = frozenset(
+    {
+        "source_id",
+        "title",
+        "canonical_origin_id",
+        "url",
+        "document_path",
+        "archival_locator",
+        "publisher",
+        "accessed_at",
+        "source_role",
+        "access_level",
+        "interest_alignment",
+        "verification_mode",
+        "independence",
+        "authority_scope",
+        "corroboration_type",
+        "citation_eligible",
+    }
+)
+
+
+def _normalize_source_for_v19_schema(s: dict[str, Any], idx: int) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Strip non-schema fields into diagnostics; map legacy bridge enums."""
+    row_in = dict(s) if isinstance(s, dict) else {}
+    diag: dict[str, Any] = {"source_idx": idx}
+    snippet_raw = row_in.pop("content_snippet", None)
+    if snippet_raw is not None:
+        slen = len(str(snippet_raw))
+        if slen:
+            diag["content_snippet_len"] = slen
+    ferr = row_in.pop("content_fetch_error", None)
+    if ferr:
+        diag["content_fetch_error"] = str(ferr)[:200]
+    stripped: list[str] = []
+    row: dict[str, Any] = {}
+    for k, v in row_in.items():
+        if k in _SOURCE_SCHEMA_KEYS:
+            row[k] = v
+        else:
+            stripped.append(str(k))
+    if stripped:
+        diag["stripped_unknown_keys"] = stripped
+    if row.get("source_role") == "background":
+        row["source_role"] = "unknown"
+        diag["mapped_source_role"] = "background→unknown"
+    if row.get("interest_alignment") == "neutral":
+        row["interest_alignment"] = "unknown"
+        diag["mapped_interest_alignment"] = "neutral→unknown"
+    ct = row.get("corroboration_type")
+    if ct in {"authoritative", "corroborated"}:
+        row["corroboration_type"] = "independent"
+        diag["mapped_corroboration_type"] = f"{ct}→independent"
+    elif ct is not None and ct not in {"independent", "circular", "unknown"}:
+        row["corroboration_type"] = "unknown"
+        diag["mapped_corroboration_type_fallback"] = str(ct)
+    sid_now = str(row.get("source_id") or "").strip() or f"SRC-RELAY-{idx + 1:03d}"
+    row["source_id"] = sid_now
+    diag["source_id"] = sid_now
+    co = str(row.get("canonical_origin_id") or "").strip()
+    url = str(row.get("url") or "").strip()
+    if not co and url:
+        co = url
+    if not co:
+        co = sid_now
+    row["canonical_origin_id"] = co
+    title = str(row.get("title") or "").strip() or co[:200]
+    row["title"] = title[:200]
+    if row.get("citation_eligible") and not (
+        row.get("url") or row.get("document_path") or row.get("archival_locator")
+    ):
+        first = co.split()[0] if co else ""
+        if first.startswith("http"):
+            row["url"] = first[:2048]
+    row.setdefault("access_level", "primary_access")
+    row.setdefault("verification_mode", "testimony")
+    row.setdefault("independence", "medium")
+    row.setdefault("citation_eligible", True)
+    row.setdefault("corroboration_type", "unknown")
+    row.setdefault("source_role", "unknown")
+    row.setdefault("interest_alignment", "unknown")
+    return row, diag
+
+
+def _persist_bridge_source_packet(rd: Path, packet_path_str: str) -> None:
+    """Copy ``RFO_SOURCE_PACKET`` payload into ``<rd>/sources/`` and patch collection-result."""
+    from runtime.util import jr, jw
+
+    pkt = Path(packet_path_str)
+    if not pkt.is_file():
+        return
+    rel = Path("sources") / "external-source-packet.bridge.json"
+    dst = rd / rel
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(pkt, dst)
+    sha = hashlib.sha256(dst.read_bytes()).hexdigest()
+    cr = jr(rd / "collection-result.json", {})
+    if isinstance(cr, dict):
+        cr["external_source_packet_path"] = rel.as_posix()
+        jw(rd / "collection-result.json", cr)
+    print(
+        f"[4/5] persisted source packet → {rel.as_posix()} sha256={sha[:16]}…",
+        file=sys.stderr,
+    )
+
+
 # ── RFO patch helpers ─────────────────────────────────────────────────────────
 def patch_claims_registry(rd: Path, claims: list[dict], evidence_cards: list[dict]) -> None:
     """Overwrite claims-registry with real source-derived claims."""
@@ -331,23 +442,46 @@ def patch_claims_registry(rd: Path, claims: list[dict], evidence_cards: list[dic
     })
     jw(rd / "evidence-cards.json", {"schema_version": "v19.0", "evidence_cards": evidence_cards})
     jw(rd / "evidence/evidence-cards.json", {"run_id": rd.name, "evidence_cards": evidence_cards})
-    print(f"[patch] claims-registry → {len(v19_claims)} claims, evidence-cards → {len(evidence_cards)} cards")
+    print(
+        f"[patch] claims-registry → {len(v19_claims)} claims, evidence-cards → {len(evidence_cards)} cards",
+        file=sys.stderr,
+    )
 
 
 def patch_sources_json(rd: Path, sources: list[dict]) -> None:
-    """Update sources.json and sources/sources.json with full source list."""
+    """Update sources bundles with schema-aligned records; diagnostics under ``reports/``."""
     from runtime.util import jw
 
-    root_sources = []
-    subdir_sources = []
-    for s in sources:
-        src = {k: v for k, v in s.items() if k != "content_snippet"}
-        root_sources.append(src)
-        subdir_sources.append(src)
+    diagnostics: list[dict[str, Any]] = []
+    root_sources: list[dict[str, Any]] = []
+    for i, s in enumerate(sources):
+        norm, diag = _normalize_source_for_v19_schema(s, i)
+        if norm.get("source_id"):
+            root_sources.append(norm)
+            diagnostics.append(diag)
+
+    subdir_sources = list(root_sources)
 
     jw(rd / "sources.json", {"schema_version": "v19.0", "sources": root_sources})
     jw(rd / "sources/sources.json", {"run_id": rd.name, "sources": subdir_sources})
-    print(f"[patch] sources.json → {len(sources)} sources")
+    rep_dir = rd / "reports"
+    rep_dir.mkdir(parents=True, exist_ok=True)
+    jw(
+        rep_dir / "relay-bridge-sources-diagnostics.json",
+        {
+            "schema_version": "v19.0",
+            "run_id": rd.name,
+            "generated_at": now(),
+            "relay": "prefetch_bridge",
+            "sources_count": len(root_sources),
+            "per_source": diagnostics,
+        },
+    )
+    print(
+        f"[patch] sources.json → {len(root_sources)} schema-aligned sources "
+        f"(diagnostics → reports/relay-bridge-sources-diagnostics.json)",
+        file=sys.stderr,
+    )
 
 
 def minimum_sources_policy(profile_name: str) -> int:
@@ -419,9 +553,9 @@ def main() -> int:
 
     task = args.task
     prof_lc = args.profile.strip().lower()
-    print(f"\n{'='*60}")
-    print(f"[RFO relay] Starting: profile={prof_lc} task={task[:80]!r}")
-    print(f"{'='*60}\n")
+    print(f"\n{'='*60}", file=sys.stderr)
+    print(f"[RFO relay] Starting: profile={prof_lc} task={task[:80]!r}", file=sys.stderr)
+    print(f"{'='*60}\n", file=sys.stderr)
 
     relays = resolve_relay_bases(args.web_search_json_api_base)
     if not relays:
@@ -432,7 +566,7 @@ def main() -> int:
         )
         return 2
 
-    print("[1/5] Query JSON relay...")
+    print("[1/5] Query JSON relay...", file=sys.stderr)
     results: list[dict] = []
     for base in relays:
         results = query_json_search_relay(base, task, args.num_sources)
@@ -453,19 +587,25 @@ def main() -> int:
                     file=sys.stderr,
                 )
                 return 2
-            print(f"{msg} continuing with empty scaffold (mvr + RFO_ALLOW_MVR_EMPTY_RELAY)")
+            print(
+                f"{msg} continuing with empty scaffold (mvr + RFO_ALLOW_MVR_EMPTY_RELAY)",
+                file=sys.stderr,
+            )
         else:
             print(msg, file=sys.stderr)
             print("Relax with --profile mvr or tune RFO_WEB_SEARCH_* / relay availability.", file=sys.stderr)
             return 2
 
-    print(f"[1/5] Got {len(results)} relay rows")
+    print(f"[1/5] Got {len(results)} relay rows", file=sys.stderr)
 
     # Step 2: Build source packet with fetched content
-    print("[2/5] Building source packet with fetched content...")
+    print("[2/5] Building source packet with fetched content...", file=sys.stderr)
     packet = build_source_packet(results)
     n_with_content = sum(1 for s in packet["sources"] if str(s.get("content_snippet") or "").strip())
-    print(f"[2/5] {len(packet['sources'])} sources, {n_with_content} with non-empty bodies")
+    print(
+        f"[2/5] {len(packet['sources'])} sources, {n_with_content} with non-empty bodies",
+        file=sys.stderr,
+    )
 
     min_need = minimum_sources_policy(args.profile)
     ok_pf, pf_detail = strict_packet_preflight(prof_lc, packet, min_need)
@@ -480,7 +620,10 @@ def main() -> int:
             packet_path = f.name
 
         # Step 3: adapter (queue) → worker (runtime), deterministic run_dir from adapter
-        print(f"[3/5] Queue job + run worker (source packet file: {packet_path})...")
+        print(
+            f"[3/5] Queue job + run worker (source packet file: {packet_path})...",
+            file=sys.stderr,
+        )
         runs_root = str(Path(args.runs_root).resolve())
         _ensure_rfo_tree(Path(runs_root))
 
@@ -533,7 +676,7 @@ def main() -> int:
             print("[3/5] ERROR: adapter stdout missing run_dir", file=sys.stderr)
             return 1
         latest_run = Path(str(run_dir_raw)).resolve()
-        print(f"[3/5] Queued run_dir: {latest_run}")
+        print(f"[3/5] Queued run_dir: {latest_run}", file=sys.stderr)
 
         worker_claimed = False
         worker_hard_failed = False
@@ -558,7 +701,7 @@ def main() -> int:
             summary = _parse_stdout_json_object(proc.stdout or "")
             if summary.get("claimed") is True:
                 worker_claimed = True
-                print(f"[3/5] worker claimed job (attempt {attempt + 1})")
+                print(f"[3/5] worker claimed job (attempt {attempt + 1})", file=sys.stderr)
                 break
             reason = str(summary.get("reason") or "")
             if proc.returncode != 0:
@@ -566,15 +709,21 @@ def main() -> int:
                 print(last_worker_out[:2500], file=sys.stderr)
                 if args.best_effort_continue:
                     worker_hard_failed = True
-                    print("[3/5] WARN: --best-effort-continue set; continuing bridge despite worker failure.")
+                    print(
+                        "[3/5] WARN: --best-effort-continue set; continuing bridge despite worker failure.",
+                        file=sys.stderr,
+                    )
                     break
                 return 1
-            print(f"[3/5] worker not claimed ({reason}), retry {attempt + 1}/{_WORKER_RETRY_MAX}")
+            print(
+                f"[3/5] worker not claimed ({reason}), retry {attempt + 1}/{_WORKER_RETRY_MAX}",
+                file=sys.stderr,
+            )
             time.sleep(_WORKER_RETRY_BASE_S + 0.12 * attempt)
 
         if not worker_claimed:
             if args.best_effort_continue and worker_hard_failed and latest_run.is_dir():
-                print("[3/5] WARN: proceeding with incomplete worker run (best-effort).")
+                print("[3/5] WARN: proceeding with incomplete worker run (best-effort).", file=sys.stderr)
             else:
                 print(
                     "[3/5] ERROR: worker did not claim a pending job after retries — "
@@ -591,7 +740,7 @@ def main() -> int:
             return 1
 
         # Step 4: Extract real claims from source packet → patch artifacts
-        print(f"[4/5] Extracting claims from {len(packet['sources'])} sources...")
+        print(f"[4/5] Extracting claims from {len(packet['sources'])} sources...", file=sys.stderr)
         all_sources = list(packet["sources"])
         existing_sources_path = latest_run / "sources.json"
         if existing_sources_path.exists():
@@ -602,20 +751,26 @@ def main() -> int:
                 for es in existing_srcs:
                     if es.get("source_id") not in seen:
                         all_sources.append(es)
-                print(f"[4/5] Merged {len(existing_srcs)} existing sources → {len(all_sources)} total")
+                print(
+                    f"[4/5] Merged {len(existing_srcs)} existing sources → {len(all_sources)} total",
+                    file=sys.stderr,
+                )
             except Exception as e:
-                print(f"[4/5] Could not merge existing sources: {e}")
+                print(f"[4/5] Could not merge existing sources: {e}", file=sys.stderr)
 
         real_claims, real_ev = extract_claims_from_content(all_sources, task)
-        print(f"[4/5] Generated {len(real_claims)} real claims from sources")
+        print(f"[4/5] Generated {len(real_claims)} real claims from sources", file=sys.stderr)
 
         if real_claims:
             patch_claims_registry(latest_run, real_claims, real_ev)
             patch_sources_json(latest_run, all_sources)
         else:
-            print("[4/5] WARNING: no real claims extracted — will use scaffold")
+            print("[4/5] WARNING: no real claims extracted — will use scaffold", file=sys.stderr)
 
-        print("[4/5] Re-rendering HTML with real claims...")
+        if packet_path:
+            _persist_bridge_source_packet(latest_run, packet_path)
+
+        print("[4/5] Re-rendering HTML with real claims...", file=sys.stderr)
         run_id = job_id_gate = cmd_id_gate = "UNKNOWN"
         try:
             from runtime.render import render_all
@@ -626,7 +781,7 @@ def main() -> int:
             job_id_gate = str(run_json.get("job_id") or "UNKNOWN")
             cmd_id_gate = str(run_json.get("command_id") or "UNKNOWN")
             render_all(latest_run, task, run_id, job_id_gate, cmd_id_gate, "cli")
-            print("[4/5] Re-render complete")
+            print("[4/5] Re-render complete", file=sys.stderr)
         except Exception as e:
             strict = (
                 os.environ.get("RFO_BRIDGE_RENDER_STRICT", "").strip().lower()
@@ -641,7 +796,46 @@ def main() -> int:
                     file=sys.stderr,
                 )
                 return 21
-            print(f"[4/5] Re-render error (non-fatal): {e}")
+            print(f"[4/5] Re-render error (non-fatal): {e}", file=sys.stderr)
+
+        try:
+            from runtime.worker_impl import _build_package_allow_stub, build_package as _bridge_build_package
+
+            _bridge_build_package(
+                latest_run,
+                allow_stub=_build_package_allow_stub(latest_run),
+                quiet=True,
+            )
+            print("[4/5] Package rebuilt after bridge render (quiet)", file=sys.stderr)
+        except Exception as e:
+            print(f"[4/5] Package rebuild error (non-fatal): {e}", file=sys.stderr)
+
+        try:
+            from runtime.citation_grounding import evaluate as _evaluate_citation_grounding_bridge
+            from runtime.util import jr as _jr_b, jw as _jw_b
+
+            rp_doc = _jr_b(latest_run / "run-profile.json", {})
+            pname = str(rp_doc.get("profile") or prof_lc or "live-bridge")
+            cg = _evaluate_citation_grounding_bridge(
+                latest_run,
+                run_id=run_id,
+                job_id=job_id_gate,
+                profile=pname,
+            )
+            fm = _jr_b(latest_run / "feature-truth-matrix.json", {})
+            if isinstance(fm, dict):
+                fm["citation_grounding_summary"] = {
+                    "raf": cg.get("relevance_aware_factuality_score"),
+                    "dfl": cg.get("deflection_rate_when_no_grounding"),
+                    "passed": cg.get("passed"),
+                    "requires_grounding": cg.get("requires_grounding"),
+                    "claims_total": cg.get("claims_total"),
+                    "claims_grounded": cg.get("claims_grounded"),
+                }
+                _jw_b(latest_run / "feature-truth-matrix.json", fm)
+                print("[4/5] citation-grounding + feature-truth-matrix citation block resynced", file=sys.stderr)
+        except Exception as e:
+            print(f"[4/5] citation/matrix resync error (non-fatal): {e}", file=sys.stderr)
 
         if prof_lc == "mvr" or args.allow_gate_stub:
             try:
@@ -649,30 +843,38 @@ def main() -> int:
 
                 jw(
                     latest_run / "final-answer-gate.json",
-                    {
-                        "schema_version": "v19.0",
-                        "run_id": run_id,
-                        "passed": True,
-                        "status": "content_rendered_relay_prefetch",
-                        "checks": {},
-                        "overconfidence_risk": {"blocking": [], "warnings": [], "signals": {}},
-                        "created_at": now(),
-                    },
+                    minimal_valid(
+                        "final-answer-gate",
+                        overrides={
+                            "run_id": run_id,
+                            "passed": True,
+                            "status": "stub_only",
+                        },
+                    ),
                 )
             except Exception as e:
-                print(f"[4/5] gate update error: {e}")
+                print(f"[4/5] gate update error: {e}", file=sys.stderr)
         else:
-            print("[4/5] Leaving final-answer-gate untouched (live-bridge: run validators for truth)")
+            print(
+                "[4/5] Leaving final-answer-gate untouched (live-bridge: run validators for truth)",
+                file=sys.stderr,
+            )
 
-        print("[5/5] Stdout agent handoff (see __RFO_SKILL_AGENT_HANDOFF__=… on last line).")
+        print(
+            "[5/5] Agent handoff (__RFO_SKILL_AGENT_HANDOFF__=… emitted to stdout as single line)",
+            file=sys.stderr,
+        )
         from runtime.artifact_execute_impl import emit_agent_skill_handoff
 
         _st, exit_code = emit_agent_skill_handoff(latest_run, task)
 
-        print(f"\n{'='*60}")
-        print(f"[DONE] Run: {latest_run.name}")
-        print(f"[DONE] Sources: {len(all_sources)}, Claims: {len(real_claims)}, handoff_status={_st}")
-        print(f"{'='*60}\n")
+        print(f"\n{'='*60}", file=sys.stderr)
+        print(f"[DONE] Run: {latest_run.name}", file=sys.stderr)
+        print(
+            f"[DONE] Sources: {len(all_sources)}, Claims: {len(real_claims)}, handoff_status={_st}",
+            file=sys.stderr,
+        )
+        print(f"{'='*60}\n", file=sys.stderr)
         return exit_code
     finally:
         if packet_path:

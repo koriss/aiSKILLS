@@ -1,6 +1,6 @@
 # AGENTS.md — RFO ≥ v19.2.1 honesty contract
 
-This file defines an **allowed** pattern for agents invoking Research Factory Orchestrator (RFO). Path guards (`scripts/_rfo_path_guard.py`) enforce canonical skill layout and approved `--runs-root` values; post-run checks may use `scripts/verify_openclaw_run.py` where applicable.
+This file defines an **allowed** pattern for agents invoking Research Factory Orchestrator (RFO). Path guards (`scripts/_rfo_path_guard.py`) enforce canonical skill layout and approved `--runs-root` values; post-run checks may use `scripts/verify_skill_run_claims.py` (compatibility filename: `scripts/verify_openclaw_run.py`).
 
 ## What you must parameterize (any host)
 
@@ -20,12 +20,12 @@ cd <SKILL_ROOT> && \
     --task "<user request as a single string>"
 ```
 
-### Example: OpenClaw-style paths
+### Example: host-agnostic paths
 
 ```bash
-cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \
+cd <SKILL_ROOT> && \
   python3 -S scripts/interface_runtime_adapter.py \
-    adapter --runs-root ~/.openclaw/workspace/rfo-runs \
+    adapter --runs-root <RUNS_ROOT> \
     --interface cli --provider cli \
     --task "<user request as a single string>"
 ```
@@ -37,10 +37,10 @@ implement outbound messaging to external channels.
 ## Worker pipeline
 
 ```bash
-cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \
-  python3 -S scripts/runtime_job_worker.py    --runs-root ~/.openclaw/workspace/rfo-runs --execute-runtime
-cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \
-  python3 -S scripts/outbox_delivery_worker.py --runs-root ~/.openclaw/workspace/rfo-runs
+cd <SKILL_ROOT> && \
+  python3 -S scripts/runtime_job_worker.py    --runs-root <RUNS_ROOT> --execute-runtime
+cd <SKILL_ROOT> && \
+  python3 -S scripts/outbox_delivery_worker.py --runs-root <RUNS_ROOT>
 ```
 
 **Important:** `runtime_job_worker` only consumes `queue/pending/*.json`. Starting the worker alone (with no prior `interface_runtime_adapter adapter` enqueue) usually does nothing useful (`claimed:false`). The worker subprocess must inherit the same environment the run needs (e.g. `RFO_SOURCE_PACKET` when using a source packet).
@@ -57,9 +57,9 @@ Full external collection uses a configurable HTTP JSON relay (SearxNG-style
 Bundled bridge (prefetch + queue + worker + handoff):
 
 ```bash
-cd ~/.openclaw/workspace/skills/research-factory-orchestrator && \
+cd <SKILL_ROOT> && \
   python3 -S scripts/run_rfo_with_web_search.py \
-    --runs-root ~/.openclaw/workspace/rfo-runs \
+    --runs-root <RUNS_ROOT> \
     --web-search-json-api-base "${RFO_WEB_SEARCH_JSON_API_BASE:?set relay base URL}" \
     --task "<user request>"
 ```
@@ -76,9 +76,9 @@ The bridge exits non-zero if the relay base URL is missing. It ends with stdout 
 - **Worker** (`cmd_worker`): claims one pending job, runs `rfo_runtime_core run` **inheriting the current OS environment**, then packaging / outbox prep.
 - **Collector** (`collect`): reads `RFO_SOURCE_PACKET` file if present (`external_source_packet_loaded`); `RFO_SEED_URLS` probes are a separate branch. Breaking env inheritance (e.g. `subprocess.run(..., env={})` without merge) silently drops packets.
 
-## BATS embeddings index (OpenClaw ops)
+## BATS embeddings index (host platform ops)
 
-Failures such as **BATS 33/34 “embeddings index”** concern how much workspace memory OpenClaw indexes for tests, not RFO collector code. Mitigations: widen the indexed corpus (more eligible source files), adjust the indexer include policy, or change the embeddings threshold in the BATS scenario—treat as **platform ops**, orthogonal to collection truth flags.
+Failures such as **BATS 33/34 “embeddings index”** concern how much workspace memory the host platform indexes for tests, not RFO collector code. Mitigations: widen the indexed corpus (more eligible source files), adjust the indexer include policy, or change the embeddings threshold in the BATS scenario—treat as **platform ops**, orthogonal to collection truth flags.
 
 ## Hard prohibitions (enforced by code, not by convention)
 
@@ -88,8 +88,8 @@ Failures such as **BATS 33/34 “embeddings index”** concern how much workspac
 | `--runs-root /tmp/...` without `RFO_ALLOW_TMP_RUNS_ROOT=1` | `_rfo_path_guard.enforce_runs_root_argv` | exit 12, `RFO-RUNS-ROOT-FORBIDDEN` |
 | Outbox event naming a provider with no `providers/<provider>/<provider>_delivery_adapter.py` | `runtime/outbox_impl.cmd_outbox` | ack `failed`, reason `PROVIDER-DELIVERY-ADAPTER-MISSING`, `delivery_not_proven` where applicable |
 | Calling adapter from a non-canonical skill name (basename ≠ `research-factory-orchestrator`) | `_rfo_path_guard.enforce_canonical_skill_path` | exit 11, `RFO-NON-CANONICAL-SKILL-PATH` |
-| Narrating a `version` (e.g. "RFO v19.2.1 …") **before** reading `entrypoint-proof.json` or `run.json` from the actual run | `scripts/verify_openclaw_run.py` (`LIE-DETECTED-NARRATIVE-WITHOUT-EVIDENCE`) | verifier non-zero exit |
-| Claiming `real_external_delivery=true` while artifacts show `seed_only=true` or `delivery_not_proven` | `scripts/verify_openclaw_run.py` | verifier non-zero exit |
+| Narrating a `version` (e.g. "RFO v19.2.1 …") **before** reading `entrypoint-proof.json` or `run.json` from the actual run | `scripts/verify_skill_run_claims.py` (`LIE-DETECTED-NARRATIVE-WITHOUT-EVIDENCE`) | verifier non-zero exit |
+| Claiming `real_external_delivery=true` while artifacts show `seed_only=true` or `delivery_not_proven` | `scripts/verify_skill_run_claims.py` | verifier non-zero exit |
 
 ## Smoke / consent escape hatches
 

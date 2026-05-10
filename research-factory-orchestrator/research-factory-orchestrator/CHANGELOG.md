@@ -2,6 +2,11 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+- **Breaking (JSON consumers):** honesty harness JSON field `validator_id` is now
+  **`verify_skill_run_claims`**. Canonical script: `scripts/verify_skill_run_claims.py`;
+  `scripts/verify_openclaw_run.py` remains a thin compatibility wrapper.
+- Downstream agent index: `agent-handoff/bundle-manifest.json` under each run-dir
+  (contract `rfo-agent-handoff-bundle-v1`) lists prompt role files and key artifact paths.
 - Default bridge profile `live-bridge`; relay base URL required (no baked search host).
 - Removed in-tree Telegram delivery (`providers/telegram/`, `tools/agent_telegram/`)
   and optional golden diff helper; docs/schemas label legacy `telegram_messages` field.

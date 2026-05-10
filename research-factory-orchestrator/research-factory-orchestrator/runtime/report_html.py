@@ -360,15 +360,65 @@ def build_run_banner_html(
         "rfo_run_mode": run_meta.get("mode"),
         "skill_version": version,
         "user_visible_research": user_visible_research,
-        "note": "Treat seed-only output as provisional until external gates pass.",
+        "note": (
+            "Treat seed-only output as provisional until external gates pass. "
+            "On-disk HTML completeness is not the same as user-visible delivery on a host channel (ADR-016)."
+        ),
     }
     banner_json = html.escape(json.dumps(banner_obj, ensure_ascii=False))
+    host_line_html = (
+        " Compute-only artifact bundle; "
+        "if a host forwards truncated text or attachments, compare with paths in "
+        "<code>result-manifest.json</code> / handoff capsule."
+    )
     return (
         "<header role=\"banner\" class=\"rfo-run-banner\" style=\"background:#37474f;color:#eceff1;padding:10px 14px;"
         "border-radius:6px;margin-bottom:14px;font-size:13px;line-height:1.45\">"
         "<strong>Research report</strong> · "
-        f"run mode <code>{mode_s}</code> · evidence depth: {html.escape(depth)}"
+        f"run mode <code>{mode_s}</code> · evidence depth: {html.escape(depth)}."
+        f"{host_line_html}"
         f"</header><script type=\"application/json\" id=\"rfo-run-mode-banner\">{banner_json}</script>"
+    )
+
+
+def build_feature_truth_capabilities_html(rd: Path) -> str:
+    """Small read-only excerpt from ``feature-truth-matrix.json`` (no invented capabilities)."""
+    ftm = jr(rd / "feature-truth-matrix.json", {})
+    feats = ftm.get("features") if isinstance(ftm.get("features"), dict) else {}
+    if not feats:
+        return ""
+    prio = (
+        "real_external_search_workers",
+        "external_user_visible_delivery_via_skill",
+        "work_unit_decomposition",
+        "relay_prefetch_bridge",
+        "citation_grounding",
+    )
+    keys: list[str] = []
+    for k in prio:
+        if k in feats and k not in keys:
+            keys.append(k)
+    for k in sorted(feats.keys()):
+        if k not in keys:
+            keys.append(k)
+        if len(keys) >= 12:
+            break
+    rows: list[str] = []
+    for k in keys[:12]:
+        v = feats.get(k)
+        rows.append(
+            f"<dt><code>{html.escape(k)}</code></dt>"
+            f"<dd><code>{html.escape(json.dumps(v, ensure_ascii=False)[:280])}</code></dd>"
+        )
+    caps_json = html.escape(json.dumps({"features_subset": {k: feats[k] for k in keys[:12]}}, ensure_ascii=False))
+    return (
+        "<aside class=\"rfo-capabilities-truth\" style=\"margin:10px 0 14px;padding:8px 12px;"
+        "border-left:4px solid #546e7a;background:#fafafa;font-size:12px;line-height:1.4\">"
+        "<strong>Capabilities (truth matrix excerpt)</strong> — scaffold values reflect validator truth, "
+        "not marketing copy.<dl style=\"margin:6px 0 0;padding:0\">"
+        f"{''.join(rows)}"
+        "</dl></aside>"
+        f"<script type=\"application/json\" id=\"rfo-feature-truth-excerpt\">{caps_json}</script>"
     )
 
 
@@ -453,7 +503,10 @@ def build_full_report_html(
         "TITLE": html.escape(f"RFO Report — {run_id}"),
         "GENERATED_AT": html.escape(generated_at),
         "OUTPUT_PROFILE": "v19 investigation / wiki-citations",
-        "RUN_BANNER": build_run_banner_html(rd, provider, disclaimer, user_visible_research, version),
+        "RUN_BANNER": (
+            build_run_banner_html(rd, provider, disclaimer, user_visible_research, version)
+            + build_feature_truth_capabilities_html(rd)
+        ),
         "EXECUTIVE_SUMMARY": exec_summary,
         "KEY_VERDICT": f"<div class=\"callout info\"><strong>Key verdict:</strong> {key_verdict}</div>",
         "RESEARCH_QUESTION_SCOPE": f"<p>{html.escape(task)}</p>",

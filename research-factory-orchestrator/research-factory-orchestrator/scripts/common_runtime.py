@@ -2,7 +2,20 @@
 from pathlib import Path
 import json, datetime, re, hashlib
 
-VERSION = "19.3.0"
+_VERSION_FILE = Path(__file__).resolve().parent.parent / "runtime" / "version.json"
+
+
+def _load_skill_version() -> str:
+    if not _VERSION_FILE.is_file():
+        return "18.5.0-unknown"
+    try:
+        meta = json.loads(_VERSION_FILE.read_text(encoding="utf-8"))
+        return str(meta.get("skill_version") or meta.get("version") or "18.5.0-unknown")
+    except Exception:
+        return "18.5.0-unknown"
+
+
+VERSION = _load_skill_version()
 STATES = ["created","compiled","collecting","subagents_running","subagent_timeout_detected","recovery_running","quorum_check","coverage_check","partial_ready","synthesis_ready","validating","delivery_ready","delivered","failed","cancelled"]
 AXES = ["entity_resolution","primary_origin_sources","broad_sweep","contrary_adversarial_search","source_quality_provenance","timeline_freshness","structured_data","claim_factcheck","strong_tie_pivoting","contact_media_graph","raw_evidence_vault","synthesis_merge"]
 SOURCE_FAMILIES = ["primary_or_origin","official_or_institutional","independent_media","registry_or_database","contrary_or_debunking","archive_or_cached"]

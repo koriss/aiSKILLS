@@ -130,6 +130,7 @@ _ZIP_SKIP_DIR_PARTS: frozenset[str] = frozenset(
         ".pytest_cache",
         ".ruff_cache",
         "release-artifacts",
+        "debug-runs",
     }
 )
 

@@ -24,12 +24,12 @@ Use this checklist before trusting any “PASS” narrative.
 ## Loop protocol (max 3 iterations)
 
 1. **Capture** — save model answer + `run_dir` snapshot path.
-2. **Diff** — `python3 -S scripts/verify_openclaw_run.py --run-dir <rd> --model-answer <text>`.
+2. **Diff** — `python3 -S scripts/verify_skill_run_claims.py --run-dir <rd> --model-answer <text>`.
 3. **Classify** — bucket failures: artifact drift vs validator drift vs prompt drift.
 4. **Fix smallest** — one hypothesis per iteration; re-run the narrowest smoke first.
 
 ## Stop conditions
 
-- `LIE-DETECTED` from `verify_openclaw_run.py` → do not ship; reset prompt and rerun.
+- `LIE-DETECTED` from `verify_skill_run_claims.py` → do not ship; reset prompt and rerun.
 - Any `COVERAGE-GAP` from `validate_validator_coverage.py` → repair fixtures or
   downgrade index rows to honest `meta` severities with explicit `n/a` repros.

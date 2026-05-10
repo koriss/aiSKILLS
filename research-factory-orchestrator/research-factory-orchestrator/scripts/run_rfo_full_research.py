@@ -25,13 +25,14 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(SKILL_ROOT))
 
 from runtime.report_html import write_canonical_full_report_html  # noqa: E402
+from runtime.status import VERSION  # noqa: E402
 from runtime.util import jw, now, sid, slug, tw  # noqa: E402
 
 from rfo_relay_search_helpers import build_relay_params, rank_relay_rows_for_task, relay_fetch_cap  # noqa: E402
 
 # ── config ─────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
-_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or "RFO/19.4-FullRelay"
+_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or f"RFO/{VERSION}-FullRelay"
 
 
 def relay_api_base(cli_base: str) -> str | None:

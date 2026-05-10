@@ -30,10 +30,11 @@ import urllib.request
 from pathlib import Path
 
 from runtime.error_log import append_error
+from runtime.status import VERSION
 from runtime.util import jw, now, sid
 
 
-_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or "RFO/19.3.0-collector"
+_USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or f"RFO/{VERSION}-collector"
 
 
 def _seed_urls() -> list[str]:

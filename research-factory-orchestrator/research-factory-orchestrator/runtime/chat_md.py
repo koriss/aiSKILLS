@@ -101,6 +101,20 @@ def build_analysis_markdown(
 
     verdict = str((io or {}).get("verdict") or "n/a")
 
+    ft_caps = ""
+    ftm = jr(rd / "feature-truth-matrix.json", {})
+    ffeats = ftm.get("features") if isinstance(ftm.get("features"), dict) else {}
+    if ffeats:
+        lines = []
+        for k in list(ffeats.keys())[:10]:
+            lines.append(f"- `{k}` → `{json.dumps(ffeats[k], ensure_ascii=False)}`")
+        ft_caps = (
+            "## Capability truth snapshot\n\n"
+            "_From `feature-truth-matrix.json` (validator-facing scaffolds, not channel delivery proof)._\n\n"
+            + "\n".join(lines)
+            + "\n\n"
+        )
+
     parts = [
         f"# {title}",
         "",
@@ -118,6 +132,8 @@ def build_analysis_markdown(
         disclaimer,
         "",
     ]
+    if ft_caps:
+        parts.extend([ft_caps])
     if gap_lines:
         parts.extend(["## Data gaps", "", gap_lines, ""])
 

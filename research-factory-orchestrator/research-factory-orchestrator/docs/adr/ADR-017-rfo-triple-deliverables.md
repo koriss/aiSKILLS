@@ -23,10 +23,10 @@ Legacy chat files `message-003-io-propaganda-check.txt` and `message-004-files.t
 
 Canonical events: `OUT-0001` / `OUT-0002` (Markdown chat payloads), `OUT-0005` (HTML), `OUT-0006` (zip).
 
-## Gateway (OpenClaw)
+## Gateway (host-owned)
 
-For Telegram delivery (`skill-artifact-delivery.ts`), artifacts with `role` `analysis` or `facts` and `media_type` containing `markdown` are sent as `sendMessage` (chunked ≤4000 chars). HTML and zip use `sendDocument`. The first outbound message may use `reply_to_message_id` when provided.
+For host-channel delivery (`skill-artifact-delivery.ts`-style integration), artifacts with `role` `analysis` or `facts` and `media_type` containing `markdown` are delivered as text messages/chunks; HTML and zip are delivered as file attachments. Thread/reply metadata may be applied by host policy when provided.
 
 ## Skill boundary
 
-Compute-only path does not open Telegram sessions; the gateway performs delivery after parsing the stdout handoff marker.
+Compute-only path does not open channel sessions; the gateway performs delivery after parsing the stdout handoff marker.

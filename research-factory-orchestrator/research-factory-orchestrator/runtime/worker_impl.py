@@ -380,7 +380,7 @@ def _build_package_allow_stub(rd: Path) -> bool:
     return False
 
 
-def build_package(rd, *, allow_stub: bool = False):
+def build_package(rd, *, allow_stub: bool = False, quiet: bool = False):
     rd = Path(rd)
     miss = [r for r in PKG_REQUIRED if not (rd / r).exists()]
     if miss and not allow_stub:
@@ -405,7 +405,8 @@ def build_package(rd, *, allow_stub: bool = False):
             "built_at": now(),
         },
     )
-    print(json.dumps(m, ensure_ascii=False, indent=2))
+    if not quiet:
+        print(json.dumps(m, ensure_ascii=False, indent=2))
 
 
 def _unlink_stale_lease(lease: Path, ttl_s: float) -> None:

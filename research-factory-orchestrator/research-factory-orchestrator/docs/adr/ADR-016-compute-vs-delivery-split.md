@@ -6,12 +6,12 @@ Accepted — supersedes operational assumptions in ADR-014 for **who** performs 
 
 ## Context
 
-External audits of v19.2.1 showed `interface_runtime_adapter` queues work; the worker performs render+package; outbox/Telegram adapters perform delivery. A gateway hook placed **after** adapter exec only sees `{"queued": true}` and an empty or incomplete `run_dir`.
+External audits of v19.2.1 showed `interface_runtime_adapter` queues work; the worker performs render+package; outbox channel adapters perform delivery. A gateway hook placed **after** adapter exec only sees `{"queued": true}` and an empty or incomplete `run_dir`.
 
 ## Decision
 
 1. **Skill (RFO) is compute-only** for the native `/research_factory_orchestrator` path: synchronous `cli execute --runs-root --task` allocates `run_dir`, renders artifacts, writes `final-answer.md`, `result-manifest.json`, `marker.json`, and prints **exactly one** stdout capsule `__RFO_SKILL_AGENT_HANDOFF__=<json>` with neutral `instructions_for_invoking_agent` (all other diagnostics on stderr).
-2. **OpenClaw gateway** parses the marker, validates `result-manifest.json` (JSON Schema + relative paths + sha256), delivers via the existing channel adapter (e.g. Telegram `sendMessage` / `sendDocument`), records audit, and **suppresses** the model-generated user reply on this path.
+2. **Host gateway** parses the marker, validates `result-manifest.json` (JSON Schema + relative paths + sha256), delivers via the existing channel adapter, records audit, and **suppresses** the model-generated user reply on this path.
 3. **`final-answer-gate.json`**: in artifact mode, `passed` MAY be `true` when content is ready and delivery is explicitly deferred to the gateway (`status` documents gateway ownership); legacy `content_ready_delivery_not_proven` remains for queue/outbox flows.
 
 ## MUST / MUST NOT (skill)
@@ -24,8 +24,8 @@ External audits of v19.2.1 showed `interface_runtime_adapter` queues work; the w
 
 **MUST NOT**
 
-- Accept `chat_id`, bot tokens, or Telegram API base in argv/env for execute mode.
-- Call Telegram or webhook delivery from the skill process.
+- Accept channel-specific target IDs or bot tokens in argv/env for execute mode.
+- Call channel/webhook delivery from the skill process.
 
 ## MUST / MUST NOT (gateway)
 
@@ -41,12 +41,16 @@ External audits of v19.2.1 showed `interface_runtime_adapter` queues work; the w
 
 ## Consequences
 
-- Validator matrix drops mandatory in-skill Telegram smokes; release adds `validate_artifact_release` / artifact smoke gates.
-- ADR-014 remains valid for **operator** control-plane concerns; delivery proof for user-visible Telegram moves to **gateway audit** on the native route.
+- Validator matrix drops mandatory in-skill channel smokes; release adds `validate_artifact_release` / artifact smoke gates.
+- ADR-014 remains valid for **operator** control-plane concerns; delivery proof for user-visible channel sends moves to **gateway audit** on the native route.
+
+### Marker prefix alignment (relay bridge)
+
+ADR-016 mandates a single stdout capsule **after synchronous execute**. The **relay bridge** (`scripts/run_rfo_with_web_search.py`) uses the **same** prefix **`__RFO_SKILL_AGENT_HANDOFF__=`** as `runtime/artifact_execute_impl.py` (`HANDOFF_STDOUT_PREFIX`). All other bridge output (progress, `[DONE]`, packaging hints) goes to **stderr** so gateways can parse stdout as in execute mode. See **ADR-018** for full bridge contract and portable path-guard notes.
 
 ```mermaid
 flowchart LR
-  U[User / Telegram] --> G[OpenClaw gateway]
+  U[User / Host channel] --> G[Host gateway]
   G --> E[Skill: cli execute]
   E --> RD[run_dir artifacts]
   E --> M[stdout marker]

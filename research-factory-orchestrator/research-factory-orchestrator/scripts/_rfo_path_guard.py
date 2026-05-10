@@ -7,7 +7,7 @@ v19.2.1 so that an agent (or operator) physically cannot run RFO from a
 ``--runs-root`` such as ``/tmp/rfo-runs`` without explicit consent.
 
 When an invariant is violated the process exits with a stable code and a
-deterministic stderr stamp so that ``scripts/verify_openclaw_run.py`` can
+deterministic stderr stamp so that ``scripts/verify_skill_run_claims.py`` can
 classify the failure (see ``LIE-DETECTED-*`` codes added in v19.2.1).
 
 Stable exit codes
@@ -24,6 +24,10 @@ Override env vars (consent for smoke / dev only)
                                 (used by smoke tests; logged in
                                 ``feature-truth-matrix.json`` as
                                 ``runs_root_consent_tmp``).
+``RFO_ALLOW_NON_CANONICAL_SKILL_LAYOUT=1``  skip basename/parent-dir checks for
+                                ``skill_root`` (portable clones, symlinks, or
+                                non-OpenClaw tree layouts). Forbidden path tokens
+                                are still enforced.
 """
 from __future__ import annotations
 
@@ -81,6 +85,25 @@ def enforce_canonical_skill_path(entry_file: str | os.PathLike[str]) -> Path:
     resolved skill root on success.
     """
     skill_root = resolve_skill_root_for(entry_file)
+
+    bypass = os.environ.get("RFO_ALLOW_NON_CANONICAL_SKILL_LAYOUT", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    )
+
+    if bypass:
+        parts_lower = [p.lower() for p in skill_root.parts]
+        for tok in FORBIDDEN_PATH_TOKENS:
+            for part in parts_lower:
+                if tok in part:
+                    _stamp(
+                        "RFO-NON-CANONICAL-SKILL-PATH",
+                        f"path segment {part!r} contains forbidden token "
+                        f"{tok!r} (skill_root={skill_root})\n{_CANONICAL_HINT}",
+                    )
+                    sys.exit(EXIT_NON_CANONICAL_SKILL_PATH)
+        return skill_root
 
     if skill_root.name != CANONICAL_SKILL_NAME:
         _stamp(

@@ -1,10 +1,10 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.3+ artifact-only compute with profile-driven V1–V6 validation; user-visible delivery is always host-owned (stdout handoff or your gateway). Example host stack: OpenClaw (see `docs/runtime-paths.md`).
+description: Research Factory Orchestrator — v19.3+ artifact-only compute with profile-driven V1–V6 validation; user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
   version: "19.3.1"
-  package: openclaw-research-factory-orchestrator
+  package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
   native_relay_entrypoint: "scripts/run_rfo_with_web_search.py"
@@ -20,7 +20,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Allowed execution paths
 
-- **Host slash / native command (if your agent exposes it)** — the **host** runs **`scripts/run_rfo_with_web_search.py`** (relay bridge + collectors). Delivery to the user stays **outside** this package (stdout marker, gateway, or other channel). See `docs/runtime-paths.md`. *Example:* OpenClaw native handler wiring.
+- **Host slash / native command (if your agent exposes it)** — the **host** runs **`scripts/run_rfo_with_web_search.py`** (relay bridge + collectors). Delivery to the user stays **outside** this package (stdout marker, gateway, or other channel). See `docs/runtime-paths.md`.
 - `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."`
 - `python3 -S scripts/run_rfo_with_web_search.py --runs-root <runs-root> --web-search-json-api-base <relay-base-url> --task "..."` (default profile `live-bridge`; optional **`RFO_BRIDGE_RENDER_STRICT=1`** to fail closed if re-render throws)
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
@@ -50,6 +50,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 ### References
 
 - `docs/runtime-paths.md` — native relay vs artifact execute vs workers (single-page map).
+- `docs/qa/RFO-FULL-RESEARCH-PLAYBOOK.md` — golden paths, relay steps, troubleshooting (links to SKILL-core / profiles, no duplicate env tables).
 - `SKILL-core.md`
 - `docs/v19/README.md`
 - `docs/v19/validators-core.md`

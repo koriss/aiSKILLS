@@ -33,6 +33,44 @@ DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT = [
 ]
 
 
+def _write_agent_handoff_bundle(rd: Path) -> None:
+    """Persist a machine-readable index for a second-pass agent (impl-24; ADR-016 separation)."""
+    rd = Path(rd).resolve()
+    bundle_dir = rd / "agent-handoff"
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    prompt_roles = [
+        {"role": "user_facts_collection", "skill_relative_path": "prompts/roles/user-facts-collection.md"},
+        {"role": "user_task_summary", "skill_relative_path": "prompts/roles/user-task-summary.md"},
+        {"role": "analytics_from_run_artifacts", "skill_relative_path": "prompts/roles/analytics-from-run-artifacts.md"},
+    ]
+    run_refs = [
+        {"role": "bundle_manifest", "path": "agent-handoff/bundle-manifest.json"},
+        {"role": "collection_result", "path": "collection-result.json"},
+        {"role": "analytical_memo", "path": "report/analytical-memo.json"},
+        {"role": "factual_dossier", "path": "report/factual-dossier.json"},
+        {"role": "sources", "path": "sources.json"},
+        {"role": "feature_truth_matrix", "path": "feature-truth-matrix.json"},
+        {"role": "delivery_manifest", "path": "delivery-manifest.json"},
+        {"role": "full_report_html", "path": "report/full-report.html"},
+        {"role": "analysis_md", "path": "chat/01-analysis.md"},
+        {"role": "facts_md", "path": "chat/02-facts.md"},
+        {"role": "result_manifest", "path": "result-manifest.json"},
+    ]
+    jw(
+        bundle_dir / "bundle-manifest.json",
+        {
+            "schema_version": "1",
+            "contract": "rfo-agent-handoff-bundle-v1",
+            "prompt_roles": prompt_roles,
+            "run_artifact_refs": run_refs,
+            "skill_package_note": (
+                "Paths under prompt_roles are relative to the canonical skill package root "
+                "(the directory containing scripts/ and runtime/)."
+            ),
+        },
+    )
+
+
 def _seed_interface_and_job(rd: Path, c: dict, task: str) -> None:
     req_id = sid("REQ", "artifact_execute", "cli", "", "", task)
     delivery = {"mode": "agent_handoff_only", "source": "artifact_execute_compute_only"}
@@ -300,6 +338,7 @@ def emit_agent_skill_handoff(
     if host_vis:
         payload["run_dir_host"] = host_vis
     jw(rd / "marker.json", payload)
+    _write_agent_handoff_bundle(rd)
     print(HANDOFF_STDOUT_PREFIX + json.dumps(payload, ensure_ascii=False), flush=True)
     return resolved, _normalize_exit(resolved)
 
@@ -400,5 +439,6 @@ def cmd_execute(a) -> int:
         "task_excerpt": (task[:500] + ("…" if len(task) > 500 else "")),
     }
     jw(rd / "marker.json", payload)
+    _write_agent_handoff_bundle(rd)
     print(HANDOFF_STDOUT_PREFIX + json.dumps(payload, ensure_ascii=False), flush=True)
     return _normalize_exit(status)

@@ -151,5 +151,10 @@ Symptom: bridge retries (“not claimed” / stale lease) while a **parallel wor
 | Empty `sources` / `collection-result` anomalies | Collector logs, relay JSON shape, HEAD vs GET policy flags |
 | `validate_skill` failure | Package `cwd`, stale partial checkout, compare `scripts/validate_skill.py` list |
 | HTML missing wiki refs | `python3 -m unittest tests.test_report_html_citations`, rerun render step |
+
+## Deterministic test command
+
+- Prefer explicit discovery to avoid false-green `Ran 0 tests` runs:
+  `python3 -m unittest discover -s tests -p "test_*.py"`.
 | Verifier lie classes | Run `scripts/verify_skill_run_claims.py`; inspect `delivery-manifest.json` + `runtime/errors.jsonl` |
 | “Completed” vs stub | Read `delivery-manifest.json` gates, not prose in chat excerpts |

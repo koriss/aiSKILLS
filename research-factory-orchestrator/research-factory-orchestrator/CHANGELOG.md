@@ -5,6 +5,9 @@
 - **Breaking (JSON consumers):** honesty harness JSON field `validator_id` is now
   **`verify_skill_run_claims`**. Canonical script: `scripts/verify_skill_run_claims.py`;
   `scripts/verify_openclaw_run.py` remains a thin compatibility wrapper.
+- Wrapper lifecycle policy: retire `scripts/verify_openclaw_run.py` no earlier
+  than the next minor release after all internal call sites and docs stop
+  depending on the legacy filename.
 - Downstream agent index: `agent-handoff/bundle-manifest.json` under each run-dir
   (contract `rfo-agent-handoff-bundle-v1`) lists prompt role files and key artifact paths.
 - Default bridge profile `live-bridge`; relay base URL required (no baked search host).

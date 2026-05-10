@@ -77,6 +77,14 @@ def _ensure_rfo_tree(runs_root: Path) -> None:
 
 
 def _parse_stdout_json_object(stdout: str) -> dict[str, Any]:
+    """
+    Best-effort extraction of the last JSON object from noisy stdout.
+
+    Supports:
+      - pure JSON stdout
+      - single-line JSON mixed with logs
+      - pretty-printed (multiline) JSON blocks mixed with logs
+    """
     text = (stdout or "").strip()
     if not text:
         return {}
@@ -85,16 +93,66 @@ def _parse_stdout_json_object(stdout: str) -> dict[str, Any]:
         return obj if isinstance(obj, dict) else {}
     except json.JSONDecodeError:
         pass
+    # Fast path: line-wise tail scan.
     for line in reversed(text.splitlines()):
         line = line.strip()
-        if line.startswith("{") and line.endswith("}"):
-            try:
-                obj = json.loads(line)
-                if isinstance(obj, dict):
-                    return obj
-            except json.JSONDecodeError:
-                continue
-    return {}
+        if not (line.startswith("{") and line.endswith("}")):
+            continue
+        try:
+            obj = json.loads(line)
+            if isinstance(obj, dict):
+                return obj
+        except json.JSONDecodeError:
+            continue
+    # Robust path: incremental JSONDecoder scan to find embedded objects.
+    dec = json.JSONDecoder()
+    last_obj: dict[str, Any] = {}
+    for i, ch in enumerate(text):
+        if ch != "{":
+            continue
+        try:
+            parsed, _end = dec.raw_decode(text[i:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            last_obj = parsed
+    return last_obj
+
+
+def _bridge_best_effort_sanity_gate(run_dir: Path) -> tuple[bool, dict[str, Any]]:
+    """
+    Gate handoff in best-effort mode: require minimally coherent artifacts.
+    """
+    required = (
+        "run.json",
+        "runtime-status.json",
+        "result-manifest.json",
+        "report/full-report.html",
+        "chat/01-analysis.md",
+    )
+    missing = [rel for rel in required if not (run_dir / rel).is_file()]
+    rs = {}
+    try:
+        rs = json.loads((run_dir / "runtime-status.json").read_text(encoding="utf-8"))
+    except Exception:
+        rs = {}
+    state = str(rs.get("state") or "").strip().lower()
+    allowed_states = {
+        "content_rendered",
+        "delivery_queued",
+        "delivered",
+        "stub_delivered",
+        "partial_delivery",
+        "delivery_not_proven",
+    }
+    ok = (not missing) and (state in allowed_states)
+    detail = {
+        "ok": ok,
+        "state": state,
+        "missing": missing,
+        "required": list(required),
+    }
+    return ok, detail
 
 
 def _apply_profile_env(env: dict[str, str], profile: str) -> None:
@@ -723,7 +781,19 @@ def main() -> int:
 
         if not worker_claimed:
             if args.best_effort_continue and worker_hard_failed and latest_run.is_dir():
-                print("[3/5] WARN: proceeding with incomplete worker run (best-effort).", file=sys.stderr)
+                gate_ok, gate_detail = _bridge_best_effort_sanity_gate(latest_run)
+                if not gate_ok:
+                    print(
+                        "[3/5] ERROR: best-effort sanity gate rejected handoff path "
+                        f"(state={gate_detail.get('state')}, missing={gate_detail.get('missing')}).",
+                        file=sys.stderr,
+                    )
+                    return 1
+                print(
+                    "[3/5] WARN: worker failed, but best-effort sanity gate passed; "
+                    "continuing with degraded bridge path.",
+                    file=sys.stderr,
+                )
             else:
                 print(
                     "[3/5] ERROR: worker did not claim a pending job after retries — "

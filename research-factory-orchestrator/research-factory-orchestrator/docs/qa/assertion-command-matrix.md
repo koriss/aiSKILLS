@@ -20,5 +20,7 @@ Single place to map **documentation claims** to **commands** that prove or falsi
 | Agent handoff bundle artifact | Presence of `agent-handoff/bundle-manifest.json` (`rfo-agent-handoff-bundle-v1`) after execute/relay finalize |
 | Model/chat honesty vs artifacts | `python3 -S scripts/verify_skill_run_claims.py --run-dir <run-dir> [--model-answer "..."]` (JSON uses `validator_id` **verify_skill_run_claims**) |
 | Vendor-neutral doc surface gate | `rg` command documented in `docs/qa/NEUTRALITY-SCAN.md` (allowed residuals only) |
+| Handoff parser robust to extra stdout lines | `python3 -m unittest tests.test_parse_handoff_stdout_reference` |
+| `primary_text` usage policy documented | `docs/qa/MANIFEST-PRIMARY-TEXT-POLICY.md` present and referenced by delivery layer docs |
 
 **Canonical semver:** always read `skill_version` from `runtime/version.json`, not from duplicate headers alone.

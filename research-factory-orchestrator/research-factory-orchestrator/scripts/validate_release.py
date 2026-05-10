@@ -98,6 +98,13 @@ def _step_tail(name: str, p: subprocess.CompletedProcess[str], extra: dict[str, 
     return row
 
 
+def _persist_transcript(out_path: Path, transcript: dict[str, object]) -> None:
+    transcript["transcript_sha256"] = _sha256_obj(
+        {k: v for k, v in transcript.items() if k != "transcript_sha256"}
+    )
+    out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def _latest_run_dir_from_runs_root(runs_root: Path) -> str:
     latest_path = runs_root / "index" / "latest.json"
     if not latest_path.is_file():
@@ -331,8 +338,7 @@ def main() -> int:
         "transcript_sha256": "",
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
-    transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
-    out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _persist_transcript(out_path, transcript)
 
     lc_rc = 1
     if run_dir_nd and Path(run_dir_nd).is_dir():
@@ -355,12 +361,7 @@ def main() -> int:
         steps.append({"name": "validate_logical_consistency", "rc": 1, "error": "no artifact_execute run_dir"})
 
     transcript["steps"] = steps
-    transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
-    out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-    transcript["steps"] = steps
-    transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
-    out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _persist_transcript(out_path, transcript)
 
     report_arg = os.environ.get("RFO_RELEASE_REPORT_PATH", "").strip()
     cmd = [py, "-S", str(ROOT / "scripts" / "validate_release_report.py"), "--transcript", str(out_path)]
@@ -389,8 +390,7 @@ def main() -> int:
     transcript["blocking_failures"] = blocking
     transcript["next_actions"] = next_actions
 
-    transcript["transcript_sha256"] = _sha256_obj({k: v for k, v in transcript.items() if k != "transcript_sha256"})
-    out_path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _persist_transcript(out_path, transcript)
 
     # B4: fail if verdict not READY (includes missing gates)
     failed = verdict != "READY"

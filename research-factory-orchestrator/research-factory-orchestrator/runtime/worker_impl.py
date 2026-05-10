@@ -315,8 +315,12 @@ def cmd_run(a):
         from runtime.event_history import append_side_effect
 
         append_side_effect(rd, "runtime_completed", {"run_id": run_id, "job_id": job_id}, {"state": "content_rendered"})
-    except Exception:
-        pass
+    except Exception as e:
+        _record_runtime_error(
+            rd,
+            "event_history_append_failed",
+            {"phase": "runtime_completed", "error": str(e)},
+        )
     print(json.dumps({"runtime_initialized": True, "run_id": run_id, "job_id": job_id, "version": VERSION, "state": "content_rendered"}, ensure_ascii=False, indent=2))
 
 
@@ -429,6 +433,91 @@ def _return_job_pending(runq_path: Path, pending_path: Path) -> None:
         pass
 
 
+def _queue_failure_meta_path(root: Path) -> Path:
+    return root / "queue" / "failure-meta.json"
+
+
+def _load_queue_failure_meta(root: Path) -> dict:
+    p = _queue_failure_meta_path(root)
+    try:
+        data = jr(p, {})
+    except Exception:
+        data = {}
+    return data if isinstance(data, dict) else {}
+
+
+def _save_queue_failure_meta(root: Path, meta: dict) -> None:
+    p = _queue_failure_meta_path(root)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    jw(p, meta)
+
+
+def _select_pending_job_with_backoff(root: Path, pending_jobs: list[Path]) -> Path | None:
+    """
+    Select pending job while skipping temporarily parked poison jobs.
+    """
+    now_ts = time.time()
+    meta = _load_queue_failure_meta(root)
+    jobs_meta = meta.get("jobs") if isinstance(meta.get("jobs"), dict) else {}
+    for p in pending_jobs:
+        row = jobs_meta.get(p.name) if isinstance(jobs_meta, dict) else {}
+        if not isinstance(row, dict):
+            return p
+        parked_until = float(row.get("parked_until_ts") or 0.0)
+        if parked_until <= now_ts:
+            return p
+    return None
+
+
+def _record_worker_failure(root: Path, job_file: str) -> None:
+    """
+    Increment attempts and park failing job for bounded backoff.
+    """
+    now_ts = time.time()
+    meta = _load_queue_failure_meta(root)
+    jobs_meta = meta.get("jobs") if isinstance(meta.get("jobs"), dict) else {}
+    if not isinstance(jobs_meta, dict):
+        jobs_meta = {}
+    row = jobs_meta.get(job_file) if isinstance(jobs_meta.get(job_file), dict) else {}
+    attempts = int(row.get("queue_attempts") or 0) + 1
+    # 2,4,8,... seconds up to 5 min
+    backoff_s = min(300, 2 ** min(attempts, 8))
+    row.update(
+        {
+            "queue_attempts": attempts,
+            "last_failure_at": now(),
+            "parked_until_ts": now_ts + backoff_s,
+            "backoff_seconds": backoff_s,
+        }
+    )
+    jobs_meta[job_file] = row
+    meta["jobs"] = jobs_meta
+    _save_queue_failure_meta(root, meta)
+
+
+def _clear_worker_failure(root: Path, job_file: str) -> None:
+    meta = _load_queue_failure_meta(root)
+    jobs_meta = meta.get("jobs")
+    if isinstance(jobs_meta, dict) and job_file in jobs_meta:
+        jobs_meta.pop(job_file, None)
+        meta["jobs"] = jobs_meta
+        _save_queue_failure_meta(root, meta)
+
+
+def _record_runtime_error(rd: Path, err_type: str, detail: dict) -> None:
+    try:
+        jl(
+            rd / "runtime/errors.jsonl",
+            {
+                "timestamp": now(),
+                "error_type": err_type,
+                "detail": detail,
+            },
+        )
+    except Exception:
+        pass
+
+
 def cmd_worker(a):
     root = Path(a.runs_root)
     pending = sorted((root / "queue/pending").glob("*.json"))
@@ -438,11 +527,15 @@ def cmd_worker(a):
     if not a.execute_runtime and not a.dry_run:
         raise SystemExit("explicit --execute-runtime or --dry-run required")
     stale_ttl_s = float(os.environ.get("RFO_WORKER_LEASE_STALE_SECONDS", "900"))
-    job = jr(pending[0])
+    selected_pending = _select_pending_job_with_backoff(root, pending)
+    if selected_pending is None:
+        print(json.dumps({"claimed": False, "reason": "all_pending_jobs_parked"}, ensure_ascii=False))
+        return
+    job = jr(selected_pending)
     rd = Path(job["run_dir"])
-    job_pending_path = pending[0]
-    runq = root / "queue/running" / pending[0].name
-    done = root / "queue/done" / pending[0].name
+    job_pending_path = selected_pending
+    runq = root / "queue/running" / selected_pending.name
+    done = root / "queue/done" / selected_pending.name
     runq.parent.mkdir(parents=True, exist_ok=True)
     done.parent.mkdir(parents=True, exist_ok=True)
     lease = root / "queue/worker.lease"
@@ -455,7 +548,7 @@ def cmd_worker(a):
     lease_payload = {
         "token": tok,
         "pid": os.getpid(),
-        "job_file": pending[0].name,
+        "job_file": selected_pending.name,
         "run_dir": str(rd),
         "created_at": now(),
     }
@@ -504,6 +597,12 @@ def cmd_worker(a):
     except subprocess.TimeoutExpired:
         lease.unlink(missing_ok=True)
         _return_job_pending(runq, job_pending_path)
+        _record_worker_failure(root, selected_pending.name)
+        _record_runtime_error(
+            rd,
+            "worker_subprocess_timeout",
+            {"timeout_seconds": 240, "job_file": selected_pending.name},
+        )
         print(json.dumps({"error": "worker_subprocess_timeout", "timeout_seconds": 240}, ensure_ascii=False), file=sys.stderr)
         raise SystemExit(124) from None
 
@@ -511,6 +610,12 @@ def cmd_worker(a):
     if p.returncode:
         lease.unlink(missing_ok=True)
         _return_job_pending(runq, job_pending_path)
+        _record_worker_failure(root, selected_pending.name)
+        _record_runtime_error(
+            rd,
+            "worker_subprocess_failed",
+            {"returncode": p.returncode, "job_file": selected_pending.name},
+        )
         print(p.stdout + p.stderr)
         raise SystemExit(p.returncode)
     jw(
@@ -580,8 +685,12 @@ def cmd_worker(a):
         from runtime.event_history import append_side_effect
 
         append_side_effect(rd, "package_built", {"run_id": job["run_id"], "job_id": job["job_id"]}, {"ok": True})
-    except Exception:
-        pass
+    except Exception as e:
+        _record_runtime_error(
+            rd,
+            "event_history_append_failed",
+            {"phase": "package_built", "error": str(e)},
+        )
     st = jr(rd / "runtime-status.json")
     st.update({"state": "delivery_queued"})
     jw(rd / "runtime-status.json", st)
@@ -590,4 +699,5 @@ def cmd_worker(a):
     jw(done, job)
     runq.unlink(missing_ok=True)
     lease.unlink(missing_ok=True)
+    _clear_worker_failure(root, selected_pending.name)
     print(json.dumps({"claimed": True, "status": "done", "run_id": job["run_id"], "outbox_events": 6}, ensure_ascii=False, indent=2))

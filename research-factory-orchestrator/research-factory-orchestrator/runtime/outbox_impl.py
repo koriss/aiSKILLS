@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from runtime.util import REQ_EVENTS, jr, jw, now, sid, skill_root
+from runtime.util import REQ_EVENTS, jl, jr, jw, now, sid, skill_root
 
 
 def _load_provider_caps(provider: str) -> dict:
@@ -399,7 +399,13 @@ def cmd_outbox(a):
                     env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
                     check=False,
                 )
-            except Exception:
-                # Packaging drift will be caught by root-vs-zip validator.
-                pass
+            except Exception as e:
+                jl(
+                    rd / "runtime/errors.jsonl",
+                    {
+                        "timestamp": now(),
+                        "error_type": "outbox_package_rebuild_failed",
+                        "detail": {"error": str(e)},
+                    },
+                )
     print(json.dumps({"processed": processed}, ensure_ascii=False, indent=2))

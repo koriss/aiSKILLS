@@ -1,8 +1,8 @@
 {
   "version": "19.2.1",
-  "description": "Merged regression index; version aligns with runtime/version.json failure_corpus_index_version. Legacy cases retained for regression only.",
-  "legacy_cases_total": 20,
-  "legacy_cases": [
+  "description": "Merged regression index; version aligns with runtime/version.json failure_corpus_index_version.",
+  "regression_cases_total": 20,
+  "regression_cases": [
     {
       "case_id": "case_telegram_table_rendering",
       "failure_type": "telegram_table",

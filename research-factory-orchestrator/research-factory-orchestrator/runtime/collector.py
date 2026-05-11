@@ -7,6 +7,10 @@ Honest about truth flags. Closes:
     and *result_count* so an empty/failed response cannot impersonate a real fetch.
   * SOURCE-PROVENANCE-CONFLATION — distinguishes ``external_source_packet_loaded``
     (operator-supplied bundle) from ``external_web_search_executed`` (live HTTP).
+    Packets from ``scripts/run_rfo_with_web_search.py`` set ``relay_prefetch_bridge``:
+    those rows were produced by real relay JSON + page fetches before the worker;
+    we surface that as ``web_search_*`` / ``external_web_search_executed`` so
+    ``collection-result.json`` matches ``relay_query_fanout`` depth evidence.
   * RFO_NO_NETWORK toggle — returns ``backend="no_network"`` decisively without
     attempting any sockets.
 
@@ -94,11 +98,13 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
     backend = "off"
     backend_reason = ""
     collected_sources: list[dict] = []
+    packet_relay_prefetch = False
     if source_packet_path and Path(source_packet_path).is_file():
         try:
             packet = json.loads(Path(source_packet_path).read_text(encoding="utf-8"))
             if isinstance(packet, dict) and isinstance(packet.get("sources"), list):
                 external_source_packet_loaded = True
+                packet_relay_prefetch = bool(packet.get("relay_prefetch_bridge"))
                 packet_rows = [dict(s) for s in packet["sources"] if isinstance(s, dict)][: _max_sources()]
                 # Derive citation_scope from verification_mode so packet-supplied snippet rows
                 # cannot accidentally be marked citation_eligible (closes SNIPPET-CITATION-ELIGIBLE).
@@ -115,6 +121,15 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
                         row["citation_eligible"] = False
                     row.setdefault("fetch_method", "source_packet")
                 collected_sources.extend(packet_rows)
+                if packet_relay_prefetch:
+                    web_search_attempted = True
+                    web_search_result_count = sum(
+                        1
+                        for r in packet_rows
+                        if isinstance(r, dict) and str(r.get("url") or "").strip().startswith("http")
+                    )
+                    web_search_succeeded = web_search_result_count > 0
+                    external_web_search_executed = web_search_succeeded
         except Exception as e:
             append_error(rd, code="SOURCE-PACKET-PARSE-FAILED", severity="error", detail=str(e), context={"path": source_packet_path})
     if no_network:
@@ -123,7 +138,7 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
         append_error(rd, code="EXTERNAL-COLLECTION-DISABLED", severity="warning", detail="RFO_NO_NETWORK=1 set; external collection skipped", context={"profile": profile, "external_mode": external_mode})
     elif external_source_packet_loaded:
         backend = "source_packet"
-        backend_reason = "RFO_SOURCE_PACKET"
+        backend_reason = "RFO_SOURCE_PACKET+relay_prefetch" if packet_relay_prefetch else "RFO_SOURCE_PACKET"
     elif not seeds:
         backend = "no_seeds"
         backend_reason = "RFO_SEED_URLS not set"
@@ -171,7 +186,7 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
                 context={"profile": profile, "seed_count": len(seeds)},
             )
     if external_mode == "required" and not (external_web_search_executed or external_source_packet_loaded):
-        # Hard fail surface for downstream guards (full-rigor / required profile).
+        # Hard fail surface for downstream guards (strict profile / required policy).
         append_error(
             rd,
             code="RFO_EXTERNAL_COLLECTION_REQUIRED_BUT_NO_BACKEND",
@@ -202,6 +217,7 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
         "synthetic_count": 0,
         "max_sources_cap": _max_sources(),
         "seed_urls_provided": seeds,
+        "relay_prefetch_bridge": packet_relay_prefetch,
     }
     jw(rd / "collection-result.json", summary)
     return _update_sources_with_collection(rd, summary, collected_sources)

@@ -18,10 +18,7 @@ from runtime.util import PKG_REQUIRED, jl, jr, jw, now, read_json_or_none, skill
 V19_PROFILES = frozenset(
     {
         "dossier",
-        "mvr",
-        "full-rigor",
-        "live-bridge",
-        "source-packet",
+        "search-primary",
         "propaganda-io",
         "book-verification",
     }
@@ -185,7 +182,7 @@ def validate(rd):
     fg = jr(rd / "final-answer-gate.json")
     gates = fg.get("checks", {}) if isinstance(fg, dict) and isinstance(fg.get("checks"), dict) else {}
     if isinstance(fg, dict) and "gates" in fg and isinstance(fg["gates"], dict):
-        errs.append({"v18_gates_present_in_v19_fag": list(fg["gates"].keys())})
+        errs.append({"legacy_nested_gates_in_final_answer_gate": list(fg["gates"].keys())})
     needed = [
         "provider_ack_gate",
         "external_delivery_gate",

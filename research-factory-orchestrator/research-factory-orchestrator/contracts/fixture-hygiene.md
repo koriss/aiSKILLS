@@ -38,7 +38,7 @@ Used by `scripts/validate_v19_fixture_suite.py` for `good/` and `bad/`:
 
 ```json
 {
-  "expected_profile": "mvr | full-rigor | propaganda-io | book-verification",
+  "expected_profile": "search-primary | dossier | propaganda-io | book-verification",
   "expected_rc": 0,
   "expected_validator": "validate_traceability",
   "expected_issue_codes": ["missing_evidence_card"],

@@ -4,8 +4,8 @@
 Pre-run input artifacts (V1 does **not** require runner outputs):
   - sources.json or sources/sources.json
   - evidence-cards.json, claims-registry.json, final-answer-gate.json, delivery-manifest.json
-  - contradictions-lite.json only when validation-profile-used.json (if present) sets
-    options.require_full_contradiction_matrix == true
+  - contradictions-lite.json when validation-profile-used.json (if present) sets
+    options.require_full_contradiction_matrix == true, or any claim has meta.force_contradictions_lite
 
 V1 does **not** require as input (avoid circular dependency with the runner):
   - validation-transcript.json — written only after V1–V6 complete
@@ -63,6 +63,19 @@ def _load(p: Path) -> dict | None:
         return {"_parse_error": str(e)}
 
 
+def _claims_force_contradictions_lite(rd: Path) -> bool:
+    cr = _load(rd / "claims-registry.json")
+    if not isinstance(cr, dict):
+        return False
+    for cl in cr.get("claims") or []:
+        if not isinstance(cl, dict):
+            continue
+        meta = cl.get("meta")
+        if isinstance(meta, dict) and meta.get("force_contradictions_lite") is True:
+            return True
+    return False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-dir", required=True)
@@ -102,15 +115,17 @@ def main() -> int:
         if ver and isinstance(o, dict) and o.get(ver[0]) != ver[1]:
             issues.append({"code": "schema_version", "severity": "error", "path": rel, "detail": f"want {ver[1]} got {o.get(ver[0])}", "artifact": rel})
     prof = rd / "validation-profile-used.json"
+    opts: dict = {}
     if prof.is_file():
         po = _load(prof)
-        opts = (po or {}).get("options") if isinstance(po, dict) else None
-        if not isinstance(opts, dict):
-            opts = {}
-        if opts.get("require_full_contradiction_matrix") is True:
-            cl = rd / "contradictions-lite.json"
-            if not cl.is_file():
-                issues.append({"code": "missing_contradictions_lite", "severity": "error", "path": "contradictions-lite.json", "detail": "profile requires file", "artifact": "contradictions-lite.json"})
+        raw = (po or {}).get("options") if isinstance(po, dict) else None
+        if isinstance(raw, dict):
+            opts = raw
+    req_lite = opts.get("require_full_contradiction_matrix") is True or _claims_force_contradictions_lite(rd)
+    if req_lite:
+        cl = rd / "contradictions-lite.json"
+        if not cl.is_file():
+            issues.append({"code": "missing_contradictions_lite", "severity": "error", "path": "contradictions-lite.json", "detail": "profile requires file", "artifact": "contradictions-lite.json"})
 
     def _resolve_src() -> Path | None:
         s = rd / "sources.json"

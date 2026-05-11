@@ -32,15 +32,15 @@ def cmd_failure(a):
                 walk(it)
 
     walk(idx)
-    for s in idx.get("v18_3_1_context_integrity_cases") or []:
+    for s in idx.get("context_integrity_cases") or []:
         if isinstance(s, str):
             m = re.search(r"(F\d{3})", s)
             if m:
                 covered.add(m.group(1))
-    for s in idx.get("v18_3_2_delivery_truth_cases") or []:
+    for s in idx.get("delivery_truth_cases") or []:
         if isinstance(s, str) and s.startswith("F"):
             covered.add(s)
-    for s in idx.get("v18_5_1_truth_gate_regression_cases") or []:
+    for s in idx.get("truth_gate_regression_cases") or []:
         if isinstance(s, str):
             m = re.search(r"(F\d{3})", s)
             if m:
@@ -50,7 +50,7 @@ def cmd_failure(a):
     cases_dir = root / "failure-corpus" / "cases"
     scenarios = []
     bad_runs = []
-    for case in idx.get("legacy_cases") or []:
+    for case in idx.get("regression_cases") or []:
         if not isinstance(case, dict):
             continue
         val, bad = case.get("validator"), case.get("bad_sample")

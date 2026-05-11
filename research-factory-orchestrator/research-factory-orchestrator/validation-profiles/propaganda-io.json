@@ -2,7 +2,7 @@
   "profile": "propaganda-io",
   "schema_version": "v19.0",
   "description": "Specialized profile: neutral pattern detection + mapping. Not a political classifier. KB is reference-only. Values in claim_topics_enum are descriptive routing labels for policy/caps only, not verdict taxonomies (see docs/v19/propaganda-io-neutrality.md).",
-  "parent_profile": "full-rigor",
+  "parent_profile": "dossier",
   "active_validators": [
     "validate_artifact_schema",
     "validate_traceability",

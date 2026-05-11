@@ -23,5 +23,5 @@
     "late_result_not_silently_merged",
     "ambient_agent_context_cannot_override_rfo_entrypoint"
   ],
-  "inherits_from": "18.3.1-context-integrity-hotfix"
+  "inherits_from": "19.2.0"
 }

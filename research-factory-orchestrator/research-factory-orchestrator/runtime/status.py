@@ -9,12 +9,12 @@ _VERSION_FILE = Path(__file__).resolve().parent / "version.json"
 
 def _load_skill_version() -> str:
     if not _VERSION_FILE.is_file():
-        return "18.5.0-unknown"
+        return "0.0.0-unknown"
     try:
         meta = json.loads(_VERSION_FILE.read_text(encoding="utf-8"))
-        return str(meta.get("skill_version") or meta.get("version") or "18.5.0-unknown")
+        return str(meta.get("skill_version") or meta.get("version") or "0.0.0-unknown")
     except Exception:
-        return "18.5.0-unknown"
+        return "0.0.0-unknown"
 
 
 VERSION = _load_skill_version()

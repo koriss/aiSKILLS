@@ -76,6 +76,10 @@
           "type": "array",
           "minItems": 1,
           "items": { "$ref": "#/$defs/supportEntry" }
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": true
         }
       }
     }

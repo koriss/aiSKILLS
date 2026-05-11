@@ -172,9 +172,9 @@ def main() -> None:
         "final-answer-gate.json": gate(),
         "delivery-manifest.json": dm(True),
         "report/full-report.html": common_html(),
-        "expected.json": exp("mvr", 0, "", [], rationale="golden path"),
+        "expected.json": exp("search-primary", 0, "", [], rationale="golden path"),
     }
-    write_dir(FIX / "good" / "mvr_minimal_valid", good_files)
+    write_dir(FIX / "good" / "minimal_valid", good_files)
 
     def b(name: str, files: dict[str, object]) -> None:
         write_dir(FIX / "bad" / name, files)
@@ -198,7 +198,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="evidence_cards minItems under strict schema"),
+            "expected.json": exp("search-primary", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="evidence_cards minItems under strict schema"),
         },
     )
 
@@ -213,7 +213,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="source_ids minItems under strict schema"),
+            "expected.json": exp("search-primary", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="source_ids minItems under strict schema"),
         },
     )
 
@@ -228,7 +228,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_traceability", ["unknown_source"], rationale="unknown S_MISSING"),
+            "expected.json": exp("search-primary", 1, "validate_traceability", ["unknown_source"], rationale="unknown S_MISSING"),
         },
     )
 
@@ -244,7 +244,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "expected.json": exp(
-                "mvr",
+                "search-primary",
                 1,
                 "validate_claim_status",
                 ["weak_evidence_type_for_primary_support"],
@@ -264,7 +264,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="forecast cap"),
+            "expected.json": exp("search-primary", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="forecast cap"),
         },
     )
 
@@ -279,7 +279,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="geo cap"),
+            "expected.json": exp("search-primary", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="geo cap"),
         },
     )
 
@@ -295,7 +295,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "expected.json": exp(
-                "mvr",
+                "search-primary",
                 1,
                 "validate_claim_status",
                 ["weak_evidence_type_for_primary_support"],
@@ -316,7 +316,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "KB:001", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_source_quality", ["kb_match_used_as_evidence"], rationale="KB primary"),
+            "expected.json": exp("search-primary", 1, "validate_source_quality", ["kb_match_used_as_evidence"], rationale="KB primary"),
         },
     )
 
@@ -400,7 +400,7 @@ def main() -> None:
             "sources.json": dup_sources,
             "evidence-cards.json": dup_ev,
             "claims-registry.json": dup_claim,
-            "expected.json": exp("mvr", 1, "validate_source_quality", ["duplicate_sources_same_origin"], rationale="same canon"),
+            "expected.json": exp("search-primary", 1, "validate_source_quality", ["duplicate_sources_same_origin"], rationale="same canon"),
         },
     )
 
@@ -416,7 +416,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "final-answer-gate.json": gate(["new_fact_without_claim_id"]),
-            "expected.json": exp("mvr", 1, "validate_final_answer", ["new_fact_without_claim_id"], rationale="blocking bucket"),
+            "expected.json": exp("search-primary", 1, "validate_final_answer", ["new_fact_without_claim_id"], rationale="blocking bucket"),
         },
     )
 
@@ -432,7 +432,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(True, user_visible_artifact_paths=["/opt/rfo/leak.txt"]),
-            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["local_path_leak"], rationale="/opt in user-visible"),
+            "expected.json": exp("search-primary", 1, "validate_delivery_truth", ["local_path_leak"], rationale="/opt in user-visible"),
         },
     )
 
@@ -448,7 +448,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(False),
-            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["cli_external"], rationale="cli real_external_delivery"),
+            "expected.json": exp("search-primary", 1, "validate_delivery_truth", ["cli_external"], rationale="cli real_external_delivery"),
         },
     )
 
@@ -456,6 +456,10 @@ def main() -> None:
         "contradiction_required_but_missing",
         {
             **base,
+            "run.json": {
+                **base["run.json"],
+                "validation_options_override": {"require_full_contradiction_matrix": True},
+            },
             "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
             "claims-registry.json": claim_row(
                 "narrative_claim",
@@ -464,19 +468,23 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "expected.json": exp(
-                "full-rigor",
+                "search-primary",
                 1,
                 "validate_artifact_schema",
                 ["missing_contradictions_lite"],
-                rationale="full-rigor requires contradictions-lite.json",
+                rationale="validation_options_override requires contradictions-lite.json",
             ),
         },
     )
 
     b(
-        "l0_scan_unknown_under_full_profile",
+        "l0_unknown_contradiction_echo_blocks",
         {
             **base,
+            "run.json": {
+                **base["run.json"],
+                "validation_options_override": {"l0_unknown_contradiction_echo_blocks": True},
+            },
             "contradictions-lite.json": contradictions_lite(),
             "evidence-cards.json": ev_card("E1", ["S1"], "t", "article"),
             "claims-registry.json": claim_row(
@@ -486,7 +494,13 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "final-answer-gate.json": gate(hs="unknown"),
-            "expected.json": exp("full-rigor", 1, "validate_claim_status", ["l0_unknown_blocked"], rationale="full-rigor L0 unknown"),
+            "expected.json": exp(
+                "search-primary",
+                1,
+                "validate_claim_status",
+                ["l0_unknown_blocked"],
+                rationale="validation_options_override l0_unknown_contradiction_echo_blocks",
+            ),
         },
     )
 
@@ -501,7 +515,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "totally_made_up"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-CLAIMS-REGISTRY"], rationale="role_for_claim not in schema enum"),
+            "expected.json": exp("search-primary", 1, "validate_artifact_schema", ["V1-SCHEMA-CLAIMS-REGISTRY"], rationale="role_for_claim not in schema enum"),
         },
     )
 
@@ -517,7 +531,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(True, external_delivery_claim_allowed=True, real_external_delivery=False),
-            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-EXT-CLI"], rationale="cli external claim"),
+            "expected.json": exp("search-primary", 1, "validate_delivery_truth", ["DELIV-EXT-CLI"], rationale="cli external claim"),
         },
     )
 
@@ -544,7 +558,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="supports must be string enum"),
+            "expected.json": exp("search-primary", 1, "validate_artifact_schema", ["V1-SCHEMA-EVIDENCE-CARDS"], rationale="supports must be string enum"),
         },
     )
 
@@ -559,7 +573,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S2", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_traceability", ["TRACE-SUP-SOURCE-001"], rationale="S2 not on card"),
+            "expected.json": exp("search-primary", 1, "validate_traceability", ["TRACE-SUP-SOURCE-001"], rationale="S2 not on card"),
         },
     )
 
@@ -594,7 +608,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E2", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_traceability", ["TRACE-SUP-DECL-001"], rationale="E2 not declared on claim"),
+            "expected.json": exp("search-primary", 1, "validate_traceability", ["TRACE-SUP-DECL-001"], rationale="E2 not declared on claim"),
         },
     )
 
@@ -633,7 +647,7 @@ def main() -> None:
                     {"source_id": "KB:001", "evidence_card_id": "E2", "role_for_claim": "corroboration"},
                 ],
             ),
-            "expected.json": exp("mvr", 1, "validate_source_quality", ["kb_match_used_as_evidence"], rationale="KB corroboration"),
+            "expected.json": exp("search-primary", 1, "validate_source_quality", ["kb_match_used_as_evidence"], rationale="KB corroboration"),
         },
     )
 
@@ -648,7 +662,7 @@ def main() -> None:
                 ["E1"],
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
-            "expected.json": exp("mvr", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="narrative max reported_claim"),
+            "expected.json": exp("search-primary", 1, "validate_claim_status", ["claim_status_cap_exceeded"], rationale="narrative max reported_claim"),
         },
     )
 
@@ -664,7 +678,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(True, attachments=[], artifact_ready_claim_allowed=True),
-            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-ATT-MISSING"], rationale="ready without attachments"),
+            "expected.json": exp("search-primary", 1, "validate_delivery_truth", ["DELIV-ATT-MISSING"], rationale="ready without attachments"),
         },
     )
 
@@ -680,7 +694,7 @@ def main() -> None:
                 [{"source_id": "S1", "evidence_card_id": "E1", "role_for_claim": "primary_support"}],
             ),
             "delivery-manifest.json": dm(True, attachments=[{"path": "/etc/passwd", "sha256": _sha()}]),
-            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-ATT-ABSOLUTE-PATH"], rationale="absolute attachment"),
+            "expected.json": exp("search-primary", 1, "validate_delivery_truth", ["DELIV-ATT-ABSOLUTE-PATH"], rationale="absolute attachment"),
         },
     )
 
@@ -700,7 +714,7 @@ def main() -> None:
                 stub_delivery=True,
                 attachments=[{"path": "out/scratch.tmp", "sha256": _sha()}],
             ),
-            "expected.json": exp("mvr", 1, "validate_delivery_truth", ["DELIV-STUB-EXT"], rationale="stub tmp ext"),
+            "expected.json": exp("search-primary", 1, "validate_delivery_truth", ["DELIV-STUB-EXT"], rationale="stub tmp ext"),
         },
     )
 

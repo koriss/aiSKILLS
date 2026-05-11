@@ -26,7 +26,7 @@ def _copy_fixture(src: Path, dst: Path) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--fixture", required=True, type=Path, help="Path to fixture directory (e.g. good/mvr_minimal_valid)")
+    ap.add_argument("--fixture", required=True, type=Path, help="Path to fixture directory (e.g. good/minimal_valid)")
     ap.add_argument("--out", required=True, type=Path, help="Output run-directory")
     ap.add_argument("--n", type=int, default=10, help="Number of noise sources/cards to add")
     ap.add_argument("--in-place", action="store_true", help="Overwrite --out in place (dangerous)")

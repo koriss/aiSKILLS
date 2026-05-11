@@ -34,7 +34,7 @@ def main() -> int:
     out = {
         "schema_version": "v19.0",
         "validators": rows,
-        "runner_profiles": ["dossier", "mvr", "full-rigor", "propaganda-io", "book-verification"],
+        "runner_profiles": ["dossier", "search-primary", "propaganda-io", "book-verification"],
     }
     text = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
     if args.output:

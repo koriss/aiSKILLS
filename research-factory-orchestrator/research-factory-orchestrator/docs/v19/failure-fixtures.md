@@ -9,7 +9,7 @@ Schemas without **paired bad fixtures** regress into ceremony. Implementation ph
 ```
 tests/fixtures/v19/
   good/
-    mvr_minimal_valid/
+    minimal_valid/
   bad/
     claim_without_evidence/
     evidence_without_source/
@@ -24,7 +24,7 @@ tests/fixtures/v19/
     local_path_in_user_message/
     cli_claimed_external_delivery/
     contradiction_required_but_missing/
-    l0_scan_unknown_under_full_profile/
+    l0_unknown_contradiction_echo_blocks/
     release_pass_without_transcript/
 ```
 
@@ -45,12 +45,12 @@ tests/fixtures/v19/
 | `local_path_in_user_message` | V6 | blocking |
 | `cli_claimed_external_delivery` | V6 | blocking |
 | `contradiction_required_but_missing` | V4 | blocking |
-| `l0_scan_unknown_under_full_profile` | V4 / V5 | blocking |
+| `l0_unknown_contradiction_echo_blocks` | V4 / V5 | blocking |
 | `release_pass_without_transcript` | CI release validator | blocking (dev contour) |
 
 ## Good fixture
 
-`good/mvr_minimal_valid/` — smallest consistent run-dir passing **MVR** under all six validators.
+`good/minimal_valid/` — smallest consistent run-dir passing the default fixture harness under all six validators.
 
 ## Failure corpus registration
 

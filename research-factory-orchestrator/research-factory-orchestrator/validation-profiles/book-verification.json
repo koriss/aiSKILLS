@@ -2,7 +2,7 @@
   "profile": "book-verification",
   "schema_version": "v19.0",
   "description": "Book / long-form verification. Stricter citation and excerpt gates; single canonical protocol path in implementation.",
-  "parent_profile": "full-rigor",
+  "parent_profile": "dossier",
   "active_validators": [
     "validate_artifact_schema",
     "validate_traceability",

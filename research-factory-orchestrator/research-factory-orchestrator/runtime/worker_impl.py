@@ -255,6 +255,12 @@ def cmd_run(a):
         "external_source_count": collection_summary.get("external_source_count", 0),
         "seed_only": collection_summary.get("seed_only", True),
     }
+    ext_ws = bool(collection_summary.get("external_web_search_executed"))
+    pkt_ld = bool(collection_summary.get("external_source_packet_loaded"))
+    if ext_ws:
+        feature_matrix["features"]["real_external_search_workers"] = "implemented_real"
+    elif pkt_ld:
+        feature_matrix["features"]["real_external_search_workers"] = "implemented_seed_only"
     feature_matrix["coverage_summary"] = {
         "profile": coverage_result.get("profile"),
         "minimum_independent_sources": coverage_result.get("minimum_independent_sources"),

@@ -19,5 +19,5 @@
     }
   },
   "notes": "Burn-rate alerts: compare 5m vs 1h windows on trace+events volume; wire to external observability per operator runbook.",
-  "inherits_from": "18.5.0"
+  "inherits_from": "19.2.0"
 }

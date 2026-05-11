@@ -12,19 +12,10 @@ from pathlib import Path
 from typing import Any
 
 _DEFAULT = "dossier"
-# Legacy Operator names map to production dossier (single funnel contract).
-_LEGACY_PROFILE_ALIASES = frozenset({"mvr", "live-bridge", "source-packet", "full-rigor"})
-
-_KNOWN = ("dossier",)
 
 
 def _canonical_profile(name: str) -> str:
-    n = str(name or "").strip().lower()
-    if not n:
-        return ""
-    if n in _LEGACY_PROFILE_ALIASES:
-        return "dossier"
-    return n
+    return str(name or "").strip().lower()
 
 
 def _path() -> Path:

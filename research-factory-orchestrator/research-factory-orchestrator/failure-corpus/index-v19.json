@@ -4,7 +4,7 @@
   "failure_corpus_index_version": "19.2.0",
   "description": "v19.2.0 failure-code overlay: v19 baseline + runtime-truth / telegram / advisory meta registry.",
   "v19_fixture_roots": {
-    "good": "tests/fixtures/v19/good/mvr_minimal_valid",
+    "good": "tests/fixtures/v19/good/minimal_valid",
     "bad": "tests/fixtures/v19/bad",
     "release_bad": "tests/fixtures/v19/release_bad"
   },
@@ -35,7 +35,7 @@
       "category": "status-cap",
       "severity": "error",
       "owner_validator": "validate_claim_status",
-      "reproduces_in_fixture": "bad/l0_scan_unknown_under_full_profile"
+      "reproduces_in_fixture": "bad/l0_unknown_contradiction_echo_blocks"
     },
     {
       "code": "V1-SCHEMA-UNSUPPORTED-KEYWORD",

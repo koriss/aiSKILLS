@@ -245,7 +245,7 @@ def main() -> int:
             if not isinstance(exp, dict):
                 all_errs.append(f"{name}: expected.json not an object")
                 continue
-            profile = str(exp.get("expected_profile") or "mvr")
+            profile = str(exp.get("expected_profile") or "search-primary")
             rc, tr, raw = _run_one(fixture_dir, py, profile)
             errs = _check_expected(name, rc, tr, exp, raw)
             all_errs.extend(errs)

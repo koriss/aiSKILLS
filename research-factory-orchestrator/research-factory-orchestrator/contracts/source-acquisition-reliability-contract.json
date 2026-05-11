@@ -16,5 +16,5 @@
     "fetch_timeout_does_not_kill_entire_run",
     "archive_copy_has_timestamp"
   ],
-  "inherits_from": "18.3.1-context-integrity-hotfix"
+  "inherits_from": "19.2.0"
 }

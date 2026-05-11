@@ -1,5 +1,5 @@
 {
-  "expected_profile": "mvr",
+  "expected_profile": "search-primary",
   "expected_rc": 1,
   "expected_validator": "validate_claim_status",
   "expected_issue_codes": [

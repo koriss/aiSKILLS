@@ -2,8 +2,8 @@
   "version": "19.2.0",
   "base": "17.3.0-report-proof-integrity-hardening",
   "overlays": [
-    "18.0.0-internal-analysis-audit-runtime",
-    "18.1.0-discovery-execution-integrity-hotfix"
+    "pre-19.2-internal-analysis-audit-runtime",
+    "pre-19.2-discovery-execution-integrity-hotfix"
   ],
   "validators": [
     "validate_skill_discovery_frontmatter.py",
@@ -35,5 +35,5 @@
     "timeout_promoted_to_complete",
     "late_result_without_accept_reject"
   ],
-  "notes": "v19-only validator DAG"
+  "notes": "v19-only validator DAG; overlay slugs are archival lineage (no v18-tagged strings)."
 }

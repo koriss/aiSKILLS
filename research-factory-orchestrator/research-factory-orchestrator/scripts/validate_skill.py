@@ -37,7 +37,7 @@ required_scripts = [
     "validate_active_contract_versions.py", "validate_profile_policies_present.py",
     "validate_no_scaffolds_in_production.py", "validate_no_failed_validation_in_production.py",
     "validate_advisory_fixture_suite.py",
-    "validate_artifact_release.py", "verify_skill_run_claims.py", "verify_openclaw_run.py",
+    "validate_artifact_release.py", "verify_skill_run_claims.py",
     "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
     "validate_logical_consistency.py",
     "run_core_validators.py",
@@ -122,7 +122,7 @@ index = root/"failure-corpus/index.json"
 if not index.exists(): errors.append("missing_failure_corpus_index")
 else:
     data = json.loads(index.read_text(encoding="utf-8"))
-    if not data.get("legacy_cases"): errors.append("failure_corpus_missing_legacy_cases")
+    if not data.get("regression_cases"): errors.append("failure_corpus_missing_regression_cases")
     if not data.get("required_failure_classes"): errors.append("failure_corpus_missing_required_classes")
     if not data.get("reliability_cases"): errors.append("failure_corpus_missing_reliability_cases")
     if not data.get("context_integrity_cases"): errors.append("failure_corpus_missing_context_integrity_cases")

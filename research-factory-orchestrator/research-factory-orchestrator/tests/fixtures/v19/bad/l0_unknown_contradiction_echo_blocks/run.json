@@ -4,6 +4,6 @@
   "mode": "research",
   "version": "19.0.3",
   "validation_options_override": {
-    "require_full_contradiction_matrix": true
+    "l0_unknown_contradiction_echo_blocks": true
   }
 }

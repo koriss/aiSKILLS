@@ -71,12 +71,12 @@ def _issue_codes_from_transcript(run_dir: Path) -> set[str]:
 def _profile_for_fixture(fixture_dir: Path) -> str:
     exp = fixture_dir / "expected.json"
     if not exp.is_file():
-        return "mvr"
+        return "search-primary"
     try:
         o = json.loads(exp.read_text(encoding="utf-8"))
-        return str(o.get("expected_profile") or "mvr") if isinstance(o, dict) else "mvr"
+        return str(o.get("expected_profile") or "search-primary") if isinstance(o, dict) else "search-primary"
     except Exception:
-        return "mvr"
+        return "search-primary"
 
 
 def _run_fixture_codes(py: str, fixture_dir: Path) -> set[str]:
@@ -117,9 +117,9 @@ def main() -> int:
         if vid not in bad_validators:
             gaps.append(f"no bad fixture declares expected_validator={vid!r}")
 
-    good_ok = (GOOD / "mvr_minimal_valid").is_dir() and (GOOD / "mvr_minimal_valid" / "expected.json").is_file()
+    good_ok = (GOOD / "minimal_valid").is_dir() and (GOOD / "minimal_valid" / "expected.json").is_file()
     if not good_ok:
-        gaps.append("missing good/mvr_minimal_valid")
+        gaps.append("missing good/minimal_valid")
 
     idx_codes: list[dict[str, object]] = []
     if not INDEX.is_file():

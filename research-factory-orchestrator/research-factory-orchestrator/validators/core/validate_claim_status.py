@@ -45,7 +45,7 @@ def main() -> int:
     issues: list[dict] = []
     warnings: list[dict] = []
     prof = _load(rd / "validation-profile-used.json") or {}
-    profile = str(prof.get("profile") or "mvr")
+    profile = str(prof.get("profile") or "dossier")
     opts = prof.get("options") if isinstance(prof.get("options"), dict) else {}
     req_lite = opts.get("require_full_contradiction_matrix") is True or any(
         isinstance(c, dict) and (c.get("meta") or {}).get("force_contradictions_lite") for c in (_load(rd / "claims-registry.json") or {}).get("claims") or []
@@ -70,7 +70,7 @@ def main() -> int:
     cards = {str(c.get("evidence_id")): c for c in (evb.get("evidence_cards") or []) if isinstance(c, dict)}
     fg = _load(rd / "final-answer-gate.json") or {}
     echo = fg.get("contradiction_echo") or {}
-    if profile == "full-rigor" and echo.get("high_severity_detected") == "unknown":
+    if opts.get("l0_unknown_contradiction_echo_blocks") is True and echo.get("high_severity_detected") == "unknown":
         issues.append({"code": "l0_unknown_blocked", "severity": "error", "path": "final-answer-gate.json", "detail": "high_severity_detected unknown", "artifact": "final-answer-gate.json"})
     for cl in (_load(rd / "claims-registry.json") or {}).get("claims") or []:
         if not isinstance(cl, dict):

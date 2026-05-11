@@ -17,8 +17,8 @@ recorded verbatim into ``interface/interface-request.json`` under
 ``delivery.*`` for the host process only. This skill computes artifacts and
 local outbox stubs; any real user-visible send happens outside this repository.
 
-Backwards compatible with v19.2.0: if invoked without an explicit
-sub-command word, dispatches to ``adapter`` (legacy behaviour).
+Requires an explicit first argument: one of ``adapter``, ``execute``, ``run``,
+``worker``, ``outbox``, ``validate``, or ``failure``.
 """
 from __future__ import annotations
 
@@ -53,11 +53,14 @@ def main() -> int:
     enforce_canonical_skill_path(__file__)
 
     incoming = sys.argv[1:]
-    if incoming and incoming[0] in _SUBCOMMANDS:
-        new_argv = incoming
-    else:
-        # Legacy: implicit `adapter` sub-command.
-        new_argv = ["adapter"] + incoming
+    if not incoming or incoming[0] not in _SUBCOMMANDS:
+        print(
+            "error: missing subcommand; use e.g. `adapter`, `execute`, or `worker` "
+            f"(got argv={incoming[:3]!r}…)",
+            file=sys.stderr,
+        )
+        return 2
+    new_argv = incoming
 
     enforce_runs_root_argv(new_argv)
 

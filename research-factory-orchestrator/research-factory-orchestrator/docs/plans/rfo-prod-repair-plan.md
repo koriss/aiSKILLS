@@ -182,16 +182,18 @@ isProject: false
 
 ## Обход `_projects/_tmp` и `**/home/kazak/_projects/_tmp/rfo`** (архивы версий)
 
-1. `**/home/kazak/_projects/_tmp**` (корень): glob `*.zip` / `*.tar.gz` — **0 файлов**. Упакованной линейки версий там нет.
-2. `**/home/kazak/_projects/_tmp/rfo`** (путь от оператора): не zip-лента, а **две распакованные копии** дерева скилла — `**_a/research-factory-orchestrator/`** и `**_b/research-factory-orchestrator/**` (41 файл суммарно). Обе помечены как **«Local Artifact Runtime v19.5.5»**; отличие `_b`: дополнительная секция **Source packet** в `SKILL.md` (`--source-packet`, без сети).
-3. **Что внутри этих снимков (важное для сопоставления с вашим Deep Investigation):**
+1. `**/home/kazak/_projects/_tmp**` (корень, не подкаталог `rfo/`): glob `*.zip` / `*.tar.gz` — **0 файлов**. Упакованной линейки версий **в корне `_tmp`** нет.
+2. `**/home/kazak/_projects/_tmp/rfo`** — **канонический операторский «музей» версий** на диске:
+   - **ZIP-лента релизов:** десятки `openclaw-research-factory-orchestrator-v*-workspace.zip` (от ранних `v2` / `v4` / `v7` до `v19.x`) плюс `openclaw-rfo-local-artifact-skill-v19.5.5*.zip`, `openclaw-research-factory-orchestrator-workspace.zip` и т.п. — это **первичный** архив для diff HTML/шаблонов/генерации с текущим каноном (рядом с репо, не только `_guests/`).
+   - **Распакованные снимки для локального no-net:** `**_a/research-factory-orchestrator/`**, `**_b/research-factory-orchestrator/**`, каталоги `**_extract-v19.5.5/**` — обе копии `_a`/`_b` помечены как **«Local Artifact Runtime v19.5.5»**; отличие `_b`: дополнительная секция **Source packet** в `SKILL.md` (`--source-packet`, без сети).
+3. **Что внутри снимков `_a`/`_b` (важное для сопоставления с вашим Deep Investigation):**
   - **Нет пяти субагентов и нет LLM-оркестратора** — один синхронный пайплайн `[runtime/run.py](file:///home/kazak/_projects/_tmp/rfo/_a/research-factory-orchestrator/runtime/run.py)`: `analyse_task` → `write_reports` → manifest → validate; **явно «no network calls»** в `[runtime/analysis.py](file:///home/kazak/_projects/_tmp/rfo/_a/research-factory-orchestrator/runtime/analysis.py)`.
   - **Много «осей» пропаганды/ИО** зашито **детерминированно** в коде: список `PROPAGANDA_METHODS` (~12 методов с паттернами и рисками) — это ближайший аналог «десятки осей», но **не** волна внешнего добора и **не** субагенты.
   - **Шаблон артефактов под канал/гейтвей:** `SKILL.md` задаёт дерево `runs/<run_id>/` с `**chat/01-analysis.md` … `04-artifacts-and-limits.md`**, `report/full-report.html`, `data/*.json`, маркер `**__RFO_RESULT__=**` — порядок «сначала куски в md, потом большой html» **частично** отражён, но **без** SearXNG-волн и **без** постов в канал внутри скилла (явно запрещено).
-4. **Вывод:** `_tmp/rfo` — это **ещё одно упрощение** (локальный артефактный рантайм без сети), **не** архив эры «5 субагентов + добор». Он полезен как **контраст**: показывает, куда катился продукт (короткий детерминированный путь + жёсткий маркер), и почему ощущение «всё затирают» — **новый слой контрактов** вместо описанного вами **оркестра волн**.
+4. **Вывод:** в одном каталоге `_tmp/rfo` смешаны **две роли**: (а) **ZIP-лента** — полноценный архив версий для diff шаблонов/HTML/генерации с каноном; (б) **распакованные `_a`/`_b`/`_extract-*`** — локальный артефактный рантайм **без сети**, это **не** архив эры «5 субагентов + добор», но полезен как **контраст** к волновому оркестру. Ощущение «всё затирают» — про **новый слой контрактов** в рантайме vs описанный вами **оркестр волн**; сравнение по ZIP из той же папки снимает вопрос «где старые релизы».
 5. **Соседство:** `**_tmp/rfo_analogs/`** — OSS deep-research для сравнения fanout/collector; `**rfo_analogs/repos/research_orchestrator**` — чужой merge-скилл.
 
-Плановое действие: todo `**predecessor-artifact-mining**` — если появятся **другие** каталоги/zip с **ранней** Deep Investigation / pre-v19.3 оркестрацией, дополнить выжимку; для `_tmp/rfo` выжимка выше уже зафиксирована в плане.
+Плановое действие: todo `**predecessor-artifact-mining**` — для HTML/шаблонов **сначала** `unzip -p` по выбранным `v*-workspace.zip` из `_tmp/rfo`; при появлении **других** каталогов с ранней Deep Investigation / pre-v19.3 оркестрацией — дополнить выжимку.
 
 ---
 

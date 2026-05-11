@@ -2,6 +2,8 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+- **Standalone `run_rfo_full_research.py`:** multi-vector **`fanout_relay_search`**, materializes **`graph/wave-plan.json`**, runs **`citation_grounding.evaluate`** before outbox, syncs **`feature-truth-matrix.json`**, replaces the optimistic **`final-answer-gate`** stub with schema-safe pass/fail from wave + citation checks; IO payload uses a **topic bucket** + non-empty **`narrative_map`** heuristics.
+- **`runtime_job_worker` packaging:** calls **`ensure_pkg_required_paths`** immediately before **`build_package`** so required ZIP paths exist per `contracts/package-required-artifacts.json`.
 - **Single production profile `dossier`:** `contracts/run-profiles.json` default; legacy `mvr` / `live-bridge` / `full-rigor` / `source-packet` names canonicalize to dossier in `runtime.profiles.resolve`.
 - Relay bridge **multi-vector fanout** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) with stats on `collection-result.json` (`relay_query_fanout`, `query_vectors`).
 - Removed **empty-relay mvr scaffold** path and `RFO_ALLOW_MVR_EMPTY_RELAY` user surface; empty relay exits non-zero.
@@ -15,6 +17,7 @@
   depending on the legacy filename.
 - Downstream agent index: `agent-handoff/bundle-manifest.json` under each run-dir
   (contract `rfo-agent-handoff-bundle-v1`) lists prompt role files and key artifact paths.
+- **Roadmap (not shipped in this minor):** richer **LLM-orchestrated** wave planning / sub-query generation should reuse existing discipline prompts (`prompts/source-quality-worker-prompt.md`, `templates/evaluation-rubric.md`, `templates/archetypes/report-archetypes.json`) and write each LLM step to disk with schema validation; predecessor-era chat/HTML templates remain reference-only under `templates/` and `reports/`.
 - Default bridge profile **`dossier`**; relay base URL required (no baked search host).
 - Removed in-tree Telegram delivery (`providers/telegram/`, `tools/agent_telegram/`)
   and optional golden diff helper; docs/schemas label legacy `telegram_messages` field.

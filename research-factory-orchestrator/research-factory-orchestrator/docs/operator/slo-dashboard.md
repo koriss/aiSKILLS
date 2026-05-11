@@ -1,4 +1,4 @@
-# SLO dashboard (v19.3.1)
+# SLO dashboard (v19.4.0)
 
 Use `runtime/slo.compute_slis(run_dir)` after each run; compare against `contracts/slo-config.json`.
 

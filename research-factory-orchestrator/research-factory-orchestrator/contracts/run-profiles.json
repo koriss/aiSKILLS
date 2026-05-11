@@ -1,9 +1,30 @@
 {
   "contract_id": "run-profiles",
-  "version": "v19.3.0",
+  "version": "v19.4.0",
   "title": "RFO single dossier funnel (production)",
   "summary": "One production profile: deep relay-backed dossier. No lite / MVR baseline in contract; validators may still expose legacy overlays under validation-profiles/ for fixture isolation only.",
   "profiles": {
+    "search-primary": {
+      "label": "CLI JSON relay standalone (search-primary driver)",
+      "description": "Used by scripts/run_rfo_full_research.py: relay prefetch + fetch, no source-packet dossier floor. Web search is the primary collection path; citation grounding thresholds apply.",
+      "source_policy": {
+        "external_collection_required": false,
+        "minimum_independent_sources": 2,
+        "source_packet_allowed": false,
+        "source_packet_required": false,
+        "web_search_required": true,
+        "stub_only_allowed": true
+      },
+      "delivery_policy": {
+        "stub_delivered_allowed": true,
+        "external_delivery_required": false,
+        "fail_on_validation_failed": false
+      },
+      "active_validators": [
+        "validate_artifact_schema",
+        "validate_citation_grounding"
+      ]
+    },
     "dossier": {
       "label": "Decision dossier (production)",
       "description": "Prefetch JSON relay with RFO_SOURCE_PACKET, strict independent-source floor, stub delivery forbidden. Only supported production funnel.",

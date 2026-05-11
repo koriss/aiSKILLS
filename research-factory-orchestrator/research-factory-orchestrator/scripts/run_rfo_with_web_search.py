@@ -60,8 +60,8 @@ from rfo_relay_search_helpers import (  # noqa: E402
 # ── config ────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
 _USER_AGENT = (os.environ.get("RFO_WEB_SEARCH_USER_AGENT") or "").strip() or f"RFO/{VERSION}-RelayPrefetch"
-_MAX_CHARS_PER_SOURCE = 3000   # truncate content per source
-_MAX_SOURCES = 8
+_MAX_CHARS_PER_SOURCE = int(os.environ.get("RFO_MAX_CHARS_PER_SOURCE", "3000"))
+_MAX_SOURCES = int(os.environ.get("RFO_MAX_SOURCES", "8"))
 
 _ADAPTER_TIMEOUT = float(os.environ.get("RFO_BRIDGE_ADAPTER_TIMEOUT", "120"))
 _WORKER_TIMEOUT = float(os.environ.get("RFO_BRIDGE_WORKER_TIMEOUT", "600"))

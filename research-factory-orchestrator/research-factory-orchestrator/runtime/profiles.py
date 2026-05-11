@@ -38,14 +38,21 @@ def load_profiles() -> dict[str, Any]:
         return {"profiles": {}, "default_profile": _DEFAULT}
 
 
-def resolve(profile: str | None) -> tuple[str, dict[str, Any]]:
-    """Resolve active profile. Unknown ``RFO_RUN_PROFILE`` env → ``ValueError`` (fail-closed)."""
+def resolve(profile: str | None, *, entrypoint_default: str | None = None) -> tuple[str, dict[str, Any]]:
+    """Resolve active profile. Unknown ``RFO_RUN_PROFILE`` env → ``ValueError`` (fail-closed).
+
+    ``entrypoint_default`` (e.g. ``search-primary`` for ``run_rfo_full_research.py``) is used
+    only when CLI profile and ``RFO_RUN_PROFILE`` are both unset; it does not change the
+    global contract default (still ``dossier`` for worker/bridge).
+    """
     contract = load_profiles()
     profiles = contract.get("profiles") or {}
     default = _canonical_profile(str(contract.get("default_profile") or _DEFAULT))
     env_raw = _canonical_profile(os.environ.get("RFO_RUN_PROFILE", ""))
     cli_raw = _canonical_profile((profile or "").strip())
-    chosen = cli_raw or env_raw or default
+    ed = _canonical_profile((entrypoint_default or "").strip()) if entrypoint_default else ""
+    fallback = ed if ed and ed in profiles else default
+    chosen = cli_raw or env_raw or fallback
     if chosen not in profiles:
         if env_raw and env_raw not in profiles:
             raise ValueError(f"unknown RFO_RUN_PROFILE={env_raw!r}; known={sorted(profiles)}")

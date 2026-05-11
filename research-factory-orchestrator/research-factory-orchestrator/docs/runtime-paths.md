@@ -13,6 +13,16 @@ This document fixes **vector F** (“which code path ran?”): a single checklis
 4. Worker / collector stages inside the bridge write the run-dir; **`render_all`** may re-render HTML; **`ensure_canonical_full_report_html`** + **`emit_agent_skill_handoff`** finalize `report/full-report.html` and **`result-manifest.json`**.
 5. **Host delivery:** the gateway reads **`marker.run_dir`** + manifest from the handoff and attaches artifacts / chunked text to the operator channel (implementation is host-owned).
 
+## Delivery truth: native slash vs CLI / subagent
+
+| Surface | Who proves user-visible delivery? | What to read on disk |
+|--------|-------------------------------------|------------------------|
+| **Native `/research_factory_orchestrator`** (gateway) | Host gateway + channel acks (`sendDocument`, audit JSONL). | `delivery-manifest.json`, `attachment-ledger.json`, host audit under `workspace/audit/`. |
+| **`interface_runtime_adapter.py` + `--provider cli`** | **No** external channel — `stub_delivered` / `stub_only` is expected unless the operator wires a real provider. | Same manifests; treat `stub` as **not** Telegram proof. |
+| **Plain subagent / chat-only recap** | **Invalid** as RFO completion — see `SKILL.md` prohibitions. | N/A — always open the run-dir artifacts. |
+
+The LLM must **not** invent ZIP paths, RAF numbers, or “sent to Telegram” without the rows above. Final user-visible truth is **`final-answer-gate.json`** plus the profile’s primary artifact (usually **`report/full-report.html`**).
+
 ### Bridge stdout/stderr (symmetry with execute)
 
 Treat **`stdout`** from the bridge as **handoff-only:** the line **`__RFO_SKILL_AGENT_HANDOFF__=<json>`** (`HANDOFF_STDOUT_PREFIX` in `runtime/artifact_execute_impl.py`). Progress, **`[DONE]`**, and normalization logs belong on **`stderr`**. Parsing hosts should locate the capsule by prefix, not assume no other stdout during operator smoke runs. **`build_package`** after bridge MAY use **`quiet=True`** so packaging does not add JSON blobs to stdout. Detail: **`docs/adr/ADR-018-bridge-handoff-contract-and-portable-paths.md`**.
@@ -23,9 +33,18 @@ Treat **`stdout`** from the bridge as **handoff-only:** the line **`__RFO_SKILL_
 2. **`cmd_execute` → `cmd_run` + `build_package` → `_build_manifest` + stdout handoff**.
 3. No outbound channel logic in this layer; attaching files is the host’s responsibility.
 
+## Standalone relay driver (`scripts/run_rfo_full_research.py`)
+
+Packaged **relay + fetch** CLI (not the native slash bridge):
+
+- Default profile is **`search-primary`** from `contracts/run-profiles.json` when `RFO_RUN_PROFILE` is empty (`runtime.profiles.resolve(..., entrypoint_default="search-primary")`).
+- Uses **`fanout_relay_search`** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) with stats recorded on **`collection-result.json`** (`relay_query_fanout`).
+- Emits **`graph/wave-plan.json`** (so **`wave_graph_gate`** can pass on file presence), **`citation-grounding-result.json`**, **`feature-truth-matrix.json`** citation block, and a **`final-answer-gate.json`** aligned with those checks.
+- **Not** the full **`dossier`** work-unit / source-packet pipeline; for that depth use **`run_rfo_with_web_search.py`** or **`runtime_job_worker.py`**. Delivery under **`cli`** may still be **`stub_only`** — distinguish from gateway-attested sends (ADR-016).
+
 ## Legacy / auxiliary
 
-- **`scripts/runtime_job_worker.py` / `outbox_delivery_worker.py`** — queued worker pipeline (not the v19.3 native slash path).
+- **`scripts/runtime_job_worker.py` / `outbox_delivery_worker.py`** — queued worker pipeline (not the v19.4 native slash path).
 - **`scripts/run_research_factory.py`** — direct run-dir pipeline.
 - **HTML tooling:** **`scripts/rfo_render.py`** with subcommands `canonical` | `semantic-shell` (thin wrappers remain for backwards compatibility).
 

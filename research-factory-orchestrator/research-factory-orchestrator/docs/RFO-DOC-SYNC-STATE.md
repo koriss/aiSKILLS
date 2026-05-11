@@ -10,7 +10,7 @@
 | Git branch | `cleanup/v19-only-version-purge` |
 | Начальный commit | `76b59ce` |
 | Checkpoint commit (doc-sync bundle) | `71b722e` |
-| `skill_version` (канон) | `19.3.1` из `runtime/version.json` |
+| `skill_version` (канон) | `19.4.0` из `runtime/version.json` |
 | `failure_corpus_index_version` (канон) | `19.2.1` из `runtime/version.json` |
 
 ## Master list — затронутые пути

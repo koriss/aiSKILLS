@@ -10,6 +10,7 @@ import zipfile
 from pathlib import Path
 
 from runtime.render import hydrate_claims_if_needed, render_all
+from runtime.pkg_required_scaffold import ensure_pkg_required_paths
 from runtime.schema_defaults import minimal_valid
 from runtime.status import VERSION
 from runtime.util import CHAT, PKG_REQUIRED, REQ_EVENTS, jw, jr, jl, now, sha, sid, skill_root, tw
@@ -670,6 +671,12 @@ def cmd_worker(a):
             "idempotency_key": sid("IDEMP", "OUT-0006", "package/research-package.zip", job.get("provider", "cli")),
             "created_at": now(),
         },
+    )
+    ensure_pkg_required_paths(
+        rd,
+        str(job_after_move.get("run_id", job.get("run_id", ""))),
+        str(job_after_move.get("job_id", job.get("job_id", ""))),
+        str(job_after_move.get("command_id", job.get("command_id", ""))),
     )
     build_package(rd, allow_stub=_build_package_allow_stub(rd))
     try:

@@ -1,4 +1,4 @@
-# RFO operating discipline (v19.3.1)
+# RFO operating discipline (v19.4.0)
 
 0c. **Runtime truth vs rollback** — `cmd_run` emission + artifact layout are the single source of truth; fail-closed rollback must **not** mask inconsistent “green” manifests.
 

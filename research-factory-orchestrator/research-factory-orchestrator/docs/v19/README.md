@@ -1,6 +1,6 @@
 # RFO v19 — documentation hub
 
-This directory contains **v19 specifications** (validators, schemas, CI vs runtime boundaries, failure fixtures) **and** materials from the original **design program**. The repository root **`runtime/`**, **`scripts/`**, and **`contracts/`** are **live** — not a future implementation phase. Current release line: **`19.3.x`** (see [`runtime/version.json`](../../runtime/version.json), [`CHANGELOG.md`](../../CHANGELOG.md)).
+This directory contains **v19 specifications** (validators, schemas, CI vs runtime boundaries, failure fixtures) **and** materials from the original **design program**. The repository root **`runtime/`**, **`scripts/`**, and **`contracts/`** are **live** — not a future implementation phase. Current release line: **`19.4.x`** (see [`runtime/version.json`](../../runtime/version.json), [`CHANGELOG.md`](../../CHANGELOG.md)).
 
 ## Where to look first (current line)
 

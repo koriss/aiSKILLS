@@ -33,6 +33,10 @@ _STATUS_WEIGHT = {
     "contradicted": 0.0,
     "false": 0.0,
     "unsupported": 0.0,
+    # RFO claims-registry / relay standalone statuses
+    "reported_claim": 0.88,
+    "inferred_assessment": 0.52,
+    "insufficient_evidence": 0.25,
 }
 
 

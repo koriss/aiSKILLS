@@ -25,9 +25,16 @@ def build_relay_params(query: str, num: int) -> dict[str, str]:
 
 
 def relay_fetch_cap(requested_num: int) -> int:
-    upper = max(1, int(os.environ.get("RFO_WEB_SEARCH_FETCH_CAP", "20")))
-    boosted = max(requested_num, requested_num * 2)
-    return min(upper, boosted)
+    """Upper bound for SearXNG ``num`` must never be below ``requested_num`` (old default 20 starved fanout)."""
+    requested_num = max(1, int(requested_num))
+    raw = os.environ.get("RFO_WEB_SEARCH_FETCH_CAP", "").strip()
+    if raw:
+        try:
+            return max(requested_num, int(raw))
+        except ValueError:
+            pass
+    # Default: ask the relay for at least 2× what we keep (cap 200) so ranking/dedup has headroom.
+    return max(requested_num, min(200, requested_num * 2))
 
 
 def rank_relay_rows_for_task(task: str, rows: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:

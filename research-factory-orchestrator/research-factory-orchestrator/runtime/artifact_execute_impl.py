@@ -19,7 +19,7 @@ from runtime.status import VERSION
 from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
 from runtime.chat_md import sanitize_chat_body_for_plain_channels
-from runtime.worker_impl import build_package, cmd_run
+from runtime.worker_impl import build_package, cmd_run, _build_package_allow_stub
 
 # Neutral stdout capsule for whoever invoked the skill (LLM gateway, cron, host relay bridge, …).
 HANDOFF_STDOUT_PREFIX = "__RFO_SKILL_AGENT_HANDOFF__="
@@ -392,7 +392,7 @@ def cmd_execute(a) -> int:
     try:
         with contextlib.redirect_stdout(sys.stderr):
             cmd_run(ns)
-            build_package(rd, allow_stub=True)
+            build_package(rd, allow_stub=_build_package_allow_stub(rd))
         _write_final_answer(rd, task)
         jw(
             rd / "final-answer-gate.json",

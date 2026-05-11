@@ -16,7 +16,7 @@ def _skill_root() -> Path:
 
 
 class TestBridgeCliIntegration(unittest.TestCase):
-    def test_mvr_empty_relay_requires_consent_exit_2(self):
+    def test_empty_relay_exits_2_no_mvr_scaffold_hints(self):
         skill = _skill_root()
         script = skill / "scripts" / "run_rfo_with_web_search.py"
 
@@ -57,7 +57,7 @@ class TestBridgeCliIntegration(unittest.TestCase):
                         "--task",
                         "integration empty relay",
                         "--profile",
-                        "mvr",
+                        "dossier",
                         "--web-search-json-api-base",
                         base,
                     ],
@@ -72,7 +72,10 @@ class TestBridgeCliIntegration(unittest.TestCase):
             httpd.server_close()
 
         self.assertEqual(proc.returncode, 2, proc.stderr + proc.stdout)
-        self.assertIn("RFO_ALLOW_MVR_EMPTY_RELAY", proc.stderr or "")
+        err = proc.stderr or ""
+        self.assertNotIn("Relax with --profile mvr", err)
+        self.assertNotIn("RFO_ALLOW_MVR_EMPTY_RELAY", err)
+        self.assertIn("Relay fanout returned zero", err)
 
     def test_allow_gate_stub_requires_experiment_exit_2(self):
         skill = _skill_root()

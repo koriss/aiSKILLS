@@ -51,4 +51,4 @@ Treat **`stdout`** from the bridge as **handoff-only:** the line **`__RFO_SKILL_
 
 ## Observability (`errors.jsonl`, vector K)
 
-- **`severity: warning`** events (for example **`EXTERNAL-COLLECTION-NO-SEEDS`** under `live-bridge` without **`RFO_SEED_URLS`**) are **not** necessarily pipeline failure; distinguish them from **`failed`**/`exit≠0`/missing triple deliverables in triage.
+- **`severity: warning`** events (for example **`EXTERNAL-COLLECTION-NO-SEEDS`** under dossier/external-off without **`RFO_SEED_URLS`**) are **not** necessarily pipeline failure; distinguish them from **`failed`**/`exit≠0`/missing triple deliverables in triage.

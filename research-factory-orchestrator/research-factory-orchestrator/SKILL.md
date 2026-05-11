@@ -20,9 +20,9 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Allowed execution paths
 
-- **Host slash / native command (if your agent exposes it)** — the **host** runs **`scripts/run_rfo_with_web_search.py`** (relay bridge + collectors). Delivery to the user stays **outside** this package (stdout marker, gateway, or other channel). See `docs/runtime-paths.md`.
+- **Host slash / native command** — the host runs **`scripts/run_rfo_with_web_search.py`** (relay fanout + collectors). **Primary human artifact:** **`report/full-report.html`** (chat/Markdown is preview/derivative). Delivery stays outside this package (stdout marker, gateway). See `docs/runtime-paths.md`.
 - `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."`
-- `python3 -S scripts/run_rfo_with_web_search.py --runs-root <runs-root> --web-search-json-api-base <relay-base-url> --task "..."` (default profile `live-bridge`; optional **`RFO_BRIDGE_RENDER_STRICT=1`** to fail closed if re-render throws)
+- `python3 -S scripts/run_rfo_with_web_search.py --runs-root <runs-root> --web-search-json-api-base <relay-base-url> --task "..."` (default profile **`dossier`**; multi-vector relay fanout via `contracts/query-fanout-config.json`; optional **`RFO_BRIDGE_RENDER_STRICT=1`** to fail closed if re-render throws)
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
 - `python3 -S scripts/outbox_delivery_worker.py --runs-root <runs-root>`
 - `python3 -S scripts/run_research_factory.py --project-dir <run-dir> --task "..."`
@@ -43,7 +43,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### v19 core validation
 
-- Prefer validation profile embedded in the run dir (`validation-profile-used.json`, `run-profile.json`); optionally override with `RFO_V19_PROFILE` (`mvr`, `full-rigor`, `propaganda-io`, `book-verification`).
+- Prefer validation profile embedded in the run dir (`validation-profile-used.json`, `run-profile.json`); optionally override with `RFO_V19_PROFILE` (including **`dossier`**, `mvr`, `full-rigor`, `live-bridge`, `propaganda-io`, `book-verification`).
 - Run `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>`.
 - Core validator stack is V1..V6 with fail-closed delivery truth.
 
@@ -57,3 +57,4 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 - `docs/v19/validators-core.md`
 - `docs/adr/ADR-001-v19-pragmatic-rigor.md`
 - `docs/adr/ADR-015-runtime-truth-restoration.md`
+- `docs/adr/ADR-019-single-dossier-funnel.md`

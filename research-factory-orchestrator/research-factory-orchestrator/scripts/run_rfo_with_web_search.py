@@ -14,12 +14,12 @@ URL для исследования собирается здесь через *
 документом (иначе эвристика выключена).
 
 Поток:
-  1. relay search + HTTP fetch страниц
+  1. multi-vector relay fanout → merge/dedup URL → fetch страниц
   2. RFO_SOURCE_PACKET + очередь RFO как обычно
   3. патчи claims-registry / re-render / stdout ``__RFO_SKILL_AGENT_HANDOFF__=``
 
-По умолчанию ``--profile live-bridge`` (строже mvr).
-Для экспресс-режима: ``--profile mvr``.
+По умолчанию профиль ``dossier`` (единый конвейер «досье»). Legacy-имена
+(`mvr`, ``live-bridge``, ``full-rigor``) канонизуются в ``dossier`` внутри ``runtime.profiles``.
 """
 from __future__ import annotations
 
@@ -50,6 +50,7 @@ from runtime.schema_defaults import minimal_valid  # noqa: E402
 from runtime.status import VERSION  # noqa: E402
 from runtime.util import now  # noqa: E402
 
+from rfo_query_fanout import fanout_relay_search  # noqa: E402
 from rfo_relay_search_helpers import (  # noqa: E402
     build_relay_params,
     rank_relay_rows_for_task,
@@ -452,6 +453,23 @@ def _persist_bridge_source_packet(rd: Path, packet_path_str: str) -> None:
     )
 
 
+def _merge_relay_fanout_into_collection(rd: Path, stats: dict) -> None:
+    """Attach relay fanout stats to ``collection-result.json`` for depth evidence."""
+    from runtime.util import jr, jw
+
+    cr = jr(rd / "collection-result.json", {})
+    if not isinstance(cr, dict):
+        cr = {}
+    cr["relay_query_fanout"] = stats
+    if isinstance(stats, dict):
+        cr["query_vectors"] = stats.get("query_vectors")
+        mrg = stats.get("merge") or {}
+        if isinstance(mrg, dict):
+            cr["relay_fanout_unique_urls"] = mrg.get("unique_urls_after_dedup")
+            cr["relay_fanout_raw_rows"] = mrg.get("raw_rows_total")
+    jw(rd / "collection-result.json", cr)
+
+
 # ── RFO patch helpers ─────────────────────────────────────────────────────────
 def patch_claims_registry(rd: Path, claims: list[dict], evidence_cards: list[dict]) -> None:
     """Overwrite claims-registry with real source-derived claims."""
@@ -556,8 +574,7 @@ def minimum_sources_policy(profile_name: str) -> int:
 
 
 def strict_packet_preflight(profile_lc: str, packet: dict, min_need: int) -> tuple[bool, str]:
-    if profile_lc == "mvr":
-        return True, ""
+    _ = profile_lc  # dossier funnel: uniform preflight regardless of legacy CLI aliases
     rows = packet.get("sources") if isinstance(packet.get("sources"), list) else []
     with_body = sum(1 for s in rows if isinstance(s, dict) and str(s.get("content_snippet") or "").strip())
     if len(rows) < min_need:
@@ -580,7 +597,7 @@ def main() -> int:
         default="",
         help="HTTP JSON relay origin (no /search suffix). Overrides RFO_WEB_SEARCH_JSON_API_BASE for this run.",
     )
-    parser.add_argument("--profile", default="live-bridge")
+    parser.add_argument("--profile", default="dossier")
     parser.add_argument(
         "--allow-gate-stub",
         action="store_true",
@@ -624,37 +641,33 @@ def main() -> int:
         )
         return 2
 
-    print("[1/5] Query JSON relay...", file=sys.stderr)
-    results: list[dict] = []
-    for base in relays:
-        results = query_json_search_relay(base, task, args.num_sources)
-        if results:
-            break
+    fan_stats: dict[str, Any] = {}
+    print("[1/5] Multi-vector JSON relay fanout...", file=sys.stderr)
+    min_need_bootstrap = minimum_sources_policy(args.profile)
+    slice_cap = max(relay_fetch_cap(args.num_sources) * 4, min_need_bootstrap + 8, 24)
+    fan_rows, fan_stats = fanout_relay_search(
+        query_json_search_relay,
+        relays,
+        task,
+        args.num_sources,
+    )
+    ranked = rank_relay_rows_for_task(task, fan_rows, limit=slice_cap)
+    results = ranked[:slice_cap]
 
     if not results:
-        msg = "[1/5] Relay returned zero URLs."
-        if prof_lc == "mvr":
-            allow_empty = os.environ.get("RFO_ALLOW_MVR_EMPTY_RELAY", "").strip().lower() in (
-                "1",
-                "true",
-                "yes",
-            )
-            if not allow_empty:
-                print(
-                    f"{msg} profile=mvr requires RFO_ALLOW_MVR_EMPTY_RELAY=1 to continue with an empty scaffold.",
-                    file=sys.stderr,
-                )
-                return 2
-            print(
-                f"{msg} continuing with empty scaffold (mvr + RFO_ALLOW_MVR_EMPTY_RELAY)",
-                file=sys.stderr,
-            )
-        else:
-            print(msg, file=sys.stderr)
-            print("Relax with --profile mvr or tune RFO_WEB_SEARCH_* / relay availability.", file=sys.stderr)
-            return 2
+        msg = "[1/5] Relay fanout returned zero URLs after merge/dedup."
+        print(msg, file=sys.stderr)
+        print(
+            "Tune RFO_WEB_SEARCH_* / relay availability or broaden "
+            "`contracts/query-fanout-config.json` templates.",
+            file=sys.stderr,
+        )
+        return 2
 
-    print(f"[1/5] Got {len(results)} relay rows", file=sys.stderr)
+    print(
+        f"[1/5] Fanout relay rows (post-dedup, pre-rank)={len(fan_rows)}; ranked slice={len(results)}",
+        file=sys.stderr,
+    )
 
     # Step 2: Build source packet with fetched content
     print("[2/5] Building source packet with fetched content...", file=sys.stderr)
@@ -839,6 +852,7 @@ def main() -> int:
 
         if packet_path:
             _persist_bridge_source_packet(latest_run, packet_path)
+        _merge_relay_fanout_into_collection(latest_run, fan_stats)
 
         print("[4/5] Re-rendering HTML with real claims...", file=sys.stderr)
         run_id = job_id_gate = cmd_id_gate = "UNKNOWN"
@@ -885,7 +899,7 @@ def main() -> int:
             from runtime.util import jr as _jr_b, jw as _jw_b
 
             rp_doc = _jr_b(latest_run / "run-profile.json", {})
-            pname = str(rp_doc.get("profile") or prof_lc or "live-bridge")
+            pname = str(rp_doc.get("profile") or prof_lc or "dossier")
             cg = _evaluate_citation_grounding_bridge(
                 latest_run,
                 run_id=run_id,
@@ -907,7 +921,7 @@ def main() -> int:
         except Exception as e:
             print(f"[4/5] citation/matrix resync error (non-fatal): {e}", file=sys.stderr)
 
-        if prof_lc == "mvr" or args.allow_gate_stub:
+        if args.allow_gate_stub:
             try:
                 from runtime.util import jw
 
@@ -926,7 +940,7 @@ def main() -> int:
                 print(f"[4/5] gate update error: {e}", file=sys.stderr)
         else:
             print(
-                "[4/5] Leaving final-answer-gate untouched (live-bridge: run validators for truth)",
+                "[4/5] Leaving final-answer-gate untouched (dossier: run validators for truth)",
                 file=sys.stderr,
             )
 

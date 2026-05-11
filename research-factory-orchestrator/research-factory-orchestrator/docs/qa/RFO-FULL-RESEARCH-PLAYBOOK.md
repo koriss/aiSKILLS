@@ -2,7 +2,7 @@
 
 Canonical operator knobs live in **`SKILL-core.md`** and **`docs/PROFILE_DEFAULTS.md`**; this playbook adds **routing**, **relay sequence**, **troubleshooting**, and **truth boundaries** without duplicating every env variable.
 
-Related: [`RFO-CANONICAL-WORK-ROOTS`](./RFO-CANONICAL-WORK-ROOTS.md), [`assertion-command-matrix`](./assertion-command-matrix.md), [`RFO-MERGE-ANTI-REGRESSION`](./RFO-MERGE-ANTI-REGRESSION.md), [`TELEGRAM-LONGFORM-OUTPUT`](./TELEGRAM-LONGFORM-OUTPUT.md) (оформление канала), ADRs **001**, **016**, **018**.
+Related: [`RFO-CANONICAL-WORK-ROOTS`](./RFO-CANONICAL-WORK-ROOTS.md), [`assertion-command-matrix`](./assertion-command-matrix.md), [`RFO-MERGE-ANTI-REGRESSION`](./RFO-MERGE-ANTI-REGRESSION.md), [`TELEGRAM-LONGFORM-OUTPUT`](./TELEGRAM-LONGFORM-OUTPUT.md) (оформление канала), ADRs **001**, **016**, **018**, **019** (single dossier funnel).
 
 ---
 
@@ -32,7 +32,7 @@ python3 -S scripts/run_rfo_with_web_search.py \
   --task "$TASK"
 ```
 
-Profiles: **`live-bridge`** (default stricter contour) vs **`mvr`** (minimal viable relay). Override with `--profile`.
+Profile defaults to **`dossier`** (relay fanout + source packet semantics). Legacy names remap in `runtime.profiles.resolve`; override with `--profile` only when intentionally matching a validator harness fixture.
 
 ### GH3 — Host invokes skill (conceptual)
 
@@ -75,7 +75,7 @@ Pick `RUNS_ROOT` on persistent storage approved by your ops policy (`/tmp` requi
 Treat as **staging / operator** checklist (not CI-default). Cross-check timeouts and env names with `scripts/run_rfo_with_web_search.py --help`.
 
 1. **Export relay base** — `export RFO_WEB_SEARCH_JSON_API_BASE=…` or pass `--web-search-json-api-base`.
-2. **Choose profile** — default `live-bridge`; `mvr` for minimal smoke when profiles allow it.
+2. **Choose profile** — default **`dossier`** (`contracts/run-profiles.json`). CI/smoke-only overrides are documented separately; empty relay never “downgrades” to a lite path.
 3. **Runs root** — `--runs-root` points at durable workspace path.
 4. **Task string** — non-empty `--task`; keep URL-heavy tasks quoted.
 5. **Dry connectivity** — from the bridge host (not inside skill): `curl -sS -o /dev/null -w '%{http_code}\n' "$BASE"` or relay-specific ping.

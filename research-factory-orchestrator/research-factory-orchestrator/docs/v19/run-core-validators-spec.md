@@ -7,10 +7,10 @@ Single entrypoint executing **exactly six** validators in order, aggregating res
 ## CLI
 
 ```
-python3 -S scripts/run_core_validators.py --run-dir <path> [--profile mvr|full-rigor|propaganda-io|book-verification]
+python3 -S scripts/run_core_validators.py --run-dir <path> [--profile dossier|full-rigor|propaganda-io|book-verification]
 ```
 
-- Default profile: `mvr`
+- Default profile: **`dossier`** (`mvr` / legacy names acceptable for fixtures / explicit harness rows)
 - Profile JSON loaded from `validation-profiles/<name>.json` at the repository root (design drafts remain under `docs/v19/drafts/validation-profiles/` for reference).
 
 ## Behaviour

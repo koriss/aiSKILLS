@@ -19,7 +19,7 @@
 ## Iteration 2 (profile+hardening matrix)
 - Command: `python3 -S scripts/_smoke_v19_2_integration.py`
 - Result: `passed=true`
-- Covered checks: profile matrix (mvr/full-rigor/required), legacy-leak guards, profile/registry alignment, subprocess timeout guard, contract/policy guards.
+- Covered checks: profile matrix (**dossier** default + harness names mvr/full-rigor), legacy-leak guards, profile/registry alignment, subprocess timeout guard, contract/policy guards.
 
 ## Iteration 3 (archived — channel delivery smoke)
 - **Removed from repo:** `_smoke_channel_real_send.py`-style in-tree channel/Bot API adapters.

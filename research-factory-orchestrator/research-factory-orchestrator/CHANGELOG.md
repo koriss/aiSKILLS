@@ -2,6 +2,11 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+- **Single production profile `dossier`:** `contracts/run-profiles.json` default; legacy `mvr` / `live-bridge` / `full-rigor` / `source-packet` names canonicalize to dossier in `runtime.profiles.resolve`.
+- Relay bridge **multi-vector fanout** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) with stats on `collection-result.json` (`relay_query_fanout`, `query_vectors`).
+- Removed **empty-relay mvr scaffold** path and `RFO_ALLOW_MVR_EMPTY_RELAY` user surface; empty relay exits non-zero.
+- Publish policy: **`block_user_publish_when_collection_seed_only`** wired through `decide_publish_allowed` / outbox.
+- ADR: `docs/adr/ADR-019-single-dossier-funnel.md`.
 - **Breaking (JSON consumers):** honesty harness JSON field `validator_id` is now
   **`verify_skill_run_claims`**. Canonical script: `scripts/verify_skill_run_claims.py`;
   `scripts/verify_openclaw_run.py` remains a thin compatibility wrapper.
@@ -10,7 +15,7 @@
   depending on the legacy filename.
 - Downstream agent index: `agent-handoff/bundle-manifest.json` under each run-dir
   (contract `rfo-agent-handoff-bundle-v1`) lists prompt role files and key artifact paths.
-- Default bridge profile `live-bridge`; relay base URL required (no baked search host).
+- Default bridge profile **`dossier`**; relay base URL required (no baked search host).
 - Removed in-tree Telegram delivery (`providers/telegram/`, `tools/agent_telegram/`)
   and optional golden diff helper; docs/schemas label legacy `telegram_messages` field.
 - Outbox: missing provider adapter is `failed` with `PROVIDER-DELIVERY-ADAPTER-MISSING`,

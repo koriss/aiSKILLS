@@ -43,11 +43,11 @@
 ### Wave A — входные точки
 
 - **README.md** — добавлена отсылка к `runtime/version.json` и CHANGELOG как к источнику semver.
-- **CHANGELOG.md** — просмотр: актуален относительно линии 19.4.x / 19.3.x; правок не потребовалось.
+- **CHANGELOG.md** — обновлена секция 19.4.x (single dossier funnel, см. ADR-019).
 - **SKILL.md / SKILL-core.md** — просмотр: версии и пути согласованы с `runtime/version.json`; правок не потребовалось.
-- **AGENTS.md** — просмотр: шаблон вызова и границы хоста согласованы с artifact-only контуром; правок не потребовалось.
+- **AGENTS.md** — дефолтный профиль моста: **`dossier`** (relay).
 - **docs/v19/README.md** — переписан ввод: убрано ложное «design-only / no changes to runtime»; добавлены ссылки на текущую линию и ADR.
-- **docs/PROFILE_DEFAULTS.md** — сверено с `contracts/run-profiles.json` (`default_profile`: `mvr`) и дефолтами `run_rfo_with_web_search.py` / `run_core_validators.py`; правок не потребовалось.
+- **docs/PROFILE_DEFAULTS.md** — сверено с `contracts/run-profiles.json` (`default_profile`: **`dossier`**) и дефолтами `run_rfo_with_web_search.py` / `run_core_validators.py` (ADR-019).
 
 ### Wave B — validators / CI–runtime
 

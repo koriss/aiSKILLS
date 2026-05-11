@@ -135,7 +135,7 @@ def _build_used_profile(profile_name: str, prof: dict[str, object]) -> dict[str,
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-dir", required=True)
-    ap.add_argument("--profile", default="mvr", help="Profile name (without .json) under validation-profiles/")
+    ap.add_argument("--profile", default="dossier", help="Profile name (without .json) under validation-profiles/")
     args = ap.parse_args()
     rd = Path(args.run_dir)
     if not rd.is_dir():

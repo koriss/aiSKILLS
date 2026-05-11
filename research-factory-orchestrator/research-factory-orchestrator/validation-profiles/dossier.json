@@ -1,7 +1,7 @@
 {
-  "profile": "live-bridge",
+  "profile": "dossier",
   "schema_version": "v19.0",
-  "description": "Legacy CLI name; redirects to dossier semantics in profiles.resolve — kept for tooling that still loads this file explicitly.",
+  "description": "Production dossier funnel: relay packet mandatory, stubs disallowed at delivery truth.",
   "parent_profile": "full-rigor",
   "active_validators": [
     "validate_artifact_schema",

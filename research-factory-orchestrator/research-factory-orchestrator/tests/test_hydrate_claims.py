@@ -51,15 +51,23 @@ class TestHydrateClaims(unittest.TestCase):
 
 
 class TestBuildPackageStub(unittest.TestCase):
-    def test_live_bridge_packet_allows_stub(self):
+    def test_dossier_with_packet_requires_full_zip(self):
         with tempfile.TemporaryDirectory() as tmp:
             rd = Path(tmp) / "run"
             rd.mkdir(parents=True, exist_ok=True)
-            jw(rd / "run-profile.json", {"schema_version": "v19.0", "profile": "live-bridge"})
+            jw(rd / "run-profile.json", {"schema_version": "v19.0", "profile": "dossier"})
             jw(
                 rd / "collection-result.json",
                 {"seed_only": False, "external_source_packet_loaded": True},
             )
+            self.assertFalse(_build_package_allow_stub(rd))
+
+    def test_seed_only_allows_stub_zip(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp) / "run"
+            rd.mkdir(parents=True, exist_ok=True)
+            jw(rd / "run-profile.json", {"schema_version": "v19.0", "profile": "dossier"})
+            jw(rd / "collection-result.json", {"seed_only": True})
             self.assertTrue(_build_package_allow_stub(rd))
 
 

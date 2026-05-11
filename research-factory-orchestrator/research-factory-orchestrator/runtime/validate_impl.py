@@ -15,7 +15,17 @@ from runtime.schema_defaults import (
 )
 from runtime.util import PKG_REQUIRED, jl, jr, jw, now, read_json_or_none, skill_root
 
-V19_PROFILES = frozenset({"mvr", "full-rigor", "live-bridge", "source-packet", "propaganda-io", "book-verification"})
+V19_PROFILES = frozenset(
+    {
+        "dossier",
+        "mvr",
+        "full-rigor",
+        "live-bridge",
+        "source-packet",
+        "propaganda-io",
+        "book-verification",
+    }
+)
 
 
 def _resolved_v19_profile_for_run_dir(rd: Path) -> str:

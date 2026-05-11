@@ -22,6 +22,7 @@ def decide_publish_allowed(
     any_failed: bool,
     external: bool,
     stub_only: bool,
+    collection_seed_only: bool = False,
 ) -> Tuple[bool, str]:
     """Returns (publish_allowed, reason_code).
 
@@ -42,6 +43,8 @@ def decide_publish_allowed(
     )
     if policy.get("block_external_publish_on_smoke_like", True) and mode in smoke_like:
         return False, "blocked_smoke_like_mode"
+    if policy.get("block_user_publish_when_collection_seed_only", True) and collection_seed_only:
+        return False, "collection_seed_only_block"
     if policy.get("block_on_manual_fallback", True) and manual_fallback:
         return False, "manual_fallback_blocked"
     if policy.get("require_all_required_acks", True) and not provider_pass:

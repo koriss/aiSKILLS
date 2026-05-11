@@ -14,6 +14,7 @@
   "require_all_required_acks": true,
   "require_no_failed_acks": true,
   "require_external_delivery_for_user_publish": true,
+  "block_user_publish_when_collection_seed_only": true,
   "notes": [
     "effective run_mode SHOULD be run-mode-classification.json.run_mode (Outbox computes this).",
     "external=true means real_external_delivery proven on all required acks (non-stub provider path)."

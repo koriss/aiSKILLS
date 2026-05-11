@@ -64,7 +64,7 @@ cd <SKILL_ROOT> && \
     --task "<user request>"
 ```
 
-Defaults: `--profile live-bridge`. Use **`--profile mvr`** only for deliberate lighter rigor.
+Defaults: **`--profile dossier`** (relay fanout + source packet contract). Legacy names (`mvr`, `live-bridge`, `full-rigor`) remap via `runtime.profiles.resolve`.
 
 The bridge exits non-zero if the relay base URL is missing. It ends with stdout line **`__RFO_SKILL_AGENT_HANDOFF__=<json>`** plus `instructions_for_invoking_agent` — the **caller** performs any user-visible send outside this repo. `outbox_delivery_worker.py` only runs provider adapters shipped here (`providers/cli`, `providers/webhook`); missing adapters yield failed acks, not silent “sent”.
 

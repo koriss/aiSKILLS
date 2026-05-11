@@ -1,102 +1,18 @@
 {
   "contract_id": "run-profiles",
-  "version": "v19.2.0",
-  "title": "RFO v19.2.0 run profiles",
-  "summary": "Source of truth for run profiles consumed by runtime, coverage gate, validators, and operator interface. Each profile names: source policy, delivery policy, and the active validator set. Profiles are explicit so JSON config and runner code stay aligned.",
+  "version": "v19.3.0",
+  "title": "RFO single dossier funnel (production)",
+  "summary": "One production profile: deep relay-backed dossier. No lite / MVR baseline in contract; validators may still expose legacy overlays under validation-profiles/ for fixture isolation only.",
   "profiles": {
-    "mvr": {
-      "label": "Minimum Viable Research",
-      "description": "Honest baseline. No external collection required. Stub-only delivery is allowed and explicitly disclosed.",
-      "source_policy": {
-        "external_collection_required": false,
-        "minimum_independent_sources": 0,
-        "source_packet_allowed": true,
-        "source_packet_required": false,
-        "web_search_required": false,
-        "stub_only_allowed": true
-      },
-      "delivery_policy": {
-        "stub_delivered_allowed": true,
-        "external_delivery_required": false,
-        "fail_on_validation_failed": true
-      },
-      "active_validators": [
-        "validate_artifact_schema",
-        "validate_work_unit_completion",
-        "validate_seed_only_truth",
-        "validate_error_log_quality",
-        "validate_source_provenance_distinction",
-        "validate_outbox_finalization",
-        "validate_root_vs_zip_artifact_truth",
-        "validate_collection_coverage_decoupled",
-        "validate_citation_grounding"
-      ]
-    },
-    "source-packet": {
-      "label": "Operator-Supplied Source Packet",
-      "description": "Operator pre-curates sources via RFO_SOURCE_PACKET=<path>. Web search is not required and must not be reported as executed.",
-      "source_policy": {
-        "external_collection_required": true,
-        "minimum_independent_sources": 0,
-        "source_packet_allowed": true,
-        "source_packet_required": true,
-        "web_search_required": false,
-        "stub_only_allowed": false
-      },
-      "delivery_policy": {
-        "stub_delivered_allowed": false,
-        "external_delivery_required": true,
-        "fail_on_validation_failed": true
-      },
-      "active_validators": [
-        "validate_artifact_schema",
-        "validate_work_unit_completion",
-        "validate_seed_only_truth",
-        "validate_error_log_quality",
-        "validate_source_provenance_distinction",
-        "validate_outbox_finalization",
-        "validate_root_vs_zip_artifact_truth",
-        "validate_collection_coverage_decoupled",
-        "validate_citation_grounding"
-      ]
-    },
-    "live-bridge": {
-      "label": "Prefetch relay + packaged sources (production bridge path)",
-      "description": "Host prefetches URLs via configurable JSON relay, supplies RFO_SOURCE_PACKET. Collector HEAD-probe optional; relay performed outside collector. Intended default for scripts/run_rfo_with_web_search.py.",
+    "dossier": {
+      "label": "Decision dossier (production)",
+      "description": "Prefetch JSON relay with RFO_SOURCE_PACKET, strict independent-source floor, stub delivery forbidden. Only supported production funnel.",
       "source_policy": {
         "external_collection_required": true,
         "minimum_independent_sources": 8,
         "source_packet_allowed": true,
         "source_packet_required": true,
         "web_search_required": false,
-        "stub_only_allowed": false
-      },
-      "delivery_policy": {
-        "stub_delivered_allowed": true,
-        "external_delivery_required": false,
-        "fail_on_validation_failed": true
-      },
-      "active_validators": [
-        "validate_artifact_schema",
-        "validate_work_unit_completion",
-        "validate_seed_only_truth",
-        "validate_error_log_quality",
-        "validate_source_provenance_distinction",
-        "validate_outbox_finalization",
-        "validate_root_vs_zip_artifact_truth",
-        "validate_collection_coverage_decoupled",
-        "validate_citation_grounding"
-      ]
-    },
-    "full-rigor": {
-      "label": "Full Rigor (Strict)",
-      "description": "Live web search required. Coverage threshold = collection-coverage-contract.minimum_independent_sources_default (20). Stub-only is forbidden. Citation grounding gate must pass.",
-      "source_policy": {
-        "external_collection_required": true,
-        "minimum_independent_sources": 20,
-        "source_packet_allowed": true,
-        "source_packet_required": false,
-        "web_search_required": true,
         "stub_only_allowed": false
       },
       "delivery_policy": {
@@ -117,5 +33,5 @@
       ]
     }
   },
-  "default_profile": "mvr"
+  "default_profile": "dossier"
 }

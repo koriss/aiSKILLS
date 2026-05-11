@@ -371,17 +371,8 @@ def _collect_profile_names(rd: Path) -> set[str]:
 
 
 def _build_package_allow_stub(rd: Path) -> bool:
-    """Zip packaging may skip strict PKG_REQUIRED paths for seed/artifact-only/live-bridge prefetch."""
-    if _is_seed_only_or_artifact_only(rd):
-        return True
-    profiles = _collect_profile_names(rd)
-    if "live-bridge" in profiles:
-        cr = jr(rd / "collection-result.json", {})
-        if isinstance(cr, dict) and (
-            cr.get("external_source_packet_loaded") or cr.get("external_web_search_executed")
-        ):
-            return True
-    return False
+    """Zip packaging may skip strict PKG_REQUIRED paths only for seed_only / artifact_only runs."""
+    return _is_seed_only_or_artifact_only(rd)
 
 
 def build_package(rd, *, allow_stub: bool = False, quiet: bool = False):

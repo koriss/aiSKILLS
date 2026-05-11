@@ -35,7 +35,7 @@ def main():
     s.add_argument(
         "--profile",
         default="",
-        help="Sets RFO_RUN_PROFILE for this run (mvr | full-rigor | source-packet). Empty: env/default.",
+        help='Sets RFO_RUN_PROFILE for this run (canonical: dossier; legacy names remap in runtime.profiles). Empty: env/default_profile.',
     )
     s.add_argument(
         "--seed-urls",

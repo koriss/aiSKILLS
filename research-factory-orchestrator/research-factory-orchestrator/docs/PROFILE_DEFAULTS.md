@@ -4,9 +4,9 @@ Single reference for default profile strings across the repo.
 
 | Location | Default / fallback | Notes |
 |----------|-------------------|--------|
-| `contracts/run-profiles.json` | `default_profile`: **`mvr`** | Contract “baseline” when resolving names. |
-| `runtime/profiles.py` | If profile JSON is unreadable, internal default **`mvr`**. | Defensive fallback only. |
-| `scripts/run_rfo_with_web_search.py` | CLI `--profile` default **`live-bridge`** | Stricter bridge / relay path; operators override with `mvr` for lighter rigor. |
-| `scripts/run_core_validators.py` | `--profile` default **`mvr`** | Fixture / validator harness baseline; not the relay bridge default. |
+| `contracts/run-profiles.json` | `default_profile`: **`dossier`** | Production contract; legacy env/CLI names remap in `runtime.profiles.resolve`. |
+| `runtime/profiles.py` | Internal default **`dossier`** (and legacy alias → dossier). | |
+| `scripts/run_rfo_with_web_search.py` | CLI `--profile` default **`dossier`** | Multi-vector relay fanout (`contracts/query-fanout-config.json`). |
+| `scripts/run_core_validators.py` | `--profile` default **`dossier`** | Validator harness default; fixtures may still embed `mvr`/`full-rigor` in `run-profile.json`. |
 
-**Rule of thumb:** bridge runners default to **`live-bridge`**; offline validator runs default to **`mvr`**.
+**Rule of thumb:** operators and bridge runs default to **`dossier`**. `publish-policy.json` blocks user-visible publish when `collection-result.json` has `seed_only: true`.

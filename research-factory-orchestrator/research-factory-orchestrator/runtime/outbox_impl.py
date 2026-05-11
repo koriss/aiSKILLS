@@ -35,6 +35,8 @@ def _publish_tuple(rd: Path, external: bool, stub_only: bool, provider_pass: boo
     effective_mode = classified if classified else str(run.get("mode", "") or "")
     audit = jr(rd / "self-audit" / "runtime-self-audit.json", {})
     manual = bool(audit.get("manual_fallback_presented_as_rfo"))
+    cr_coll = jr(rd / "collection-result.json", {})
+    seed_only_coll = isinstance(cr_coll, dict) and cr_coll.get("seed_only") is True
     spec = importlib.util.spec_from_file_location("rfo_publish_policy", root / "runtime" / "publish_policy.py")
     if spec and spec.loader:
         mod = importlib.util.module_from_spec(spec)
@@ -47,6 +49,7 @@ def _publish_tuple(rd: Path, external: bool, stub_only: bool, provider_pass: boo
             any_failed=any_failed,
             external=external,
             stub_only=stub_only,
+            collection_seed_only=seed_only_coll,
         )
     return (False, "publish_policy_module_missing")
 

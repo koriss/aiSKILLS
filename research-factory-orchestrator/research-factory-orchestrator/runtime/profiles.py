@@ -11,8 +11,20 @@ import os
 from pathlib import Path
 from typing import Any
 
-_DEFAULT = "mvr"
-_KNOWN = ("mvr", "source-packet", "live-bridge", "full-rigor")
+_DEFAULT = "dossier"
+# Legacy Operator names map to production dossier (single funnel contract).
+_LEGACY_PROFILE_ALIASES = frozenset({"mvr", "live-bridge", "source-packet", "full-rigor"})
+
+_KNOWN = ("dossier",)
+
+
+def _canonical_profile(name: str) -> str:
+    n = str(name or "").strip().lower()
+    if not n:
+        return ""
+    if n in _LEGACY_PROFILE_ALIASES:
+        return "dossier"
+    return n
 
 
 def _path() -> Path:
@@ -30,9 +42,9 @@ def resolve(profile: str | None) -> tuple[str, dict[str, Any]]:
     """Resolve active profile. Unknown ``RFO_RUN_PROFILE`` env → ``ValueError`` (fail-closed)."""
     contract = load_profiles()
     profiles = contract.get("profiles") or {}
-    default = str(contract.get("default_profile") or _DEFAULT).strip().lower()
-    env_raw = os.environ.get("RFO_RUN_PROFILE", "").strip().lower()
-    cli_raw = (profile or "").strip().lower()
+    default = _canonical_profile(str(contract.get("default_profile") or _DEFAULT))
+    env_raw = _canonical_profile(os.environ.get("RFO_RUN_PROFILE", ""))
+    cli_raw = _canonical_profile((profile or "").strip())
     chosen = cli_raw or env_raw or default
     if chosen not in profiles:
         if env_raw and env_raw not in profiles:

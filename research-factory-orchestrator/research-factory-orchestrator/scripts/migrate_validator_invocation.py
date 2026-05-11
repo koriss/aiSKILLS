@@ -31,7 +31,11 @@ def main() -> int:
     for v in reg.get("validators") or []:
         vid = v.get("id") or ""
         rows.append({"id": vid, "path": v.get("path"), "migration": LEGACY_TO_V19.get(vid, {"v19": None, "via": "validator_dag", "note": "run via runtime/validate_impl.py DAG"})})
-    out = {"schema_version": "v19.0", "validators": rows, "runner_profiles": ["mvr", "full-rigor", "propaganda-io", "book-verification"]}
+    out = {
+        "schema_version": "v19.0",
+        "validators": rows,
+        "runner_profiles": ["dossier", "mvr", "full-rigor", "propaganda-io", "book-verification"],
+    }
     text = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         Path(args.output).write_text(text, encoding="utf-8")

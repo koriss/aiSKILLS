@@ -2,7 +2,8 @@
 
 **Version:** `19.3.1`  
 **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md`  
-**Runtime truth:** `docs/adr/ADR-015-runtime-truth-restoration.md`
+**Runtime truth:** `docs/adr/ADR-015-runtime-truth-restoration.md`  
+**Single funnel:** `docs/adr/ADR-019-single-dossier-funnel.md`
 
 ## Role
 
@@ -14,10 +15,9 @@ Host-invoked research orchestration skill: artifact-first compute, profile-drive
 |--------|---------------------|
 | Runs filesystem | `--runs-root` / `RFO_RUNS_ROOT` (see `docs/adr/ADR-RFO_PORTABLE.md`) |
 | JSON relay (bridge) | `RFO_WEB_SEARCH_JSON_API_BASE` or `--web-search-json-api-base` |
-| Run profile | `RFO_RUN_PROFILE` or bridge `--profile` (`live-bridge` vs `mvr`; see `docs/PROFILE_DEFAULTS.md`) |
+| Run profile | `RFO_RUN_PROFILE` or bridge `--profile` (**`dossier`** default; legacy names remap in `runtime.profiles`; see `docs/PROFILE_DEFAULTS.md`) |
 | User-agent strings | Optional `RFO_WEB_SEARCH_USER_AGENT` (defaults are neutral; no vendor URL) |
 | Wikipedia URL heuristic (bridge) | `RFO_WIKIPEDIA_HEURISTIC=1` to treat `wikipedia.org` as raw-document |
-| mvr + empty relay | `RFO_ALLOW_MVR_EMPTY_RELAY=1` |
 | Risky bridge flags | `RFO_EXPERIMENT_BRIDGE=1` for `--allow-gate-stub` / `--best-effort-continue` (or `RFO_SMOKE=1`) |
 | Container path hints | `RFO_HOST_WORKSPACE_ROOT` + `RFO_CONTAINER_WORKSPACE_PREFIX` (both optional; prefix required if mapping) |
 
@@ -47,14 +47,12 @@ Every factual claim must trace through claim -> evidence -> source with explicit
 
 ## Profiles
 
-- `mvr`
-- `full-rigor`
-- `propaganda-io`
-- `book-verification`
+- **`dossier`** — single production funnel (relay packet required, stubs disallowed for real research).
+- Fixture / historical harness names still load under `validation-profiles/`: `mvr`, `full-rigor`, `live-bridge`, `propaganda-io`, `book-verification`.
 
 Run:
 
-`python -S scripts/run_core_validators.py --run-dir <run_dir> --profile mvr`
+`python -S scripts/run_core_validators.py --run-dir <run_dir> --profile dossier`
 
 ## Queue diagnostics (runs-root)
 

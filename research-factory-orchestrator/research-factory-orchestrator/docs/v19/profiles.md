@@ -1,17 +1,23 @@
 # D1 — Profiles manifest (v19)
 
+## Operator default (ADR-019)
+
+**Production conveyor:** run profile **`dossier`** (`contracts/run-profiles.json` `default_profile`). Legacy CLI/env names **`mvr`**, **`live-bridge`**, **`full-rigor`**, **`source-packet`** canonicalize to **`dossier`** in `runtime.profiles.resolve`.
+
+The tables below describe **historical design / fixture intents** (`mvr` as shallow baseline, etc.) retained for validator drafts and **`tests/fixtures/v19`** — not separate user-facing lite pipelines anymore.
+
 ## Goals
 
-- **MVR** (Minimal Viable Rigor) is the default for most tasks.
-- **Full Rigor** is explicit or auto-escalated **with a recorded reason** (never keyword-only magic).
-- **Specialized** profiles extend Full with optional heavy modules; they do not replace the six core validators.
+- **Dossier** is the default for relay-backed tasks: external collection + source packet semantics.
+- **Full Rigor** and specialized profiles extend rigor thresholds; escalation must be recorded (never keyword-only magic).
 
 ## Named profiles (documentation)
 
 | Profile | Doc intent | JSON draft |
 |---------|------------|------------|
-| quick-research | Alias / marketing name for default shallow web research | use `mvr` |
-| deep-due-diligence | Full rigor + L2 contradiction where needed | use `full-rigor` |
+| **dossier** | Production single funnel — relay packet + HTML dossier | `validation-profiles/dossier.json` / `contracts/run-profiles.json` |
+| quick-research | Legacy marketing alias for shallow web research | **use `dossier`** now; historically `mvr` |
+| deep-due-diligence | Full rigor + L2 contradiction where needed | use `full-rigor` JSON + dossier contracts |
 | book-verification | Book pipeline; canonical protocol single source | `book-verification.json` |
 | propaganda-io-analysis | Neutral pattern mapping; KB reference-only | `propaganda-io.json` |
 | market-research | Industry data emphasis; numerical thresholds | extend `full-rigor` in implementation |
@@ -33,7 +39,8 @@ Every profile lists the same six IDs (V1–V6); **options** and **thresholds** d
 
 | Profile | `contradiction_level` | Notes |
 |---------|----------------------|--------|
-| mvr | L0 default; L1 if conflicts detected | L0 must include scan metadata (see D5) |
+| dossier | As configured in dossier validation JSON | Relay depth + artifact gates |
+| mvr (fixtures) | L0 default; L1 if conflicts detected | Harness / historical; L0 must include scan metadata (see D5) |
 | full-rigor | L1 minimum; L2 for flagged tasks | Full matrix schema when L2 |
 | propaganda-io | L1 minimum; L2 encouraged | Same six validators; heavy narrative modules optional |
 | book-verification | L1 typical | Citation + excerpt gates stricter |
@@ -50,7 +57,7 @@ Every profile lists the same six IDs (V1–V6); **options** and **thresholds** d
 
 Signals should come from **artifact state** (contradiction scan, claim types present, user-declared stakes), not substring matching on free text alone.
 
-## Heavy modules (optional, not in MVR default path)
+## Heavy modules (optional, not in default dossier minimal path)
 
 - Full contradiction matrix (L2)
 - Laundering graph

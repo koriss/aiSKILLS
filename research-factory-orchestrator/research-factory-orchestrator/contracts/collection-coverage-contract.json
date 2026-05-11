@@ -1,16 +1,14 @@
 {
   "contract_id": "collection-coverage-contract",
-  "version": "v19.2.0",
-  "title": "Collection coverage thresholds (RFO v19.2.0)",
-  "summary": "Single source of truth for the minimum_independent_sources threshold consumed by both the strict-profile coverage validator and the runtime collector cap (RFO_MAX_EXTERNAL_SOURCES default).",
-  "minimum_independent_sources_default": 20,
+  "version": "v19.3.0",
+  "title": "Collection coverage thresholds (RFO dossier funnel)",
+  "summary": "Single production profile dossier references minimum_independent_sources from run-profiles.json; caps align with dossier thresholds.",
+  "minimum_independent_sources_default": 8,
   "minimum_independent_sources_by_profile": {
-    "mvr": 0,
-    "source-packet": 0,
-    "full-rigor": 20,
+    "dossier": 8,
     "strict": 20
   },
-  "rationale": "Phase 4C P0-1 closure: previous default RFO_MAX_EXTERNAL_SOURCES=8 made strict coverage unreachable even with a working backend. Cap now defaults to the contract minimum so strict coverage is operator-attainable out of the box.",
+  "rationale": "Operators run one profile (dossier). Legacy fixture profiles (mvr, full-rigor) are not listed here; dossier relay path uses packet + collector merge.",
   "linked_validators": [
     "validate_collection_coverage",
     "validate_seed_only_truth"

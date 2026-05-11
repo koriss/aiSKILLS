@@ -8,8 +8,7 @@ fetch of relay URLs). Operators and host LLMs must **not** use env vars to
 pick “which search backend runs”; only **infrastructure endpoints** and
 **relay row budget** are configurable.
 
-JSON relay HTTP base is **never** inferred; export ``RFO_WEB_SEARCH_JSON_API_BASE``
-(or ``RFO_SEARXNG_URL`` rename for migration).
+JSON relay HTTP base is **never** inferred; export ``RFO_WEB_SEARCH_JSON_API_BASE``.
 
 Infrastructure (URLs / capacity):
 
@@ -35,15 +34,20 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(SKILL_ROOT))
 
 from runtime.citation_grounding import evaluate as citation_grounding_evaluate  # noqa: E402
+from runtime.pkg_required_scaffold import ensure_pkg_required_paths  # noqa: E402
 from runtime.report_html import write_canonical_full_report_html  # noqa: E402
 from runtime.profiles import resolve as resolve_profile  # noqa: E402
-from runtime.status import VERSION  # noqa: E402
-from runtime.pkg_required_scaffold import ensure_pkg_required_paths  # noqa: E402
 from runtime.schema_defaults import minimal_valid  # noqa: E402
+from runtime.source_record_v19 import normalize_source_record_v19  # noqa: E402
+from runtime.status import VERSION  # noqa: E402
 from runtime.util import jr, jw, now, sid, slug, tw  # noqa: E402
 
 from rfo_query_fanout import fanout_relay_search  # noqa: E402
-from rfo_relay_search_helpers import build_relay_params, rank_relay_rows_for_task, relay_fetch_cap  # noqa: E402
+from rfo_relay_search_helpers import (  # noqa: E402
+    rank_relay_rows_for_task,
+    relay_fetch_cap,
+    relay_json_search,
+)
 
 # ── config ─────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
@@ -58,7 +62,7 @@ _DEFAULT_PUBLIC_MEDIAWIKI_API = "https://en.wikipedia.org/w/api.php"
 
 
 def relay_api_base(cli_base: str) -> str | None:
-    for raw in ((cli_base or "").strip(), os.environ.get("RFO_WEB_SEARCH_JSON_API_BASE", "").strip(), os.environ.get("RFO_SEARXNG_URL", "").strip()):
+    for raw in ((cli_base or "").strip(), os.environ.get("RFO_WEB_SEARCH_JSON_API_BASE", "").strip()):
         if raw:
             return raw.rstrip("/")
     return None
@@ -167,24 +171,22 @@ def search_json_relay(api_base: str, query: str, num: int | None = None) -> list
     num = max(1, int(num))
     base = api_base.rstrip("/")
     fetch_n = relay_fetch_cap(num)
-    params = build_relay_params(query, fetch_n)
-    url = f"{base}/search?{urllib.parse.urlencode(params)}"
-    req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
-        with urllib.request.urlopen(req, timeout=_HTTP_TIMEOUT + 5) as resp:
-            data = json.loads(resp.read())
-            results = []
-            for r in data.get("results", [])[:num]:
-                u = r.get("url", "")
-                if not u.startswith("http"):
-                    continue
-                results.append({
-                    "url": u,
-                    "title": r.get("title", "")[:300],
-                    "snippet": (r.get("content") or "")[:500],
-                    "engine": r.get("engine", ""),
-                })
-            return rank_relay_rows_for_task(query, results, limit=num)
+        rows, meta = relay_json_search(
+            base,
+            query,
+            fetch_n,
+            user_agent=_USER_AGENT,
+            timeout=_HTTP_TIMEOUT + 5,
+        )
+        for r in rows:
+            if isinstance(r, dict) and "engine" not in r:
+                r["engine"] = ""
+        if meta.get("post_fallback") and not meta.get("post_error"):
+            print(f"[search] relay POST JSON fallback used ({base})")
+        if not rows and (meta.get("get_error") or meta.get("post_error") or meta.get("post_parse_failed")):
+            print(f"[search] relay empty: {json.dumps({k: meta[k] for k in ('get_error', 'post_error', 'post_parse_failed', 'body_preview') if k in meta}, ensure_ascii=False)}")
+        return rank_relay_rows_for_task(query, rows, limit=num)
     except Exception as e:
         print(f"[search] relay error: {e}")
         return []
@@ -356,20 +358,16 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
         url = f"{wiki_origin}/wiki/{slug}"
         sources.append({
             "source_id": f"SRC-WIKI-{i+1:03d}",
-            "title": title,
+            "title": title[:200],
             "canonical_origin_id": url,
             "url": url,
-            "source_role": "authoritative",
+            "source_role": "peer_reviewed",
             "access_level": "primary_access",
-            "interest_alignment": "neutral",
+            "interest_alignment": "unknown",
             "verification_mode": "raw_document",
             "independence": "high",
             "citation_eligible": True,
-            "corroboration_type": "authoritative",
-            "fetch_method": "wikipedia_api",
-            "content": text,
-            "content_error": err,
-            "is_wikipedia": True,
+            "corroboration_type": "independent",
         })
         print(f"  [wiki] {title}: {len(text)} chars")
 
@@ -399,23 +397,23 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
             continue
         sources.append({
             "source_id": f"SRC-WEB-{i+1:03d}",
-            "title": title[:200] or url[:100],
+            "title": (title[:200] if title else url[:100]),
             "canonical_origin_id": url,
             "url": url,
-            "source_role": "background",
+            "source_role": "unknown",
             "access_level": "primary_access",
-            "interest_alignment": "neutral",
+            "interest_alignment": "unknown",
             "verification_mode": "testimony",
             "independence": "medium",
             "citation_eligible": True,
-            "corroboration_type": "corroborated",
-            "fetch_method": "relay_primary_fetch",
-            "content": content[:_MAX_FETCH_CHARS],
-            "content_error": err,
-            "is_wikipedia": False,
+            "corroboration_type": "independent",
         })
 
-    return sources
+    out: list[dict] = []
+    for i, s in enumerate(sources):
+        n, _ = normalize_source_record_v19(s, i)
+        out.append(n)
+    return out
 
 
 # ── claim extraction ───────────────────────────────────────────────────────────

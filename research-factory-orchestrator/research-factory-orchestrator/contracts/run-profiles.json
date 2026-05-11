@@ -1,8 +1,8 @@
 {
   "contract_id": "run-profiles",
-  "version": "v19.4.0",
+  "version": "v19.4.3",
   "title": "RFO single dossier funnel (production)",
-  "summary": "One production profile: deep relay-backed dossier. No lite / MVR baseline in contract; validators may still expose legacy overlays under validation-profiles/ for fixture isolation only.",
+  "summary": "One production profile: deep relay-backed dossier. Fixture V1–V6 harness uses validation-profiles/search-primary.json.",
   "profiles": {
     "search-primary": {
       "label": "CLI JSON relay standalone (search-primary driver)",

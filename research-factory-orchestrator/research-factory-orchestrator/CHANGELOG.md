@@ -2,19 +2,21 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
-- **Standalone `run_rfo_full_research.py`:** multi-vector **`fanout_relay_search`**, materializes **`graph/wave-plan.json`**, runs **`citation_grounding.evaluate`** before outbox, syncs **`feature-truth-matrix.json`**, replaces the optimistic **`final-answer-gate`** stub with schema-safe pass/fail from wave + citation checks; IO payload uses a **topic bucket** + non-empty **`narrative_map`** heuristics.
+### 19.4.3 — 2026-05-10 (internal plan **19.4.1.1** / accumulated fixes)
+
+- **RAF / citation grounding:** `runtime/citation_grounding.py` — structural multiplier `min(1, support_count)` plus `inferred_assessment` weight **0.68** so relay/dossier rows with one grounded support can meet RAF ≥ 0.65 (previous `min(sc/2,1)*0.52` capped inferred claims below the threshold forever).
+- **Sources schema:** `runtime/source_record_v19.py` — shared normalization for bridge + `run_rfo_full_research.py`; standalone driver emits **only** `schemas/core/sources.schema.json` fields (no `content` / legacy enums on disk).
+- **Harness:** `scripts/run_core_validators.py` chain adds **`validate_citation_grounding`**; `validation-profiles/dossier.json` and **`search-primary.json`** list it. `validate_citation_grounding.py` — if the result file is missing and the profile does **not** require grounding, **pass** with warning (optional artifact).
+- **Discovery frontmatter:** `validate_skill_discovery_frontmatter.py` accepts **19.4.x** (and keeps **19.3.x**).
+- **Operator plan:** `docs/plans/PLAN-19.4.1.1-accumulated-fixes.md`; host embedding truncation prompt: `prompts/host-agent-embedding-truncate.md`.
+
 - **`runtime_job_worker` packaging:** calls **`ensure_pkg_required_paths`** immediately before **`build_package`** so required ZIP paths exist per `contracts/package-required-artifacts.json`.
-- **Single production profile `dossier`:** `contracts/run-profiles.json` default; legacy `mvr` / `live-bridge` / `full-rigor` / `source-packet` names canonicalize to dossier in `runtime.profiles.resolve`.
+- **Run profiles:** `contracts/run-profiles.json` default **`dossier`**; contract keys are **`dossier`** and **`search-primary`**. `runtime.profiles.resolve` is fail-closed (unknown `RFO_RUN_PROFILE` / CLI `--profile` → `ValueError`).
 - Relay bridge **multi-vector fanout** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) with stats on `collection-result.json` (`relay_query_fanout`, `query_vectors`).
 - Removed **empty-relay mvr scaffold** path and `RFO_ALLOW_MVR_EMPTY_RELAY` user surface; empty relay exits non-zero.
 - Publish policy: **`block_user_publish_when_collection_seed_only`** wired through `decide_publish_allowed` / outbox.
 - ADR: `docs/adr/ADR-019-single-dossier-funnel.md`.
-- **Breaking (JSON consumers):** honesty harness JSON field `validator_id` is now
-  **`verify_skill_run_claims`**. Canonical script: `scripts/verify_skill_run_claims.py`;
-  `scripts/verify_openclaw_run.py` remains a thin compatibility wrapper.
-- Wrapper lifecycle policy: retire `scripts/verify_openclaw_run.py` no earlier
-  than the next minor release after all internal call sites and docs stop
-  depending on the legacy filename.
+- **Breaking (JSON consumers):** honesty harness JSON field `validator_id` is now **`verify_skill_run_claims`**. Canonical script: `scripts/verify_skill_run_claims.py` (removed `scripts/verify_openclaw_run.py`).
 - Downstream agent index: `agent-handoff/bundle-manifest.json` under each run-dir
   (contract `rfo-agent-handoff-bundle-v1`) lists prompt role files and key artifact paths.
 - **Roadmap (not shipped in this minor):** richer **LLM-orchestrated** wave planning / sub-query generation should reuse existing discipline prompts (`prompts/source-quality-worker-prompt.md`, `templates/evaluation-rubric.md`, `templates/archetypes/report-archetypes.json`) and write each LLM step to disk with schema validation; predecessor-era chat/HTML templates remain reference-only under `templates/` and `reports/`.

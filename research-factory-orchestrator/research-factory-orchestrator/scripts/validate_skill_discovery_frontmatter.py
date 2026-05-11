@@ -25,7 +25,7 @@ else:
         errors.append("wrong_or_missing_metadata_version")
     else:
         vers = ver_m.group(1)
-        if not re.match(r"^19\.3(?:\.\d+)*$", vers):
+        if not re.match(r"^19\.(?:3|4)(?:\.\d+)*$", vers):
             errors.append(f"bad_skill_version_syntax_{vers}")
     if rel_m and ver_m and rel_m.group(1) != ver_m.group(1):
         errors.append("metadata_release_mismatch_metadata_version")

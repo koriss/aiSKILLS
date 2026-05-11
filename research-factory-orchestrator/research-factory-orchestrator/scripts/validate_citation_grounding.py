@@ -20,6 +20,19 @@ from pathlib import Path
 VALIDATOR_ID = "validate_citation_grounding"
 
 
+def _profile_requires_grounding(rd: Path) -> bool:
+    """Mirror ``runtime.citation_grounding.evaluate`` policy from disk-backed profile."""
+    p = rd / "validation-profile-used.json"
+    if not p.is_file():
+        return False
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return False
+    sp = data.get("source_policy") if isinstance(data.get("source_policy"), dict) else {}
+    return bool(sp.get("web_search_required") or sp.get("external_collection_required"))
+
+
 def _emit(passed, blocking, issues, warnings, summary):
     print(json.dumps({"validator_id": VALIDATOR_ID, "schema_version": "v19.0", "passed": passed, "blocking": blocking, "issues": issues, "warnings": warnings, "summary": summary}, ensure_ascii=False))
 
@@ -39,11 +52,28 @@ def main() -> int:
     args = ap.parse_args()
     rd = Path(args.run_dir)
     issues, warnings = [], []
+    requires_profile = _profile_requires_grounding(rd)
     cg = _load(rd / "citation-grounding-result.json")
     if not isinstance(cg, dict) or "_parse_error" in cg:
-        issues.append({"code": "CITATION-GROUNDING-RESULT-MISSING", "severity": "error", "detail": "citation-grounding-result.json missing or invalid"})
-        _emit(False, True, issues, warnings, "no citation-grounding result")
-        return 1
+        if requires_profile:
+            issues.append(
+                {
+                    "code": "CITATION-GROUNDING-RESULT-MISSING",
+                    "severity": "error",
+                    "detail": "citation-grounding-result.json missing or invalid",
+                }
+            )
+            _emit(False, True, issues, warnings, "no citation-grounding result")
+            return 1
+        warnings.append(
+            {
+                "code": "CITATION-GROUNDING-OPTIONAL-MISSING",
+                "severity": "warning",
+                "detail": "citation-grounding-result.json absent; profile does not require web/collection grounding",
+            }
+        )
+        _emit(True, False, issues, warnings, "citation grounding skipped (optional for this profile)")
+        return 0
     requires = bool(cg.get("requires_grounding", False))
     raf = float(cg.get("relevance_aware_factuality_score", 0.0) or 0.0)
     dfl = float(cg.get("deflection_rate_when_no_grounding", 0.0) or 0.0)

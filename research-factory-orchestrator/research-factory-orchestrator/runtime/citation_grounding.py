@@ -1,4 +1,4 @@
-"""Citation grounding result writer (RFO v19.2.0).
+"""Citation grounding result writer (RFO v19.4.3).
 
 Produces ``<rd>/citation-grounding-result.json`` consumed by
 runtime.outbox.finalize and validate_citation_grounding. Closes
@@ -6,7 +6,9 @@ CITATION-GROUNDING-MAGIC-LITERAL by replacing render.py's hardcoded RAF/DFL
 defaults with a real, per-claim computation:
 
   * RAF (Relevance-Aware Factuality) = mean over claims of
-    ``min(support_count/2, 1.0) * status_weight``
+    ``min(1.0, float(support_count)) * status_weight``
+    (one grounded support slot counts at full structural weight for relay/dossier
+    rows; ``support_count`` is ``len(support_set)`` or legacy list lengths.)
     where status_weight ∈ {confirmed:1.0, probable:0.8, inferred:0.5,
     unknown:0.3, disputed:0.2, contradicted:0.0, false:0.0,
     unsupported:0.0, stale:0.4}
@@ -35,7 +37,9 @@ _STATUS_WEIGHT = {
     "unsupported": 0.0,
     # RFO claims-registry / relay standalone statuses
     "reported_claim": 0.88,
-    "inferred_assessment": 0.52,
+    # Relay/dossier: one evidence-backed inferred row must be able to meet RAF≥0.65
+    # when ``requires_grounding`` (see min(1, sc) structural multiplier above).
+    "inferred_assessment": 0.68,
     "insufficient_evidence": 0.25,
 }
 
@@ -67,7 +71,9 @@ def evaluate(rd: Path, *, run_id: str, job_id: str, profile: str | None) -> dict
             sc = _claim_support_count(c)
             status = c.get("status") or "unknown"
             sw = _STATUS_WEIGHT.get(status, 0.3)
-            total += min(sc / 2.0, 1.0) * sw
+            # Structural multiplier: first support card counts fully (bridge standard).
+            mult = min(1.0, float(sc)) if sc > 0 else 0.0
+            total += mult * sw
             if sc <= 0:
                 dfl_no_support += 1
             else:

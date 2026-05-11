@@ -7,8 +7,7 @@ URL для исследования собирается здесь через *
 (типичный эндпоинт вида `/search?q=…&format=json`; хост задаёт оператор).
 
 Обязательно задать базу через ``--web-search-json-api-base`` или
-``RFO_WEB_SEARCH_JSON_API_BASE`` (совместимо: ``RFO_SEARXNG_URL`` только как имя
-переменной для миграции; значение всегда задаёт оператор).
+``RFO_WEB_SEARCH_JSON_API_BASE`` (значение всегда задаёт оператор).
 
 Опционально: ``RFO_WIKIPEDIA_HEURISTIC=1`` — считать URL с ``wikipedia.org`` сырым
 документом (иначе эвристика выключена).
@@ -18,8 +17,8 @@ URL для исследования собирается здесь через *
   2. RFO_SOURCE_PACKET + очередь RFO как обычно
   3. патчи claims-registry / re-render / stdout ``__RFO_SKILL_AGENT_HANDOFF__=``
 
-По умолчанию профиль ``dossier`` (единый конвейер «досье»). Legacy-имена
-(`mvr`, ``live-bridge``, ``full-rigor``) канонизуются в ``dossier`` внутри ``runtime.profiles``.
+По умолчанию профиль ``dossier`` (единый конвейер «досье»); допустимые имена —
+только ключи из ``contracts/run-profiles.json``.
 """
 from __future__ import annotations
 
@@ -47,14 +46,16 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(SKILL_ROOT))
 
 from runtime.schema_defaults import minimal_valid  # noqa: E402
+from runtime.source_record_v19 import normalize_source_record_v19  # noqa: E402
 from runtime.status import VERSION  # noqa: E402
 from runtime.util import now  # noqa: E402
 
 from rfo_query_fanout import fanout_relay_search  # noqa: E402
 from rfo_relay_search_helpers import (  # noqa: E402
-    build_relay_params,
+    body_text_signals_seed_garbage,
     rank_relay_rows_for_task,
     relay_fetch_cap,
+    relay_json_search,
 )
 
 # ── config ────────────────────────────────────────────────────────────────────
@@ -181,7 +182,6 @@ def resolve_relay_bases(cli_base: str) -> list[str]:
     for raw in (
         (cli_base or "").strip(),
         os.environ.get("RFO_WEB_SEARCH_JSON_API_BASE", "").strip(),
-        os.environ.get("RFO_SEARXNG_URL", "").strip(),
         os.environ.get("RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE", "").strip(),
     ):
         if raw and raw not in seen:
@@ -190,28 +190,28 @@ def resolve_relay_bases(cli_base: str) -> list[str]:
 
 
 def query_json_search_relay(api_base: str, query: str, num: int) -> list[dict]:
-    """JSON relay search; ``api_base`` is origin only; path ``/search`` appended (SearxNG-style)."""
+    """JSON relay search; ``api_base`` is origin only; path ``/search`` (SearxNG-style)."""
     base = api_base.rstrip("/")
     fetch_n = relay_fetch_cap(num)
-    params = build_relay_params(query, fetch_n)
-    url = f"{base}/search?{urllib.parse.urlencode(params)}"
-    req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
     try:
-        with urllib.request.urlopen(req, timeout=_HTTP_TIMEOUT + 3) as resp:
-            data = json.loads(resp.read())
-            results = []
-            for r in data.get("results", [])[:num]:
-                raw_url = r.get("url", "")
-                if not raw_url.startswith("http"):
-                    continue
-                results.append(
-                    {
-                        "url": raw_url,
-                        "title": r.get("title", "")[:300],
-                        "snippet": (r.get("content") or "")[:500],
-                    }
-                )
-            return rank_relay_rows_for_task(query, results, limit=num)
+        rows, meta = relay_json_search(
+            base,
+            query,
+            fetch_n,
+            user_agent=_USER_AGENT,
+            timeout=_HTTP_TIMEOUT + 3,
+        )
+        if meta.get("post_fallback") and not meta.get("post_error"):
+            print(
+                f"[search] relay used POST JSON fallback ({api_base}) transport={meta.get('transport')!r}",
+                file=sys.stderr,
+            )
+        if not rows and (meta.get("get_error") or meta.get("post_error") or meta.get("post_parse_failed")):
+            print(
+                f"[search] relay empty ({api_base}): {json.dumps({k: meta[k] for k in meta if k in ('get_error', 'post_error', 'post_parse_failed', 'body_preview')}, ensure_ascii=False)}",
+                file=sys.stderr,
+            )
+        return rank_relay_rows_for_task(query, rows, limit=num)
     except Exception as e:
         print(f"[search] relay error ({api_base}): {e}", file=sys.stderr)
         return []
@@ -259,6 +259,8 @@ def extract_claims_from_content(sources: list[dict], task: str) -> list[dict]:
     evidence_cards = []
     for i, src in enumerate(sources):
         content = str(src.get("content_snippet") or src.get("content") or "").strip()
+        if content and body_text_signals_seed_garbage(content):
+            continue
         if not content:
             title = str(src.get("title") or "").strip()
             url = str(src.get("url") or src.get("canonical_origin_id") or "").strip()
@@ -343,92 +345,7 @@ def build_source_packet(search_results: list[dict]) -> dict:
             "content_snippet": content or snippet,
             "content_fetch_error": err,
         })
-    return {"sources": sources}
-
-
-# Keys allowed on each source record under ``schemas/core/sources.schema.json``.
-_SOURCE_SCHEMA_KEYS: frozenset[str] = frozenset(
-    {
-        "source_id",
-        "title",
-        "canonical_origin_id",
-        "url",
-        "document_path",
-        "archival_locator",
-        "publisher",
-        "accessed_at",
-        "source_role",
-        "access_level",
-        "interest_alignment",
-        "verification_mode",
-        "independence",
-        "authority_scope",
-        "corroboration_type",
-        "citation_eligible",
-    }
-)
-
-
-def _normalize_source_for_v19_schema(s: dict[str, Any], idx: int) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Strip non-schema fields into diagnostics; map legacy bridge enums."""
-    row_in = dict(s) if isinstance(s, dict) else {}
-    diag: dict[str, Any] = {"source_idx": idx}
-    snippet_raw = row_in.pop("content_snippet", None)
-    if snippet_raw is not None:
-        slen = len(str(snippet_raw))
-        if slen:
-            diag["content_snippet_len"] = slen
-    ferr = row_in.pop("content_fetch_error", None)
-    if ferr:
-        diag["content_fetch_error"] = str(ferr)[:200]
-    stripped: list[str] = []
-    row: dict[str, Any] = {}
-    for k, v in row_in.items():
-        if k in _SOURCE_SCHEMA_KEYS:
-            row[k] = v
-        else:
-            stripped.append(str(k))
-    if stripped:
-        diag["stripped_unknown_keys"] = stripped
-    if row.get("source_role") == "background":
-        row["source_role"] = "unknown"
-        diag["mapped_source_role"] = "background→unknown"
-    if row.get("interest_alignment") == "neutral":
-        row["interest_alignment"] = "unknown"
-        diag["mapped_interest_alignment"] = "neutral→unknown"
-    ct = row.get("corroboration_type")
-    if ct in {"authoritative", "corroborated"}:
-        row["corroboration_type"] = "independent"
-        diag["mapped_corroboration_type"] = f"{ct}→independent"
-    elif ct is not None and ct not in {"independent", "circular", "unknown"}:
-        row["corroboration_type"] = "unknown"
-        diag["mapped_corroboration_type_fallback"] = str(ct)
-    sid_now = str(row.get("source_id") or "").strip() or f"SRC-RELAY-{idx + 1:03d}"
-    row["source_id"] = sid_now
-    diag["source_id"] = sid_now
-    co = str(row.get("canonical_origin_id") or "").strip()
-    url = str(row.get("url") or "").strip()
-    if not co and url:
-        co = url
-    if not co:
-        co = sid_now
-    row["canonical_origin_id"] = co
-    title = str(row.get("title") or "").strip() or co[:200]
-    row["title"] = title[:200]
-    if row.get("citation_eligible") and not (
-        row.get("url") or row.get("document_path") or row.get("archival_locator")
-    ):
-        first = co.split()[0] if co else ""
-        if first.startswith("http"):
-            row["url"] = first[:2048]
-    row.setdefault("access_level", "primary_access")
-    row.setdefault("verification_mode", "testimony")
-    row.setdefault("independence", "medium")
-    row.setdefault("citation_eligible", True)
-    row.setdefault("corroboration_type", "unknown")
-    row.setdefault("source_role", "unknown")
-    row.setdefault("interest_alignment", "unknown")
-    return row, diag
+    return {"schema_version": "v19.4", "relay_prefetch_bridge": True, "sources": sources}
 
 
 def _persist_bridge_source_packet(rd: Path, packet_path_str: str) -> None:
@@ -531,7 +448,7 @@ def patch_sources_json(rd: Path, sources: list[dict]) -> None:
     diagnostics: list[dict[str, Any]] = []
     root_sources: list[dict[str, Any]] = []
     for i, s in enumerate(sources):
-        norm, diag = _normalize_source_for_v19_schema(s, i)
+        norm, diag = normalize_source_record_v19(s, i)
         if norm.get("source_id"):
             root_sources.append(norm)
             diagnostics.append(diag)
@@ -636,7 +553,7 @@ def main() -> int:
     if not relays:
         print(
             "[fatal] JSON relay API base unset. Pass --web-search-json-api-base or export "
-            "RFO_WEB_SEARCH_JSON_API_BASE (legacy alias: RFO_SEARXNG_URL). No baked-in hostname.",
+            "RFO_WEB_SEARCH_JSON_API_BASE. No baked-in hostname.",
             file=sys.stderr,
         )
         return 2

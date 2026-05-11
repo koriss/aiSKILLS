@@ -1,6 +1,6 @@
 # Research Factory Orchestrator — v19 core operator sheet
 
-**Version:** `19.4.0`  
+**Version:** `19.4.3`  
 **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md`  
 **Runtime truth:** `docs/adr/ADR-015-runtime-truth-restoration.md`  
 **Single funnel:** `docs/adr/ADR-019-single-dossier-funnel.md`
@@ -44,11 +44,12 @@ Every factual claim must trace through claim -> evidence -> source with explicit
 - V4 `validate_claim_status`: claim status, caps, contradiction guards.
 - V5 `validate_final_answer`: risk blocks and final gate semantics.
 - V6 `validate_delivery_truth`: artifact/delivery consistency and no fake delivery.
+- **Citation grounding** (`validate_citation_grounding`): when the profile’s `active_validators` includes it (see `validation-profiles/*.json`), `run_core_validators.py` runs it after V6; missing `citation-grounding-result.json` is a **warning-only pass** on profiles that do not require web/collection grounding. For host agents that embed long claim/snippet text separately from RFO’s RAF math, apply `prompts/host-agent-embedding-truncate.md` (truncate before embed).
 
 ## Profiles
 
 - **`dossier`** — single production funnel (relay packet required, stubs disallowed for real research).
-- Fixture / historical harness names still load under `validation-profiles/`: `mvr`, `full-rigor`, `live-bridge`, `propaganda-io`, `book-verification`.
+- Fixture harness JSON under `validation-profiles/`: **`search-primary`**, **`propaganda-io`**, **`book-verification`** (inherit options from **`dossier`** via `parent_profile` where present).
 
 Run:
 

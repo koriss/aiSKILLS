@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.4+ artifact-only compute with profile-driven V1–V6 validation; user-visible delivery is always host-owned (stdout handoff or your gateway).
+description: Research Factory Orchestrator — v19.4.3+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
-  version: "19.4.0"
+  version: "19.4.3"
   package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -11,7 +11,7 @@ metadata:
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.4.0"
+  release: "19.4.3"
 ---
 
 ## HOW TO OPERATE THIS SKILL
@@ -55,7 +55,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### v19 core validation
 
-- Prefer validation profile embedded in the run dir (`validation-profile-used.json`, `run-profile.json`); optionally override with `RFO_V19_PROFILE` (including **`dossier`**, `mvr`, `full-rigor`, `live-bridge`, `propaganda-io`, `book-verification`).
+- Prefer validation profile embedded in the run dir (`validation-profile-used.json`, `run-profile.json`); optionally override with `RFO_V19_PROFILE` — only **`dossier`**, **`search-primary`**, **`propaganda-io`**, **`book-verification`** (see `runtime/validate_impl.py`); unknown values are ignored for the v19 runner path.
 - Run `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>`.
 - Core validator stack is V1..V6 with fail-closed delivery truth.
 

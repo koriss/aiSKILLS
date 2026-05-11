@@ -34,6 +34,7 @@ CHAIN = [
     ("validate_claim_status", ROOT / "validators" / "core" / "validate_claim_status.py"),
     ("validate_final_answer", ROOT / "validators" / "core" / "validate_final_answer.py"),
     ("validate_delivery_truth", ROOT / "validators" / "core" / "validate_delivery_truth.py"),
+    ("validate_citation_grounding", ROOT / "scripts" / "validate_citation_grounding.py"),
 ]
 
 
@@ -150,16 +151,23 @@ def main() -> int:
     if not isinstance(active, list):
         active = [x[0] for x in CHAIN]
     used_profile = _build_used_profile(args.profile, prof)
-    (rd / "validation-profile-used.json").write_text(
-        json.dumps(used_profile, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
     run: dict[str, object] = {}
     if (rd / "run.json").is_file():
         try:
             run = json.loads((rd / "run.json").read_text(encoding="utf-8"))
         except Exception:
             run = {}
+    voo = run.get("validation_options_override")
+    if isinstance(voo, dict):
+        base_opts = dict(used_profile.get("options") or {}) if isinstance(used_profile.get("options"), dict) else {}
+        for k, v in voo.items():
+            if isinstance(k, str) and k and not k.startswith("_"):
+                base_opts[k] = v
+        used_profile["options"] = base_opts
+    (rd / "validation-profile-used.json").write_text(
+        json.dumps(used_profile, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     run_id = str(run.get("run_id") or rd.name)
     evp = rd / "run-events.jsonl"
     try:

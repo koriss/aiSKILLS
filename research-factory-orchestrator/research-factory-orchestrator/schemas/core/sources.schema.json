@@ -92,7 +92,12 @@
           "type": "string",
           "enum": ["independent", "circular", "unknown"]
         },
-        "citation_eligible": { "type": "boolean" }
+        "citation_eligible": { "type": "boolean" },
+        "content_snippet": {
+          "type": "string",
+          "maxLength": 12000,
+          "description": "Optional capped body text for validators / QA (not required for schema minimality)."
+        }
       },
       "allOf": [
         {

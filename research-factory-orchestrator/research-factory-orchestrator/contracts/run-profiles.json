@@ -22,6 +22,11 @@
       },
       "active_validators": [
         "validate_artifact_schema",
+        "validate_traceability",
+        "validate_source_quality",
+        "validate_claim_status",
+        "validate_final_answer",
+        "validate_delivery_truth",
         "validate_citation_grounding"
       ]
     },
@@ -43,13 +48,11 @@
       },
       "active_validators": [
         "validate_artifact_schema",
-        "validate_work_unit_completion",
-        "validate_seed_only_truth",
-        "validate_error_log_quality",
-        "validate_source_provenance_distinction",
-        "validate_outbox_finalization",
-        "validate_root_vs_zip_artifact_truth",
-        "validate_collection_coverage_decoupled",
+        "validate_traceability",
+        "validate_source_quality",
+        "validate_claim_status",
+        "validate_final_answer",
+        "validate_delivery_truth",
         "validate_citation_grounding"
       ]
     }

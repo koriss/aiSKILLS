@@ -368,6 +368,7 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
             "independence": "high",
             "citation_eligible": True,
             "corroboration_type": "independent",
+            "content_snippet": text[:12000],
         })
         print(f"  [wiki] {title}: {len(text)} chars")
 
@@ -407,6 +408,7 @@ def build_sources(task: str, search_results: list[dict]) -> list[dict]:
             "independence": "medium",
             "citation_eligible": True,
             "corroboration_type": "independent",
+            "content_snippet": content[:12000],
         })
 
     out: list[dict] = []
@@ -426,7 +428,7 @@ def make_claims(sources: list[dict]) -> tuple[list[dict], list[dict]]:
 
     claims, evidence = [], []
     for s in sources:
-        c = s.get("content", "")
+        c = (s.get("content_snippet") or s.get("content") or "").strip()
         if not c:
             continue
         cid = f"C-{s['source_id']}"

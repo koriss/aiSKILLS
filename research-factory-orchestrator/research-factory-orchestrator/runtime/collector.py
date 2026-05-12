@@ -34,6 +34,7 @@ import urllib.request
 from pathlib import Path
 
 from runtime.error_log import append_error
+from runtime.source_record_v19 import normalize_source_record_v19
 from runtime.status import VERSION
 from runtime.util import jw, now, sid
 
@@ -219,7 +220,6 @@ def collect(rd: Path, *, run_id: str, job_id: str, profile: str | None = None) -
         "seed_urls_provided": seeds,
         "relay_prefetch_bridge": packet_relay_prefetch,
     }
-    jw(rd / "collection-result.json", summary)
     return _update_sources_with_collection(rd, summary, collected_sources)
 
 
@@ -259,7 +259,21 @@ def _update_sources_with_collection(rd: Path, summary: dict, collected_sources: 
         )
         summary["synthetic_count"] = 1
     base["schema_version"] = "v19.0"
+    normalized: list[dict] = []
+    for i, row in enumerate(base.get("sources") or []):
+        if isinstance(row, dict):
+            n, _diag = normalize_source_record_v19(row, i)
+            normalized.append(n)
+        else:
+            normalized.append(row)  # pragma: no cover — defensive
+    base["sources"] = normalized
+    run_label = str(summary.get("run_id") or rd.name)
+    (rd / "sources").mkdir(parents=True, exist_ok=True)
     jw(root, base)
+    jw(
+        rd / "sources" / "sources.json",
+        {"run_id": run_label, "sources": list(normalized)},
+    )
     summary["root_sources_count_after"] = len(base["sources"])
     jw(rd / "collection-result.json", summary)
     return summary

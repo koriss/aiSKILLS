@@ -61,6 +61,14 @@ def normalize_source_record_v19(s: dict[str, Any], idx: int) -> tuple[dict[str, 
     if row.get("interest_alignment") == "neutral":
         row["interest_alignment"] = "unknown"
         diag["mapped_interest_alignment"] = "neutral→unknown"
+    _vm_ok = frozenset({"raw_document", "dataset", "visual", "testimony", "aggregation", "opinion"})
+    vm = row.get("verification_mode")
+    if vm == "snippet_only":
+        row["verification_mode"] = "testimony"
+        diag["mapped_verification_mode"] = "snippet_only→testimony"
+    elif vm is not None and vm not in _vm_ok:
+        row["verification_mode"] = "testimony"
+        diag["mapped_verification_mode_fallback"] = str(vm)
     ct = row.get("corroboration_type")
     if ct in {"authoritative", "corroborated"}:
         row["corroboration_type"] = "independent"

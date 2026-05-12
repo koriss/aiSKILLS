@@ -763,9 +763,11 @@ def main() -> int:
 
         if real_claims:
             patch_claims_registry(latest_run, real_claims, real_ev)
-            patch_sources_json(latest_run, all_sources)
         else:
             print("[4/5] WARNING: no real claims extracted — will use scaffold", file=sys.stderr)
+        # Always align sources.json with v19 schema (relay enums / collector extras),
+        # independent of claim extraction (empty claims must not skip normalization).
+        patch_sources_json(latest_run, all_sources)
 
         if packet_path:
             _persist_bridge_source_packet(latest_run, packet_path)

@@ -1,6 +1,7 @@
 """Runtime worker: execute deterministic render pipeline and package."""
 from __future__ import annotations
 
+import errno
 import json
 import os
 import subprocess
@@ -294,7 +295,15 @@ def cmd_run(a):
     ]
     jw(rd / "artifact-manifest.json", {"run_id": run_id, "artifacts": [{"path": r, "exists": (rd / r).exists()} for r in required], "generated_at": now()})
     jw(rd / "provenance-manifest.json", {"run_id": run_id, "entrypoint": "scripts/run_research_factory.py", "proof_model": "artifact-backed"})
-    jw(rd / "validation-transcript.json", {"run_id": run_id, "status": "pending_dag"})
+    v_rc = _invoke_core_validators(rd, profile_name)
+    if v_rc != 0:
+        _record_runtime_error(
+            rd,
+            "core_validators_exit",
+            {"returncode": v_rc, "profile": profile_name},
+        )
+        _emit_event(rd, "runtime.validation_failed", {"run_id": run_id, "job_id": job_id, "returncode": v_rc, "timestamp": now()})
+        raise SystemExit(v_rc)
     _emit_event(rd, "runtime.completed", {"run_id": run_id, "job_id": job_id, "timestamp": now()})
     from runtime.handoff import emit_handoff
     from runtime.trace import append_trace_line
@@ -422,6 +431,84 @@ def _unlink_stale_lease(lease: Path, ttl_s: float) -> None:
         lease.unlink(missing_ok=True)
 
 
+def _try_acquire_worker_lease(lease: Path, payload: dict, stale_ttl_s: float) -> bool:
+    """Create ``queue/worker.lease`` atomically (O_CREAT|O_EXCL). Stale lease removed first."""
+    lease.parent.mkdir(parents=True, exist_ok=True)
+    if lease.exists():
+        _unlink_stale_lease(lease, stale_ttl_s)
+    flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    try:
+        fd = os.open(str(lease), flags, 0o644)
+    except FileExistsError:
+        return False
+    except OSError as exc:
+        if getattr(exc, "errno", None) == errno.EEXIST:
+            return False
+        raise
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(json.dumps(payload, ensure_ascii=False) + "\n")
+    except Exception:
+        try:
+            lease.unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
+    return True
+
+
+def _invoke_core_validators(rd: Path, profile_name: str) -> int:
+    """Run ``scripts/run_core_validators.py``; writes real ``validation-transcript.json`` (not pending_dag)."""
+    root = skill_root()
+    runner = root / "scripts" / "run_core_validators.py"
+    prof_file = root / "validation-profiles" / f"{profile_name}.json"
+    rid = str(jr(rd / "run.json", {}).get("run_id") or rd.name)
+    if not runner.is_file():
+        jw(
+            rd / "validation-transcript.json",
+            {"run_id": rid, "status": "runner_missing", "path": str(runner)},
+        )
+        return 2
+    if not prof_file.is_file():
+        jw(
+            rd / "validation-transcript.json",
+            {
+                "run_id": rid,
+                "status": "profile_missing",
+                "path": str(prof_file),
+                "profile": profile_name,
+            },
+        )
+        return 2
+    if os.environ.get("RFO_SKIP_CORE_VALIDATORS", "").strip().lower() in ("1", "true", "yes"):
+        jw(
+            rd / "validation-transcript.json",
+            {"run_id": rid, "status": "skipped_env", "reason": "RFO_SKIP_CORE_VALIDATORS"},
+        )
+        return 0
+    bp = subprocess.run(
+        [sys.executable, "-S", str(runner), "--run-dir", str(rd), "--profile", profile_name],
+        cwd=str(root),
+        capture_output=True,
+        text=True,
+        timeout=600,
+        env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+    )
+    if bp.returncode != 0:
+        _record_runtime_error(
+            rd,
+            "core_validators_failed",
+            {
+                "rc": bp.returncode,
+                "stderr_tail": (bp.stderr or "")[-1200:],
+                "stdout_tail": (bp.stdout or "")[-400:],
+            },
+        )
+    return int(bp.returncode)
+
+
 def _return_job_pending(runq_path: Path, pending_path: Path) -> None:
     if not runq_path.is_file():
         return
@@ -538,11 +625,6 @@ def cmd_worker(a):
     done.parent.mkdir(parents=True, exist_ok=True)
     lease = root / "queue/worker.lease"
     tok = sid("LEASE", selected_pending.name, now())
-    if lease.exists():
-        _unlink_stale_lease(lease, stale_ttl_s)
-    if lease.exists():
-        print(json.dumps({"claimed": False, "reason": "lease_present"}, ensure_ascii=False))
-        return
     lease_payload = {
         "token": tok,
         "pid": os.getpid(),
@@ -550,7 +632,9 @@ def cmd_worker(a):
         "run_dir": str(rd),
         "created_at": now(),
     }
-    lease.write_text(json.dumps(lease_payload, ensure_ascii=False) + "\n", encoding="utf-8")
+    if not _try_acquire_worker_lease(lease, lease_payload, stale_ttl_s):
+        print(json.dumps({"claimed": False, "reason": "lease_present"}, ensure_ascii=False))
+        return
     try:
         job_pending_path.replace(runq)
     except OSError:

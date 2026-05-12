@@ -26,6 +26,7 @@ SOURCE_SCHEMA_KEYS: frozenset[str] = frozenset(
         "authority_scope",
         "corroboration_type",
         "citation_eligible",
+        "content_snippet",
     }
 )
 
@@ -92,4 +93,11 @@ def normalize_source_record_v19(s: dict[str, Any], idx: int) -> tuple[dict[str, 
     row.setdefault("corroboration_type", "unknown")
     row.setdefault("source_role", "unknown")
     row.setdefault("interest_alignment", "unknown")
+    if snippet_raw is not None and str(snippet_raw).strip():
+        cap = 12000
+        t = str(snippet_raw)
+        if len(t) > cap:
+            t = t[:cap]
+            diag["content_snippet_truncated"] = True
+        row["content_snippet"] = t
     return row, diag

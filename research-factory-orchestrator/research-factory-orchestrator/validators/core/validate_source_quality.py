@@ -75,8 +75,12 @@ def main() -> int:
         if not sid:
             continue
         sid_to_origin[sid] = str(s.get("canonical_origin_id") or s.get("url_normalized") or sid)
-    policy_path = srcp.parent / "source-policy.json"
-    if policy_path.is_file():
+    policy_path: Path | None = None
+    for cand in (srcp.parent / "source-policy.json", rd / "sources" / "source-policy.json"):
+        if cand.is_file():
+            policy_path = cand
+            break
+    if policy_path is not None:
         pol = _load(policy_path) or {}
         per = pol.get("per_host") if isinstance(pol.get("per_host"), dict) else {}
         mode = _read_profile_rule(rd, "source_policy_unknown")

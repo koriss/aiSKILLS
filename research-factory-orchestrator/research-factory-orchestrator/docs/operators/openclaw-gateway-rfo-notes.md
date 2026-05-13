@@ -26,7 +26,7 @@ Defaults are defined in `scripts/run_rfo_with_web_search.py` (not overridden her
 **What a real native run leaves on disk (sanity checks):**
 
 - A **new** directory under **`<workspace>/rfo-runs/runs/<label>/`** around the message time (not only yesterday’s runs).
-- Under that run: **`result-manifest.json`**, relay/collection artifacts as usual.
+- Under that run: **`result-manifest.json`**, relay/collection artifacts as usual, and **`agent-operating-log.md`** (empty template at bootstrap — host agents append steps here; avoids inventing a parallel `log.md` path).
 - Host audit trail: **`workspace/audit/gateway-skill-delivery-audit.jsonl`** (or your deploy’s equivalent) with entries tied to the Telegram update — not only generic agent tool logs.
 
 **Host checks (replace container / paths with yours):**
@@ -47,6 +47,11 @@ python3 -S scripts/validate_rfo_command_did_not_spawn_plain_subagent.py /path/to
 ```
 
 **Related:** `web_fetch` blocked with *“private/internal/special-use IP”* is **egress anti-SSRF** (SOCKS/DNS/CDN), separate from whether RFO ran; with native RFO you still rely on relay/fetch policy on the host.
+
+## B4 — Host agent step log (path discipline)
+
+- After a successful bridge allocate, each **`run_dir`** contains **`agent-operating-log.md`** (bootstrap template). Host-side coding agents should **append** UTC-step bullets there — **only** under the same path as **`result-manifest.json`** from the stdout handoff / gateway parse.
+- **Symptom “Edit …/log.md failed”:** usually a guessed directory (`fix-run-*`, task slug) that was **never** allocated. Fix: read **`marker.run_dir`** / handoff JSON, then edit **`{run_dir}/agent-operating-log.md`**.
 
 ## B1 — Subprocess budget vs bridge wait loop
 

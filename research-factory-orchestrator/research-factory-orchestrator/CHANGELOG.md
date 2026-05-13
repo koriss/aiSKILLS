@@ -2,6 +2,11 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.7 — 2026-05-10
+
+- **Host / IDE agents:** `runtime/research_bridge_bootstrap.py` now materializes **`agent-operating-log.md`** at the root of each allocated **`run_dir`** (same path as `result-manifest.json`) so append-only step logs do not rely on guessed `rfo-runs/runs/<slug>/` trees.
+- **SKILL.md / runtime-paths / gateway notes:** strict “resolve `run_dir` from handoff only” sequence; substance-first answers from **`report/full-report.html`**; **`propaganda-io`** profile only on explicit user ask; prohibition on parallel invented log paths.
+
 ### 19.4.6 — 2026-05-14
 
 - Patch release: semver +0.0.1 (`runtime/version.json`, SKILL metadata, `contracts/run-profiles.json`, compatibility matrix).

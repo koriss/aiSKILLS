@@ -1,6 +1,6 @@
 {
   "contract_id": "run-profiles",
-  "version": "v19.4.6",
+  "version": "v19.4.7",
   "title": "RFO single dossier funnel (production)",
   "summary": "One production profile: deep relay-backed dossier. Fixture V1–V6 harness uses validation-profiles/search-primary.json.",
   "profiles": {

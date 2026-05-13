@@ -8,7 +8,7 @@ Relay **“fanout”** is **sequential**: `scripts/rfo_query_fanout.py` walks de
 
 ## Research plan on disk (bridge)
 
-- **Lifecycle:** `scripts/run_rfo_with_web_search.py` allocates **`run_dir`** immediately (`runtime.render.allocate`), bootstraps `research/` + `graph/` (`runtime.research_bridge_bootstrap`), then relay — so partial traces survive early failures (`research/bridge-phase-log.jsonl`).
+- **Lifecycle:** `scripts/run_rfo_with_web_search.py` allocates **`run_dir`** immediately (`runtime.render.allocate`), bootstraps `research/` + `graph/` (`runtime.research_bridge_bootstrap`, including **`agent-operating-log.md`** for host-agent step traces), then relay — so partial traces survive early failures (`research/bridge-phase-log.jsonl`).
 - **`research/research-plan.json`:** versioned **`research-plan-v1`** (`contracts/research-plan-v1.schema.json`). **`RFO_RESEARCH_PLAN_MODE=off`** (default): plan mirrors template `build_query_vectors`; **`llm_v1`**: planner (`runtime/research_plan_planner.py`, `RFO_RESEARCH_PLANNER_*`) with schema repair + fallback; execution still **one sequential relay stream** (`fanout_relay_search` vs `fanout_relay_search_from_queries`).
 - **Adapter handoff:** bridge sets **`RFO_PREALLOCATED_RUN_DIR=<run_dir>`** so `interface_runtime_adapter adapter` reuses the same directory (see **`docs/adr/ADR-021-research-plan-disk-sequential-relay.md`**).
 - **`graph/wave-plan.json`:** materialized from the plan after relay for **`wave_graph_gate`** file presence in the bridge path.
@@ -105,6 +105,7 @@ Work is sequenced **inside this package** as: **(1)** operator docs + contracts 
 
 - Do **not** drop long **`*.html`** “reports” in the **workspace root**; host delivery only follows **`run_dir`** from the marker/manifest.
 - Prefer **`*.md`** drafts **inside** the active run-dir (or a clearly marked scratch subtree), not ad-hoc HTML next to unrelated projects.
+- **Step traces for coding agents:** append only to **`agent-operating-log.md`** inside the **handoff** `run_dir` (same directory as `result-manifest.json`). Do not create sibling folders under `rfo-runs/runs/` from the task slug alone — that path must match the bridge allocation or editor writes will fail.
 
 ## Host vs container paths (vector J)
 

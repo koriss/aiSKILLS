@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.4.6+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
+description: Research Factory Orchestrator — v19.4.7+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
-  version: "19.4.6"
+  version: "19.4.7"
   package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -12,7 +12,7 @@ metadata:
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.4.6"
+  release: "19.4.7"
 ---
 
 ## HOW TO OPERATE THIS SKILL
@@ -23,7 +23,18 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 - Read this file through **Artifacts / gates** before promising a finished investigation.
 - After any run: open **`report/full-report.html`** (or the profile’s primary artifact), then **`final-answer-gate.json`** and **`citation-grounding-result.json`** when the profile requires grounding; do not narrate a final verdict from relay snippets alone.
+- **User-facing answer shape:** lead with substantive prose from **`report/full-report.html`** / **`chat/02-facts.md`** (as appropriate to the question). Validator metrics (RAF, claim counts, `delivery_status`) are **supporting** detail — not a substitute for the report when the user asked for a normal topic summary.
 - Do not confuse **CLI `stub_delivered`** with **host gateway delivery** (confirmed attachments / ack path); read `delivery-manifest.json` + provider acks for the shell you actually used.
+
+### IDE agent operating sequence (strict)
+
+Use this order on **every** native bridge run so disk paths stay aligned with the real allocation (avoids “edit `log.md` failed” when a guessed directory never existed).
+
+1. **Resolve `run_dir` only from the same handoff** as `result-manifest.json` / `__RFO_SKILL_AGENT_HANDOFF__` / host audit — never invent `rfo-runs/runs/<custom-slug>/` from the task text alone.
+2. **Step log:** append bullets to **`agent-operating-log.md` in that exact `run_dir`** (the bridge bootstraps this file at allocate time). If your editor cannot create files, append via shell to that path — still under the handoff `run_dir`.
+3. **`python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>`** when you need disk-backed V1–V6 proof (profile from `validation-profile-used.json` / operator choice).
+4. **Read gates** (`final-answer-gate.json`, optional `citation-grounding-result.json`) **before** claiming pass/fail to the user.
+5. **Profiles:** use **`propaganda-io`** (or other non-default profiles) only when the **user** explicitly asks for contested-narrative / IO framing — a plain `/research_factory_orchestrator <topic>` dossier run does **not** require upgrading to that profile by default.
 
 ### Allowed execution paths
 
@@ -59,6 +70,7 @@ Relay JSON base and runs/workspace resolution are **orthogonal**: missing relay 
 - Do not treat smoke/seed-only artifacts as completed production research.
 - Do not publish local filesystem paths as proof of delivery.
 - Do not save long HTML dumps as loose **`*.html`** in the workspace root — canonical **`report/full-report.html`** lives only under the **`run_dir`**; use **`*.md`** drafts inside that run-dir when scribbling intermediate prose.
+- Do not invent a **parallel** `rfo-runs/runs/<slug>/` tree for “fix logs” unless that path is **identical** to the handoff `run_dir`; use **`agent-operating-log.md`** inside the allocated directory only.
 
 ### Runtime truth contract
 

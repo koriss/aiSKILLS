@@ -39,6 +39,20 @@ def bootstrap_early_run_dir(rd: Path, *, run_id: str, task: str, label: str = "b
             "timestamp": now(),
         },
     )
+    # Pre-create so host/IDE agents can append steps without inventing a sibling path
+    # (see SKILL.md "IDE agent operating sequence").
+    trace = rd / "agent-operating-log.md"
+    if not trace.exists():
+        trace.write_text(
+            "# Agent operating trace (RFO)\n\n"
+            f"- Canonical run_dir (append steps only here): {rd}\n"
+            f"- run_id: {run_id}\n"
+            f"- label: {label}\n\n"
+            "Append one bullet per step with UTC wall time, command, and exit code. "
+            "Do not treat relay stderr snippets or chat/*.md alone as completion proof.\n\n"
+            "## Log\n\n",
+            encoding="utf-8",
+        )
 
 
 def append_bridge_phase(rd: Path, event_name: str, fields: dict[str, Any] | None = None) -> None:

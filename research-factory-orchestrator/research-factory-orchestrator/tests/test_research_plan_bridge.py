@@ -39,6 +39,9 @@ class TestResearchPlanBridge(unittest.TestCase):
             self.assertTrue(lines)
             row = json.loads(lines[0])
             self.assertEqual(row.get("event_name"), "bridge.run_dir_bootstrapped")
+            trace = rd / "agent-operating-log.md"
+            self.assertTrue(trace.is_file())
+            self.assertIn("RUN-test", trace.read_text(encoding="utf-8"))
 
     def test_fanout_from_queries_sequential_merge_stats(self) -> None:
         rows, stats = fanout_relay_search_from_queries(

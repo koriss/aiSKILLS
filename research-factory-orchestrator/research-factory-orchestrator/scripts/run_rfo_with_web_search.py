@@ -567,7 +567,11 @@ def main() -> int:
     parser.add_argument(
         "--runs-root",
         default=None,
-        help="Runs root (deprecated; prefer OPENCLAW_WORKSPACE_DIR / --workspace-root → <ws>/rfo-runs).",
+        help=(
+            "Runs root directory. **Canonical production:** pass explicit absolute path on argv "
+            "(required). Deprecated: infer from OPENCLAW_WORKSPACE_DIR / --workspace-root / RFO_RUNS_ROOT "
+            "only when RFO_RUN_EXECUTION_MODE=test_fixture (in-repo CI / IDE validation)."
+        ),
     )
     parser.add_argument(
         "--workspace-root",

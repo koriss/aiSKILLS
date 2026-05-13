@@ -42,6 +42,7 @@ class TestBridgeCliIntegration(unittest.TestCase):
         base = f"http://{host}:{port}"
         env = {**os.environ}
         env.pop("RFO_ALLOW_MVR_EMPTY_RELAY", None)
+        env["RFO_RUN_EXECUTION_MODE"] = "test_fixture"
         env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
         try:
@@ -85,6 +86,7 @@ class TestBridgeCliIntegration(unittest.TestCase):
         env.pop("RFO_EXPERIMENT_BRIDGE", None)
         env.pop("RFO_SMOKE", None)
         env.pop("RFO_ALLOW_LEGACY_ENTRYPOINT", None)
+        env["RFO_RUN_EXECUTION_MODE"] = "test_fixture"
         env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -122,30 +124,28 @@ class TestBridgeCliIntegration(unittest.TestCase):
         script = skill / "scripts" / "run_rfo_with_web_search.py"
         env = {**os.environ}
         env["RFO_SMOKE"] = "1"
-        env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
-        with tempfile.TemporaryDirectory() as tmp:
-            runs = Path(tmp) / "rfo-runs"
-            runs.mkdir(parents=True, exist_ok=True)
-            proc = subprocess.run(
-                [
-                    sys.executable,
-                    "-S",
-                    str(script),
-                    "--preflight",
-                    "--runs-root",
-                    str(runs),
-                    "--task",
-                    "x",
-                    "--web-search-json-api-base",
-                    "http://127.0.0.1:9",
-                ],
-                cwd=str(skill),
-                env=env,
-                capture_output=True,
-                text=True,
-                timeout=30,
-            )
+        runs = Path.home() / "rfo-runs"
+        runs.mkdir(parents=True, exist_ok=True)
+        proc = subprocess.run(
+            [
+                sys.executable,
+                "-S",
+                str(script),
+                "--preflight",
+                "--runs-root",
+                str(runs),
+                "--task",
+                "x",
+                "--web-search-json-api-base",
+                "http://127.0.0.1:9",
+            ],
+            cwd=str(skill),
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
 
         self.assertEqual(proc.returncode, 2)
         doc = json.loads(proc.stdout or "{}")
@@ -157,6 +157,7 @@ class TestBridgeCliIntegration(unittest.TestCase):
         env = {**os.environ}
         for k in ("RFO_SMOKE", "RFO_EXPERIMENT_BRIDGE", "RFO_ALLOW_LEGACY_ENTRYPOINT"):
             env.pop(k, None)
+        env["RFO_RUN_EXECUTION_MODE"] = "test_fixture"
         env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -198,6 +199,7 @@ class TestBridgeCliIntegration(unittest.TestCase):
             "RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE",
         ):
             env.pop(k, None)
+        env["RFO_RUN_EXECUTION_MODE"] = "test_fixture"
         env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
         with tempfile.TemporaryDirectory() as tmp:

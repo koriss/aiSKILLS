@@ -131,6 +131,17 @@ try:
         errors.extend(of_errs)
 except Exception as e:
     errors.append(f"operator_facing_markdown:{e}")
+aed_path = root / "scripts" / "validate_agent_executable_doc_grep.py"
+try:
+    spec2 = importlib.util.spec_from_file_location("validate_agent_executable_doc_grep", aed_path)
+    if spec2 is None or spec2.loader is None:
+        errors.append("agent_executable_docgrep:import_spec_failed")
+    else:
+        mod2 = importlib.util.module_from_spec(spec2)
+        spec2.loader.exec_module(mod2)
+        errors.extend(mod2.validate(root))
+except Exception as e:
+    errors.append(f"agent_executable_docgrep:{e}")
 index = root/"failure-corpus/index.json"
 if not index.exists(): errors.append("missing_failure_corpus_index")
 else:

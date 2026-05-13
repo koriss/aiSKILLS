@@ -51,7 +51,7 @@ Machine-readable mirror: `contracts/supported-skill-actions-v1.json`. **Unsuppor
 
 | Action | When | Command (from skill root) |
 |--------|------|---------------------------|
-| **Research (relay + queue)** | Default operator path — dossier bridge | `python3 -S scripts/rfo_execute.py --workspace-root <workspace> --task "…"` + `--web-search-json-api-base …` **or** `RFO_WEB_SEARCH_JSON_API_BASE`; alternatively explicit `--runs-root …` (see `runtime/config_resolution.py`) |
+| **Research (relay + queue)** | Canonical production on host or guest | `python3 -S scripts/rfo_execute.py --runs-root <abs> --task "…" --web-search-json-api-base <URL>` (argv relay; deprecated env still logged in preflight `deprecated_inputs_used`). **In-repo / CI without production defaults:** `RFO_RUN_EXECUTION_MODE=test_fixture` plus tmp consent if `--runs-root` is under `/tmp` — see `docs/rfo-env-classification.md` |
 | **Preflight / effective-config** | Guest agent / Telegram triage before a full run; must be **foreground** (see `docs/runtime-paths.md` § Production incident checklist) | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json`; forbidden env (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`) → exit **2** |
 | **Skill packaging gate** | Release / CI layout | `python3 -S scripts/validate_skill.py` |
 | **Unit tests** | Regression checks | `python3 -m unittest discover -s tests` |
@@ -102,4 +102,5 @@ Relay JSON base and runs/workspace resolution are **orthogonal**: missing relay 
 - `docs/v19/validators-core.md`
 - `docs/adr/ADR-001-v19-pragmatic-rigor.md`
 - `docs/adr/ADR-015-runtime-truth-restoration.md`
-- `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`
+- `docs/plans/PLAN-rfo-agent-executable-single-behavior.md` — agent-executable single-behavior contract (production vs fixture vs blocked).
+- `docs/rfo-env-classification.md` — `RFO_*` required / deprecated / forbidden / fixture-relaxed.

@@ -19,6 +19,11 @@
     "deprecated_inputs_used",
     "forbidden_inputs_present",
     "canonical",
+    "run_execution_mode",
+    "production_research",
+    "fixture_mode",
+    "search_mode",
+    "blocked_dependency",
     "errors"
   ],
   "properties": {
@@ -36,6 +41,14 @@
     "deprecated_inputs_used": { "type": "array", "items": { "type": "string" } },
     "forbidden_inputs_present": { "type": "array", "items": { "type": "string" } },
     "canonical": { "type": "boolean" },
+    "run_execution_mode": {
+      "type": "string",
+      "enum": ["canonical_production", "test_fixture", "blocked_external_dependency"]
+    },
+    "production_research": { "type": "boolean" },
+    "fixture_mode": { "type": "boolean" },
+    "search_mode": { "type": "string", "enum": ["relay", "fixture_relay"] },
+    "blocked_dependency": { "type": ["string", "null"] },
     "errors": { "type": "array", "items": { "type": "string" } }
   }
 }

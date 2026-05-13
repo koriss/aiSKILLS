@@ -1,15 +1,17 @@
 """Single source of truth for bridge runs-root, workspace, relay, and preflight JSON.
 
-Contract **W** (workspace-first): ``runs_root`` defaults to
-``{workspace_root}/rfo-runs`` where ``workspace_root`` comes from
-``--workspace-root``, ``OPENCLAW_WORKSPACE_DIR``, or (deprecated infer)
-``$HOME/.openclaw/workspace`` when that directory exists.
+**Canonical production** (default): ``--runs-root`` on argv is **required**; implicit
+workspace / ``~/.openclaw/workspace/rfo-runs`` / ``~/rfo-runs`` resolution is **not**
+used (see ``docs/plans/PLAN-rfo-agent-executable-single-behavior.md``).
 
-Explicit ``--runs-root`` remains supported for CI/machines (recorded as
-deprecated in ``effective-config``). ``RFO_RUNS_ROOT`` is deprecated.
+**In-repo / CI fixture mode:** set ``RFO_RUN_EXECUTION_MODE=test_fixture`` (or
+``fixture`` / ``ci``) to allow legacy resolution paths and tmp consent env keys
+without treating them as canonical production.
+
+``RFO_RUNS_ROOT`` remains deprecated compatibility when resolving inside fixture mode.
 
 Canonical operator runs must not set forbidden env keys (see
-``forbidden_canonical_env_keys``).
+``forbidden_canonical_env_keys``) unless ``RFO_RUN_EXECUTION_MODE`` selects fixture mode.
 """
 from __future__ import annotations
 
@@ -24,14 +26,26 @@ _FORBIDDEN_EXACT = frozenset(
         "RFO_SMOKE",
         "RFO_EXPERIMENT_BRIDGE",
         "RFO_ALLOW_LEGACY_ENTRYPOINT",
+        "RFO_ALLOW_TMP_RUNS_ROOT",
+        "RFO_ALLOW_NON_CANONICAL_SKILL_LAYOUT",
     }
 )
+
+# In ``RFO_RUN_EXECUTION_MODE=test_fixture`` only: recorded in effective-config but
+# do not add ``forbidden_canonical_env`` to errors (path-guard / portable layout consent).
+_RELAXED_IN_FIXTURE = frozenset({"RFO_ALLOW_TMP_RUNS_ROOT", "RFO_ALLOW_NON_CANONICAL_SKILL_LAYOUT"})
 
 
 def _truthy(val: str | None) -> bool:
     if val is None:
         return False
     return val.strip().lower() in ("1", "true", "yes")
+
+
+def is_test_fixture_mode(env: Mapping[str, str] | os._Environ) -> bool:
+    """True when harness explicitly opts into non-production resolution (CI / IDE in-repo)."""
+    v = str(env.get("RFO_RUN_EXECUTION_MODE", "") or "").strip().lower()
+    return v in ("test_fixture", "fixture", "ci")
 
 
 def forbidden_canonical_env_keys(env: Mapping[str, str] | os._Environ) -> list[str]:
@@ -152,17 +166,49 @@ def build_effective_config_snapshot(
     profile: str,
     entrypoint: str,
 ) -> dict[str, Any]:
+    fixture_mode = is_test_fixture_mode(env)
     forbidden = forbidden_canonical_env_keys(env)
-    runs_path, runs_src, dep_runs, errs = resolve_runs_root_for_bridge(argv, env)
+    arg_runs = (extract_argv_value(argv, "--runs-root") or "").strip()
+
+    if fixture_mode:
+        runs_path, runs_src, dep_runs, errs = resolve_runs_root_for_bridge(argv, env)
+    elif not arg_runs:
+        runs_path, runs_src, dep_runs, errs = (
+            None,
+            "argv:--runs-root-missing",
+            [],
+            ["missing_required_argv_runs_root"],
+        )
+    else:
+        runs_path, runs_src, dep_runs, errs = resolve_runs_root_for_bridge(argv, env)
+
     relays, relay_src, dep_relay = relay_chain(cli_relay_base, env)
     ws, ws_src = resolve_workspace_root(argv, env)
     deprecated = sorted(set(dep_runs + dep_relay))
     relay_primary = relays[0] if relays else None
     errs = list(errs)
-    if forbidden:
+    strict_forbidden = [k for k in forbidden if not (fixture_mode and k in _RELAXED_IN_FIXTURE)]
+    if strict_forbidden:
         errs.append("forbidden_canonical_env")
     if not relays:
         errs.append("missing_relay")
+
+    blocked_dependency: str | None = None
+    if "missing_relay" in errs:
+        blocked_dependency = "web_search_json_api_base"
+    elif "missing_required_argv_runs_root" in errs:
+        blocked_dependency = "runs_root_argv"
+
+    if fixture_mode:
+        run_execution_mode = "test_fixture"
+    elif errs:
+        run_execution_mode = "blocked_external_dependency"
+    else:
+        run_execution_mode = "canonical_production"
+
+    production_research = run_execution_mode == "canonical_production"
+    search_mode = "fixture_relay" if fixture_mode else "relay"
+
     snap: dict[str, Any] = {
         "schema": "rfo-effective-config-v1",
         "entrypoint": entrypoint,
@@ -177,7 +223,12 @@ def build_effective_config_snapshot(
         "relay_chain": relays,
         "deprecated_inputs_used": deprecated,
         "forbidden_inputs_present": forbidden,
-        "canonical": True,
+        "canonical": not fixture_mode,
+        "run_execution_mode": run_execution_mode,
+        "production_research": production_research,
+        "fixture_mode": fixture_mode,
+        "search_mode": search_mode,
+        "blocked_dependency": blocked_dependency,
         "errors": list(errs),
     }
     return snap
@@ -187,16 +238,23 @@ def log_startup_summary(snap: Mapping[str, Any]) -> None:
     """Stable stderr tags for gateway / Telegram log parsers."""
     import sys
 
-    mode = "canonical"
+    rem = snap.get("run_execution_mode") or "unknown"
+    prod = snap.get("production_research")
     sys.stderr.write(
-        f"[rfo-config] mode={mode} entrypoint={snap.get('entrypoint')} "
+        f"[rfo-config] execution_mode={rem} production_research={prod} "
+        f"entrypoint={snap.get('entrypoint')} "
         f"runs_root={snap.get('runs_root')} runs_root_source={snap.get('runs_root_source')} "
-        f"relay={snap.get('relay')} relay_source={snap.get('relay_source')}\n"
+        f"relay={snap.get('relay')} relay_source={snap.get('relay_source')} "
+        f"search_mode={snap.get('search_mode')}\n"
     )
     for d in snap.get("deprecated_inputs_used") or []:
         sys.stderr.write(f"[rfo-config-warning] deprecated_input={d}\n")
-    for f in snap.get("forbidden_inputs_present") or []:
-        sys.stderr.write(f"[rfo-config-error] forbidden_env={f}\n")
+    if snap.get("fixture_mode"):
+        for f in snap.get("forbidden_inputs_present") or []:
+            sys.stderr.write(f"[rfo-config-fixture] non_production_env_detected={f}\n")
+    else:
+        for f in snap.get("forbidden_inputs_present") or []:
+            sys.stderr.write(f"[rfo-config-error] forbidden_env={f}\n")
     for e in snap.get("errors") or []:
         sys.stderr.write(f"[rfo-config-error] {e}\n")
     sys.stderr.flush()

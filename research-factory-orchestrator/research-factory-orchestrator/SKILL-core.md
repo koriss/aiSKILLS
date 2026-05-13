@@ -13,11 +13,13 @@ Host-invoked research orchestration skill: artifact-first compute, profile-drive
 
 Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** for supported work from a git checkout + shell. **Research** = **`scripts/rfo_execute.py`** only; `validate_skill`, `unittest`, preflight, and post-run validators are separate **registry** actions, not alternate research CLIs. **`contracts/supported-skill-actions-v1.json`** duplicates the registry for tooling. Anything outside that table is **unsupported** unless you are following explicit troubleshooting notes in `docs/runtime-paths.md` (e.g. adapter emergency).
 
+**Execution modes (disk truth):** (1) **canonical production** — explicit `--runs-root` + relay, `production_research=true` only when preflight is clean; (2) **`test_fixture`** — set `RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` for in-repo validation (`production_research=false`); (3) **blocked** — missing argv/env contract → non-zero preflight and `blocked_dependency` in effective-config. Never substitute blocked canonical runs with fixture output or plain `web_search`. See `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`.
+
 ### What the host must supply
 
 | Concern | Typical env / argv |
 |--------|---------------------|
-| Runs filesystem | Workspace-first: ``OPENCLAW_WORKSPACE_DIR`` / ``--workspace-root`` → ``<ws>/rfo-runs``; optional explicit ``--runs-root`` / ``RFO_RUNS_ROOT`` (deprecated; see ``runtime/config_resolution.py``) |
+| Runs filesystem | **Canonical:** explicit argv ``--runs-root <abs>`` (required). Deprecated / fixture-only: ``OPENCLAW_WORKSPACE_DIR`` / ``--workspace-root`` / ``RFO_RUNS_ROOT`` when ``RFO_RUN_EXECUTION_MODE=test_fixture`` — see ``runtime/config_resolution.py`` and ``docs/rfo-env-classification.md`` |
 | JSON relay (bridge) | `RFO_WEB_SEARCH_JSON_API_BASE` or `--web-search-json-api-base` (**required** for canonical bridge; missing relay → **non-zero**, not silent stub) |
 | Secondary relay (deprecated) | `RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE` — optional; if set, appears only in **`deprecated_inputs_used`** on the effective-config snapshot (not an operator-facing second “product path”) |
 | Run profile | `RFO_RUN_PROFILE` or bridge `--profile` (**`dossier`** default; legacy names remap in `runtime.profiles`; see `docs/PROFILE_DEFAULTS.md`) |

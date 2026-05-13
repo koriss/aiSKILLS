@@ -2,6 +2,13 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.9 — 2026-05-10
+
+- **Agent-executable contract:** `runtime/config_resolution.py` — canonical production requires argv `--runs-root`; `RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` for in-repo harness; `run_execution_mode`, `production_research`, `fixture_mode`, `search_mode`, `blocked_dependency` on `rfo-effective-config-v1`; relaxed fixture handling for `RFO_ALLOW_TMP_RUNS_ROOT` / `RFO_ALLOW_NON_CANONICAL_SKILL_LAYOUT` only in fixture mode; startup stderr summary includes execution mode.
+- **Contracts:** `contracts/rfo-effective-config-v1.schema.json` extended; `scripts/validate_agent_executable_doc_grep.py` + hook from `validate_skill.py`.
+- **Docs:** `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`, `docs/rfo-env-classification.md`; SKILL / SKILL-core / runtime-paths aligned; grave marker `run_rfo_full_research.py` message lists `--runs-root`.
+- **Tests:** bridge integration tests set fixture mode for `/tmp` runs; `test_effective_config_schema_contract` covers missing argv runs-root and fixture snapshot.
+
 ### 19.4.8 — 2026-05-10
 
 - **MD-first dossier:** `runtime/report_inputs.py` centralizes run-dir inputs; `runtime/report_md.py` writes **`report/full-report.md`**; `runtime/report_html.py` derives **`report/full-report.html`** only from that Markdown (`markdown` when available, else escaped `<pre>` fallback). `render_all` and `scripts/rfo_render.py canonical` follow MD → HTML; embedded JSON proof blocks remain in the HTML shell for validators.

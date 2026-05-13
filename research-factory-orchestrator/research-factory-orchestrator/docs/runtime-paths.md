@@ -25,6 +25,8 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 
 **Preflight / effective config:** `python3 -S scripts/rfo_execute.py --preflight …` prints **`rfo-effective-config-v1`** JSON to **stdout** and exits **0** when relay + runs-root resolve cleanly, **2** when forbidden env keys are set or resolution fails — **no** run allocation. Snapshot shape is defined in **`contracts/rfo-effective-config-v1.schema.json`**. On a normal bridge run, after `allocate`, the run-dir includes **`effective-config.json`** with the same snapshot.
 
+**Three modes for agents:** **canonical production** (default; explicit `--runs-root` argv + relay), **`test_fixture`** (`RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` — in-repo/CI; `production_research=false` in JSON), and **blocked** (missing argv runs-root or relay / strict forbidden env → exit **2**, `blocked_dependency` populated). Full matrix: `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`, `docs/rfo-env-classification.md`.
+
 **Gateway timeout vs worker wait loop:** default `RFO_BRIDGE_WORKER_*` values and a pessimistic budget formula for the subprocess runner are documented in **`docs/operators/openclaw-gateway-rfo-notes.md`** (§ A3 + B1).
 
 **Legacy / retired:** `scripts/run_rfo_full_research.py` — **not** an operator entrypoint; executing it prints a fatal hint pointing at **`rfo_execute.py`** and exits **2**. Shared test helpers: **`runtime/standalone_relay_driver.py`**. See § “Standalone relay driver” below.

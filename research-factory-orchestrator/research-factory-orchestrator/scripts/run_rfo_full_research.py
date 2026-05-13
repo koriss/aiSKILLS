@@ -6,9 +6,10 @@ Tests and tooling import helpers from ``runtime.standalone_relay_driver``.
 
 Use::
 
-  python3 -S scripts/rfo_execute.py --task \"…\" --web-search-json-api-base \"…\"
+  python3 -S scripts/rfo_execute.py --runs-root <abs> --task \"…\" --web-search-json-api-base \"…\"
 
-from the skill root (see SKILL.md, docs/runtime-paths.md).
+from the skill root (see SKILL.md, docs/runtime-paths.md,
+docs/plans/PLAN-rfo-agent-executable-single-behavior.md).
 """
 from __future__ import annotations
 
@@ -19,9 +20,10 @@ def main() -> int:
     print(
         "[fatal] scripts/run_rfo_full_research.py is a legacy standalone entrypoint.\n"
         "Research is not started. Use the single operator CLI:\n"
-        "  python3 -S scripts/rfo_execute.py --task \"…\" --web-search-json-api-base \"…\"\n"
+        "  python3 -S scripts/rfo_execute.py --runs-root <abs> --task \"…\" "
+        "--web-search-json-api-base \"…\"\n"
         "Helpers for tests live in runtime.standalone_relay_driver (not this script).\n"
-        "See SKILL.md and docs/runtime-paths.md.",
+        "See docs/plans/PLAN-rfo-agent-executable-single-behavior.md, SKILL.md, docs/runtime-paths.md.",
         file=sys.stderr,
     )
     return 2

@@ -14,3 +14,6 @@ coverage-report.json
 release-artifacts/
 release-validation-transcript.json
 reports/debug-runs/
+
+# Optional local archive / analytics dumps (not part of the canonical skill package)
+docs/analytics/

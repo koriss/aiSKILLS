@@ -27,7 +27,7 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 
 **Gateway timeout vs worker wait loop:** default `RFO_BRIDGE_WORKER_*` values and a pessimistic budget formula for the subprocess runner are documented in **`docs/operators/openclaw-gateway-rfo-notes.md`** (§ A3 + B1).
 
-**Legacy / retired:** `scripts/run_rfo_full_research.py` — **not** an operator entrypoint; executing it prints a fatal hint pointing at **`rfo_execute.py`** and exits **2** (helpers remain for tests). See § “Standalone relay driver” below.
+**Legacy / retired:** `scripts/run_rfo_full_research.py` — **not** an operator entrypoint; executing it prints a fatal hint pointing at **`rfo_execute.py`** and exits **2**. Shared test helpers: **`runtime/standalone_relay_driver.py`**. See § “Standalone relay driver” below.
 
 ## Native relay (host agent / gateway)
 
@@ -70,9 +70,9 @@ Treat **`stdout`** from the bridge as **handoff-only:** the line **`__RFO_SKILL_
 
 ## Standalone relay driver (`scripts/run_rfo_full_research.py`) — **retired from operators**
 
-Historically a packaged **relay + fetch** CLI (not the native slash bridge). **Today:** running the script as `__main__` is a **grave marker** only — it prints stderr telling operators to use **`scripts/rfo_execute.py`** and exits **2** without starting research.
+Historically a packaged **relay + fetch** CLI (not the native slash bridge). **Today:** the script is a **grave marker** only — stderr → **`rfo_execute.py`**, exit **2**. Claim/matrix/post-finish helpers used by tests live in **`runtime/standalone_relay_driver.py`**.
 
-- **Tests:** modules and functions inside the file are still imported by unit tests (e.g. post-finish helpers); that is **not** permission to run the script for production.
+- **Tests:** import from **`runtime.standalone_relay_driver`** — that is **not** permission to run `run_rfo_full_research.py` for production.
 - **Profile `search-primary`:** described in `contracts/run-profiles.json` for artifact semantics; **operator** relay+queue depth is **`rfo_execute.py`** (bridge implementation is loaded internally).
 
 ### `search-primary` profile: contradiction scan (E3)

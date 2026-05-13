@@ -2,6 +2,10 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.6 — 2026-05-14
+
+- Patch release: semver +0.0.1 (`runtime/version.json`, SKILL metadata, `contracts/run-profiles.json`, compatibility matrix).
+
 ### 19.4.5 — 2026-05-13
 
 - **Research plan on disk + early `run_dir`:** `research-plan-v1` contract, `RFO_RESEARCH_PLAN_MODE=off|llm_v1`, bridge allocates run directory before relay; adapter reuse via `RFO_PREALLOCATED_RUN_DIR`; `fanout_relay_search_from_queries`; plan validation in `validate_impl` when present; ADR-021; `jl()` ResourceWarning fix; `tests/test_research_plan_bridge.py`.

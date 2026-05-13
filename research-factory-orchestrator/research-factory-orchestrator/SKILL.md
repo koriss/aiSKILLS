@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.4.5+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
+description: Research Factory Orchestrator — v19.4.6+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
-  version: "19.4.5"
+  version: "19.4.6"
   package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -12,7 +12,7 @@ metadata:
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.4.5"
+  release: "19.4.6"
 ---
 
 ## HOW TO OPERATE THIS SKILL
@@ -29,7 +29,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 - **Host slash / native command (canonical research)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade: loads the bridge implementation module internally; **sequential** relay query expansion + **`research/research-plan.json`** on disk + collectors + queue bridge — **not** a multi-agent swarm; see `docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md` and `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`). **Primary human artifact:** **`report/full-report.html`**. Plan mode: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`** (default `off`). Preallocated run reuse: **`RFO_PREALLOCATED_RUN_DIR`** (set by the bridge; do not hand-craft for production slash). Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
 - **Queue / tooling (not standalone research):** `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."` — preallocated run-dir / CLI queue plumbing only; not the native slash research path.
-- **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr points to **`rfo_execute.py`**, exit **2**; no research start). The file stays in-tree **only** for unit tests that import helpers — not an operator path.
+- **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Test helpers live in **`runtime/standalone_relay_driver.py`** — not an operator path.
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
 - `python3 -S scripts/outbox_delivery_worker.py --runs-root <runs-root>`
 - **`scripts/run_research_factory.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Workers use **`rfo_runtime_core.py`** directly; this shim is not research launch.

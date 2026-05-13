@@ -32,7 +32,7 @@ def load_profiles() -> dict[str, Any]:
 def resolve(profile: str | None, *, entrypoint_default: str | None = None) -> tuple[str, dict[str, Any]]:
     """Resolve active profile. Unknown ``RFO_RUN_PROFILE`` env → ``ValueError`` (fail-closed).
 
-    ``entrypoint_default`` (e.g. ``search-primary`` for ``run_rfo_full_research.py``) is used
+    ``entrypoint_default`` (e.g. ``search-primary`` for standalone relay test harness) is used
     only when CLI profile and ``RFO_RUN_PROFILE`` are both unset; it does not change the
     global contract default (still ``dossier`` for worker/bridge).
     """

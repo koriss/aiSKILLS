@@ -8,7 +8,7 @@ This file defines an **allowed** pattern for agents invoking Research Factory Or
 |-----------------|------|
 | `<SKILL_ROOT>` | Directory containing this package (`research-factory-orchestrator/`). |
 | `RFO_RUNS_ROOT` or `--runs-root` | Persistent runs queue root (see `docs/adr/ADR-RFO_PORTABLE.md`). |
-| Relay / bridge | `RFO_WEB_SEARCH_JSON_API_BASE` when using `scripts/run_rfo_with_web_search.py`. |
+| Relay / bridge | `RFO_WEB_SEARCH_JSON_API_BASE` when using **`scripts/rfo_execute.py`** (canonical façade → `run_rfo_with_web_search.py`). |
 
 ## Canonical entrypoint (template)
 
@@ -50,7 +50,7 @@ cd <SKILL_ROOT> && \
 Full external collection uses a configurable HTTP JSON relay (SearxNG-style
 `/search?q=…&format=json`) plus `RFO_SOURCE_PACKET`, the queue, and the worker:
 
-1. Build / obtain a source packet (JSON with `sources[]`) or run the prefetch bridge (`scripts/run_rfo_with_web_search.py`), which writes `RFO_SOURCE_PACKET`.
+1. Build / obtain a source packet (JSON with `sources[]`) or run the prefetch bridge (`scripts/rfo_execute.py`), which writes `RFO_SOURCE_PACKET`.
 2. **Enqueue** with `interface_runtime_adapter.py adapter` using `--runs-root`, `--task`, and profile-related env as needed (`RFO_RUN_PROFILE`, etc.). Prefer `--interface cli --provider cli` for artifact-only enqueue.
 3. Run `runtime_job_worker.py --runs-root … --execute-runtime` (env must include `RFO_SOURCE_PACKET` when using a prefetch packet so nested `rfo_runtime_core run` inherits it).
 
@@ -58,7 +58,7 @@ Bundled bridge (prefetch + queue + worker + handoff):
 
 ```bash
 cd <SKILL_ROOT> && \
-  python3 -S scripts/run_rfo_with_web_search.py \
+  python3 -S scripts/rfo_execute.py \
     --runs-root <RUNS_ROOT> \
     --web-search-json-api-base "${RFO_WEB_SEARCH_JSON_API_BASE:?set relay base URL}" \
     --task "<user request>"

@@ -48,7 +48,7 @@ sys.path.insert(0, str(SKILL_ROOT))
 from runtime.schema_defaults import minimal_valid  # noqa: E402
 from runtime.source_record_v19 import normalize_source_record_v19  # noqa: E402
 from runtime.status import VERSION  # noqa: E402
-from runtime.util import now  # noqa: E402
+from runtime.util import jl, now  # noqa: E402
 
 from rfo_query_fanout import fanout_relay_search  # noqa: E402
 from rfo_relay_search_helpers import (  # noqa: E402
@@ -490,6 +490,69 @@ def minimum_sources_policy(profile_name: str) -> int:
         return 1
 
 
+def _write_bridge_worker_failure_meta(
+    runs_root: Path,
+    *,
+    attempt: int,
+    returncode: int,
+    stdout_tail: str,
+    stderr_tail: str,
+    parsed_summary: dict[str, Any],
+) -> None:
+    """Operator-visible record when the worker subprocess fails (E1 hardening)."""
+    try:
+        p = runs_root / "queue" / "bridge-last-worker-failure.json"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        rec = {
+            "schema_version": "v19.4.1",
+            "timestamp": now(),
+            "attempt": attempt,
+            "worker_returncode": returncode,
+            "parsed_stdout_summary": parsed_summary,
+            "stdout_tail": (stdout_tail or "")[:8000],
+            "stderr_tail": (stderr_tail or "")[:8000],
+        }
+        p.write_text(json.dumps(rec, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def _append_bridge_worker_poll_event(
+    latest_run: Path,
+    *,
+    attempt: int,
+    proc: subprocess.CompletedProcess[str],
+    summary: dict[str, Any],
+    runs_root: Path,
+) -> None:
+    """Structured poll trail for gateway / operators (plan A1)."""
+    if not latest_run.is_dir():
+        return
+    reason = str(summary.get("reason") or "")
+    pending_n: int | None = None
+    try:
+        pending_n = len(list((Path(runs_root) / "queue" / "pending").glob("*.json")))
+    except Exception:
+        pending_n = None
+    lease_path = Path(runs_root) / "queue" / "worker.lease"
+    lease_present = lease_path.is_file()
+    payload: dict[str, Any] = {
+        "event_name": "bridge.worker_poll",
+        "timestamp": now(),
+        "attempt": attempt,
+        "worker_returncode": proc.returncode,
+        "claimed": summary.get("claimed"),
+        "reason": reason,
+        "lease_present": lease_present,
+        "queue_pending_count": pending_n,
+        "worker_stdout_summary": (proc.stdout or "").strip()[:1200],
+    }
+    try:
+        jl(latest_run / "observability-events.jsonl", payload)
+    except Exception:
+        pass
+
+
 def strict_packet_preflight(profile_lc: str, packet: dict, min_need: int) -> tuple[bool, str]:
     _ = profile_lc  # dossier funnel: uniform preflight regardless of legacy CLI aliases
     rows = packet.get("sources") if isinstance(packet.get("sources"), list) else []
@@ -687,14 +750,54 @@ def main() -> int:
             )
             last_worker_out = (proc.stdout or "") + "\n" + (proc.stderr or "")
             summary = _parse_stdout_json_object(proc.stdout or "")
-            if summary.get("claimed") is True:
+            _append_bridge_worker_poll_event(
+                latest_run,
+                attempt=attempt + 1,
+                proc=proc,
+                summary=summary,
+                runs_root=runs_root,
+            )
+            claimed_ok = summary.get("claimed") is True and (proc.returncode == 0)
+            if claimed_ok:
                 worker_claimed = True
                 print(f"[3/5] worker claimed job (attempt {attempt + 1})", file=sys.stderr)
                 break
             reason = str(summary.get("reason") or "")
+            # E1: stdout may claim success while subprocess failed — never treat as claimed.
+            if summary.get("claimed") is True and proc.returncode != 0:
+                print(
+                    f"[3/5] worker stdout claimed=true but process exit {proc.returncode} "
+                    "(treating as failure; see queue/bridge-last-worker-failure.json)",
+                    file=sys.stderr,
+                )
+                print(last_worker_out[:2500], file=sys.stderr)
+                _write_bridge_worker_failure_meta(
+                    runs_root,
+                    attempt=attempt + 1,
+                    returncode=int(proc.returncode or -1),
+                    stdout_tail=(proc.stdout or "")[-8000:],
+                    stderr_tail=(proc.stderr or "")[-8000:],
+                    parsed_summary=summary,
+                )
+                if args.best_effort_continue:
+                    worker_hard_failed = True
+                    print(
+                        "[3/5] WARN: --best-effort-continue set; continuing bridge despite worker failure.",
+                        file=sys.stderr,
+                    )
+                    break
+                return 1
             if proc.returncode != 0:
                 print(f"[3/5] worker exit {proc.returncode}", file=sys.stderr)
                 print(last_worker_out[:2500], file=sys.stderr)
+                _write_bridge_worker_failure_meta(
+                    runs_root,
+                    attempt=attempt + 1,
+                    returncode=int(proc.returncode or -1),
+                    stdout_tail=(proc.stdout or "")[-8000:],
+                    stderr_tail=(proc.stderr or "")[-8000:],
+                    parsed_summary=summary,
+                )
                 if args.best_effort_continue:
                     worker_hard_failed = True
                     print(

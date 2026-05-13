@@ -21,16 +21,18 @@ python3 -S scripts/interface_runtime_adapter.py execute \
   --task "$TASK"
 ```
 
-### GH2 — Relay bridge (`run_rfo_with_web_search.py`)
+### GH2 — Relay bridge (`rfo_execute.py` → `run_rfo_with_web_search.py`)
 
 Configurable JSON HTTP relay prefetch + collectors + finalize handoff (ADR-018). **Requires** `--web-search-json-api-base` or `RFO_WEB_SEARCH_JSON_API_BASE`.
 
 ```bash
 export RFO_WEB_SEARCH_JSON_API_BASE="http://127.0.0.1:8180/search?q={query}&format=json"
-python3 -S scripts/run_rfo_with_web_search.py \
+python3 -S scripts/rfo_execute.py \
   --runs-root "$RUNS_ROOT" \
   --task "$TASK"
 ```
+
+(Equivalent: `python3 -S scripts/run_rfo_with_web_search.py` with the same flags — prefer **`rfo_execute.py`** in new automation.)
 
 Profile defaults to **`dossier`** (relay fanout + source packet semantics). Legacy names remap in `runtime.profiles.resolve`; override with `--profile` only when intentionally matching a validator harness fixture.
 
@@ -62,7 +64,7 @@ The **external orchestrator** reads `result-manifest.json`, optional `marker.jso
 ```bash
 cd /path/to/.../research-factory-orchestrator
 python3 -S scripts/validate_skill.py    # exit 0
-python3 -S scripts/run_rfo_with_web_search.py --help
+python3 -S scripts/rfo_execute.py --help
 python3 -S scripts/interface_runtime_adapter.py --help
 ```
 
@@ -79,7 +81,7 @@ Treat as **staging / operator** checklist (not CI-default). Cross-check timeouts
 3. **Runs root** — `--runs-root` points at durable workspace path.
 4. **Task string** — non-empty `--task`; keep URL-heavy tasks quoted.
 5. **Dry connectivity** — from the bridge host (not inside skill): `curl -sS -o /dev/null -w '%{http_code}\n' "$BASE"` or relay-specific ping.
-6. **Start bridge run** — `python3 -S scripts/run_rfo_with_web_search.py …` (**stderr**: progress/`[DONE]`; **stdout**: handoff line only once finished).
+6. **Start bridge run** — `python3 -S scripts/rfo_execute.py …` (**stderr**: progress/`[DONE]`; **stdout**: handoff line only once finished).
 7. **Locate `run_dir`** — newest directory under `$RUNS_ROOT` or derive from stdout manifest paths (host-specific).
 8. **`collection-result.json`** — confirms collection phase bookkeeping; inspect `seed_only`, counts, relay errors.
 9. **`sources/sources.json`** (or emitted path per run) — URL list + fetch metadata normalized toward `schemas/core/sources.schema.json` (failure records may appear in sibling diagnostics depending on normalization mode).

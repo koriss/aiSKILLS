@@ -30,7 +30,8 @@ Use this runbook when the relay bridge or automation logs:
 - repeated “worker did not claim a pending job”
 - jobs stuck in `queue/pending` despite healthy disk
 
-Companion analysis: [`RFO-DEEP-ANALYSIS-2026-05.md`](./RFO-DEEP-ANALYSIS-2026-05.md).
+Companion analysis: [`RFO-DEEP-ANALYSIS-2026-05.md`](./RFO-DEEP-ANALYSIS-2026-05.md).  
+Gateway-side timeouts / no–plain-subagent policy: [`../operators/openclaw-gateway-rfo-notes.md`](../operators/openclaw-gateway-rfo-notes.md).
 
 ---
 

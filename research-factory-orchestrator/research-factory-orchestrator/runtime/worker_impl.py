@@ -18,7 +18,7 @@ from runtime.util import CHAT, PKG_REQUIRED, REQ_EVENTS, jw, jr, jl, now, sha, s
 from runtime.citation_grounding import evaluate as _evaluate_citation_grounding
 from runtime.collector import collect as _collect_external
 from runtime.coverage import reconcile as _reconcile_coverage
-from runtime.profiles import resolve as _resolve_profile
+from runtime.profiles import load_profiles, resolve as _resolve_profile
 from runtime.work_units import execute_pending as _execute_work_units
 
 
@@ -340,8 +340,36 @@ def cmd_run(a):
     print(json.dumps({"runtime_initialized": True, "run_id": run_id, "job_id": job_id, "version": VERSION, "state": "content_rendered"}, ensure_ascii=False, indent=2))
 
 
+def _stub_packaging_allowed_from_run_profile(rd: Path) -> bool:
+    """True when ``contracts/run-profiles.json`` ``source_policy.stub_only_allowed`` applies to this run.
+
+    Prefer embedded ``run-profile.json`` ``policy`` (written by the worker). For older dirs that only
+    store ``profile: search-primary`` without ``policy``, fall back to the contract file.
+    """
+    rd = Path(rd)
+    doc = jr(rd / "run-profile.json", {})
+    if isinstance(doc, dict):
+        pol = doc.get("policy")
+        if isinstance(pol, dict):
+            sp = pol.get("source_policy")
+            if isinstance(sp, dict):
+                if sp.get("stub_only_allowed") is True:
+                    return True
+                if sp.get("stub_only_allowed") is False:
+                    return False
+        pname = str(doc.get("profile") or "").strip().lower()
+        if pname == "search-primary":
+            profiles = (load_profiles().get("profiles") or {}).get("search-primary") or {}
+            sp2 = profiles.get("source_policy") if isinstance(profiles, dict) else None
+            if isinstance(sp2, dict) and sp2.get("stub_only_allowed") is True:
+                return True
+    return False
+
+
 def _is_seed_only_or_artifact_only(rd: Path) -> bool:
     rd = Path(rd)
+    if _stub_packaging_allowed_from_run_profile(rd):
+        return True
     profile_names: set[str] = set()
     for rel in ("run-profile.json", "validation-profile-used.json"):
         p = rd / rel
@@ -387,7 +415,7 @@ def _collect_profile_names(rd: Path) -> set[str]:
 
 
 def _build_package_allow_stub(rd: Path) -> bool:
-    """Zip packaging may skip strict PKG_REQUIRED paths only for seed_only / artifact_only runs."""
+    """Zip packaging may skip strict PKG_REQUIRED paths for seed_only, artifact_only, or contract stub profiles."""
     return _is_seed_only_or_artifact_only(rd)
 
 

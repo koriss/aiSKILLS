@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import Path
 
-from runtime.util import jr, tw
+from runtime.util import CLAIM_STATUS_LEGACY_ALIASES, jr, tw
 
 # Canonical relative path inside a run-dir (single writer API — use write_canonical_full_report_html).
 FULL_REPORT_REL = "report/full-report.html"
@@ -130,11 +130,23 @@ def render_source_table_rows(sources: list[dict]) -> str:
     return "".join(rows) or "<tr><td colspan='7'><em>Нет источников.</em></td></tr>"
 
 
+def _normalize_claim_status_for_bucket(status: object) -> str:
+    s = str(status or "").strip().lower()
+    if not s:
+        return ""
+    meta = CLAIM_STATUS_LEGACY_ALIASES.get(s)
+    if isinstance(meta, dict):
+        use = meta.get("use")
+        if isinstance(use, str) and use.strip():
+            return use.strip().lower()
+    return s
+
+
 def _claim_bucket(status: object) -> str:
-    s = str(status or "").lower()
-    if s in ("confirmed", "verified", "established"):
+    s = _normalize_claim_status_for_bucket(status)
+    if s in ("confirmed", "verified", "established", "confirmed_fact", "established_fact"):
         return "verified"
-    if s in ("disputed", "contradicted", "rejected"):
+    if s in ("disputed", "contradicted", "rejected", "false"):
         return "disputed"
     return "uncertain"
 

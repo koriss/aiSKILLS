@@ -70,6 +70,44 @@ class TestBuildPackageStub(unittest.TestCase):
             jw(rd / "collection-result.json", {"seed_only": True})
             self.assertTrue(_build_package_allow_stub(rd))
 
+    def test_search_primary_embedded_policy_stub_allowed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp) / "run"
+            rd.mkdir(parents=True, exist_ok=True)
+            jw(
+                rd / "run-profile.json",
+                {
+                    "schema_version": "v19.0",
+                    "profile": "search-primary",
+                    "policy": {"source_policy": {"stub_only_allowed": True}},
+                },
+            )
+            jw(rd / "collection-result.json", {"seed_only": False})
+            self.assertTrue(_build_package_allow_stub(rd))
+
+    def test_search_primary_profile_name_only_resolves_contract(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp) / "run"
+            rd.mkdir(parents=True, exist_ok=True)
+            jw(rd / "run-profile.json", {"schema_version": "v19.0", "profile": "search-primary"})
+            jw(rd / "collection-result.json", {"seed_only": False})
+            self.assertTrue(_build_package_allow_stub(rd))
+
+    def test_dossier_explicit_stub_disallowed_without_seed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rd = Path(tmp) / "run"
+            rd.mkdir(parents=True, exist_ok=True)
+            jw(
+                rd / "run-profile.json",
+                {
+                    "schema_version": "v19.0",
+                    "profile": "dossier",
+                    "policy": {"source_policy": {"stub_only_allowed": False}},
+                },
+            )
+            jw(rd / "collection-result.json", {"seed_only": False})
+            self.assertFalse(_build_package_allow_stub(rd))
+
 
 if __name__ == "__main__":
     unittest.main()

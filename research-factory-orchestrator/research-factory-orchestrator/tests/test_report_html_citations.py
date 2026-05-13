@@ -8,6 +8,7 @@ from pathlib import Path
 
 from runtime.report_html import (
     TEMPLATE_PATH,
+    _claim_bucket,
     build_full_report_html,
     build_source_index,
     fill_template,
@@ -68,6 +69,17 @@ class TestWikiCitations(unittest.TestCase):
         mapping = {m: "<p>x</p>" for m in re.findall(r"\{\{([A-Z0-9_]+)\}\}", tpl)}
         filled = fill_template(tpl, mapping)
         self.assertNotRegex(filled, r"\{\{[A-Z0-9_]+\}\}")
+
+
+class TestClaimBucket(unittest.TestCase):
+    def test_partial_legacy_maps_to_probable_bucket(self) -> None:
+        self.assertEqual(_claim_bucket("partial"), "uncertain")
+
+    def test_confirmed_fact_is_verified(self) -> None:
+        self.assertEqual(_claim_bucket("confirmed_fact"), "verified")
+
+    def test_inferred_assessment_uncertain(self) -> None:
+        self.assertEqual(_claim_bucket("inferred_assessment"), "uncertain")
 
 
 if __name__ == "__main__":

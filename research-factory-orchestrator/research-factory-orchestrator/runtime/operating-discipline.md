@@ -19,7 +19,7 @@
 
 10. **Pragmatic Rigor core**: optional `RFO_V19_PROFILE` (`dossier`, `mvr`, `full-rigor`, `propaganda-io`, `book-verification`, …) switches `runtime/validate_impl.validate` to `scripts/run_core_validators.py` (V1–V6); frozen contracts live under `schemas/core/`; operator summary in `SKILL-core.md`. Production default is **`dossier`**; see `docs/adr/ADR-019-single-dossier-funnel.md`.
 
-11. **Default bridge pipeline (agents calling `run_rfo_with_web_search.py` with task + `--runs-root`)** — step → invariant (verify in code after changes):
+11. **Default bridge pipeline (agents calling `rfo_execute.py` / `run_rfo_with_web_search.py` with task + `--runs-root`)** — step → invariant (verify in code after changes):
 
     | Step | Invariant |
     | --- | --- |
@@ -30,4 +30,4 @@
     | Coverage | `web_search_required` aligns with prefetch (see `contracts/run-profiles.json` profile **`dossier`**). |
     | Handoff stdout | Exactly one `__RFO_SKILL_AGENT_HANDOFF__=` line; caller performs external UX. |
 
-    Operational deploy: sync the refreshed skill directory to whichever workspace path invokes `scripts/run_rfo_with_web_search.py`; no Telegram-specific code ships in-repo.
+    Operational deploy: sync the refreshed skill directory to whichever workspace path invokes **`scripts/rfo_execute.py`** (canonical); no Telegram-specific code ships in-repo.

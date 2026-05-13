@@ -1,7 +1,7 @@
 {
   "profile": "search-primary",
   "schema_version": "v19.0",
-  "description": "Fixture / relay validation harness: core V1–V6 chain with relaxed source floor; L0 contradiction echo unknown is non-blocking unless overridden per run.",
+  "description": "Fixture / relay validation harness: core V1–V6 chain with relaxed source floor; L0 contradiction echo unknown is non-blocking unless overridden per run. Intentionally does not require a full contradiction matrix scan (scan_scope may remain none; blocking_rules.l0_contradiction_scan_not_performed_for_profile is warn) — use dossier profile for deep contradiction coverage.",
   "active_validators": [
     "validate_artifact_schema",
     "validate_traceability",

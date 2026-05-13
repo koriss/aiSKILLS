@@ -883,23 +883,60 @@ h2{{color:#1a237e;font-size:1.1rem;margin:24px 0 10px;border-bottom:2px solid #3
 
 
 # ── outbox delivery ────────────────────────────────────────────────────────────
-def run_outbox(runs_root: Path):
+def run_outbox(runs_root: Path) -> int:
     import subprocess
+
     proc = subprocess.run(
-        [sys.executable, "-S", str(SCRIPTS_DIR / "outbox_delivery_worker.py"),
-         "--runs-root", str(runs_root)],
-        capture_output=True, text=True, timeout=120,
+        [
+            sys.executable,
+            "-S",
+            str(SCRIPTS_DIR / "outbox_delivery_worker.py"),
+            "--runs-root",
+            str(runs_root),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=120,
     )
     print(f"[outbox] exit={proc.returncode} processed={proc.stdout.strip()}")
+    if proc.returncode != 0 and proc.stderr:
+        print(proc.stderr[:4000], file=sys.stderr)
+    return int(proc.returncode or 0)
+
+
+def _legacy_cli_entry_allowed(argv: list[str]) -> bool:
+    if os.environ.get("RFO_ALLOW_LEGACY_ENTRYPOINT", "").strip().lower() in ("1", "true", "yes"):
+        return True
+    return "--allow-legacy-entrypoint" in argv
 
 
 # ── main ───────────────────────────────────────────────────────────────────────
 def main():
     import argparse
+
+    argv = list(sys.argv)
+    if not _legacy_cli_entry_allowed(argv):
+        print(
+            "[fatal] scripts/run_rfo_full_research.py is a legacy standalone entrypoint.\n"
+            "Production / native slash: use\n"
+            "  python3 -S scripts/rfo_execute.py …\n"
+            "or equivalently\n"
+            "  python3 -S scripts/run_rfo_with_web_search.py …\n"
+            "For CI or expert smoke only: export RFO_ALLOW_LEGACY_ENTRYPOINT=1\n"
+            "or pass --allow-legacy-entrypoint (see docs/runtime-paths.md).",
+            file=sys.stderr,
+        )
+        return 64
+
     p = argparse.ArgumentParser()
     p.add_argument("--runs-root", required=True)
     p.add_argument("--task", required=True)
     p.add_argument("--web-search-json-api-base", default="", help="Relay origin (overrides env for this run)")
+    p.add_argument(
+        "--allow-legacy-entrypoint",
+        action="store_true",
+        help="Acknowledge legacy standalone entry (no-op if RFO_ALLOW_LEGACY_ENTRYPOINT is set).",
+    )
     args = p.parse_args()
 
     task = args.task
@@ -967,7 +1004,10 @@ def main():
     )
 
     print("[outbox] Delivering...")
-    run_outbox(runs_root)
+    ob = run_outbox(runs_root)
+    if ob != 0:
+        print(f"[outbox] delivery worker failed (exit {ob})", file=sys.stderr)
+        return ob
 
     print(f"\n{'='*60}")
     print(f"[DONE] {entry['run_label']}")

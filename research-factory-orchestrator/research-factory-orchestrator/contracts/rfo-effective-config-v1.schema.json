@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://research-factory-orchestrator.local/contracts/rfo-effective-config-v1.schema.json",
+  "title": "RFO effective config snapshot (bridge preflight / run-dir artifact)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "entrypoint",
+    "profile",
+    "skill_root",
+    "workspace_root",
+    "workspace_root_source",
+    "runs_root",
+    "runs_root_source",
+    "relay",
+    "relay_source",
+    "relay_chain",
+    "deprecated_inputs_used",
+    "forbidden_inputs_present",
+    "canonical",
+    "errors"
+  ],
+  "properties": {
+    "schema": { "const": "rfo-effective-config-v1" },
+    "entrypoint": { "type": "string", "minLength": 1 },
+    "profile": { "type": "string", "minLength": 1 },
+    "skill_root": { "type": "string", "minLength": 1 },
+    "workspace_root": { "type": ["string", "null"] },
+    "workspace_root_source": { "type": ["string", "null"] },
+    "runs_root": { "type": ["string", "null"] },
+    "runs_root_source": { "type": ["string", "null"] },
+    "relay": { "type": ["string", "null"] },
+    "relay_source": { "type": ["string", "null"] },
+    "relay_chain": { "type": "array", "items": { "type": "string" } },
+    "deprecated_inputs_used": { "type": "array", "items": { "type": "string" } },
+    "forbidden_inputs_present": { "type": "array", "items": { "type": "string" } },
+    "canonical": { "type": "boolean" },
+    "errors": { "type": "array", "items": { "type": "string" } }
+  }
+}

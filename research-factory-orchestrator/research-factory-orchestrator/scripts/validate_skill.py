@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import ast, json, re, shutil, sys
+import ast, importlib.util, json, re, shutil, sys
 sys.dont_write_bytecode = True
 VERSION = "19.4"
 root = Path(__file__).resolve().parents[1]
@@ -37,6 +37,7 @@ required_scripts = [
     "validate_active_contract_versions.py", "validate_profile_policies_present.py",
     "validate_no_scaffolds_in_production.py", "validate_no_failed_validation_in_production.py",
     "validate_advisory_fixture_suite.py",
+    "validate_operator_facing_markdown.py",
     "validate_artifact_release.py", "verify_skill_run_claims.py",
     "validate_no_delivery_after_validation_fail.py", "validate_no_local_paths_in_chat.py",
     "validate_logical_consistency.py",
@@ -46,7 +47,7 @@ required_scripts = [
 ]
 # v19.3: compute-only — only the CLI pass-through adapter is required for packaging.
 required_providers = ["providers/cli/cli_delivery_adapter.py"]
-required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "seed-only-run-contract.json", "manual-fallback-contract.json", "core-boundary-contract.json"]
+required_contracts = ["artifact-contract.json", "artifact-result-contract.json", "validator-dag.json", "delivery-contract.json", "interface-adapter-contract.json", "provider-contract.json", "canonical-package-layout-contract.json", "runtime-queue-contract.json", "outbox-contract.json", "source-acquisition-reliability-contract.json", "execution-reliability-contract.json", "context-acquisition-contract.json", "delivery-truth-contract.json", "seed-only-run-contract.json", "manual-fallback-contract.json", "core-boundary-contract.json", "rfo-effective-config-v1.schema.json"]
 required_policies = ["source-quality-policy.json", "source-acquisition-policy.json", "execution-reliability-policy.json", "context-acquisition-policy.json"]
 required_schemas = ["claim-source-fit.schema.json", "claim-evidence-weight.schema.json", "source-acquisition-result.schema.json", "source-gap.schema.json", "model-call.schema.json", "worker-lease.schema.json", "execution-reliability-gate.schema.json", "context-load-request.schema.json", "read-ledger.schema.json", "context-claim-gate.schema.json", "active-context-manifest.schema.json", "attachment-ledger.schema.json", "user-visible-delivery.schema.json", "run-mode-classification.schema.json", "manual-fallback-ledger.schema.json", "skill-result.schema.json"]
 for d in required_dirs:
@@ -118,6 +119,18 @@ for p in root.rglob("*"):
     if p.name == "__pycache__" or p.suffix == ".pyc":
         pycache.append(str(rel))
 if pycache: errors.append("pycache_present:"+json.dumps(pycache, ensure_ascii=False))
+try:
+    vof_path = root / "scripts" / "validate_operator_facing_markdown.py"
+    spec = importlib.util.spec_from_file_location("validate_operator_facing_markdown", vof_path)
+    if spec is None or spec.loader is None:
+        errors.append("operator_facing_markdown:import_spec_failed")
+    else:
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        of_errs = mod.validate(root)
+        errors.extend(of_errs)
+except Exception as e:
+    errors.append(f"operator_facing_markdown:{e}")
 index = root/"failure-corpus/index.json"
 if not index.exists(): errors.append("missing_failure_corpus_index")
 else:

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import http.server
+import json
 import os
 import subprocess
 import sys
@@ -77,12 +78,13 @@ class TestBridgeCliIntegration(unittest.TestCase):
         self.assertNotIn("RFO_ALLOW_MVR_EMPTY_RELAY", err)
         self.assertIn("Relay fanout returned zero", err)
 
-    def test_allow_gate_stub_requires_experiment_exit_2(self):
+    def test_preflight_emits_effective_config_json_exit_0(self):
         skill = _skill_root()
         script = skill / "scripts" / "run_rfo_with_web_search.py"
         env = {**os.environ}
         env.pop("RFO_EXPERIMENT_BRIDGE", None)
         env.pop("RFO_SMOKE", None)
+        env.pop("RFO_ALLOW_LEGACY_ENTRYPOINT", None)
         env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -93,11 +95,48 @@ class TestBridgeCliIntegration(unittest.TestCase):
                     sys.executable,
                     "-S",
                     str(script),
+                    "--preflight",
+                    "--runs-root",
+                    str(runs),
+                    "--task",
+                    "preflight-only",
+                    "--web-search-json-api-base",
+                    "http://127.0.0.1:9",
+                ],
+                cwd=str(skill),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+
+        self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
+        doc = json.loads(proc.stdout or "{}")
+        self.assertEqual(doc.get("schema"), "rfo-effective-config-v1")
+        self.assertEqual(doc.get("entrypoint"), "scripts/run_rfo_with_web_search.py")
+        self.assertEqual(doc.get("runs_root"), str(runs.resolve()))
+        self.assertTrue(doc.get("relay_chain"))
+
+    def test_preflight_forbidden_env_exit_2(self):
+        skill = _skill_root()
+        script = skill / "scripts" / "run_rfo_with_web_search.py"
+        env = {**os.environ}
+        env["RFO_SMOKE"] = "1"
+        env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            runs = Path(tmp) / "rfo-runs"
+            runs.mkdir(parents=True, exist_ok=True)
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    "-S",
+                    str(script),
+                    "--preflight",
                     "--runs-root",
                     str(runs),
                     "--task",
                     "x",
-                    "--allow-gate-stub",
                     "--web-search-json-api-base",
                     "http://127.0.0.1:9",
                 ],
@@ -109,4 +148,79 @@ class TestBridgeCliIntegration(unittest.TestCase):
             )
 
         self.assertEqual(proc.returncode, 2)
-        self.assertIn("RFO_EXPERIMENT_BRIDGE", proc.stderr or "")
+        doc = json.loads(proc.stdout or "{}")
+        self.assertIn("forbidden_canonical_env", doc.get("errors") or [])
+
+    def test_rfo_execute_preflight_same_as_bridge(self):
+        skill = _skill_root()
+        facade = skill / "scripts" / "rfo_execute.py"
+        env = {**os.environ}
+        for k in ("RFO_SMOKE", "RFO_EXPERIMENT_BRIDGE", "RFO_ALLOW_LEGACY_ENTRYPOINT"):
+            env.pop(k, None)
+        env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            runs = Path(tmp) / "rfo-runs"
+            runs.mkdir(parents=True, exist_ok=True)
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    "-S",
+                    str(facade),
+                    "--preflight",
+                    "--runs-root",
+                    str(runs),
+                    "--task",
+                    "via-facade",
+                    "--web-search-json-api-base",
+                    "http://127.0.0.1:9",
+                ],
+                cwd=str(skill),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        doc = json.loads(proc.stdout or "{}")
+        self.assertEqual(doc.get("schema"), "rfo-effective-config-v1")
+
+    def test_preflight_missing_relay_exit_2_canonical_failfast(self):
+        """Canonical bridge: no relay argv/env → non-zero preflight (not silent stub)."""
+        skill = _skill_root()
+        facade = skill / "scripts" / "rfo_execute.py"
+        env = {**os.environ}
+        for k in (
+            "RFO_SMOKE",
+            "RFO_EXPERIMENT_BRIDGE",
+            "RFO_ALLOW_LEGACY_ENTRYPOINT",
+            "RFO_WEB_SEARCH_JSON_API_BASE",
+            "RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE",
+        ):
+            env.pop(k, None)
+        env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
+
+        with tempfile.TemporaryDirectory() as tmp:
+            runs = Path(tmp) / "rfo-runs"
+            runs.mkdir(parents=True, exist_ok=True)
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    "-S",
+                    str(facade),
+                    "--preflight",
+                    "--runs-root",
+                    str(runs),
+                    "--task",
+                    "no-relay",
+                ],
+                cwd=str(skill),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+        self.assertEqual(proc.returncode, 2, proc.stderr + proc.stdout)
+        doc = json.loads(proc.stdout or "{}")
+        self.assertEqual(doc.get("schema"), "rfo-effective-config-v1")
+        self.assertIn("missing_relay", doc.get("errors") or [])

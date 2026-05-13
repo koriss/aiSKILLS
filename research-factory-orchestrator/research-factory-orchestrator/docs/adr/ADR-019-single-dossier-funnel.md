@@ -19,7 +19,7 @@ RFO historically exposed multiple run profiles (`mvr`, `live-bridge`, etc.) that
 
 ## Consequences
 
-- Operators must supply a working JSON relay; fixture-only “express” scaffolding is CI-gated (`RFO_EXPERIMENT_BRIDGE`, `--allow-gate-stub`).
+- Operators must supply a working JSON relay; empty relay runs fail closed. Use **`--preflight`** on the bridge to emit **`rfo-effective-config-v1`** JSON without allocating a run-dir; canonical operator environments must **not** set smoke/experiment env keys (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`).
 - Fixture suites that still encode `mvr` run-profile JSON remain valid for **historical validator harness** rows; **new** runs record `dossier`.
 
 ## References

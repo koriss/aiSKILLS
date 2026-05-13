@@ -7,8 +7,9 @@ argv and exit code**. **All new docs, compose, and native slash handlers should
 invoke this path** (`python3 -S scripts/rfo_execute.py …`).
 
 The implementation module remains ``run_rfo_with_web_search.py`` (do not fork
-semantics). ``run_rfo_full_research.py`` is **legacy** (requires
-``RFO_ALLOW_LEGACY_ENTRYPOINT=1`` or ``--allow-legacy-entrypoint``). See
+semantics). ``scripts/run_rfo_full_research.py`` is **retired as an operator
+entrypoint**: running it prints a fatal hint to use ``rfo_execute.py`` and exits
+**2** (the file body is kept for unit tests that import helpers). See
 ``docs/runtime-paths.md``.
 """
 from __future__ import annotations

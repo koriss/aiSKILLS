@@ -147,6 +147,21 @@ def _extract_runs_root(argv: list[str]) -> str | None:
     return None
 
 
+def resolve_default_runs_root() -> Path:
+    """Directory used when ``--runs-root`` is omitted (legacy helpers / tests).
+
+    Delegates to ``runtime.config_resolution.resolve_portable_default_runs_root``
+    (single implementation; see ``docs/adr/ADR-RFO_PORTABLE.md``).
+    """
+    skill_root = Path(__file__).resolve().parent.parent
+    r = str(skill_root)
+    if r not in sys.path:
+        sys.path.insert(0, r)
+    from runtime.config_resolution import resolve_portable_default_runs_root
+
+    return resolve_portable_default_runs_root()
+
+
 def _allowed_runs_roots() -> list[Path]:
     home = Path.home()
     roots: list[Path] = [
@@ -218,5 +233,6 @@ __all__ = [
     "RUNS_ROOT_ENV",
     "enforce_canonical_skill_path",
     "enforce_runs_root_argv",
+    "resolve_default_runs_root",
     "resolve_skill_root_for",
 ]

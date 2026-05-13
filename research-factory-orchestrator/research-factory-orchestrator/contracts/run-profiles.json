@@ -6,7 +6,7 @@
   "profiles": {
     "search-primary": {
       "label": "CLI JSON relay standalone (search-primary driver)",
-      "description": "Used by scripts/run_rfo_full_research.py: relay prefetch + fetch, no source-packet dossier floor. Web search is the primary collection path; citation grounding thresholds apply.",
+      "description": "Relay prefetch + fetch profile used in historical artifacts/tests (see scripts/run_rfo_full_research.py module). Operator relay+queue depth uses scripts/rfo_execute.py (dossier bridge).",
       "source_policy": {
         "external_collection_required": false,
         "minimum_independent_sources": 2,

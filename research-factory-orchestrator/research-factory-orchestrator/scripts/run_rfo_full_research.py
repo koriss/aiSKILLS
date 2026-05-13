@@ -904,116 +904,16 @@ def run_outbox(runs_root: Path) -> int:
     return int(proc.returncode or 0)
 
 
-def _legacy_cli_entry_allowed(argv: list[str]) -> bool:
-    if os.environ.get("RFO_ALLOW_LEGACY_ENTRYPOINT", "").strip().lower() in ("1", "true", "yes"):
-        return True
-    return "--allow-legacy-entrypoint" in argv
-
-
 # ── main ───────────────────────────────────────────────────────────────────────
 def main():
-    import argparse
-
-    argv = list(sys.argv)
-    if not _legacy_cli_entry_allowed(argv):
-        print(
-            "[fatal] scripts/run_rfo_full_research.py is a legacy standalone entrypoint.\n"
-            "Production / native slash: use\n"
-            "  python3 -S scripts/rfo_execute.py …\n"
-            "or equivalently\n"
-            "  python3 -S scripts/run_rfo_with_web_search.py …\n"
-            "For CI or expert smoke only: export RFO_ALLOW_LEGACY_ENTRYPOINT=1\n"
-            "or pass --allow-legacy-entrypoint (see docs/runtime-paths.md).",
-            file=sys.stderr,
-        )
-        return 64
-
-    p = argparse.ArgumentParser()
-    p.add_argument("--runs-root", required=True)
-    p.add_argument("--task", required=True)
-    p.add_argument("--web-search-json-api-base", default="", help="Relay origin (overrides env for this run)")
-    p.add_argument(
-        "--allow-legacy-entrypoint",
-        action="store_true",
-        help="Acknowledge legacy standalone entry (no-op if RFO_ALLOW_LEGACY_ENTRYPOINT is set).",
-    )
-    args = p.parse_args()
-
-    task = args.task
-    runs_root = Path(args.runs_root).resolve()
-    relay = relay_api_base(args.web_search_json_api_base)
-    if not relay:
-        print(
-            "[fatal] JSON relay base missing. Set --web-search-json-api-base or RFO_WEB_SEARCH_JSON_API_BASE.",
-            file=sys.stderr,
-        )
-        return 2
-
-    print(f"\n{'='*60}")
-    print(f"[RFO full-research] {task}")
-    print(f"{'='*60}\n")
-
-    try:
-        profile_name, profile_policy = resolve_profile(
-            os.environ.get("RFO_RUN_PROFILE"),
-            entrypoint_default="search-primary",
-        )
-    except ValueError as exc:
-        print(f"[fatal] run profile resolution failed: {exc}", file=sys.stderr)
-        return 2
-
-    print("[1/3] JSON relay search (fanout)...")
-
-    def _relay_query(base: str, query: str, num: int) -> list[dict]:
-        return search_json_relay(base, query, num=num)
-
-    n_results = relay_max_results()
-    search_results, fanout_stats = fanout_relay_search(_relay_query, [relay], task, n_results)
     print(
-        f"[1/3] → {len(search_results)} merged URLs "
-        f"(vectors={len(fanout_stats.get('query_vectors') or [])}, "
-        f"relay_requests={fanout_stats.get('relay_requests', 0)})",
+        "[fatal] scripts/run_rfo_full_research.py is a legacy standalone entrypoint.\n"
+        "Research is not started. Use the single operator CLI:\n"
+        "  python3 -S scripts/rfo_execute.py --task \"…\" --web-search-json-api-base \"…\"\n"
+        "from the skill root (see SKILL.md and docs/runtime-paths.md).",
+        file=sys.stderr,
     )
-
-    print("[2/3] Building sources (Wikipedia + fetched web)...")
-    sources = build_sources(task, search_results)
-    wiki_srcs = [s for s in sources if s.get("is_wikipedia")]
-    web_srcs = [s for s in sources if not s.get("is_wikipedia")]
-    print(f"[2/3] → {len(sources)} sources ({len(wiki_srcs)} wiki, {len(web_srcs)} web)")
-
-    print("[3/3] Generating claims and artifacts...")
-    claims, evidence = make_claims(sources)
-    rd, entry = allocate_run(runs_root, task)
-    write_artifacts(
-        rd,
-        entry,
-        sources,
-        claims,
-        evidence,
-        task,
-        search_results,
-        profile_name=profile_name,
-        profile_policy=profile_policy,
-        fanout_stats=fanout_stats,
-    )
-    cg = post_finish_standalone(rd, entry, profile_name)
-    print(f"[3/3] → {len(claims)} claims, artifacts in {entry['run_label']}")
-    print(
-        f"[3/3] citation_grounding passed={cg.get('passed')} raf={cg.get('relevance_aware_factuality_score')} "
-        f"dfl={cg.get('deflection_rate_when_no_grounding')}",
-    )
-
-    print("[outbox] Delivering...")
-    ob = run_outbox(runs_root)
-    if ob != 0:
-        print(f"[outbox] delivery worker failed (exit {ob})", file=sys.stderr)
-        return ob
-
-    print(f"\n{'='*60}")
-    print(f"[DONE] {entry['run_label']}")
-    print(f"[DONE] Search: {len(search_results)} | Sources: {len(sources)} | Claims: {len(claims)}")
-    print(f"{'='*60}\n")
-    return 0
+    return 2
 
 
 if __name__ == "__main__":

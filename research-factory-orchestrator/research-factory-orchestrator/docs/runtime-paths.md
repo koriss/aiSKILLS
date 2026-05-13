@@ -21,11 +21,13 @@ Relay **“fanout”** is **sequential**: `scripts/rfo_query_fanout.py` walks de
 python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task>"
 ```
 
-`scripts/rfo_execute.py` is a thin façade: it loads and runs **`scripts/run_rfo_with_web_search.py`** with the **same argv** and exit semantics. Existing deployments that still invoke `run_rfo_with_web_search.py` directly remain valid; new text should standardize on **`rfo_execute.py`**.
+`scripts/rfo_execute.py` is a thin façade: it loads and runs **`scripts/run_rfo_with_web_search.py`** with the **same argv** and exit semantics. **Operator-facing docs and compose files** should invoke **`rfo_execute.py` only**; the bridge module name is an implementation detail.
+
+**Preflight / effective config:** `python3 -S scripts/rfo_execute.py --preflight …` prints **`rfo-effective-config-v1`** JSON to **stdout** and exits **0** when relay + runs-root resolve cleanly, **2** when forbidden env keys are set or resolution fails — **no** run allocation. Snapshot shape is defined in **`contracts/rfo-effective-config-v1.schema.json`**. On a normal bridge run, after `allocate`, the run-dir includes **`effective-config.json`** with the same snapshot.
 
 **Gateway timeout vs worker wait loop:** default `RFO_BRIDGE_WORKER_*` values and a pessimistic budget formula for the subprocess runner are documented in **`docs/operators/openclaw-gateway-rfo-notes.md`** (§ A3 + B1).
 
-**Legacy / dev-only:** `scripts/run_rfo_full_research.py` — standalone relay+fetch **without** the same queue bridge invariants; **blocked** unless `RFO_ALLOW_LEGACY_ENTRYPOINT=1` or `--allow-legacy-entrypoint` (exit **64** otherwise). See § “Standalone relay driver” below.
+**Legacy / retired:** `scripts/run_rfo_full_research.py` — **not** an operator entrypoint; executing it prints a fatal hint pointing at **`rfo_execute.py`** and exits **2** (helpers remain for tests). See § “Standalone relay driver” below.
 
 ## Native relay (host agent / gateway)
 
@@ -33,7 +35,6 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 2. **Native handler** in the host extension resolves the skill under `workspace/skills/research-factory-orchestrator/`.
 3. **Bridge process (canonical argv):**  
    `python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task>"`  
-   (equivalent: `python3 -S scripts/run_rfo_with_web_search.py` with the same flags).  
    (+ relay env / `--web-search-json-api-base` as deployed).  
    This is **not** `scripts/interface_runtime_adapter.py` for the slash-command path.
 4. Worker / collector stages inside the bridge write the run-dir; **`render_all`** may re-render HTML; **`ensure_canonical_full_report_html`** + **`emit_agent_skill_handoff`** finalize `report/full-report.html` and **`result-manifest.json`**.
@@ -67,16 +68,12 @@ Treat **`stdout`** from the bridge as **handoff-only:** the line **`__RFO_SKILL_
 2. **`cmd_execute` → `cmd_run` + `build_package` → `_build_manifest` + stdout handoff**.
 3. No outbound channel logic in this layer; attaching files is the host’s responsibility.
 
-## Standalone relay driver (`scripts/run_rfo_full_research.py`) — **legacy**
+## Standalone relay driver (`scripts/run_rfo_full_research.py`) — **retired from operators**
 
-Packaged **relay + fetch** CLI (not the native slash bridge):
+Historically a packaged **relay + fetch** CLI (not the native slash bridge). **Today:** running the script as `__main__` is a **grave marker** only — it prints stderr telling operators to use **`scripts/rfo_execute.py`** and exits **2** without starting research.
 
-- **Entry:** requires `RFO_ALLOW_LEGACY_ENTRYPOINT=1` or `--allow-legacy-entrypoint`; otherwise prints stderr hint pointing at **`rfo_execute.py`** and exits **64**.
-
-- Default profile is **`search-primary`** from `contracts/run-profiles.json` when `RFO_RUN_PROFILE` is empty (`runtime.profiles.resolve(..., entrypoint_default="search-primary")`).
-- Uses **`fanout_relay_search`** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) **sequentially** (one relay query at a time), with stats recorded on **`collection-result.json`** (`relay_query_fanout`).
-- Emits **`graph/wave-plan.json`** (so **`wave_graph_gate`** can pass on file presence), **`citation-grounding-result.json`**, **`feature-truth-matrix.json`** citation block, and a **`final-answer-gate.json`** aligned with those checks.
-- **Not** the full **`dossier`** work-unit / source-packet pipeline; for that depth use **`scripts/rfo_execute.py`** (or **`runtime_job_worker.py`**). Delivery under **`cli`** may still be **`stub_only`** — distinguish from gateway-attested sends (ADR-016).
+- **Tests:** modules and functions inside the file are still imported by unit tests (e.g. post-finish helpers); that is **not** permission to run the script for production.
+- **Profile `search-primary`:** described in `contracts/run-profiles.json` for artifact semantics; **operator** relay+queue depth is **`rfo_execute.py`** (bridge implementation is loaded internally).
 
 ### `search-primary` profile: contradiction scan (E3)
 
@@ -87,8 +84,12 @@ Packaged **relay + fetch** CLI (not the native slash bridge):
 ## Legacy / auxiliary
 
 - **`scripts/runtime_job_worker.py` / `outbox_delivery_worker.py`** — queued worker pipeline (not the v19.4 native slash path).
-- **`scripts/run_research_factory.py`** — direct run-dir pipeline.
+- **`scripts/run_research_factory.py`** — **not** an operator entrypoint; running as `__main__` prints a fatal hint → **`rfo_execute.py`**, exit **2** (provenance shim for contracts; workers call **`rfo_runtime_core.py`**).
 - **HTML tooling:** **`scripts/rfo_render.py`** with subcommands `canonical` | `semantic-shell` (thin wrappers remain for backwards compatibility).
+
+## Phased rollout (skill repo only)
+
+Work is sequenced **inside this package** as: **(1)** operator docs + contracts + effective-config schema + markdown guardrails; **(2)** single resolver (`runtime/config_resolution.py`) + bridge/path_guard consumers + preflight; **(3)** legacy grave markers, forbidden-env enforcement in canonical paths, run-dir **`effective-config.json`** after allocate, tests for missing relay/workspace. **Gateway / host** changes (argv relay from the same config block as the agent’s web plugin) stay **outside** this tree per deploy ADRs.
 
 ## Bridge re-render strictness
 
@@ -109,6 +110,31 @@ Packaged **relay + fetch** CLI (not the native slash bridge):
 
 - Marker / `latest.json` may show a container workspace path while the host has a different mount prefix.
 - Optional hint: **`RFO_HOST_WORKSPACE_ROOT`** + **`RFO_CONTAINER_WORKSPACE_PREFIX`** populate **`run_dir_host`** in manifest metadata (derivative; verify mounts).
+
+## Production incident checklist (preflight)
+
+**Context (guest agent / Telegram):** the model’s built-in `web_search` tool does **not** inject `RFO_WEB_SEARCH_JSON_API_BASE` into the RFO subprocess. You must pass the JSON relay **explicitly** (argv below or host-native slash wiring).
+
+| Input | Required? | Notes |
+|-------|-------------|--------|
+| **Skill root / CWD** | Yes | Run from the **inner** package root where `scripts/rfo_execute.py` lives (`SKILL.md` tree). Skill root in snapshots comes from **`__file__`**, but operators should **`cd`** there to avoid wrong relative paths. |
+| **`runs_root`** | Yes (or workspace) | e.g. `<OPENCLAW_WORKSPACE_DIR>/rfo-runs` or explicit `--runs-root` (deprecated env: see `runtime/config_resolution.py`). |
+| **Relay base** | Yes | `--web-search-json-api-base "<url>"` **or** `RFO_WEB_SEARCH_JSON_API_BASE`. **Canonical:** no relay → **exit 2** on preflight and on bridge start — not a “successful” run without search. |
+| **`skill_root`** | Derived | Shown in effective-config JSON for audits. |
+| **Sync vs background** | Sync for preflight | Use **foreground** subprocess so exit code and stdout JSON are visible; do not hide failures behind `background=true` when the operator needs pass/fail. |
+
+| Step | Command (example — substitute absolute paths) |
+|------|---------|
+| Resolve relay + runs-root without allocating | `cd /path/to/openclaw/workspace/skills/research-factory-orchestrator && python3 -S scripts/rfo_execute.py --preflight --runs-root /path/to/openclaw/workspace/rfo-runs --web-search-json-api-base "http://127.0.0.1:8180"` |
+| Inspect | **stdout:** `rfo-effective-config-v1` JSON (`errors` must be empty; `relay` non-null). **Exit:** `0` ok, `2` forbidden env, missing relay, or resolution failure. |
+
+**Do not** conflate **native `/research_factory_orchestrator`** (host dispatches bridge) with a **manual** shell from `skills/.../scripts` without the same argv/env — if RFO failed, report the **non-zero exit** and stderr; do not substitute a parallel “answer” from generic web tools and call it RFO.
+
+Use this from a **guest agent** or broken-gateway triage before re-running a full task.
+
+## Adapter emergency policy (queue tooling only)
+
+`scripts/interface_runtime_adapter.py adapter` exists for **preallocated run-dir reuse** and **CLI queue** workflows. It is **not** a drop-in replacement for **`rfo_execute.py`** on the native `/research_factory_orchestrator` path: hosts that route slash compute only through adapter argv skip the documented bridge contract unless they also satisfy disk gates (`result-manifest.json`, validator bundle). Prefer fixing gateway argv to **`rfo_execute.py`**; see **`docs/adr/ADR-016-compute-vs-delivery-split.md`**.
 
 ## Observability (`errors.jsonl`, vector K)
 

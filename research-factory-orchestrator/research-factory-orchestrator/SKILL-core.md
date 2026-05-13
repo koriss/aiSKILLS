@@ -9,16 +9,21 @@
 
 Host-invoked research orchestration skill: artifact-first compute, profile-driven validation, and delivery truth gating. **Delivery** (chat apps, email, etc.) is configured by the host; this repo stays compute + artifacts.
 
+### IDE / agent registry (supported actions)
+
+Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** for supported work from a git checkout + shell. **Research** = **`scripts/rfo_execute.py`** only; `validate_skill`, `unittest`, preflight, and post-run validators are separate **registry** actions, not alternate research CLIs. Anything outside that table is **unsupported** unless you are following explicit troubleshooting notes in `docs/runtime-paths.md`.
+
 ### What the host must supply
 
 | Concern | Typical env / argv |
 |--------|---------------------|
-| Runs filesystem | `--runs-root` / `RFO_RUNS_ROOT` (see `docs/adr/ADR-RFO_PORTABLE.md`) |
-| JSON relay (bridge) | `RFO_WEB_SEARCH_JSON_API_BASE` or `--web-search-json-api-base` |
+| Runs filesystem | Workspace-first: ``OPENCLAW_WORKSPACE_DIR`` / ``--workspace-root`` → ``<ws>/rfo-runs``; optional explicit ``--runs-root`` / ``RFO_RUNS_ROOT`` (deprecated; see ``runtime/config_resolution.py``) |
+| JSON relay (bridge) | `RFO_WEB_SEARCH_JSON_API_BASE` or `--web-search-json-api-base` (**required** for canonical bridge; missing relay → **non-zero**, not silent stub) |
+| Secondary relay (deprecated) | `RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE` — optional; if set, appears only in **`deprecated_inputs_used`** on the effective-config snapshot (not an operator-facing second “product path”) |
 | Run profile | `RFO_RUN_PROFILE` or bridge `--profile` (**`dossier`** default; legacy names remap in `runtime.profiles`; see `docs/PROFILE_DEFAULTS.md`) |
 | User-agent strings | Optional `RFO_WEB_SEARCH_USER_AGENT` (defaults are neutral; no vendor URL) |
 | Wikipedia URL heuristic (bridge) | `RFO_WIKIPEDIA_HEURISTIC=1` to treat `wikipedia.org` as raw-document |
-| Risky bridge flags | `RFO_EXPERIMENT_BRIDGE=1` for `--allow-gate-stub` / `--best-effort-continue` (or `RFO_SMOKE=1`) |
+| Operator diagnostics | ``python3 -S scripts/rfo_execute.py --preflight …`` prints ``effective-config`` JSON (stdout); forbidden env keys (e.g. ``RFO_SMOKE``) force exit **2** |
 | Container path hints | `RFO_HOST_WORKSPACE_ROOT` + `RFO_CONTAINER_WORKSPACE_PREFIX` (both optional; prefix required if mapping) |
 
 ## Eight-phase pipeline

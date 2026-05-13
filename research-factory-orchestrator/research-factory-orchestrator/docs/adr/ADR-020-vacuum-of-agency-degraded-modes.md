@@ -12,7 +12,7 @@ When those goals conflict, the LLM is pushed toward **plain subagent / chat rese
 
 ## Decision
 
-1. **Canonical prod entrypoint** for relay+queue is **`scripts/rfo_execute.py`** (delegates to `run_rfo_with_web_search.py`); legacy **`run_rfo_full_research.py`** is gated (`RFO_ALLOW_LEGACY_ENTRYPOINT` / exit 64).
+1. **Canonical prod entrypoint** for relay+queue is **`scripts/rfo_execute.py`** (delegates to `run_rfo_with_web_search.py`); **`run_rfo_full_research.py`** is **not** an operator entrypoint (grave marker → **`rfo_execute.py`**, exit **2**).
 2. **Degraded modes must stay in-contract** where possible: expose bridge/worker state (`bridge.worker_poll`, lease runbook) instead of silently switching research genre under the same slash.
 3. **Out-of-contract relief** is allowed only via **explicit** separate commands or host UX — not by re-labeling plain subagent output as RFO completion.
 

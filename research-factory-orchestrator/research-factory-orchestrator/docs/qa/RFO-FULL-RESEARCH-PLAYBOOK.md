@@ -32,7 +32,7 @@ python3 -S scripts/rfo_execute.py \
   --task "$TASK"
 ```
 
-(Equivalent: `python3 -S scripts/run_rfo_with_web_search.py` with the same flags — prefer **`rfo_execute.py`** in new automation.)
+(The façade loads the bridge implementation module with the same argv; do not add a second operator-facing copy-paste CLI in new automation.)
 
 Profile defaults to **`dossier`** (relay fanout + source packet semantics). Legacy names remap in `runtime.profiles.resolve`; override with `--profile` only when intentionally matching a validator harness fixture.
 

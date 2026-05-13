@@ -9,6 +9,11 @@ URL для исследования собирается здесь через *
 Обязательно задать базу через ``--web-search-json-api-base`` или
 ``RFO_WEB_SEARCH_JSON_API_BASE`` (значение всегда задаёт оператор).
 
+Runs root (workspace-first): ``OPENCLAW_WORKSPACE_DIR`` / ``--workspace-root`` →
+``<workspace>/rfo-runs``, либо явный ``--runs-root`` / ``RFO_RUNS_ROOT`` (deprecated),
+иначе portable цепочка (см. ``runtime/config_resolution.py`` и
+``docs/adr/ADR-RFO_PORTABLE.md``).
+
 Опционально: ``RFO_WIKIPEDIA_HEURISTIC=1`` — считать URL с ``wikipedia.org`` сырым
 документом (иначе эвристика выключена).
 
@@ -46,8 +51,11 @@ SCRIPTS_DIR = SKILL_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(SKILL_ROOT))
 
-from runtime.schema_defaults import minimal_valid  # noqa: E402
-from runtime.source_record_v19 import normalize_source_record_v19  # noqa: E402
+from runtime.config_resolution import (  # noqa: E402
+    build_effective_config_snapshot,
+    log_startup_summary,
+    relay_chain,
+)
 from runtime.status import VERSION  # noqa: E402
 from runtime.util import jl, now  # noqa: E402
 
@@ -62,6 +70,7 @@ from rfo_relay_search_helpers import (  # noqa: E402
     relay_fetch_cap,
     relay_json_search,
 )
+from runtime.source_record_v19 import normalize_source_record_v19  # noqa: E402
 
 # ── config ────────────────────────────────────────────────────────────────────
 _HTTP_TIMEOUT = float(os.environ.get("RFO_HTTP_TIMEOUT", "8.0"))
@@ -126,42 +135,6 @@ def _parse_stdout_json_object(stdout: str) -> dict[str, Any]:
     return last_obj
 
 
-def _bridge_best_effort_sanity_gate(run_dir: Path) -> tuple[bool, dict[str, Any]]:
-    """
-    Gate handoff in best-effort mode: require minimally coherent artifacts.
-    """
-    required = (
-        "run.json",
-        "runtime-status.json",
-        "result-manifest.json",
-        "report/full-report.html",
-        "chat/01-analysis.md",
-    )
-    missing = [rel for rel in required if not (run_dir / rel).is_file()]
-    rs = {}
-    try:
-        rs = json.loads((run_dir / "runtime-status.json").read_text(encoding="utf-8"))
-    except Exception:
-        rs = {}
-    state = str(rs.get("state") or "").strip().lower()
-    allowed_states = {
-        "content_rendered",
-        "delivery_queued",
-        "delivered",
-        "stub_delivered",
-        "partial_delivery",
-        "delivery_not_proven",
-    }
-    ok = (not missing) and (state in allowed_states)
-    detail = {
-        "ok": ok,
-        "state": state,
-        "missing": missing,
-        "required": list(required),
-    }
-    return ok, detail
-
-
 def _apply_profile_env(env: dict[str, str], profile: str) -> None:
     """Align ``RFO_RUN_PROFILE`` / ``RFO_EXTERNAL_COLLECTION`` with execute semantics."""
     profile = (profile or "").strip()
@@ -182,16 +155,9 @@ def _apply_profile_env(env: dict[str, str], profile: str) -> None:
 
 # ── search ────────────────────────────────────────────────────────────────────
 def resolve_relay_bases(cli_base: str) -> list[str]:
-    """Relay API roots (scheme+host[+path]), no literals: operator supplies all."""
-    seen: list[str] = []
-    for raw in (
-        (cli_base or "").strip(),
-        os.environ.get("RFO_WEB_SEARCH_JSON_API_BASE", "").strip(),
-        os.environ.get("RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE", "").strip(),
-    ):
-        if raw and raw not in seen:
-            seen.append(raw.rstrip("/"))
-    return seen
+    """Relay API roots (scheme+host[+path]); delegates to ``relay_chain``."""
+    bases, _, _ = relay_chain(cli_base, os.environ)
+    return bases
 
 
 def query_json_search_relay(api_base: str, query: str, num: int) -> list[dict]:
@@ -595,7 +561,16 @@ def main() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="RFO relay prefetch bridge (handoff stdout only)")
-    parser.add_argument("--runs-root", required=True)
+    parser.add_argument(
+        "--runs-root",
+        default=None,
+        help="Runs root (deprecated; prefer OPENCLAW_WORKSPACE_DIR / --workspace-root → <ws>/rfo-runs).",
+    )
+    parser.add_argument(
+        "--workspace-root",
+        default=None,
+        help="Workspace directory; runs use <workspace>/rfo-runs when --runs-root is omitted.",
+    )
     parser.add_argument("--task", required=True)
     parser.add_argument("--num-sources", type=int, default=_MAX_SOURCES)
     parser.add_argument(
@@ -605,32 +580,44 @@ def main() -> int:
     )
     parser.add_argument("--profile", default="dossier")
     parser.add_argument(
-        "--allow-gate-stub",
+        "--preflight",
         action="store_true",
-        help="Write optimistic final-answer-gate stub (normally disabled for strict profiles)",
-    )
-    parser.add_argument(
-        "--best-effort-continue",
-        action="store_true",
-        help="After worker subprocess non-zero exit, continue bridge steps instead of failing (default off).",
+        help="Print effective-config JSON to stdout and exit (no run allocation).",
     )
     args = parser.parse_args()
+    argv = list(sys.argv)
 
-    def _experiment_bridge_ok() -> bool:
-        return os.environ.get("RFO_EXPERIMENT_BRIDGE", "").strip().lower() in ("1", "true", "yes")
+    from _rfo_path_guard import enforce_runs_root_argv
 
-    def _smoke_env() -> bool:
-        return os.environ.get("RFO_SMOKE", "").strip().lower() in ("1", "true", "yes")
+    enforce_runs_root_argv(argv)
 
-    if (args.allow_gate_stub or args.best_effort_continue) and not (
-        _experiment_bridge_ok() or _smoke_env()
-    ):
+    snap = build_effective_config_snapshot(
+        skill_root=SKILL_ROOT,
+        argv=argv,
+        env=os.environ,
+        cli_relay_base=args.web_search_json_api_base,
+        profile=args.profile.strip().lower(),
+        entrypoint="scripts/run_rfo_with_web_search.py",
+    )
+    if args.preflight:
+        print(json.dumps(snap, ensure_ascii=False, indent=2, sort_keys=True))
+        errs_pf = snap.get("errors") or []
+        if errs_pf or not snap.get("relay"):
+            return 2
+        return 0
+
+    log_startup_summary(snap)
+    errs = snap.get("errors") or []
+    if errs or not snap.get("runs_root") or not snap.get("relay"):
         print(
-            "[fatal] --allow-gate-stub / --best-effort-continue require "
-            "RFO_EXPERIMENT_BRIDGE=1 (or RFO_SMOKE=1 for smoke runs).",
+            "[fatal] invalid configuration (see stderr [rfo-config-error] lines; "
+            "run with --preflight for effective-config JSON).",
             file=sys.stderr,
         )
         return 2
+
+    runs_root_p = Path(str(snap["runs_root"])).expanduser().resolve(strict=False)
+    runs_root = str(runs_root_p)
 
     task = args.task
     prof_lc = args.profile.strip().lower()
@@ -638,17 +625,15 @@ def main() -> int:
     print(f"[RFO relay] Starting: profile={prof_lc} task={task[:80]!r}", file=sys.stderr)
     print(f"{'='*60}\n", file=sys.stderr)
 
-    relays = resolve_relay_bases(args.web_search_json_api_base)
+    relays = list(snap.get("relay_chain") or [])
     if not relays:
         print(
             "[fatal] JSON relay API base unset. Pass --web-search-json-api-base or export "
-            "RFO_WEB_SEARCH_JSON_API_BASE. No baked-in hostname.",
+            "RFO_WEB_SEARCH_JSON_API_BASE.",
             file=sys.stderr,
         )
         return 2
 
-    runs_root_p = Path(args.runs_root).resolve()
-    runs_root = str(runs_root_p)
     _ensure_rfo_tree(runs_root_p)
 
     from runtime.render import allocate
@@ -673,6 +658,13 @@ def main() -> int:
         label=str(entry.get("run_label") or "bridge"),
     )
     append_bridge_phase(rd_early, "bridge.allocated", {"run_dir": str(rd_early)})
+    try:
+        (rd_early / "effective-config.json").write_text(
+            json.dumps(snap, ensure_ascii=False, indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+    except Exception as e:
+        print(f"[warn] could not write effective-config.json: {e}", file=sys.stderr)
 
     plan_mode = (os.environ.get("RFO_RESEARCH_PLAN_MODE") or "off").strip().lower()
     if plan_mode not in ("off", "llm_v1"):
@@ -837,7 +829,6 @@ def main() -> int:
             return 1
 
         worker_claimed = False
-        worker_hard_failed = False
         last_worker_out = ""
         for attempt in range(_WORKER_RETRY_MAX):
             proc = subprocess.run(
@@ -886,13 +877,6 @@ def main() -> int:
                     stderr_tail=(proc.stderr or "")[-8000:],
                     parsed_summary=summary,
                 )
-                if args.best_effort_continue:
-                    worker_hard_failed = True
-                    print(
-                        "[3/5] WARN: --best-effort-continue set; continuing bridge despite worker failure.",
-                        file=sys.stderr,
-                    )
-                    break
                 return 1
             if proc.returncode != 0:
                 print(f"[3/5] worker exit {proc.returncode}", file=sys.stderr)
@@ -905,13 +889,6 @@ def main() -> int:
                     stderr_tail=(proc.stderr or "")[-8000:],
                     parsed_summary=summary,
                 )
-                if args.best_effort_continue:
-                    worker_hard_failed = True
-                    print(
-                        "[3/5] WARN: --best-effort-continue set; continuing bridge despite worker failure.",
-                        file=sys.stderr,
-                    )
-                    break
                 return 1
             print(
                 f"[3/5] worker not claimed ({reason}), retry {attempt + 1}/{_WORKER_RETRY_MAX}",
@@ -920,30 +897,15 @@ def main() -> int:
             time.sleep(_WORKER_RETRY_BASE_S + 0.12 * attempt)
 
         if not worker_claimed:
-            if args.best_effort_continue and worker_hard_failed and latest_run.is_dir():
-                gate_ok, gate_detail = _bridge_best_effort_sanity_gate(latest_run)
-                if not gate_ok:
-                    print(
-                        "[3/5] ERROR: best-effort sanity gate rejected handoff path "
-                        f"(state={gate_detail.get('state')}, missing={gate_detail.get('missing')}).",
-                        file=sys.stderr,
-                    )
-                    return 1
-                print(
-                    "[3/5] WARN: worker failed, but best-effort sanity gate passed; "
-                    "continuing with degraded bridge path.",
-                    file=sys.stderr,
-                )
-            else:
-                print(
-                    "[3/5] ERROR: worker did not claim a pending job after retries — "
-                    "check queue/pending and queue/worker.lease "
-                    "(canonical: <runs-root>/queue/worker.lease). "
-                    "If lease is stale, set RFO_WORKER_LEASE_STALE_SECONDS or remove the file after verifying no worker holds it.",
-                    file=sys.stderr,
-                )
-                print(last_worker_out[:2500], file=sys.stderr)
-                return 1
+            print(
+                "[3/5] ERROR: worker did not claim a pending job after retries — "
+                "check queue/pending and queue/worker.lease "
+                "(canonical: <runs-root>/queue/worker.lease). "
+                "If lease is stale, set RFO_WORKER_LEASE_STALE_SECONDS or remove the file after verifying no worker holds it.",
+                file=sys.stderr,
+            )
+            print(last_worker_out[:2500], file=sys.stderr)
+            return 1
 
         if not latest_run.is_dir():
             print(f"[3/5] ERROR: run dir missing: {latest_run}", file=sys.stderr)
@@ -1056,28 +1018,10 @@ def main() -> int:
         except Exception as e:
             print(f"[4/5] citation/matrix resync error (non-fatal): {e}", file=sys.stderr)
 
-        if args.allow_gate_stub:
-            try:
-                from runtime.util import jw
-
-                jw(
-                    latest_run / "final-answer-gate.json",
-                    minimal_valid(
-                        "final-answer-gate",
-                        overrides={
-                            "run_id": run_id,
-                            "passed": True,
-                            "status": "stub_only",
-                        },
-                    ),
-                )
-            except Exception as e:
-                print(f"[4/5] gate update error: {e}", file=sys.stderr)
-        else:
-            print(
-                "[4/5] Leaving final-answer-gate untouched (dossier: run validators for truth)",
-                file=sys.stderr,
-            )
+        print(
+            "[4/5] Leaving final-answer-gate untouched (dossier: run validators for truth)",
+            file=sys.stderr,
+        )
 
         print(
             "[5/5] Agent handoff (__RFO_SKILL_AGENT_HANDOFF__=… emitted to stdout as single line)",

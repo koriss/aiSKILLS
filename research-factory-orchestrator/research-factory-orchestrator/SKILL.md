@@ -27,13 +27,22 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Allowed execution paths
 
-- **Host slash / native command (canonical)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade → same argv/semantics as **`scripts/run_rfo_with_web_search.py`**: **sequential** relay query expansion + **`research/research-plan.json`** on disk + collectors + queue bridge — **not** a multi-agent swarm; see `docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md` and `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`). **Primary human artifact:** **`report/full-report.html`**. Plan mode: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`** (default `off`). Preallocated run reuse: **`RFO_PREALLOCATED_RUN_DIR`** (set by the bridge; do not hand-craft for production slash). Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
-- `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."`
-- `python3 -S scripts/run_rfo_with_web_search.py …` — **alias** of `rfo_execute.py` for operators who already embed this path; prefer **`rfo_execute.py`** in new docs and compose files.
-- `python3 -S scripts/run_rfo_full_research.py …` — **legacy** standalone relay+fetch (blocked unless `RFO_ALLOW_LEGACY_ENTRYPOINT=1` or `--allow-legacy-entrypoint`). Profile **`search-primary`** when `RFO_RUN_PROFILE` unset; **not** dossier depth — see `docs/runtime-paths.md` appendix.
+- **Host slash / native command (canonical research)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade: loads the bridge implementation module internally; **sequential** relay query expansion + **`research/research-plan.json`** on disk + collectors + queue bridge — **not** a multi-agent swarm; see `docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md` and `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`). **Primary human artifact:** **`report/full-report.html`**. Plan mode: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`** (default `off`). Preallocated run reuse: **`RFO_PREALLOCATED_RUN_DIR`** (set by the bridge; do not hand-craft for production slash). Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
+- **Queue / tooling (not standalone research):** `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."` — preallocated run-dir / CLI queue plumbing only; not the native slash research path.
+- **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr points to **`rfo_execute.py`**, exit **2**; no research start). The file stays in-tree **only** for unit tests that import helpers — not an operator path.
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
 - `python3 -S scripts/outbox_delivery_worker.py --runs-root <runs-root>`
-- `python3 -S scripts/run_research_factory.py --project-dir <run-dir> --task "..."`
+- **`scripts/run_research_factory.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Workers use **`rfo_runtime_core.py`** directly; this shim is not research launch.
+
+### Registry (IDE / coding agents)
+
+| Action | Command (from skill root) |
+|--------|-------------------------|
+| **Research (relay + queue)** | `python3 -S scripts/rfo_execute.py --runs-root … --task "…"` (+ relay base env or `--web-search-json-api-base`) |
+| **Preflight / effective-config** | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json` |
+| **Skill packaging gate** | `python3 -S scripts/validate_skill.py` |
+| **Unit tests** | `python3 -m unittest discover -s tests` |
+| **Post-run validators** | `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>` |
 
 ### Prohibitions
 
@@ -52,7 +61,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Product canon: depth vs naming
 
-- **Canonical deep research** is the **`dossier`** bridge / work-unit pipeline (multi-step collectors, source packet, full validators). Treat **`run_rfo_full_research.py`** as a **narrow relay+fetch driver** for smoke / CI / host shells that need JSON artifacts quickly — not a substitute for dossier depth, even though the script name contains “full”.
+- **Canonical deep research** is the **`dossier`** bridge / work-unit pipeline (multi-step collectors, source packet, full validators). **`run_rfo_full_research.py`** is not an operator entrypoint; use **`rfo_execute.py`** for relay+queue depth.
 - Do not invent “depth flags” as a separate product surface; prefer the profile + run-mode classification already on disk.
 
 ### v19 core validation

@@ -38,6 +38,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 ### Prohibitions
 
 - Do not route `/research_factory_orchestrator` to a plain subagent. A chat-only recap or `memory/*.md` write-up is **not** RFO completion: there is no run-dir gate bundle, no `__OPENCLAW_SKILL_RESULT__` contract path, and no gateway-attested delivery. If the gateway killed the bridge (SIGTERM), the worker is wedged (`lease_present`), or the user only saw “busy” — triage with `docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md` and `latest_run/observability-events.jsonl` (`bridge.worker_poll`), not a replacement research thread.
+- **Channel gotcha (Telegram / some clients):** if the user line is delivered to the model session as **plain `text`** (e.g. JSON `content: [{ "type": "text", "text": "/research_factory_orchestrator …" }]`) instead of **host native skill dispatch**, answering with `web_search` / `web_fetch` is **not** an RFO run — fix gateway slash registration and timeouts; see `docs/operators/openclaw-gateway-rfo-notes.md` § B0. To lint exports: `python3 -S scripts/validate_rfo_command_did_not_spawn_plain_subagent.py <path>`.
 - Do not claim delivery without `delivery-manifest.json` + `attachment-ledger.json` + provider ack.
 - Do not treat smoke/seed-only artifacts as completed production research.
 - Do not publish local filesystem paths as proof of delivery.

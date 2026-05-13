@@ -17,6 +17,37 @@ Defaults are defined in `scripts/run_rfo_with_web_search.py` (not overridden her
 
 **Tuning without forking code:** for a single long-running worker and heavy dossier, operators often **raise** `RFO_BRIDGE_WORKER_TIMEOUT` and/or `RFO_BRIDGE_WORKER_RETRIES`, then **match** gateway timeout (B1). Shorter smoke stacks can keep defaults.
 
+## B0 — Telegram / session transcript: slash arrived as **plain text** (not native skill dispatch)
+
+**Symptom:** In the session export, the user turn looks like normal chat content, e.g.  
+`"content":[{"type":"text","text":"/research_factory_orchestrator …"}]`  
+— i.e. **`type: "text"`**, not a host-routed skill invocation. The main agent may then “honour” the string by reading `SKILL.md` and calling **`web_search` / `web_fetch`**, which is **not** the v19.3 artifact-only compute path (`python3 -S scripts/rfo_execute.py` → relay → `run_dir` → `__OPENCLAW_SKILL_RESULT__` → gateway delivery). That is an **operations / gateway / channel** issue or model misuse, not a bug in FRED or the skill’s economics logic.
+
+**What a real native run leaves on disk (sanity checks):**
+
+- A **new** directory under **`<workspace>/rfo-runs/runs/<label>/`** around the message time (not only yesterday’s runs).
+- Under that run: **`result-manifest.json`**, relay/collection artifacts as usual.
+- Host audit trail: **`workspace/audit/gateway-skill-delivery-audit.jsonl`** (or your deploy’s equivalent) with entries tied to the Telegram update — not only generic agent tool logs.
+
+**Host checks (replace container / paths with yours):**
+
+```bash
+# Gateway around the time of the /research_factory_orchestrator message
+docker logs <gateway-container> 2>&1 | rg -i 'research_factory|rfo_execute|run_rfo_with_web_search'
+
+# Telegram channel block (slash routing lives in gateway build + config)
+# Example: jq filter on the mounted openclaw.json
+jq '.channels.telegram // .telegram // empty' <path-to/openclaw.json>
+```
+
+**Transcript / export lint:** run the skill repo validator on a saved log or transcript path — it flags RFO mentions **without** approved subprocess evidence (`interface_runtime_adapter.py`, `runtime_job_worker.py`, `run_research_factory.py`, etc.):
+
+```bash
+python3 -S scripts/validate_rfo_command_did_not_spawn_plain_subagent.py /path/to/exported-session.md
+```
+
+**Related:** `web_fetch` blocked with *“private/internal/special-use IP”* is **egress anti-SSRF** (SOCKS/DNS/CDN), separate from whether RFO ran; with native RFO you still rely on relay/fetch policy on the host.
+
 ## B1 — Subprocess budget vs bridge wait loop
 
 - Native `/research_factory_orchestrator` should invoke the skill’s **`python3 -S scripts/rfo_execute.py`** (same argv as the legacy spelled-out `run_rfo_with_web_search.py` command).

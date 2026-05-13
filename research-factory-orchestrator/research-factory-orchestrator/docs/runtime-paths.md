@@ -51,6 +51,7 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 
 - **Native RFO** ends with a **disk-backed run-dir**, `result-manifest.json` / stdout handoff contract, and (in production) gateway delivery + audit. The model is not the source of truth for “ZIP sent” or “investigation complete”.
 - If the user only received a **Markdown file in workspace memory** or a narrative from **`sessions_spawn` / plain research**, that path **did not** run the validator gate bundle for that slash — treat it as **parallel chat research**, not a substitute for the run-dir.
+- **Slash string in a normal user `text` part** (e.g. exported session: `content: [{ "type": "text", "text": "/research_factory_orchestrator …" }]`) means the host did **not** dispatch native skill compute for that turn — the model may still choose `web_search` / `web_fetch`. Fix channel/gateway routing; see **`docs/operators/openclaw-gateway-rfo-notes.md`** § **B0**.
 - **When the bridge is slow or the worker is busy:** read **`docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md`** (`queue/worker.lease`, `pending` vs `running`, PID). While the bridge waits, **`latest_run/observability-events.jsonl`** may contain **`bridge.worker_poll`** lines (`attempt`, `reason`, optional queue snapshot) — use them to explain “still RFO” vs “stuck”.
 - **Host policy** (timeouts, whether to spawn a subagent on SIGTERM) lives in the gateway repo — see **`docs/operators/openclaw-gateway-rfo-notes.md`** for a checklist aligned with this skill’s contract.
 

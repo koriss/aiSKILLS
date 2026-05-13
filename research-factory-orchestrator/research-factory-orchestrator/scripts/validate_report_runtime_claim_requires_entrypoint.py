@@ -26,7 +26,10 @@ def main():
             else:
                 try:
                     ep=json.loads((run_dir/"entrypoint-proof.json").read_text(encoding="utf-8"))
-                    if ep.get("entrypoint")!="scripts/run_research_factory.py" or ep.get("invocation_mode")!="runtime":
+                    if ep.get("entrypoint") not in (
+                        "scripts/rfo_execute.py",
+                        "scripts/run_research_factory.py",
+                    ) or ep.get("invocation_mode") != "runtime":
                         errors.append("entrypoint proof is not valid runtime invocation")
                 except Exception as e:
                     errors.append(f"entrypoint-proof invalid JSON: {e}")

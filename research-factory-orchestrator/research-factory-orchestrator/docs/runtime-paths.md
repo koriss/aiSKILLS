@@ -119,8 +119,10 @@ Work is sequenced **inside this package** as: **(1)** operator docs + contracts 
 |-------|-------------|--------|
 | **Skill root / CWD** | Yes | Run from the **inner** package root where `scripts/rfo_execute.py` lives (`SKILL.md` tree). Skill root in snapshots comes from **`__file__`**, but operators should **`cd`** there to avoid wrong relative paths. |
 | **`runs_root`** | Yes (or workspace) | e.g. `<OPENCLAW_WORKSPACE_DIR>/rfo-runs` or explicit `--runs-root` (deprecated env: see `runtime/config_resolution.py`). |
-| **Relay base** | Yes | `--web-search-json-api-base "<url>"` **or** `RFO_WEB_SEARCH_JSON_API_BASE`. **Canonical:** no relay → **exit 2** on preflight and on bridge start — not a “successful” run without search. |
+| **Relay base** | Yes | `--web-search-json-api-base "<url>"` **or** `RFO_WEB_SEARCH_JSON_API_BASE`. **Canonical:** no relay → **exit 2** on preflight and on bridge start — not a “successful” run without search and **not** a silent stub-only dossier. |
 | **`skill_root`** | Derived | Shown in effective-config JSON for audits. |
+| **Forbidden env** | Must be unset | `RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*` → canonical preflight/bridge exits **2** (configuration error). |
+| **Secondary relay** | Optional | `RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE` — deprecated; if set, appears only under **`deprecated_inputs_used`** in effective-config (not a second product path). |
 | **Sync vs background** | Sync for preflight | Use **foreground** subprocess so exit code and stdout JSON are visible; do not hide failures behind `background=true` when the operator needs pass/fail. |
 
 | Step | Command (example — substitute absolute paths) |

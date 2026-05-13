@@ -15,7 +15,10 @@ def main():
         print("OK: no pipeline/status claim in text")
         return 0
     errors = []
-    if status.get("entrypoint") != "scripts/run_research_factory.py":
+    if status.get("entrypoint") not in (
+        "scripts/rfo_execute.py",
+        "scripts/run_research_factory.py",
+    ):
         errors.append("text claims pipeline but status entrypoint is not runtime")
     if status.get("work_units_total", 0) <= 1:
         errors.append("text claims pipeline but work_units_total <= 1")

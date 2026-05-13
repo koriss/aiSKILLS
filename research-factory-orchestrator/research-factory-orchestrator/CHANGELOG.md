@@ -5,6 +5,7 @@
 ### 19.4.6 — 2026-05-14
 
 - Patch release: semver +0.0.1 (`runtime/version.json`, SKILL metadata, `contracts/run-profiles.json`, compatibility matrix).
+- **Single-behavior (skill repo):** `contracts/command-router-contract.json` maps native slash commands to **`scripts/rfo_execute.py`**; `contracts/entrypoint-contract.json` documents **`canonical_operator_research_entrypoint`** vs queued-worker `required_entrypoint`; `contracts/supported-skill-actions-v1.json` — IDE/registry mirror; validators accept **`entrypoint-proof.json`** from either **`rfo_execute.py`** or historical **`run_research_factory.py`**; `tests/test_legacy_grave_markers.py`; SKILL/runtime-paths guest-preflight table expanded (forbidden env, secondary relay deprecated).
 
 ### 19.4.5 — 2026-05-13
 

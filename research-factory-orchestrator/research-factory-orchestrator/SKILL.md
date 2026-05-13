@@ -36,13 +36,20 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Registry (IDE / coding agents)
 
-| Action | Command (from skill root) |
-|--------|-------------------------|
-| **Research (relay + queue)** | `python3 -S scripts/rfo_execute.py --runs-root … --task "…"` (+ relay base env or `--web-search-json-api-base`) |
-| **Preflight / effective-config** | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json` |
-| **Skill packaging gate** | `python3 -S scripts/validate_skill.py` |
-| **Unit tests** | `python3 -m unittest discover -s tests` |
-| **Post-run validators** | `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>` |
+Machine-readable mirror: `contracts/supported-skill-actions-v1.json`. **Unsupported:** any `scripts/*.py` workflow not listed here (except troubleshooting sections in `docs/runtime-paths.md`).
+
+| Action | When | Command (from skill root) |
+|--------|------|---------------------------|
+| **Research (relay + queue)** | Default operator path — dossier bridge | `python3 -S scripts/rfo_execute.py --workspace-root <workspace> --task "…"` + `--web-search-json-api-base …` **or** `RFO_WEB_SEARCH_JSON_API_BASE`; alternatively explicit `--runs-root …` (see `runtime/config_resolution.py`) |
+| **Preflight / effective-config** | Guest agent / Telegram triage before a full run; must be **foreground** (see `docs/runtime-paths.md` § Production incident checklist) | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json`; forbidden env (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`) → exit **2** |
+| **Skill packaging gate** | Release / CI layout | `python3 -S scripts/validate_skill.py` |
+| **Unit tests** | Regression checks | `python3 -m unittest discover -s tests` |
+| **Post-run validators** | After a run-dir exists | `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>` |
+| **Emergency (internal)** | Source-packet + `execute` troubleshooting only — **not** a second research launch | See `docs/runtime-paths.md` § Adapter emergency policy |
+
+### Guest agent: required inputs (summary)
+
+Relay JSON base and runs/workspace resolution are **orthogonal**: missing relay → canonical CLI exits **non-zero** (not “successful dossier without search”). Do **not** hide RFO stderr/exit behind `background=true` when you need a synchronous pass/fail. Full matrix: `docs/runtime-paths.md` § Production incident checklist.
 
 ### Prohibitions
 

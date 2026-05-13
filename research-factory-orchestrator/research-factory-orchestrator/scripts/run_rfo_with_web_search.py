@@ -25,6 +25,9 @@ Runs root (workspace-first): ``OPENCLAW_WORKSPACE_DIR`` / ``--workspace-root`` �
 
 По умолчанию профиль ``dossier`` (единый конвейер «досье»); допустимые имена —
 только ключи из ``contracts/run-profiles.json``.
+
+**Конфигурация:** резолв ``runs_root`` / relay / effective-config — только через
+``runtime/config_resolution.py`` (без дублирования цепочек приоритетов в этом файле).
 """
 from __future__ import annotations
 

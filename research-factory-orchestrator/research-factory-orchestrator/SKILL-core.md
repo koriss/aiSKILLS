@@ -11,7 +11,7 @@ Host-invoked research orchestration skill: artifact-first compute, profile-drive
 
 ### IDE / agent registry (supported actions)
 
-Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** for supported work from a git checkout + shell. **Research** = **`scripts/rfo_execute.py`** only; `validate_skill`, `unittest`, preflight, and post-run validators are separate **registry** actions, not alternate research CLIs. Anything outside that table is **unsupported** unless you are following explicit troubleshooting notes in `docs/runtime-paths.md`.
+Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** for supported work from a git checkout + shell. **Research** = **`scripts/rfo_execute.py`** only; `validate_skill`, `unittest`, preflight, and post-run validators are separate **registry** actions, not alternate research CLIs. **`contracts/supported-skill-actions-v1.json`** duplicates the registry for tooling. Anything outside that table is **unsupported** unless you are following explicit troubleshooting notes in `docs/runtime-paths.md` (e.g. adapter emergency).
 
 ### What the host must supply
 

@@ -6,6 +6,7 @@ import argparse, re, sys
 CORE_RUNTIME = [
     'scripts/common_runtime.py',
     'scripts/init_runtime.py',
+    'scripts/rfo_execute.py',
     'scripts/run_research_factory.py',
     'scripts/runtime_job_worker.py',
     'scripts/outbox_delivery_worker.py',

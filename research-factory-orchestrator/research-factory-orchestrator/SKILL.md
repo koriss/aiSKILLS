@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.4.4+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
+description: Research Factory Orchestrator — v19.4.5+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
-  version: "19.4.4"
+  version: "19.4.5"
   package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -12,7 +12,7 @@ metadata:
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.4.4"
+  release: "19.4.5"
 ---
 
 ## HOW TO OPERATE THIS SKILL

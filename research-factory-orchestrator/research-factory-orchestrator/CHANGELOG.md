@@ -2,6 +2,11 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.5 — 2026-05-13
+
+- **Research plan on disk + early `run_dir`:** `research-plan-v1` contract, `RFO_RESEARCH_PLAN_MODE=off|llm_v1`, bridge allocates run directory before relay; adapter reuse via `RFO_PREALLOCATED_RUN_DIR`; `fanout_relay_search_from_queries`; plan validation in `validate_impl` when present; ADR-021; `jl()` ResourceWarning fix; `tests/test_research_plan_bridge.py`.
+- **Operators:** `docs/operators/openclaw-gateway-rfo-notes.md` § B0 — Telegram/session JSON where `/research_factory_orchestrator` arrives as plain `type:text` (not native skill dispatch); transcript lint via `validate_rfo_command_did_not_spawn_plain_subagent.py`; cross-links in `SKILL.md` and `docs/runtime-paths.md`.
+
 ### 19.4.4 — 2026-05-10
 
 - **Bridge / relay:** worker exit semantics hardened; `bridge.worker_poll` events appended to `latest_run/observability-events.jsonl`; non-zero exit when the inner worker fails after claim.

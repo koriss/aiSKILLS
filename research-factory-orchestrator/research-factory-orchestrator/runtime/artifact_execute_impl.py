@@ -10,6 +10,7 @@ from types import SimpleNamespace
 
 from runtime.profiles import resolve as _resolve_profile
 from runtime.render import allocate
+from runtime.status import VERSION
 from runtime.report_html import (
     content_profile_for_manifest,
     ensure_canonical_full_report_html,

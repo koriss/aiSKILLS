@@ -1,4 +1,4 @@
-"""Citation grounding result writer (RFO v19.4.7).
+"""Citation grounding result writer (RFO v19.4.8).
 
 Produces ``<rd>/citation-grounding-result.json`` consumed by
 runtime.outbox.finalize and validate_citation_grounding. Closes

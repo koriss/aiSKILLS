@@ -1,5 +1,5 @@
 {
-  "version": "19.4.7",
+  "version": "19.4.8",
   "canonical_operator_research_entrypoint": "scripts/rfo_execute.py",
   "required_entrypoint": "scripts/run_research_factory.py",
   "_comment_required_entrypoint": "Queued runtime_job_worker subprocess still invokes run_research_factory.py → rfo_runtime_core; native slash / gateway dispatch uses canonical_operator_research_entrypoint.",

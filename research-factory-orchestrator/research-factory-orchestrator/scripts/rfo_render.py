@@ -12,25 +12,22 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from runtime.report_html import build_full_report_html_from_run_dir, write_canonical_full_report_html  # noqa: E402
+from runtime.report_html import rebuild_canonical_md_then_html, write_canonical_full_report_html  # noqa: E402
+from runtime.report_inputs import minimal_report_sources_ready  # noqa: E402
 
-RENDERER_VERSION = "19.4.1-rfo-render-cli"
+RENDERER_VERSION = "19.4.8-rfo-render-cli-md-first"
 
 
 def cmd_canonical(args: argparse.Namespace) -> int:
     run_dir = Path(args.run_dir).resolve()
-    required = (
-        "run.json",
-        "claims-registry.json",
-        "sources.json",
-        "evidence-cards.json",
-    )
-    missing = [k for k in required if not (run_dir / k).is_file()]
-    if missing:
-        sys.stderr.write("cannot render HTML; missing: " + ", ".join(missing) + "\n")
+    ok, note = minimal_report_sources_ready(run_dir)
+    if not ok:
+        sys.stderr.write("cannot render dossier; " + note + "\n")
         return 2
-    html_doc = build_full_report_html_from_run_dir(run_dir)
-    write_canonical_full_report_html(run_dir, html_doc, source="rfo_render.canonical")
+    ok2, note2 = rebuild_canonical_md_then_html(run_dir, source="rfo_render.canonical")
+    if not ok2:
+        sys.stderr.write("render failed: " + note2 + "\n")
+        return 2
     run = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
     run_id = str(run.get("run_id") or "UNKNOWN")
     print(
@@ -38,9 +35,10 @@ def cmd_canonical(args: argparse.Namespace) -> int:
             {
                 "rendered": True,
                 "run_id": run_id,
-                "path": "report/full-report.html",
+                "markdown_path": "report/full-report.md",
+                "html_path": "report/full-report.html",
                 "renderer_version": RENDERER_VERSION,
-                "note": "runtime.report_html.build_full_report_html_from_run_dir → write_canonical_full_report_html",
+                "note": note2,
             },
             ensure_ascii=False,
             indent=2,

@@ -188,6 +188,7 @@ def _inv_lc11(rd: Path) -> list[dict]:
         ("run.json", 2),
         ("delivery-manifest.json", 2),
         ("feature-truth-matrix.json", 10),
+        ("report/full-report.md", 32),
         ("report/full-report.html", 100),
     ]
     for rel, minb in required:

@@ -11,7 +11,7 @@ CURRENT_REQUIRED = [
     "claims/claims-registry.json", "evidence/evidence-cards.json", "graph/target-graph.json",
     "raw-evidence/raw-evidence-vault.json", "provenance-manifest.json", "artifact-manifest.json",
     "validation-transcript.json", "delivery-manifest.json", "attachment-ledger.json", "final-answer-gate.json",
-    "report/semantic-report.json", "report/full-report.html", "chat/chat-message-plan.json",
+    "report/semantic-report.json", "report/full-report.md", "report/full-report.html", "chat/chat-message-plan.json",
     "interface/interface-request.json", "interface/normalized-command.json", "jobs/runtime-job.json", "outbox/outbox-policy.json",
 ]
 CURRENT_REQUIRED_DIRS = ["work-units", "subagents", "ledgers", "claims", "evidence", "raw-evidence", "report", "chat", "outbox", "delivery-acks", "provider-payloads"]

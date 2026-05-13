@@ -278,6 +278,12 @@
       "line_schema": null
     },
     {
+      "relpath": "report/full-report.md",
+      "kind": "text",
+      "core_schema": "pkg-stub-empty-string",
+      "line_schema": null
+    },
+    {
       "relpath": "report/full-report.html",
       "kind": "text",
       "core_schema": "pkg-stub-html",

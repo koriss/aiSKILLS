@@ -6,10 +6,28 @@ import json
 import re
 from pathlib import Path
 
+from runtime.report_inputs import ReportRunInputs, minimal_report_sources_ready
+from runtime.report_md import (
+    FULL_REPORT_MD_REL,
+    build_full_report_md,
+    write_canonical_full_report_md,
+)
 from runtime.util import CLAIM_STATUS_LEGACY_ALIASES, jr, tw
 
 # Canonical relative path inside a run-dir (single writer API — use write_canonical_full_report_html).
 FULL_REPORT_REL = "report/full-report.html"
+
+# Standard JSON proof block ids expected by ``scripts/validate_html_proof_matches_runtime_artifacts.py``.
+_RFO_BLOCK_TO_FILE: tuple[tuple[str, str], ...] = (
+    ("runtime-status-json", "runtime-status.json"),
+    ("entrypoint-proof-json", "entrypoint-proof.json"),
+    ("delivery-manifest-json", "delivery-manifest.json"),
+    ("final-answer-gate-json", "final-answer-gate.json"),
+    ("validation-transcript-json", "validation-transcript.json"),
+    ("artifact-manifest-json", "artifact-manifest.json"),
+    ("provenance-manifest-json", "provenance-manifest.json"),
+    ("semantic-report-json", "report/semantic-report.json"),
+)
 
 _PKG_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_PATH = _PKG_ROOT / "templates" / "full-report-template.html"
@@ -358,6 +376,114 @@ def build_proof_scripts_html(rd: Path, proofs: list[str]) -> str:
     )
 
 
+def build_standard_rfo_proof_blocks_html(rd: Path) -> str:
+    """Emit ``<script type=\"application/json\" id=\"…\">`` blocks matching ``validate_html_proof_matches_runtime_artifacts``."""
+    scripts: list[str] = []
+    rd = Path(rd).resolve()
+    for sid, rel in _RFO_BLOCK_TO_FILE:
+        fp = rd / rel
+        if not fp.is_file():
+            continue
+        raw = fp.read_text(encoding="utf-8")
+        scripts.append(
+            f'<script type="application/json" id="{html.escape(sid)}">'
+            f"{html.escape(raw)}</script>"
+        )
+    extra_paths = [
+        "run.json",
+        "claims/claims-registry.json",
+        "evidence/evidence-cards.json",
+        "report/analytical-memo.json",
+        "report/factual-dossier.json",
+        "report/io-propaganda-check.json",
+        "self-audit/runtime-self-audit.json",
+    ]
+    for p in extra_paths:
+        fp = rd / p
+        if not fp.is_file():
+            continue
+        pid = p.replace("/", "-").replace(".", "-") + "-json"
+        raw = fp.read_text(encoding="utf-8")
+        safe_id = pid.replace('"', "")
+        scripts.append(
+            f'<script type="application/json" id="{html.escape(safe_id)}">'
+            f"{html.escape(raw)}</script>"
+        )
+    return (
+        "<section id=\"embedded-proof-blocks\"><h2>Embedded proof blocks</h2>"
+        "<p>MD-first HTML shell; JSON blocks mirror on-disk artifacts for validators.</p>"
+        f"{''.join(scripts)}</section>"
+    )
+
+
+def md_to_html_body(md: str) -> str:
+    """Render Markdown to an HTML fragment; safe fallback if ``markdown`` is not installed."""
+    try:
+        import markdown as _markdown  # type: ignore[import-not-found]
+
+        return str(
+            _markdown.markdown(
+                md,
+                extensions=["tables", "fenced_code", "nl2br"],
+            )
+        )
+    except Exception:
+        return (
+            '<main class="rfo-md-fallback"><pre class="rfo-md-pre">'
+            f"{html.escape(md)}"
+            "</pre></main>"
+        )
+
+
+def build_full_report_html_from_markdown(rd: Path, md_text: str) -> str:
+    """Standalone HTML document derived **only** from Markdown + standard proof blocks."""
+    rd = Path(rd).resolve()
+    run_meta = jr(rd / "run.json", {})
+    run_id = str(run_meta.get("run_id") or "UNKNOWN")
+    title = f"RFO Report — {run_id}"
+    inner = md_to_html_body(md_text)
+    proof = build_standard_rfo_proof_blocks_html(rd)
+    styles = (
+        "<style>body{font-family:system-ui,Segoe UI,sans-serif;margin:0;background:#fafafa;color:#111}"
+        ".rfo-from-md{max-width:1100px;margin:0 auto;padding:16px 20px 48px;background:#fff}"
+        ".rfo-md-pre{white-space:pre-wrap;font-size:13px;font-family:ui-monospace,monospace}"
+        "table{border-collapse:collapse;width:100%;margin:12px 0}"
+        "th,td{border:1px solid #ccc;padding:6px;text-align:left}"
+        "code{background:#f0f0f0;padding:1px 4px;border-radius:3px}</style>"
+    )
+    return (
+        "<!DOCTYPE html>\n"
+        '<html lang="ru">\n<head>\n'
+        '<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        f"<title>{html.escape(title)}</title>\n{styles}\n</head>\n<body>\n"
+        '<article class="rfo-from-md rfo-md-first">\n'
+        f"{inner}\n</article>\n{proof}\n</body>\n</html>\n"
+    )
+
+
+def rebuild_canonical_md_then_html(rd: Path, *, source: str = "rebuild_canonical_md_then_html") -> tuple[bool, str]:
+    """Write ``report/full-report.md`` from JSON, then ``report/full-report.html`` **only** from that MD."""
+    rd = Path(rd).resolve()
+    ok, note = minimal_report_sources_ready(rd)
+    if not ok:
+        return False, note
+    try:
+        inputs = ReportRunInputs.from_run_dir(rd)
+        md_doc = build_full_report_md(inputs)
+        if not md_doc.strip():
+            return False, "empty_md"
+        write_canonical_full_report_md(rd, md_doc, source=source)
+    except Exception as exc:
+        return False, f"md_write_failed:{exc!r}"
+    try:
+        html_doc = build_full_report_html_from_markdown(rd, md_doc)
+        write_canonical_full_report_html(rd, html_doc, source=source)
+    except Exception as exc:
+        return False, f"html_failed_md_preserved:{exc!r}"
+    return True, "md_then_html_ok"
+
+
 def build_run_banner_html(
     rd: Path,
     provider: str,
@@ -588,89 +714,33 @@ def build_full_report_html(
 
 
 def build_full_report_html_from_run_dir(rd: Path) -> str:
-    """Rebuild HTML from an existing run directory (for CLI)."""
-    run_meta = jr(rd / "run.json", {})
-    run_id = str(run_meta.get("run_id") or "UNKNOWN")
-    job_id = str(run_meta.get("job_id") or "UNKNOWN")
-    cmd_id = str(run_meta.get("command_id") or run_meta.get("cmd_id") or "")
-    task = str(run_meta.get("task") or "")
-    provider = str(run_meta.get("provider") or "")
+    """Rebuild HTML from an existing run directory using the **legacy** wiki template (JSON → template).
 
-    memo = jr(rd / "report/analytical-memo.json", {})
-    if not isinstance(memo, dict):
-        memo = {}
-    factual = jr(rd / "report/factual-dossier.json", {})
-    if not isinstance(factual, dict):
-        factual = {}
-    io = jr(rd / "report/io-propaganda-check.json", {})
-    if not isinstance(io, dict):
-        io = {}
-    audit = jr(rd / "self-audit/runtime-self-audit.json", {})
-    if not isinstance(audit, dict):
-        audit = {}
-
-    claims_data = jr(rd / "claims-registry.json", {})
-    claims = claims_data.get("claims") if isinstance(claims_data, dict) else []
-    if not isinstance(claims, list):
-        claims = []
-    src_data = jr(rd / "sources.json", {})
-    sources = src_data.get("sources") if isinstance(src_data, dict) else []
-    if not isinstance(sources, list):
-        sources = []
-    ev_data = jr(rd / "evidence-cards.json", {})
-    evidence = ev_data.get("evidence_cards") if isinstance(ev_data, dict) else []
-    if not isinstance(evidence, list):
-        evidence = []
-
-    graph = jr(rd / "graph/target-graph.json", {})
-    nodes = graph.get("nodes") if isinstance(graph, dict) else []
-    edges = graph.get("edges") if isinstance(graph, dict) else []
-    if not isinstance(nodes, list):
-        nodes = []
-    if not isinstance(edges, list):
-        edges = []
-
-    wp = jr(rd / "graph/wave-plan.json", {})
-    waves = wp.get("waves") if isinstance(wp, dict) else []
-    if not isinstance(waves, list):
-        waves = []
-
-    external_source_count = sum(
-        1
-        for s in sources
-        if isinstance(s, dict)
-        and s.get("source_role") != "seed"
-        and not str(s.get("source_id") or "").startswith("stub:")
-    )
-    user_visible_research = external_source_count > 0
-    disclaimer = (
-        "No external evidence collected; runtime structure only."
-        if not user_visible_research
-        else "External evidence present."
-    )
-
+    For the canonical MD-first pipeline use ``rebuild_canonical_md_then_html`` / ``build_full_report_html_from_markdown``.
+    """
+    inputs = ReportRunInputs.from_run_dir(rd)
     from runtime.status import VERSION
     from runtime.util import now as util_now
 
     return build_full_report_html(
-        rd=rd,
-        task=task,
-        run_id=run_id,
-        job_id=job_id,
-        cmd_id=cmd_id,
-        provider=provider,
-        memo=memo,
-        claims=claims,
-        sources=sources,
-        evidence=evidence,
-        waves=waves,
-        nodes=nodes,
-        edges=edges,
-        io=io,
-        audit=audit,
-        disclaimer=disclaimer,
-        user_visible_research=user_visible_research,
-        factual=factual,
+        rd=inputs.rd,
+        task=inputs.task,
+        run_id=inputs.run_id,
+        job_id=inputs.job_id,
+        cmd_id=inputs.cmd_id,
+        provider=inputs.provider,
+        memo=inputs.memo,
+        claims=inputs.claims,
+        sources=inputs.sources,
+        evidence=inputs.evidence,
+        waves=inputs.waves,
+        nodes=inputs.nodes,
+        edges=inputs.edges,
+        io=inputs.io,
+        audit=inputs.audit,
+        disclaimer=inputs.disclaimer,
+        user_visible_research=inputs.user_visible_research,
+        factual=inputs.factual,
         generated_at=util_now(),
         version=VERSION,
     )
@@ -726,35 +796,34 @@ def write_canonical_full_report_html(rd: Path, html_doc: str, *, source: str = "
 
 
 def _try_rebuild_full_report_html(rd: Path) -> tuple[bool, str]:
-    required = ("run.json", "claims-registry.json", "sources.json", "evidence-cards.json")
-    for name in required:
-        if not (rd / name).is_file():
-            return False, f"missing:{name}"
-    try:
-        html_doc = build_full_report_html_from_run_dir(rd)
-        write_canonical_full_report_html(rd, html_doc, source="ensure_canonical_full_report_html")
-        return True, "rebuilt"
-    except Exception as exc:
-        return False, repr(exc)
+    """Rebuild canonical dossier: ``report/full-report.md`` then ``report/full-report.html`` from MD only."""
+    return rebuild_canonical_md_then_html(rd, source="ensure_canonical_full_report_html")
 
 
 def ensure_canonical_full_report_html(rd: Path) -> tuple[bool, str]:
-    """If ``full-report.html`` is missing or not HTML-ish, rebuild from run-dir JSON when possible.
+    """Ensure ``report/full-report.md`` exists and ``report/full-report.html`` is HTML-ish (MD-first).
 
-    Returns (ok, note) where note includes sniff profile or rebuild status.
+    When either is missing or HTML is corrupt, rebuild via ``rebuild_canonical_md_then_html`` when core
+    JSON exists. If HTML rendering fails after MD was written, returns ``(True, "md_only;…")``.
     """
     rd = Path(rd).resolve()
     fp = rd / FULL_REPORT_REL
-    if not fp.is_file():
-        ok, msg = _try_rebuild_full_report_html(rd)
-        return ok, f"missing_file;{msg}"
+    md_p = rd / FULL_REPORT_MD_REL
+    md_ok = md_p.is_file() and md_p.stat().st_size > 32
 
-    raw = fp.read_bytes()[:8192].decode("utf-8", errors="replace")
-    prof = sniff_html_document(raw)
-    if prof in ("html_document", "html_fragment"):
+    html_ok = False
+    prof = "missing_file"
+    if fp.is_file():
+        raw = fp.read_bytes()[:8192].decode("utf-8", errors="replace")
+        prof = sniff_html_document(raw)
+        html_ok = prof in ("html_document", "html_fragment")
+
+    if html_ok and md_ok:
         return True, prof
 
-    ok, msg = _try_rebuild_full_report_html(rd)
+    ok, msg = rebuild_canonical_md_then_html(rd, source="ensure_canonical_full_report_html")
     if ok:
-        return True, f"repaired_from_{prof}"
-    return False, f"non_html_profile={prof};rebuild_failed:{msg}"
+        return True, f"repaired_or_synced:{prof if fp.is_file() else 'missing_html_before'}:{msg}"
+    if msg.startswith("html_failed_md_preserved:") and md_p.is_file() and md_p.stat().st_size > 32:
+        return True, f"md_only;{msg}"
+    return False, msg

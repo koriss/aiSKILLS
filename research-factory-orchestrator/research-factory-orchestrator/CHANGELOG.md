@@ -2,6 +2,16 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.8 — 2026-05-10
+
+- **MD-first dossier:** `runtime/report_inputs.py` centralizes run-dir inputs; `runtime/report_md.py` writes **`report/full-report.md`**; `runtime/report_html.py` derives **`report/full-report.html`** only from that Markdown (`markdown` when available, else escaped `<pre>` fallback). `render_all` and `scripts/rfo_render.py canonical` follow MD → HTML; embedded JSON proof blocks remain in the HTML shell for validators.
+- **Contracts / gates:** `report/full-report.md` is required in package layout and worker post-render checks; `content_gate` treats non-trivial MD as primary; HTML presence tracked as derivative.
+- **Tests:** `tests/test_report_md_first_pipeline.py`.
+- **Docs:** `docs/runtime-paths.md` (canonical files section); `docs/operator/rfo-llm-pipeline-checkpoints.md` (Layer A / B for LLM-assisted operators).
+- **Host deploy (opt-openclaw):** rsync this package to the host skill tree only when the operator confirms the target instance; example:  
+  `rsync -a --delete /home/kazak/_projects/aiSKILLS/research-factory-orchestrator/research-factory-orchestrator/ /opt/openclaw/data/workspace/skills/research-factory-orchestrator/`  
+  then `docker compose restart gateway` from that stack’s compose directory; smoke `/research_factory_orchestrator` per gateway runbook.
+
 ### 19.4.7 — 2026-05-10
 
 - **Host / IDE agents:** `runtime/research_bridge_bootstrap.py` now materializes **`agent-operating-log.md`** at the root of each allocated **`run_dir`** (same path as `result-manifest.json`) so append-only step logs do not rely on guessed `rfo-runs/runs/<slug>/` trees.

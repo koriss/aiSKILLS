@@ -10,7 +10,9 @@ from runtime.chat_md import (
     build_facts_markdown,
     compute_quality_metadata,
 )
-from runtime.report_html import build_full_report_html, write_canonical_full_report_html
+from runtime.report_html import build_full_report_html_from_markdown, write_canonical_full_report_html
+from runtime.report_inputs import ReportRunInputs
+from runtime.report_md import build_full_report_md, write_canonical_full_report_md
 from runtime.status import VERSION
 from runtime.util import jr, jw, now, sid, slug, tw
 
@@ -349,28 +351,10 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
     }
     jw(rd / "report/semantic-report.json", semantic)
 
-    html_doc = build_full_report_html(
-        rd=rd,
-        task=task,
-        run_id=run_id,
-        job_id=job_id,
-        cmd_id=cmd_id,
-        provider=provider,
-        memo=memo,
-        claims=cs,
-        sources=sources,
-        evidence=evidence,
-        waves=waves,
-        nodes=nodes,
-        edges=edges,
-        io=io,
-        audit=audit,
-        disclaimer=disclaimer,
-        user_visible_research=user_visible_research,
-        factual=factual,
-        generated_at=now(),
-        version=VERSION,
-    )
+    inputs = ReportRunInputs.from_run_dir(rd)
+    md_doc = build_full_report_md(inputs)
+    write_canonical_full_report_md(rd, md_doc, source="render_all")
+    html_doc = build_full_report_html_from_markdown(rd, md_doc)
     write_canonical_full_report_html(rd, html_doc, source="render_all")
     artifact_layout = {
         "schema_version": "v19.0",
@@ -381,6 +365,7 @@ def render_all(rd, task, run_id, job_id, cmd_id, provider):
             "claims-registry.json",
             "sources.json",
             "evidence-cards.json",
+            "report/full-report.md",
             "report/full-report.html",
             "chat/01-analysis.md",
             "chat/02-facts.md",

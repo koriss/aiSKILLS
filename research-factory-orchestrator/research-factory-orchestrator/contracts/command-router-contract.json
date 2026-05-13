@@ -1,5 +1,5 @@
 {
-  "version": "19.4.7",
+  "version": "19.4.8",
   "commands": {
     "/research_factory_orchestrator": {
       "entrypoint": "scripts/rfo_execute.py",

@@ -148,7 +148,7 @@ def main():
         jwrite(root/"subagents"/sa/"assignment.json", a)
         jwrite(root/"subagents"/sa/"context-packet.json", {"run_id":run_id,"job_id":job_id,"command_id":command_id,"task":args.task,"work_unit_id":wu["work_unit_id"],"axis":wu["axis"],"allowed_scope":["target-relevant collection and analysis"],"forbidden_scope":["unsupported conclusions","unbounded recursion","raw sensitive data in chat/provider messages"],"required_outputs":wu["required_outputs"]})
         jwrite(root/"work-units"/wu["work_unit_id"]/"contract.json", wu)
-    run={"run_id":run_id,"job_id":job_id,"command_id":command_id,"request_id":request_id,"topic":args.task,"slug":slug,"created_at":now(),"updated_at":now(),"status":"created","skill_version":VERSION,"mode":args.mode,"paths":{"html_report":"report/full-report.html","research_package":"package/research-package.zip","chat_plan":"chat/chat-message-plan.json"}}
+    run={"run_id":run_id,"job_id":job_id,"command_id":command_id,"request_id":request_id,"topic":args.task,"slug":slug,"created_at":now(),"updated_at":now(),"status":"created","skill_version":VERSION,"mode":args.mode,"paths":{"md_report":"report/full-report.md","html_report":"report/full-report.html","research_package":"package/research-package.zip","chat_plan":"chat/chat-message-plan.json"}}
     jwrite(root/"run.json", run)
     jwrite(root/"run-state.json", {"run_id":run_id,"job_id":job_id,"status":"created","current_state":"created","completed_states":[],"last_checkpoint_at":now(),"resume_from":None,"errors":[]})
     jwrite(root/"task-profile.json", {"task_id":run_id,"run_id":run_id,"job_id":job_id,"topic":args.task,"detected_entities":[],"claim_types":[],"uncertainty_axes":["entity_ambiguity","source_independence","current_vs_historical","self_claim_vs_external"],"source_family_needs":SOURCE_FAMILIES,"created_at":now()})
@@ -188,6 +188,10 @@ def main():
         root,
         "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'></head><body><h1>Runtime initialization report shell</h1><script type='application/json' id='artifact-manifest-json'>{}</script><script type='application/json' id='provenance-manifest-json'>{}</script><script type='application/json' id='validation-transcript-json'>{}</script><script type='application/json' id='delivery-manifest-json'>{}</script><script type='application/json' id='runtime-status-json'>{}</script><script type='application/json' id='entrypoint-proof-json'>{}</script></body></html>",
         source="init_runtime",
+    )
+    twrite(
+        root / "report/full-report.md",
+        "# Runtime initialization report (stub)\n\nPipeline replaces this with the canonical MD-first dossier.\n",
     )
     chat_plan={"run_id":run_id,"job_id":job_id,"command_id":command_id,"provider":args.provider,"plain_text_only":True,"mobile_safe":True,"no_tables":True,"no_local_paths":True,"split_policy":{"max_message_chars":3500,"logical_blocks":True},"messages":[],"attachments":[],"created_at":now()}
     jwrite(root/"chat/chat-message-plan.json", chat_plan)

@@ -2,7 +2,7 @@
 from pathlib import Path
 import json, datetime, hashlib, re
 
-VERSION = "19.4.7"
+VERSION = "19.4.8"
 
 def now():
     return datetime.datetime.now(datetime.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")

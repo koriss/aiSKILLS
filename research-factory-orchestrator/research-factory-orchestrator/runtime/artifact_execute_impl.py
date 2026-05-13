@@ -15,7 +15,7 @@ from runtime.report_html import (
     ensure_canonical_full_report_html,
     sniff_html_document,
 )
-from runtime.status import VERSION
+from runtime.report_md import FULL_REPORT_MD_REL
 from runtime.schema_defaults import minimal_valid
 from runtime.util import jw, jr, now, sha, sid
 from runtime.chat_md import sanitize_chat_body_for_plain_channels
@@ -28,7 +28,7 @@ RESULT_MANIFEST_CONTRACT = "rfo-skill-agent-handoff-v1"
 
 DEFAULT_INSTRUCTIONS_FOR_INVOKING_AGENT = [
     "This process is compute-only: it writes artifacts under run_dir and does not open chat sessions or outbound channels.",
-    "Primary human-readable outputs: chat/01-analysis.md (analysis + IO check), chat/02-facts.md (claims with URLs), report/full-report.html.",
+    "Primary human-readable outputs: chat/01-analysis.md (analysis + IO check), chat/02-facts.md (claims with URLs), report/full-report.md (canonical dossier text), then report/full-report.html (HTML derived only from that Markdown).",
     "If your environment can attach files for the human, attach paths listed under result-manifest.json.artifacts;",
     "only claim artifacts were handed off after your layer actually exposes them.",
 ]
@@ -52,6 +52,7 @@ def _write_agent_handoff_bundle(rd: Path) -> None:
         {"role": "sources", "path": "sources.json"},
         {"role": "feature_truth_matrix", "path": "feature-truth-matrix.json"},
         {"role": "delivery_manifest", "path": "delivery-manifest.json"},
+        {"role": "full_report_md", "path": FULL_REPORT_MD_REL},
         {"role": "full_report_html", "path": "report/full-report.html"},
         {"role": "analysis_md", "path": "chat/01-analysis.md"},
         {"role": "facts_md", "path": "chat/02-facts.md"},
@@ -186,6 +187,7 @@ def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: lis
     for path, role, media, fn, required in (
         ("chat/01-analysis.md", "analysis", "text/markdown", "01-analysis.md", True),
         ("chat/02-facts.md", "facts", "text/markdown", "02-facts.md", True),
+        (FULL_REPORT_MD_REL, "report_md", "text/markdown", "full-report.md", True),
         ("report/full-report.html", "report", "text/html", "report.html", True),
         ("package/research-package.zip", "package", "application/zip", "research-package.zip", False),
     ):
@@ -208,6 +210,8 @@ def _build_manifest(rd: Path, run_id: str, job_id: str, status: str, errors: lis
             sniff = sniff_html_document(head)
             art["report_html_sniff"] = sniff
             art["content_profile"] = content_profile_for_manifest(sniff)
+        if path == FULL_REPORT_MD_REL:
+            art["content_profile"] = "markdown_v1"
         arts.append(art)
     quality = jr(rd / "report/quality-metadata.json", {})
     meta = {
@@ -283,7 +287,7 @@ def emit_agent_skill_handoff(
     resolved = status
     if resolved is None:
         resolved = "ok"
-        for p in ("report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md"):
+        for p in (FULL_REPORT_MD_REL, "report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md"):
             if not (rd / p).is_file():
                 resolved = "failed"
                 errs.append(
@@ -305,8 +309,17 @@ def emit_agent_skill_handoff(
                     "where": "emit_agent_skill_handoff.ensure_canonical_full_report_html",
                 },
             )
-    req_triple = ("report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md")
-    missing_after = [p for p in req_triple if not (rd / p).is_file()]
+        elif not (rd / "report/full-report.html").is_file():
+            resolved = "partial"
+            errs.append(
+                {
+                    "code": "missing_derivative_html",
+                    "message": rep_note,
+                    "where": "emit_agent_skill_handoff.post_ensure_html",
+                },
+            )
+    req_quad = (FULL_REPORT_MD_REL, "report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md")
+    missing_after = [p for p in req_quad if not (rd / p).is_file()]
     seen_missing_msgs = {
         e.get("message")
         for e in errs
@@ -420,7 +433,7 @@ def cmd_execute(a) -> int:
             encoding="utf-8",
         )
     if status == "ok":
-        req_paths = ("report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md")
+        req_paths = (FULL_REPORT_MD_REL, "report/full-report.html", "chat/01-analysis.md", "chat/02-facts.md")
         miss = [p for p in req_paths if not (rd / p).is_file()]
         if miss:
             status = "failed"

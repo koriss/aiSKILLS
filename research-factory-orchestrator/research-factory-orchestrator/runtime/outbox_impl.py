@@ -290,11 +290,19 @@ def _cmd_outbox_inner(rd: Path, processed: list) -> None:
                 zip_ok = "outbox/OUT-0005.json" in names and "outbox/OUT-0006.json" in names
         except Exception:
             zip_ok = False
+    md_p = rd / "report/full-report.md"
+    md_gate = md_p.is_file() and md_p.stat().st_size > 32
+    html_gate = (rd / "report/full-report.html").is_file()
     checks = {
         "provider_ack_gate": {"status": "pass" if provider_pass else "fail", "passed": provider_pass},
         "external_delivery_gate": ext_gate,
         "final_user_claim_gate": {"status": ext_status, "passed": external, "stub_only": stub_only, "delivery_not_proven": any_delivery_not_proven},
-        "content_gate": {"status": "pass", "passed": (rd / "report/full-report.html").exists()},
+        "content_gate": {
+            "status": "pass" if md_gate else "fail",
+            "passed": md_gate,
+            "html_present": html_gate,
+            "markdown_report_path": "report/full-report.md",
+        },
         "wave_graph_gate": {"status": "pass", "passed": (rd / "graph/wave-plan.json").exists()},
         "io_analysis_gate": {"status": "pass", "passed": (rd / "report/io-propaganda-check.json").exists()},
         "self_audit_gate": {"status": "pass", "passed": (rd / "self-audit/runtime-self-audit.json").exists()},

@@ -285,6 +285,7 @@ def cmd_run(a):
         "run.json",
         "entrypoint-proof.json",
         "runtime-status.json",
+        "report/full-report.md",
         "report/full-report.html",
         "report/analytical-memo.json",
         "report/factual-dossier.json",

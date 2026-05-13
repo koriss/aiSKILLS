@@ -37,7 +37,7 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
    `python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task>"`  
    (+ relay env / `--web-search-json-api-base` as deployed).  
    This is **not** `scripts/interface_runtime_adapter.py` for the slash-command path.
-4. Worker / collector stages inside the bridge write the run-dir; **`render_all`** may re-render HTML; **`ensure_canonical_full_report_html`** + **`emit_agent_skill_handoff`** finalize `report/full-report.html` and **`result-manifest.json`**.
+4. Worker / collector stages inside the bridge write the run-dir; **`render_all`** writes **`report/full-report.md`** then derives **`report/full-report.html`** from it; **`ensure_canonical_full_report_html`** + **`emit_agent_skill_handoff`** finalize the dossier and **`result-manifest.json`**.
 5. **Host delivery:** the gateway reads **`marker.run_dir`** + manifest from the handoff and attaches artifacts / chunked text to the operator channel (implementation is host-owned).
 
 ## Delivery truth: native slash vs CLI / subagent
@@ -56,7 +56,7 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 - **When the bridge is slow or the worker is busy:** read **`docs/qa/RFO-QUEUE-LEASE-INCIDENT-RUNBOOK.md`** (`queue/worker.lease`, `pending` vs `running`, PID). While the bridge waits, **`latest_run/observability-events.jsonl`** may contain **`bridge.worker_poll`** lines (`attempt`, `reason`, optional queue snapshot) — use them to explain “still RFO” vs “stuck”.
 - **Host policy** (timeouts, whether to spawn a subagent on SIGTERM) lives in the gateway repo — see **`docs/operators/openclaw-gateway-rfo-notes.md`** for a checklist aligned with this skill’s contract.
 
-The LLM must **not** invent ZIP paths, RAF numbers, or “sent to Telegram” without the rows above. Final user-visible truth is **`final-answer-gate.json`** plus the profile’s primary artifact (usually **`report/full-report.html`**).
+The LLM must **not** invent ZIP paths, RAF numbers, or “sent to Telegram” without the rows above. Final user-visible truth is **`final-answer-gate.json`** plus the profile’s primary artifacts: **`report/full-report.md`** (canonical text) and **`report/full-report.html`** (derivative HTML shell with embedded JSON proof blocks).
 
 ### Bridge stdout/stderr (symmetry with execute)
 
@@ -85,7 +85,7 @@ Historically a packaged **relay + fetch** CLI (not the native slash bridge). **T
 
 - **`scripts/runtime_job_worker.py` / `outbox_delivery_worker.py`** — queued worker pipeline (not the v19.4 native slash path).
 - **`scripts/run_research_factory.py`** — **not** an operator entrypoint; running as `__main__` prints a fatal hint → **`rfo_execute.py`**, exit **2** (provenance shim for contracts; workers call **`rfo_runtime_core.py`**).
-- **HTML tooling:** **`scripts/rfo_render.py`** with subcommands `canonical` | `semantic-shell` (thin wrappers remain for backwards compatibility).
+- **HTML tooling:** **`scripts/rfo_render.py`** with subcommands `canonical` (MD-first rebuild: `minimal_report_sources_ready` → `rebuild_canonical_md_then_html`) | `semantic-shell` (thin wrappers remain for backwards compatibility).
 
 ## Phased rollout (skill repo only)
 
@@ -96,10 +96,11 @@ Work is sequenced **inside this package** as: **(1)** operator docs + contracts 
 - By default a failure in **`render_all`** inside **`run_rfo_with_web_search.py`** logs **`Re-render error (non-fatal)`** and still hands off (stale HTML possible).
 - Set **`RFO_BRIDGE_RENDER_STRICT=1`** (or `true` / `yes`) to **abort before handoff** with exit **21**.
 
-## Canonical report file
+## Canonical report files (MD-first)
 
-- **Path inside every run-dir:** `report/full-report.html`.
-- **Writes** should go through **`runtime.report_html.write_canonical_full_report_html`** so MIME vs bytes stay aligned (see **`sniff_html_document`** / **`ensure_*`**).
+- **Canonical human-readable dossier:** `report/full-report.md` — built from the same `ReportRunInputs` JSON bundle as the legacy template path (`runtime/report_md.py`).
+- **Derivative HTML:** `report/full-report.html` — **only** from the Markdown string (`build_full_report_html_from_markdown`); uses the `markdown` package when installed, otherwise a valid HTML shell with escaped `<pre>` so the pipeline does not lose the text layer.
+- **Writes:** `write_canonical_full_report_md` then `write_canonical_full_report_html`; **`ensure_canonical_full_report_html`** may rebuild both; if HTML conversion fails, a coherent MD may still satisfy gates (see `content_gate` / `ensure_*` semantics).
 
 ## Agent hygiene (avoid vector B)
 

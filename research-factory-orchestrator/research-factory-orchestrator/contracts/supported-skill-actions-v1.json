@@ -1,6 +1,6 @@
 {
   "contract_id": "supported-skill-actions-v1",
-  "version": "19.4.7",
+  "version": "19.4.8",
   "summary": "Machine-readable mirror of SKILL.md Registry (IDE agents); operator research CLI is scripts/rfo_execute.py only.",
   "operator_research_entrypoint": "scripts/rfo_execute.py",
   "actions": [

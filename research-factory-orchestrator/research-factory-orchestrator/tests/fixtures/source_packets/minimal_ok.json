@@ -1,0 +1,19 @@
+{
+  "schema_version": "source-packet-v1",
+  "topic": "fixture minimal topic",
+  "created_at": "2026-05-10T12:00:00+00:00",
+  "profile": "dossier",
+  "validation_profile": "bootstrap",
+  "execution_authenticity": "fixture",
+  "evidence_scope": "web",
+  "collection_integrity": "agent_attested",
+  "collection_methods": ["web_search"],
+  "sources": [
+    {
+      "source_id": "s1",
+      "url": "https://example.com/page",
+      "title": "Example",
+      "content_snippet": "body text for fixture"
+    }
+  ]
+}

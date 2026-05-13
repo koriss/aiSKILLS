@@ -11,9 +11,9 @@ Host-invoked research orchestration skill: artifact-first compute, profile-drive
 
 ### IDE / agent registry (supported actions)
 
-Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** for supported work from a git checkout + shell. **Research** = **`scripts/rfo_execute.py`** only; `validate_skill`, `unittest`, preflight, and post-run validators are separate **registry** actions, not alternate research CLIs. **`contracts/supported-skill-actions-v1.json`** duplicates the registry for tooling. Anything outside that table is **unsupported** unless you are following explicit troubleshooting notes in `docs/runtime-paths.md` (e.g. adapter emergency).
+Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** for supported work from a git checkout + shell. **Research execute (source-packet)** = **`scripts/rfo_execute.py`**; **JSON relay prefetch + preflight** = **`scripts/run_rfo_with_web_search.py`** (invoke as `python3 -S` plus that script path; do not copy a single contiguous “python3 … bridge …” line into `SKILL.md` — registry spells args). `validate_skill`, `unittest`, and post-run validators are separate **registry** actions. **`contracts/supported-skill-actions-v1.json`** duplicates the registry for tooling; **`contracts/supported-skill-actions-v2.json`** records breaking entrypoint split. Anything outside that table is **unsupported** unless you are following explicit troubleshooting notes in `docs/runtime-paths.md` (e.g. adapter emergency).
 
-**Execution modes (disk truth):** (1) **canonical production** — explicit `--runs-root` + relay, `production_research=true` only when preflight is clean; (2) **`test_fixture`** — set `RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` for in-repo validation (`production_research=false`); (3) **blocked** — missing argv/env contract → non-zero preflight and `blocked_dependency` in effective-config. Never substitute blocked canonical runs with fixture output or plain `web_search`. See `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`.
+**Execution modes (disk truth):** (1) **source-packet canonical** — explicit `--runs-root` + agent-written packet, `rfo-effective-config-v2` with `search_mode: agent_supplied_packet`; (2) **relay bridge** — explicit `--runs-root` + `--task` + relay argv/env, `rfo-effective-config-v1` + `relay_reachable` for preflight; (3) **`test_fixture`** — `RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` for in-repo validation; (4) **blocked** — missing contract inputs → non-zero. See `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`.
 
 ### What the host must supply
 
@@ -25,7 +25,7 @@ Use **only** the commands in **`SKILL.md` → Registry (IDE / coding agents)** f
 | Run profile | `RFO_RUN_PROFILE` or bridge `--profile` (**`dossier`** default; legacy names remap in `runtime.profiles`; see `docs/PROFILE_DEFAULTS.md`) |
 | User-agent strings | Optional `RFO_WEB_SEARCH_USER_AGENT` (defaults are neutral; no vendor URL) |
 | Wikipedia URL heuristic (bridge) | `RFO_WIKIPEDIA_HEURISTIC=1` to treat `wikipedia.org` as raw-document |
-| Operator diagnostics | ``python3 -S scripts/rfo_execute.py --preflight …`` prints ``effective-config`` JSON (stdout); forbidden env keys (e.g. ``RFO_SMOKE``) force exit **2** |
+| Operator diagnostics (relay) | ``python3 -S`` ``scripts/run_rfo_with_web_search.py`` ``--preflight …`` prints ``effective-config`` JSON (stdout); forbidden env keys (e.g. ``RFO_SMOKE``) force exit **2** |
 | Container path hints | `RFO_HOST_WORKSPACE_ROOT` + `RFO_CONTAINER_WORKSPACE_PREFIX` (both optional; prefix required if mapping) |
 
 ## Eight-phase pipeline

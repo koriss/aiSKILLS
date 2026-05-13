@@ -1,0 +1,40 @@
+{
+  "contract_id": "supported-skill-actions-v2",
+  "version": "19.5.0",
+  "breaking_since": "19.5.0",
+  "summary": "Source-packet canonical execute: scripts/rfo_execute.py accepts only --runs-root + optional --source-packet. Relay+preflight lives on scripts/run_rfo_with_web_search.py.",
+  "removed_invocations": [
+    "python3 -S scripts/rfo_execute.py --task … (use run_rfo_with_web_search.py for JSON relay bridge)",
+    "python3 -S scripts/rfo_execute.py --preflight … (use run_rfo_with_web_search.py --preflight …)"
+  ],
+  "operator_research_entrypoint": "scripts/rfo_execute.py",
+  "relay_bridge_entrypoint": "scripts/run_rfo_with_web_search.py",
+  "archived_contract": "contracts/supported-skill-actions-v1.json",
+  "actions": [
+    {
+      "id": "research_source_packet_canonical",
+      "description": "Canonical execute: host-written source-packet.json + queue/worker pipeline (no RFO relay runtime in packet)",
+      "example": "python3 -S scripts/rfo_execute.py --runs-root <abs>/rfo-runs"
+    },
+    {
+      "id": "research_relay_bridge",
+      "description": "JSON relay prefetch + queue (legacy product path; explicit script name)",
+      "example": "python3 -S scripts/run_rfo_with_web_search.py --runs-root <abs>/rfo-runs --task \"…\" --web-search-json-api-base \"<url>\""
+    },
+    {
+      "id": "preflight_effective_config_relay",
+      "description": "Dry-run effective-config v1 for relay resolution",
+      "example": "python3 -S scripts/run_rfo_with_web_search.py --preflight --runs-root … --web-search-json-api-base …"
+    },
+    {
+      "id": "validate_source_packet",
+      "description": "Validate source-packet JSON against schema",
+      "example": "python3 -S scripts/rfo_validate_source_packet.py --packet path/to/source-packet.json"
+    },
+    {
+      "id": "assert_no_relay_semantics",
+      "description": "Strict scan of machine JSON under a run-dir for forbidden relay-runtime keys",
+      "example": "python3 -S scripts/assert_no_relay_semantics.py --run-dir <run-dir>"
+    }
+  ]
+}

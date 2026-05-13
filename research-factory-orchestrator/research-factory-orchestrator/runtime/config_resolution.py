@@ -258,3 +258,82 @@ def log_startup_summary(snap: Mapping[str, Any]) -> None:
     for e in snap.get("errors") or []:
         sys.stderr.write(f"[rfo-config-error] {e}\n")
     sys.stderr.flush()
+
+
+def build_effective_config_snapshot_source_packet_v2(
+    *,
+    skill_root: Path,
+    argv: list[str],
+    env: Mapping[str, str] | os._Environ,
+    profile: str,
+    entrypoint: str,
+    source_packet_path: str,
+    source_packet_sha256: str,
+    packet_meta: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Effective-config for ``scripts/rfo_execute.py`` source-packet path (no JSON relay)."""
+    fixture_mode = is_test_fixture_mode(env)
+    forbidden = forbidden_canonical_env_keys(env)
+    arg_runs = (extract_argv_value(argv, "--runs-root") or "").strip()
+
+    if fixture_mode:
+        runs_path, runs_src, dep_runs, errs = resolve_runs_root_for_bridge(argv, env)
+    elif not arg_runs:
+        runs_path, runs_src, dep_runs, errs = (
+            None,
+            "argv:--runs-root-missing",
+            [],
+            ["missing_required_argv_runs_root"],
+        )
+    else:
+        runs_path, runs_src, dep_runs, errs = resolve_runs_root_for_bridge(argv, env)
+
+    ws, ws_src = resolve_workspace_root(argv, env)
+    deprecated = sorted(set(dep_runs))
+    errs = list(errs)
+    strict_forbidden = [k for k in forbidden if not (fixture_mode and k in _RELAXED_IN_FIXTURE)]
+    if strict_forbidden:
+        errs.append("forbidden_canonical_env")
+
+    blocked_dependency: str | None = None
+    if "missing_required_argv_runs_root" in errs:
+        blocked_dependency = "runs_root_argv"
+
+    if fixture_mode:
+        run_execution_mode = "test_fixture"
+    elif errs:
+        run_execution_mode = "blocked_external_dependency"
+    else:
+        run_execution_mode = "canonical_production"
+
+    production_research = run_execution_mode == "canonical_production"
+    meta = packet_meta or {}
+    snap: dict[str, Any] = {
+        "schema": "rfo-effective-config-v2",
+        "entrypoint": entrypoint,
+        "profile": profile,
+        "skill_root": str(skill_root.resolve()),
+        "workspace_root": str(ws) if ws is not None else None,
+        "workspace_root_source": ws_src,
+        "runs_root": str(runs_path) if runs_path is not None else None,
+        "runs_root_source": runs_src,
+        "relay": None,
+        "relay_source": "none_agent_supplied_packet",
+        "relay_chain": [],
+        "deprecated_inputs_used": deprecated,
+        "forbidden_inputs_present": forbidden,
+        "canonical": not fixture_mode,
+        "run_execution_mode": run_execution_mode,
+        "production_research": production_research,
+        "fixture_mode": fixture_mode,
+        "search_mode": "agent_supplied_packet",
+        "blocked_dependency": blocked_dependency,
+        "errors": list(errs),
+        "source_packet_path": source_packet_path,
+        "source_packet_sha256": source_packet_sha256,
+        "validation_profile": meta.get("validation_profile"),
+        "execution_authenticity": meta.get("execution_authenticity"),
+        "evidence_scope": meta.get("evidence_scope"),
+        "collection_integrity": meta.get("collection_integrity"),
+    }
+    return snap

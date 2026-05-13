@@ -38,7 +38,10 @@ Use this order on **every** native bridge run so disk paths stay aligned with th
 
 ### Allowed execution paths
 
-- **Host slash / native command (canonical research)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade: loads the bridge implementation module internally; **sequential** relay query expansion + **`research/research-plan.json`** on disk + collectors + queue bridge — **not** a multi-agent swarm; see `docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md` and `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`). **Primary human artifact:** **`report/full-report.md`**; **`report/full-report.html`** is built only from that Markdown (optional `markdown` package; safe `<pre>` fallback if unavailable). Plan mode: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`** (default `off`). Preallocated run reuse: **`RFO_PREALLOCATED_RUN_DIR`** (set by the bridge; do not hand-craft for production slash). Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
+- **Host slash / native command** — the host may run either:
+  - **`python3 -S scripts/rfo_execute.py --runs-root <abs>`** with an agent-written **source-packet** (default `<skill_root>/.rfo-state/input/source-packet.json` or **`--source-packet`** for concurrent hosts). No relay prefetch on this binary; legacy flags (`--task`, `--web-search-json-api-base`, `--preflight`) are rejected (exit **2**); use the bridge script below for relay.
+  - **`python3 -S`** **`scripts/run_rfo_with_web_search.py`** for **JSON relay prefetch + queue** (`--task`, `--web-search-json-api-base`, optional `--profile`, **`--preflight`** for effective-config v1). Same worker/adapter/render pipeline after the packet exists on disk.
+  **Primary human artifact:** **`report/full-report.md`**; **`report/full-report.html`** is derived from that Markdown. Plan mode on the bridge: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`**. Delivery stays host-owned. See `docs/runtime-paths.md` and `docs/adr/ADR-023-source-packet-canonical-execute.md`.
 - **Queue / tooling (not standalone research):** `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."` — preallocated run-dir / CLI queue plumbing only; not the native slash research path.
 - **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Test helpers live in **`runtime/standalone_relay_driver.py`** — not an operator path.
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
@@ -51,8 +54,11 @@ Machine-readable mirror: `contracts/supported-skill-actions-v1.json`. **Unsuppor
 
 | Action | When | Command (from skill root) |
 |--------|------|---------------------------|
-| **Research (relay + queue)** | Canonical production on host or guest | `python3 -S scripts/rfo_execute.py --runs-root <abs> --task "…" --web-search-json-api-base <URL>` (argv relay; deprecated env still logged in preflight `deprecated_inputs_used`). **In-repo / CI without production defaults:** `RFO_RUN_EXECUTION_MODE=test_fixture` plus tmp consent if `--runs-root` is under `/tmp` — see `docs/rfo-env-classification.md` |
-| **Preflight / effective-config** | Guest agent / Telegram triage before a full run; must be **foreground** (see `docs/runtime-paths.md` § Production incident checklist) | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json`; forbidden env (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`) → exit **2** |
+| **Research (source-packet execute)** | Canonical when the host/agent assembled **`source-packet-v1`** JSON | `python3 -S scripts/rfo_execute.py --runs-root <abs>` (optional `--source-packet <path>`). **Fixture / tmp:** `RFO_RUN_EXECUTION_MODE=test_fixture` and `RFO_ALLOW_TMP_RUNS_ROOT=1` when runs-root is under `/tmp` — `docs/rfo-env-classification.md` |
+| **Research (JSON relay + queue)** | Relay prefetch + sequential fanout before adapter | `python3 -S` `scripts/run_rfo_with_web_search.py` `--runs-root <abs> --task "…" --web-search-json-api-base <URL>` |
+| **Preflight / effective-config (relay)** | Before a relay run; stdout JSON | `python3 -S` `scripts/run_rfo_with_web_search.py` `--preflight --runs-root … --task "…" --web-search-json-api-base …` — schema `contracts/rfo-effective-config-v1.schema.json`; forbidden env → exit **2** |
+| **Validate source-packet** | Before execute or in CI | `python3 -S scripts/rfo_validate_source_packet.py --source-packet <path>` (`--template-mode` for placeholders) |
+| **Assert no relay runtime in run-dir** | Post-run audit | `python3 -S scripts/assert_no_relay_semantics.py --run-dir <run-dir>` (optional `--soft-text`) |
 | **Skill packaging gate** | Release / CI layout | `python3 -S scripts/validate_skill.py` |
 | **Unit tests** | Regression checks | `python3 -m unittest discover -s tests` |
 | **Post-run validators** | After a run-dir exists | `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>` |
@@ -60,7 +66,7 @@ Machine-readable mirror: `contracts/supported-skill-actions-v1.json`. **Unsuppor
 
 ### Guest agent: required inputs (summary)
 
-Relay JSON base and runs/workspace resolution are **orthogonal**: missing relay → canonical CLI exits **non-zero** (not “successful dossier without search”). Do **not** hide RFO stderr/exit behind `background=true` when you need a synchronous pass/fail. Full matrix: `docs/runtime-paths.md` § Production incident checklist.
+Relay JSON base applies to **`run_rfo_with_web_search.py`** only; **`rfo_execute.py`** uses a pre-built source-packet instead. Missing relay on the bridge → **non-zero** preflight/run (not a silent stub). Do **not** hide RFO stderr/exit behind `background=true` when you need a synchronous pass/fail. Full matrix: `docs/runtime-paths.md` § Production incident checklist.
 
 ### Prohibitions
 
@@ -80,7 +86,7 @@ Relay JSON base and runs/workspace resolution are **orthogonal**: missing relay 
 
 ### Product canon: depth vs naming
 
-- **Canonical deep research** is the **`dossier`** bridge / work-unit pipeline (multi-step collectors, source packet, full validators). **`run_rfo_full_research.py`** is not an operator entrypoint; use **`rfo_execute.py`** for relay+queue depth.
+- **Canonical deep research** is the **`dossier`** work-unit pipeline (collectors, source packet, full validators). **Relay prefetch** uses **`run_rfo_with_web_search.py`**; **packet-only execute** uses **`rfo_execute.py`** once the host has written the packet. **`run_rfo_full_research.py`** is not an operator entrypoint.
 - Do not invent “depth flags” as a separate product surface; prefer the profile + run-mode classification already on disk.
 
 ### v19 core validation

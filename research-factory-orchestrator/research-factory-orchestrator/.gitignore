@@ -16,4 +16,5 @@ release-validation-transcript.json
 reports/debug-runs/
 
 # Optional local archive / analytics dumps (not part of the canonical skill package)
-docs/analytics/
+docs/analytics/*
+!docs/analytics/README.md

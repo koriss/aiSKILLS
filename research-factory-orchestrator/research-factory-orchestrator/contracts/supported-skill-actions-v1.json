@@ -1,19 +1,36 @@
 {
   "contract_id": "supported-skill-actions-v1",
-  "version": "19.4.10",
-  "summary": "Machine-readable mirror of SKILL.md Registry (IDE agents); operator research CLI is scripts/rfo_execute.py only.",
+  "version": "19.4.11",
+  "summary": "Machine-readable mirror of SKILL.md Registry; operator research uses source-packet execute (rfo_execute.py) and/or relay bridge (run_rfo_with_web_search.py) as documented.",
   "operator_research_entrypoint": "scripts/rfo_execute.py",
+  "relay_preflight_entrypoint": "scripts/run_rfo_with_web_search.py",
   "actions": [
     {
-      "id": "research_relay_bridge",
-      "description": "Canonical dossier research (JSON relay + queue bridge)",
-      "example": "python3 -S scripts/rfo_execute.py --runs-root <abs>/rfo-runs --task \"…\" --web-search-json-api-base \"<url>\"",
-      "notes": "Alternatively --runs-root (explicit) + relay argv/env; see runtime/config_resolution.py"
+      "id": "research_source_packet_execute",
+      "description": "Canonical dossier run when the host assembled source-packet-v1 JSON",
+      "example": "python3 -S scripts/rfo_execute.py --runs-root <abs>/rfo-runs [--source-packet <path>]",
+      "notes": "Default packet path: <skill_root>/.rfo-state/input/source-packet.json; legacy relay flags rejected (exit 2)."
     },
     {
-      "id": "preflight_effective_config",
-      "description": "Dry-run effective-config JSON before allocating a run-dir",
-      "example": "python3 -S scripts/rfo_execute.py --preflight --runs-root … --web-search-json-api-base …"
+      "id": "research_relay_bridge",
+      "description": "JSON relay prefetch + queue bridge (sequential fanout) before adapter",
+      "example": "RFO_RELAY=scripts/run_rfo_with_web_search.py; python3 -S \"$RFO_RELAY\" --runs-root <abs>/rfo-runs --task \"…\" --web-search-json-api-base \"<url>\"",
+      "notes": "Sets RFO_SOURCE_PACKET / preallocated run_dir; see runtime-paths.md § B."
+    },
+    {
+      "id": "preflight_effective_config_relay",
+      "description": "Dry-run effective-config v1 JSON before allocating a run-dir (relay path only)",
+      "example": "RFO_RELAY=scripts/run_rfo_with_web_search.py; python3 -S \"$RFO_RELAY\" --preflight --runs-root … --task \"…\" --web-search-json-api-base …"
+    },
+    {
+      "id": "validate_source_packet",
+      "description": "Validate a source packet against source-packet-v1 schema",
+      "example": "python3 -S scripts/rfo_validate_source_packet.py --source-packet <path> [--template-mode]"
+    },
+    {
+      "id": "assert_no_relay_semantics",
+      "description": "Strict JSON scan (+ optional soft text) for forbidden relay runtime keys in a run-dir",
+      "example": "python3 -S scripts/assert_no_relay_semantics.py --run-dir <run-dir> [--soft-text]"
     },
     {
       "id": "validate_skill_packaging",

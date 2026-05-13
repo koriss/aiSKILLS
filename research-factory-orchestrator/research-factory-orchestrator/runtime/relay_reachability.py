@@ -1,4 +1,10 @@
-"""Optional JSON-relay reachability probe for RFO preflight (stdlib + shared relay client)."""
+"""Optional JSON-relay reachability probe for RFO preflight (stdlib + shared relay client).
+
+**Deprecation note (source-packet canonical):** new operator execute uses
+``scripts/rfo_execute.py`` with an agent-assembled packet only; relay reachability
+remains relevant for ``scripts/run_rfo_with_web_search.py`` preflight, not for
+packet-only effective-config v2.
+"""
 from __future__ import annotations
 
 import os

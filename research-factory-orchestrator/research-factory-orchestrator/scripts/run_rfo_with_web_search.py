@@ -59,6 +59,7 @@ from runtime.config_resolution import (  # noqa: E402
     log_startup_summary,
     relay_chain,
 )
+from runtime.relay_reachability import merge_relay_probe_into_snapshot  # noqa: E402
 from runtime.status import VERSION  # noqa: E402
 from runtime.util import jl, now  # noqa: E402
 
@@ -598,14 +599,16 @@ def main() -> int:
 
     enforce_runs_root_argv(argv)
 
+    entrypoint = (os.environ.get("RFO_EFFECTIVE_ENTRYPOINT") or "").strip() or "scripts/run_rfo_with_web_search.py"
     snap = build_effective_config_snapshot(
         skill_root=SKILL_ROOT,
         argv=argv,
         env=os.environ,
         cli_relay_base=args.web_search_json_api_base,
         profile=args.profile.strip().lower(),
-        entrypoint="scripts/run_rfo_with_web_search.py",
+        entrypoint=entrypoint,
     )
+    merge_relay_probe_into_snapshot(snap, os.environ)
     if args.preflight:
         print(json.dumps(snap, ensure_ascii=False, indent=2, sort_keys=True))
         errs_pf = snap.get("errors") or []

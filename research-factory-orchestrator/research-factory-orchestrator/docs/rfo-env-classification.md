@@ -44,3 +44,9 @@ Recorded in `forbidden_inputs_present` but **do not** add `forbidden_canonical_e
 ## Internal tuning (not operator contract)
 
 Examples: `RFO_HTTP_TIMEOUT*`, `RFO_BRIDGE_*`, `RFO_WIKIPEDIA_HEURISTIC`, `RFO_RESEARCH_PLAN_MODE`, `RFO_WEB_SEARCH_USER_AGENT`, worker lease TTLs — see `docs/runtime-paths.md` and profile JSON.
+
+| Variable | Effect |
+|----------|--------|
+| `RFO_PREFLIGHT_RELAY_TIMEOUT` | Seconds for the JSON `/search` reachability probe (default **5.0**). |
+| `RFO_SKIP_RELAY_PROBE` | When truthy, skips the probe (tests / special harness only; **not** for production triage). |
+| `RFO_EFFECTIVE_ENTRYPOINT` | Set by `scripts/rfo_execute.py` before loading the bridge so `effective-config.entrypoint` records the façade; do not export manually. |

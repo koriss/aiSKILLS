@@ -19,10 +19,11 @@ RFO historically exposed multiple run profiles (`mvr`, `live-bridge`, etc.) that
 
 ## Consequences
 
-- Operators must supply a working JSON relay; empty relay runs fail closed. Use **`--preflight`** on the bridge to emit **`rfo-effective-config-v1`** JSON without allocating a run-dir; canonical operator environments must **not** set smoke/experiment env keys (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`).
+- Operators must supply a working JSON relay; empty relay runs fail closed. Use **`--preflight`** on the bridge to emit **`rfo-effective-config-v1`** JSON without allocating a run-dir; canonical operator environments must **not** set smoke/experiment env keys (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`). Preflight also performs a **minimal JSON `/search` reachability probe** (ADR-022); unreachable relays are **`relay_unreachable`** + exit **2**, not a silent “successful” preflight.
 - Fixture suites that still encode `mvr` run-profile JSON remain valid for **historical validator harness** rows; **new** runs record `dossier`.
 
 ## References
 
 - ADR-016 (compute vs delivery split)
+- ADR-022 (relay preflight reachability)
 - `contracts/query-fanout-config.json`

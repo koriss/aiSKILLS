@@ -23,7 +23,7 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 
 `scripts/rfo_execute.py` is a thin façade: it loads and runs **`scripts/run_rfo_with_web_search.py`** with the **same argv** and exit semantics. **Operator-facing docs and compose files** should invoke **`rfo_execute.py` only**; the bridge module name is an implementation detail.
 
-**Preflight / effective config:** `python3 -S scripts/rfo_execute.py --preflight …` prints **`rfo-effective-config-v1`** JSON to **stdout** and exits **0** when relay + runs-root resolve cleanly, **2** when forbidden env keys are set or resolution fails — **no** run allocation. Snapshot shape is defined in **`contracts/rfo-effective-config-v1.schema.json`**. On a normal bridge run, after `allocate`, the run-dir includes **`effective-config.json`** with the same snapshot.
+**Preflight / effective config:** `python3 -S scripts/rfo_execute.py --preflight …` prints **`rfo-effective-config-v1`** JSON to **stdout** and exits **0** when runs-root + relay resolve **and** a minimal JSON **`/search`** probe succeeds (**`relay_reachable`**); **2** when forbidden env keys are set, resolution fails, or the relay is **unreachable** (`relay_unreachable` in `errors`) — **no** run allocation. Snapshot shape: **`contracts/rfo-effective-config-v1.schema.json`**. On a normal bridge run, after `allocate`, the run-dir includes **`effective-config.json`** with the same snapshot (see ADR-022).
 
 **Three modes for agents:** **canonical production** (default; explicit `--runs-root` argv + relay), **`test_fixture`** (`RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` — in-repo/CI; `production_research=false` in JSON), and **blocked** (missing argv runs-root or relay / strict forbidden env → exit **2**, `blocked_dependency` populated). Full matrix: `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`, `docs/rfo-env-classification.md`.
 
@@ -91,7 +91,7 @@ Historically a packaged **relay + fetch** CLI (not the native slash bridge). **T
 
 ## Phased rollout (skill repo only)
 
-Work is sequenced **inside this package** as: **(1)** operator docs + contracts + effective-config schema + markdown guardrails; **(2)** single resolver (`runtime/config_resolution.py`) + bridge/path_guard consumers + preflight; **(3)** legacy grave markers, forbidden-env enforcement in canonical paths, run-dir **`effective-config.json`** after allocate, tests for missing relay/workspace. **Gateway / host** changes (argv relay from the same config block as the agent’s web plugin) stay **outside** this tree per deploy ADRs.
+Work is sequenced **inside this package** as: **(1)** operator docs + contracts + effective-config schema + markdown guardrails; **(2)** single resolver (`runtime/config_resolution.py`) + bridge/path_guard consumers + preflight + **relay reachability probe** (`runtime/relay_reachability.py`, ADR-022); **(3)** legacy grave markers, forbidden-env enforcement in canonical paths, run-dir **`effective-config.json`** after allocate, tests for missing relay/workspace. **Gateway / host** changes (argv relay from the same config block as the agent’s web plugin) stay **outside** this tree per deploy ADRs.
 
 ## Bridge re-render strictness
 
@@ -132,7 +132,7 @@ Work is sequenced **inside this package** as: **(1)** operator docs + contracts 
 | Step | Command (example — substitute absolute paths) |
 |------|---------|
 | Resolve relay + runs-root without allocating | `cd /path/to/openclaw/workspace/skills/research-factory-orchestrator && python3 -S scripts/rfo_execute.py --preflight --runs-root /path/to/openclaw/workspace/rfo-runs --web-search-json-api-base "http://127.0.0.1:8180"` |
-| Inspect | **stdout:** `rfo-effective-config-v1` JSON (`errors` must be empty; `relay` non-null). **Exit:** `0` ok, `2` forbidden env, missing relay, or resolution failure. |
+| Inspect | **stdout:** `rfo-effective-config-v1` JSON (`errors` must be empty; `relay` non-null; **`relay_reachable`** true unless `RFO_SKIP_RELAY_PROBE=1`). **Exit:** `0` ok, `2` forbidden env, missing relay, **unreachable relay**, or resolution failure. |
 
 **Do not** conflate **native `/research_factory_orchestrator`** (host dispatches bridge) with a **manual** shell from `skills/.../scripts` without the same argv/env — if RFO failed, report the **non-zero exit** and stderr; do not substitute a parallel “answer” from generic web tools and call it RFO.
 

@@ -20,6 +20,11 @@ from pathlib import Path
 
 
 def main() -> int:
+    import os
+
+    # Effective-config / audits: distinguish façade from bridge implementation module.
+    os.environ["RFO_EFFECTIVE_ENTRYPOINT"] = "scripts/rfo_execute.py"
+
     here = Path(__file__).resolve().parent
     bridge = here / "run_rfo_with_web_search.py"
     if not bridge.is_file():

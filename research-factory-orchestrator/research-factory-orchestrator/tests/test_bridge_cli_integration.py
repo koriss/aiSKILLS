@@ -89,6 +89,70 @@ class TestBridgeCliIntegration(unittest.TestCase):
         env["RFO_RUN_EXECUTION_MODE"] = "test_fixture"
         env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
 
+        class _OkRelay(http.server.BaseHTTPRequestHandler):
+            def do_GET(self) -> None:
+                if self.path.startswith("/search"):
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json")
+                    self.end_headers()
+                    self.wfile.write(b'{"results": []}')
+                else:
+                    self.send_response(404)
+                    self.end_headers()
+
+            def log_message(self, *_args) -> None:
+                pass
+
+        httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), _OkRelay)
+        host, port = httpd.server_address
+        threading.Thread(target=httpd.serve_forever, daemon=True).start()
+        base = f"http://{host}:{port}"
+
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                runs = Path(tmp) / "rfo-runs"
+                runs.mkdir(parents=True, exist_ok=True)
+                proc = subprocess.run(
+                    [
+                        sys.executable,
+                        "-S",
+                        str(script),
+                        "--preflight",
+                        "--runs-root",
+                        str(runs),
+                        "--task",
+                        "preflight-only",
+                        "--web-search-json-api-base",
+                        base,
+                    ],
+                    cwd=str(skill),
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=30,
+                )
+        finally:
+            httpd.shutdown()
+            httpd.server_close()
+
+        self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
+        doc = json.loads(proc.stdout or "{}")
+        self.assertEqual(doc.get("schema"), "rfo-effective-config-v1")
+        self.assertEqual(doc.get("entrypoint"), "scripts/run_rfo_with_web_search.py")
+        self.assertEqual(doc.get("runs_root"), str(runs.resolve()))
+        self.assertTrue(doc.get("relay_chain"))
+        self.assertTrue(doc.get("relay_reachable"))
+
+    def test_preflight_unreachable_relay_exit_2(self):
+        """JSON relay that refuses TCP → preflight exit 2 + relay_unreachable."""
+        skill = _skill_root()
+        script = skill / "scripts" / "rfo_execute.py"
+        env = {**os.environ}
+        for k in ("RFO_SMOKE", "RFO_EXPERIMENT_BRIDGE", "RFO_ALLOW_LEGACY_ENTRYPOINT"):
+            env.pop(k, None)
+        env["RFO_RUN_EXECUTION_MODE"] = "test_fixture"
+        env["RFO_ALLOW_TMP_RUNS_ROOT"] = "1"
+
         with tempfile.TemporaryDirectory() as tmp:
             runs = Path(tmp) / "rfo-runs"
             runs.mkdir(parents=True, exist_ok=True)
@@ -101,7 +165,7 @@ class TestBridgeCliIntegration(unittest.TestCase):
                     "--runs-root",
                     str(runs),
                     "--task",
-                    "preflight-only",
+                    "unreachable-relay",
                     "--web-search-json-api-base",
                     "http://127.0.0.1:9",
                 ],
@@ -112,12 +176,11 @@ class TestBridgeCliIntegration(unittest.TestCase):
                 timeout=30,
             )
 
-        self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
+        self.assertEqual(proc.returncode, 2, proc.stderr + proc.stdout)
         doc = json.loads(proc.stdout or "{}")
-        self.assertEqual(doc.get("schema"), "rfo-effective-config-v1")
-        self.assertEqual(doc.get("entrypoint"), "scripts/run_rfo_with_web_search.py")
-        self.assertEqual(doc.get("runs_root"), str(runs.resolve()))
-        self.assertTrue(doc.get("relay_chain"))
+        self.assertIn("relay_unreachable", doc.get("errors") or [])
+        self.assertEqual(doc.get("blocked_dependency"), "web_search_json_api_base")
+        self.assertEqual(doc.get("entrypoint"), "scripts/rfo_execute.py")
 
     def test_preflight_forbidden_env_exit_2(self):
         skill = _skill_root()
@@ -163,28 +226,53 @@ class TestBridgeCliIntegration(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             runs = Path(tmp) / "rfo-runs"
             runs.mkdir(parents=True, exist_ok=True)
-            proc = subprocess.run(
-                [
-                    sys.executable,
-                    "-S",
-                    str(facade),
-                    "--preflight",
-                    "--runs-root",
-                    str(runs),
-                    "--task",
-                    "via-facade",
-                    "--web-search-json-api-base",
-                    "http://127.0.0.1:9",
-                ],
-                cwd=str(skill),
-                env=env,
-                capture_output=True,
-                text=True,
-                timeout=30,
-            )
+
+            class _OkRelay(http.server.BaseHTTPRequestHandler):
+                def do_GET(self) -> None:
+                    if self.path.startswith("/search"):
+                        self.send_response(200)
+                        self.send_header("Content-Type", "application/json")
+                        self.end_headers()
+                        self.wfile.write(b'{"results": []}')
+                    else:
+                        self.send_response(404)
+                        self.end_headers()
+
+                def log_message(self, *_args) -> None:
+                    pass
+
+            httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), _OkRelay)
+            h, p = httpd.server_address
+            threading.Thread(target=httpd.serve_forever, daemon=True).start()
+            relay_base = f"http://{h}:{p}"
+            try:
+                proc = subprocess.run(
+                    [
+                        sys.executable,
+                        "-S",
+                        str(facade),
+                        "--preflight",
+                        "--runs-root",
+                        str(runs),
+                        "--task",
+                        "via-facade",
+                        "--web-search-json-api-base",
+                        relay_base,
+                    ],
+                    cwd=str(skill),
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=30,
+                )
+            finally:
+                httpd.shutdown()
+                httpd.server_close()
         self.assertEqual(proc.returncode, 0, proc.stderr)
         doc = json.loads(proc.stdout or "{}")
         self.assertEqual(doc.get("schema"), "rfo-effective-config-v1")
+        self.assertEqual(doc.get("entrypoint"), "scripts/rfo_execute.py")
+        self.assertTrue(doc.get("relay_reachable"))
 
     def test_preflight_missing_relay_exit_2_canonical_failfast(self):
         """Canonical bridge: no relay argv/env → non-zero preflight (not silent stub)."""

@@ -44,7 +44,7 @@ After a successful compute exit: read **primary report** (`report/full-report.md
 ## 5. Phasing (PR-sized)
 
 1. Docs + contracts + doc-grep validator (this file, `docs/rfo-env-classification.md`, `validate_agent_executable_doc_grep.py`).
-2. Unified config resolution + startup summary + preflight (ongoing in `runtime/config_resolution.py`).
+2. Unified config resolution + startup summary + preflight + **relay reachability probe** (`runtime/relay_reachability.py`, ADR-022).
 3. Runtime cleanup: legacy markers, smoke removal from canonical path, secondary relay deprecation messaging.
 4. Fixture/blocked/answer-readiness tests and regression fixtures.
 
@@ -54,5 +54,5 @@ After a successful compute exit: read **primary report** (`report/full-report.md
 - [x] Canonical missing `--runs-root` argv → `blocked_external_dependency` + `runs_root_argv`.
 - [x] `test_fixture` marks `production_research=false`.
 - [x] Doc-grep blocks copy-paste `python3 -S scripts/run_rfo_with_web_search.py` in operator-facing markdown.
-- [ ] Unreachable relay probe in preflight (optional follow-up).
-- [ ] `run_dir/effective-config.json` materialization on every allocate (partially documented elsewhere).
+- [x] Unreachable relay probe in preflight (`runtime/relay_reachability.py`, ADR-022).
+- [x] `run_dir/effective-config.json` materialization on every allocate (bridge writes snapshot right after `allocate` + early bootstrap).

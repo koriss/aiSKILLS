@@ -2,6 +2,13 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.10 — 2026-05-10
+
+- **Preflight relay probe:** `runtime/relay_reachability.py` — after config snapshot, minimal JSON `/search` via `relay_json_search`; on failure `relay_unreachable`, `blocked_dependency=web_search_json_api_base`, exit **2**; `RFO_SKIP_RELAY_PROBE` / `RFO_PREFLIGHT_RELAY_TIMEOUT` for harness only (ADR-022).
+- **Effective-config entrypoint:** `scripts/rfo_execute.py` sets `RFO_EFFECTIVE_ENTRYPOINT` so stdout JSON shows **`scripts/rfo_execute.py`** when using the public façade.
+- **Tests:** `test_bridge_cli_integration` uses local HTTP stub for successful preflight; new unreachable-relay case on closed port.
+- **Docs:** `docs/runtime-paths.md`, `docs/rfo-env-classification.md`, `docs/adr/ADR-019-single-dossier-funnel.md` (consequences bullet), **ADR-022**; `PLAN-rfo-agent-executable-single-behavior.md` acceptance rows closed.
+
 ### 19.4.9 — 2026-05-10
 
 - **Agent-executable contract:** `runtime/config_resolution.py` — canonical production requires argv `--runs-root`; `RFO_RUN_EXECUTION_MODE=test_fixture|fixture|ci` for in-repo harness; `run_execution_mode`, `production_research`, `fixture_mode`, `search_mode`, `blocked_dependency` on `rfo-effective-config-v1`; relaxed fixture handling for `RFO_ALLOW_TMP_RUNS_ROOT` / `RFO_ALLOW_NON_CANONICAL_SKILL_LAYOUT` only in fixture mode; startup stderr summary includes execution mode.

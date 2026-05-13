@@ -1,8 +1,8 @@
 {
-  "version": "19.2.0",
+  "version": "19.4.6",
   "commands": {
     "/research_factory_orchestrator": {
-      "entrypoint": "scripts/run_research_factory.py",
+      "entrypoint": "scripts/rfo_execute.py",
       "mode": "runtime",
       "forbidden": [
         "plain_subagent",
@@ -11,7 +11,7 @@
       ]
     },
     "/research": {
-      "entrypoint": "scripts/run_research_factory.py",
+      "entrypoint": "scripts/rfo_execute.py",
       "mode": "runtime",
       "forbidden": [
         "plain_subagent",

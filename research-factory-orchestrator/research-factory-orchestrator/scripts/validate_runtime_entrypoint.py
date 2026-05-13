@@ -2,6 +2,12 @@
 from pathlib import Path
 import argparse, json, sys
 
+# Operator bridge (native slash) vs queued worker core — both may appear in historical corpus.
+_ALLOWED_ENTRYPOINT_PROOF = frozenset(
+    ("scripts/rfo_execute.py", "scripts/run_research_factory.py")
+)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("run_dir")
@@ -13,7 +19,7 @@ def main():
         return 1
     data = json.loads(proof.read_text(encoding="utf-8"))
     errors = []
-    if data.get("entrypoint") != "scripts/run_research_factory.py":
+    if data.get("entrypoint") not in _ALLOWED_ENTRYPOINT_PROOF:
         errors.append("wrong entrypoint")
     if data.get("invocation_mode") != "runtime":
         errors.append("invocation_mode != runtime")

@@ -1,0 +1,40 @@
+{
+  "contract_id": "supported-skill-actions-v1",
+  "version": "19.4.6",
+  "summary": "Machine-readable mirror of SKILL.md Registry (IDE agents); operator research CLI is scripts/rfo_execute.py only.",
+  "operator_research_entrypoint": "scripts/rfo_execute.py",
+  "actions": [
+    {
+      "id": "research_relay_bridge",
+      "description": "Canonical dossier research (JSON relay + queue bridge)",
+      "example": "python3 -S scripts/rfo_execute.py --workspace-root <ws> --task \"…\" --web-search-json-api-base \"<url>\"",
+      "notes": "Alternatively --runs-root (explicit) + relay argv/env; see runtime/config_resolution.py"
+    },
+    {
+      "id": "preflight_effective_config",
+      "description": "Dry-run effective-config JSON before allocating a run-dir",
+      "example": "python3 -S scripts/rfo_execute.py --preflight --runs-root … --web-search-json-api-base …"
+    },
+    {
+      "id": "validate_skill_packaging",
+      "description": "Skill packaging / layout gate",
+      "example": "python3 -S scripts/validate_skill.py"
+    },
+    {
+      "id": "unit_tests",
+      "description": "Python unittest suite",
+      "example": "python3 -m unittest discover -s tests"
+    },
+    {
+      "id": "post_run_validators",
+      "description": "V1–V6 (+ profile) on an existing run directory",
+      "example": "python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile dossier"
+    },
+    {
+      "id": "emergency_adapter_execute",
+      "description": "Internal troubleshooting only (source-packet + execute); not operator research",
+      "reference": "docs/runtime-paths.md § Adapter emergency policy",
+      "unsupported_as_research_launch": true
+    }
+  ]
+}

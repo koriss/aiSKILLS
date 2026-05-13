@@ -9,7 +9,7 @@ invoke this path** (`python3 -S scripts/rfo_execute.py …`).
 The implementation module remains ``run_rfo_with_web_search.py`` (do not fork
 semantics). ``scripts/run_rfo_full_research.py`` is **retired as an operator
 entrypoint**: running it prints a fatal hint to use ``rfo_execute.py`` and exits
-**2** (the file body is kept for unit tests that import helpers). See
+**2**. Test helpers live in ``runtime/standalone_relay_driver.py``. See
 ``docs/runtime-paths.md``.
 """
 from __future__ import annotations

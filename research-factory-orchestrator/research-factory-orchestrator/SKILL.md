@@ -1,9 +1,9 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.4.5+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
+description: Research Factory Orchestrator — v19.4.6+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
-  version: "19.4.5"
+  version: "19.4.6"
   package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
@@ -12,7 +12,7 @@ metadata:
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.4.5"
+  release: "19.4.6"
 ---
 
 ## HOW TO OPERATE THIS SKILL
@@ -29,20 +29,27 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 - **Host slash / native command (canonical research)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade: loads the bridge implementation module internally; **sequential** relay query expansion + **`research/research-plan.json`** on disk + collectors + queue bridge — **not** a multi-agent swarm; see `docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md` and `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`). **Primary human artifact:** **`report/full-report.html`**. Plan mode: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`** (default `off`). Preallocated run reuse: **`RFO_PREALLOCATED_RUN_DIR`** (set by the bridge; do not hand-craft for production slash). Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
 - **Queue / tooling (not standalone research):** `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."` — preallocated run-dir / CLI queue plumbing only; not the native slash research path.
-- **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr points to **`rfo_execute.py`**, exit **2**; no research start). The file stays in-tree **only** for unit tests that import helpers — not an operator path.
+- **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Test helpers live in **`runtime/standalone_relay_driver.py`** — not an operator path.
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`
 - `python3 -S scripts/outbox_delivery_worker.py --runs-root <runs-root>`
 - **`scripts/run_research_factory.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Workers use **`rfo_runtime_core.py`** directly; this shim is not research launch.
 
 ### Registry (IDE / coding agents)
 
-| Action | Command (from skill root) |
-|--------|-------------------------|
-| **Research (relay + queue)** | `python3 -S scripts/rfo_execute.py --runs-root … --task "…"` (+ relay base env or `--web-search-json-api-base`) |
-| **Preflight / effective-config** | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json` |
-| **Skill packaging gate** | `python3 -S scripts/validate_skill.py` |
-| **Unit tests** | `python3 -m unittest discover -s tests` |
-| **Post-run validators** | `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>` |
+Machine-readable mirror: `contracts/supported-skill-actions-v1.json`. **Unsupported:** any `scripts/*.py` workflow not listed here (except troubleshooting sections in `docs/runtime-paths.md`).
+
+| Action | When | Command (from skill root) |
+|--------|------|---------------------------|
+| **Research (relay + queue)** | Default operator path — dossier bridge | `python3 -S scripts/rfo_execute.py --workspace-root <workspace> --task "…"` + `--web-search-json-api-base …` **or** `RFO_WEB_SEARCH_JSON_API_BASE`; alternatively explicit `--runs-root …` (see `runtime/config_resolution.py`) |
+| **Preflight / effective-config** | Guest agent / Telegram triage before a full run; must be **foreground** (see `docs/runtime-paths.md` § Production incident checklist) | `python3 -S scripts/rfo_execute.py --preflight …` — stdout: `rfo-effective-config-v1` JSON; schema: `contracts/rfo-effective-config-v1.schema.json`; forbidden env (`RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*`) → exit **2** |
+| **Skill packaging gate** | Release / CI layout | `python3 -S scripts/validate_skill.py` |
+| **Unit tests** | Regression checks | `python3 -m unittest discover -s tests` |
+| **Post-run validators** | After a run-dir exists | `python3 -S scripts/run_core_validators.py --run-dir <run-dir> --profile <profile>` |
+| **Emergency (internal)** | Source-packet + `execute` troubleshooting only — **not** a second research launch | See `docs/runtime-paths.md` § Adapter emergency policy |
+
+### Guest agent: required inputs (summary)
+
+Relay JSON base and runs/workspace resolution are **orthogonal**: missing relay → canonical CLI exits **non-zero** (not “successful dossier without search”). Do **not** hide RFO stderr/exit behind `background=true` when you need a synchronous pass/fail. Full matrix: `docs/runtime-paths.md` § Production incident checklist.
 
 ### Prohibitions
 

@@ -1,12 +1,12 @@
 {
   "contract_id": "run-profiles",
-  "version": "v19.4.5",
+  "version": "v19.4.6",
   "title": "RFO single dossier funnel (production)",
   "summary": "One production profile: deep relay-backed dossier. Fixture V1–V6 harness uses validation-profiles/search-primary.json.",
   "profiles": {
     "search-primary": {
       "label": "CLI JSON relay standalone (search-primary driver)",
-      "description": "Relay prefetch + fetch profile used in historical artifacts/tests (see scripts/run_rfo_full_research.py module). Operator relay+queue depth uses scripts/rfo_execute.py (dossier bridge).",
+      "description": "Relay prefetch + fetch profile used in historical artifacts/tests (helpers in runtime/standalone_relay_driver.py). Operator relay+queue depth uses scripts/rfo_execute.py (dossier bridge).",
       "source_policy": {
         "external_collection_required": false,
         "minimum_independent_sources": 2,

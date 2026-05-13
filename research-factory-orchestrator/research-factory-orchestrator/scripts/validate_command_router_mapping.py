@@ -17,7 +17,7 @@ def main():
         if not cfg:
             errors.append(f"missing command mapping: {cmd}")
             continue
-        if cfg.get("entrypoint") != "scripts/run_research_factory.py":
+        if cfg.get("entrypoint") != "scripts/rfo_execute.py":
             errors.append(f"{cmd}: wrong entrypoint")
         if cfg.get("mode") != "runtime":
             errors.append(f"{cmd}: mode != runtime")

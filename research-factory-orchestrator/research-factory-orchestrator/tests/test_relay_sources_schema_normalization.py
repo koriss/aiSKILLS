@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "validators" / "core"))
 
 from runtime.collector import _update_sources_with_collection  # noqa: E402
+from runtime.standalone_relay_driver import make_claims  # noqa: E402
 from v19_stdlib_schema_walk import validate_instance  # noqa: E402
 
 
@@ -110,13 +111,6 @@ class TestRelaySourcesSchemaNormalization(unittest.TestCase):
             self.assertNotIn("fetch_method", sub["sources"][0])
 
     def test_make_claims_reads_content_snippet(self) -> None:
-        spec = importlib.util.spec_from_file_location(
-            "run_rfo_full_research",
-            ROOT / "scripts" / "run_rfo_full_research.py",
-        )
-        assert spec and spec.loader
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
         src = {
             "source_id": "SRC-SNIP-1",
             "title": "T",
@@ -131,7 +125,7 @@ class TestRelaySourcesSchemaNormalization(unittest.TestCase):
             "corroboration_type": "independent",
             "content_snippet": "x" * 200,
         }
-        claims, evidence = mod.make_claims([src])
+        claims, evidence = make_claims([src])
         self.assertEqual(len(claims), 1)
         self.assertEqual(len(evidence), 1)
         self.assertTrue(claims[0]["claim_text"].startswith("x"))

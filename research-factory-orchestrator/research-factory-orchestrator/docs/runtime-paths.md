@@ -27,7 +27,7 @@ python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --task "<task
 
 **Gateway timeout vs worker wait loop:** default `RFO_BRIDGE_WORKER_*` values and a pessimistic budget formula for the subprocess runner are documented in **`docs/operators/openclaw-gateway-rfo-notes.md`** (§ A3 + B1).
 
-**Legacy / retired:** `scripts/run_rfo_full_research.py` — **not** an operator entrypoint; executing it prints a fatal hint pointing at **`rfo_execute.py`** and exits **2** (helpers remain for tests). See § “Standalone relay driver” below.
+**Legacy / retired:** `scripts/run_rfo_full_research.py` — **not** an operator entrypoint; executing it prints a fatal hint pointing at **`rfo_execute.py`** and exits **2**. Shared test helpers: **`runtime/standalone_relay_driver.py`**. See § “Standalone relay driver” below.
 
 ## Native relay (host agent / gateway)
 
@@ -70,9 +70,9 @@ Treat **`stdout`** from the bridge as **handoff-only:** the line **`__RFO_SKILL_
 
 ## Standalone relay driver (`scripts/run_rfo_full_research.py`) — **retired from operators**
 
-Historically a packaged **relay + fetch** CLI (not the native slash bridge). **Today:** running the script as `__main__` is a **grave marker** only — it prints stderr telling operators to use **`scripts/rfo_execute.py`** and exits **2** without starting research.
+Historically a packaged **relay + fetch** CLI (not the native slash bridge). **Today:** the script is a **grave marker** only — stderr → **`rfo_execute.py`**, exit **2**. Claim/matrix/post-finish helpers used by tests live in **`runtime/standalone_relay_driver.py`**.
 
-- **Tests:** modules and functions inside the file are still imported by unit tests (e.g. post-finish helpers); that is **not** permission to run the script for production.
+- **Tests:** import from **`runtime.standalone_relay_driver`** — that is **not** permission to run `run_rfo_full_research.py` for production.
 - **Profile `search-primary`:** described in `contracts/run-profiles.json` for artifact semantics; **operator** relay+queue depth is **`rfo_execute.py`** (bridge implementation is loaded internally).
 
 ### `search-primary` profile: contradiction scan (E3)
@@ -119,8 +119,10 @@ Work is sequenced **inside this package** as: **(1)** operator docs + contracts 
 |-------|-------------|--------|
 | **Skill root / CWD** | Yes | Run from the **inner** package root where `scripts/rfo_execute.py` lives (`SKILL.md` tree). Skill root in snapshots comes from **`__file__`**, but operators should **`cd`** there to avoid wrong relative paths. |
 | **`runs_root`** | Yes (or workspace) | e.g. `<OPENCLAW_WORKSPACE_DIR>/rfo-runs` or explicit `--runs-root` (deprecated env: see `runtime/config_resolution.py`). |
-| **Relay base** | Yes | `--web-search-json-api-base "<url>"` **or** `RFO_WEB_SEARCH_JSON_API_BASE`. **Canonical:** no relay → **exit 2** on preflight and on bridge start — not a “successful” run without search. |
+| **Relay base** | Yes | `--web-search-json-api-base "<url>"` **or** `RFO_WEB_SEARCH_JSON_API_BASE`. **Canonical:** no relay → **exit 2** on preflight and on bridge start — not a “successful” run without search and **not** a silent stub-only dossier. |
 | **`skill_root`** | Derived | Shown in effective-config JSON for audits. |
+| **Forbidden env** | Must be unset | `RFO_SMOKE`, `RFO_EXPERIMENT_BRIDGE`, `RFO_ALLOW_LEGACY*` → canonical preflight/bridge exits **2** (configuration error). |
+| **Secondary relay** | Optional | `RFO_WEB_SEARCH_SECONDARY_JSON_API_BASE` — deprecated; if set, appears only under **`deprecated_inputs_used`** in effective-config (not a second product path). |
 | **Sync vs background** | Sync for preflight | Use **foreground** subprocess so exit code and stdout JSON are visible; do not hide failures behind `background=true` when the operator needs pass/fail. |
 
 | Step | Command (example — substitute absolute paths) |

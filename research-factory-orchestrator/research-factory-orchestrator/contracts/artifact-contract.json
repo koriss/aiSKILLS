@@ -44,6 +44,7 @@
     "contracts/entrypoint-contract.json",
     "contracts/command-router-contract.json",
     "scripts/run_research_factory.py",
+    "scripts/rfo_execute.py",
     "contracts/interface-adapter-contract.json",
     "contracts/provider-contract.json",
     "contracts/canonical-package-layout-contract.json",

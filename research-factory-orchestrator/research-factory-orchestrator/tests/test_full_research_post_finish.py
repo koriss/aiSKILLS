@@ -1,4 +1,4 @@
-"""Citation grounding + feature matrix sync for standalone full-research driver."""
+"""Citation grounding + feature matrix sync for standalone relay helpers."""
 from __future__ import annotations
 
 import json
@@ -10,25 +10,20 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT))
 
+from runtime.standalone_relay_driver import (  # noqa: E402
+    feature_matrix_standalone,
+    post_finish_standalone,
+)
+from runtime.util import jw  # noqa: E402
+
 
 class TestFullResearchPostFinish(unittest.TestCase):
     def test_post_finish_writes_citation_and_validator_path(self) -> None:
         import tempfile
 
-        import importlib.util
-
-        spec = importlib.util.spec_from_file_location(
-            "run_rfo_full_research",
-            ROOT / "scripts" / "run_rfo_full_research.py",
-        )
-        assert spec and spec.loader
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-
         with tempfile.TemporaryDirectory() as td:
             rd = Path(td)
             (rd / "graph").mkdir(parents=True, exist_ok=True)
-            jw = mod.jw
             jw(
                 rd / "collection-result.json",
                 {
@@ -75,10 +70,10 @@ class TestFullResearchPostFinish(unittest.TestCase):
             jw(rd / "graph/wave-plan.json", {"run_id": "RUN-test", "waves": [{"wave_id": "W0", "status": "completed", "purpose": "test"}]})
             jw(
                 rd / "feature-truth-matrix.json",
-                mod._feature_matrix_standalone("RUN-test", {"web_search_succeeded": True, "external_web_search_executed": True}),
+                feature_matrix_standalone("RUN-test", {"web_search_succeeded": True, "external_web_search_executed": True}),
             )
             entry = {"run_id": "RUN-test", "job_id": "JOB-test", "command_id": "CMD-test"}
-            mod.post_finish_standalone(rd, entry, "search-primary")
+            post_finish_standalone(rd, entry, "search-primary")
             cg_path = rd / "citation-grounding-result.json"
             self.assertTrue(cg_path.is_file(), msg="citation-grounding-result.json missing")
             cg = json.loads(cg_path.read_text(encoding="utf-8"))

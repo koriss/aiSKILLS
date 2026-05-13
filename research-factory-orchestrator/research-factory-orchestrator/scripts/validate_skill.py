@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import ast, importlib.util, json, re, shutil, sys
+import ast, importlib.util, json, re, shutil, subprocess, sys
 sys.dont_write_bytecode = True
 VERSION = "19.4"
 root = Path(__file__).resolve().parents[1]
@@ -47,6 +47,7 @@ required_scripts = [
     "rfo_validate_source_packet.py",
     "assert_no_relay_semantics.py",
     "validate_docs_archival_markers.py",
+    "validate_source_packet_contract_bundle.py",
 ]
 # v19.3: compute-only — only the CLI pass-through adapter is required for packaging.
 required_providers = ["providers/cli/cli_delivery_adapter.py"]
@@ -111,6 +112,7 @@ for _cache in (
     root / "scripts" / "__pycache__",
     root / "runtime" / "__pycache__",
     root / "validators" / "core" / "__pycache__",
+    root / "tests" / "__pycache__",
 ):
     if _cache.is_dir():
         shutil.rmtree(_cache, ignore_errors=True)
@@ -156,6 +158,23 @@ try:
         errors.extend(mod_arch.validate(root))
 except Exception as e:
     errors.append(f"docs_archival_markers:{e}")
+try:
+    sp_bundle = subprocess.run(
+        [
+            sys.executable,
+            "-S",
+            str(root / "scripts" / "validate_source_packet_contract_bundle.py"),
+        ],
+        cwd=str(root),
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    if sp_bundle.returncode != 0:
+        tail = (sp_bundle.stdout or sp_bundle.stderr or "").strip()[:800]
+        errors.append(f"source_packet_contract_bundle:exit_{sp_bundle.returncode}:{tail}")
+except Exception as e:
+    errors.append(f"source_packet_contract_bundle:{e}")
 index = root/"failure-corpus/index.json"
 if not index.exists(): errors.append("missing_failure_corpus_index")
 else:

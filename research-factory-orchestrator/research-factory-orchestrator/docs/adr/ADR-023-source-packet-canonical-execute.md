@@ -32,3 +32,20 @@ RFO historically was **relay-first**: `run_rfo_with_web_search.py` performs JSON
 | **A** | Worker needs only `collection-result` **shape**, not relay backend | Adapter without relay semantics; iterate PR-0. |
 | **B** | Worker **semantically** needs relay prefetch | Defer packet migration; extract worker core from relay bridge first. |
 | **C** | Keep public relay CLI as “canon” **and** ship source-packet as parallel canon | **Forbidden** — hybrid operator confusion. |
+
+## assert_no_relay (machine vs text)
+
+- **Strict JSON:** forbidden keys and shapes are enforced in `scripts/assert_no_relay_semantics.py` (relay runtime: e.g. non-empty `web_search_json_api_base`, `relay_source` other than `none_agent_supplied_packet`, `relay_prefetch_bridge: true`, non-trivial `relay_chain`, …). **Allowed:** `collection_methods` values like `web_search` (agent collection provenance).
+- **Soft text:** optional `--soft-text` scan of `report/` and `chat/` for relay-shaped prose heuristics.
+
+## Roadmap: Phases A–G (post PR-0/PR-1)
+
+| Phase | Scope | In-repo status (summary) |
+|-------|--------|---------------------------|
+| **A** | argv hard-stop legacy public relay flags on packet entrypoint; migration messaging | **A (packet):** pre-scan in `rfo_execute.py`. **A (bridge):** unchanged; full removal of relay CLI deferred. |
+| **B** | Writable `.rfo-state` skill root; no silent fallback | Default packet path documented; execute refuses missing packet. |
+| **C** | Schema + `collection_integrity` + marketing grep + snippet postrun | Bootstrap merge in `runtime/source_packet_run.py`; `validate_operator_facing_markdown.py`. |
+| **D** | Execute + adapter; two transports | `rfo_execute.py`, `runtime/source_packet_run.py`, `docs/runtime-paths.md`. |
+| **E** | effective-config v2 + supported-skill-actions-v2 | Contracts + `assert_no_relay_semantics.py`. |
+| **F** | User-facing summary JSON + prompt-template passes | Incremental follow-up (rg-driven prompt edits); not a PR-1 gate. |
+| **G** | Postrun limitations / `final_verdict_allowed` from snippet mix | Merged in `source_packet_run` for bootstrap profile. |

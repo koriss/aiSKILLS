@@ -8,13 +8,16 @@
 - **`assert_no_relay_semantics.py`:** stricter relay-runtime detection (`relay_chain` non-empty, non-null `relay` URL, `relay_prefetch_bridge: true`, disallowed `relay_source`).
 - **Fixtures / templates:** `tests/fixtures/source_packets/blocked_packet.json`; `templates/source-packet.bootstrap.example.json` for `--template-mode` checks.
 - **Docs:** `docs/runtime-paths.md` (preflight + adapter policy use relay bridge, not `rfo_execute` legacy argv); `docs/rfo-env-classification.md` (source-packet execute section); `contracts/run-profiles.json` description alignment.
+- **Anti-regression:** `scripts/validate_source_packet_contract_bundle.py` (fixtures + `templates/source-packet*.json` via `rfo_validate_source_packet.py`); invoked from `validate_skill.py`; `tests/__pycache__` stripped in the same gate as other bytecode dirs.
+- **SKILL frontmatter:** `native_slash_relay_bridge` + `canonical_source_packet_execute`; explicit copy-paste subsection for the two packet transports; slash disclaimer that host owns packet + bridge choice.
+- **Relay reachability:** `runtime/relay_reachability.py` module docstring — bridge-preflight only, not packet canonical (ADR-023 cross-link).
 
 ## 19.4.x — bridge + compute-only boundary
 
 ### 19.4.10 — 2026-05-10
 
 - **Preflight relay probe:** `runtime/relay_reachability.py` — after config snapshot, minimal JSON `/search` via `relay_json_search`; on failure `relay_unreachable`, `blocked_dependency=web_search_json_api_base`, exit **2**; `RFO_SKIP_RELAY_PROBE` / `RFO_PREFLIGHT_RELAY_TIMEOUT` for harness only (ADR-022).
-- **Effective-config entrypoint:** `scripts/rfo_execute.py` sets `RFO_EFFECTIVE_ENTRYPOINT` so stdout JSON shows **`scripts/rfo_execute.py`** when using the public façade.
+- **Effective-config entrypoint:** `scripts/rfo_execute.py` sets `RFO_EFFECTIVE_ENTRYPOINT` so stdout JSON shows **`scripts/rfo_execute.py`** for the **packet execute** façade (19.4.11: native slash / default production depth still flows through **`scripts/run_rfo_with_web_search.py`** per command-router).
 - **Tests:** `test_bridge_cli_integration` uses local HTTP stub for successful preflight; new unreachable-relay case on closed port.
 - **Docs:** `docs/runtime-paths.md`, `docs/rfo-env-classification.md`, `docs/adr/ADR-019-single-dossier-funnel.md` (consequences bullet), **ADR-022**; `PLAN-rfo-agent-executable-single-behavior.md` acceptance rows closed.
 

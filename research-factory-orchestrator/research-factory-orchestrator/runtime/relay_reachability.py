@@ -1,9 +1,10 @@
-"""Optional JSON-relay reachability probe for RFO preflight (stdlib + shared relay client).
+"""JSON-relay reachability probe for **relay-bridge preflight only** (ADR-022).
 
-**Deprecation note (source-packet canonical):** new operator execute uses
-``scripts/rfo_execute.py`` with an agent-assembled packet only; relay reachability
-remains relevant for ``scripts/run_rfo_with_web_search.py`` preflight, not for
-packet-only effective-config v2.
+Do **not** use this module on the **source-packet canonical** path: packet runs
+use ``scripts/rfo_execute.py``, ``rfo-effective-config-v2``, and must not merge
+relay probe fields into disk artifacts (see ADR-023 and
+``scripts/assert_no_relay_semantics.py``). Callers are ``run_rfo_with_web_search``
+preflight / bridge startup only.
 """
 from __future__ import annotations
 

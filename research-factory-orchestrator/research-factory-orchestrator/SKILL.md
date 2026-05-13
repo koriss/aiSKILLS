@@ -1,18 +1,18 @@
 ---
 name: research_factory_orchestrator
-description: Research Factory Orchestrator — v19.4.10+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
+description: Research Factory Orchestrator — v19.4.11+ artifact-only compute with profile-driven validation (V1–V6 + citation grounding when required); user-visible delivery is always host-owned (stdout handoff or your gateway).
 license: internal
 metadata:
-  version: "19.4.10"
+  version: "19.4.11"
   package: research-factory-orchestrator
   command: "/research_factory_orchestrator"
   entrypoint: "scripts/interface_runtime_adapter.py"
-  native_relay_entrypoint: "scripts/rfo_execute.py"
-  native_relay_bridge_impl: "scripts/run_rfo_with_web_search.py"
+  native_slash_relay_bridge: "scripts/run_rfo_with_web_search.py"
+  canonical_source_packet_execute: "scripts/rfo_execute.py"
   runtime_worker: "scripts/runtime_job_worker.py"
   delivery_worker: "scripts/outbox_delivery_worker.py"
   discovery_required: true
-  release: "19.4.10"
+  release: "19.4.11"
 ---
 
 ## HOW TO OPERATE THIS SKILL
@@ -42,6 +42,22 @@ Use this order on **every** native bridge run so disk paths stay aligned with th
   - **`python3 -S scripts/rfo_execute.py --runs-root <abs>`** with an agent-written **source-packet** (default `<skill_root>/.rfo-state/input/source-packet.json` or **`--source-packet`** for concurrent hosts). No relay prefetch on this binary; legacy flags (`--task`, `--web-search-json-api-base`, `--preflight`) are rejected (exit **2**); use the bridge script below for relay.
   - **`python3 -S`** **`scripts/run_rfo_with_web_search.py`** for **JSON relay prefetch + queue** (`--task`, `--web-search-json-api-base`, optional `--profile`, **`--preflight`** for effective-config v1). Same worker/adapter/render pipeline after the packet exists on disk.
   **Primary human artifact:** **`report/full-report.md`**; **`report/full-report.html`** is derived from that Markdown. Plan mode on the bridge: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`**. Delivery stays host-owned. See `docs/runtime-paths.md` and `docs/adr/ADR-023-source-packet-canonical-execute.md`.
+
+#### Source-packet: two transports (explicit copy-paste)
+
+One JSON contract (`contracts/source-packet-v1.schema.json`); two **equal** ways to hand it to `rfo_execute.py` (see `docs/runtime-paths.md` § A).
+
+**Local single-agent (writable skill checkout)**
+
+1. Write `<skill_root>/.rfo-state/input/source-packet.json`
+2. `python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs`
+
+**Concurrent host / gateway (unique path per request)**
+
+`python3 -S scripts/rfo_execute.py --runs-root <workspace>/rfo-runs --source-packet /path/to/unique-packet.json`
+
+The **slash / native handler** does not live in this repo: the host assembles evidence (or runs the relay bridge), writes the packet if needed, then invokes the script above. The packet JSON does **not** define gateway delivery.
+
 - **Queue / tooling (not standalone research):** `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."` — preallocated run-dir / CLI queue plumbing only; not the native slash research path.
 - **`scripts/run_rfo_full_research.py`** — **retired** as `__main__` (stderr → **`rfo_execute.py`**, exit **2**). Test helpers live in **`runtime/standalone_relay_driver.py`** — not an operator path.
 - `python3 -S scripts/runtime_job_worker.py --runs-root <runs-root> --execute-runtime`

@@ -1,6 +1,6 @@
 # Research Factory Orchestrator — v19 core operator sheet
 
-**Version:** `19.4.8`  
+**Version:** `19.4.10`  
 **ADR:** `docs/adr/ADR-001-v19-pragmatic-rigor.md`  
 **Runtime truth:** `docs/adr/ADR-015-runtime-truth-restoration.md`  
 **Single funnel:** `docs/adr/ADR-019-single-dossier-funnel.md`

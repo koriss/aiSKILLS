@@ -2,6 +2,13 @@
 
 ## 19.4.x — bridge + compute-only boundary
 
+### 19.4.4 — 2026-05-10
+
+- **Bridge / relay:** worker exit semantics hardened; `bridge.worker_poll` events appended to `latest_run/observability-events.jsonl`; non-zero exit when the inner worker fails after claim.
+- **Canonical entrypoint:** `scripts/rfo_execute.py` as thin façade over `scripts/run_rfo_with_web_search.py` for native relay; `run_rfo_with_web_search.py` remains the bridge implementation; docs prefer the façade in new compose and operator notes.
+- **Outbox:** `runtime/outbox_impl.py` — per-run coordination and `package_gate` semantics aligned with zip OUT-0005/OUT-0006 (E7).
+- **Docs:** `docs/adr/ADR-020-vacuum-of-agency-degraded-modes.md`; `docs/operators/openclaw-gateway-rfo-notes.md`; runtime-paths, lease runbook, playbook, and search-primary profile notes updated.
+
 ### 19.4.3 — 2026-05-10 (internal plan **19.4.1.1** / accumulated fixes)
 
 - **RAF / citation grounding:** `runtime/citation_grounding.py` — structural multiplier `min(1, support_count)` plus `inferred_assessment` weight **0.68** so relay/dossier rows with one grounded support can meet RAF ≥ 0.65 (previous `min(sc/2,1)*0.52` capped inferred claims below the threshold forever).

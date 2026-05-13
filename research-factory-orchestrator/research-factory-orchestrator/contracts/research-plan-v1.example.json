@@ -1,0 +1,52 @@
+{
+  "schema_version": "research-plan-v1",
+  "metadata": {
+    "task": "Compare ACME Corp vs Beta LLC sustainability claims in EU 2024 filings.",
+    "plan_version": 1,
+    "created_at": "2026-05-10T12:00:00Z",
+    "planner_model": "gpt-4o-mini",
+    "planner_provider": "openai_compat"
+  },
+  "axes": [
+    {
+      "id": "axis-regulatory",
+      "title": "Regulatory / filings",
+      "intent": "Find official disclosures and filings.",
+      "priority": 1
+    },
+    {
+      "id": "axis-media",
+      "title": "Independent coverage",
+      "intent": "Corroborate with third-party reporting.",
+      "priority": 2
+    }
+  ],
+  "waves": [
+    {
+      "wave_id": "W0",
+      "axis_id": "axis-regulatory",
+      "purpose": "Broad entity + topic discovery",
+      "queries": [
+        "ACME Corp EU sustainability report 2024",
+        "Beta LLC environmental disclosure 2024"
+      ]
+    },
+    {
+      "wave_id": "W1",
+      "axis_id": "axis-media",
+      "purpose": "Narrow contradictions / comparisons",
+      "refinement_of": "W0",
+      "queries": [
+        "ACME vs Beta sustainability comparison independent analysis"
+      ]
+    }
+  ],
+  "safety": {
+    "max_waves": 32,
+    "max_queries_per_wave": 24,
+    "max_total_relay": 120
+  },
+  "extensions": {},
+  "evidence_policy": null,
+  "stop_when": null
+}

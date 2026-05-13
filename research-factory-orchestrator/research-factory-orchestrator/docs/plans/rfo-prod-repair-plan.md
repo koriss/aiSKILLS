@@ -153,7 +153,7 @@ isProject: false
 
 1. `**scripts/run_rfo_full_research.py` появился только в `cf7b09f**` (сообщение коммита: sync v19.3 ← canonical /opt). **Вся история файла — 6 коммитов**, все после этой точки. В **первом** же содержимом (`git show cf7b09f:…/run_rfo_full_research.py`) уже заданы `**_MAX_RESULTS = 10`**, один поток `**search_searxng**`, стратегия «Search Primary» / fetch — **не было этапа с multi-vector fanout** в этом файле никогда.
 2. **До v19.3** на коммите `**a1bc11e` (v19.2.0 «runtime truth»)** файлов `**run_rfo_full_research.py` и `run_rfo_with_web_search.py` нет** в `scripts/`. Точка входа «фабрики» была `**run_research_factory.py`** — тонкая обёртка: `runpy` → `**rfo_runtime_core.py` `run**` (полноценное ядро пайплайна того поколения). Параллельно в дереве были `**runtime_job_worker.py**`, `**outbox_delivery_worker.py**` и т.д.
-3. `**run_rfo_with_web_search.py` тоже добавлен в `cf7b09f**` (та же синхронизация v19.3). В **текущем** коде там явно: `**fanout_relay_search`**, шаг `**[1/5] Multi-vector JSON relay fanout**`, merge/dedup, запись `**relay_query_fanout**` в `collection-result.json` — это и есть ближайший в репозитории аналог ожидания «много запросов / волны». То есть «как было задумано глубоко» для relay-ветки — **не** `run_rfo_full_research.py`, а **bridge-скрипт** (и док `[docs/runtime-paths.md](research-factory-orchestrator/docs/runtime-paths.md)` уже называет его нативным relay-путём).
+3. `**run_rfo_with_web_search.py` тоже добавлен в `cf7b09f**` (та же синхронизация v19.3). В **текущем** коде там явно: `**fanout_relay_search`**, шаг **«[1/5] Sequential relay query expansion …»** (ранее stderr: Multi-vector JSON relay fanout), merge/dedup, запись `**relay_query_fanout**` в `collection-result.json` — это и есть ближайший в репозитории аналог ожидания «много запросов / волны». То есть «как было задумано глубоко» для relay-ветки — **не** `run_rfo_full_research.py`, а **bridge-скрипт** (и док `[docs/runtime-paths.md](research-factory-orchestrator/docs/runtime-paths.md)` уже называет его нативным relay-путём).
 4. **Вывод для починки:** регресс ощущений — не «сломали волны внутри full_research», а **подмена или рекомендация entrypoint’а**: агенты/операторы запускают `**run_rfo_full_research.py`**, ожидая поведение `**run_rfo_with_web_search.py**` / старого `**rfo_runtime_core**`. Плановый todo `rfo-product-waves-vs-fast` должен **свести к одному** поведению «всегда глубоко»: либо внутрь `run_rfo_full_research` перенести оркестрацию уровня bridge, либо запретить full_research как пользовательский «золотой путь» и везде вызывать bridge/ядро.
 
 ---
@@ -295,8 +295,13 @@ flowchart TB
 Эти пункты **не блокируют** закрытие «missing citation file», но объясняют оставшееся UX «формально отработало»:
 
 1. **Wave graph:** выяснить, должен ли `run_rfo_full_research.py` всегда материализовать `graph/wave-plan.json` при профиле dossier/search-primary; если да — добавить генерацию или смягчить гейт для standalone.
-2. **IO propaganda:** разделить (а) «артефакт записан» vs (б) «осмысленный narrative_map / корректный topic classifier»; при необходимости отдельный статус в гейте или порог для пустого `narrative_map` на новостных задачах.
-3. **Контент/HTML:** шум в `sources.json` / отчёте — отдельная линия (fetch/readability), не смешивать с отсутствием `citation-grounding-result.json`.
+2. **Bridge (`run_rfo_with_web_search.py`):** с ADR-021 мост **всегда** пишет `graph/wave-plan.json` и `research/research-plan.json` до адаптера; `wave_graph_gate` видит файл. Расхождение «full_research vs bridge» остаётся только для **legacy** `run_rfo_full_research.py` (todo **wave-plan-standalone**).
+3. **IO propaganda:** разделить (а) «артефакт записан» vs (б) «осмысленный narrative_map / корректный topic classifier»; при необходимости отдельный статус в гейте или порог для пустого `narrative_map` на новостных задачах.
+4. **Контент/HTML:** шум в `sources.json` / отчёте — отдельная линия (fetch/readability), не смешивать с отсутствием `citation-grounding-result.json`.
+
+### Post-v1 hardening (Research Factory plan / relay)
+
+Отложено за рамками ADR-021: `run_state.json` с фазами, структурированные stderr/JSONL метрики по relay_index, checkpoint/resume по индексу relay, SIGTERM → терминальное `cancelled`, fuzz merge на дубликатах волн, отдельная политика SSRF/URL в плане, формальные `stop_when` / evidence tiers (поля в схеме зарезервированы nullable).
 
 ---
 

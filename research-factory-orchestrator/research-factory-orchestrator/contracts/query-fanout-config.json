@@ -1,7 +1,7 @@
 {
   "contract_id": "query-fanout-config",
-  "version": "v19.3.0",
-  "description": "Deterministic relay query variants for multi-vector prefetch (stub heuristics; expand over time).",
+  "version": "v19.3.1",
+  "description": "Deterministic relay query templates executed sequentially (stable order), merged/deduped by URL — not a parallel multi-agent swarm. Cap with RFO_QUERY_FANOUT_QUERIES; see docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md.",
   "templates": [
     "{task}",
     "{task} definition background",

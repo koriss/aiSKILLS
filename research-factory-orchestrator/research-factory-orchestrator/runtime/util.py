@@ -184,7 +184,8 @@ def tw(p: Path | str, t: str) -> None:
 def jl(p: Path | str, o: object) -> None:
     p = Path(p)
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.open("a", encoding="utf-8").write(json.dumps(o, ensure_ascii=False) + "\n")
+    with p.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(o, ensure_ascii=False) + "\n")
 
 
 def sha(p: Path | str) -> str:

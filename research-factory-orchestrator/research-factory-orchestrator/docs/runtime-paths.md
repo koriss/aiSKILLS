@@ -2,6 +2,17 @@
 
 This document fixes **vector F** (“which code path ran?”): a single checklist for operators and coding agents.
 
+## Relay search shape (sequential, not multi-agent)
+
+Relay **“fanout”** is **sequential**: `scripts/rfo_query_fanout.py` walks deterministic query templates and calls the JSON relay one query at a time, then merges/dedupes URLs. There is **no** in-process parallel fanout pool for those searches. Product wording: **`docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md`**.
+
+## Research plan on disk (bridge)
+
+- **Lifecycle:** `scripts/run_rfo_with_web_search.py` allocates **`run_dir`** immediately (`runtime.render.allocate`), bootstraps `research/` + `graph/` (`runtime.research_bridge_bootstrap`), then relay — so partial traces survive early failures (`research/bridge-phase-log.jsonl`).
+- **`research/research-plan.json`:** versioned **`research-plan-v1`** (`contracts/research-plan-v1.schema.json`). **`RFO_RESEARCH_PLAN_MODE=off`** (default): plan mirrors template `build_query_vectors`; **`llm_v1`**: planner (`runtime/research_plan_planner.py`, `RFO_RESEARCH_PLANNER_*`) with schema repair + fallback; execution still **one sequential relay stream** (`fanout_relay_search` vs `fanout_relay_search_from_queries`).
+- **Adapter handoff:** bridge sets **`RFO_PREALLOCATED_RUN_DIR=<run_dir>`** so `interface_runtime_adapter adapter` reuses the same directory (see **`docs/adr/ADR-021-research-plan-disk-sequential-relay.md`**).
+- **`graph/wave-plan.json`:** materialized from the plan after relay for **`wave_graph_gate`** file presence in the bridge path.
+
 ## Canonical production entrypoint (relay + queue bridge)
 
 **Prefer one command everywhere** (host compose, docs, mental model):
@@ -62,7 +73,7 @@ Packaged **relay + fetch** CLI (not the native slash bridge):
 - **Entry:** requires `RFO_ALLOW_LEGACY_ENTRYPOINT=1` or `--allow-legacy-entrypoint`; otherwise prints stderr hint pointing at **`rfo_execute.py`** and exits **64**.
 
 - Default profile is **`search-primary`** from `contracts/run-profiles.json` when `RFO_RUN_PROFILE` is empty (`runtime.profiles.resolve(..., entrypoint_default="search-primary")`).
-- Uses **`fanout_relay_search`** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) with stats recorded on **`collection-result.json`** (`relay_query_fanout`).
+- Uses **`fanout_relay_search`** (`scripts/rfo_query_fanout.py`, `contracts/query-fanout-config.json`) **sequentially** (one relay query at a time), with stats recorded on **`collection-result.json`** (`relay_query_fanout`).
 - Emits **`graph/wave-plan.json`** (so **`wave_graph_gate`** can pass on file presence), **`citation-grounding-result.json`**, **`feature-truth-matrix.json`** citation block, and a **`final-answer-gate.json`** aligned with those checks.
 - **Not** the full **`dossier`** work-unit / source-packet pipeline; for that depth use **`scripts/rfo_execute.py`** (or **`runtime_job_worker.py`**). Delivery under **`cli`** may still be **`stub_only`** — distinguish from gateway-attested sends (ADR-016).
 

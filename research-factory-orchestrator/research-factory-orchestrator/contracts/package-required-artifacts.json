@@ -110,6 +110,12 @@
       "line_schema": null
     },
     {
+      "relpath": "research/research-plan.json",
+      "kind": "json",
+      "core_schema": "pkg-generic-object",
+      "line_schema": null
+    },
+    {
       "relpath": "graph/wave-events.jsonl",
       "kind": "jsonl",
       "core_schema": null,

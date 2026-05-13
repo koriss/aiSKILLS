@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rfo.local/contracts/research-plan-v1.schema.json",
+  "title": "Research Factory research plan v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "metadata", "axes", "waves", "safety"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "research-plan-v1"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["task", "plan_version"],
+      "properties": {
+        "task": { "type": "string", "minLength": 1 },
+        "plan_version": { "type": "integer", "minimum": 1 },
+        "created_at": { "type": "string" },
+        "planner_model": { "type": "string" },
+        "planner_provider": { "type": "string" },
+        "mode": { "type": "string" },
+        "fallback_reason": { "type": "string" },
+        "repair_attempted": { "type": "boolean" },
+        "plan_sha256_preview": { "type": "string" }
+      }
+    },
+    "axes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "intent", "priority"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string" },
+          "intent": { "type": "string" },
+          "priority": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "waves": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["queries"],
+        "properties": {
+          "wave_id": { "type": "string" },
+          "axis_id": { "type": "string" },
+          "purpose": { "type": "string" },
+          "refinement_of": { "type": "string" },
+          "queries": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 48,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "evidence_policy": { "type": ["object", "null"] },
+          "stop_when": { "type": ["object", "null"] }
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_waves", "max_queries_per_wave", "max_total_relay"],
+      "properties": {
+        "max_waves": { "type": "integer", "minimum": 1, "maximum": 64 },
+        "max_queries_per_wave": { "type": "integer", "minimum": 1, "maximum": 64 },
+        "max_total_relay": { "type": "integer", "minimum": 1, "maximum": 500 }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "evidence_policy": { "type": ["object", "null"] },
+    "stop_when": { "type": ["object", "null"] },
+    "citation_policy": { "type": ["object", "null"] },
+    "source_diversity_hints": { "type": ["object", "null"] }
+  }
+}

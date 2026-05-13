@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Multi-vector relay query fanout (deterministic templates + merge/dedup)."""
+"""Sequential relay query expansion: deterministic templates, one relay call at a time, merge/dedup."""
 from __future__ import annotations
 
 import json
@@ -96,6 +96,46 @@ def merge_relay_result_rows(rows_by_query: list[tuple[str, list[dict[str, Any]]]
     return merged, stats
 
 
+def fanout_relay_search_from_queries(
+    query_fn,
+    bases: list[str],
+    queries: list[str],
+    per_query_num: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """
+    Same sequential semantics as ``fanout_relay_search``, but caller supplies the
+    ordered query list (e.g. from ``research/research-plan.json``).
+    """
+    import time
+
+    budget_s = float(os.environ.get("RFO_RELAY_TOTAL_BUDGET_S", "120") or "120")
+    t0 = time.monotonic()
+    rows_by_query: list[tuple[str, list[dict[str, Any]]]] = []
+    relay_requests = 0
+    for q in queries:
+        if time.monotonic() - t0 > budget_s:
+            break
+        got: list[dict[str, Any]] = []
+        for base in bases:
+            if time.monotonic() - t0 > budget_s:
+                break
+            relay_requests += 1
+            got = query_fn(base, q, per_query_num)
+            if got:
+                break
+        rows_by_query.append((q, got or []))
+    merged, merge_stats = merge_relay_result_rows(rows_by_query)
+    stats = {
+        "query_vectors": list(queries),
+        "relay_requests": relay_requests,
+        "merge": merge_stats,
+        "budget_seconds": budget_s,
+        "elapsed_seconds": round(time.monotonic() - t0, 3),
+        "fanout_source": "explicit_query_list",
+    }
+    return merged, stats
+
+
 def fanout_relay_search(
     query_fn,
     bases: list[str],
@@ -104,6 +144,10 @@ def fanout_relay_search(
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """
     query_fn(base, query, num) -> list[dict] relay rows.
+
+    Runs **one query string at a time** (see ``build_query_vectors``), in order, then
+    merges rows — not parallel asyncio / thread pools.
+
     Respects RFO_RELAY_TOTAL_BUDGET_S (soft wall clock) and RFO_QUERY_FANOUT_QUERIES.
     """
     import time

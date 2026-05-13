@@ -13,9 +13,10 @@ URL для исследования собирается здесь через *
 документом (иначе эвристика выключена).
 
 Поток:
-  1. multi-vector relay fanout → merge/dedup URL → fetch страниц
-  2. RFO_SOURCE_PACKET + очередь RFO как обычно
-  3. патчи claims-registry / re-render / stdout ``__RFO_SKILL_AGENT_HANDOFF__=``
+  1. **Ранний ``run_dir``:** ``allocate`` + bootstrap ``research/`` / ``graph/`` (см. ``runtime/research_bridge_bootstrap``), затем план ``research/research-plan.json`` (``RFO_RESEARCH_PLAN_MODE``).
+  2. **Последовательное** расширение запросов к JSON relay → merge/dedup URL → **последовательный** fetch страниц (шаблоны или плоский список из плана при ``llm_v1``).
+  3. ``RFO_SOURCE_PACKET`` + очередь RFO как обычно (адаптер с ``RFO_PREALLOCATED_RUN_DIR``).
+  4. патчи claims-registry / re-render / stdout ``__RFO_SKILL_AGENT_HANDOFF__=``
 
 По умолчанию профиль ``dossier`` (единый конвейер «досье»); допустимые имена —
 только ключи из ``contracts/run-profiles.json``.
@@ -50,7 +51,11 @@ from runtime.source_record_v19 import normalize_source_record_v19  # noqa: E402
 from runtime.status import VERSION  # noqa: E402
 from runtime.util import jl, now  # noqa: E402
 
-from rfo_query_fanout import fanout_relay_search  # noqa: E402
+from rfo_query_fanout import (  # noqa: E402
+    build_query_vectors,
+    fanout_relay_search,
+    fanout_relay_search_from_queries,
+)
 from rfo_relay_search_helpers import (  # noqa: E402
     body_text_signals_seed_garbage,
     rank_relay_rows_for_task,
@@ -387,6 +392,27 @@ def _merge_relay_fanout_into_collection(rd: Path, stats: dict) -> None:
     jw(rd / "collection-result.json", cr)
 
 
+def _merge_research_plan_bridge_meta(
+    rd: Path,
+    *,
+    plan_mode: str,
+    planner_summary: dict[str, Any] | None,
+    run_label: str,
+) -> None:
+    """Record Research Factory plan mode + planner outcome on ``collection-result.json``."""
+    from runtime.util import jr, jw
+
+    cr = jr(rd / "collection-result.json", {})
+    if not isinstance(cr, dict):
+        cr = {}
+    cr["research_plan_mode"] = plan_mode
+    cr["research_plan_run_label"] = run_label
+    cr["research_plan_path"] = "research/research-plan.json"
+    if planner_summary:
+        cr["research_plan_planner"] = planner_summary
+    jw(rd / "collection-result.json", cr)
+
+
 # ── RFO patch helpers ─────────────────────────────────────────────────────────
 def patch_claims_registry(rd: Path, claims: list[dict], evidence_cards: list[dict]) -> None:
     """Overwrite claims-registry with real source-derived claims."""
@@ -621,16 +647,92 @@ def main() -> int:
         )
         return 2
 
+    runs_root_p = Path(args.runs_root).resolve()
+    runs_root = str(runs_root_p)
+    _ensure_rfo_tree(runs_root_p)
+
+    from runtime.render import allocate
+    from runtime.research_bridge_bootstrap import (
+        append_bridge_phase,
+        bootstrap_early_run_dir,
+        write_off_mode_research_plan,
+    )
+    from runtime.research_plan_planner import (
+        default_safety_caps,
+        flatten_plan_queries,
+        materialize_wave_plan,
+        plan_and_write,
+    )
+
+    entry = allocate(runs_root, task, "cli", "cli")
+    rd_early = Path(entry["run_dir"]).resolve()
+    bootstrap_early_run_dir(
+        rd_early,
+        run_id=str(entry["run_id"]),
+        task=task,
+        label=str(entry.get("run_label") or "bridge"),
+    )
+    append_bridge_phase(rd_early, "bridge.allocated", {"run_dir": str(rd_early)})
+
+    plan_mode = (os.environ.get("RFO_RESEARCH_PLAN_MODE") or "off").strip().lower()
+    if plan_mode not in ("off", "llm_v1"):
+        print(f"[warn] RFO_RESEARCH_PLAN_MODE={plan_mode!r} unknown; using off", file=sys.stderr)
+        plan_mode = "off"
+
+    planner_summary: dict[str, Any] | None = None
     fan_stats: dict[str, Any] = {}
-    print("[1/5] Multi-vector JSON relay fanout...", file=sys.stderr)
+    print("[1/5] Sequential relay query expansion (JSON templates → merge/dedup)...", file=sys.stderr)
     min_need_bootstrap = minimum_sources_policy(args.profile)
     slice_cap = max(relay_fetch_cap(args.num_sources) * 4, min_need_bootstrap + 8, 24)
-    fan_rows, fan_stats = fanout_relay_search(
-        query_json_search_relay,
-        relays,
-        task,
-        args.num_sources,
-    )
+    caps = default_safety_caps()
+
+    if plan_mode == "llm_v1":
+        append_bridge_phase(rd_early, "bridge.planner_start", {"mode": plan_mode})
+        summary = plan_and_write(rd_early, task)
+        planner_summary = summary if isinstance(summary, dict) else {"result": summary}
+        append_bridge_phase(rd_early, "bridge.planner_done", dict(planner_summary))
+        from runtime.util import jr as _jr_plan
+
+        plan_doc = _jr_plan(rd_early / "research" / "research-plan.json", {})
+        q_flat = flatten_plan_queries(plan_doc) if isinstance(plan_doc, dict) else []
+        if not q_flat:
+            print("[1/5] plan produced zero queries; using template vectors", file=sys.stderr)
+            q_flat = build_query_vectors(task)
+        fan_rows, fan_stats = fanout_relay_search_from_queries(
+            query_json_search_relay,
+            relays,
+            q_flat,
+            args.num_sources,
+        )
+        fb = bool(planner_summary.get("used_fallback")) if planner_summary else False
+        relay_note = f"relay_rows={len(fan_rows)} mode=llm_v1 fallback={fb}"
+        materialize_wave_plan(
+            rd_early,
+            str(entry["run_id"]),
+            plan_doc if isinstance(plan_doc, dict) else {},
+            relay_note=relay_note,
+        )
+    else:
+        vectors = build_query_vectors(task)
+        write_off_mode_research_plan(rd_early, task, queries=vectors, safety=caps)
+        fan_rows, fan_stats = fanout_relay_search(
+            query_json_search_relay,
+            relays,
+            task,
+            args.num_sources,
+        )
+        from runtime.util import jr as _jr_plan
+
+        plan_doc = _jr_plan(rd_early / "research" / "research-plan.json", {})
+        relay_note = f"relay_rows={len(fan_rows)} mode=off"
+        materialize_wave_plan(
+            rd_early,
+            str(entry["run_id"]),
+            plan_doc if isinstance(plan_doc, dict) else {},
+            relay_note=relay_note,
+        )
+        planner_summary = {"mode": "off"}
+
     ranked = rank_relay_rows_for_task(task, fan_rows, limit=slice_cap)
     results = ranked[:slice_cap]
 
@@ -675,11 +777,10 @@ def main() -> int:
             f"[3/5] Queue job + run worker (source packet file: {packet_path})...",
             file=sys.stderr,
         )
-        runs_root = str(Path(args.runs_root).resolve())
-        _ensure_rfo_tree(Path(runs_root))
 
         env: dict[str, str] = {str(k): str(v) for k, v in os.environ.items()}
         env["RFO_SOURCE_PACKET"] = packet_path
+        env["RFO_PREALLOCATED_RUN_DIR"] = str(rd_early)
         _apply_profile_env(env, args.profile)
 
         adapter_script = SKILL_ROOT / "scripts" / "interface_runtime_adapter.py"
@@ -728,6 +829,12 @@ def main() -> int:
             return 1
         latest_run = Path(str(run_dir_raw)).resolve()
         print(f"[3/5] Queued run_dir: {latest_run}", file=sys.stderr)
+        if latest_run != rd_early:
+            print(
+                f"[3/5] ERROR: adapter run_dir mismatch (expected {rd_early}, got {latest_run})",
+                file=sys.stderr,
+            )
+            return 1
 
         worker_claimed = False
         worker_hard_failed = False
@@ -875,6 +982,12 @@ def main() -> int:
         if packet_path:
             _persist_bridge_source_packet(latest_run, packet_path)
         _merge_relay_fanout_into_collection(latest_run, fan_stats)
+        _merge_research_plan_bridge_meta(
+            latest_run,
+            plan_mode=plan_mode,
+            planner_summary=planner_summary,
+            run_label=str(entry.get("run_label") or ""),
+        )
 
         print("[4/5] Re-rendering HTML with real claims...", file=sys.stderr)
         run_id = job_id_gate = cmd_id_gate = "UNKNOWN"

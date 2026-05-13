@@ -27,7 +27,7 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 
 ### Allowed execution paths
 
-- **Host slash / native command (canonical)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade → same argv/semantics as **`scripts/run_rfo_with_web_search.py`**: relay fanout + collectors + queue bridge). **Primary human artifact:** **`report/full-report.html`**. Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
+- **Host slash / native command (canonical)** — the host runs **`python3 -S scripts/rfo_execute.py`** (thin façade → same argv/semantics as **`scripts/run_rfo_with_web_search.py`**: **sequential** relay query expansion + **`research/research-plan.json`** on disk + collectors + queue bridge — **not** a multi-agent swarm; see `docs/design/RFO-SEQUENTIAL-SEARCH-NO-MULTI-AGENT.md` and `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`). **Primary human artifact:** **`report/full-report.html`**. Plan mode: **`RFO_RESEARCH_PLAN_MODE=off|llm_v1`** (default `off`). Preallocated run reuse: **`RFO_PREALLOCATED_RUN_DIR`** (set by the bridge; do not hand-craft for production slash). Delivery stays host-owned (stdout handoff / gateway). See `docs/runtime-paths.md`.
 - `python3 -S scripts/interface_runtime_adapter.py adapter --runs-root <runs-root> --interface cli --provider cli --task "..."`
 - `python3 -S scripts/run_rfo_with_web_search.py …` — **alias** of `rfo_execute.py` for operators who already embed this path; prefer **`rfo_execute.py`** in new docs and compose files.
 - `python3 -S scripts/run_rfo_full_research.py …` — **legacy** standalone relay+fetch (blocked unless `RFO_ALLOW_LEGACY_ENTRYPOINT=1` or `--allow-legacy-entrypoint`). Profile **`search-primary`** when `RFO_RUN_PROFILE` unset; **not** dossier depth — see `docs/runtime-paths.md` appendix.
@@ -73,4 +73,4 @@ Primary operator sheet lives in `SKILL-core.md`. This file is the thin v19 overl
 - `docs/v19/validators-core.md`
 - `docs/adr/ADR-001-v19-pragmatic-rigor.md`
 - `docs/adr/ADR-015-runtime-truth-restoration.md`
-- `docs/adr/ADR-019-single-dossier-funnel.md`
+- `docs/adr/ADR-021-research-plan-disk-sequential-relay.md`

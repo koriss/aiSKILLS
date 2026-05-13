@@ -64,7 +64,7 @@ cd <SKILL_ROOT> && \
     --task "<user request>"
 ```
 
-Defaults: **`--profile dossier`** (relay fanout + source packet contract). `runtime.profiles.resolve` is fail-closed: only keys from `contracts/run-profiles.json` (`dossier`, `search-primary`); unknown `RFO_RUN_PROFILE` / CLI `--profile` raises `ValueError`.
+Defaults: **`--profile dossier`** (sequential relay query expansion + source packet contract). `runtime.profiles.resolve` is fail-closed: only keys from `contracts/run-profiles.json` (`dossier`, `search-primary`); unknown `RFO_RUN_PROFILE` / CLI `--profile` raises `ValueError`.
 
 The bridge exits non-zero if the relay base URL is missing. It ends with stdout line **`__RFO_SKILL_AGENT_HANDOFF__=<json>`** plus `instructions_for_invoking_agent` — the **caller** performs any user-visible send outside this repo. `outbox_delivery_worker.py` only runs provider adapters shipped here (`providers/cli`, `providers/webhook`); missing adapters yield failed acks, not silent “sent”.
 

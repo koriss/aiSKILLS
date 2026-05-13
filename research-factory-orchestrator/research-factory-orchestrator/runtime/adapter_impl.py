@@ -2,10 +2,11 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 from runtime.render import allocate
-from runtime.util import jl, jw, now, sid
+from runtime.util import jl, jr, jw, now, sid
 
 
 def _opt(value: str | None) -> str | None:
@@ -19,8 +20,31 @@ def cmd_adapter(a):
     task = (a.task or a.reply_text or "").strip()
     if not task:
         raise SystemExit("task is required; adapter could not extract topic from command/reply context")
-    c = allocate(a.runs_root, task, a.provider, a.interface)
-    rd = Path(c["run_dir"])
+    pre = (os.environ.get("RFO_PREALLOCATED_RUN_DIR") or "").strip()
+    if pre:
+        rd = Path(pre).resolve()
+        runs_root = Path(a.runs_root).resolve()
+        allowed_root = (runs_root / "runs").resolve()
+        try:
+            rd.relative_to(allowed_root)
+        except ValueError as exc:
+            raise SystemExit(
+                "RFO_PREALLOCATED_RUN_DIR must resolve under <runs-root>/runs "
+                f"(got {rd} vs allowed {allowed_root})"
+            ) from exc
+        if not rd.is_dir():
+            raise SystemExit(f"RFO_PREALLOCATED_RUN_DIR is not a directory: {rd}")
+        entry_path = rd / "run-catalog-entry.json"
+        if not entry_path.is_file():
+            raise SystemExit(f"preallocated run_dir missing run-catalog-entry.json: {entry_path}")
+        c = jr(entry_path, {})
+        if not c.get("run_id") or not c.get("job_id"):
+            raise SystemExit("run-catalog-entry.json missing run_id/job_id for preallocated run_dir")
+        if str(c.get("run_dir") or "").rstrip("/") != str(rd).rstrip("/"):
+            c = {**c, "run_dir": str(rd)}
+    else:
+        c = allocate(a.runs_root, task, a.provider, a.interface)
+        rd = Path(c["run_dir"])
     req_id = sid("REQ", a.interface, a.provider, a.conversation_id, a.message_id, task)
     # Optional delivery routing hints from the invoking host (not used for outbound sends from this repo).
     delivery = {

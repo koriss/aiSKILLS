@@ -135,6 +135,16 @@ def validate(rd):
                         "stderr_tail": (p.stderr or "")[-1200:],
                     }
                 )
+            elif p.returncode == 0 and tr.get("overall_pass"):
+                plan_path = rd / "research" / "research-plan.json"
+                if plan_path.is_file():
+                    raw = read_json_or_none(plan_path)
+                    if isinstance(raw, dict) and raw.get("schema_version") == "research-plan-v1":
+                        from runtime.research_plan_validate import collect_research_plan_errors
+
+                        rpe = collect_research_plan_errors(rd)
+                        if rpe:
+                            errs.append({"research_plan_errors": rpe})
         if errs:
             _fail_closed_rollback(rd, errs)
         nval = len((jr(rd / "validation-transcript.json", {}) or {}).get("validators") or [])

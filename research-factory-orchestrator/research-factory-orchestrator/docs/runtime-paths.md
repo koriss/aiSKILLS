@@ -164,16 +164,16 @@ Work is sequenced **inside this package** as: **(1)** operator docs + contracts 
 
 | Step | Command (example — substitute absolute paths) |
 |------|---------|
-| Resolve relay + runs-root without allocating | `cd /path/to/openclaw/workspace/skills/research-factory-orchestrator && python3 -S scripts/rfo_execute.py --preflight --runs-root /path/to/openclaw/workspace/rfo-runs --web-search-json-api-base "http://127.0.0.1:8180"` |
+| Resolve relay + runs-root without allocating | Use the **Native relay** block above: set `RFO_RELAY=scripts/run_rfo_with_web_search.py`, then `python3 -S "$RFO_RELAY" --preflight` with `--runs-root` and `--web-search-json-api-base` (same argv shape as a full bridge run). |
 | Inspect | **stdout:** `rfo-effective-config-v1` JSON (`errors` must be empty; `relay` non-null; **`relay_reachable`** true unless `RFO_SKIP_RELAY_PROBE=1`). **Exit:** `0` ok, `2` forbidden env, missing relay, **unreachable relay**, or resolution failure. |
 
-**Do not** conflate **native `/research_factory_orchestrator`** (host dispatches bridge) with a **manual** shell from `skills/.../scripts` without the same argv/env — if RFO failed, report the **non-zero exit** and stderr; do not substitute a parallel “answer” from generic web tools and call it RFO.
+**Do not** conflate **native `/research_factory_orchestrator`** (host dispatches **`run_rfo_with_web_search.py`** relay bridge) with a **manual** shell from `skills/.../scripts` without the same argv/env — if RFO failed, report the **non-zero exit** and stderr; do not substitute a parallel “answer” from generic web tools and call it RFO.
 
 Use this from a **guest agent** or broken-gateway triage before re-running a full task.
 
 ## Adapter emergency policy (queue tooling only)
 
-`scripts/interface_runtime_adapter.py adapter` exists for **preallocated run-dir reuse** and **CLI queue** workflows. It is **not** a drop-in replacement for **`rfo_execute.py`** on the native `/research_factory_orchestrator` path: hosts that route slash compute only through adapter argv skip the documented bridge contract unless they also satisfy disk gates (`result-manifest.json`, validator bundle). Prefer fixing gateway argv to **`rfo_execute.py`**; see **`docs/adr/ADR-016-compute-vs-delivery-split.md`**.
+`scripts/interface_runtime_adapter.py adapter` exists for **preallocated run-dir reuse** and **CLI queue** workflows. It is **not** a drop-in replacement for **`run_rfo_with_web_search.py`** on the native `/research_factory_orchestrator` relay path: hosts that route slash compute only through adapter argv skip the documented bridge contract unless they also satisfy disk gates (`result-manifest.json`, validator bundle). Prefer fixing gateway argv to **`run_rfo_with_web_search.py`** with relay bases; use **`rfo_execute.py`** only when the host has already assembled a **source-packet** (see **`docs/adr/ADR-023-source-packet-canonical-execute.md`**). See **`docs/adr/ADR-016-compute-vs-delivery-split.md`**.
 
 ## Observability (`errors.jsonl`, vector K)
 

@@ -6,7 +6,7 @@
   "profiles": {
     "search-primary": {
       "label": "CLI JSON relay standalone (search-primary driver)",
-      "description": "Relay prefetch + fetch profile used in historical artifacts/tests (helpers in runtime/standalone_relay_driver.py). Operator relay+queue depth uses scripts/rfo_execute.py (dossier bridge).",
+      "description": "Relay prefetch + fetch profile used in historical artifacts/tests (helpers in runtime/standalone_relay_driver.py). Native slash / JSON relay depth uses scripts/run_rfo_with_web_search.py; source-packet-only canonical execute uses scripts/rfo_execute.py.",
       "source_policy": {
         "external_collection_required": false,
         "minimum_independent_sources": 2,

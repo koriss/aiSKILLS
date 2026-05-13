@@ -46,6 +46,7 @@ required_scripts = [
     "migrate_validator_invocation.py",
     "rfo_validate_source_packet.py",
     "assert_no_relay_semantics.py",
+    "validate_docs_archival_markers.py",
 ]
 # v19.3: compute-only — only the CLI pass-through adapter is required for packaging.
 required_providers = ["providers/cli/cli_delivery_adapter.py"]
@@ -144,6 +145,17 @@ try:
         errors.extend(mod2.validate(root))
 except Exception as e:
     errors.append(f"agent_executable_docgrep:{e}")
+arch_path = root / "scripts" / "validate_docs_archival_markers.py"
+try:
+    spec_arch = importlib.util.spec_from_file_location("validate_docs_archival_markers", arch_path)
+    if spec_arch is None or spec_arch.loader is None:
+        errors.append("docs_archival_markers:import_spec_failed")
+    else:
+        mod_arch = importlib.util.module_from_spec(spec_arch)
+        spec_arch.loader.exec_module(mod_arch)
+        errors.extend(mod_arch.validate(root))
+except Exception as e:
+    errors.append(f"docs_archival_markers:{e}")
 index = root/"failure-corpus/index.json"
 if not index.exists(): errors.append("missing_failure_corpus_index")
 else:

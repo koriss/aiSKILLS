@@ -1,8 +1,10 @@
 {
-  "version": "19.4.8",
+  "version": "19.4.11",
   "canonical_operator_research_entrypoint": "scripts/rfo_execute.py",
+  "native_relay_bridge_entrypoint": "scripts/run_rfo_with_web_search.py",
+  "_comment_entrypoints": "Source-packet canonical execute: rfo_execute.py (no legacy relay argv). Native slash / JSON relay prefetch: run_rfo_with_web_search.py (see contracts/command-router-contract.json).",
   "required_entrypoint": "scripts/run_research_factory.py",
-  "_comment_required_entrypoint": "Queued runtime_job_worker subprocess still invokes run_research_factory.py → rfo_runtime_core; native slash / gateway dispatch uses canonical_operator_research_entrypoint.",
+  "_comment_required_entrypoint": "Queued runtime_job_worker subprocess still invokes run_research_factory.py → rfo_runtime_core.",
   "required_invocation_mode": "runtime",
   "forbidden_invocation_patterns": [
     "plain_subagent",

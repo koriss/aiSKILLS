@@ -1,5 +1,14 @@
 # Changelog
 
+## 19.4.11 — 2026-05-10
+
+- **Command router:** `contracts/command-router-contract.json` maps native slash commands to **`scripts/run_rfo_with_web_search.py`** (JSON relay prefetch); **`scripts/rfo_execute.py`** remains source-packet-only canonical execute (`validate_command_router_mapping.py` updated).
+- **Contracts:** `contracts/entrypoint-contract.json` adds **`native_relay_bridge_entrypoint`** alongside **`canonical_operator_research_entrypoint`**.
+- **Validators:** `scripts/validate_docs_archival_markers.py` + hook from `validate_skill.py` (subtree `ARCHIVAL_CONTEXT_ONLY` policy).
+- **`assert_no_relay_semantics.py`:** stricter relay-runtime detection (`relay_chain` non-empty, non-null `relay` URL, `relay_prefetch_bridge: true`, disallowed `relay_source`).
+- **Fixtures / templates:** `tests/fixtures/source_packets/blocked_packet.json`; `templates/source-packet.bootstrap.example.json` for `--template-mode` checks.
+- **Docs:** `docs/runtime-paths.md` (preflight + adapter policy use relay bridge, not `rfo_execute` legacy argv); `docs/rfo-env-classification.md` (source-packet execute section); `contracts/run-profiles.json` description alignment.
+
 ## 19.4.x — bridge + compute-only boundary
 
 ### 19.4.10 — 2026-05-10

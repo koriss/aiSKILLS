@@ -3,7 +3,16 @@
 Normative narrative: `docs/plans/PLAN-rfo-agent-executable-single-behavior.md`.  
 Effective-config snapshot records **which** inputs applied (`runs_root_source`, `relay_source`, `deprecated_inputs_used`, `forbidden_inputs_present`).
 
-## Canonical production (default)
+## Source-packet canonical execute (`scripts/rfo_execute.py`)
+
+| Rule | Detail |
+|------|--------|
+| Inputs | **Argv:** `--runs-root` (required), optional `--source-packet`, optional `--allow-stale-packet`. **Packet JSON:** `topic`, `created_at`, `profile`, `sources`, … (`contracts/source-packet-v1.schema.json`). |
+| Forbidden semantic `RFO_*` | Any non-empty value for keys listed in `runtime/canonical_env_guard.py` (including `RFO_RUN_PROFILE`, `RFO_SOURCE_PACKET`, relay bases, smoke/bridge flags) → exit **2**. Profile is **only** from the packet. |
+| Harmless internal | Tunables such as `RFO_HTTP_TIMEOUT*`, `RFO_ALLOW_TMP_RUNS_ROOT` in fixture mode, etc., remain as in `docs/runtime-paths.md`. |
+| `RFO_EFFECTIVE_ENTRYPOINT` | Set by **`rfo_execute.py`** before the inner pipeline so snapshots show `scripts/rfo_execute.py`. Do not export manually. |
+
+## Canonical production (default, relay bridge)
 
 | Variable | Role |
 |----------|------|
@@ -49,4 +58,4 @@ Examples: `RFO_HTTP_TIMEOUT*`, `RFO_BRIDGE_*`, `RFO_WIKIPEDIA_HEURISTIC`, `RFO_R
 |----------|--------|
 | `RFO_PREFLIGHT_RELAY_TIMEOUT` | Seconds for the JSON `/search` reachability probe (default **5.0**). |
 | `RFO_SKIP_RELAY_PROBE` | When truthy, skips the probe (tests / special harness only; **not** for production triage). |
-| `RFO_EFFECTIVE_ENTRYPOINT` | Set by `scripts/rfo_execute.py` before loading the bridge so `effective-config.entrypoint` records the façade; do not export manually. |
+| `RFO_EFFECTIVE_ENTRYPOINT` | Set by the active entrypoint (`run_rfo_with_web_search.py` or the inner pipeline after `rfo_execute.py` resolves) so `effective-config.entrypoint` matches the binary on the audit trail; do not export manually to spoof audits. |

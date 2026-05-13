@@ -13,13 +13,27 @@ import re
 import sys
 from pathlib import Path
 
-# Keys that must not appear with a non-empty scalar in machine artifacts (relay wiring).
-_RELAY_RUNTIME_KEYS = frozenset(
-    {
-        "web_search_json_api_base",
-        "web_search_secondary_json_api_base",
-    }
-)
+# Keys / shapes that must not appear in packet-canonical machine JSON (relay wiring).
+_ALLOWED_RELAY_SOURCE = frozenset({"none_agent_supplied_packet", None, ""})
+
+
+def _relay_runtime_violation(key: str, value: object) -> str | None:
+    if key in ("web_search_json_api_base", "web_search_secondary_json_api_base"):
+        if value not in (None, "", [], {}):
+            return f"relay_runtime_key:{key}={value!r}"
+    if key == "relay" and isinstance(value, str) and value.strip():
+        return f"relay_runtime_nonnull_relay={value!r}"
+    if key == "relay_source":
+        if value in _ALLOWED_RELAY_SOURCE:
+            return None
+        if isinstance(value, str) and value.strip() == "none_agent_supplied_packet":
+            return None
+        return f"relay_runtime_relay_source={value!r}"
+    if key == "relay_chain" and isinstance(value, list) and len(value) > 0:
+        return f"relay_runtime_relay_chain_non_empty={value!r}"
+    if key == "relay_prefetch_bridge" and value is True:
+        return "relay_runtime_relay_prefetch_bridge_true"
+    return None
 
 _SOFT_TEXT_PATTERNS = (
     re.compile(r"proof-of-fetch", re.I),
@@ -32,8 +46,9 @@ def _walk(obj: object, path: str, hits: list[str]) -> None:
     if isinstance(obj, dict):
         for k, v in obj.items():
             p = f"{path}.{k}" if path else k
-            if k in _RELAY_RUNTIME_KEYS and v not in (None, "", [], {}):
-                hits.append(f"relay_runtime_key:{p}={v!r}")
+            viol = _relay_runtime_violation(k, v)
+            if viol:
+                hits.append(f"{viol}@{p}")
             _walk(v, p, hits)
     elif isinstance(obj, list):
         for i, it in enumerate(obj):

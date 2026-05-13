@@ -17,8 +17,9 @@ def main():
         if not cfg:
             errors.append(f"missing command mapping: {cmd}")
             continue
-        if cfg.get("entrypoint") != "scripts/rfo_execute.py":
-            errors.append(f"{cmd}: wrong entrypoint")
+        ep = cfg.get("entrypoint")
+        if ep != "scripts/run_rfo_with_web_search.py":
+            errors.append(f"{cmd}: wrong entrypoint (expected scripts/run_rfo_with_web_search.py, got {ep!r})")
         if cfg.get("mode") != "runtime":
             errors.append(f"{cmd}: mode != runtime")
         forbidden = set(cfg.get("forbidden", []))
